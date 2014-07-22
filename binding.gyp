@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "eigenjs",
+      "target_name": "eigen",
       "sources": [
         ""
       ],
