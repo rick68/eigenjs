@@ -1,4 +1,18 @@
 language: node_js
+env:
+  - NODE_VERSION="0.10.29"
+  - NODE_VERSION="0.11.13"
 node_js:
   - "0.10"
   - "0.11"
+notifications:
+  email:
+    - rick68@gmail.com
+before_install:
+  - rm -rf ~/.nvm
+  - git clone https://github.com/creationix/nvm.git ~/.nvm
+  - source ~/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+  - node --version
+  - npm --version
+  # at this point Travis-CI will implicitly run `npm install` for us
