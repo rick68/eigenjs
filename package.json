@@ -26,5 +26,13 @@
   "bugs": {
     "url": "https://github.com/rick68/eigenjs/issues"
   },
-  "homepage": "https://github.com/rick68/eigenjs"
+  "homepage": "https://github.com/rick68/eigenjs",
+  "dependencies": {
+    "bindings": "^1.2.1",
+    "nan": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "should": "^4.0.4"
+  }
 }
