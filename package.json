@@ -5,7 +5,7 @@
   "homepage": "https://github.com/rick68/eigenjs",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "mocha test/*.js"
   },
   "repository": {
     "type": "git",

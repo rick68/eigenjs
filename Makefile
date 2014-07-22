@@ -5,7 +5,7 @@ clean:
 	node-gyp clean
 
 test: force
-	mocha ./test/test.js
+	mocha ./test/*.js
 
 PHONY += force
 force:
