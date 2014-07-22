@@ -2,7 +2,8 @@ TOPLEVEL ?= $(dir $(lastword $(MAKEFILE_LIST)))
 CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
-SOURCES =
+SOURCES = \
+    src/eigen.cc
 
 FILTER = -whitespace/parens
 
