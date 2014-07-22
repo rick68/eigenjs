@@ -1,0 +1,30 @@
+{
+  "name": "eigenjs",
+  "version": "0.0.0",
+  "description": "The goal of this project is to port Eigen library into JavaScript for linear algebra.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rick68/eigenjs"
+  },
+  "keywords": [
+    "eigen",
+    "linear",
+    "algebra",
+    "matrix",
+    "vector",
+    "numerical",
+    "solver",
+    "related",
+    "algorithm"
+  ],
+  "author": "Wei-Ming Yang",
+  "license": "MPL2",
+  "bugs": {
+    "url": "https://github.com/rick68/eigenjs/issues"
+  },
+  "homepage": "https://github.com/rick68/eigenjs"
+}
