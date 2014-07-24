@@ -8,13 +8,16 @@ SOURCES = \
 FILTER = -whitespace/parens
 
 all:
-	node-gyp configure build
+	cd $(TOPLEVEL) && node-gyp configure build
 
 clean:
-	node-gyp clean
+	cd $(TOPLEVEL) && node-gyp clean
+
+distclean: clean
+	cd $(TOPLEVEL) && rm -rf node_modules
 
 test: force
-	mocha ./test/*.js
+	cd $(TOPLEVEL) && mocha $(TOPLEVEL)/test/*.js
 
 lint: force
 	cd $(TOPLEVEL) && $(PYTHON) $(CPPLINT) --filter=$(FILTER) $(SOURCES)
