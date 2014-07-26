@@ -11,10 +11,14 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [travis-url]: https://travis-ci.org/rick68/eigenjs
 
 ## Getting started
-First download and install [Eigen](http://eigen.tuxfamily.org/). In OS X, you can simply use [Homebrew](http://mxcl.github.io/homebrew/) and do:
+First download and install [Eigen](http://eigen.tuxfamily.org). In OS X, you can simply use [Homebrew](http://brew.sh) and do:
 
-    brew install eigen
+```bash
+$ brew install eigen
+```
 
 then either use npm:
 
-    npm install eigenjs
+```bash
+$ npm install eigenjs
+```
