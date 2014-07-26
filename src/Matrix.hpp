@@ -70,8 +70,8 @@ class Matrix : public node::ObjectWrap {
     }
 
     if (args.IsConstructCall()) {
-      uint32_t rows = args[0]->Uint32Value();
-      uint32_t columns = args[1]->Uint32Value();
+      matrix_type::Index rows = args[0]->Uint32Value();
+      matrix_type::Index columns = args[1]->Uint32Value();
       Matrix* obj = new Matrix(rows, columns);
       obj->Wrap(args.This());
       NanReturnValue(args.This());
