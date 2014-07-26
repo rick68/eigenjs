@@ -10,8 +10,8 @@ describe('Matrix', function() {
   });
 
   it('should throw error when tried creating matrix without rows and columns arguments', function() {
-    (function() { new Matrix(); }).should.throw();
-    (function() { new Matrix(1); }).should.throw();
+    (function() { new Matrix(); }).should.throw('Tried creating matrix without rows and columns arguments');
+    (function() { new Matrix(1); }).should.throw('Tried creating matrix without rows and columns arguments');
     (function() { new Matrix(1, 2); }).should.not.throw();
   });
 
@@ -39,6 +39,10 @@ describe('Matrix', function() {
     mat.set(2, 2, 9);
   });
 
+  it('#set() should throw message when row or column nubers are out of range', function() {
+    (function() { mat.set(3, 0, 68); }).should.throw('Row or column numbers are out of range');
+  });
+
   it('#get() should return the element value of Matrix', function() {
     mat.get(0, 0).should.equal(1);
     mat.get(0, 1).should.equal(2);
@@ -49,6 +53,10 @@ describe('Matrix', function() {
     mat.get(2, 0).should.equal(7);
     mat.get(2, 1).should.equal(8);
     mat.get(2, 2).should.equal(9);
+    (function(){ mat.get(3, 0); }).should.throw('Row or column numbers are out of range');
+  });
+
+  it('#get() should return all element value of Matrix', function() {
     mat.get().should.equal("1 2 3\n4 5 6\n7 8 9");
-  })
+  });
 });
