@@ -30,13 +30,34 @@ class Matrix : public node::ObjectWrap {
     tpl->SetClassName(NanNew("Matrix"));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "rows", rows);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "cols", cols);
+
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Matrix"), tpl->GetFunction());
   }
 
+  static NAN_METHOD(rows) {
+    NanScope();
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanReturnValue(NanNew<v8::Number>(obj->matrix_.rows()));
+  }
+
+  static NAN_METHOD(cols) {
+    NanScope();
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanReturnValue(NanNew<v8::Number>(obj->matrix_.cols()));
+  }
+
  private:
-  Matrix(uint32_t rows, uint32_t columns)
-    : rows_(rows), columns_(columns)
+  typedef Eigen::Matrix<
+      double
+    , Eigen::Dynamic
+    , Eigen::Dynamic
+  > matrix_type;
+
+  Matrix(matrix_type::Index rows, matrix_type::Index cols)
+    : matrix_(rows, cols)
   {}
   ~Matrix() {}
 
@@ -69,14 +90,7 @@ class Matrix : public node::ObjectWrap {
   static v8::Persistent<v8::Function> constructor;
 
  private:
-  typedef Eigen::Matrix<
-      double
-    , Eigen::Dynamic
-    , Eigen::Dynamic
-  > MatrixXd;
-
-  uint32_t rows_;
-  uint32_t columns_;
+  matrix_type matrix_;
 };
 
 v8::Persistent<v8::Function> Matrix::constructor;
