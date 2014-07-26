@@ -1,6 +1,6 @@
 //
-// eigen.cpp
-// ~~~~~~~~~
+// EigenJS.cpp
+// ~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -14,7 +14,12 @@
 
 #include <nan.h>
 
-void Init(v8::Handle<v8::Object> exports) {
+namespace EigenJS {
+
+void Init(v8::Handle<v8::Object> exports)
+{
 }
 
-NODE_MODULE(eigen, Init)
+} // nampspace EigenJS
+
+NODE_MODULE(eigen, EigenJS::Init)

@@ -3,7 +3,7 @@ CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
 SOURCES = \
-    src/eigen.cpp
+    src/EigenJS.cpp
 
 FILTER = -whitespace/parens
 
