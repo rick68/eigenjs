@@ -3,7 +3,7 @@
     {
       "target_name": "eigen",
       "sources": [
-        "src/eigen.cc"
+        "src/eigen.cpp"
       ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"

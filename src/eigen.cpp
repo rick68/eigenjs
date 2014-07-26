@@ -1,6 +1,6 @@
 //
-// eigen.cc
-// ~~~~~~~~
+// eigen.cpp
+// ~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
