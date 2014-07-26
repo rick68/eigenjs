@@ -62,7 +62,10 @@ class Matrix : public node::ObjectWrap {
       matrix_type::Index row = args[0]->Uint32Value();
       matrix_type::Index col = args[1]->Uint32Value();
       element_type value = args[2]->NumberValue();
+
       Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+      if (is_out_of_range(obj->matrix_, row, col))
+        NanReturnUndefined();
       obj->matrix_(row, col) = value;
     }
     NanReturnUndefined();
@@ -77,6 +80,8 @@ class Matrix : public node::ObjectWrap {
         args[1]->IsNumber()) {
       matrix_type::Index row = args[0]->Uint32Value();
       matrix_type::Index col = args[1]->Uint32Value();
+      if (is_out_of_range(obj->matrix_, row, col))
+        NanReturnUndefined();
       element_type value = obj->matrix_(row, col);
       NanReturnValue(NanNew(value));
     } else {
@@ -104,7 +109,7 @@ class Matrix : public node::ObjectWrap {
     NanScope();
 
     if (args.Length() < 2) {
-      NanThrowError("tried creating matrix without rows and columns arguments");
+      NanThrowError("Tried creating matrix without rows and columns arguments");
       NanReturnUndefined();
     }
 
@@ -127,6 +132,16 @@ class Matrix : public node::ObjectWrap {
   }
 
   static v8::Persistent<v8::Function> constructor;
+
+ private:
+  static bool is_out_of_range(
+      const matrix_type& matrix
+    , const matrix_type::Index& row
+    , const matrix_type::Index& col) {
+    return row >= matrix.rows() || col >= matrix.cols() ?
+        NanThrowError("Row or column numbers are out of range"), true
+      : false;
+  }
 
  private:
   matrix_type matrix_;
