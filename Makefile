@@ -3,7 +3,8 @@ CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
 SOURCES = \
-    src/EigenJS.cpp
+    src/EigenJS.cpp \
+    src/Matrix.hpp
 
 FILTER = -whitespace/parens
 
@@ -20,7 +21,7 @@ test: force
 	cd $(TOPLEVEL) && mocha $(TOPLEVEL)/test/*.js
 
 lint: force
-	cd $(TOPLEVEL) && $(PYTHON) $(CPPLINT) --filter=$(FILTER) $(SOURCES)
+	cd $(TOPLEVEL) && $(PYTHON) $(CPPLINT) --filter=$(FILTER) --extensions=hpp,cpp $(SOURCES)
 
 PHONY += force
 force:

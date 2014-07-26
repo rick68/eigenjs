@@ -14,12 +14,14 @@
 
 #include <nan.h>
 
+#include "Matrix.hpp"
+
 namespace EigenJS {
 
-void Init(v8::Handle<v8::Object> exports)
-{
+void Init(v8::Handle<v8::Object> exports) {
+  Matrix::Init(exports);
 }
 
-} // nampspace EigenJS
+}  // namespace EigenJS
 
 NODE_MODULE(eigen, EigenJS::Init)
