@@ -12,6 +12,8 @@
 #ifndef EIGENJS_MATRIX_HPP
 #define EIGENJS_MATRIX_HPP
 
+#include <sstream>
+
 #include <node.h>
 #include <v8.h>
 
@@ -32,6 +34,8 @@ class Matrix : public node::ObjectWrap {
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "rows", rows);
     NODE_SET_PROTOTYPE_METHOD(tpl, "cols", cols);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "set", set);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "get", get);
 
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Matrix"), tpl->GetFunction());
@@ -49,9 +53,44 @@ class Matrix : public node::ObjectWrap {
     NanReturnValue(NanNew<v8::Number>(obj->matrix_.cols()));
   }
 
+  static NAN_METHOD(set) {
+    NanScope();
+    if (args.Length() == 3 &&
+        args[0]->IsNumber() &&
+        args[1]->IsNumber() &&
+        args[2]->IsNumber()) {
+      matrix_type::Index row = args[0]->Uint32Value();
+      matrix_type::Index col = args[1]->Uint32Value();
+      element_type value = args[2]->NumberValue();
+      Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+      obj->matrix_(row, col) = value;
+    }
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(get) {
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+
+    NanScope();
+    if (args.Length() == 2 &&
+        args[0]->IsNumber() &&
+        args[1]->IsNumber()) {
+      matrix_type::Index row = args[0]->Uint32Value();
+      matrix_type::Index col = args[1]->Uint32Value();
+      element_type value = obj->matrix_(row, col);
+      NanReturnValue(NanNew(value));
+    } else {
+      std::ostringstream result;
+      result << obj->matrix_;
+      NanReturnValue(NanNew(result.str().c_str()));
+    }
+  }
+
+
  private:
+  typedef double element_type;
   typedef Eigen::Matrix<
-      double
+      element_type
     , Eigen::Dynamic
     , Eigen::Dynamic
   > matrix_type;
