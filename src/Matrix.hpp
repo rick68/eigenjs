@@ -35,23 +35,48 @@ class Matrix : public node::ObjectWrap {
   }
 
  private:
-  Matrix() {}
+  Matrix(uint32_t rows, uint32_t columns)
+    : rows_(rows), columns_(columns)
+  {}
   ~Matrix() {}
 
   static NAN_METHOD(New) {
     NanScope();
 
+    if (args.Length() < 2) {
+      NanThrowError("tried creating matrix without rows and columns arguments");
+      NanReturnUndefined();
+    }
+
     if (args.IsConstructCall()) {
-      Matrix* obj = new Matrix();
+      uint32_t rows = args[0]->Uint32Value();
+      uint32_t columns = args[1]->Uint32Value();
+      Matrix* obj = new Matrix(rows, columns);
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
       v8::Local<v8::Function> ctr = NanNew(constructor);
-      NanReturnValue(ctr->NewInstance());
+      v8::Local<v8::Value> argv[] = {args[0], args[1]};
+      NanReturnValue(
+          ctr->NewInstance(
+              sizeof(argv)/sizeof(v8::Local<v8::Value>)
+            , argv
+          )
+      );
     }
   }
 
   static v8::Persistent<v8::Function> constructor;
+
+ private:
+  typedef Eigen::Matrix<
+      double
+    , Eigen::Dynamic
+    , Eigen::Dynamic
+  > MatrixXd;
+
+  uint32_t rows_;
+  uint32_t columns_;
 };
 
 v8::Persistent<v8::Function> Matrix::constructor;
