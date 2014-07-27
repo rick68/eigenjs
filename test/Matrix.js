@@ -41,6 +41,15 @@ describe('Matrix', function() {
 
   it('#set() should throw message when row or column nubers are out of range', function() {
     (function() { mat.set(3, 0, 68); }).should.throw('Row or column numbers are out of range');
+    (function() { mat.set(-1, -2, 500); }).should.throw('Row or column numbers are out of range');
+  });
+
+  it('#set() with array argument should work ok', function() {
+    Matrix(3, 3).set([
+      1, 2, 3,
+      4, 5, 6,
+      7, 8, 9
+    ]).toString().should.eql(mat.toString());
   });
 
   it('#get() should return the element value of Matrix', function() {
