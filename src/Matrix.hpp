@@ -64,6 +64,12 @@ class Matrix : public node::ObjectWrap {
       v8::Local<v8::Array> array = args[0].As<v8::Array>();
       uint32_t len = array->Length();
       const matrix_type::Index& rows = obj->matrix_.rows();
+      const matrix_type::Index& cols = obj->matrix_.cols();
+
+      if (len != rows * cols) {
+        NanThrowError("Too few coefficients passed to Matrix");
+        NanReturnUndefined();
+      }
 
       for (uint32_t i = 0; i < len; ++i) {
         v8::Local<v8::Value> elem = array->Get(i);
