@@ -12,14 +12,14 @@
 #ifndef EIGENJS_MATRIX_HPP
 #define EIGENJS_MATRIX_HPP
 
-#include <sstream>
-
 #include <node.h>
 #include <v8.h>
 
 #include <nan.h>
 
 #include <eigen3/Eigen/Eigen>
+
+#include <sstream>
 
 namespace EigenJS {
 
@@ -36,25 +36,29 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "cols", cols);
     NODE_SET_PROTOTYPE_METHOD(tpl, "set", set);
     NODE_SET_PROTOTYPE_METHOD(tpl, "get", get);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Matrix"), tpl->GetFunction());
   }
 
   static NAN_METHOD(rows) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    NanReturnValue(NanNew<v8::Number>(obj->matrix_.rows()));
+
+    NanReturnValue(NanNew<v8::Integer>(obj->matrix_.rows()));
   }
 
   static NAN_METHOD(cols) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    NanReturnValue(NanNew<v8::Number>(obj->matrix_.cols()));
+
+    NanReturnValue(NanNew<v8::Integer>(obj->matrix_.cols()));
   }
 
   static NAN_METHOD(set) {
     NanScope();
+
     if (args.Length() == 3 &&
         args[0]->IsNumber() &&
         args[1]->IsNumber() &&
@@ -68,13 +72,14 @@ class Matrix : public node::ObjectWrap {
         NanReturnUndefined();
       obj->matrix_(row, col) = value;
     }
+
     NanReturnUndefined();
   }
 
   static NAN_METHOD(get) {
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
+
     if (args.Length() == 2 &&
         args[0]->IsNumber() &&
         args[1]->IsNumber()) {
@@ -84,13 +89,20 @@ class Matrix : public node::ObjectWrap {
         NanReturnUndefined();
       element_type value = obj->matrix_(row, col);
       NanReturnValue(NanNew(value));
-    } else {
-      std::ostringstream result;
-      result << obj->matrix_;
-      NanReturnValue(NanNew(result.str().c_str()));
     }
+
+    NanReturnUndefined();
   }
 
+  static NAN_METHOD(toString) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanScope();
+
+    std::ostringstream result;
+    result << obj->matrix_;
+
+    NanReturnValue(NanNew(result.str().c_str()));
+  }
 
  private:
   typedef double element_type;
@@ -101,7 +113,7 @@ class Matrix : public node::ObjectWrap {
   > matrix_type;
 
   Matrix(matrix_type::Index rows, matrix_type::Index cols)
-    : matrix_(rows, cols)
+    : matrix_(matrix_type::Zero(rows, cols))
   {}
   ~Matrix() {}
 
