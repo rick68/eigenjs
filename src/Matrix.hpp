@@ -73,7 +73,7 @@ class Matrix : public node::ObjectWrap {
       obj->matrix_(row, col) = value;
     }
 
-    NanReturnUndefined();
+    NanReturnValue(NanNew(args.This()));
   }
 
   static NAN_METHOD(get) {
