@@ -56,6 +56,14 @@ describe('Matrix', function() {
         1, 2, 3,
         4, 5, 6
     ])}).should.throw('Too few coefficients passed to Matrix');
+
+    (function() {
+      Matrix(3, 3).set([
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9,
+       10,11,12
+    ])}).should.throw('Too many coefficients passed to Matrix');
   });
 
   it('#get() should return the element value of Matrix', function() {
