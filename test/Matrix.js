@@ -56,7 +56,7 @@ describe('Matrix', function() {
     (function(){ mat.get(3, 0); }).should.throw('Row or column numbers are out of range');
   });
 
-  it('#get() should return all element value of Matrix', function() {
-    mat.get().should.equal("1 2 3\n4 5 6\n7 8 9");
+  it('#toString() should return all element values of Matrix', function() {
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
   });
 });
