@@ -35,7 +35,7 @@ var Matrix = require('eigenjs').Matrix
 console.log('mat =\n%s', mat);
 ```
 
-```bash
+```txt
 mat =
 0 0
 0 0
