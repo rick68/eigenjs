@@ -50,6 +50,12 @@ describe('Matrix', function() {
       4, 5, 6,
       7, 8, 9
     ]).toString().should.eql(mat.toString());
+
+    (function() {
+      Matrix(3, 3).set([
+        1, 2, 3,
+        4, 5, 6
+    ])}).should.throw('Too few coefficients passed to Matrix');
   });
 
   it('#get() should return the element value of Matrix', function() {
