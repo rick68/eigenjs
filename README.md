@@ -24,3 +24,19 @@ then either use npm:
 ```bash
 $ npm install eigenjs
 ```
+
+## API
+
+### Matrix methods
+
+#### Eigen.Matrix(rows, cols)
+
+* **rows** - ``
+* **cols** -
+
+```js
+var Matrix = require('eigen').Matrix
+  , mat = new Matrix(2, 2);
+
+console.log('mat =\n%s', mat);
+```
