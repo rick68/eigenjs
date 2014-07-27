@@ -27,16 +27,16 @@ describe('Matrix', function() {
   })
 
   beforeEach(function() {
-    mat = Matrix(3, 3);
-    mat.set(0, 0, 1);
-    mat.set(0, 1, 2);
-    mat.set(0, 2, 3);
-    mat.set(1, 0, 4);
-    mat.set(1, 1, 5);
-    mat.set(1, 2, 6);
-    mat.set(2, 0, 7);
-    mat.set(2, 1, 8);
-    mat.set(2, 2, 9);
+    mat = Matrix(3, 3)
+      .set(0, 0, 1)
+      .set(0, 1, 2)
+      .set(0, 2, 3)
+      .set(1, 0, 4)
+      .set(1, 1, 5)
+      .set(1, 2, 6)
+      .set(2, 0, 7)
+      .set(2, 1, 8)
+      .set(2, 2, 9);
   });
 
   it('#set() should throw message when row or column nubers are out of range', function() {
