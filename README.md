@@ -1,5 +1,4 @@
-# EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url]
-
+# EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url]
 The goal of this project is to port Eigen library into JavaScript for linear algebar.
 
 [npm-image]: http://img.shields.io/npm/v/eigenjs.svg
@@ -9,6 +8,9 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 [travis-image]: https://travis-ci.org/rick68/eigenjs.svg?branch=master
 [travis-url]: https://travis-ci.org/rick68/eigenjs
+
+[gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
+[gitter-url]: https://gitter.im/rick68/eigenjs
 
 ## Getting started
 First download and install [Eigen](http://eigen.tuxfamily.org). In OS X, you can simply use [Homebrew](http://brew.sh) and do:
