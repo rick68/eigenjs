@@ -60,10 +60,10 @@ mat.cols() = 3
 ```js
 var Matrix = require('eigenjs').Matrix
   , mat = new Matrix(2, 2);
-mat.set(0, 0, 1);
-mat.set(0, 1, 2);
-mat.set(1, 0, 3);
-mat.set(1, 1, 4);
+mat.set(0, 0, 1)
+   .set(0, 1, 2)
+   .set(1, 0, 3)
+   .set(1, 1, 4);
 console.log('mat = \n%s', mat);
 ```
 
