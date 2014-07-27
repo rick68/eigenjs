@@ -150,8 +150,8 @@ class Matrix : public node::ObjectWrap {
       const matrix_type& matrix
     , const matrix_type::Index& row
     , const matrix_type::Index& col) {
-    return row >= matrix.rows() || col >= matrix.cols() ?
-        NanThrowError("Row or column numbers are out of range"), true
+    return row < 0 || row >= matrix.rows() || col < 0 || col >= matrix.cols()
+      ? NanThrowError("Row or column numbers are out of range"), true
       : false;
   }
 
