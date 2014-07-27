@@ -65,9 +65,12 @@ class Matrix : public node::ObjectWrap {
       uint32_t len = array->Length();
       const matrix_type::Index& rows = obj->matrix_.rows();
       const matrix_type::Index& cols = obj->matrix_.cols();
+      const matrix_type::Index& elems = rows * cols;
 
-      if (len != rows * cols) {
-        NanThrowError("Too few coefficients passed to Matrix");
+      if (len != elems) {
+        len < rows * cols
+          ? NanThrowError("Too few coefficients passed to Matrix")
+          : NanThrowError("Too many coefficients passed to Matrix");
         NanReturnUndefined();
       }
 
