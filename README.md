@@ -25,18 +25,18 @@ then either use npm:
 $ npm install eigenjs
 ```
 
-## API
+## Matrix methods
 
-### Matrix methods
-
-#### Eigen.Matrix(rows, cols)
-
-* **rows** - ``
-* **cols** -
+### Eigen.Matrix(rows, cols)
 
 ```js
-var Matrix = require('eigen').Matrix
+var Matrix = require('eigenjs').Matrix
   , mat = new Matrix(2, 2);
-
 console.log('mat =\n%s', mat);
+```
+
+```bash
+mat =
+0 0
+0 0
 ```
