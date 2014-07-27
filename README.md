@@ -64,7 +64,8 @@ mat.set(0, 0, 1);
 mat.set(0, 1, 2);
 mat.set(1, 0, 3);
 mat.set(1, 1, 4);
-console.log('mat = \n%s', mat);```
+console.log('mat = \n%s', mat);
+```
 
 ```txt
 mat =
