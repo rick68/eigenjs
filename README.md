@@ -31,12 +31,43 @@ $ npm install eigenjs
 
 ```js
 var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 2);
+  , mat = new Matrix(2, 3);
 console.log('mat =\n%s', mat);
 ```
 
 ```txt
 mat =
-0 0
-0 0
+0 0 0
+0 0 0
+```
+
+### Eigen.Matrix.rows() & Eigen.Matrix.cols()
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat = new Matrix(2, 3);
+console.log('mat.rows() =', mat.rows());
+console.log('mat.cols() =', mat.cols());
+```
+
+```txt
+mat.rows() = 2
+mat.cols() = 3
+```
+
+### Eigen.Matrix.set(row, col, value)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat = new Matrix(2, 2);
+mat.set(0, 0, 1);
+mat.set(0, 1, 2);
+mat.set(1, 0, 3);
+mat.set(1, 1, 4);
+console.log('mat = \n%s', mat);```
+
+```txt
+mat =
+1 2
+3 4
 ```
