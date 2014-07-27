@@ -57,9 +57,20 @@ class Matrix : public node::ObjectWrap {
   }
 
   static NAN_METHOD(set) {
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
 
-    if (args.Length() == 3 &&
+    if (args.Length() == 1 && args[0]->IsArray()) {
+      v8::Local<v8::Array> array = args[0].As<v8::Array>();
+      uint32_t len = array->Length();
+      const matrix_type::Index& rows = obj->matrix_.rows();
+
+      for (uint32_t i = 0; i < len; ++i) {
+        v8::Local<v8::Value> elem = array->Get(i);
+        obj->matrix_(i / rows, i % rows) = elem->NumberValue();
+      }
+    } else if (
+        args.Length() == 3 &&
         args[0]->IsNumber() &&
         args[1]->IsNumber() &&
         args[2]->IsNumber()) {
@@ -67,9 +78,9 @@ class Matrix : public node::ObjectWrap {
       matrix_type::Index col = args[1]->Uint32Value();
       element_type value = args[2]->NumberValue();
 
-      Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
       if (is_out_of_range(obj->matrix_, row, col))
         NanReturnUndefined();
+
       obj->matrix_(row, col) = value;
     }
 
