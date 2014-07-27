@@ -72,3 +72,23 @@ mat =
 1 2
 3 4
 ```
+
+### Eigen.Matrix.set(value_array)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat = new Matrix(3, 3);
+mat.set([
+  1, 2, 3,
+  4, 5, 6,
+  7, 8, 9
+]);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+1 2 3
+4 5 6
+7 8 9
+```
