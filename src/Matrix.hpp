@@ -76,16 +76,16 @@ class Matrix : public node::ObjectWrap {
 
       for (uint32_t i = 0; i < len; ++i) {
         v8::Local<v8::Value> elem = array->Get(i);
-        obj->matrix_(i / rows, i % rows) = elem->NumberValue();
+        obj->matrix_(i / cols, i % cols) = elem->NumberValue();
       }
     } else if (
         args.Length() == 3 &&
         args[0]->IsNumber() &&
         args[1]->IsNumber() &&
         args[2]->IsNumber()) {
-      matrix_type::Index row = args[0]->Uint32Value();
-      matrix_type::Index col = args[1]->Uint32Value();
-      element_type value = args[2]->NumberValue();
+      const matrix_type::Index& row = args[0]->Uint32Value();
+      const matrix_type::Index& col = args[1]->Uint32Value();
+      const element_type& value = args[2]->NumberValue();
 
       if (is_out_of_range(obj->matrix_, row, col))
         NanReturnUndefined();
@@ -105,8 +105,10 @@ class Matrix : public node::ObjectWrap {
         args[1]->IsNumber()) {
       matrix_type::Index row = args[0]->Uint32Value();
       matrix_type::Index col = args[1]->Uint32Value();
+
       if (is_out_of_range(obj->matrix_, row, col))
         NanReturnUndefined();
+
       element_type value = obj->matrix_(row, col);
       NanReturnValue(NanNew(value));
     }
