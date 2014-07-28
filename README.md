@@ -92,3 +92,23 @@ mat =
 4 5 6
 7 8 9
 ```
+
+### Eigen.Matrix.get(row, col)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat = new Matrix(2, 3);
+mat.set([
+  1, 3, 5,
+  2, 4, 6
+]);
+console.log(mat.get(0, 0));
+console.log(mat.get(1, 1));
+console.log(mat.get(0, 2));
+```
+
+```txt
+1
+4
+5
+```
