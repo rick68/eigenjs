@@ -1,5 +1,5 @@
 const
-    Matrix = require('../index.js').Matrix;
+    Matrix = require('../index.js').Matrix,
     should = require('should');
 
 describe('Matrix', function() {
@@ -40,8 +40,12 @@ describe('Matrix', function() {
   });
 
   it('#set() should throw message when row or column nubers are out of range', function() {
-    (function() { mat.set(3, 0, 68); }).should.throw('Row or column numbers are out of range');
-    (function() { mat.set(-1, -2, 500); }).should.throw('Row or column numbers are out of range');
+    (function() {
+      mat.set(3, 0, 68);
+    }).should.throw('Row or column numbers are out of range');
+    (function() {
+      mat.set(-1, -2, 500);
+    }).should.throw('Row or column numbers are out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -55,15 +59,17 @@ describe('Matrix', function() {
       Matrix(3, 3).set([
         1, 2, 3,
         4, 5, 6
-    ])}).should.throw('Too few coefficients passed to Matrix');
+      ]);
+    }).should.throw('Too few coefficients passed to Matrix');
 
     (function() {
       Matrix(3, 3).set([
-        1, 2, 3,
-        4, 5, 6,
-        7, 8, 9,
-       10,11,12
-    ])}).should.throw('Too many coefficients passed to Matrix');
+        1,  2,  3,
+        4,  5,  6,
+        7,  8,  9,
+       10, 11, 12
+      ]);
+    }).should.throw('Too many coefficients passed to Matrix');
   });
 
   it('#get() should return the element value of Matrix', function() {
@@ -76,10 +82,27 @@ describe('Matrix', function() {
     mat.get(2, 0).should.equal(7);
     mat.get(2, 1).should.equal(8);
     mat.get(2, 2).should.equal(9);
-    (function(){ mat.get(3, 0); }).should.throw('Row or column numbers are out of range');
+    (function(){
+      mat.get(3, 0);
+    }).should.throw('Row or column numbers are out of range');
   });
 
   it('#toString() should return all element values of Matrix', function() {
     mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+  });
+
+  it('#add() should return sum of two matrices', function() {
+    Matrix(3, 3).set([
+      2,  4,  6,
+      8,  9, 10,
+     11, 12, 13
+    ]).add(mat).toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
+
+    (function() {
+      Matrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]).add(mat);
+    }).should.throw("Nonconformant arguments");
   });
 });
