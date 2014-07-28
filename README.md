@@ -112,3 +112,28 @@ console.log(mat.get(0, 2));
 4
 5
 ```
+
+### Eigen.Matrix.add(mat)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 2)
+  , mat2 = new Matrix(2, 2)
+  , mat3 = new Matrix(2, 2);
+mat1.set([
+  1, 3,
+  2, 4,
+]);
+mat2.set([
+  5, 6,
+  7, 8,
+]);
+mat3 = mat1.add(mat2);
+console.log("mat3 = \n%s", mat3);
+```
+
+```txt
+mat3 =
+ 6  9
+ 9 12
+```
