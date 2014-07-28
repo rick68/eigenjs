@@ -17,7 +17,7 @@
 
 #include <nan.h>
 
-#include <eigen3/Eigen/Eigen>
+#include <eigen3/Eigen/Dense>
 
 #include <sstream>
 
@@ -36,6 +36,9 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "cols", cols);
     NODE_SET_PROTOTYPE_METHOD(tpl, "set", set);
     NODE_SET_PROTOTYPE_METHOD(tpl, "get", get);
+
+    NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
+
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     NanAssignPersistent(constructor, tpl->GetFunction());
@@ -116,6 +119,40 @@ class Matrix : public node::ObjectWrap {
     NanReturnUndefined();
   }
 
+  static NAN_METHOD(add) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanScope();
+
+    if (args.Length() == 1 && args[0]->IsObject()) {
+      const Matrix* rhs_obj = node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+
+      if (is_nonconformate(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      const matrix_type::Index& rows = obj->matrix_.rows();
+      const matrix_type::Index& cols = obj->matrix_.cols();
+
+      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Integer>(rows)
+        , NanNew<v8::Integer>(cols)
+      };
+
+      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
+      new_obj->matrix_ = obj->matrix_ + rhs_obj->matrix_;
+
+      NanReturnValue(new_matrix);
+    }
+
+    NanReturnUndefined();
+  }
+
   static NAN_METHOD(toString) {
     const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
@@ -158,7 +195,7 @@ class Matrix : public node::ObjectWrap {
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
           ctr->NewInstance(
-              sizeof(argv)/sizeof(v8::Local<v8::Value>)
+              sizeof(argv) / sizeof(v8::Local<v8::Value>)
             , argv
           )
       );
@@ -174,6 +211,13 @@ class Matrix : public node::ObjectWrap {
     , const matrix_type::Index& col) {
     return row < 0 || row >= matrix.rows() || col < 0 || col >= matrix.cols()
       ? NanThrowError("Row or column numbers are out of range"), true
+      : false;
+  }
+
+  static bool is_nonconformate(const Matrix*& op1, const Matrix*& op2) {
+    return op1->matrix_.rows() != op2->matrix_.rows() ||
+           op2->matrix_.cols() != op2->matrix_.cols()
+      ? NanThrowError("Nonconformant arguments"), true
       : false;
   }
 
