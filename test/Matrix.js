@@ -105,4 +105,19 @@ describe('Matrix', function() {
       ]).add(mat);
     }).should.throw("Nonconformant arguments");
   });
+
+  it('#sub() should return defference of two matrices', function() {
+    Matrix(3, 3).set([
+      1,  3,  5,
+      7,  9, 11,
+     13, 15, 17
+    ]).sub(mat).toString().should.equal("0 1 2\n3 4 5\n6 7 8");
+
+    (function() {
+      Matrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]).sub(mat);
+    }).should.throw("Nonconformant arguments");
+  });
 });
