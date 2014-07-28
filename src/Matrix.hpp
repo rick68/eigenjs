@@ -38,6 +38,7 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "get", get);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -146,6 +147,40 @@ class Matrix : public node::ObjectWrap {
 
       Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
       new_obj->matrix_ = obj->matrix_ + rhs_obj->matrix_;
+
+      NanReturnValue(new_matrix);
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(sub) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanScope();
+
+    if (args.Length() == 1 && args[0]->IsObject()) {
+      const Matrix* rhs_obj = node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+
+      if (is_nonconformate(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      const matrix_type::Index& rows = obj->matrix_.rows();
+      const matrix_type::Index& cols = obj->matrix_.cols();
+
+      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Integer>(rows)
+        , NanNew<v8::Integer>(cols)
+      };
+
+      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
+      new_obj->matrix_ = obj->matrix_ - rhs_obj->matrix_;
 
       NanReturnValue(new_matrix);
     }
