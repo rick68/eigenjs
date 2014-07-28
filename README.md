@@ -46,13 +46,13 @@ mat =
 ```js
 var Matrix = require('eigenjs').Matrix
   , mat = new Matrix(2, 3);
-console.log('mat.rows() =', mat.rows());
-console.log('mat.cols() =', mat.cols());
+console.log(mat.rows());
+console.log(mat.cols());
 ```
 
 ```txt
-mat.rows() = 2
-mat.cols() = 3
+2
+3
 ```
 
 ### Eigen.Matrix.set(row, col, value)
