@@ -9,13 +9,6 @@
         "<!(node -e \"require('nan')\")"
       ],
       'conditions': [
-        [ 'OS=="win"', {
-          'msvs_settings': {
-            'VCCLCompilerTool': {
-              'ExceptionHandling': 1
-            }
-          }
-        }],
         [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
           'cflags_cc!': [ '-fno-rtti', '-fno-exceptions' ]
         }],
