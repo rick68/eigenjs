@@ -21,6 +21,63 @@
 
 #include <sstream>
 
+#define EIGENJS_MATRIX_BINARY_OPERATOR( NAME, OP )                             \
+static NAN_METHOD( NAME ) {                                                    \
+  const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );         \
+  NanScope();                                                                  \
+                                                                               \
+  if ( args.Length() == 1 && args[0]->IsObject() ) {                           \
+    const Matrix* rhs_obj =                                                    \
+        node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
+                                                                               \
+    if ( is_nonconformate_argument( obj, rhs_obj ) )                           \
+      NanReturnUndefined();                                                    \
+                                                                               \
+    const matrix_type::Index& rows = obj->matrix_.rows();                      \
+    const matrix_type::Index& cols = obj->matrix_.cols();                      \
+                                                                               \
+    v8::Local<v8::Function> ctr = NanNew( constructor );                       \
+    v8::Local<v8::Value> argv[] = {                                            \
+        NanNew<v8::Integer>( rows )                                            \
+      , NanNew<v8::Integer>( cols )                                            \
+    };                                                                         \
+                                                                               \
+    v8::Local<v8::Object> new_matrix = ctr->NewInstance(                       \
+        sizeof( argv ) / sizeof( v8::Local<v8::Value> )                        \
+      , argv                                                                   \
+    );                                                                         \
+                                                                               \
+    Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>( new_matrix );          \
+    new_obj->matrix_ = obj->matrix_ OP rhs_obj->matrix_;                       \
+                                                                               \
+    NanReturnValue( new_matrix );                                              \
+  }                                                                            \
+                                                                               \
+  NanReturnUndefined();                                                        \
+}                                                                              \
+/**/
+
+#define EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE( NAME, OP )                 \
+static NAN_METHOD( NAME ) {                                                    \
+  Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );               \
+  NanScope();                                                                  \
+                                                                               \
+  if ( args.Length() == 1 && args[0]->IsObject() ) {                           \
+    const Matrix* rhs_obj =                                                    \
+        node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
+                                                                               \
+    if ( is_nonconformate_argument( obj, rhs_obj ) )                           \
+      NanReturnUndefined();                                                    \
+                                                                               \
+    obj->matrix_ OP##= rhs_obj->matrix_;                                       \
+                                                                               \
+    NanReturnValue( args.This() );                                             \
+  }                                                                            \
+                                                                               \
+  NanReturnUndefined();                                                        \
+}                                                                              \
+/**/
+
 namespace EigenJS {
 
 class Matrix : public node::ObjectWrap {
@@ -38,6 +95,7 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "get", get);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
@@ -120,75 +178,10 @@ class Matrix : public node::ObjectWrap {
     NanReturnUndefined();
   }
 
-  static NAN_METHOD(add) {
-    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    NanScope();
+  EIGENJS_MATRIX_BINARY_OPERATOR(add, +)
+  EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE(adda, +)
 
-    if (args.Length() == 1 && args[0]->IsObject()) {
-      const Matrix* rhs_obj =
-          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-
-      if (is_nonconformate(obj, rhs_obj)) {
-        NanReturnUndefined();
-      }
-
-      const matrix_type::Index& rows = obj->matrix_.rows();
-      const matrix_type::Index& cols = obj->matrix_.cols();
-
-      v8::Local<v8::Function> ctr = NanNew(constructor);
-      v8::Local<v8::Value> argv[] = {
-          NanNew<v8::Integer>(rows)
-        , NanNew<v8::Integer>(cols)
-      };
-
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-      );
-
-      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
-      new_obj->matrix_ = obj->matrix_ + rhs_obj->matrix_;
-
-      NanReturnValue(new_matrix);
-    }
-
-    NanReturnUndefined();
-  }
-
-  static NAN_METHOD(sub) {
-    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    NanScope();
-
-    if (args.Length() == 1 && args[0]->IsObject()) {
-      const Matrix* rhs_obj =
-          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-
-      if (is_nonconformate(obj, rhs_obj)) {
-        NanReturnUndefined();
-      }
-
-      const matrix_type::Index& rows = obj->matrix_.rows();
-      const matrix_type::Index& cols = obj->matrix_.cols();
-
-      v8::Local<v8::Function> ctr = NanNew(constructor);
-      v8::Local<v8::Value> argv[] = {
-          NanNew<v8::Integer>(rows)
-        , NanNew<v8::Integer>(cols)
-      };
-
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-      );
-
-      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
-      new_obj->matrix_ = obj->matrix_ - rhs_obj->matrix_;
-
-      NanReturnValue(new_matrix);
-    }
-
-    NanReturnUndefined();
-  }
+  EIGENJS_MATRIX_BINARY_OPERATOR(sub, -)
 
   static NAN_METHOD(toString) {
     const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
@@ -231,7 +224,7 @@ class Matrix : public node::ObjectWrap {
       v8::Local<v8::Function> ctr = NanNew(constructor);
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
-          ctr->NewInstance(
+        ctr->NewInstance(
               sizeof(argv) / sizeof(v8::Local<v8::Value>)
             , argv
           )
@@ -251,7 +244,7 @@ class Matrix : public node::ObjectWrap {
       : false;
   }
 
-  static bool is_nonconformate(
+  static bool is_nonconformate_argument(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
@@ -267,5 +260,7 @@ class Matrix : public node::ObjectWrap {
 v8::Persistent<v8::Function> Matrix::constructor;
 
 }  // namespace EigenJS
+
+#undef EIGENJS_MATRIX_BINARY_OPERATOR
 
 #endif  // EIGENJS_MATRIX_HPP
