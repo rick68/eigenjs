@@ -91,7 +91,7 @@ describe('Matrix', function() {
     mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
   });
 
-  it('#add() should return sum of two matrices', function() {
+  it('#add() should return the sum of two matrices', function() {
     Matrix(3, 3).set([
       2,  4,  6,
       8,  9, 10,
@@ -106,7 +106,7 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#sub() should return defference of two matrices', function() {
+  it('#sub() should return the defference of two matrices', function() {
     Matrix(3, 3).set([
       1,  3,  5,
       7,  9, 11,
