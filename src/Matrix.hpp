@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+
 #define EIGENJS_MATRIX_BINARY_OPERATOR( NAME, OP )                             \
 static NAN_METHOD( NAME ) {                                                    \
   const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );         \
@@ -30,8 +31,9 @@ static NAN_METHOD( NAME ) {                                                    \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
-    if ( is_nonconformate_argument( obj, rhs_obj ) )                           \
+    if ( is_nonconformate_argument( obj, rhs_obj ) ) {                         \
       NanReturnUndefined();                                                    \
+    }                                                                          \
                                                                                \
     const matrix_type::Index& rows = obj->matrix_.rows();                      \
     const matrix_type::Index& cols = obj->matrix_.cols();                      \
@@ -66,8 +68,9 @@ static NAN_METHOD( NAME ) {                                                    \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
-    if ( is_nonconformate_argument( obj, rhs_obj ) )                           \
+    if ( is_nonconformate_argument( obj, rhs_obj ) ) {                         \
       NanReturnUndefined();                                                    \
+    }                                                                          \
                                                                                \
     obj->matrix_ OP##= rhs_obj->matrix_;                                       \
                                                                                \
@@ -77,6 +80,7 @@ static NAN_METHOD( NAME ) {                                                    \
   NanReturnUndefined();                                                        \
 }                                                                              \
 /**/
+
 
 namespace EigenJS {
 
