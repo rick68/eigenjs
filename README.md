@@ -90,20 +90,18 @@ mat =
 
 ```js
 var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 3);
+  , mat = new Matrix(2, 2);
 mat.set([
-  1, 3, 5,
-  2, 4, 6
+  1, 2,
+  3, 4
 ]);
-console.log(mat.get(0, 0));
-console.log(mat.get(1, 1));
-console.log(mat.get(0, 2));
+console.log(mat.get(0, 0) + ' ' + mat.get(0, 1));
+console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 ```
 
 ```txt
-1
-4
-5
+1 2
+3 4
 ```
 
 ### Eigen.Matrix.add(mat)
@@ -112,7 +110,7 @@ console.log(mat.get(0, 2));
 var Matrix = require('eigenjs').Matrix
   , mat1 = new Matrix(2, 2)
   , mat2 = new Matrix(2, 2)
-  , mat3 = new Matrix(2, 2);
+  , mat3;
 mat1.set([
   1, 3,
   2, 4,
@@ -161,7 +159,7 @@ mat1 =
 var Matrix = require('eigenjs').Matrix
   , mat1 = new Matrix(2, 2)
   , mat2 = new Matrix(2, 2)
-  , mat3 = new Matrix(2, 2);
+  , mat3;
 mat1.set([
   1, 3,
   2, 4,
