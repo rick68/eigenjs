@@ -9,8 +9,6 @@ notifications:
   email:
     - rick68@gmail.com
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq --no-install-recommends libeigen3-dev
   - rm -rf ~/.nvm
   - git clone https://github.com/creationix/nvm.git ~/.nvm
   - source ~/.nvm/nvm.sh
