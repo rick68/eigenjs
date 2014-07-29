@@ -241,7 +241,8 @@ class Matrix : public node::ObjectWrap {
   }
 
   static bool HasInstance(const v8::Handle<v8::Value>& value) {
-    return function_template->HasInstance(value);
+    v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
+    return tpl->HasInstance(value);
   }
 
   static v8::Persistent<v8::FunctionTemplate> function_template;
