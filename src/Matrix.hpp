@@ -97,6 +97,7 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
     NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "suba", suba);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -182,6 +183,7 @@ class Matrix : public node::ObjectWrap {
   EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE(adda, +)
 
   EIGENJS_MATRIX_BINARY_OPERATOR(sub, -)
+  EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE(suba, -)
 
   static NAN_METHOD(toString) {
     const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
