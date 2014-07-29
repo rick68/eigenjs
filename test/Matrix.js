@@ -106,6 +106,27 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#adda() should return the sum of two matrices and saves it backs', function() {
+    mat.adda(
+      Matrix(3, 3)
+      .set([
+        2,  4,  6,
+        8,  9, 10,
+        11, 12, 13
+      ])
+    ).toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
+
+    (function() {
+      mat.adda(
+        Matrix(2, 3)
+        .set([
+          1, 0, 0,
+          0, 1, 0
+        ])
+      )
+    }).should.throw("Nonconformant arguments");
+  });
+
   it('#sub() should return the defference of two matrices', function() {
     Matrix(3, 3).set([
       1,  3,  5,
