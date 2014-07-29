@@ -27,7 +27,7 @@ static NAN_METHOD( NAME ) {                                                    \
   const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );         \
   NanScope();                                                                  \
                                                                                \
-  if ( args.Length() == 1 && args[0]->IsObject() ) {                           \
+  if ( args.Length() == 1 && HasInstance( args[0] ) ) {                        \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
@@ -64,7 +64,7 @@ static NAN_METHOD( NAME ) {                                                    \
   Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );               \
   NanScope();                                                                  \
                                                                                \
-  if ( args.Length() == 1 && args[0]->IsObject() ) {                           \
+  if ( args.Length() == 1 && HasInstance( args[0] ) ) {                        \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
@@ -107,6 +107,8 @@ class Matrix : public node::ObjectWrap {
 
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Matrix"), tpl->GetFunction());
+
+    NanAssignPersistent(function_template, tpl);
   }
 
   static NAN_METHOD(rows) {
@@ -238,6 +240,11 @@ class Matrix : public node::ObjectWrap {
     }
   }
 
+  static bool HasInstance(const v8::Handle<v8::Value>& value) {
+    return function_template->HasInstance(value);
+  }
+
+  static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
 
  private:
@@ -263,6 +270,7 @@ class Matrix : public node::ObjectWrap {
   matrix_type matrix_;
 };
 
+v8::Persistent<v8::FunctionTemplate> Matrix::function_template;
 v8::Persistent<v8::Function> Matrix::constructor;
 
 }  // namespace EigenJS
