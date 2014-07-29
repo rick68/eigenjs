@@ -13,13 +13,6 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [gitter-url]: https://gitter.im/rick68/eigenjs
 
 ## Getting started
-First download and install [Eigen](http://eigen.tuxfamily.org). For OS X users, you can simply use [Homebrew](http://brew.sh) and do this:
-
-```bash
-$ brew install eigen
-```
-
-then use npm to install this package:
 
 ```bash
 $ npm install eigenjs
