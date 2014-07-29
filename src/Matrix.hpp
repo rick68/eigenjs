@@ -125,7 +125,8 @@ class Matrix : public node::ObjectWrap {
     NanScope();
 
     if (args.Length() == 1 && args[0]->IsObject()) {
-      const Matrix* rhs_obj = node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
 
       if (is_nonconformate(obj, rhs_obj)) {
         NanReturnUndefined();
@@ -159,7 +160,8 @@ class Matrix : public node::ObjectWrap {
     NanScope();
 
     if (args.Length() == 1 && args[0]->IsObject()) {
-      const Matrix* rhs_obj = node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
 
       if (is_nonconformate(obj, rhs_obj)) {
         NanReturnUndefined();
@@ -249,7 +251,9 @@ class Matrix : public node::ObjectWrap {
       : false;
   }
 
-  static bool is_nonconformate(const Matrix*& op1, const Matrix*& op2) {
+  static bool is_nonconformate(
+      const Matrix* const& op1
+    , const Matrix* const& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
            op1->matrix_.cols() != op2->matrix_.cols()
       ? NanThrowError("Nonconformant arguments"), true
