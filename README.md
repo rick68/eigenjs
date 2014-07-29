@@ -138,6 +138,30 @@ mat3 =
  9 12
 ```
 
+### Eigen.Matrix.adda(mat)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 2)
+  , mat2 = new Matrix(2, 2);
+mat1.set([
+  1, 3,
+  2, 4,
+]);
+mat2.set([
+  5, 6,
+  7, 8,
+]);
+mat1.adda(mat2);
+console.log("mat1 = \n%s", mat1);
+```
+
+```txt
+mat1 =
+ 6  9
+ 9 12
+```
+
 ### Eigen.Matrix.sub(mat)
 
 ```js
