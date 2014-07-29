@@ -6,6 +6,7 @@
         'src/EigenJS.cpp'
       ],
       'include_dirs': [
+        'deps',
         "<!(node -e \"require('nan')\")"
       ],
       'conditions': [
