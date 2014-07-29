@@ -159,6 +159,6 @@ console.log("mat3 = \n%s", mat3);
 
 ```txt
 mat3 =
--4 -5
+-4 -3
 -5 -4
 ```
