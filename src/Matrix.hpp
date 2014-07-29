@@ -251,7 +251,7 @@ class Matrix : public node::ObjectWrap {
 
   static bool is_nonconformate(const Matrix*& op1, const Matrix*& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
-           op2->matrix_.cols() != op2->matrix_.cols()
+           op1->matrix_.cols() != op2->matrix_.cols()
       ? NanThrowError("Nonconformant arguments"), true
       : false;
   }
