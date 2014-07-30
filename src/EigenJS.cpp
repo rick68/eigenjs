@@ -14,12 +14,18 @@
 
 #include <nan.h>
 
+// #include <complex>
+
 #include "Matrix.hpp"
 
 namespace EigenJS {
 
+static const char matrix_class_name[] = "Matrix";
+// static const char cmatrix_class_name[] = "CMatrix";
+
 void Init(v8::Handle<v8::Object> exports) {
-  Matrix::Init(exports);
+  Matrix<double, matrix_class_name>::Init(exports);
+  // Matrix<std::complex<double>, cmatrix_class_name>::Init(exports);
 }
 
 }  // namespace EigenJS
