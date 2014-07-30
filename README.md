@@ -201,3 +201,48 @@ mat1 =
 -4 -3
 -5 -4
 ```
+
+### Eigen.Matrix.mul(mat)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 3)
+  , vector = new Matrix(3, 1)
+  , mat2;
+mat1.set([
+  1, 2, 3,
+  4, 5, 6
+]);
+vector.set([
+  1,
+  6,
+  8
+]);
+mat2 = mat1.mul(vector);
+console.log("mat2 = \n%s", mat2);
+```
+
+```txt
+mat2 =
+37
+82
+```
+
+### Eigen.Matrix.mul(scalar)
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 3)
+  , mat2;
+mat1.set([
+  1, 2, 3,
+  4, 5, 6
+]);
+mat2 = mat1.mul(2);
+console.log("mat2 = \n%s", mat2);
+```
+
+```txt
+mat2 =
+ 2  4  6
+ 8 10 12
+```
