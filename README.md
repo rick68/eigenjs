@@ -311,3 +311,22 @@ mat2 =
 0.5   1
 1.5   2
 ```
+
+### Eigen.Matrix.diva(scalar)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 2);
+mat1.set([
+  1, 2,
+  3, 4
+]);
+mat1.diva(2);
+console.log("mat1 = \n%s", mat1);
+```
+
+```txt
+mat1 =
+0.5   1
+1.5   2
+```
