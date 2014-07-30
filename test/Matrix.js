@@ -195,4 +195,10 @@ describe('Matrix', function() {
 
     mat.div(2).toString().should.equal("0.5   1 1.5\n  2 2.5   3\n3.5   4 4.5");
   });
+
+  it('#diva() should return a Matrix which be divied by scalar value and saves it back', function() {
+    mat.diva(0);
+    mat.toString().should.equal("inf inf inf\ninf inf inf\ninf inf inf");
+    mat.get(0, 0).should.be.a.Infinity;
+  });
 });
