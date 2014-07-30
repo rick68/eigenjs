@@ -294,3 +294,22 @@ mat1 =
  8 10 12
 ```
 
+### Eigen.Matrix.div(scalar)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 2)
+  , mat2;
+mat1.set([
+  1, 2,
+  3, 4
+]);
+mat2 = mat1.div(2);
+console.log("mat2 = \n%s", mat2);
+```
+
+```txt
+mat2 =
+0.5   1
+1.5   2
+```
