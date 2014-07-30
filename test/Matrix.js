@@ -114,7 +114,8 @@ describe('Matrix', function() {
         8,  9, 10,
        11, 12, 13
       ])
-    ).toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
+    );
+    mat.toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
 
     (function() {
       mat.adda(
@@ -123,7 +124,7 @@ describe('Matrix', function() {
           1, 0, 0,
           0, 1, 0
         ])
-      )
+      );
     }).should.throw("Nonconformant arguments");
   });
 
@@ -143,12 +144,14 @@ describe('Matrix', function() {
   });
 
   it('#suba() should return the difference of two matrices and saves it back', function() {
-    Matrix(3, 3)
+    var mat2 = Matrix(3, 3)
     .set([
       1,  3,  5,
       7,  9, 11,
      13, 15, 17
-    ]).suba(mat).toString().should.equal("0 1 2\n3 4 5\n6 7 8");
+    ]);
+    mat2.suba(mat);
+    mat2.toString().should.equal("0 1 2\n3 4 5\n6 7 8");
 
     (function() {
       mat.suba(
@@ -157,7 +160,31 @@ describe('Matrix', function() {
           1, 0, 0,
           0, 1, 0
         ])
-      )
+      );
     }).should.throw("Nonconformant arguments");
+  });
+
+  it('#mul() should return the product of two matrices', function() {
+    var vector = new Matrix(3, 1).set([1, 2, 3]);
+    mat.mul(vector).toString().should.equal("14\n32\n50");
+
+    mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
+
+    (function() {
+      vector.mul(mat);
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mula() should return the product of two matrices', function() {
+    var vector = new Matrix(3, 1).set([1, 2, 3]);
+    mat.mula(vector);
+    mat.toString().should.equal("14\n32\n50");
+
+    mat.mula(-1);
+    mat.toString().should.equal("-14\n-32\n-50");
+
+    (function() {
+      vector.mula(mat);
+    }).should.throw("Invalid matrix product");
   });
 });
