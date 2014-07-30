@@ -17,6 +17,7 @@
 // #include <complex>
 
 #include "Matrix.hpp"
+#include "Complex.hpp"
 
 namespace EigenJS {
 
@@ -26,6 +27,8 @@ static const char matrix_class_name[] = "Matrix";
 void Init(v8::Handle<v8::Object> exports) {
   Matrix<double, matrix_class_name>::Init(exports);
   // Matrix<std::complex<double>, cmatrix_class_name>::Init(exports);
+
+  Complex<double>::Init(exports);
 }
 
 }  // namespace EigenJS
