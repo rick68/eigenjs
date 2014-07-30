@@ -35,10 +35,22 @@ class Complex : public node::ObjectWrap {
     tpl->SetClassName(NanNew("Complex"));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
+
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Complex"), tpl->GetFunction());
 
     NanAssignPersistent(function_template, tpl);
+  }
+
+  static NAN_METHOD(toString) {
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    NanScope();
+
+    std::ostringstream result;
+    result << obj->complex_;
+
+    NanReturnValue(NanNew(result.str().c_str()));
   }
 
  private:
