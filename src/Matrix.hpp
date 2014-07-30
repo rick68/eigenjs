@@ -106,6 +106,8 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "mul", mul);
     NODE_SET_PROTOTYPE_METHOD(tpl, "mula", mula);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "div", div);
+
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     NanAssignPersistent(constructor, tpl->GetFunction());
@@ -263,6 +265,33 @@ class Matrix : public node::ObjectWrap {
       obj->matrix_ *= args[0]->NumberValue();
 
       NanReturnValue(args.This());
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(div) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
+    const matrix_type::Index& rows = obj->matrix_.rows();
+    const matrix_type::Index& cols = obj->matrix_.cols();
+    NanScope();
+
+    if (args.Length() == 1 && args[0]->IsNumber()) {
+      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Integer>(rows)
+        , NanNew<v8::Integer>(cols)
+      };
+
+      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
+      new_obj->matrix_ = obj->matrix_ / args[0]->NumberValue();
+
+      NanReturnValue(new_matrix);
     }
 
     NanReturnUndefined();
