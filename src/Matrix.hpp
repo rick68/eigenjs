@@ -31,7 +31,7 @@ static NAN_METHOD( NAME ) {                                                    \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
-    if ( is_nonconformate_argument( obj, rhs_obj ) ) {                         \
+    if ( is_nonconformate_arguments( obj, rhs_obj ) ) {                        \
       NanReturnUndefined();                                                    \
     }                                                                          \
                                                                                \
@@ -68,7 +68,7 @@ static NAN_METHOD( NAME ) {                                                    \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
-    if ( is_nonconformate_argument( obj, rhs_obj ) ) {                         \
+    if ( is_nonconformate_arguments( obj, rhs_obj ) ) {                        \
       NanReturnUndefined();                                                    \
     }                                                                          \
                                                                                \
@@ -102,6 +102,9 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
     NODE_SET_PROTOTYPE_METHOD(tpl, "suba", suba);
+
+    NODE_SET_PROTOTYPE_METHOD(tpl, "mul", mul);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "mula", mula);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -162,7 +165,7 @@ class Matrix : public node::ObjectWrap {
       obj->matrix_(row, col) = value;
     }
 
-    NanReturnValue(NanNew(args.This()));
+    NanReturnValue(args.This());
   }
 
   static NAN_METHOD(get) {
@@ -190,6 +193,80 @@ class Matrix : public node::ObjectWrap {
 
   EIGENJS_MATRIX_BINARY_OPERATOR(sub, -)
   EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE(suba, -)
+
+  static NAN_METHOD(mul) {
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
+    const matrix_type::Index& rows = obj->matrix_.rows();
+    const matrix_type::Index& cols = obj->matrix_.cols();
+    NanScope();
+
+    if (args.Length() == 1 && HasInstance(args[0])) {
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+
+      if (is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Integer>(rows)
+        , NanNew<v8::Integer>(cols)
+      };
+
+      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
+      new_obj->matrix_ = obj->matrix_ * rhs_obj->matrix_;
+
+      NanReturnValue(new_matrix);
+    } else if (args.Length() == 1 && args[0]->IsNumber()) {
+      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Integer>(rows)
+        , NanNew<v8::Integer>(cols)
+      };
+
+      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(new_matrix);
+      new_obj->matrix_ = obj->matrix_ * args[0]->NumberValue();
+
+      NanReturnValue(new_matrix);
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(mula) {
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanScope();
+
+    if (args.Length() == 1 && HasInstance(args[0])) {
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+
+      if (is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      obj->matrix_ *= rhs_obj->matrix_;
+
+      NanReturnValue(args.This());
+    } else if (args.Length() == 1 && args[0]->IsNumber()) {
+      obj->matrix_ *= args[0]->NumberValue();
+
+      NanReturnValue(args.This());
+    }
+
+    NanReturnUndefined();
+  }
 
   static NAN_METHOD(toString) {
     const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
@@ -233,9 +310,9 @@ class Matrix : public node::ObjectWrap {
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
         ctr->NewInstance(
-              sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-          )
+            sizeof(argv) / sizeof(v8::Local<v8::Value>)
+          , argv
+        )
       );
     }
   }
@@ -258,12 +335,20 @@ class Matrix : public node::ObjectWrap {
       : false;
   }
 
-  static bool is_nonconformate_argument(
+  static bool is_nonconformate_arguments(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
            op1->matrix_.cols() != op2->matrix_.cols()
       ? NanThrowError("Nonconformant arguments"), true
+      : false;
+  }
+
+  static bool is_invalid_matrix_product(
+      const Matrix* const& op1
+    , const Matrix* const& op2) {
+    return op1->matrix_.cols() != op2->matrix_.rows()
+      ? NanThrowError("Invalid matrix product"), true
       : false;
   }
 
@@ -277,5 +362,6 @@ v8::Persistent<v8::Function> Matrix::constructor;
 }  // namespace EigenJS
 
 #undef EIGENJS_MATRIX_BINARY_OPERATOR
+#undef EIGENJS_MATRIX_BINARY_OPERATOR_COMMUTATIVE
 
 #endif  // EIGENJS_MATRIX_HPP
