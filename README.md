@@ -330,3 +330,16 @@ mat1 =
 0.5   1
 1.5   2
 ```
+
+## Complex methods
+
+### Eigen.Complex(real, imag)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c = %s', c);
+```
+```txt
+c = (3,-4)
+```
