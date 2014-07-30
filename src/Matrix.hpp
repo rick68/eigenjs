@@ -107,6 +107,7 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "mula", mula);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "div", div);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "diva", diva);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -292,6 +293,19 @@ class Matrix : public node::ObjectWrap {
       new_obj->matrix_ = obj->matrix_ / args[0]->NumberValue();
 
       NanReturnValue(new_matrix);
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(diva) {
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    NanScope();
+
+    if (args.Length() == 1 && args[0]->IsNumber()) {
+      obj->matrix_ /= args[0]->NumberValue();
+
+      NanReturnValue(args.This());
     }
 
     NanReturnUndefined();
