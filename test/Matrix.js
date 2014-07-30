@@ -175,7 +175,7 @@ describe('Matrix', function() {
     }).should.throw("Invalid matrix product");
   });
 
-  it('#mula() should return the product of two matrices', function() {
+  it('#mula() should return the product of two matrices and saves it back', function() {
     var vector = new Matrix(3, 1).set([1, 2, 3]);
     mat.mula(vector);
     mat.toString().should.equal("14\n32\n50");
