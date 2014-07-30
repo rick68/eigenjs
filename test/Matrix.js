@@ -187,4 +187,12 @@ describe('Matrix', function() {
       vector.mula(mat);
     }).should.throw("Invalid matrix product");
   });
+
+  it('#div() should return a Matrix which be divied by scalar value', function() {
+    var mat2 = mat.div(0);
+    mat2.toString().should.equal("inf inf inf\ninf inf inf\ninf inf inf");
+    mat2.get(0, 0).should.be.a.Infinity;
+
+    mat.div(2).toString().should.equal("0.5   1 1.5\n  2 2.5   3\n3.5   4 4.5");
+  });
 });
