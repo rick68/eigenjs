@@ -43,6 +43,8 @@ class Complex : public node::ObjectWrap {
     NODE_SET_METHOD(tpl, "polar", polar);
     NODE_SET_METHOD(tpl, "proj", proj);
 
+    NODE_SET_METHOD(tpl, "cos", cos);
+
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     v8::Local<v8::ObjectTemplate> proto = tpl->PrototypeTemplate();
@@ -133,6 +135,34 @@ class Complex : public node::ObjectWrap {
       const complex_type& proj = std::proj(obj->complex_);
       const element_type& real = proj.real();
       const element_type& imag = proj.imag();
+
+      v8::Local<v8::Function> ctor = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Number>(real)
+        , NanNew<v8::Number>(imag)
+      };
+
+      v8::Local<v8::Object> new_complex = ctor->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      NanReturnValue(new_complex);
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(cos) {
+    NanScope();
+
+    if (args.Length() == 1 && HasInstance(args[0])) {
+      const Complex* obj =
+          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+
+      const complex_type& cos = std::cos(obj->complex_);
+      const element_type& real = cos.real();
+      const element_type& imag = cos.imag();
 
       v8::Local<v8::Function> ctor = NanNew(constructor);
       v8::Local<v8::Value> argv[] = {
