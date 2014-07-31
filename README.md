@@ -370,3 +370,17 @@ console.log(c.abs());
 ```txt
 5
 ```
+
+### Eigen.Complex.arg()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.arg());
+console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()));
+```
+
+```txt
+-0.9272952180016122
+(3.0000000000000004,-3.9999999999999996)
+```
