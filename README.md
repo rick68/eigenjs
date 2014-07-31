@@ -408,3 +408,21 @@ console.log(c.conj().toString());
 ```txt
 (3,4)
 ```
+
+### Eigen.Complex.polar()
+
+```js
+var Complex = require('eigenjs').Complex
+  , rho = 5
+  , theta = -0.9272952180016122
+  , c = Complex.polar(rho, theta);
+console.log(c.conj().toString());
+console.log(c.real * Math.cos(c.imag));
+console.log(c.real * Math.sin(c.imag));
+```
+
+```txt
+(5,0.927295)
+3.0000000000000004
+-3.9999999999999996
+```
