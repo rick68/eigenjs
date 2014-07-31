@@ -9,7 +9,8 @@ notifications:
   email:
     - rick68@gmail.com
 before_install:
-  - export CXX="clang++"
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq --no-install-recommends g++4.8
   - rm -rf ~/.nvm
   - git clone https://github.com/creationix/nvm.git ~/.nvm
   - source ~/.nvm/nvm.sh
