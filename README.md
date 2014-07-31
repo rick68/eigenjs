@@ -340,6 +340,7 @@ var Complex = require('eigenjs').Complex
   , c = new Complex(3, -4);
 console.log('c = %s', c);
 ```
+
 ```txt
 c = (3,-4)
 ```
@@ -353,6 +354,19 @@ c.real = 6;
 c.imag = 8;
 console.log('(%d,%d)', c.real, c.imag);
 ```
+
 ```txt
 (6,8)
+```
+
+### Eigen.Complex.abs()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.abs());
+```
+
+```txt
+5
 ```
