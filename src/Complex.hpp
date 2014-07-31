@@ -38,6 +38,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "abs", abs);
     NODE_SET_PROTOTYPE_METHOD(tpl, "arg", arg);
     NODE_SET_PROTOTYPE_METHOD(tpl, "norm", norm);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -70,6 +71,27 @@ class Complex : public node::ObjectWrap {
     NanScope();
 
     NanReturnValue(NanNew(std::norm(obj->complex_)));
+  }
+
+  static NAN_METHOD(conj) {
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    const complex_type& c = std::conj(obj->complex_);
+    const element_type& real = c.real();
+    const element_type& imag = c.imag();
+    NanScope();
+
+    v8::Local<v8::Function> ctor = NanNew(constructor);
+    v8::Local<v8::Value> argv[] = {
+        NanNew<v8::Number>(real)
+      , NanNew<v8::Number>(imag)
+    };
+
+    v8::Local<v8::Object> new_complex = ctor->NewInstance(
+        sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+    );
+
+    NanReturnValue(new_complex);
   }
 
   static NAN_METHOD(toString) {
