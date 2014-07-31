@@ -426,3 +426,16 @@ console.log(c.real * Math.sin(c.imag));
 3.0000000000000004
 -3.9999999999999996
 ```
+
+### Eigen.Complex.proj()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(0, -Infinity)
+  , c2 = Complex.proj(c1);
+console.log(c2.toString());
+```
+
+```txt
+(inf, -0)
+```
