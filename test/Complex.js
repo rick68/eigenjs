@@ -40,4 +40,9 @@ describe('Complex', function() {
     (c.abs() * Math.cos(c.arg())).should.approximately(3, 0.0000001);
     (c.abs() * Math.sin(c.arg())).should.approximately(-4, 0.0000001);
   });
+
+  it('#norm() should return the norm value of the complex number', function() {
+    c.norm.should.be.a.Function;
+    c.norm().should.equal(25);
+  });
 });
