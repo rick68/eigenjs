@@ -45,4 +45,9 @@ describe('Complex', function() {
     c.norm.should.be.a.Function;
     c.norm().should.equal(25);
   });
+
+  it('#conj() should return the conjugate of the complex number', function() {
+    c.conj.should.be.a.Function;
+    c.conj().toString().should.equal("(3,4)");
+  });
 });
