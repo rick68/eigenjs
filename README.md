@@ -338,7 +338,7 @@ mat1 =
 ```js
 var Complex = require('eigenjs').Complex
   , c = new Complex(3, -4);
-console.log(c = %s', c);
+console.log('c = %s', c);
 ```
 ```txt
 c = (3,-4)
