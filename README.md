@@ -384,3 +384,15 @@ console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()))
 -0.9272952180016122
 (3.0000000000000004,-3.9999999999999996)
 ```
+
+### Eigen.Complex.norm()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.norm());
+```
+
+```txt
+25
+```
