@@ -33,4 +33,11 @@ describe('Complex', function() {
     c.abs.should.be.a.Function;
     c.abs().should.equal(5);
   });
+
+  it('#arg() should return the phase angle (or angular component) of the complex number, expressed in radians', function() {
+    c.arg.should.be.a.Function;
+    c.arg().should.equal(-0.9272952180016122);
+    (c.abs() * Math.cos(c.arg())).should.approximately(3, 0.0000001);
+    (c.abs() * Math.sin(c.arg())).should.approximately(-4, 0.0000001);
+  });
 });
