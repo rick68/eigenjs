@@ -15,4 +15,5 @@ before_install:
   - nvm install $NODE_VERSION
   - node --version
   - npm --version
+  - $CXX --version
   # at this point Travis-CI will implicitly run `npm install` for us
