@@ -35,6 +35,8 @@ class Complex : public node::ObjectWrap {
     tpl->SetClassName(NanNew("Complex"));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "abs", abs);
+
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     v8::Local<v8::ObjectTemplate> proto = tpl->PrototypeTemplate();
@@ -45,6 +47,25 @@ class Complex : public node::ObjectWrap {
     exports->Set(NanNew("Complex"), tpl->GetFunction());
 
     NanAssignPersistent(function_template, tpl);
+  }
+
+  static NAN_METHOD(abs) {
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    NanScope();
+
+    NanReturnValue(NanNew(std::abs(obj->complex_)));
+  }
+
+  static NAN_METHOD(toString) {
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    NanScope();
+
+    std::ostringstream result;
+    result << obj->complex_;
+
+    NanReturnValue(NanNew(result.str().c_str()));
+
+    NanReturnUndefined();
   }
 
   static NAN_GETTER(get_real) {
@@ -87,18 +108,6 @@ class Complex : public node::ObjectWrap {
         , value->NumberValue()
       );
     }
-  }
-
-  static NAN_METHOD(toString) {
-    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-    NanScope();
-
-    std::ostringstream result;
-    result << obj->complex_;
-
-    NanReturnValue(NanNew(result.str().c_str()));
-
-    NanReturnUndefined();
   }
 
  private:
