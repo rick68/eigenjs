@@ -39,6 +39,7 @@ class Complex : public node::ObjectWrap {
 
     v8::Local<v8::ObjectTemplate> proto = tpl->PrototypeTemplate();
     proto->SetAccessor(NanNew("real"), get_real, set_real);
+    proto->SetAccessor(NanNew("imag"), get_imag, set_imag);
 
     NanAssignPersistent(constructor, tpl->GetFunction());
     exports->Set(NanNew("Complex"), tpl->GetFunction());
@@ -63,6 +64,27 @@ class Complex : public node::ObjectWrap {
       obj->complex_ = complex_type(
           value->NumberValue()
         , obj->complex_.imag()
+      );
+    }
+  }
+
+  static NAN_GETTER(get_imag) {
+    NanScope();
+
+    if (!args.This()->GetPointerFromInternalField(0))
+      NanReturnValue(args.This());
+
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+
+    NanReturnValue(NanNew(obj->complex_.imag()));
+  }
+
+  static NAN_SETTER(set_imag) {
+    if (value->IsNumber()) {
+      Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+      obj->complex_ = complex_type(
+          obj->complex_.real()
+        , value->NumberValue()
       );
     }
   }
