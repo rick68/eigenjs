@@ -71,7 +71,7 @@ class Complex : public node::ObjectWrap {
   static NAN_GETTER(get_real) {
     NanScope();
 
-    if (!args.This()->GetPointerFromInternalField(0))
+    if (!NanGetInternalFieldPointer(args.This(), 0))
       NanReturnValue(args.This());
 
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
@@ -92,7 +92,7 @@ class Complex : public node::ObjectWrap {
   static NAN_GETTER(get_imag) {
     NanScope();
 
-    if (!args.This()->GetPointerFromInternalField(0))
+    if (!NanGetInternalFieldPointer(args.This(), 0))
       NanReturnValue(args.This());
 
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
