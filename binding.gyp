@@ -19,8 +19,8 @@
           }
         }],
         ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
-          'cflags': [ '-std=c++0x' ],
-          'cflags_cc!': [ '-fno-rtti', '-fno-exceptions']
+          'cflags': [ '-std=c++11' ],
+          'cflags_cc!': [ '-fno-rtti', '-fno-exceptions' ]
         }],
         ['OS=="mac"', {
           'xcode_settings': {
