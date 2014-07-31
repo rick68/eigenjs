@@ -21,8 +21,8 @@
 
 namespace EigenJS {
 
-static const char matrix_class_name[] = "Matrix";
-// static const char cmatrix_class_name[] = "CMatrix";
+static constexpr char matrix_class_name[] = "Matrix";
+// static constexpr char cmatrix_class_name[] = "CMatrix";
 
 void Init(v8::Handle<v8::Object> exports) {
   Matrix<double, matrix_class_name>::Init(exports);
