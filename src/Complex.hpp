@@ -41,6 +41,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
 
     NODE_SET_METHOD(tpl, "polar", polar);
+    NODE_SET_METHOD(tpl, "proj", proj);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -109,6 +110,34 @@ class Complex : public node::ObjectWrap {
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Number>(rho)
         , NanNew<v8::Number>(theta)
+      };
+
+      v8::Local<v8::Object> new_complex = ctor->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      NanReturnValue(new_complex);
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(proj) {
+    NanScope();
+
+    if (args.Length() == 1 && HasInstance(args[0])) {
+      const Complex* obj =
+          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+
+      const complex_type& proj = std::proj(obj->complex_);
+      const element_type& real = proj.real();
+      const element_type& imag = proj.imag();
+
+      v8::Local<v8::Function> ctor = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Number>(real)
+        , NanNew<v8::Number>(imag)
       };
 
       v8::Local<v8::Object> new_complex = ctor->NewInstance(
@@ -206,6 +235,12 @@ class Complex : public node::ObjectWrap {
         )
       );
     }
+  }
+
+  static bool HasInstance(const v8::Handle<v8::Value>& value) {
+    NanScope();
+    v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
+    return tpl->HasInstance(value);
   }
 
  private:
