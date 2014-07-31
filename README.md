@@ -396,3 +396,15 @@ console.log(c.norm());
 ```txt
 25
 ```
+
+### Eigen.Complex.conj()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.conj().toString());
+```
+
+```txt
+(3,4)
+```
