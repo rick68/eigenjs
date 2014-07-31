@@ -28,4 +28,9 @@ describe('Complex', function() {
     c.imag.should.equal(2);
     c.toString().should.equal("(3,2)");
   });
+
+  it('#abs() should return the absolute value of the complex number', function() {
+    c.abs.should.be.a.Function;
+    c.abs().should.equal(5);
+  });
 });
