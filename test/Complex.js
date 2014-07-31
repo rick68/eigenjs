@@ -20,4 +20,12 @@ describe('Complex', function() {
     c.real.should.equal(7);
     c.toString().should.equal("(7,-4)");
   });
+
+  it('has a property `imag`', function() {
+    c.should.have.property('imag');
+    c.imag.should.equal(-4);
+    c.imag = 2;
+    c.imag.should.equal(2);
+    c.toString().should.equal("(3,2)");
+  });
 });
