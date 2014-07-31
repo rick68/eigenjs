@@ -61,14 +61,8 @@ describe('Complex', function() {
     (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
   });
 
-  it('#proj() should return the projection of the complex number onto the Riemann sphere', function() {
-    Complex.proj.should.be.a.Function;
-    Complex.proj(c).toString().should.equal("(3,-4)");
-    c.real = Infinity;
-    c.imag = -1;
-    Complex.proj(c).toString().should.equal("(inf,-0)");
-    c.real = 0;
-    c.imag = -Infinity;
-    Complex.proj(c).toString().should.equal("(inf,-0)");
+  it('#cos() should return the cosine of the complex number', function() {
+    Complex.cos.should.be.a.Function;
+    Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
   });
 });
