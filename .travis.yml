@@ -10,7 +10,7 @@ notifications:
     - rick68@gmail.com
 before_install:
   - g++ --version
-  - clang++ -version
+  - clang++ --version
   - rm -rf ~/.nvm
   - git clone https://github.com/creationix/nvm.git ~/.nvm
   - source ~/.nvm/nvm.sh
