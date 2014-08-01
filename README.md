@@ -471,10 +471,10 @@ console.log(c2.toString());
 ```js
 var Complex = require('eigenjs').Complex
   , c1 = new Complex(1, 0)
-  , c2 = Complex.cosh(c1);
+  , c2 = Complex.exp(c1);
 console.log(c2.toString());
 ```
 
 ```txt
-(1.54308,0)
+(2.71828,0)
 ```
