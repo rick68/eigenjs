@@ -77,6 +77,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "arg", arg);
     NODE_SET_PROTOTYPE_METHOD(tpl, "norm", norm);
     NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
 
     NODE_SET_METHOD(tpl, "polar", polar);
     NODE_SET_METHOD(tpl, "proj", proj);
@@ -247,6 +248,20 @@ class Complex : public node::ObjectWrap {
 
     NanReturnUndefined();
   }
+
+  static NAN_METHOD(equals) {
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    NanScope();
+
+    if (args.Length() == 1 && is_complex(args[0])) {
+      const Complex* rhs_obj =
+          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+      NanReturnValue(NanNew<v8::Boolean>(obj->complex_ == rhs_obj->complex_));
+    }
+
+    NanReturnUndefined();
+  }
+
 
   static NAN_METHOD(toString) {
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
