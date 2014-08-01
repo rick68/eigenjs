@@ -108,7 +108,7 @@ describe('Complex', function() {
     Complex.pow.should.be.a.Function;
     Complex.pow(2, 3).toString().should.equal("(8,0)");
     Complex.pow(c, 2).toString().should.equal("(-7,-24)");
-    Complex.pow(1, c).toString().should.equal("(1,0)");
+    Complex.pow(0, c).toString().should.equal("(0,0)");
     Complex.pow(c, c).toString().should.equal("(-2.99799,-0.623785)");
   });
 });
