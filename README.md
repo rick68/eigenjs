@@ -581,3 +581,16 @@ console.log(c2.toString());
 ```txt
 (1,0)
 ```
+
+### Eigen.Complex.acos(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.acos(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0,0)
+```
