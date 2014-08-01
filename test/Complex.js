@@ -111,4 +111,10 @@ describe('Complex', function() {
     Complex.pow(0, c).toString().should.equal("(0,0)");
     Complex.pow(c, c).toString().should.equal("(-2.99799,-0.623785)");
   });
+
+  it('#sin() should return the sine of the complex number', function() {
+    Complex.sin.should.be.a.Function;
+    Complex.sin(c).toString().should.equal("(3.85374,27.0168)");
+  });
+
 });
