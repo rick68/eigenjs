@@ -646,3 +646,16 @@ console.log(c2.toString());
 ```txt
 (1.5708,0)
 ```
+
+### Eigen.Complex.atanh()comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.atanh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(inf,0)
+```
