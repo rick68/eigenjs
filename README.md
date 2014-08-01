@@ -633,3 +633,16 @@ console.log(c2.toString());
 ```txt
 (0.881374,0)
 ```
+
+### Eigen.Complex.atan(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Infinity, 0)
+  , c2 = Complex.atan(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1.5708,0)
+```
