@@ -439,3 +439,16 @@ console.log(c2.toString());
 ```txt
 (inf, -0)
 ```
+
+### Eigen.Complex.cos()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.PI/4, 0)
+  , c2 = Complex.cos(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.707107,-0)
+```
