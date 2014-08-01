@@ -76,6 +76,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_METHOD(tpl, "cos", cos);
     NODE_SET_METHOD(tpl, "cosh", cosh);
     NODE_SET_METHOD(tpl, "exp", exp);
+    NODE_SET_METHOD(tpl, "log", log);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -161,6 +162,7 @@ class Complex : public node::ObjectWrap {
   EIGENJS_COMPLEX_CLASS_METHOD(cos)
   EIGENJS_COMPLEX_CLASS_METHOD(cosh)
   EIGENJS_COMPLEX_CLASS_METHOD(exp)
+  EIGENJS_COMPLEX_CLASS_METHOD(log)
 
   static NAN_METHOD(toString) {
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
