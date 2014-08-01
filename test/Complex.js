@@ -141,4 +141,13 @@ describe('Complex', function() {
     c = Complex(Math.PI / 4, 0);
     Complex.tan(c).toString().should.equal("(1,0)");
   });
+
+  it('#tanh() should return the hyperbolic tangent of the complex number', function() {
+    Complex.tanh.should.be.a.Function;
+    Complex.tanh(c).toString().should.equal("(1.00071,-0.00490826)");
+    c = Complex(Infinity, 0);
+    Complex.tanh(c).toString().should.equal("(1,0)");
+    c = Complex(1, 0);
+    Complex.tanh(c).toString().should.equal("(0.761594,0)");
+  });
 });
