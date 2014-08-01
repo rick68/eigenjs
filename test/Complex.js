@@ -103,4 +103,12 @@ describe('Complex', function() {
     c = Complex(0, 0);
     Complex.log10(c).toString().should.equal("(-inf,0)");
   });
+
+  it('#pow() should return the complex power of base x raised to the y-th power using the principal branch, whose cuts are along the negative real axis', function() {
+    Complex.pow.should.be.a.Function;
+    Complex.pow(2, 3).toString().should.equal("(8,0)");
+    Complex.pow(c, 2).toString().should.equal("(-7,-24)");
+    Complex.pow(1, c).toString().should.equal("(1,0)");
+    Complex.pow(c, c).toString().should.equal("(-2.99799,-0.623785)");
+  });
 });
