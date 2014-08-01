@@ -555,3 +555,16 @@ console.log(c2.toString());
 ```txt
 (3,0)
 ```
+
+### Eigen.Complex.tan(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.PI/4, 0)
+  , c2 = Complex.tan(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
