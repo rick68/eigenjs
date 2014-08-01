@@ -226,4 +226,10 @@ describe('Complex', function() {
     Complex.atanh(c).toString().should.equal("(inf,0)");
     Complex.atanh(1).toString().should.equal("(inf,0)");
   });
+
+  it('#equals() should return true if two complexes are equal', function() {
+    c.equals.should.be.a.Function;
+    c.equals(c).should.be.a.true;
+    c.equals(new Complex(3, -4)).should.be.a.true;
+  });
 });
