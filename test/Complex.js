@@ -186,4 +186,11 @@ describe('Complex', function() {
     c = Complex(1, 0);
     Complex.asinh(c).toString().should.equal("(0.881374,0)");
   });
+
+  it('#atan() should return the arc tangent of the complex number', function() {
+    Complex.atan.should.be.a.Function;
+    Complex.atan(c).toString().should.equal("(1.44831,-0.158997)");
+    c = Complex(Infinity, 0);
+    Complex.atan(c).toString().should.equal("(1.5708,0)");
+  });
 });
