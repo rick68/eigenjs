@@ -117,4 +117,15 @@ describe('Complex', function() {
     Complex.sin(c).toString().should.equal("(3.85374,27.0168)");
   });
 
+  it('#sinh() should return the hyperbolic sine of the complex number', function() {
+    Complex.sinh.should.be.a.Function;
+    Complex.sinh(c).toString().should.equal("(-6.54812,7.61923)");
+    c = Complex(0, 0);
+    Complex.sinh(c).toString().should.equal("(0,0)");
+    c = Complex(1, 0);
+    Complex.sinh(c).toString().should.equal("(1.1752,0)");
+    c = Complex(-1, 0);
+    Complex.sinh(c).toString().should.equal("(-1.1752,0)");
+  });
+
 });
