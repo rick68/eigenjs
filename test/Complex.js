@@ -159,4 +159,13 @@ describe('Complex', function() {
     c = Complex(0, 0);
     Complex.acos(c).toString().should.equal("(1.5708,-0)");
   });
+
+  it('#acosh() should return the arc hyperbolic cosine of the complex number', function() {
+    Complex.acosh.should.be.a.Function;
+    Complex.acosh(c).toString().should.equal("(2.30551,-0.936812)");
+    c = Complex(0, 0);
+    Complex.acosh(c).toString().should.equal("(0,1.5708)");
+    c = Complex(1.54308, 0);
+    Complex.acosh(c).toString().should.equal("(0.999999,0)");
+  });
 });
