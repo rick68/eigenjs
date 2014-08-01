@@ -491,3 +491,16 @@ console.log(c2.toString());
 ```txt
 (1,0)
 ```
+
+### Eigen.Complex.log10()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1000, 0)
+  , c2 = Complex.log10(c1);
+console.log(c2.toString());
+```
+
+```txt
+(3,0)
+```
