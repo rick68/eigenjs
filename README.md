@@ -409,7 +409,7 @@ console.log(c.conj().toString());
 (3,4)
 ```
 
-### Eigen.Complex.polar()
+### Eigen.Complex.polar(scalar, scalar)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -427,7 +427,7 @@ console.log(c.real * Math.sin(c.imag));
 -3.9999999999999996
 ```
 
-### Eigen.Complex.proj()
+### Eigen.Complex.proj(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -440,7 +440,7 @@ console.log(c2.toString());
 (inf, -0)
 ```
 
-### Eigen.Complex.cos()
+### Eigen.Complex.cos(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -453,7 +453,7 @@ console.log(c2.toString());
 (0.707107,-0)
 ```
 
-### Eigen.Complex.cosh()
+### Eigen.Complex.cosh(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -466,7 +466,7 @@ console.log(c2.toString());
 (1,0)
 ```
 
-### Eigen.Complex.exp()
+### Eigen.Complex.exp(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -479,7 +479,7 @@ console.log(c2.toString());
 (2.71828,0)
 ```
 
-### Eigen.Complex.log()
+### Eigen.Complex.log(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
@@ -492,7 +492,7 @@ console.log(c2.toString());
 (1,0)
 ```
 
-### Eigen.Complex.log10()
+### Eigen.Complex.log10(comp)
 
 ```js
 var Complex = require('eigenjs').Complex
