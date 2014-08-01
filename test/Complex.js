@@ -81,10 +81,10 @@ describe('Complex', function() {
     Complex.exp.should.be.a.Function;
     Complex.exp(c).toString().should.equal("(-13.1288,15.2008)");
     c = Complex(-1, 0);
-    Complex.cosh(c).toString().should.equal("(1.54308,-0)");
+    Complex.exp(c).toString().should.equal("(0.367879,0)");
     c = Complex(0, 0);
-    Complex.cosh(c).toString().should.equal("(1,0)");
+    Complex.exp(c).toString().should.equal("(1,0)");
     c = Complex(1, 0);
-    Complex.cosh(c).toString().should.equal("(1.54308,0)");
+    Complex.exp(c).toString().should.equal("(2.71828,0)");
   });
 });
