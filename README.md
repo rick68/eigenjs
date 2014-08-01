@@ -465,3 +465,16 @@ console.log(c2.toString());
 ```txt
 (1,0)
 ```
+
+### Eigen.Complex.exp()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.cosh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1.54308,0)
+```
