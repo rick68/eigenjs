@@ -504,3 +504,15 @@ console.log(c2.toString());
 ```txt
 (3,0)
 ```
+
+### Eigen.Complex.pow(scalar, scalar) && Eigen.Complex.pow(comp, scalar) && Eigen.Complex.pow(scalar, comp) && Eigen.Complex.pow(comp, comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = Complex.pow(2, 3)
+console.log(c.toString());
+```
+
+```txt
+(8,0)
+```
