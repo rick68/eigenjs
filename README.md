@@ -529,3 +529,16 @@ console.log(c2.toString());
 ```txt
 (0.707107,0)
 ```
+
+### Eigen.Complex.sinh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(0, 0)
+  , c2 = Complex.sin(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0,0)
+```
