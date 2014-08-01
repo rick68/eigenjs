@@ -347,6 +347,19 @@ console.log(c2.toString());
 (inf,0)
 ```
 
+### Eigen.Complex.equals()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = c1.conj();
+console.log(c1.equals(c2));
+```
+
+```txt
+true
+```
+
 ## Matrix methods
 
 ### Eigen.Matrix(rows, cols)
