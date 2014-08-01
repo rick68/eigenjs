@@ -535,7 +535,7 @@ console.log(c2.toString());
 ```js
 var Complex = require('eigenjs').Complex
   , c1 = new Complex(0, 0)
-  , c2 = Complex.sin(c1);
+  , c2 = Complex.sinh(c1);
 console.log(c2.toString());
 ```
 
