@@ -67,7 +67,7 @@ describe('Complex', function() {
     Complex.polar.should.be.a.Function;
     var rho = 5;
     var theta = -0.9272952180016122;
-    c = Complex.polar(rho, theta);
+    c = new Complex.polar(rho, theta);
     c.toString().should.equal("(5,-0.927295)");
     (c.real * Math.cos(c.imag)).should.approximately(3, 0.0000001);
     (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
@@ -82,11 +82,11 @@ describe('Complex', function() {
   it('#cosh() should return the hyperbolic cosine of the complex number', function() {
     Complex.cosh.should.be.a.Function;
     Complex.cosh(c).toString().should.equal("(-6.58066,7.58155)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.cosh(c).toString().should.equal("(1,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.cosh(c).toString().should.equal("(1.54308,0)");
-    c = Complex(-1, 0);
+    c = new Complex(-1, 0);
     Complex.cosh(c).toString().should.equal("(1.54308,-0)");
     Complex.cosh(1).toString().should.equal("(1.54308,0)");
   });
@@ -94,11 +94,11 @@ describe('Complex', function() {
   it('#exp() should return the base-e exponential of the complex number', function() {
     Complex.exp.should.be.a.Function;
     Complex.exp(c).toString().should.equal("(-13.1288,15.2008)");
-    c = Complex(-1, 0);
+    c = new Complex(-1, 0);
     Complex.exp(c).toString().should.equal("(0.367879,0)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.exp(c).toString().should.equal("(1,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.exp(c).toString().should.equal("(2.71828,0)");
     Complex.exp(1).toString().should.equal("(2.71828,0)");
   });
@@ -106,7 +106,7 @@ describe('Complex', function() {
   it('#log() should return the natural (base-e) logarithm of the complex number, using the principal branch, whose cuts are along the negative real axis', function() {
     Complex.log.should.be.a.Function;
     Complex.log(c).toString().should.equal("(1.60944,-0.927295)");
-    c = Complex(-1, 0);
+    c = new Complex(-1, 0);
     Complex.log(c).toString().should.equal("(0,3.14159)");
     Complex.log(Math.E).toString().should.equal("(1,0)");
   });
@@ -114,9 +114,9 @@ describe('Complex', function() {
   it('#log10() should return the natural (base-10) logarithm of the complex number, using the principal branch, whose cuts are along the negative real axis', function() {
     Complex.log10.should.be.a.Function;
     Complex.log10(c).toString().should.equal("(0.69897,-0.402719)");
-    c = Complex(1000, 0);
+    c = new Complex(1000, 0);
     Complex.log10(c).toString().should.equal("(3,0)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.log10(c).toString().should.equal("(-inf,0)");
     Complex.log10(1000).toString().should.equal("(3,0)");
   });
@@ -138,11 +138,11 @@ describe('Complex', function() {
   it('#sinh() should return the hyperbolic sine of the complex number', function() {
     Complex.sinh.should.be.a.Function;
     Complex.sinh(c).toString().should.equal("(-6.54812,7.61923)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.sinh(c).toString().should.equal("(0,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.sinh(c).toString().should.equal("(1.1752,0)");
-    c = Complex(-1, 0);
+    c = new Complex(-1, 0);
     Complex.sinh(c).toString().should.equal("(-1.1752,0)");
     Complex.sinh(1).toString().should.equal("(1.1752,0)");
   });
@@ -150,7 +150,7 @@ describe('Complex', function() {
   it('#sqrt() should return square root of x using the principal branch, whose cuts are along the negative real axis', function() {
     Complex.sqrt.should.be.a.Function;
     Complex.sqrt(c).toString().should.equal("(2,-1)");
-    c = Complex(9, 0);
+    c = new Complex(9, 0);
     Complex.sqrt(c).toString().should.equal("(3,0)");
     Complex.sqrt(9).toString().should.equal("(3,0)");
   });
@@ -158,7 +158,7 @@ describe('Complex', function() {
   it('#tan() should return the tangent of the complex number', function() {
     Complex.tan.should.be.a.Function;
     Complex.tan(c).toString().should.equal("(-0.000187346,-0.999356)");
-    c = Complex(Math.PI / 4, 0);
+    c = new Complex(Math.PI / 4, 0);
     Complex.tan(c).toString().should.equal("(1,0)");
     Complex.tan(Math.PI / 4).toString().should.equal("(1,0)");
   });
@@ -166,9 +166,9 @@ describe('Complex', function() {
   it('#tanh() should return the hyperbolic tangent of the complex number', function() {
     Complex.tanh.should.be.a.Function;
     Complex.tanh(c).toString().should.equal("(1.00071,-0.00490826)");
-    c = Complex(Infinity, 0);
+    c = new Complex(Infinity, 0);
     Complex.tanh(c).toString().should.equal("(1,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.tanh(c).toString().should.equal("(0.761594,0)");
     Complex.tanh(1).toString().should.equal("(0.761594,0)");
   });
@@ -176,7 +176,7 @@ describe('Complex', function() {
   it('#acos() should return the arc cosine of the complex number', function() {
     Complex.acos.should.be.a.Function;
     Complex.acos(c).toString().should.equal("(0.936812,2.30551)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.acos(c).toString().should.equal("(1.5708,-0)");
     Complex.acos(0).toString().should.equal("(1.5708,-0)");
   });
@@ -184,9 +184,9 @@ describe('Complex', function() {
   it('#acosh() should return the arc hyperbolic cosine of the complex number', function() {
     Complex.acosh.should.be.a.Function;
     Complex.acosh(c).toString().should.equal("(2.30551,-0.936812)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.acosh(c).toString().should.equal("(0,1.5708)");
-    c = Complex(1.54308, 0);
+    c = new Complex(1.54308, 0);
     Complex.acosh(c).toString().should.equal("(0.999999,0)");
     Complex.acosh(1.54308).toString().should.equal("(0.999999,0)");
   });
@@ -194,7 +194,7 @@ describe('Complex', function() {
   it('#asin() should return the arc sine of the complex number', function() {
     Complex.asin.should.be.a.Function;
     Complex.asin(c).toString().should.equal("(0.633984,-2.30551)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.asin(c).toString().should.equal("(0,0)");
     Complex.asin(0).toString().should.equal("(0,0)");
   });
@@ -202,9 +202,9 @@ describe('Complex', function() {
   it('#asinh() should return the arc hyperbolic sine of the complex number', function() {
     Complex.asinh.should.be.a.Function;
     Complex.asinh(c).toString().should.equal("(2.29991,-0.917617)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.asinh(c).toString().should.equal("(0,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.asinh(c).toString().should.equal("(0.881374,0)");
     Complex.asinh(1).toString().should.equal("(0.881374,0)");
   });
@@ -212,7 +212,7 @@ describe('Complex', function() {
   it('#atan() should return the arc tangent of the complex number', function() {
     Complex.atan.should.be.a.Function;
     Complex.atan(c).toString().should.equal("(1.44831,-0.158997)");
-    c = Complex(Infinity, 0);
+    c = new Complex(Infinity, 0);
     Complex.atan(c).toString().should.equal("(1.5708,0)");
     Complex.atan(Infinity).toString().should.equal("(1.5708,0)");
   });
@@ -220,9 +220,9 @@ describe('Complex', function() {
   it('#atanh() should return the arc hyperbolic tangent of the complex number', function() {
     Complex.atanh.should.be.a.Function;
     Complex.atanh(c).toString().should.equal("(0.117501,-1.40992)");
-    c = Complex(0, 0);
+    c = new Complex(0, 0);
     Complex.atanh(c).toString().should.equal("(0,0)");
-    c = Complex(1, 0);
+    c = new Complex(1, 0);
     Complex.atanh(c).toString().should.equal("(inf,0)");
     Complex.atanh(1).toString().should.equal("(inf,0)");
   });
