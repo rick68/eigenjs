@@ -177,4 +177,13 @@ describe('Complex', function() {
     c = Complex(1, 0);
     Complex.asin(c).toString().should.equal("(1.5708,7.82511e-09)");
   });
+
+  it('#asinh() should return the arc hyperbolic sine of the complex number', function() {
+    Complex.asinh.should.be.a.Function;
+    Complex.asinh(c).toString().should.equal("(2.29991,-0.917617)");
+    c = Complex(0, 0);
+    Complex.asinh(c).toString().should.equal("(0,0)");
+    c = Complex(1, 0);
+    Complex.asinh(c).toString().should.equal("(0.881374,0)");
+  });
 });
