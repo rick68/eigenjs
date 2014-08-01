@@ -168,4 +168,13 @@ describe('Complex', function() {
     c = Complex(1.54308, 0);
     Complex.acosh(c).toString().should.equal("(0.999999,0)");
   });
+
+  it('#asin() should return the arc sine of the complex number', function() {
+    Complex.asin.should.be.a.Function;
+    Complex.asin(c).toString().should.equal("(0.633984,-2.30551)");
+    c = Complex(0, 0);
+    Complex.asin(c).toString().should.equal("(0,0)");
+    c = Complex(1, 0);
+    Complex.asin(c).toString().should.equal("(1.5708,7.82511e-09)");
+  });
 });
