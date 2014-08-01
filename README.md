@@ -478,3 +478,16 @@ console.log(c2.toString());
 ```txt
 (2.71828,0)
 ```
+
+### Eigen.Complex.log()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.E, 0)
+  , c2 = Complex.log(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
