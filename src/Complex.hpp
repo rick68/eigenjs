@@ -22,13 +22,21 @@
 
 #define EIGENJS_COMPLEX_CLASS_METHOD( NAME )                                  \
   static NAN_METHOD( NAME ) {                                                 \
+    complex_type c;                                                           \
     NanScope();                                                               \
                                                                               \
-    if ( args.Length() == 1 && HasInstance(args[0]) ) {                       \
-      const Complex* obj =                                                    \
-          node::ObjectWrap::Unwrap<Complex>( args[0]->ToObject() );           \
+    if ( args.Length() == 1 ) {                                               \
+      if( is_complex( args[0] ) ) {                                           \
+        new (&c) complex_type(                                                \
+            node::ObjectWrap::Unwrap<Complex>(                                \
+                args[0]->ToObject()                                           \
+            )->complex_                                                       \
+        );                                                                    \
+      } else if ( is_saclar( args[0] ) ) {                                    \
+        new (&c) complex_type(args[0]->NumberValue(), 0);                     \
+      }                                                                       \
                                                                               \
-      const complex_type& NAME = std::NAME( obj->complex_ );                  \
+      const complex_type& NAME = std::NAME( c );                              \
       const element_type& real = NAME.real();                                 \
       const element_type& imag = NAME.imag();                                 \
                                                                               \
