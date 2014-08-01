@@ -87,4 +87,11 @@ describe('Complex', function() {
     c = Complex(1, 0);
     Complex.exp(c).toString().should.equal("(2.71828,0)");
   });
+
+  it('#log() should return the natural (base-e) logarithm of the complex number, using the principal branch, whose cuts are along the negative real axis', function() {
+    Complex.log.should.be.a.Function;
+    Complex.log(c).toString().should.equal("(1.60944,-0.927295)");
+    c = Complex(-1, 0);
+    Complex.cosh(c).toString().should.equal("(1.54308,-0)");
+  });
 });
