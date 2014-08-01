@@ -128,4 +128,11 @@ describe('Complex', function() {
     Complex.sinh(c).toString().should.equal("(-1.1752,0)");
   });
 
+  it('#sqrt() should return square root of x using the principal branch, whose cuts are along the negative real axis', function() {
+    Complex.sqrt.should.be.a.Function;
+    Complex.sqrt(c).toString().should.equal("(2,-1)");
+    c = Complex(9, 0);
+    Complex.sqrt(c).toString().should.equal("(3,0)");
+  });
+
 });
