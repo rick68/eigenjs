@@ -594,3 +594,16 @@ console.log(c2.toString());
 ```txt
 (0,0)
 ```
+
+### Eigen.Complex.acosh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1.54308, 0)
+  , c2 = Complex.acosh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.999999,0)
+```
