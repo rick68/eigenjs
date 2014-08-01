@@ -92,6 +92,6 @@ describe('Complex', function() {
     Complex.log.should.be.a.Function;
     Complex.log(c).toString().should.equal("(1.60944,-0.927295)");
     c = Complex(-1, 0);
-    Complex.cosh(c).toString().should.equal("(1.54308,-0)");
+    Complex.log(c).toString().should.equal("(0,3.14159)");
   });
 });
