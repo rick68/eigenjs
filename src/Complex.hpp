@@ -87,6 +87,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_METHOD(tpl, "acos", acos);
     NODE_SET_METHOD(tpl, "acosh", acosh);
     NODE_SET_METHOD(tpl, "asin", asin);
+    NODE_SET_METHOD(tpl, "asinh", asinh);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -182,6 +183,7 @@ class Complex : public node::ObjectWrap {
   EIGENJS_COMPLEX_CLASS_METHOD(acos)
   EIGENJS_COMPLEX_CLASS_METHOD(acosh)
   EIGENJS_COMPLEX_CLASS_METHOD(asin)
+  EIGENJS_COMPLEX_CLASS_METHOD(asinh)
 
   static NAN_METHOD(pow) {
     NanScope();
