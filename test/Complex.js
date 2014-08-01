@@ -76,4 +76,15 @@ describe('Complex', function() {
     c = Complex(-1, 0);
     Complex.cosh(c).toString().should.equal("(1.54308,-0)");
   });
+
+  it('#exp() should return the base-e exponential of the complex number', function() {
+    Complex.exp.should.be.a.Function;
+    Complex.exp(c).toString().should.equal("(-13.1288,15.2008)");
+    c = Complex(-1, 0);
+    Complex.cosh(c).toString().should.equal("(1.54308,-0)");
+    c = Complex(0, 0);
+    Complex.cosh(c).toString().should.equal("(1,0)");
+    c = Complex(1, 0);
+    Complex.cosh(c).toString().should.equal("(1.54308,0)");
+  });
 });
