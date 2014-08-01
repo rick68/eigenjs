@@ -20,6 +20,36 @@
 #include <complex>
 #include <sstream>
 
+#define EIGENJS_COMPLEX_CLASS_METHOD( NAME )                                  \
+  static NAN_METHOD( NAME ) {                                                 \
+    NanScope();                                                               \
+                                                                              \
+    if (args.Length() == 1 && HasInstance(args[0])) {                         \
+      const Complex* obj =                                                    \
+          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());             \
+                                                                              \
+      const complex_type& NAME = std::NAME(obj->complex_);                    \
+      const element_type& real = NAME.real();                                 \
+      const element_type& imag = NAME.imag();                                 \
+                                                                              \
+      v8::Local<v8::Function> ctor = NanNew(constructor);                     \
+      v8::Local<v8::Value> argv[] = {                                         \
+          NanNew<v8::Number>(real)                                            \
+        , NanNew<v8::Number>(imag)                                            \
+      };                                                                      \
+                                                                              \
+      v8::Local<v8::Object> new_complex = ctor->NewInstance(                  \
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)                         \
+        , argv                                                                \
+      );                                                                      \
+                                                                              \
+      NanReturnValue(new_complex);                                            \
+    }                                                                         \
+                                                                              \
+    NanReturnUndefined();                                                     \
+  }                                                                           \
+/**/
+
 namespace EigenJS {
 
 template <typename ValueType>
@@ -125,61 +155,8 @@ class Complex : public node::ObjectWrap {
     NanReturnUndefined();
   }
 
-  static NAN_METHOD(proj) {
-    NanScope();
-
-    if (args.Length() == 1 && HasInstance(args[0])) {
-      const Complex* obj =
-          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-
-      const complex_type& proj = std::proj(obj->complex_);
-      const element_type& real = proj.real();
-      const element_type& imag = proj.imag();
-
-      v8::Local<v8::Function> ctor = NanNew(constructor);
-      v8::Local<v8::Value> argv[] = {
-          NanNew<v8::Number>(real)
-        , NanNew<v8::Number>(imag)
-      };
-
-      v8::Local<v8::Object> new_complex = ctor->NewInstance(
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-      );
-
-      NanReturnValue(new_complex);
-    }
-
-    NanReturnUndefined();
-  }
-
-  static NAN_METHOD(cos) {
-    NanScope();
-
-    if (args.Length() == 1 && HasInstance(args[0])) {
-      const Complex* obj =
-          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-
-      const complex_type& cos = std::cos(obj->complex_);
-      const element_type& real = cos.real();
-      const element_type& imag = cos.imag();
-
-      v8::Local<v8::Function> ctor = NanNew(constructor);
-      v8::Local<v8::Value> argv[] = {
-          NanNew<v8::Number>(real)
-        , NanNew<v8::Number>(imag)
-      };
-
-      v8::Local<v8::Object> new_complex = ctor->NewInstance(
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-      );
-
-      NanReturnValue(new_complex);
-    }
-
-    NanReturnUndefined();
-  }
+  EIGENJS_COMPLEX_CLASS_METHOD(proj)
+  EIGENJS_COMPLEX_CLASS_METHOD(cos)
 
   static NAN_METHOD(toString) {
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
@@ -288,5 +265,7 @@ template<typename ValueType>
 v8::Persistent<v8::Function> Complex<ValueType>::constructor;
 
 }  // namespace EigenJS
+
+#undef EIGENJS_COMPLEX_CLASS_METHOD
 
 #endif  // EIGENJS_COMPLEX_HPP
