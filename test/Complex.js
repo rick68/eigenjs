@@ -94,4 +94,13 @@ describe('Complex', function() {
     c = Complex(-1, 0);
     Complex.log(c).toString().should.equal("(0,3.14159)");
   });
+
+  it('#log10() should return the natural (base-10) logarithm of the complex number, using the principal branch, whose cuts are along the negative real axis', function() {
+    Complex.log10.should.be.a.Function;
+    Complex.log10(c).toString().should.equal("(0.69897,-0.402719)");
+    c = Complex(1000, 0);
+    Complex.log10(c).toString().should.equal("(3,0)");
+    c = Complex(0, 0);
+    Complex.log10(c).toString().should.equal("(-inf,0)");
+  });
 });
