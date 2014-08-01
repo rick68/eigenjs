@@ -193,4 +193,13 @@ describe('Complex', function() {
     c = Complex(Infinity, 0);
     Complex.atan(c).toString().should.equal("(1.5708,0)");
   });
+
+  it('#atanh() should return the arc hyperbolic tangent of the complex number', function() {
+    Complex.atanh.should.be.a.Function;
+    Complex.atanh(c).toString().should.equal("(0.117501,-1.40992)");
+    c = Complex(0, 0);
+    Complex.atanh(c).toString().should.equal("(0,0)");
+    c = Complex(1, 0);
+    Complex.atanh(c).toString().should.equal("(inf,0)");
+  });
 });
