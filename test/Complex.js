@@ -150,4 +150,13 @@ describe('Complex', function() {
     c = Complex(1, 0);
     Complex.tanh(c).toString().should.equal("(0.761594,0)");
   });
+
+  it('#acos() should return the arc cosine of the complex number', function() {
+    Complex.acos.should.be.a.Function;
+    Complex.acos(c).toString().should.equal("(0.936812,2.30551)");
+    c = Complex(1, 0);
+    Complex.acos(c).toString().should.equal("(0,-0)");
+    c = Complex(0, 0);
+    Complex.acos(c).toString().should.equal("(1.5708,-0)");
+  });
 });
