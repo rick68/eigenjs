@@ -65,4 +65,15 @@ describe('Complex', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
   });
+
+  it('#cosh() should return the hyperbolic cosine of the complex number', function() {
+    Complex.cosh.should.be.a.Function;
+    Complex.cosh(c).toString().should.equal("(-6.58066,7.58155)");
+    c = Complex(0, 0);
+    Complex.cosh(c).toString().should.equal("(1,0)");
+    c = Complex(1, 0);
+    Complex.cosh(c).toString().should.equal("(1.54308,0)");
+    c = Complex(-1, 0);
+    Complex.cosh(c).toString().should.equal("(1.54308,-0)");
+  });
 });
