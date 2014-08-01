@@ -78,6 +78,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_METHOD(tpl, "exp", exp);
     NODE_SET_METHOD(tpl, "log", log);
     NODE_SET_METHOD(tpl, "log10", log10);
+    NODE_SET_METHOD(tpl, "pow", pow);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
@@ -165,6 +166,57 @@ class Complex : public node::ObjectWrap {
   EIGENJS_COMPLEX_CLASS_METHOD(exp)
   EIGENJS_COMPLEX_CLASS_METHOD(log)
   EIGENJS_COMPLEX_CLASS_METHOD(log10)
+
+  static NAN_METHOD(pow) {
+    NanScope();
+
+    if (args.Length() == 2 &&
+        is_complex_or_saclar(args[0]) &&
+        is_complex_or_saclar(args[1])) {
+      const bool& arg0_is_complex = is_complex(args[0]);
+      const bool& arg1_is_complex = is_complex(args[1]);
+      const bool& arg0_is_scalar = is_saclar(args[0]);
+      const bool& arg1_is_scalar = is_saclar(args[1]);
+      complex_type c;
+
+      if (arg0_is_complex && arg1_is_complex) {
+        const Complex* obj0 =
+            node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+        const Complex* obj1 =
+            node::ObjectWrap::Unwrap<Complex>(args[1]->ToObject());
+        c = std::pow(obj0->complex_, obj1->complex_);
+      } else if (arg0_is_complex && arg1_is_scalar) {
+        const Complex* obj0 =
+            node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+        const element_type& scalar1 = args[1]->NumberValue();
+        c = std::pow(obj0->complex_, scalar1);
+      } else if (arg0_is_scalar && arg1_is_complex) {
+        const element_type& scalar0 = args[0]->NumberValue();
+        const Complex* obj1 =
+            node::ObjectWrap::Unwrap<Complex>(args[1]->ToObject());
+        c = std::pow(scalar0, obj1->complex_);
+      } else if (arg0_is_scalar && arg1_is_scalar) {
+        const element_type& scalar0 = args[0]->NumberValue();
+        const element_type& scalar1 = args[1]->NumberValue();
+        c = std::pow(scalar0, scalar1);
+      }
+
+      v8::Local<v8::Function> ctor = NanNew(constructor);
+      v8::Local<v8::Value> argv[] = {
+          NanNew<v8::Number>(c.real())
+        , NanNew<v8::Number>(c.imag())
+      };
+
+      v8::Local<v8::Object> new_complex = ctor->NewInstance(
+          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+      );
+
+      NanReturnValue(new_complex);
+    }
+
+    NanReturnUndefined();
+  }
 
   static NAN_METHOD(toString) {
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
@@ -261,6 +313,20 @@ class Complex : public node::ObjectWrap {
  private:
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
+
+ private:
+  static bool is_complex(const v8::Handle<v8::Value>& arg) {
+    return HasInstance(arg) ? true : false;
+  }
+
+  static bool is_saclar(const v8::Handle<v8::Value>& arg) {
+    return arg->IsNumber() ? true : false;
+  }
+
+  static bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
+    return HasInstance(arg) || arg->IsNumber()
+      ? true : false;
+  }
 
  private:
   complex_type complex_;
