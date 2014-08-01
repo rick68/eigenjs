@@ -76,7 +76,7 @@ describe('Complex', function() {
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
-    Complex.cos(0).toString().should.equal("(1,0)");
+    Complex.cos(Math.PI / 3).toString().should.equal("(0.5,-0)");
   });
 
   it('#cosh() should return the hyperbolic cosine of the complex number', function() {
