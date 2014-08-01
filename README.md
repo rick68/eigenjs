@@ -18,6 +18,335 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 $ npm install eigenjs
 ```
 
+## Complex methods
+
+### Eigen.Complex(real, imag)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log('c = %s', c);
+```
+
+```txt
+c = (3,-4)
+```
+
+### Eigen.Complex.real && Eigen.Complex.imag
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+c.real = 6;
+c.imag = 8;
+console.log('(%d,%d)', c.real, c.imag);
+```
+
+```txt
+(6,8)
+```
+
+### Eigen.Complex.abs()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.abs());
+```
+
+```txt
+5
+```
+
+### Eigen.Complex.arg()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.arg());
+console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()));
+```
+
+```txt
+-0.9272952180016122
+(3.0000000000000004,-3.9999999999999996)
+```
+
+### Eigen.Complex.norm()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.norm());
+```
+
+```txt
+25
+```
+
+### Eigen.Complex.conj()
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = new Complex(3, -4);
+console.log(c.conj().toString());
+```
+
+```txt
+(3,4)
+```
+
+### Eigen.Complex.polar(scalar, scalar)
+
+```js
+var Complex = require('eigenjs').Complex
+  , rho = 5
+  , theta = -0.9272952180016122
+  , c = Complex.polar(rho, theta);
+console.log(c.conj().toString());
+console.log(c.real * Math.cos(c.imag));
+console.log(c.real * Math.sin(c.imag));
+```
+
+```txt
+(5,0.927295)
+3.0000000000000004
+-3.9999999999999996
+```
+
+### Eigen.Complex.proj(scalar) && Eigen.Complex.proj(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(0, -Infinity)
+  , c2 = Complex.proj(c1);
+console.log(c2.toString());
+```
+
+```txt
+(inf, -0)
+```
+
+### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.PI/4, 0)
+  , c2 = Complex.cos(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.707107,-0)
+```
+
+### Eigen.Complex.cosh(scalar) && Eigen.Complex.cosh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(0, 0)
+  , c2 = Complex.cosh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
+
+### Eigen.Complex.exp(scalar) && Eigen.Complex.exp(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.exp(c1);
+console.log(c2.toString());
+```
+
+```txt
+(2.71828,0)
+```
+
+### Eigen.Complex.log(scalar) && Eigen.Complex.log(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.E, 0)
+  , c2 = Complex.log(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
+
+### Eigen.Complex.log10(scalar) && Eigen.Complex.log10(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1000, 0)
+  , c2 = Complex.log10(c1);
+console.log(c2.toString());
+```
+
+```txt
+(3,0)
+```
+
+### Eigen.Complex.pow(scalar, scalar) && Eigen.Complex.pow(comp, scalar) && Eigen.Complex.pow(scalar, comp) && Eigen.Complex.pow(comp, comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c = Complex.pow(2, 3)
+console.log(c.toString());
+```
+
+```txt
+(8,0)
+```
+
+### Eigen.Complex.sin(scalar) && Eigen.Complex.sin(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.PI/4, 0)
+  , c2 = Complex.sin(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.707107,0)
+```
+
+### Eigen.Complex.sinh(scalar) && Eigen.Complex.sin(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(0, 0)
+  , c2 = Complex.sinh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0,0)
+```
+
+### Eigen.Complex.sqrt(scalar) && Eigen.Complex.sqrt(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(9, 0)
+  , c2 = Complex.sqrt(c1);
+console.log(c2.toString());
+```
+
+```txt
+(3,0)
+```
+
+### Eigen.Complex.tan(scalar) && Eigen.Complex.tan(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Math.PI/4, 0)
+  , c2 = Complex.tan(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
+
+### Eigen.Complex.tanh(scalar) && Eigen.Complex.tanh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Infinity, 0)
+  , c2 = Complex.tanh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
+
+### Eigen.Complex.acos(scalar) && Eigen.Complex.acos(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.acos(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0,0)
+```
+
+### Eigen.Complex.acosh(scalar) && Eigen.Complex.acosh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1.54308, 0)
+  , c2 = Complex.acosh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.999999,0)
+```
+
+### Eigen.Complex.asin(scalar) && Eigen.Complex.asin(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.asin(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1.5708,7.82511e-09)
+```
+
+### Eigen.Complex.asinh(scalar) && Eigen.Complex.asinh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.asinh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(0.881374,0)
+```
+
+### Eigen.Complex.atan(scalar) && Eigen.Complex.atan(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Infinity, 0)
+  , c2 = Complex.atan(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1.5708,0)
+```
+
+### Eigen.Complex.atanh(scalar) && Eigen.Complex.atanh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.atanh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(inf,0)
+```
+
 ## Matrix methods
 
 ### Eigen.Matrix(rows, cols)
@@ -329,333 +658,4 @@ console.log("mat1 = \n%s", mat1);
 mat1 =
 0.5   1
 1.5   2
-```
-
-## Complex methods
-
-### Eigen.Complex(real, imag)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-console.log('c = %s', c);
-```
-
-```txt
-c = (3,-4)
-```
-
-### Eigen.Complex.real && Eigen.Complex.imag
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-c.real = 6;
-c.imag = 8;
-console.log('(%d,%d)', c.real, c.imag);
-```
-
-```txt
-(6,8)
-```
-
-### Eigen.Complex.abs()
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-console.log(c.abs());
-```
-
-```txt
-5
-```
-
-### Eigen.Complex.arg()
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-console.log(c.arg());
-console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()));
-```
-
-```txt
--0.9272952180016122
-(3.0000000000000004,-3.9999999999999996)
-```
-
-### Eigen.Complex.norm()
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-console.log(c.norm());
-```
-
-```txt
-25
-```
-
-### Eigen.Complex.conj()
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
-console.log(c.conj().toString());
-```
-
-```txt
-(3,4)
-```
-
-### Eigen.Complex.polar(scalar, scalar)
-
-```js
-var Complex = require('eigenjs').Complex
-  , rho = 5
-  , theta = -0.9272952180016122
-  , c = Complex.polar(rho, theta);
-console.log(c.conj().toString());
-console.log(c.real * Math.cos(c.imag));
-console.log(c.real * Math.sin(c.imag));
-```
-
-```txt
-(5,0.927295)
-3.0000000000000004
--3.9999999999999996
-```
-
-### Eigen.Complex.proj(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, -Infinity)
-  , c2 = Complex.proj(c1);
-console.log(c2.toString());
-```
-
-```txt
-(inf, -0)
-```
-
-### Eigen.Complex.cos(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.cos(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0.707107,-0)
-```
-
-### Eigen.Complex.cosh(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, 0)
-  , c2 = Complex.cosh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1,0)
-```
-
-### Eigen.Complex.exp(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.exp(c1);
-console.log(c2.toString());
-```
-
-```txt
-(2.71828,0)
-```
-
-### Eigen.Complex.log(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.E, 0)
-  , c2 = Complex.log(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1,0)
-```
-
-### Eigen.Complex.log10(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1000, 0)
-  , c2 = Complex.log10(c1);
-console.log(c2.toString());
-```
-
-```txt
-(3,0)
-```
-
-### Eigen.Complex.pow(scalar, scalar) && Eigen.Complex.pow(comp, scalar) && Eigen.Complex.pow(scalar, comp) && Eigen.Complex.pow(comp, comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c = Complex.pow(2, 3)
-console.log(c.toString());
-```
-
-```txt
-(8,0)
-```
-
-### Eigen.Complex.sin(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.sin(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0.707107,0)
-```
-
-### Eigen.Complex.sinh(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, 0)
-  , c2 = Complex.sinh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0,0)
-```
-
-### Eigen.Complex.sqrt(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(9, 0)
-  , c2 = Complex.sqrt(c1);
-console.log(c2.toString());
-```
-
-```txt
-(3,0)
-```
-
-### Eigen.Complex.tan(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.tan(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1,0)
-```
-
-### Eigen.Complex.tanh(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Infinity, 0)
-  , c2 = Complex.tanh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1,0)
-```
-
-### Eigen.Complex.acos(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.acos(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0,0)
-```
-
-### Eigen.Complex.acosh(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1.54308, 0)
-  , c2 = Complex.acosh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0.999999,0)
-```
-
-### Eigen.Complex.asin(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.asin(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1.5708,7.82511e-09)
-```
-
-### Eigen.Complex.asinh(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.asinh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(0.881374,0)
-```
-
-### Eigen.Complex.atan(comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Infinity, 0)
-  , c2 = Complex.atan(c1);
-console.log(c2.toString());
-```
-
-```txt
-(1.5708,0)
-```
-
-### Eigen.Complex.atanh()comp)
-
-```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.atanh(c1);
-console.log(c2.toString());
-```
-
-```txt
-(inf,0)
 ```
