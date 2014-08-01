@@ -135,4 +135,10 @@ describe('Complex', function() {
     Complex.sqrt(c).toString().should.equal("(3,0)");
   });
 
+  it('#tan() should return the tangent of the complex number', function() {
+    Complex.tan.should.be.a.Function;
+    Complex.tan(c).toString().should.equal("(-0.000187346,-0.999356)");
+    c = Complex(Math.PI / 4, 0);
+    Complex.tan(c).toString().should.equal("(1,0)");
+  });
 });
