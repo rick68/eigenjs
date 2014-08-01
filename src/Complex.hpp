@@ -24,26 +24,26 @@
   static NAN_METHOD( NAME ) {                                                 \
     NanScope();                                                               \
                                                                               \
-    if (args.Length() == 1 && HasInstance(args[0])) {                         \
+    if ( args.Length() == 1 && HasInstance(args[0]) ) {                       \
       const Complex* obj =                                                    \
-          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());             \
+          node::ObjectWrap::Unwrap<Complex>( args[0]->ToObject() );           \
                                                                               \
-      const complex_type& NAME = std::NAME(obj->complex_);                    \
+      const complex_type& NAME = std::NAME( obj->complex_ );                  \
       const element_type& real = NAME.real();                                 \
       const element_type& imag = NAME.imag();                                 \
                                                                               \
-      v8::Local<v8::Function> ctor = NanNew(constructor);                     \
+      v8::Local<v8::Function> ctor = NanNew( constructor );                   \
       v8::Local<v8::Value> argv[] = {                                         \
-          NanNew<v8::Number>(real)                                            \
-        , NanNew<v8::Number>(imag)                                            \
+          NanNew<v8::Number>( real )                                          \
+        , NanNew<v8::Number>( imag )                                          \
       };                                                                      \
                                                                               \
       v8::Local<v8::Object> new_complex = ctor->NewInstance(                  \
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)                         \
+          sizeof( argv ) / sizeof( v8::Local<v8::Value> )                     \
         , argv                                                                \
       );                                                                      \
                                                                               \
-      NanReturnValue(new_complex);                                            \
+      NanReturnValue( new_complex );                                          \
     }                                                                         \
                                                                               \
     NanReturnUndefined();                                                     \
