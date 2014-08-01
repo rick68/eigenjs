@@ -607,3 +607,16 @@ console.log(c2.toString());
 ```txt
 (0.999999,0)
 ```
+
+### Eigen.Complex.asin(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 0)
+  , c2 = Complex.asin(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1.5708,7.82511e-09)
+```
