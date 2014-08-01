@@ -568,3 +568,16 @@ console.log(c2.toString());
 ```txt
 (1,0)
 ```
+
+### Eigen.Complex.tanh(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(Infinity, 0)
+  , c2 = Complex.tanh(c1);
+console.log(c2.toString());
+```
+
+```txt
+(1,0)
+```
