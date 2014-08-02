@@ -90,6 +90,11 @@ describe('Complex', function() {
     c.sub(new Complex(-2, 4)).toString().should.equal("(5,-8)");
   });
 
+  it('#suba() should return the difference of two complexes and saves it back', function() {
+    c.suba(-3).toString().should.equal("(6,-4)");
+    c.sub(new Complex(4, -9)).toString().should.equal("(2,5)");
+  });
+
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
