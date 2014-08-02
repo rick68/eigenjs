@@ -197,6 +197,20 @@ console.log(c3.toString());
 (-26,52)
 ```
 
+### Eigen.Complex.mula(scalar) && Eigen.Complex.mula(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 1)
+  , c2 = new Complex(2, 4)
+c1.mula(c2);
+console.log(c1.toString());
+```
+
+```txt
+(2,14)
+```
+
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
 
 ```js
