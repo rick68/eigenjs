@@ -20,42 +20,80 @@
 #include <complex>
 #include <sstream>
 
-#define EIGENJS_COMPLEX_CLASS_METHOD( NAME )                                  \
-  static NAN_METHOD( NAME ) {                                                 \
-    complex_type c;                                                           \
-    NanScope();                                                               \
-                                                                              \
-    if ( args.Length() == 1 ) {                                               \
-      if( is_complex( args[0] ) ) {                                           \
-        new (&c) complex_type(                                                \
-            node::ObjectWrap::Unwrap<Complex>(                                \
-                args[0]->ToObject()                                           \
-            )->complex_                                                       \
-        );                                                                    \
-      } else if ( is_saclar( args[0] ) ) {                                    \
-        new (&c) complex_type(args[0]->NumberValue(), 0);                     \
-      }                                                                       \
-                                                                              \
-      const complex_type& NAME = std::NAME( c );                              \
-      const element_type& real = NAME.real();                                 \
-      const element_type& imag = NAME.imag();                                 \
-                                                                              \
-      v8::Local<v8::Function> ctor = NanNew( constructor );                   \
-      v8::Local<v8::Value> argv[] = {                                         \
-          NanNew<v8::Number>( real )                                          \
-        , NanNew<v8::Number>( imag )                                          \
-      };                                                                      \
-                                                                              \
-      v8::Local<v8::Object> new_complex = ctor->NewInstance(                  \
-          sizeof( argv ) / sizeof( v8::Local<v8::Value> )                     \
-        , argv                                                                \
-      );                                                                      \
-                                                                              \
-      NanReturnValue( new_complex );                                          \
-    }                                                                         \
-                                                                              \
-    NanReturnUndefined();                                                     \
-  }                                                                           \
+#define EIGENJS_COMPLEX_CLASS_METHOD( NAME )                                 \
+static NAN_METHOD( NAME ) {                                                  \
+  complex_type c;                                                            \
+  NanScope();                                                                \
+                                                                             \
+  if ( args.Length() == 1 ) {                                                \
+    if( is_complex( args[0] ) ) {                                            \
+      new (&c) complex_type(                                                 \
+          node::ObjectWrap::Unwrap<Complex>(                                 \
+              args[0]->ToObject()                                            \
+          )->complex_                                                        \
+      );                                                                     \
+    } else if ( is_saclar( args[0] ) ) {                                     \
+      new (&c) complex_type(args[0]->NumberValue(), 0);                      \
+    }                                                                        \
+                                                                             \
+    const complex_type& NAME = std::NAME( c );                               \
+    const element_type& real = NAME.real();                                  \
+    const element_type& imag = NAME.imag();                                  \
+                                                                             \
+    v8::Local<v8::Function> ctor = NanNew( constructor );                    \
+    v8::Local<v8::Value> argv[] = {                                          \
+        NanNew<v8::Number>( real )                                           \
+      , NanNew<v8::Number>( imag )                                           \
+    };                                                                       \
+                                                                             \
+    v8::Local<v8::Object> new_complex = ctor->NewInstance(                   \
+        sizeof( argv ) / sizeof( v8::Local<v8::Value> )                      \
+      , argv                                                                 \
+    );                                                                       \
+                                                                             \
+    NanReturnValue( new_complex );                                           \
+  }                                                                          \
+                                                                             \
+  NanReturnUndefined();                                                      \
+}                                                                            \
+/**/
+
+#define EIGENJS_COMPLEX_BINARY_OPERATOR( NAME, OP )                          \
+static NAN_METHOD( NAME ) {                                                  \
+  complex_type c;                                                            \
+  NanScope();                                                                \
+                                                                             \
+  if ( args.Length() == 1 ) {                                                \
+    if( is_complex( args[0] ) ) {                                            \
+      new (&c) complex_type(                                                 \
+          node::ObjectWrap::Unwrap<Complex>(                                 \
+              args[0]->ToObject()                                            \
+          )->complex_                                                        \
+      );                                                                     \
+    } else if ( is_saclar( args[0] ) ) {                                     \
+      new (&c) complex_type(args[0]->NumberValue(), 0);                      \
+    }                                                                        \
+                                                                             \
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>( args.This() );   \
+                                                                             \
+    c = obj->complex_ OP c;                                                  \
+                                                                             \
+    v8::Local<v8::Function> ctor = NanNew( constructor );                    \
+    v8::Local<v8::Value> argv[] = {                                          \
+        NanNew<v8::Number>( c.real() )                                       \
+      , NanNew<v8::Number>( c.imag() )                                       \
+    };                                                                       \
+                                                                             \
+    v8::Local<v8::Object> new_complex = ctor->NewInstance(                   \
+        sizeof( argv ) / sizeof( v8::Local<v8::Value> )                      \
+      , argv                                                                 \
+    );                                                                       \
+                                                                             \
+    NanReturnValue( new_complex );                                           \
+  }                                                                          \
+                                                                             \
+  NanReturnUndefined();                                                      \
+}                                                                            \
 /**/
 
 namespace EigenJS {
@@ -78,6 +116,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "norm", norm);
     NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
 
     NODE_SET_METHOD(tpl, "polar", polar);
     NODE_SET_METHOD(tpl, "proj", proj);
@@ -179,6 +218,8 @@ class Complex : public node::ObjectWrap {
 
     NanReturnUndefined();
   }
+
+  EIGENJS_COMPLEX_BINARY_OPERATOR(add, +)
 
   EIGENJS_COMPLEX_CLASS_METHOD(proj)
   EIGENJS_COMPLEX_CLASS_METHOD(cos)
