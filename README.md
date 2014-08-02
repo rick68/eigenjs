@@ -170,6 +170,20 @@ console.log(c3.toString());
 (1,7)
 ```
 
+### Eigen.Complex.suba(scalar) && Eigen.Complex.suba(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(5, 8)
+  , c2 = new Complex(-3, 4);
+c1.suba(c2);
+console.log(c1.toString());
+```
+
+```txt
+(8,4)
+```
+
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
 
 ```js
