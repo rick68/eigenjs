@@ -155,7 +155,6 @@ console.log(c1.toString());
 (3,4)
 ```
 
-
 ### Eigen.Complex.sub(scalar) && Eigen.Complex.sub(comp)
 
 ```js
@@ -182,6 +181,20 @@ console.log(c1.toString());
 
 ```txt
 (8,4)
+```
+
+### Eigen.Complex.mul(scalar) && Eigen.Complex.mul(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 8)
+  , c2 = new Complex(6, 4)
+  , c3 = c1.mul(c2);
+console.log(c3.toString());
+```
+
+```txt
+(-26,52)
 ```
 
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
