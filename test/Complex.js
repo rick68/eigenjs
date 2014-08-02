@@ -51,6 +51,16 @@ describe('Complex', function() {
     c.conj().toString().should.equal("(3,4)");
   });
 
+  it('#polar() should returns a complex object (in cartesian format) corresponding to the complex number defined by its polar components rho and theta, where rho is the magnitude (modulus) and theta is the phase angle', function() {
+    Complex.polar.should.be.a.Function;
+    var rho = 5;
+    var theta = -0.9272952180016122;
+    c = new Complex.polar(rho, theta);
+    c.toString().should.equal("(5,-0.927295)");
+    (c.real * Math.cos(c.imag)).should.approximately(3, 0.0000001);
+    (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
+  });
+
   it('#proj() should return the projection of the complex number onto the Riemann sphere', function() {
     Complex.proj.should.be.a.Function;
     Complex.proj(c).toString().should.equal("(3,-4)");
@@ -63,14 +73,9 @@ describe('Complex', function() {
     Complex.proj(Infinity).toString().should.equal("(inf,0)");
   });
 
-  it('#polar() should returns a complex object (in cartesian format) corresponding to the complex number defined by its polar components rho and theta, where rho is the magnitude (modulus) and theta is the phase angle', function() {
-    Complex.polar.should.be.a.Function;
-    var rho = 5;
-    var theta = -0.9272952180016122;
-    c = new Complex.polar(rho, theta);
-    c.toString().should.equal("(5,-0.927295)");
-    (c.real * Math.cos(c.imag)).should.approximately(3, 0.0000001);
-    (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
+  it('#add() should return the sum of two complexes', function() {
+    c.add(-7).toString().should.equal("(-4,-4)");
+    c.add(new Complex(-2, 4)).toString().should.equal("(1,0)");
   });
 
   it('#cos() should return the cosine of the complex number', function() {
