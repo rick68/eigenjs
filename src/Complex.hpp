@@ -145,6 +145,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
     NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
 
     NODE_SET_METHOD(tpl, "polar", polar);
     NODE_SET_METHOD(tpl, "proj", proj);
@@ -249,6 +250,7 @@ class Complex : public node::ObjectWrap {
 
   EIGENJS_COMPLEX_BINARY_OPERATOR(add, +)
   EIGENJS_COMPLEX_BINARY_OPERATOR_COMMUTATIVE(adda, +)
+  EIGENJS_COMPLEX_BINARY_OPERATOR(sub, -)
 
   EIGENJS_COMPLEX_CLASS_METHOD(proj)
   EIGENJS_COMPLEX_CLASS_METHOD(cos)
