@@ -471,6 +471,18 @@ console.log(c1.equals(c2));
 ```txt
 true
 ```
+### Eigen.Complex.isApprox(comp [, prec = 1e-12])
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1/3, 0)
+  , c2 = new Complex(0.3333, 0);
+console.log(c1.isApprox(c2, 1e-3));
+```
+
+```txt
+true
+```
 
 ## Matrix methods
 

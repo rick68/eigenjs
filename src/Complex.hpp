@@ -17,6 +17,9 @@
 
 #include <nan.h>
 
+#include <eigen3/Eigen/src/Core/NumTraits.h>
+
+#include <algorithm>
 #include <complex>
 #include <sstream>
 
@@ -142,7 +145,6 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "arg", arg);
     NODE_SET_PROTOTYPE_METHOD(tpl, "norm", norm);
     NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
-    NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
     NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
     NODE_SET_PROTOTYPE_METHOD(tpl, "sub", sub);
@@ -173,6 +175,8 @@ class Complex : public node::ObjectWrap {
     NODE_SET_METHOD(tpl, "atan", atan);
     NODE_SET_METHOD(tpl, "atanh", atanh);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "isApprox", isApprox);
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     v8::Local<v8::ObjectTemplate> proto = tpl->PrototypeTemplate();
@@ -332,10 +336,10 @@ class Complex : public node::ObjectWrap {
   }
 
   static NAN_METHOD(equals) {
-    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
     NanScope();
 
     if (args.Length() == 1 && is_complex(args[0])) {
+      const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
       const Complex* rhs_obj =
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       NanReturnValue(NanNew<v8::Boolean>(obj->complex_ == rhs_obj->complex_));
@@ -344,6 +348,32 @@ class Complex : public node::ObjectWrap {
     NanReturnUndefined();
   }
 
+  static NAN_METHOD(isApprox) {
+    const int& args_length = args.Length();
+    NanScope();
+
+    if (args_length == 0 || args_length > 2)
+      NanReturnUndefined();
+
+    const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
+    const Complex* rhs_obj =
+        node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+    const complex_type& v = obj->complex_;
+    const complex_type& w = rhs_obj->complex_;
+
+    typedef Eigen::NumTraits<complex_type> num_traits;
+    const typename num_traits::Real& prec =
+        args_length == 2
+      ? args[1]->NumberValue()
+      : num_traits::dummy_precision();
+
+    NanReturnValue(
+      NanNew(
+        std::norm(v - w) <= prec * prec *
+            (std::min)(std::norm(v), std::norm(w))
+      )
+    );
+  }
 
   static NAN_METHOD(toString) {
     const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());

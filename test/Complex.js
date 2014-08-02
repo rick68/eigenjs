@@ -269,4 +269,13 @@ describe('Complex', function() {
     c.equals(c).should.be.a.true;
     c.equals(new Complex(3, -4)).should.be.a.true;
   });
+
+  it('#isApprox() should return true if this is approximately equal to other', function() {
+    c.isApprox.should.be.a.Function;
+    c.diva(3);
+    c.isApprox(new Complex(1, -1.333333333333)).should.true;
+    c.isApprox(new Complex(1, -1.33333), 1e-6).should.false;
+    c.isApprox(new Complex(1, -1.33333), 1e-5).should.true;
+    c.isApprox(new Complex(1, -1.33333), 1e-4).should.true;
+  });
 });
