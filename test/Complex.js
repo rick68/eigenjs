@@ -100,6 +100,13 @@ describe('Complex', function() {
     c.mul(c).toString().should.equal("(-7,-24)");
   });
 
+  it('#mula() should return the product of two complexes and saves it back', function() {
+    c.mula(8);
+    c.toString().should.equal("(24,-32)");
+    c.mula(new Complex(1, 1));
+    c.toString().should.equal("(56,-8)");
+  });
+
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
