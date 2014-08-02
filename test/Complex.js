@@ -51,6 +51,16 @@ describe('Complex', function() {
     c.conj().toString().should.equal("(3,4)");
   });
 
+  it('#polar() should returns a complex object (in cartesian format) corresponding to the complex number defined by its polar components rho and theta, where rho is the magnitude (modulus) and theta is the phase angle', function() {
+    Complex.polar.should.be.a.Function;
+    var rho = 5;
+    var theta = -0.9272952180016122;
+    c = new Complex.polar(rho, theta);
+    c.toString().should.equal("(5,-0.927295)");
+    (c.real * Math.cos(c.imag)).should.approximately(3, 0.0000001);
+    (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
+  });
+
   it('#proj() should return the projection of the complex number onto the Riemann sphere', function() {
     Complex.proj.should.be.a.Function;
     Complex.proj(c).toString().should.equal("(3,-4)");
@@ -63,14 +73,49 @@ describe('Complex', function() {
     Complex.proj(Infinity).toString().should.equal("(inf,0)");
   });
 
-  it('#polar() should returns a complex object (in cartesian format) corresponding to the complex number defined by its polar components rho and theta, where rho is the magnitude (modulus) and theta is the phase angle', function() {
-    Complex.polar.should.be.a.Function;
-    var rho = 5;
-    var theta = -0.9272952180016122;
-    c = new Complex.polar(rho, theta);
-    c.toString().should.equal("(5,-0.927295)");
-    (c.real * Math.cos(c.imag)).should.approximately(3, 0.0000001);
-    (c.real * Math.sin(c.imag)).should.approximately(-4, 0.0000001);
+  it('#add() should return the sum of two complexes', function() {
+    c.add(-7).toString().should.equal("(-4,-4)");
+    c.add(new Complex(-2, 4)).toString().should.equal("(1,0)");
+  });
+
+  it('#adda() should return the sum of two complexes and saves it back', function() {
+    c.adda(3);
+    c.toString().should.equal("(6,-4)");
+    c.adda(new Complex(0, 12));
+    c.toString().should.equal("(6,8)");
+  });
+
+  it('#sub() should return the difference of two complexes', function() {
+    c.sub(3).toString().should.equal("(0,-4)");
+    c.sub(new Complex(-2, 4)).toString().should.equal("(5,-8)");
+  });
+
+  it('#suba() should return the difference of two complexes and saves it back', function() {
+    c.suba(-3).toString().should.equal("(6,-4)");
+    c.sub(new Complex(4, -9)).toString().should.equal("(2,5)");
+  });
+
+  it('#mul() should return the product of two complexes', function() {
+    c.mul(5).toString().should.equal("(15,-20)");
+    c.mul(c).toString().should.equal("(-7,-24)");
+  });
+
+  it('#mula() should return the product of two complexes and saves it back', function() {
+    c.mula(8);
+    c.toString().should.equal("(24,-32)");
+    c.mula(new Complex(1, 1));
+    c.toString().should.equal("(56,-8)");
+  });
+
+  it('#div() should return the complex which be divied by other complex', function() {
+    c.div(3).toString().should.equal("(1,-1.33333)");
+    c.div(new Complex(1, 1)).toString().should.equal("(-0.5,-3.5)");
+  });
+
+  it('#diva() should return the complex which be divied by other complex and saves it back', function() {
+    c.diva(4);
+    c.toString().should.equal("(0.75,-1)");
+    c.div(new Complex(0.75, 0)).toString().should.equal("(1,-1.33333)");
   });
 
   it('#cos() should return the cosine of the complex number', function() {

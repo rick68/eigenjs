@@ -127,6 +127,118 @@ console.log(c2.toString());
 (inf, -0)
 ```
 
+### Eigen.Complex.add(scalar) && Eigen.Complex.add(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 0)
+  , c2 = new Complex(0, 4)
+  , c3 = c1.add(c2);
+console.log(c3.toString());
+```
+
+```txt
+(3,4)
+```
+
+### Eigen.Complex.adda(scalar) && Eigen.Complex.adda(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 0)
+  , c2 = new Complex(0, 4);
+c1.adda(c2);
+console.log(c1.toString());
+```
+
+```txt
+(3,4)
+```
+
+### Eigen.Complex.sub(scalar) && Eigen.Complex.sub(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 4)
+  , c2 = new Complex(2, -3)
+  , c3 = c1.sub(c2);
+console.log(c3.toString());
+```
+
+```txt
+(1,7)
+```
+
+### Eigen.Complex.suba(scalar) && Eigen.Complex.suba(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(5, 8)
+  , c2 = new Complex(-3, 4);
+c1.suba(c2);
+console.log(c1.toString());
+```
+
+```txt
+(8,4)
+```
+
+### Eigen.Complex.mul(scalar) && Eigen.Complex.mul(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(1, 8)
+  , c2 = new Complex(6, 4)
+  , c3 = c1.mul(c2);
+console.log(c3.toString());
+```
+
+```txt
+(-26,52)
+```
+
+### Eigen.Complex.mula(scalar) && Eigen.Complex.mula(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 1)
+  , c2 = new Complex(2, 4)
+c1.mula(c2);
+console.log(c1.toString());
+```
+
+```txt
+(2,14)
+```
+
+### Eigen.Complex.div(scalar) && Eigen.Complex.div(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(4, 8)
+  , c2 = new Complex(2, 0)
+  , c3 = c1.div(c2);
+console.log(c3.toString());
+```
+
+```txt
+(2,4)
+```
+
+### Eigen.Complex.diva(scalar) && Eigen.Complex.diva(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 9)
+  , c2 = new Complex(9, 0)
+c1.diva(c2);
+console.log(c2.toString());
+```
+
+```txt
+(0.333333,1)
+```
+
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
 
 ```js
