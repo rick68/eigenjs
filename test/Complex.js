@@ -95,6 +95,11 @@ describe('Complex', function() {
     c.sub(new Complex(4, -9)).toString().should.equal("(2,5)");
   });
 
+  it('#mul() should return the product of two complexes', function() {
+    c.mul(5).toString().should.equal("(15,-20)");
+    c.mul(c).toString().should.equal("(-7,-24)");
+  });
+
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
