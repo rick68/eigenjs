@@ -225,6 +225,20 @@ console.log(c3.toString());
 (2,4)
 ```
 
+### Eigen.Complex.diva(scalar) && Eigen.Complex.diva(comp)
+
+```js
+var Complex = require('eigenjs').Complex
+  , c1 = new Complex(3, 9)
+  , c2 = new Complex(9, 0)
+c1.diva(c2);
+console.log(c2.toString());
+```
+
+```txt
+(0.333333,1)
+```
+
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
 
 ```js
