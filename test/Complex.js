@@ -79,7 +79,9 @@ describe('Complex', function() {
   });
 
   it('#adda() should return the sum of two complexes and saves it back', function() {
-    c.adda(new Complex(3, 12));
+    c.adda(3);
+    c.toString().should.equal("(6,-4)");
+    c.adda(new Complex(0, 12));
     c.toString().should.equal("(6,8)");
   });
 
