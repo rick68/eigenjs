@@ -78,6 +78,11 @@ describe('Complex', function() {
     c.add(new Complex(-2, 4)).toString().should.equal("(1,0)");
   });
 
+  it('#adda() should return the sum of two complexes and saves it back', function() {
+    c.adda(new Complex(3, 12));
+    c.toString().should.equal("(6,8)");
+  });
+
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
