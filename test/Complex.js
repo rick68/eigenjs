@@ -107,6 +107,11 @@ describe('Complex', function() {
     c.toString().should.equal("(56,-8)");
   });
 
+  it('#div() should return the complex which be divied by other complex', function() {
+    c.div(3).toString().should.equal("(1,-1.33333)");
+    c.div(new Complex(1, 1)).toString().should.equal("(-0.5,-3.5)");
+  });
+
   it('#cos() should return the cosine of the complex number', function() {
     Complex.cos.should.be.a.Function;
     Complex.cos(c).toString().should.equal("(-27.0349,3.85115)");
