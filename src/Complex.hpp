@@ -96,6 +96,33 @@ static NAN_METHOD( NAME ) {                                                  \
 }                                                                            \
 /**/
 
+#define EIGENJS_COMPLEX_BINARY_OPERATOR_COMMUTATIVE( NAME, OP )              \
+static NAN_METHOD( NAME ) {                                                  \
+  complex_type c;                                                            \
+  NanScope();                                                                \
+                                                                             \
+  if ( args.Length() == 1 ) {                                                \
+    if( is_complex( args[0] ) ) {                                            \
+      new (&c) complex_type(                                                 \
+          node::ObjectWrap::Unwrap<Complex>(                                 \
+              args[0]->ToObject()                                            \
+          )->complex_                                                        \
+      );                                                                     \
+    } else if ( is_saclar( args[0] ) ) {                                     \
+      new (&c) complex_type(args[0]->NumberValue(), 0);                      \
+    }                                                                        \
+                                                                             \
+    Complex* obj = node::ObjectWrap::Unwrap<Complex>( args.This() );         \
+                                                                             \
+    obj->complex_ OP##= c;                                                   \
+                                                                             \
+    NanReturnValue( args.This() );                                           \
+  }                                                                          \
+                                                                             \
+  NanReturnUndefined();                                                      \
+}                                                                            \
+/**/
+
 namespace EigenJS {
 
 template <typename ValueType>
@@ -117,6 +144,7 @@ class Complex : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "conj", conj);
     NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
     NODE_SET_PROTOTYPE_METHOD(tpl, "add", add);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "adda", adda);
 
     NODE_SET_METHOD(tpl, "polar", polar);
     NODE_SET_METHOD(tpl, "proj", proj);
@@ -220,6 +248,7 @@ class Complex : public node::ObjectWrap {
   }
 
   EIGENJS_COMPLEX_BINARY_OPERATOR(add, +)
+  EIGENJS_COMPLEX_BINARY_OPERATOR_COMMUTATIVE(adda, +)
 
   EIGENJS_COMPLEX_CLASS_METHOD(proj)
   EIGENJS_COMPLEX_CLASS_METHOD(cos)
