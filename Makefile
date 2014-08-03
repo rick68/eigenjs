@@ -5,7 +5,8 @@ PYTHON ?= python
 SOURCES = \
     src/EigenJS.cpp \
     src/Matrix.hpp \
-    src/Complex.hpp
+    src/Complex.hpp \
+    src/base.hpp
 
 FILTER = -whitespace/parens
 
