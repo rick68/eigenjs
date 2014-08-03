@@ -21,6 +21,9 @@
 
 #include <sstream>
 
+#include "base.hpp"
+#include "Complex.hpp"
+
 #define EIGENJS_MATRIX_BINARY_OPERATOR( NAME, OP )                             \
 static NAN_METHOD( NAME ) {                                                    \
   const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );         \
@@ -83,14 +86,12 @@ static NAN_METHOD( NAME ) {                                                    \
 namespace EigenJS {
 
 template <typename ValueType, const char* ClassName>
-class Matrix : public node::ObjectWrap {
-  typedef ValueType element_type;
-
-  typedef Eigen::Matrix<
-      element_type
-    , Eigen::Dynamic
-    , Eigen::Dynamic
-  > matrix_type;
+class Matrix : public node::ObjectWrap, base<ValueType> {
+ public:
+  typedef base<ValueType> base_type;
+  typedef typename base_type::element_type element_type;
+  typedef typename base_type::complex_type complex_type;
+  typedef typename base_type::matrix_type matrix_type;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
