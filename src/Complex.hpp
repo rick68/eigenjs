@@ -23,6 +23,8 @@
 #include <complex>
 #include <sstream>
 
+#include "base.hpp"
+
 #define EIGENJS_COMPLEX_CLASS_METHOD( NAME )                                 \
 static NAN_METHOD( NAME ) {                                                  \
   complex_type c;                                                            \
@@ -129,9 +131,10 @@ static NAN_METHOD( NAME ) {                                                  \
 namespace EigenJS {
 
 template <typename ValueType>
-class Complex : public node::ObjectWrap {
-  typedef ValueType element_type;
-  typedef std::complex<element_type> complex_type;
+class Complex : public node::ObjectWrap, base<ValueType> {
+  typedef base<ValueType> base_type;
+  typedef typename base_type::element_type element_type;
+  typedef typename base_type::complex_type complex_type;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
