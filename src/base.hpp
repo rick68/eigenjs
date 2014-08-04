@@ -21,6 +21,9 @@
 
 #include <complex>
 
+#include "Complex_fwd.hpp"
+#include "Matrix_fwd.hpp"
+
 namespace EigenJS {
 
 template <
@@ -41,6 +44,14 @@ struct base {
 
   static inline bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
+  }
+
+  static inline bool is_complex(const v8::Handle<v8::Value>& arg) {
+    return Complex<element_type>::base_type::HasInstance(arg);
+  }
+
+  static inline bool is_matrix(const v8::Handle<v8::Value>& arg) {
+    return Matrix<element_type>::base_type::HasInstance(arg);
   }
 
  protected:

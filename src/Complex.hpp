@@ -31,7 +31,7 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
@@ -69,7 +69,7 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
@@ -107,7 +107,7 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
@@ -132,6 +132,7 @@ namespace EigenJS {
 
 template <typename ValueType, const char* ClassName>
 class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
+ public:
   typedef base<::EigenJS::Complex, ValueType, ClassName> base_type;
   typedef typename base_type::element_type element_type;
   typedef typename base_type::complex_type complex_type;
@@ -293,8 +294,8 @@ class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
     if (args.Length() == 2 &&
         is_complex_or_saclar(args[0]) &&
         is_complex_or_saclar(args[1])) {
-      const bool& arg0_is_complex = is_complex(args[0]);
-      const bool& arg1_is_complex = is_complex(args[1]);
+      const bool& arg0_is_complex = base_type::is_complex(args[0]);
+      const bool& arg1_is_complex = base_type::is_complex(args[1]);
       const bool& arg0_is_scalar = base_type::is_scalar(args[0]);
       const bool& arg1_is_scalar = base_type::is_scalar(args[1]);
       complex_type c;
@@ -341,7 +342,7 @@ class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
   static NAN_METHOD(equals) {
     NanScope();
 
-    if (args.Length() == 1 && is_complex(args[0])) {
+    if (args.Length() == 1 && base_type::is_complex(args[0])) {
       const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
       const Complex* rhs_obj =
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
@@ -464,11 +465,7 @@ class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
     }
   }
 
- public:
-  static inline bool is_complex(const v8::Handle<v8::Value>& arg) {
-    return base_type::HasInstance(arg) ? true : false;
-  }
-
+ private:
   static inline bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
     return base_type::HasInstance(arg) || arg->IsNumber()
       ? true : false;
