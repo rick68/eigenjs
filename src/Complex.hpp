@@ -37,7 +37,7 @@ static NAN_METHOD( NAME ) {                                                  \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -75,7 +75,7 @@ static NAN_METHOD( NAME ) {                                                  \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -113,7 +113,7 @@ static NAN_METHOD( NAME ) {                                                  \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -295,8 +295,8 @@ class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
         is_complex_or_saclar(args[1])) {
       const bool& arg0_is_complex = is_complex(args[0]);
       const bool& arg1_is_complex = is_complex(args[1]);
-      const bool& arg0_is_scalar = is_saclar(args[0]);
-      const bool& arg1_is_scalar = is_saclar(args[1]);
+      const bool& arg0_is_scalar = base_type::is_scalar(args[0]);
+      const bool& arg1_is_scalar = base_type::is_scalar(args[1]);
       complex_type c;
 
       if (arg0_is_complex && arg1_is_complex) {
@@ -467,10 +467,6 @@ class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
  public:
   static inline bool is_complex(const v8::Handle<v8::Value>& arg) {
     return base_type::HasInstance(arg) ? true : false;
-  }
-
-  static inline bool is_saclar(const v8::Handle<v8::Value>& arg) {
-    return arg->IsNumber() ? true : false;
   }
 
   static inline bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {

@@ -45,6 +45,10 @@ struct base {
     return tpl->HasInstance(value);
   }
 
+  static inline bool is_scalar(const v8::Handle<v8::Value>& arg) {
+    return arg->IsNumber() ? true : false;
+  }
+
  protected:
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
