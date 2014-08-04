@@ -190,9 +190,14 @@ describe('Matrix', function() {
 
   it('#div() should return a Matrix which be divied by scalar value', function() {
     var mat2 = mat.div(0);
-    mat2.toString().should.equal("inf inf inf\ninf inf inf\ninf inf inf");
-    mat2.get(0, 0).should.be.a.Infinity;
-
+    mat2.equals(
+      new Matrix(3, 3)
+      .set([
+        Infinity, Infinity, Infinity,
+        Infinity, Infinity, Infinity,
+        Infinity, Infinity, Infinity
+      ])
+    ).should.ok;
     mat.div(2).toString().should.equal("0.5   1 1.5\n  2 2.5   3\n3.5   4 4.5");
   });
 
@@ -200,5 +205,14 @@ describe('Matrix', function() {
     mat.diva(0);
     mat.toString().should.equal("inf inf inf\ninf inf inf\ninf inf inf");
     mat.get(0, 0).should.be.a.Infinity;
+  });
+
+  it('#equals() should return true if two Matrix are equal', function() {
+    mat.equals(mat).should.ok;
+    mat.equals(new Matrix(3, 3).set([
+      1, 2, 3,
+      4, 5, 6,
+      7, 8, 9
+    ])).should.ok;
   });
 });
