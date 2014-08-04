@@ -116,6 +116,7 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
     NODE_SET_PROTOTYPE_METHOD(tpl, "diva", diva);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "isApprox", isApprox);
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
@@ -329,6 +330,28 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
     }
 
     NanReturnUndefined();
+  }
+
+  static NAN_METHOD(isApprox) {
+    const int& args_length = args.Length();
+    NanScope();
+
+    if (args_length == 0 || args_length > 2)
+      NanReturnUndefined();
+
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    const Matrix* rhs_obj =
+        node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+    const matrix_type& v = obj->matrix_;
+    const matrix_type& w = rhs_obj->matrix_;
+
+    typedef Eigen::NumTraits<typename matrix_type::Scalar> num_traits;
+    const typename num_traits::Real& prec =
+        args_length == 2
+      ? args[1]->NumberValue()
+      : num_traits::dummy_precision();
+
+    NanReturnValue(NanNew(v.isApprox(w, prec)));
   }
 
   static NAN_METHOD(toString) {
