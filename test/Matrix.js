@@ -40,6 +40,8 @@ describe('Matrix', function() {
   });
 
   it('#set() should throw message when row or column nubers are out of range', function() {
+    mat.set.should.be.a.Function;
+
     (function() {
       mat.set(3, 0, 68);
     }).should.throw('Row or column numbers are out of range');
@@ -49,6 +51,8 @@ describe('Matrix', function() {
   });
 
   it('#set() with array argument should work ok', function() {
+    mat.set.should.be.a.Function;
+
     Matrix(3, 3).set([
       1, 2, 3,
       4, 5, 6,
@@ -73,6 +77,8 @@ describe('Matrix', function() {
   });
 
   it('#get() should return the element value of Matrix', function() {
+    mat.get.should.be.a.Function;
+
     mat.get(0, 0).should.equal(1);
     mat.get(0, 1).should.equal(2);
     mat.get(0, 2).should.equal(3);
@@ -88,10 +94,14 @@ describe('Matrix', function() {
   });
 
   it('#toString() should return all element values of Matrix', function() {
+    mat.toString.should.be.a.Function;
+
     mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
   });
 
   it('#add() should return the sum of two matrices', function() {
+    mat.add.should.be.a.Function;
+
     Matrix(3, 3).set([
       2,  4,  6,
       8,  9, 10,
@@ -107,6 +117,8 @@ describe('Matrix', function() {
   });
 
   it('#adda() should return the sum of two matrices and saves it back', function() {
+    mat.adda.should.be.a.Function;
+
     mat.adda(
       Matrix(3, 3)
       .set([
@@ -129,6 +141,8 @@ describe('Matrix', function() {
   });
 
   it('#sub() should return the difference of two matrices', function() {
+    mat.sub.should.be.a.Function;
+
     Matrix(3, 3).set([
       1,  3,  5,
       7,  9, 11,
@@ -144,6 +158,8 @@ describe('Matrix', function() {
   });
 
   it('#suba() should return the difference of two matrices and saves it back', function() {
+    mat.suba.should.be.a.Function;
+
     var mat2 = Matrix(3, 3)
     .set([
       1,  3,  5,
@@ -165,6 +181,8 @@ describe('Matrix', function() {
   });
 
   it('#mul() should return the product of two matrices', function() {
+    mat.mul.should.be.a.Function;
+
     var vector = new Matrix(3, 1).set([1, 2, 3]);
     mat.mul(vector).toString().should.equal("14\n32\n50");
 
@@ -176,6 +194,8 @@ describe('Matrix', function() {
   });
 
   it('#mula() should return the product of two matrices and saves it back', function() {
+    mat.mula.should.be.a.Function;
+
     var vector = new Matrix(3, 1).set([1, 2, 3]);
     mat.mula(vector);
     mat.toString().should.equal("14\n32\n50");
@@ -189,6 +209,8 @@ describe('Matrix', function() {
   });
 
   it('#div() should return a Matrix which be divied by scalar value', function() {
+    mat.div.should.be.a.Function;
+
     var mat2 = mat.div(0);
     mat2.equals(
       new Matrix(3, 3)
@@ -202,12 +224,23 @@ describe('Matrix', function() {
   });
 
   it('#diva() should return a Matrix which be divied by scalar value and saves it back', function() {
+    mat.diva.should.be.a.Function;
+
     mat.diva(0);
-    mat.toString().should.equal("inf inf inf\ninf inf inf\ninf inf inf");
+    mat.equals(
+      new Matrix(3, 3)
+      .set([
+        Infinity, Infinity, Infinity,
+        Infinity, Infinity, Infinity,
+        Infinity, Infinity, Infinity
+      ])
+    ).should.ok;
     mat.get(0, 0).should.be.a.Infinity;
   });
 
   it('#equals() should return true if two Matrix are equal', function() {
+    mat.equals.should.be.a.Function;
+
     mat.equals(mat).should.ok;
     mat.equals(new Matrix(3, 3).set([
       1, 2, 3,
@@ -217,6 +250,8 @@ describe('Matrix', function() {
   });
 
   it('#isApprox() should return true if this is approximately equal to other', function() {
+    mat.isApprox.should.be.a.Function;
+
     var mat2 = new Matrix(3, 3).set([
       0.111, 0.222, 0.333,
       0.444, 0.555, 0.666,
