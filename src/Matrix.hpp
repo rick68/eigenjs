@@ -115,6 +115,7 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
     NODE_SET_PROTOTYPE_METHOD(tpl, "div", div);
     NODE_SET_PROTOTYPE_METHOD(tpl, "diva", diva);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
@@ -312,6 +313,19 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
       obj->matrix_ /= args[0]->NumberValue();
 
       NanReturnValue(args.This());
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(equals) {
+    NanScope();
+
+    if (args.Length() == 1 && base_type::is_matrix(args[0])) {
+      const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      NanReturnValue(NanNew<v8::Boolean>(obj->matrix_ == rhs_obj->matrix_));
     }
 
     NanReturnUndefined();
