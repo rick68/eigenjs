@@ -38,13 +38,13 @@ static NAN_METHOD( NAME ) {                                                    \
     const typename matrix_type::Index& rows = obj->matrix_.rows();             \
     const typename matrix_type::Index& cols = obj->matrix_.cols();             \
                                                                                \
-    v8::Local<v8::Function> ctr = NanNew( base_type::constructor );            \
+    v8::Local<v8::Function> ctor = NanNew( base_type::constructor );           \
     v8::Local<v8::Value> argv[] = {                                            \
         NanNew<v8::Integer>( rows )                                            \
       , NanNew<v8::Integer>( cols )                                            \
     };                                                                         \
                                                                                \
-    v8::Local<v8::Object> new_matrix = ctr->NewInstance(                       \
+    v8::Local<v8::Object> new_matrix = ctor->NewInstance(                      \
         sizeof( argv ) / sizeof( v8::Local<v8::Value> )                        \
       , argv                                                                   \
     );                                                                         \
@@ -219,13 +219,13 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -235,13 +235,13 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
 
       NanReturnValue(new_matrix);
     } else if (args.Length() == 1 && args[0]->IsNumber()) {
-      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -286,13 +286,13 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
     NanScope();
 
     if (args.Length() == 1 && args[0]->IsNumber()) {
-      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -387,10 +387,10 @@ class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
-      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
-        ctr->NewInstance(
+        ctor->NewInstance(
             sizeof(argv) / sizeof(v8::Local<v8::Value>)
           , argv
         )
