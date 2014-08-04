@@ -215,4 +215,14 @@ describe('Matrix', function() {
       7, 8, 9
     ])).should.ok;
   });
+
+  it('#isApprox() should return true if this is approximately equal to other', function() {
+    var mat2 = new Matrix(3, 3).set([
+      0.111, 0.222, 0.333,
+      0.444, 0.555, 0.666,
+      0.777, 0.888, 0.999
+    ]);
+    mat.div(9).isApprox(mat2, 1e-3).should.false;
+    mat.div(9).isApprox(mat2, 1e-2).should.true;
+  });
 });
