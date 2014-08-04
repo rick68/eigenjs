@@ -822,3 +822,24 @@ console.log(mat1.equals(mat2.add(mat3)));
 ```txt
 true
 ```
+
+### Eigen.Matrix.isApprox(mat)
+
+```js
+var Matrix = require('eigenjs').Matrix
+  , mat1 = new Matrix(2, 2)
+  , mat2 = new Matrix(2, 2);
+mat1.set([
+  1, 3,
+  5, 7
+]).diva(11);
+mat2.set([
+  0.091, 0.273,
+  0.455, 0.636
+]);
+console.log(mat1.isApprox(mat2, 1e-3));
+```
+
+```txt
+true
+```
