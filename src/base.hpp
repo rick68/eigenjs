@@ -39,17 +39,17 @@ struct base {
 
   typedef Derived<ValueType, ClassName> derived_type;
 
+  static inline bool is_scalar(const v8::Handle<v8::Value>& arg) {
+    return arg->IsNumber() ? true : false;
+  }
+
+ protected:
   static bool HasInstance(const v8::Handle<v8::Value>& value) {
     NanScope();
     v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
     return tpl->HasInstance(value);
   }
 
-  static inline bool is_scalar(const v8::Handle<v8::Value>& arg) {
-    return arg->IsNumber() ? true : false;
-  }
-
- protected:
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
 };
