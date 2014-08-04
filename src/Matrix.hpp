@@ -19,14 +19,15 @@
 
 #include <eigen3/Eigen/Dense>
 
-#include <sstream>
+#include "base.hpp"
+#include "Complex.hpp"
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR( NAME, OP )                             \
 static NAN_METHOD( NAME ) {                                                    \
   const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );         \
   NanScope();                                                                  \
                                                                                \
-  if ( args.Length() == 1 && HasInstance( args[0] ) ) {                        \
+  if ( args.Length() == 1 && base_type::HasInstance( args[0] ) ) {             \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
@@ -37,13 +38,13 @@ static NAN_METHOD( NAME ) {                                                    \
     const typename matrix_type::Index& rows = obj->matrix_.rows();             \
     const typename matrix_type::Index& cols = obj->matrix_.cols();             \
                                                                                \
-    v8::Local<v8::Function> ctr = NanNew( constructor );                       \
+    v8::Local<v8::Function> ctor = NanNew( base_type::constructor );           \
     v8::Local<v8::Value> argv[] = {                                            \
         NanNew<v8::Integer>( rows )                                            \
       , NanNew<v8::Integer>( cols )                                            \
     };                                                                         \
                                                                                \
-    v8::Local<v8::Object> new_matrix = ctr->NewInstance(                       \
+    v8::Local<v8::Object> new_matrix = ctor->NewInstance(                      \
         sizeof( argv ) / sizeof( v8::Local<v8::Value> )                        \
       , argv                                                                   \
     );                                                                         \
@@ -63,7 +64,7 @@ static NAN_METHOD( NAME ) {                                                    \
   Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );               \
   NanScope();                                                                  \
                                                                                \
-  if ( args.Length() == 1 && HasInstance( args[0] ) ) {                        \
+  if ( args.Length() == 1 && base_type::HasInstance( args[0] ) ) {             \
     const Matrix* rhs_obj =                                                    \
         node::ObjectWrap::Unwrap<Matrix>( args[0]->ToObject() );               \
                                                                                \
@@ -83,14 +84,12 @@ static NAN_METHOD( NAME ) {                                                    \
 namespace EigenJS {
 
 template <typename ValueType, const char* ClassName>
-class Matrix : public node::ObjectWrap {
-  typedef ValueType element_type;
-
-  typedef Eigen::Matrix<
-      element_type
-    , Eigen::Dynamic
-    , Eigen::Dynamic
-  > matrix_type;
+class Matrix : public node::ObjectWrap, base<Matrix, ValueType, ClassName> {
+ public:
+  typedef base<::EigenJS::Matrix, ValueType, ClassName> base_type;
+  typedef typename base_type::element_type element_type;
+  typedef typename base_type::complex_type complex_type;
+  typedef typename base_type::matrix_type matrix_type;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -116,12 +115,14 @@ class Matrix : public node::ObjectWrap {
     NODE_SET_PROTOTYPE_METHOD(tpl, "div", div);
     NODE_SET_PROTOTYPE_METHOD(tpl, "diva", diva);
 
+    NODE_SET_PROTOTYPE_METHOD(tpl, "equals", equals);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "isApprox", isApprox);
     NODE_SET_PROTOTYPE_METHOD(tpl, "toString", toString);
 
-    NanAssignPersistent(constructor, tpl->GetFunction());
+    NanAssignPersistent(base_type::constructor, tpl->GetFunction());
     exports->Set(NanNew(ClassName), tpl->GetFunction());
 
-    NanAssignPersistent(function_template, tpl);
+    NanAssignPersistent(base_type::function_template, tpl);
   }
 
   static NAN_METHOD(rows) {
@@ -210,7 +211,7 @@ class Matrix : public node::ObjectWrap {
     const typename matrix_type::Index& cols = obj->matrix_.cols();
     NanScope();
 
-    if (args.Length() == 1 && HasInstance(args[0])) {
+    if (args.Length() == 1 && base_type::HasInstance(args[0])) {
       const Matrix* rhs_obj =
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
 
@@ -218,13 +219,13 @@ class Matrix : public node::ObjectWrap {
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -234,13 +235,13 @@ class Matrix : public node::ObjectWrap {
 
       NanReturnValue(new_matrix);
     } else if (args.Length() == 1 && args[0]->IsNumber()) {
-      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -258,7 +259,7 @@ class Matrix : public node::ObjectWrap {
     Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     NanScope();
 
-    if (args.Length() == 1 && HasInstance(args[0])) {
+    if (args.Length() == 1 && base_type::HasInstance(args[0])) {
       const Matrix* rhs_obj =
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
 
@@ -285,13 +286,13 @@ class Matrix : public node::ObjectWrap {
     NanScope();
 
     if (args.Length() == 1 && args[0]->IsNumber()) {
-      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Integer>(rows)
         , NanNew<v8::Integer>(cols)
       };
 
-      v8::Local<v8::Object> new_matrix = ctr->NewInstance(
+      v8::Local<v8::Object> new_matrix = ctor->NewInstance(
           sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
       );
@@ -316,6 +317,41 @@ class Matrix : public node::ObjectWrap {
     }
 
     NanReturnUndefined();
+  }
+
+  static NAN_METHOD(equals) {
+    NanScope();
+
+    if (args.Length() == 1 && base_type::is_matrix(args[0])) {
+      const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      NanReturnValue(NanNew<v8::Boolean>(obj->matrix_ == rhs_obj->matrix_));
+    }
+
+    NanReturnUndefined();
+  }
+
+  static NAN_METHOD(isApprox) {
+    const int& args_length = args.Length();
+    NanScope();
+
+    if (args_length == 0 || args_length > 2)
+      NanReturnUndefined();
+
+    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    const Matrix* rhs_obj =
+        node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+    const matrix_type& v = obj->matrix_;
+    const matrix_type& w = rhs_obj->matrix_;
+
+    typedef Eigen::NumTraits<typename matrix_type::Scalar> num_traits;
+    const typename num_traits::Real& prec =
+        args_length == 2
+      ? args[1]->NumberValue()
+      : num_traits::dummy_precision();
+
+    NanReturnValue(NanNew(v.isApprox(w, prec)));
   }
 
   static NAN_METHOD(toString) {
@@ -351,10 +387,10 @@ class Matrix : public node::ObjectWrap {
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
-      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
-        ctr->NewInstance(
+        ctor->NewInstance(
             sizeof(argv) / sizeof(v8::Local<v8::Value>)
           , argv
         )
@@ -362,17 +398,8 @@ class Matrix : public node::ObjectWrap {
     }
   }
 
-  static bool HasInstance(const v8::Handle<v8::Value>& value) {
-    NanScope();
-    v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
-    return tpl->HasInstance(value);
-  }
-
-  static v8::Persistent<v8::FunctionTemplate> function_template;
-  static v8::Persistent<v8::Function> constructor;
-
  private:
-  static bool is_out_of_range(
+  static inline bool is_out_of_range(
       const matrix_type& matrix
     , const typename matrix_type::Index& row
     , const typename matrix_type::Index& col) {
@@ -381,7 +408,7 @@ class Matrix : public node::ObjectWrap {
       : false;
   }
 
-  static bool is_nonconformate_arguments(
+  static inline bool is_nonconformate_arguments(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
@@ -390,7 +417,7 @@ class Matrix : public node::ObjectWrap {
       : false;
   }
 
-  static bool is_invalid_matrix_product(
+  static inline bool is_invalid_matrix_product(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.cols() != op2->matrix_.rows()
@@ -401,13 +428,6 @@ class Matrix : public node::ObjectWrap {
  private:
   matrix_type matrix_;
 };
-
-template<typename ValueType, const char* ClassName>
-v8::Persistent<v8::FunctionTemplate>
-Matrix<ValueType, ClassName>::function_template;
-
-template<typename ValueType, const char* ClassName>
-v8::Persistent<v8::Function> Matrix<ValueType, ClassName>::constructor;
 
 }  // namespace EigenJS
 

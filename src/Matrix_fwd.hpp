@@ -1,6 +1,6 @@
 //
-// EigenJS.cpp
-// ~~~~~~~~~~~
+// Matrix_fwd.cpp
+// ~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,26 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#include <node.h>
-#include <v8.h>
-
-#include <nan.h>
+#ifndef EIGENJS_MATRIX_FWD_HPP
+#define EIGENJS_MATRIX_FWD_HPP
 
 #include <boost/config.hpp>
 
-#include <complex>
-
-#include "Matrix.hpp"
-#include "Complex.hpp"
-
 namespace EigenJS {
 
+BOOST_CONSTEXPR char matrix_class_name[] = "Matrix";
 
-void Init(v8::Handle<v8::Object> exports) {
-  Complex<double>::Init(exports);
-  Matrix<double>::Init(exports);
-}
+template <typename ValueType, const char* ClassName = matrix_class_name>
+class Matrix;
 
 }  // namespace EigenJS
 
-NODE_MODULE(eigen, EigenJS::Init)
+#endif  // EIGENJS_MATRIX_FWD_HPP

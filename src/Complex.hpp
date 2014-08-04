@@ -31,13 +31,13 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -45,7 +45,7 @@ static NAN_METHOD( NAME ) {                                                  \
     const element_type& real = NAME.real();                                  \
     const element_type& imag = NAME.imag();                                  \
                                                                              \
-    v8::Local<v8::Function> ctor = NanNew( constructor );                    \
+    v8::Local<v8::Function> ctor = NanNew( base_type::constructor );         \
     v8::Local<v8::Value> argv[] = {                                          \
         NanNew<v8::Number>( real )                                           \
       , NanNew<v8::Number>( imag )                                           \
@@ -69,13 +69,13 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -83,7 +83,7 @@ static NAN_METHOD( NAME ) {                                                  \
                                                                              \
     c = obj->complex_ OP c;                                                  \
                                                                              \
-    v8::Local<v8::Function> ctor = NanNew( constructor );                    \
+    v8::Local<v8::Function> ctor = NanNew( base_type::constructor );         \
     v8::Local<v8::Value> argv[] = {                                          \
         NanNew<v8::Number>( c.real() )                                       \
       , NanNew<v8::Number>( c.imag() )                                       \
@@ -107,13 +107,13 @@ static NAN_METHOD( NAME ) {                                                  \
   NanScope();                                                                \
                                                                              \
   if ( args.Length() == 1 ) {                                                \
-    if( is_complex( args[0] ) ) {                                            \
+    if( base_type::is_complex( args[0] ) ) {                                 \
       new (&c) complex_type(                                                 \
           node::ObjectWrap::Unwrap<Complex>(                                 \
               args[0]->ToObject()                                            \
           )->complex_                                                        \
       );                                                                     \
-    } else if ( is_saclar( args[0] ) ) {                                     \
+    } else if ( base_type::is_scalar( args[0] ) ) {                          \
       new (&c) complex_type(args[0]->NumberValue(), 0);                      \
     }                                                                        \
                                                                              \
@@ -130,9 +130,10 @@ static NAN_METHOD( NAME ) {                                                  \
 
 namespace EigenJS {
 
-template <typename ValueType>
-class Complex : public node::ObjectWrap, base<ValueType> {
-  typedef base<ValueType> base_type;
+template <typename ValueType, const char* ClassName>
+class Complex : public node::ObjectWrap, base<Complex, ValueType, ClassName> {
+ public:
+  typedef base<::EigenJS::Complex, ValueType, ClassName> base_type;
   typedef typename base_type::element_type element_type;
   typedef typename base_type::complex_type complex_type;
 
@@ -141,7 +142,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
     NanScope();
 
     v8::Local<v8::FunctionTemplate> tpl = NanNew<v8::FunctionTemplate>(New);
-    tpl->SetClassName(NanNew("Complex"));
+    tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     NODE_SET_PROTOTYPE_METHOD(tpl, "abs", abs);
@@ -186,10 +187,10 @@ class Complex : public node::ObjectWrap, base<ValueType> {
     proto->SetAccessor(NanNew("real"), get_real, set_real);
     proto->SetAccessor(NanNew("imag"), get_imag, set_imag);
 
-    NanAssignPersistent(constructor, tpl->GetFunction());
-    exports->Set(NanNew("Complex"), tpl->GetFunction());
+    NanAssignPersistent(base_type::constructor, tpl->GetFunction());
+    exports->Set(NanNew(ClassName), tpl->GetFunction());
 
-    NanAssignPersistent(function_template, tpl);
+    NanAssignPersistent(base_type::function_template, tpl);
   }
 
   static NAN_METHOD(abs) {
@@ -220,7 +221,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
     const element_type& imag = c.imag();
     NanScope();
 
-    v8::Local<v8::Function> ctor = NanNew(constructor);
+    v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
     v8::Local<v8::Value> argv[] = {
         NanNew<v8::Number>(real)
       , NanNew<v8::Number>(imag)
@@ -243,7 +244,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
       const element_type& rho = args[0]->NumberValue();
       const element_type& theta = args[1]->NumberValue();
 
-      v8::Local<v8::Function> ctor = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Number>(rho)
         , NanNew<v8::Number>(theta)
@@ -293,10 +294,10 @@ class Complex : public node::ObjectWrap, base<ValueType> {
     if (args.Length() == 2 &&
         is_complex_or_saclar(args[0]) &&
         is_complex_or_saclar(args[1])) {
-      const bool& arg0_is_complex = is_complex(args[0]);
-      const bool& arg1_is_complex = is_complex(args[1]);
-      const bool& arg0_is_scalar = is_saclar(args[0]);
-      const bool& arg1_is_scalar = is_saclar(args[1]);
+      const bool& arg0_is_complex = base_type::is_complex(args[0]);
+      const bool& arg1_is_complex = base_type::is_complex(args[1]);
+      const bool& arg0_is_scalar = base_type::is_scalar(args[0]);
+      const bool& arg1_is_scalar = base_type::is_scalar(args[1]);
       complex_type c;
 
       if (arg0_is_complex && arg1_is_complex) {
@@ -321,7 +322,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
         c = std::pow(scalar0, scalar1);
       }
 
-      v8::Local<v8::Function> ctor = NanNew(constructor);
+      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {
           NanNew<v8::Number>(c.real())
         , NanNew<v8::Number>(c.imag())
@@ -341,7 +342,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
   static NAN_METHOD(equals) {
     NanScope();
 
-    if (args.Length() == 1 && is_complex(args[0])) {
+    if (args.Length() == 1 && base_type::is_complex(args[0])) {
       const Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
       const Complex* rhs_obj =
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
@@ -453,7 +454,7 @@ class Complex : public node::ObjectWrap, base<ValueType> {
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
-      v8::Local<v8::Function> ctr = NanNew(constructor);
+      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
       v8::Local<v8::Value> argv[] = {args[0], args[1]};
       NanReturnValue(
         ctr->NewInstance(
@@ -464,39 +465,15 @@ class Complex : public node::ObjectWrap, base<ValueType> {
     }
   }
 
-  static bool HasInstance(const v8::Handle<v8::Value>& value) {
-    NanScope();
-    v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
-    return tpl->HasInstance(value);
-  }
-
  private:
-  static v8::Persistent<v8::FunctionTemplate> function_template;
-  static v8::Persistent<v8::Function> constructor;
-
- private:
-  static bool is_complex(const v8::Handle<v8::Value>& arg) {
-    return HasInstance(arg) ? true : false;
-  }
-
-  static bool is_saclar(const v8::Handle<v8::Value>& arg) {
-    return arg->IsNumber() ? true : false;
-  }
-
-  static bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
-    return HasInstance(arg) || arg->IsNumber()
+  static inline bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
+    return base_type::HasInstance(arg) || arg->IsNumber()
       ? true : false;
   }
 
  private:
   complex_type complex_;
 };
-
-template<typename ValueType>
-v8::Persistent<v8::FunctionTemplate> Complex<ValueType>::function_template;
-
-template<typename ValueType>
-v8::Persistent<v8::Function> Complex<ValueType>::constructor;
 
 }  // namespace EigenJS
 
