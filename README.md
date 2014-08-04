@@ -823,7 +823,7 @@ console.log(mat1.equals(mat2.add(mat3)));
 true
 ```
 
-### Eigen.Matrix.isApprox(mat)
+### Eigen.Matrix.isApprox(mat [, prec = 1e-12])
 
 ```js
 var Matrix = require('eigenjs').Matrix
