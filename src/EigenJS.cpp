@@ -9,24 +9,14 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#include <node.h>
-#include <v8.h>
-
-#include <nan.h>
-
-#include <boost/config.hpp>
-
-#include <complex>
-
 #include "Matrix.hpp"
 #include "Complex.hpp"
 
 namespace EigenJS {
 
-
 void Init(v8::Handle<v8::Object> exports) {
-  Complex<double>::Init(exports);
-  Matrix<double>::Init(exports);
+  Complex<>::Init(exports);
+  Matrix<>::Init(exports);
 }
 
 }  // namespace EigenJS

@@ -1,5 +1,5 @@
 //
-// Complex_fwd.cpp
+// Complex_fwd.hpp
 // ~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
@@ -12,14 +12,16 @@
 #ifndef EIGENJS_COMPLEX_FWD_HPP
 #define EIGENJS_COMPLEX_FWD_HPP
 
-#include <boost/config.hpp>
+#include <boost/config/suffix.hpp>
 
 namespace EigenJS {
 
 BOOST_CONSTEXPR char complex_class_name[] = "Complex";
 
-template <typename ValueType, const char* ClassName = complex_class_name>
-class Complex;
+template <
+  typename ValueType = double
+, const char* ClassName = complex_class_name
+> class Complex;
 
 }  // namespace EigenJS
 
