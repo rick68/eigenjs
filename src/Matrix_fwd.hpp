@@ -12,7 +12,7 @@
 #ifndef EIGENJS_MATRIX_FWD_HPP
 #define EIGENJS_MATRIX_FWD_HPP
 
-#include <boost/config/suffix.hpp>
+#include <boost/config.hpp>
 
 namespace EigenJS {
 
