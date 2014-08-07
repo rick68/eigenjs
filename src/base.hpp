@@ -1,5 +1,5 @@
 //
-// EigenJS.cpp
+// base.hpp
 // ~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
@@ -12,9 +12,8 @@
 #ifndef EIGENJS_BASIC_HPP
 #define EIGENJS_BASIC_HPP
 
-#include <node.h>
 #include <v8.h>
-
+#include <node.h>
 #include <nan.h>
 
 #include <eigen3/Eigen/Dense>
@@ -27,11 +26,11 @@
 namespace EigenJS {
 
 template <
-  template <typename, const char*> class Derived
+    template <typename, const char*> class Derived
   , typename ValueType
   , const char* ClassName
   >
-struct base {
+struct base : node::ObjectWrap {
   typedef ValueType element_type;
   typedef std::complex<element_type> complex_type;
   typedef Eigen::Matrix<
@@ -47,20 +46,35 @@ struct base {
   }
 
   static inline bool is_complex(const v8::Handle<v8::Value>& arg) {
-    return Complex<element_type>::base_type::HasInstance(arg);
+    return Complex<element_type>::base_type::has_instance(arg);
+  }
+
+  static inline bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
+    return
+      Complex<element_type>::base_type::has_instance(arg) || arg->IsNumber()
+      ? true : false;
   }
 
   static inline bool is_matrix(const v8::Handle<v8::Value>& arg) {
-    return Matrix<element_type>::base_type::HasInstance(arg);
+    return Matrix<element_type>::base_type::has_instance(arg);
   }
 
- protected:
-  static bool HasInstance(const v8::Handle<v8::Value>& value) {
+  static inline bool has_instance(const v8::Handle<v8::Value>& value) {
     NanScope();
     v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
     return tpl->HasInstance(value);
   }
 
+  static inline v8::Local<v8::Object>
+  new_instance(int argc, v8::Handle<v8::Value> argv[])
+  {
+    NanScope();
+    v8::Local<v8::Function> ctor = NanNew(constructor);
+    v8::Local<v8::Object> instance = ctor->NewInstance(argc, argv);
+    NanReturnValue(instance);
+  }
+
+ protected:
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
 };

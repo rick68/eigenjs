@@ -12,14 +12,16 @@
 #ifndef EIGENJS_MATRIX_FWD_HPP
 #define EIGENJS_MATRIX_FWD_HPP
 
-#include <boost/config.hpp>
+#include <boost/config/suffix.hpp>
 
 namespace EigenJS {
 
 BOOST_CONSTEXPR char matrix_class_name[] = "Matrix";
 
-template <typename ValueType, const char* ClassName = matrix_class_name>
-class Matrix;
+template <
+  typename ValueType = double
+, const char* ClassName = matrix_class_name
+> class Matrix;
 
 }  // namespace EigenJS
 
