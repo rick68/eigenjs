@@ -18,6 +18,8 @@
 
 #define EIGENJS_COMPLEX_BINARY_OPERATOR_CONTEXT( OP )                        \
   {                                                                          \
+    NanScope();                                                              \
+                                                                             \
     if ( args.Length() == 1 ) {                                              \
       typename Complex::complex_type c;                                      \
                                                                              \
@@ -29,7 +31,6 @@
         new ( &c ) typename Complex::complex_type                            \
           ( args[0]->NumberValue(), 0 );                                     \
       }                                                                      \
-                                                                             \
       const Complex* const& obj =                                            \
         node::ObjectWrap::Unwrap<Complex>( args.This() );                    \
       const typename Complex::complex_type& complex = **obj;                 \
@@ -41,14 +42,15 @@
       , NanNew<v8::Number>( c.imag() )                                       \
       };                                                                     \
                                                                              \
-      return Complex::new_instance(                                          \
+      NanReturnValue(                                                        \
+        Complex::new_instance(                                               \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
-        );                                                                   \
+        )                                                                    \
+      );                                                                     \
     }                                                                        \
                                                                              \
-    NanScope();                                                              \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -84,6 +86,8 @@
 
 #define EIGENJS_COMPLEX_CLASS_METHOD_CONTEXT( NAME )                         \
   {                                                                          \
+    NanScope();                                                              \
+                                                                             \
     if ( args.Length() == 1 ) {                                              \
       typename Complex::complex_type c;                                      \
                                                                              \
@@ -107,14 +111,15 @@
       , NanNew<v8::Number>( imag )                                           \
       };                                                                     \
                                                                              \
-      return Complex::new_instance(                                          \
+      NanReturnValue(                                                        \
+        Complex::new_instance(                                               \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
-        );                                                                   \
+        )                                                                    \
+      );                                                                     \
     }                                                                        \
                                                                              \
-    NanScope();                                                              \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/

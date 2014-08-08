@@ -69,10 +69,9 @@ struct base : node::ObjectWrap {
   static inline v8::Local<v8::Object>
   new_instance(T& args, int argc, v8::Handle<v8::Value> argv[])
   {
-    NanScope();
     v8::Local<v8::Function> ctor = NanNew(constructor);
     v8::Local<v8::Object> instance = ctor->NewInstance(argc, argv);
-    NanReturnValue(instance);
+    return instance;
   }
 
  protected:
