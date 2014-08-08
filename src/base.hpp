@@ -26,10 +26,10 @@
 namespace EigenJS {
 
 template <
-    template <typename, const char*> class Derived
-  , typename ValueType
-  , const char* ClassName
-  >
+  template <typename, const char*> class Derived
+, typename ValueType
+, const char* ClassName
+>
 struct base : node::ObjectWrap {
   typedef ValueType element_type;
   typedef std::complex<element_type> complex_type;
@@ -80,18 +80,18 @@ struct base : node::ObjectWrap {
 };
 
 template<
-    template <typename, const char*> class Derived
-  , typename ValueType
-  , const char* ClassName
-  >
+  template <typename, const char*> class Derived
+, typename ValueType
+, const char* ClassName
+>
 v8::Persistent<v8::FunctionTemplate>
     base<Derived, ValueType, ClassName>::function_template;
 
 template<
-    template <typename, const char*> class Derived
-  , typename ValueType
-  , const char* ClassName
-  >
+  template <typename, const char*> class Derived
+, typename ValueType
+, const char* ClassName
+>
 v8::Persistent<v8::Function> base<Derived, ValueType, ClassName>::constructor;
 
 }  // namespace EigenJS

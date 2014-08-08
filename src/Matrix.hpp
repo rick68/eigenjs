@@ -20,8 +20,8 @@
 
 #include "base.hpp"
 #include "definition.hpp"
-#include "Matrix_definitions.hpp"
 #include "Complex.hpp"
+#include "Matrix/definitions.hpp"
 
 namespace EigenJS {
 

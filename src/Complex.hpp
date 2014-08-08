@@ -20,7 +20,7 @@
 
 #include "base.hpp"
 #include "definition.hpp"
-#include "Complex_definitions.hpp"
+#include "Complex/definitions.hpp"
 
 namespace EigenJS {
 

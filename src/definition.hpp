@@ -106,7 +106,7 @@
       BOOST_PP_SEQ_ELEM( n, BOOST_PP_SEQ_ELEM( 1, data ) )                   \
     , BOOST_PP_CAT( _, BOOST_PP_SEQ_ELEM( 2, data ) )                        \
     )                                                                        \
-  )< T >                                                                     \
+  ) < T >                                                                    \
   /**/
 
 #define EIGENJS_PROPERTY_ACCESSOR( CLASS, NAME, ACCESSORS )                  \
@@ -137,10 +137,9 @@
 
 #define EIGENJS_OBJECT_DEFINITIONS( NAME, SEQ )                              \
   BOOST_PP_CAT(                                                              \
-      typedef boost::mpl::vector                                             \
-    , BOOST_PP_SEQ_SIZE( SEQ )                                               \
-    )                                                                        \
-  <                                                                          \
+    typedef boost::mpl::vector                                               \
+  , BOOST_PP_SEQ_SIZE( SEQ )                                                 \
+  ) <                                                                        \
     BOOST_PP_SEQ_FOR_EACH_I                                                  \
       ( EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO, < NAME<> >, SEQ )           \
   > BOOST_PP_CAT( NAME, _definitions );                                      \
