@@ -41,34 +41,34 @@ struct base : node::ObjectWrap {
 
   typedef Derived<ValueType, ClassName> derived_type;
 
-  static inline bool is_scalar(const v8::Handle<v8::Value>& arg) {
+  static NAN_INLINE bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
   }
 
-  static inline bool is_complex(const v8::Handle<v8::Value>& arg) {
+  static NAN_INLINE bool is_complex(const v8::Handle<v8::Value>& arg) {
     return Complex<element_type>::base_type::has_instance(arg);
   }
 
-  static inline bool is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
+  static NAN_INLINE bool
+  is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
     return
       Complex<element_type>::base_type::has_instance(arg) || arg->IsNumber()
       ? true : false;
   }
 
-  static inline bool is_matrix(const v8::Handle<v8::Value>& arg) {
+  static NAN_INLINE bool is_matrix(const v8::Handle<v8::Value>& arg) {
     return Matrix<element_type>::base_type::has_instance(arg);
   }
 
-  static inline bool has_instance(const v8::Handle<v8::Value>& value) {
+  static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
     NanScope();
     v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
     return tpl->HasInstance(value);
   }
 
   template <typename T>
-  static inline v8::Local<v8::Object>
-  new_instance(T& args, int argc, v8::Handle<v8::Value> argv[])
-  {
+  static NAN_INLINE v8::Local<v8::Object>
+  new_instance(const T& args, int argc, v8::Handle<v8::Value> argv[]) {
     v8::Local<v8::Function> ctor = NanNew(constructor);
     v8::Local<v8::Object> instance = ctor->NewInstance(argc, argv);
     return instance;

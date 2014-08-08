@@ -49,7 +49,7 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
-  static inline bool is_out_of_range(
+  static NAN_INLINE bool is_out_of_range(
       const matrix_type& matrix
     , const typename matrix_type::Index& row
     , const typename matrix_type::Index& col) {
@@ -58,7 +58,7 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
       : false;
   }
 
-  static inline bool is_nonconformate_arguments(
+  static NAN_INLINE bool is_nonconformate_arguments(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.rows() != op2->matrix_.rows() ||
@@ -67,7 +67,7 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
       : false;
   }
 
-  static inline bool is_invalid_matrix_product(
+  static NAN_INLINE bool is_invalid_matrix_product(
       const Matrix* const& op1
     , const Matrix* const& op2) {
     return op1->matrix_.cols() != op2->matrix_.rows()
@@ -76,19 +76,19 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
   }
 
  public:
-  inline matrix_type& operator*() {
+  NAN_INLINE matrix_type& operator*() {
     return matrix_;
   }
 
-  inline const matrix_type& operator*() const {
+  NAN_INLINE const matrix_type& operator*() const {
     return matrix_;
   }
 
-  inline matrix_type* operator->() {
+  NAN_INLINE matrix_type* operator->() {
     return &matrix_;
   }
 
-  inline const matrix_type* operator->() const {
+  NAN_INLINE const matrix_type* operator->() const {
     return &matrix_;
   }
 

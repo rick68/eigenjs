@@ -47,19 +47,19 @@ class Complex : public base<Complex, ValueType, ClassName> {
   }
 
  public:
-  inline complex_type& operator*() {
+  NAN_INLINE complex_type& operator*() {
     return complex_;
   }
 
-  inline const complex_type& operator*() const {
+  NAN_INLINE const complex_type& operator*() const {
     return complex_;
   }
 
-  inline complex_type* operator->() {
+  NAN_INLINE complex_type* operator->() {
     return &complex_;
   }
 
-  inline const complex_type* operator->() const {
+  NAN_INLINE const complex_type* operator->() const {
     return &complex_;
   }
 
