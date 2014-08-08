@@ -18,6 +18,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, mul,
 {
+  NanScope();
+
   if (args.Length() == 1) {
     const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
     const typename Matrix::matrix_type& matrix = **obj;
@@ -48,7 +50,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
 
       new_matrix = matrix * rhs_matrix;
 
-      return instance;
+      NanReturnValue(instance);
     } else if (Matrix::is_scalar(args[0])) {
       v8::Local<v8::Value> argv[] = {
         NanNew<v8::Integer>(rows)
@@ -66,11 +68,10 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
 
       new_matrix = matrix * args[0]->NumberValue();
 
-      return instance;
+      NanReturnValue(instance);
     }
   }
 
-  NanScope();
   NanReturnUndefined();
 })
 

@@ -18,6 +18,8 @@
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                          \
   {                                                                           \
+    NanScope();                                                               \
+                                                                              \
     if ( args.Length() == 1 && Matrix::has_instance( args[0] ) ) {            \
       const Matrix* const& obj =                                              \
         node::ObjectWrap::Unwrap<Matrix>( args.This() );                      \
@@ -29,7 +31,6 @@
       if ( Matrix::is_nonconformate_arguments( obj, rhs_obj ) ) {             \
         NanReturnUndefined();                                                 \
       }                                                                       \
-                                                                              \
       const typename Matrix::matrix_type::Index& rows = matrix.rows();        \
       const typename Matrix::matrix_type::Index& cols = matrix.cols();        \
                                                                               \
@@ -48,10 +49,9 @@
       typename Matrix::matrix_type& new_matrix = **new_obj;                   \
       new_matrix = matrix OP rhs_matrix;                                      \
                                                                               \
-      return instance;                                                        \
+      NanReturnValue(instance);                                               \
     }                                                                         \
                                                                               \
-    NanScope();                                                               \
     NanReturnUndefined();                                                     \
   }                                                                           \
   /**/
