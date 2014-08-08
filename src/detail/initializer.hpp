@@ -25,10 +25,11 @@ struct initializer {
   {}
 
   template <typename T>
-  void operator()(T& definition) {
+  void operator()(T& definition) const {
     definition(function_template_);
   }
 
+ private:
   function_template_type& function_template_;
 };
 
