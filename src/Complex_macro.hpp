@@ -42,9 +42,10 @@
       };                                                                     \
                                                                              \
       return Complex::new_instance(                                          \
-        sizeof( argv ) / sizeof( v8::Local<v8::Value> )                      \
-      , argv                                                                 \
-      );                                                                     \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
     }                                                                        \
                                                                              \
     NanScope();                                                              \
@@ -107,7 +108,8 @@
       };                                                                     \
                                                                              \
       return Complex::new_instance(                                          \
-          sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
     }                                                                        \

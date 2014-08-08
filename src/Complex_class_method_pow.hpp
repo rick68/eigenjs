@@ -57,7 +57,8 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     };
 
     return Complex::new_instance(
-        sizeof( argv ) / sizeof( v8::Local<v8::Value> )
+        args
+      , sizeof( argv ) / sizeof( v8::Local<v8::Value> )
       , argv
       );
   }

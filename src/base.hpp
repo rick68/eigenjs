@@ -65,8 +65,9 @@ struct base : node::ObjectWrap {
     return tpl->HasInstance(value);
   }
 
+  template <typename T>
   static inline v8::Local<v8::Object>
-  new_instance(int argc, v8::Handle<v8::Value> argv[])
+  new_instance(T& args, int argc, v8::Handle<v8::Value> argv[])
   {
     NanScope();
     v8::Local<v8::Function> ctor = NanNew(constructor);

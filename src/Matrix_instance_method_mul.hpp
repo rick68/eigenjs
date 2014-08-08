@@ -38,7 +38,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
       };
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
-        sizeof(argv) / sizeof(v8::Local<v8::Value>)
+       args
+      ,sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
@@ -55,7 +56,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
       };
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
-        sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
