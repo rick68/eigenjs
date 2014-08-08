@@ -19,6 +19,8 @@ namespace EigenJS {
 
 EIGENJS_CLASS_METHOD(Complex, polar,
 {
+  NanScope();
+
   if (args.Length() == 2 &&
       Complex::is_scalar(args[0]) &&
       Complex::is_scalar(args[1])
@@ -31,14 +33,15 @@ EIGENJS_CLASS_METHOD(Complex, polar,
     , NanNew<v8::Number>(theta)
     };
 
-    return Complex::new_instance(
-      args
-    , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-    , argv
+    NanReturnValue(
+      Complex::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      )
     );
   }
 
-  NanScope();
   NanReturnUndefined();
 })
 

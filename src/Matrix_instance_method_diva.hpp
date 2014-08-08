@@ -18,6 +18,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, diva,
 {
+  NanScope();
+
   if (args.Length() == 1) {
     Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
     typename Matrix::matrix_type& matrix = **obj;
@@ -25,11 +27,10 @@ EIGENJS_INSTANCE_METHOD(Matrix, diva,
     if (Matrix::is_scalar(args[0])) {
       matrix /= args[0]->NumberValue();
 
-      return args.This();
+      NanReturnValue(args.This());
     }
   }
 
-  NanScope();
   NanReturnUndefined();
 })
 

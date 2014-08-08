@@ -29,11 +29,14 @@ EIGENJS_INSTANCE_METHOD(Complex, conj,
   , NanNew<v8::Number>(imag)
   };
 
-  return Complex::new_instance(
+  NanScope();
+  NanReturnValue(
+    Complex::new_instance(
       args
-    , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+    , sizeof( argv ) / sizeof( v8::Local<v8::Value> )
     , argv
-    );
+    )
+  );
 })
 
 }  // namespace EigenJS

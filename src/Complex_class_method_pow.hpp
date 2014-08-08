@@ -19,6 +19,8 @@ namespace EigenJS {
 
 EIGENJS_CLASS_METHOD(Complex, pow,
 {
+  NanScope();
+
   if (args.Length() == 2 &&
       Complex::is_complex_or_saclar(args[0]) &&
       Complex::is_complex_or_saclar(args[1])
@@ -56,14 +58,15 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     , NanNew<v8::Number>(c.imag())
     };
 
-    return Complex::new_instance(
+    NanReturnValue(
+      Complex::new_instance(
         args
       , sizeof( argv ) / sizeof( v8::Local<v8::Value> )
       , argv
-      );
+      )
+    );
   }
 
-  NanScope();
   NanReturnUndefined();
 })
 

@@ -34,11 +34,11 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
 
       matrix *= rhs_matrix;
 
-      return args.This();
+      NanReturnValue(args.This());
     } else if (Matrix::is_scalar(args[0])) {
       matrix *= args[0]->NumberValue();
 
-      return args.This();
+      NanReturnValue(args.This());
     }
   }
 
