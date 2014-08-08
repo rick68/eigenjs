@@ -26,7 +26,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
     const typename Matrix::matrix_type::Index& rows = matrix.rows();
     const typename Matrix::matrix_type::Index& cols = matrix.cols();
 
-     if (Matrix::has_instance(args[0])) {
+    if (Matrix::has_instance(args[0])) {
       const Matrix* rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;
@@ -40,8 +40,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
       };
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
-       args
-      ,sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 

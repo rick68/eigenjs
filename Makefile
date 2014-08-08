@@ -44,7 +44,6 @@ SOURCES = \
     src/Complex_property_accessor_imag.hpp \
     src/Complex_property_accessor_real.hpp \
     src/EigenJS.cpp \
-    src/EigenJS.hpp \
     src/Matrix.hpp \
     src/Matrix_definitions.hpp \
     src/Matrix_fwd.hpp \
