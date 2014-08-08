@@ -132,16 +132,21 @@
   /**/
 
 #define EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO( r, data, i, elem )          \
-  BOOST_PP_COMMA_IF( i ) elem data                                           \
+  BOOST_PP_COMMA_IF( i )                                                     \
+  BOOST_PP_CAT(                                                              \
+    BOOST_PP_CAT( BOOST_PP_SEQ_ELEM( 0, data ), _ )                          \
+  , elem                                                                     \
+  ) BOOST_PP_SEQ_ELEM(1, data)                                               \
   /**/
 
 #define EIGENJS_OBJECT_DEFINITIONS( NAME, SEQ )                              \
   BOOST_PP_CAT(                                                              \
     typedef boost::mpl::vector                                               \
   , BOOST_PP_SEQ_SIZE( SEQ )                                                 \
-  ) <                                                                        \
+  )                                                                          \
+  <                                                                          \
     BOOST_PP_SEQ_FOR_EACH_I                                                  \
-      ( EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO, < NAME<> >, SEQ )           \
+      ( EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO, (NAME)(< NAME<> >), SEQ )   \
   > BOOST_PP_CAT( NAME, _definitions );                                      \
   /**/
 

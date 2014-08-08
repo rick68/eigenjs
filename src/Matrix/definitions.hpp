@@ -40,27 +40,27 @@ namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Matrix
-, (Matrix_instance_method_rows)
-  (Matrix_instance_method_cols)
+, (instance_method_rows)
+  (instance_method_cols)
 
-  (Matrix_instance_method_set)
-  (Matrix_instance_method_get)
+  (instance_method_set)
+  (instance_method_get)
 
-  (Matrix_instance_method_add)
-  (Matrix_instance_method_adda)
-  (Matrix_instance_method_sub)
-  (Matrix_instance_method_suba)
+  (instance_method_add)
+  (instance_method_adda)
+  (instance_method_sub)
+  (instance_method_suba)
 
-  (Matrix_instance_method_mul)
-  (Matrix_instance_method_mula)
+  (instance_method_mul)
+  (instance_method_mula)
 
-  (Matrix_instance_method_div)
-  (Matrix_instance_method_diva)
+  (instance_method_div)
+  (instance_method_diva)
 
-  (Matrix_instance_method_equals)
-  (Matrix_instance_method_isApprox)
+  (instance_method_equals)
+  (instance_method_isApprox)
 
-  (Matrix_instance_method_toString)
+  (instance_method_toString)
 );
 
 }  // namespace EigenJS
