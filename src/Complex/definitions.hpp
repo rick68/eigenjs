@@ -60,7 +60,9 @@ namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Complex
-, (property_accessor_real)
+, (instance_method_toString)
+
+  (property_accessor_real)
   (property_accessor_imag)
 
   (instance_method_abs)
@@ -100,8 +102,6 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
-
-  (instance_method_toString)
 );
 
 }  // namespace EigenJS

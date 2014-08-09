@@ -28,8 +28,14 @@ template <typename ValueType, const char* ClassName>
 class Complex : public base<Complex, ValueType, ClassName> {
  public:
   typedef base<::EigenJS::Complex, ValueType, ClassName> base_type;
+
   typedef typename base_type::element_type element_type;
   typedef typename base_type::complex_type complex_type;
+  typedef typename base_type::matrix_type matrix_type;
+  typedef typename base_type::cmatrix_type cmatrix_type;
+
+  typedef typename base_type::Matrix Matrix;
+  typedef typename base_type::CMatrix CMatrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
