@@ -19,7 +19,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, diva,
   NanScope();
 
   if (args.Length() == 1) {
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     typename Matrix::matrix_type& matrix = **obj;
 
     if (Matrix::is_scalar(args[0])) {

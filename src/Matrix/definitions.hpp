@@ -40,7 +40,9 @@ namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Matrix
-, (instance_method_rows)
+, (instance_method_toString)
+
+  (instance_method_rows)
   (instance_method_cols)
 
   (instance_method_set)
@@ -59,8 +61,6 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
-
-  (instance_method_toString)
 );
 
 }  // namespace EigenJS

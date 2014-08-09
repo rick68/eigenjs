@@ -30,7 +30,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, get,
     if (Matrix::is_out_of_range(matrix, row, col))
       NanReturnUndefined();
 
-    typename Matrix::element_type value = matrix(row, col);
+    const typename Matrix::element_type& value = matrix(row, col);
     NanReturnValue(NanNew(value));
   }
 
