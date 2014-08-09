@@ -45,9 +45,9 @@ struct base : node::ObjectWrap {
   typedef Eigen::Matrix<
       complex_type, Eigen::Dynamic, Eigen::Dynamic> cmatrix_type;
 
-  typedef Complex<element_type> Complex;
-  typedef Matrix<element_type> Matrix;
-  typedef CMatrix<element_type> CMatrix;
+  typedef ::EigenJS::Complex<element_type> Complex;
+  typedef ::EigenJS::Matrix<element_type> Matrix;
+  typedef ::EigenJS::CMatrix<element_type> CMatrix;
 
   typedef Derived<ValueType, ClassName> derived_type;
 
