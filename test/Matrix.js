@@ -1,5 +1,7 @@
 const
     Matrix = require('../index.js').Matrix,
+    Complex = require('../index.js').Complex,
+    CMatrix = require('../index.js').CMatrix,
     should = require('should');
 
 describe('Matrix', function() {
@@ -116,6 +118,24 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#add() should return a CMatrix with the sum of a matrix and a complex matrix', function() {
+    mat.add.should.be.a.Function;
+
+    var cmat = CMatrix(3, 3).set([
+      2,  4,  6,
+      8,  9, 10,
+     11, 12, 13
+    ]);
+    mat.add(cmat).toString().should.equal(" (3,0)  (6,0)  (9,0)\n(12,0) (14,0) (16,0)\n(18,0) (20,0) (22,0)");
+
+    (function() {
+      Matrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]).add(mat);
+    }).should.throw("Nonconformant arguments");
+  });
+
   it('#adda() should return the sum of two matrices and saves it back', function() {
     mat.adda.should.be.a.Function;
 
@@ -138,6 +158,13 @@ describe('Matrix', function() {
         ])
       );
     }).should.throw("Nonconformant arguments");
+
+    var cmat = CMatrix(3, 3).set([
+      2,  4,  6,
+      8,  9, 10,
+     11, 12, 13
+    ]);
+    (mat.adda(cmat) == undefined).should.be.true;
   });
 
   it('#sub() should return the difference of two matrices', function() {
@@ -154,6 +181,27 @@ describe('Matrix', function() {
         1, 0, 0,
         0, 1, 0
       ]).sub(mat);
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return a CMatrix with the sum of a matrix and complex matrix', function() {
+    mat.add.should.be.a.Function;
+
+    var cmat = CMatrix(3, 3).set([
+      Complex( 2, 0), Complex( 4, 1),  Complex(6, 2),
+      Complex( 8, 4), Complex( 9, 5), Complex(10, 6),
+      Complex(11, 7), Complex(12, 8), Complex(13, 9)
+    ]);
+
+    mat.sub(cmat).toString().should.equal(" (-1,0) (-2,-1) (-3,-2)\n(-4,-4) (-4,-5) (-4,-6)\n(-4,-7) (-4,-8) (-4,-9)");
+
+    (function() {
+      mat.sub(
+        CMatrix(2, 3).set([
+          1, 0, 0,
+          0, 1, 0
+        ])
+      );
     }).should.throw("Nonconformant arguments");
   });
 
@@ -178,6 +226,13 @@ describe('Matrix', function() {
         ])
       );
     }).should.throw("Nonconformant arguments");
+
+    var cmat = CMatrix(3, 3).set([
+      2,  4,  6,
+      8,  9, 10,
+     11, 12, 13
+    ]);
+    (mat.suba(cmat) == undefined).should.be.true;
   });
 
   it('#mul() should return the product of two matrices', function() {
@@ -186,11 +241,26 @@ describe('Matrix', function() {
     var vector = new Matrix(3, 1).set([1, 2, 3]);
     mat.mul(vector).toString().should.equal("14\n32\n50");
 
-    mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
-
     (function() {
       vector.mul(mat);
     }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return a CMatrix with the product of a matrix and a complex matrix', function() {
+    mat.mul.should.be.a.Function;
+
+    var cvector = new CMatrix(3, 1).set([Complex(1, 1), Complex(2, 2), Complex(3, 3)]);
+    mat.mul(cvector).toString().should.equal("14\n14\n32");
+
+    (function() {
+      cvector.mul(mat);
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return the product of a matrix and a scalar', function() {
+    mat.mul.should.be.a.Function;
+
+    mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
   });
 
   it('#mula() should return the product of two matrices and saves it back', function() {
@@ -200,15 +270,26 @@ describe('Matrix', function() {
     mat.mula(vector);
     mat.toString().should.equal("14\n32\n50");
 
-    mat.mula(-1);
-    mat.toString().should.equal("-14\n-32\n-50");
-
     (function() {
       vector.mula(mat);
     }).should.throw("Invalid matrix product");
   });
 
-  it('#div() should return a Matrix which be divied by scalar value', function() {
+  it('#mula() should return the product of a matrices and a scalar value then saves it back', function() {
+    mat.mula.should.be.a.Function;
+
+    mat.mula(-1);
+    mat.toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
+  });
+
+  it('#mul() should return a CMatrix with the product of a matrix and a complex', function() {
+    mat.mul.should.be.a.Function;
+
+    var c = new Complex(-1, 0);
+    mat.mul(c).toString().should.equal("(-1,0) (-2,0) (-3,0)\n(-4,0) (-5,0) (-6,0)\n(-7,0) (-8,0) (-9,0)");
+  });
+
+  it('#div() should return a Matrix which be divied by a scalar value', function() {
     mat.div.should.be.a.Function;
 
     var mat2 = mat.div(0);
@@ -223,7 +304,13 @@ describe('Matrix', function() {
     mat.div(2).toString().should.equal("0.5   1 1.5\n  2 2.5   3\n3.5   4 4.5");
   });
 
-  it('#diva() should return a Matrix which be divied by scalar value and saves it back', function() {
+  it('#div() should return a Matrix which be divied by a complex value', function() {
+    mat.div.should.be.a.Function;
+
+    mat.div(Complex(2, 0)).toString().should.equal("(0.5,0)   (1,0) (1.5,0)\n  (2,0) (2.5,0)   (3,0)\n(3.5,0)   (4,0) (4.5,0)");
+  });
+
+  it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
     mat.diva.should.be.a.Function;
 
     mat.diva(0);

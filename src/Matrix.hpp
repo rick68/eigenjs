@@ -29,9 +29,14 @@ template <typename ValueType, const char* ClassName>
 class Matrix : public base<Matrix, ValueType, ClassName> {
  public:
   typedef base<::EigenJS::Matrix, ValueType, ClassName> base_type;
+
   typedef typename base_type::element_type element_type;
   typedef typename base_type::complex_type complex_type;
   typedef typename base_type::matrix_type matrix_type;
+  typedef typename base_type::cmatrix_type cmatrix_type;
+
+  typedef typename base_type::Complex Complex;
+  typedef typename base_type::CMatrix CMatrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -47,32 +52,6 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
     exports->Set(NanNew(ClassName), tpl->GetFunction());
 
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
-  }
-
-  static NAN_INLINE bool is_out_of_range(
-      const matrix_type& matrix
-    , const typename matrix_type::Index& row
-    , const typename matrix_type::Index& col) {
-    return row < 0 || row >= matrix.rows() || col < 0 || col >= matrix.cols()
-      ? NanThrowError("Row or column numbers are out of range"), true
-      : false;
-  }
-
-  static NAN_INLINE bool is_nonconformate_arguments(
-      const Matrix* const& op1
-    , const Matrix* const& op2) {
-    return op1->matrix_.rows() != op2->matrix_.rows() ||
-           op1->matrix_.cols() != op2->matrix_.cols()
-      ? NanThrowError("Nonconformant arguments"), true
-      : false;
-  }
-
-  static NAN_INLINE bool is_invalid_matrix_product(
-      const Matrix* const& op1
-    , const Matrix* const& op2) {
-    return op1->matrix_.cols() != op2->matrix_.rows()
-      ? NanThrowError("Invalid matrix product"), true
-      : false;
   }
 
  public:
@@ -94,9 +73,9 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
 
  private:
   Matrix(
-      const typename matrix_type::Index& rows
-    , const typename matrix_type::Index& cols
-    ) : matrix_(matrix_type::Zero(rows, cols))
+    const typename matrix_type::Index& rows
+  , const typename matrix_type::Index& cols
+  ) : matrix_(matrix_type::Zero(rows, cols))
   {}
 
   ~Matrix() {}

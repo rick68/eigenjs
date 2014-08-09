@@ -14,6 +14,8 @@
 
 #include "../Complex_fwd.hpp"
 
+#include "instance_method_toString.hpp"
+
 #include "property_accessor_real.hpp"
 #include "property_accessor_imag.hpp"
 
@@ -54,13 +56,13 @@
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
 
-#include "instance_method_toString.hpp"
-
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Complex
-, (property_accessor_real)
+, (instance_method_toString)
+
+  (property_accessor_real)
   (property_accessor_imag)
 
   (instance_method_abs)
@@ -100,8 +102,6 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
-
-  (instance_method_toString)
 );
 
 }  // namespace EigenJS

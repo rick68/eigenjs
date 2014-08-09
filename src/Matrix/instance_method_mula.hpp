@@ -19,11 +19,11 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
   NanScope();
 
   if (args.Length() == 1) {
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     typename Matrix::matrix_type& matrix = **obj;
 
-    if (Matrix::has_instance(args[0])) {
-      const Matrix* rhs_obj =
+    if (Matrix::is_matrix(args[0])) {
+      const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;
 
