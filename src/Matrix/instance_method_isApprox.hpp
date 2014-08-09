@@ -20,12 +20,12 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
 
   NanScope();
 
-  if (args_length == 0 || args_length > 2)
+  if (args_length == 0 || args_length > 2 || !Matrix::is_matrix(args[0]))
     NanReturnUndefined();
 
-  const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+  const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
   const typename Matrix::matrix_type& matrix = **obj;
-  const Matrix* rhs_obj =
+  const Matrix* const& rhs_obj =
       node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
   const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;
   const typename Matrix::matrix_type& v = matrix;

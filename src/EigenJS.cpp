@@ -9,14 +9,16 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#include "Matrix.hpp"
 #include "Complex.hpp"
+#include "Matrix.hpp"
+#include "CMatrix.hpp"
 
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
   Complex<>::Init(exports);
   Matrix<>::Init(exports);
+  CMatrix<>::Init(exports);
 }
 
 }  // namespace EigenJS

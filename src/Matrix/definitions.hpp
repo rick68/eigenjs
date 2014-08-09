@@ -14,6 +14,8 @@
 
 #include "../Matrix_fwd.hpp"
 
+#include "instance_method_toString.hpp"
+
 #include "instance_method_rows.hpp"
 #include "instance_method_cols.hpp"
 
@@ -34,13 +36,13 @@
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
 
-#include "instance_method_toString.hpp"
-
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Matrix
-, (instance_method_rows)
+, (instance_method_toString)
+
+  (instance_method_rows)
   (instance_method_cols)
 
   (instance_method_set)
@@ -59,8 +61,6 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
-
-  (instance_method_toString)
 );
 
 }  // namespace EigenJS

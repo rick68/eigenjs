@@ -23,8 +23,8 @@ $ npm install eigenjs
 ### Eigen.Complex(real, imag)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 console.log('c = %s', c);
 ```
 
@@ -35,8 +35,8 @@ c = (3,-4)
 ### Eigen.Complex.real && Eigen.Complex.imag
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 c.real = 6;
 c.imag = 8;
 console.log('(%d,%d)', c.real, c.imag);
@@ -49,8 +49,8 @@ console.log('(%d,%d)', c.real, c.imag);
 ### Eigen.Complex.abs()
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 console.log(c.abs());
 ```
 
@@ -61,8 +61,8 @@ console.log(c.abs());
 ### Eigen.Complex.arg()
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 console.log(c.arg());
 console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()));
 ```
@@ -75,8 +75,8 @@ console.log('(%d,%d)', c.abs() * Math.cos(c.arg()), c.abs() * Math.sin(c.arg()))
 ### Eigen.Complex.norm()
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 console.log(c.norm());
 ```
 
@@ -87,8 +87,8 @@ console.log(c.norm());
 ### Eigen.Complex.conj()
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = new Complex(3, -4);
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
 console.log(c.conj().toString());
 ```
 
@@ -99,10 +99,10 @@ console.log(c.conj().toString());
 ### Eigen.Complex.polar(scalar, scalar)
 
 ```js
-var Complex = require('eigenjs').Complex
+var C = require('eigenjs').Complex
   , rho = 5
   , theta = -0.9272952180016122
-  , c = Complex.polar(rho, theta);
+  , c = C.polar(rho, theta);
 console.log(c.conj().toString());
 console.log(c.real * Math.cos(c.imag));
 console.log(c.real * Math.sin(c.imag));
@@ -117,9 +117,9 @@ console.log(c.real * Math.sin(c.imag));
 ### Eigen.Complex.proj(scalar) && Eigen.Complex.proj(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, -Infinity)
-  , c2 = Complex.proj(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(0, -Infinity)
+  , c2 = C.proj(c1);
 console.log(c2.toString());
 ```
 
@@ -130,9 +130,9 @@ console.log(c2.toString());
 ### Eigen.Complex.add(scalar) && Eigen.Complex.add(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(3, 0)
-  , c2 = new Complex(0, 4)
+var C = require('eigenjs').Complex
+  , c1 = new C(3, 0)
+  , c2 = new C(0, 4)
   , c3 = c1.add(c2);
 console.log(c3.toString());
 ```
@@ -144,9 +144,9 @@ console.log(c3.toString());
 ### Eigen.Complex.adda(scalar) && Eigen.Complex.adda(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(3, 0)
-  , c2 = new Complex(0, 4);
+var C = require('eigenjs').Complex
+  , c1 = new C(3, 0)
+  , c2 = new C(0, 4);
 c1.adda(c2);
 console.log(c1.toString());
 ```
@@ -158,9 +158,9 @@ console.log(c1.toString());
 ### Eigen.Complex.sub(scalar) && Eigen.Complex.sub(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(3, 4)
-  , c2 = new Complex(2, -3)
+var C = require('eigenjs').Complex
+  , c1 = new C(3, 4)
+  , c2 = new Cx(2, -3)
   , c3 = c1.sub(c2);
 console.log(c3.toString());
 ```
@@ -172,9 +172,9 @@ console.log(c3.toString());
 ### Eigen.Complex.suba(scalar) && Eigen.Complex.suba(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(5, 8)
-  , c2 = new Complex(-3, 4);
+var C = require('eigenjs').Complex
+  , c1 = new C(5, 8)
+  , c2 = new C(-3, 4);
 c1.suba(c2);
 console.log(c1.toString());
 ```
@@ -183,12 +183,12 @@ console.log(c1.toString());
 (8,4)
 ```
 
-### Eigen.Complex.mul(scalar) && Eigen.Complex.mul(comp)
+### Eigen.Complex.mul(scalar) && Eigen.Complex.mul(comp) && Eigen.Complex.mul(mat) && Eigen.Complex.mul(cmat)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 8)
-  , c2 = new Complex(6, 4)
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 8)
+  , c2 = new C(6, 4)
   , c3 = c1.mul(c2);
 console.log(c3.toString());
 ```
@@ -200,9 +200,9 @@ console.log(c3.toString());
 ### Eigen.Complex.mula(scalar) && Eigen.Complex.mula(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(3, 1)
-  , c2 = new Complex(2, 4)
+var C = require('eigenjs').Complex
+  , c1 = new C(3, 1)
+  , c2 = new C(2, 4)
 c1.mula(c2);
 console.log(c1.toString());
 ```
@@ -214,9 +214,9 @@ console.log(c1.toString());
 ### Eigen.Complex.div(scalar) && Eigen.Complex.div(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(4, 8)
-  , c2 = new Complex(2, 0)
+var C = require('eigenjs').Complex
+  , c1 = new C(4, 8)
+  , c2 = new C(2, 0)
   , c3 = c1.div(c2);
 console.log(c3.toString());
 ```
@@ -228,9 +228,9 @@ console.log(c3.toString());
 ### Eigen.Complex.diva(scalar) && Eigen.Complex.diva(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(3, 9)
-  , c2 = new Complex(9, 0)
+var C = require('eigenjs').Complex
+  , c1 = new C(3, 9)
+  , c2 = new C(9, 0)
 c1.diva(c2);
 console.log(c2.toString());
 ```
@@ -242,9 +242,9 @@ console.log(c2.toString());
 ### Eigen.Complex.cos(scalar) && Eigen.Complex.cos(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.cos(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Math.PI/4, 0)
+  , c2 = C.cos(c1);
 console.log(c2.toString());
 ```
 
@@ -255,9 +255,9 @@ console.log(c2.toString());
 ### Eigen.Complex.cosh(scalar) && Eigen.Complex.cosh(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, 0)
-  , c2 = Complex.cosh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(0, 0)
+  , c2 = C.cosh(c1);
 console.log(c2.toString());
 ```
 
@@ -268,9 +268,9 @@ console.log(c2.toString());
 ### Eigen.Complex.exp(scalar) && Eigen.Complex.exp(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.exp(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
+  , c2 = C.exp(c1);
 console.log(c2.toString());
 ```
 
@@ -281,9 +281,9 @@ console.log(c2.toString());
 ### Eigen.Complex.log(scalar) && Eigen.Complex.log(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.E, 0)
-  , c2 = Complex.log(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Math.E, 0)
+  , c2 = C.log(c1);
 console.log(c2.toString());
 ```
 
@@ -294,9 +294,9 @@ console.log(c2.toString());
 ### Eigen.Complex.log10(scalar) && Eigen.Complex.log10(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1000, 0)
-  , c2 = Complex.log10(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1000, 0)
+  , c2 = C.log10(c1);
 console.log(c2.toString());
 ```
 
@@ -307,8 +307,8 @@ console.log(c2.toString());
 ### Eigen.Complex.pow(scalar, scalar) && Eigen.Complex.pow(comp, scalar) && Eigen.Complex.pow(scalar, comp) && Eigen.Complex.pow(comp, comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c = Complex.pow(2, 3)
+var C = require('eigenjs').Complex
+  , c = C.pow(2, 3)
 console.log(c.toString());
 ```
 
@@ -319,9 +319,9 @@ console.log(c.toString());
 ### Eigen.Complex.sin(scalar) && Eigen.Complex.sin(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.sin(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Math.PI/4, 0)
+  , c2 = C.sin(c1);
 console.log(c2.toString());
 ```
 
@@ -332,9 +332,9 @@ console.log(c2.toString());
 ### Eigen.Complex.sinh(scalar) && Eigen.Complex.sin(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(0, 0)
-  , c2 = Complex.sinh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(0, 0)
+  , c2 = C.sinh(c1);
 console.log(c2.toString());
 ```
 
@@ -345,9 +345,9 @@ console.log(c2.toString());
 ### Eigen.Complex.sqrt(scalar) && Eigen.Complex.sqrt(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(9, 0)
-  , c2 = Complex.sqrt(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(9, 0)
+  , c2 = C.sqrt(c1);
 console.log(c2.toString());
 ```
 
@@ -358,9 +358,9 @@ console.log(c2.toString());
 ### Eigen.Complex.tan(scalar) && Eigen.Complex.tan(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Math.PI/4, 0)
-  , c2 = Complex.tan(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Math.PI/4, 0)
+  , c2 = C.tan(c1);
 console.log(c2.toString());
 ```
 
@@ -371,9 +371,9 @@ console.log(c2.toString());
 ### Eigen.Complex.tanh(scalar) && Eigen.Complex.tanh(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Infinity, 0)
-  , c2 = Complex.tanh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Infinity, 0)
+  , c2 = C.tanh(c1);
 console.log(c2.toString());
 ```
 
@@ -384,9 +384,9 @@ console.log(c2.toString());
 ### Eigen.Complex.acos(scalar) && Eigen.Complex.acos(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.acos(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
+  , c2 = C.acos(c1);
 console.log(c2.toString());
 ```
 
@@ -397,9 +397,9 @@ console.log(c2.toString());
 ### Eigen.Complex.acosh(scalar) && Eigen.Complex.acosh(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1.54308, 0)
-  , c2 = Complex.acosh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1.54308, 0)
+  , c2 = C.acosh(c1);
 console.log(c2.toString());
 ```
 
@@ -410,9 +410,9 @@ console.log(c2.toString());
 ### Eigen.Complex.asin(scalar) && Eigen.Complex.asin(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.asin(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
+  , c2 = C.asin(c1);
 console.log(c2.toString());
 ```
 
@@ -423,9 +423,9 @@ console.log(c2.toString());
 ### Eigen.Complex.asinh(scalar) && Eigen.Complex.asinh(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.asinh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
+  , c2 = C.asinh(c1);
 console.log(c2.toString());
 ```
 
@@ -436,9 +436,9 @@ console.log(c2.toString());
 ### Eigen.Complex.atan(scalar) && Eigen.Complex.atan(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(Infinity, 0)
-  , c2 = Complex.atan(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(Infinity, 0)
+  , c2 = C.atan(c1);
 console.log(c2.toString());
 ```
 
@@ -449,9 +449,9 @@ console.log(c2.toString());
 ### Eigen.Complex.atanh(scalar) && Eigen.Complex.atanh(comp)
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
-  , c2 = Complex.atanh(c1);
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
+  , c2 = C.atanh(c1);
 console.log(c2.toString());
 ```
 
@@ -462,8 +462,8 @@ console.log(c2.toString());
 ### Eigen.Complex.equals()
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1, 0)
+var C = require('eigenjs').Complex
+  , c1 = new C(1, 0)
   , c2 = c1.conj();
 console.log(c1.equals(c2));
 ```
@@ -474,9 +474,9 @@ true
 ### Eigen.Complex.isApprox(comp [, prec = 1e-12])
 
 ```js
-var Complex = require('eigenjs').Complex
-  , c1 = new Complex(1/3, 0)
-  , c2 = new Complex(0.3333, 0);
+var C = require('eigenjs').Complex
+  , c1 = new C(1/3, 0)
+  , c2 = new C(0.3333, 0);
 console.log(c1.isApprox(c2, 1e-3));
 ```
 
@@ -489,8 +489,8 @@ true
 ### Eigen.Matrix(rows, cols)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 3);
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 3);
 console.log('mat =\n%s', mat);
 ```
 
@@ -503,8 +503,8 @@ mat =
 ### Eigen.Matrix.rows() & Eigen.Matrix.cols()
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 3);
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 3);
 console.log(mat.rows());
 console.log(mat.cols());
 ```
@@ -517,8 +517,8 @@ console.log(mat.cols());
 ### Eigen.Matrix.set(row, col, value)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 2);
 mat.set(0, 0, 1)
    .set(0, 1, 2)
    .set(1, 0, 3)
@@ -535,8 +535,8 @@ mat =
 ### Eigen.Matrix.set(value_array)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(3, 3);
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3);
 mat.set([
   1, 2, 3,
   4, 5, 6,
@@ -555,8 +555,8 @@ mat =
 ### Eigen.Matrix.get(row, col)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 2);
 mat.set([
   1, 2,
   3, 4
@@ -570,12 +570,12 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 3 4
 ```
 
-### Eigen.Matrix.add(mat)
+### Eigen.Matrix.add(mat) && Eigen.Matrix.add(cmat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2)
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2)
   , mat3;
 mat1.set([
   1, 3,
@@ -598,9 +598,9 @@ mat3 =
 ### Eigen.Matrix.adda(mat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2);
 mat1.set([
   1, 3,
   2, 4,
@@ -619,12 +619,12 @@ mat1 =
  9 12
 ```
 
-### Eigen.Matrix.sub(mat)
+### Eigen.Matrix.sub(mat) && Eigen.Matrix.sub(cmat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2)
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2)
   , mat3;
 mat1.set([
   1, 3,
@@ -647,9 +647,9 @@ mat3 =
 ### Eigen.Matrix.suba(mat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2);
 mat1.set([
   1, 3,
   2, 4,
@@ -668,23 +668,23 @@ mat1 =
 -5 -4
 ```
 
-### Eigen.Matrix.mul(mat)
+### Eigen.Matrix.mul(scalar) && Eigen.Matrix.mul(comp) && Eigen.Matrix.mul(mat) && Eigen.Matrix.mul(cmat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 3)
-  , vector = new Matrix(3, 1)
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 3)
+  , vec = new M(3, 1)
   , mat2;
 mat1.set([
   1, 2, 3,
   4, 5, 6
 ]);
-vector.set([
+vec.set([
   1,
   6,
   8
 ]);
-mat2 = mat1.mul(vector);
+mat2 = mat1.mul(vec);
 console.log("mat2 = \n%s", mat2);
 ```
 
@@ -694,75 +694,36 @@ mat2 =
 82
 ```
 
-### Eigen.Matrix.mul(scalar)
+### Eigen.Matrix.mula(scalar) && Eigen.Matrix.mula(mat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 3)
-  , mat2;
-mat1.set([
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 3)
+  , vec = new M(3, 1);
+mat.set([
   1, 2, 3,
   4, 5, 6
 ]);
-mat2 = mat1.mul(2);
-console.log("mat2 = \n%s", mat2);
-```
-
-```txt
-mat2 =
- 2  4  6
- 8 10 12
-```
-
-### Eigen.Matrix.mula(mat)
-
-```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 3)
-  , vector = new Matrix(3, 1);
-mat1.set([
-  1, 2, 3,
-  4, 5, 6
-]);
-vector.set([
+vec.set([
   1,
   6,
   8
 ]);
-mat1.mula(vector);
-console.log("mat1 = \n%s", mat1);
+mat.mula(vec);
+console.log("mat = \n%s", mat);
 ```
 
 ```txt
-mat1 =
+mat =
 37
 82
 ```
 
-### Eigen.Matrix.mula(scalar)
+### Eigen.Matrix.div(scalar) && Eigen.Matrix.div(comp)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 3);
-mat1.set([
-  1, 2, 3,
-  4, 5, 6
-]);
-mat1.mula(2);
-console.log("mat1 = \n%s", mat1);
-```
-
-```txt
-mat1 =
- 2  4  6
- 8 10 12
-```
-
-### Eigen.Matrix.div(scalar)
-
-```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
   , mat2;
 mat1.set([
   1, 2,
@@ -781,18 +742,18 @@ mat2 =
 ### Eigen.Matrix.diva(scalar)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2);
-mat1.set([
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 2);
+mat.set([
   1, 2,
   3, 4
 ]);
-mat1.diva(2);
-console.log("mat1 = \n%s", mat1);
+mat.diva(2);
+console.log("mat = \n%s", mat);
 ```
 
 ```txt
-mat1 =
+mat =
 0.5   1
 1.5   2
 ```
@@ -800,10 +761,10 @@ mat1 =
 ### Eigen.Matrix.equals(mat)
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2)
-  , mat3 = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2)
+  , mat3 = new M(2, 2);
 mat1.set([
   1, 2,
   3, 4
@@ -826,9 +787,9 @@ true
 ### Eigen.Matrix.isApprox(mat [, prec = 1e-12])
 
 ```js
-var Matrix = require('eigenjs').Matrix
-  , mat1 = new Matrix(2, 2)
-  , mat2 = new Matrix(2, 2);
+var M = require('eigenjs').Matrix
+  , mat1 = new M(2, 2)
+  , mat2 = new M(2, 2);
 mat1.set([
   1, 3,
   5, 7
@@ -838,6 +799,351 @@ mat2.set([
   0.455, 0.636
 ]);
 console.log(mat1.isApprox(mat2, 1e-3));
+```
+
+```txt
+true
+```
+
+## Complex Matrix methods
+
+### Eigen.CMatrix(rows, cols)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 3);
+console.log('cmat =\n%s', cmat);
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+```
+
+### Eigen.CMatrix.rows() & Eigen.CMatrix.cols()
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 3);
+console.log(cmat.rows());
+console.log(cmat.cols());
+```
+
+```txt
+2
+3
+```
+
+### Eigen.CMatrix.set(row, col, value)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 2);
+cmat.set(0, 0, C(1, 1))
+    .set(0, 1, C(2, 2))
+    .set(1, 0, C(3, 3))
+    .set(1, 1, C(4, 4));
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(1,1) (2,2)
+(3,3) (4,4)
+```
+
+### Eigen.CMatrix.set(value_array)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(3, 3);
+cmat.set([
+  C(1,1), C(2,2), C(3,3),
+  C(4,4), C(5,5), C(6,6),
+  C(7,7), C(8,8), C(9,9)
+]);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(1,1) (2,2) (3,3)
+(4,4) (5,5) (6,6)
+(7,7) (8,8) (9,9)
+```
+
+### Eigen.CMatrix.get(row, col)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 2);
+cmat.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+console.log(cmat.get(0, 0) + ' ' + cmat.get(0, 1));
+console.log(cmat.get(1, 0) + ' ' + cmat.get(1, 1));
+```
+
+```txt
+(1,1) (2,2)
+(3,3) (4,4)
+```
+
+### Eigen.CMatrix.add(mat) && Eigen.CMatrix.add(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2)
+  , cmat3;
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2.set([
+    5   ,   6   ,
+  C(7,7), C(8,8)
+]);
+cmat3 = cmat1.add(cmat2);
+console.log("cmat3 = \n%s", cmat3);
+```
+
+```txt
+cmat3 =
+  (6,1)   (8,2)
+(10,10) (12,12)
+```
+
+### Eigen.CMatrix.adda(mat) && Eigen.CMatrix.adda(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2);
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2.set([
+  5, 6,
+  7, 8,
+]);
+cmat1.adda(cmat2);
+console.log("cmat1 = \n%s", cmat1);
+```
+
+```txt
+cmat1 =
+ (6,1)  (8,2)
+(10,3) (12,4)
+```
+
+### Eigen.CMatrix.sub(mat) && Eigen.CMatrix.sub(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2)
+  , cmat3;
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2.set([
+  5, 6,
+  7, 8,
+]);
+cmat3 = cmat1.sub(cmat2);
+console.log("cmat3 = \n%s", cmat3);
+```
+
+```txt
+cmat3 =
+(-4,1) (-4,2)
+(-4,3) (-4,4)
+```
+
+### Eigen.CMatrix.suba(mat) && Eigen.CMatrix.suba(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2);
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2.set([
+  5, 6,
+  7, 8,
+]);
+cmat1.suba(cmat2);
+console.log("cmat1 = \n%s", cmat1);
+```
+
+```txt
+mat1 =
+(-4,1) (-4,2)
+(-4,3) (-4,4)
+```
+
+### Eigen.CMatrix.mul(scalar) && Eigen.CMatrix.mul(comp) && Eigen.CMatrix.mul(mat) && Eigen.CMatrix.mul(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , M = Eigen.Matrix
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 3)
+  , vec = new M(3, 1)
+  , cmat2;
+cmat1.set([
+  C(1,1), C(2,2), C(3,3),
+  C(4,4), C(5,5), C(6,6)
+]);
+vec.set([
+  1,
+  2,
+  3
+]);
+cmat2 = cmat1.mul(vec);
+console.log("cmat2 = \n%s", cmat2);
+```
+
+```txt
+mat2 =
+(14,14)
+(32,32)
+```
+
+### Eigen.CMatrix.mula(scalar) && Eigen.CMatrix.mula(comp) && Eigen.CMatrix.mula(mat) && Eigen.CMatrix.mula(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 3)
+  , c = new C(1, -1);
+cmat.set([
+  C(1,1), C(2,2), C(3,3),
+  C(4,4), C(5,5), C(6,6)
+]);
+cmat.mula(c);
+console.log("cmat = \n%s", cmat);
+```
+
+```txt
+cmat =
+ (2,0)  (4,0)  (6,0)
+ (8,0) (10,0) (12,0)
+```
+
+### Eigen.CMatrix.div(scalar) && Eigen.CMatrix.div(comp)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2);
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2 = cmat1.div(C(2,0));
+console.log("cmat2 = \n%s", cmat2);
+```
+
+```txt
+cmat2 =
+(0.5,0.5)     (1,1)
+(1.5,1.5)     (2,2)
+```
+
+### Eigen.CMatrix.diva(scalar) && Eigen.CMatrix.diva(comp)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 2)
+cmat.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat.diva(2);
+console.log("cmat = \n%s", cmat);
+```
+
+```txt
+cmat =
+(0.5,0.5)     (1,1)
+(1.5,1.5)     (2,2)
+```
+
+### Eigen.CMatrix.equals(cmat)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2)
+  , cmat3 = new CM(2, 2);
+cmat1.set([
+  C(1,1), C(2,2),
+  C(3,3), C(4,4)
+]);
+cmat2.set([
+  C(1,0), C(2,0),
+  C(3,0), C(4,0)
+]);
+cmat3.set([
+  C(0,1), C(0,2),
+  C(0,3), C(0,4)
+]);
+console.log(cmat1.equals(cmat2.add(cmat3)));
+```
+
+```txt
+true
+```
+
+### Eigen.CMatrix.isApprox(cmat [, prec = 1e-12])
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat1 = new CM(2, 2)
+  , cmat2 = new CM(2, 2);
+cmat1.set([
+  C(1,1), C(3,3),
+  C(5,5), C(7,7)
+]).diva(C(11,11));
+cmat2.set([
+  C(0.091,0), C(0.273,0),
+  C(0.455,0), C(0.636,0)
+]);
+console.log(cmat1.isApprox(cmat2, 1e-3));
 ```
 
 ```txt

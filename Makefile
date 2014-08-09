@@ -3,6 +3,25 @@ CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
 SOURCES = \
+    src/CMatrix.hpp \
+    src/CMatrix/definitions.hpp \
+    src/CMatrix_fwd.hpp \
+    src/CMatrix/instance_method_add.hpp \
+    src/CMatrix/instance_method_adda.hpp \
+    src/CMatrix/instance_method_cols.hpp \
+    src/CMatrix/instance_method_div.hpp \
+    src/CMatrix/instance_method_diva.hpp \
+    src/CMatrix/instance_method_equals.hpp \
+    src/CMatrix/instance_method_get.hpp \
+    src/CMatrix/instance_method_isApprox.hpp \
+    src/CMatrix/instance_method_mul.hpp \
+    src/CMatrix/instance_method_mula.hpp \
+    src/CMatrix/instance_method_rows.hpp \
+    src/CMatrix/instance_method_set.hpp \
+    src/CMatrix/instance_method_sub.hpp \
+    src/CMatrix/instance_method_suba.hpp \
+    src/CMatrix/instance_method_toString.hpp \
+    src/CMatrix/macro.hpp \
     src/Complex.hpp \
     src/Complex/class_method_acos.hpp \
     src/Complex/class_method_acosh.hpp \
