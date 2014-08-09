@@ -1,6 +1,6 @@
 //
-// Complex/instance_method_mul.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CMatrix/instance_method_adda.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,18 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_COMPLEX_INSTANCE_METHOD_MUL_HPP
-#define EIGENJS_COMPLEX_INSTANCE_METHOD_MUL_HPP
+#ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_ADDA_HPP
+#define EIGENJS_CMATRIX_INSTANCE_METHOD_ADDA_HPP
 
 #include "macro.hpp"
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(Complex, mul,
+EIGENJS_INSTANCE_METHOD(CMatrix, adda,
 {
-  EIGENJS_COMPLEX_BINARY_OPERATOR_CONTEXT(*)
+  EIGENJS_CMATRIX_BINARY_OPERATOR_COMMUTATIVE_CONTEXT(+)
 })
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_COMPLEX_INSTANCE_METHOD_MUL_HPP
+#endif  // EIGENJS_CMATRIX_INSTANCE_METHOD_ADDA_HPP
