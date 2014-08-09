@@ -1,5 +1,8 @@
 const
-    Complex = require('../index.js').Complex,
+    Eigen = require('../index.js'),
+    Complex = Eigen.Complex,
+    Matrix = Eigen.Matrix,
+    CMatrix = Eigen.CMatrix,
     should = require('should');
 
 describe('Complex', function() {
@@ -90,6 +93,22 @@ describe('Complex', function() {
   it('#mul() should return the product of two complexes', function() {
     c.mul(5).toString().should.equal("(15,-20)");
     c.mul(c).toString().should.equal("(-7,-24)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a matrix', function() {
+    var mat = new Matrix(2, 2).set([
+      1, 2,
+      3, 4
+    ]);
+    c.mul(mat).toString().should.equal("  (3,-4)   (6,-8)\n (9,-12) (12,-16)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex matrix', function() {
+    var cmat = new CMatrix(2, 2).set([
+      Complex(1, 1), Complex(2, 2),
+      Complex(3, 3), Complex(4, 4)
+    ]);
+    c.mul(cmat).toString().should.equal(" (7,-1) (14,-2)\n(21,-3) (28,-4)");
   });
 
   it('#mula() should return the product of two complexes and saves it back', function() {
