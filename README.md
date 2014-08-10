@@ -1167,3 +1167,21 @@ console.log(cmat1.isApprox(cmat2, 1e-3));
 ```txt
 true
 ```
+
+### Eigen.CMatrix.Identity(n) && Eigen.CMatrix.Identity(rows, cols)
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat1 = CM.Identity(2)
+  , cmat2 = CM.Identity(2, 3);
+console.log('cmat1 = \n%s', cmat1);
+console.log('cmat2 = \n%s', cmat2);
+```
+
+```txt
+cmat1 =
+(1,0) (0,0)
+(0,0) (1,0)
+cmat2 =
+(1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0)
+```
