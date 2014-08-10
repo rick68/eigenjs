@@ -12,13 +12,153 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
 
-## Getting started
+## Getting Started
 
 ```bash
 $ npm install eigenjs
 ```
 
-## Complex methods
+## API
+
+* [Complex Methods](#Complex-Methods)
+  * [Class Methods](#)
+    * [Complex(real, imag)](#)
+    * [Complex.polar(scalar, scalar)](#)
+    * [Complex.cos(scalar)](#)
+    * [Complex.cos(comp)](#)
+    * [Complex.cosh(scalar)](#)
+    * [Complex.cosh(comp)](#)
+    * [Complex.exp(scalar)](#)
+    * [Complex.exp(comp)](#)
+    * [Complex.log(scalar)](#)
+    * [Complex.log(comp)](#)
+    * [Complex.log10(scalar)](#)
+    * [Complex.log10(comp)](#)
+    * [Complex.pow(scalar, scalar)](#)
+    * [Complex.pow(comp, scalar)](#)
+    * [Complex.pow(scalar, comp)](#)
+    * [Complex.pow(comp, comp)](#)
+    * [Complex.sin(scalar)](#)
+    * [Complex.sin(comp)](#)
+    * [Complex.sinh(scalar)](#)
+    * [Complex.sinh(comp)](#)
+    * [Complex.sqrt(scalar)](#)
+    * [Complex.sqrt(comp)](#)
+    * [Complex.tan(scalar)](#)
+    * [Complex.tan(comp)](#)
+    * [Complex.tanh(scalar)](#)
+    * [Complex.tanh(comp)](#)
+    * [Complex.acos(scalar)](#)
+    * [Complex.acos(comp)](#)
+    * [Complex.acosh(scalar)](#)
+    * [Complex.acosh(comp)](#)
+    * [Complex.asin(scalar)](#)
+    * [Complex.asin(comp)](#)
+    * [Complex.asinh(scalar)](#)
+    * [Complex.asinh(comp)](#)
+    * [Complex.atan(scalar)](#)
+    * [Complex.atan(comp)](#)
+    * [Complex.atanh(scalar)](#)
+    * [Complex.atanh(comp)](#)
+  * [Instance Methods](#)
+    * [.abs()](#)
+    * [.arg()](#)
+    * [.norm()](#)
+    * [.conj()](#)
+    * [.proj(scalar)](#)
+    * [.proj(comp)](#)
+    * [.add(scalar)](#)
+    * [.add(comp)](#)
+    * [.adda(scalar)](#)
+    * [.adda(comp)](#)
+    * [.sub(scalar)](#)
+    * [.sub(comp)](#)
+    * [.suba(scalar)](#)
+    * [.suba(comp)](#)
+    * [.mul(scalar)](#)
+    * [.mul(comp)](#)
+    * [.mul(mat)](#)
+    * [.mul(cmat)](#)
+    * [.mula(scalar)](#)
+    * [.mula(comp)](#)
+    * [.div(scalar)](#)
+    * [.div(comp)](#)
+    * [.diva(scalar)](#)
+    * [.diva(comp)](#)
+    * [.equals(Complex)](#)
+    * [.isApprox(comp, [prec = 1e-12])](#)
+    * [.toString()](#)
+  * [Properties](#)
+    * [real](#)
+    * [imag](#)
+* [Matrix Methods](#Complex-Methods)
+  * [Class Methods](#)
+    * [Matrix(rows, cols)](#)
+    * [Matrix.Zero(rows, cols)](#)
+    * [Matrix.Identity(n)](#)
+    * [Matrix.Identity(rows, cols)](#)
+    * [Matrix.Random(rows, cols)](#)
+  * [Instance Methods](#)
+    * [.rows()](#)
+    * [.cols()](#)
+    * [.set(row, col, scalar)](#)
+    * [.set(scalar_array)](#)
+    * [.get(row, col)](#)
+    * [.add(mat)](#)
+    * [.add(cmat)](#)
+    * [.adda(mat)](#)
+    * [.sub(mat)](#)
+    * [.sub(cmat)](#)
+    * [.suba(mat)](#)
+    * [.mul(scalar)](#)
+    * [.mul(comp)](#)
+    * [.mul(mat)](#)
+    * [.mul(cmat)](#)
+    * [.mula(scalar))](#)
+    * [.mula(mat)](#)
+    * [.div(scalar))](#)
+    * [.div(comp)](#)
+    * [.diva(scalar))](#)
+    * [.equals(mat)](#)
+    * [.isApprox(mat, [prec = 1e-12])](#)
+* [Complex Matrix Methods](#Complex-Methods)
+  * [Class Methods](#)
+    * [CMatrix(rows, cols)](#)
+    * [CMatrix.Zero(rows, cols)](#)
+    * [CMatrix.Identity(n)](#)
+    * [CMatrix.Identity(rows, cols)](#)
+    * [CMatrix.Random(rows, cols)](#)
+  * [Instance Methods](#)
+    * [.rows()](#)
+    * [.cols()](#)
+    * [.set(row, col, comp)](#)
+    * [.set(comp_array)](#)
+    * [.get(row, col)](#)
+    * [.add(mat)](#)
+    * [.add(cmat)](#)
+    * [.adda(mat)](#)
+    * [.adda(cmat)](#)
+    * [.sub(mat)](#)
+    * [.sub(cmat)](#)
+    * [.suba(mat)](#)
+    * [.suba(cmat)](#)
+    * [.mul(scalar)](#)
+    * [.mul(comp)](#)
+    * [.mul(mat)](#)
+    * [.mul(cmat)](#)
+    * [.mula(scalar))](#)
+    * [.mula(comp))](#)
+    * [.mula(mat)](#)
+    * [.mula(cmat)](#)
+    * [.div(scalar))](#)
+    * [.div(comp)](#)
+    * [.diva(scalar))](#)
+    * [.diva(comp))](#)
+    * [.equals(cmat)](#)
+    * [.isApprox(cmat, [prec = 1e-12])](#)
+
+
+## Complex Methods
 
 ### Eigen.Complex(real, imag)
 
@@ -459,7 +599,7 @@ console.log(c2.toString());
 (inf,0)
 ```
 
-### Eigen.Complex.equals()
+### Eigen.Complex.equals(comp)
 
 ```js
 var C = require('eigenjs').Complex
@@ -471,7 +611,7 @@ console.log(c1.equals(c2));
 ```txt
 true
 ```
-### Eigen.Complex.isApprox(comp [, prec = 1e-12])
+### Eigen.Complex.isApprox(comp, [prec = 1e-12])
 
 ```js
 var C = require('eigenjs').Complex
@@ -484,7 +624,7 @@ console.log(c1.isApprox(c2, 1e-3));
 true
 ```
 
-## Matrix methods
+## Matrix Methods
 
 ### Eigen.Matrix(rows, cols)
 
@@ -514,7 +654,7 @@ console.log(mat.cols());
 3
 ```
 
-### Eigen.Matrix.set(row, col, value)
+### Eigen.Matrix.set(row, col, scalar)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -532,7 +672,7 @@ mat =
 3 4
 ```
 
-### Eigen.Matrix.set(value_array)
+### Eigen.Matrix.set(scalar_array)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -784,7 +924,7 @@ console.log(mat1.equals(mat2.add(mat3)));
 true
 ```
 
-### Eigen.Matrix.isApprox(mat [, prec = 1e-12])
+### Eigen.Matrix.isApprox(mat, [prec = 1e-12])
 
 ```js
 var M = require('eigenjs').Matrix
@@ -852,7 +992,7 @@ mat =
  0.260209  -0.13622  0.464891
 ```
 
-## Complex Matrix methods
+## Complex Matrix Methods
 
 ### Eigen.CMatrix(rows, cols)
 
@@ -884,7 +1024,7 @@ console.log(cmat.cols());
 3
 ```
 
-### Eigen.CMatrix.set(row, col, value)
+### Eigen.CMatrix.set(row, col, comp)
 
 ```js
 var Eigen = require('eigenjs')
@@ -904,7 +1044,7 @@ cmat =
 (3,3) (4,4)
 ```
 
-### Eigen.CMatrix.set(value_array)
+### Eigen.CMatrix.set(comp_array)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1174,7 +1314,7 @@ console.log(cmat1.equals(cmat2.add(cmat3)));
 true
 ```
 
-### Eigen.CMatrix.isApprox(cmat [, prec = 1e-12])
+### Eigen.CMatrix.isApprox(cmat, [prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
