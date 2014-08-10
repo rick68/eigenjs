@@ -367,4 +367,18 @@ describe('Matrix', function() {
      0, 0, 1, 0
     ])).should.true;
   });
+
+  it('#Zero() should return a zero matrix', function() {
+    Matrix.Zero.should.be.a.Function;
+
+    Matrix.Zero(3, 3).toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+
+    Matrix.Zero(3, 4).equals(
+      new Matrix(3, 4).set([
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0
+      ])
+    ).should.true;
+  });
 });
