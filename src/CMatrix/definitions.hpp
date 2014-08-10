@@ -37,6 +37,7 @@
 #include "instance_method_isApprox.hpp"
 
 #include "class_method_Identity.hpp"
+#include "class_method_Zero.hpp"
 
 namespace EigenJS {
 
@@ -65,6 +66,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_isApprox)
 
   (class_method_Identity)
+  (class_method_Zero)
 );
 
 }  // namespace EigenJS
