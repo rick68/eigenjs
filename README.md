@@ -838,6 +838,20 @@ mat2 =
 0 1 0
 ```
 
+### Eigen.Matrix.Random(rows, cols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Random(2, 3);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+-0.421952 -0.671276  0.547419
+ 0.260209  -0.13622  0.464891
+```
+
 ## Complex Matrix methods
 
 ### Eigen.CMatrix(rows, cols)
@@ -1213,4 +1227,18 @@ cmat1 =
 cmat2 =
 (1,0) (0,0) (0,0)
 (0,0) (1,0) (0,0)
+```
+
+### Eigen.CMatrix.Random(rows, cols)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Random(2, 3);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+   (0.827048,0.18844)  (-0.130621,0.648239)  (-0.946608,0.364096)
+(-0.895631,-0.864291)  (0.952898,-0.648834)  (-0.646252,0.440248)
 ```

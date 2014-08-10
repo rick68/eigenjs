@@ -9,6 +9,9 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
+#include <cstdlib>
+#include <ctime>
+
 #include "Complex.hpp"
 #include "Matrix.hpp"
 #include "CMatrix.hpp"
@@ -16,6 +19,9 @@
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
+  std::srand(std::time(0));
+  std::rand();
+
   Complex<>::Init(exports);
   Matrix<>::Init(exports);
   CMatrix<>::Init(exports);

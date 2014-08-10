@@ -26,14 +26,14 @@
          CLASS::is_scalar( args[0] ) &&                                      \
          CLASS::is_scalar( args[1] )                                         \
     ) {                                                                      \
-      const typename CLASS::matrix_type::Index& nbRows =                     \
+      const typename CLASS::value_type::Index& nbRows =                      \
           args[0]->Uint32Value();                                            \
-      const typename CLASS::matrix_type::Index& nbCols =                     \
+      const typename CLASS::value_type::Index& nbCols =                      \
           args[1]->Uint32Value();                                            \
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
-        NanNew< v8::Number >(nbRows)                                         \
-      , NanNew< v8::Number >(nbCols)                                         \
+        NanNew< v8::Number >( nbRows )                                       \
+      , NanNew< v8::Number >( nbCols )                                       \
       };                                                                     \
                                                                              \
       v8::Local< v8::Object > instance = CLASS::new_instance(                \
@@ -83,6 +83,45 @@
     }                                                                        \
                                                                              \
     EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_CLASS_METHOD_RANDOM_CONTEXT( CLASS )           \
+  {                                                                          \
+    const int& args_length = args.Length();                                  \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    if ( args_length == 2 &&                                                 \
+         CLASS::is_scalar( args[0] ) &&                                      \
+         CLASS::is_scalar( args[1] )                                         \
+    ) {                                                                      \
+      const typename CLASS::value_type::Index& nbRows =                      \
+          args[0]->Uint32Value();                                            \
+      const typename CLASS::value_type::Index& nbCols =                      \
+          args[1]->Uint32Value();                                            \
+                                                                             \
+      v8::Local< v8::Value > argv[] = {                                      \
+        NanNew< v8::Number >( 0 )                                            \
+      , NanNew< v8::Number >( 0 )                                            \
+      };                                                                     \
+                                                                             \
+      v8::Local< v8::Object > instance = CLASS::new_instance(                \
+        args                                                                 \
+      , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                    \
+      , argv                                                                 \
+      );                                                                     \
+                                                                             \
+      CLASS* new_obj = node::ObjectWrap::Unwrap< CLASS >( instance );        \
+      typename CLASS::value_type& new_value = **new_obj;                     \
+                                                                             \
+      new_value = CLASS::value_type::Random( nbRows, nbCols );               \
+                                                                             \
+      NanReturnValue( instance );                                            \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ROWS_AND_COLUMNS_ARGUMENTS()                 \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
