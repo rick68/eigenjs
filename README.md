@@ -20,7 +20,7 @@ $ npm install eigenjs
 
 ## API
 
-* [Complex Methods](#Complex-Methods)
+* [Complex Methods](#complex-methods)
   * [Class Methods](#)
     * [Complex(real, imag)](#)
     * [Complex.polar(scalar, scalar)](#)
