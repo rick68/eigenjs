@@ -38,6 +38,7 @@
 
 #include "class_method_Zero.hpp"
 #include "class_method_Identity.hpp"
+#include "class_method_Random.hpp"
 
 namespace EigenJS {
 
@@ -67,6 +68,7 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (class_method_Zero)
   (class_method_Identity)
+  (class_method_Random)
 );
 
 }  // namespace EigenJS
