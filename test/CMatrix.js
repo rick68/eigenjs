@@ -1,6 +1,6 @@
 const
     Eigen = require('../index.js'),
-    C = Eigen.Complex,
+    Complex = Eigen.Complex,
     Matrix = Eigen.Matrix,
     CMatrix = Eigen.CMatrix,
     should = require('should');
@@ -31,15 +31,15 @@ describe('CMatrix', function() {
 
   beforeEach(function() {
     cmat = CMatrix(3, 3)
-      .set(0, 0, C(1, 1))
-      .set(0, 1, C(2, 2))
-      .set(0, 2, C(3, 3))
-      .set(1, 0, C(4, 4))
-      .set(1, 1, C(5, 5))
-      .set(1, 2, C(6, 6))
-      .set(2, 0, C(7, 7))
-      .set(2, 1, C(8, 8))
-      .set(2, 2, C(9, 9));
+      .set(0, 0, Complex(1, 1))
+      .set(0, 1, Complex(2, 2))
+      .set(0, 2, Complex(3, 3))
+      .set(1, 0, Complex(4, 4))
+      .set(1, 1, Complex(5, 5))
+      .set(1, 2, Complex(6, 6))
+      .set(2, 0, Complex(7, 7))
+      .set(2, 1, Complex(8, 8))
+      .set(2, 2, Complex(9, 9));
   });
 
   it('#set() should throw message when row or column nubers are out of range', function() {
@@ -57,24 +57,24 @@ describe('CMatrix', function() {
     cmat.set.should.be.a.Function;
 
     CMatrix(3, 3).set([
-      C(1, 1), C(2, 2), C(3, 3),
-      C(4, 4), C(5, 5), C(6, 6),
-      C(7, 7), C(8, 8), C(9, 9)
+      Complex(1, 1), Complex(2, 2), Complex(3, 3),
+      Complex(4, 4), Complex(5, 5), Complex(6, 6),
+      Complex(7, 7), Complex(8, 8), Complex(9, 9)
     ]).toString().should.eql(cmat.toString());
 
     (function() {
       CMatrix(3, 3).set([
-      C(1, 1), C(2, 2), C(3, 3),
-      C(4, 4), C(5, 5), C(6, 6)
+      Complex(1, 1), Complex(2, 2), Complex(3, 3),
+      Complex(4, 4), Complex(5, 5), Complex(6, 6)
       ]);
     }).should.throw('Too few coefficients passed to CMatrix');
 
     (function() {
       CMatrix(3, 3).set([
-      C( 1,  1), C( 2,  2), C( 3,  3),
-      C( 4,  4), C( 5,  5), C( 6,  6),
-      C( 7,  7), C( 8,  8), C( 9,  9),
-      C(10, 10), C(11, 11), C(12, 12)
+      Complex( 1,  1), Complex( 2,  2), Complex( 3,  3),
+      Complex( 4,  4), Complex( 5,  5), Complex( 6,  6),
+      Complex( 7,  7), Complex( 8,  8), Complex( 9,  9),
+      Complex(10, 10), Complex(11, 11), Complex(12, 12)
       ]);
     }).should.throw('Too many coefficients passed to CMatrix');
   });
@@ -85,24 +85,24 @@ describe('CMatrix', function() {
     cmat.equals(cmat).should.ok;
     cmat.equals(new CMatrix(3, 3)
     .set([
-      C(1, 1), C(2, 2), C(3, 3),
-      C(4, 4), C(5, 5), C(6, 6),
-      C(7, 7), C(8, 8), C(9, 9)
+      Complex(1, 1), Complex(2, 2), Complex(3, 3),
+      Complex(4, 4), Complex(5, 5), Complex(6, 6),
+      Complex(7, 7), Complex(8, 8), Complex(9, 9)
     ])).should.ok;
   });
 
   it('#get() should return the element value of CMatrix', function() {
     cmat.get.should.be.a.Function;
 
-    cmat.get(0, 0).equals(C(1, 1)).should.ok;
-    cmat.get(0, 1).equals(C(2, 2)).should.ok;
-    cmat.get(0, 2).equals(C(3, 3)).should.ok;
-    cmat.get(1, 0).equals(C(4, 4)).should.ok;
-    cmat.get(1, 1).equals(C(5, 5)).should.ok;
-    cmat.get(1, 2).equals(C(6, 6)).should.ok;
-    cmat.get(2, 0).equals(C(7, 7)).should.ok;
-    cmat.get(2, 1).equals(C(8, 8)).should.ok;
-    cmat.get(2, 2).equals(C(9, 9)).should.ok;
+    cmat.get(0, 0).equals(Complex(1, 1)).should.ok;
+    cmat.get(0, 1).equals(Complex(2, 2)).should.ok;
+    cmat.get(0, 2).equals(Complex(3, 3)).should.ok;
+    cmat.get(1, 0).equals(Complex(4, 4)).should.ok;
+    cmat.get(1, 1).equals(Complex(5, 5)).should.ok;
+    cmat.get(1, 2).equals(Complex(6, 6)).should.ok;
+    cmat.get(2, 0).equals(Complex(7, 7)).should.ok;
+    cmat.get(2, 1).equals(Complex(8, 8)).should.ok;
+    cmat.get(2, 2).equals(Complex(9, 9)).should.ok;
     (function(){
       cmat.get(3, 0);
     }).should.throw('Row or column numbers are out of range');
@@ -159,9 +159,9 @@ describe('CMatrix', function() {
     cmat.adda(
       CMatrix(3, 3)
       .set([
-        C( 2, 0), C( 4, 0), C( 6, 0),
-        C( 8, 0), C( 9, 0), C(10, 0),
-        C(11, 0), C(12, 0), C(13, 0)
+        Complex( 2, 0), Complex( 4, 0), Complex( 6, 0),
+        Complex( 8, 0), Complex( 9, 0), Complex(10, 0),
+        Complex(11, 0), Complex(12, 0), Complex(13, 0)
       ])
     );
     cmat.toString().should.equal(" (3,1)  (6,2)  (9,3)\n(12,4) (14,5) (16,6)\n(18,7) (20,8) (22,9)");
@@ -284,7 +284,7 @@ describe('CMatrix', function() {
   it('#mul() should return the product of two complex matrices', function() {
     cmat.mul.should.be.a.Function;
 
-    var cvector = new CMatrix(3, 1).set([C(1, 1), C(2, 2), C(3, 3)]);
+    var cvector = new CMatrix(3, 1).set([Complex(1, 1), Complex(2, 2), Complex(3, 3)]);
     cmat.mul(cvector).toString().should.equal(" (0,28)\n (0,64)\n(0,100)");
 
     (function() {
@@ -312,7 +312,7 @@ describe('CMatrix', function() {
   it('#mul() should return the product of a complex matrix and a complex value', function() {
     cmat.mul.should.be.a.Function;
 
-    cmat.mul(C(-1, -1)).toString().should.equal(" (0,-2)  (0,-4)  (0,-6)\n (0,-8) (0,-10) (0,-12)\n(0,-14) (0,-16) (0,-18)");
+    cmat.mul(Complex(-1, -1)).toString().should.equal(" (0,-2)  (0,-4)  (0,-6)\n (0,-8) (0,-10) (0,-12)\n(0,-14) (0,-16) (0,-18)");
   });
 
   it('#mula() should return the product of two complex matrices and saves it back', function() {
@@ -345,7 +345,7 @@ describe('CMatrix', function() {
   it('#mula() should return the product of a complex matrix and a complex value then saves it back', function() {
     cmat.mula.should.be.a.Function;
 
-    cmat.mula(C(-1, 0));
+    cmat.mula(Complex(-1, 0));
     cmat.toString().should.equal("(-1,-1) (-2,-2) (-3,-3)\n(-4,-4) (-5,-5) (-6,-6)\n(-7,-7) (-8,-8) (-9,-9)");
   });
 
@@ -363,9 +363,9 @@ describe('CMatrix', function() {
     cmat2.equals(
       new CMatrix(3, 3)
       .set([
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN)
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN)
       ])
     ).should.false;
     (NaN !== NaN).should.true;
@@ -376,7 +376,7 @@ describe('CMatrix', function() {
   it('#div() should return a CMatrix which be divied by a complex value', function() {
     cmat.div.should.be.a.Function;
 
-    var cmat2 = cmat.div(C(0, 0));
+    var cmat2 = cmat.div(Complex(0, 0));
 
     for (var i = 0; i < cmat.rows(); ++i) {
       for (var j = 0; j < cmat.cols(); ++j) {
@@ -387,20 +387,20 @@ describe('CMatrix', function() {
     cmat2.equals(
       new CMatrix(3, 3)
       .set([
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN)
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN)
       ])
     ).should.false;
     (NaN !== NaN).should.true;
     
-    cmat.div(C(2, 0)).toString().should.equal("(0.5,0.5)     (1,1) (1.5,1.5)\n    (2,2) (2.5,2.5)     (3,3)\n(3.5,3.5)     (4,4) (4.5,4.5)");
+    cmat.div(Complex(2, 0)).toString().should.equal("(0.5,0.5)     (1,1) (1.5,1.5)\n    (2,2) (2.5,2.5)     (3,3)\n(3.5,3.5)     (4,4) (4.5,4.5)");
   });
 
   it('#diva() should return a CMatrix which be divied by a scalar value and saves it back', function() {
     cmat.diva.should.be.a.Function;
 
-    cmat.diva(C(2, 0));
+    cmat.diva(Complex(2, 0));
     cmat.toString().should.equal("(0.5,0.5)     (1,1) (1.5,1.5)\n    (2,2) (2.5,2.5)     (3,3)\n(3.5,3.5)     (4,4) (4.5,4.5)");
 
     cmat.diva(0);
@@ -413,9 +413,9 @@ describe('CMatrix', function() {
     cmat.equals(
       new CMatrix(3, 3)
       .set([
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN), 
-        C(NaN, NaN), C(NaN, NaN), C(NaN, NaN)
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN), 
+        Complex(NaN, NaN), Complex(NaN, NaN), Complex(NaN, NaN)
       ])
     ).should.false;
     (NaN !== NaN).should.true;
@@ -425,11 +425,31 @@ describe('CMatrix', function() {
     cmat.isApprox.should.be.a.Function;
 
     var cmat2 = new CMatrix(3, 3).set([
-      C(0.111, 0.111), C(0.222, 0.222), C(0.333, 0.333),
-      C(0.444, 0.444), C(0.555, 0.555), C(0.666, 0.666),
-      C(0.777, 0.777), C(0.888, 0.888), C(0.999, 0.999)
+      Complex(0.111, 0.111), Complex(0.222, 0.222), Complex(0.333, 0.333),
+      Complex(0.444, 0.444), Complex(0.555, 0.555), Complex(0.666, 0.666),
+      Complex(0.777, 0.777), Complex(0.888, 0.888), Complex(0.999, 0.999)
     ]);
     cmat.div(9).isApprox(cmat2, 1e-3).should.false;
     cmat.div(9).isApprox(cmat2, 1e-2).should.true;
+  });
+
+  it('#Identity() should return a identity complex matrix', function() {
+    CMatrix.Identity.should.be.a.Function;
+
+    CMatrix.Identity(0).toString().should.equal("");
+
+    cmat = CMatrix.Identity(3);
+    cmat.equals(new CMatrix(3, 3).set([
+     Complex(1, 0), Complex(0, 0), Complex(0, 0),
+     Complex(0, 0), Complex(1, 0), Complex(0, 0),
+     Complex(0, 0), Complex(0, 0), Complex(1, 0)
+    ])).should.true;
+
+    cmat = CMatrix.Identity(3, 4);
+    cmat.equals(new CMatrix(3, 4).set([
+     Complex(1, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
+     Complex(0, 0), Complex(1, 0), Complex(0, 0), Complex(0, 0),
+     Complex(0, 0), Complex(0, 0), Complex(1, 0), Complex(0, 0)
+    ])).should.true;
   });
 });
