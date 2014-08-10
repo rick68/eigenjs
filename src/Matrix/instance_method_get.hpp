@@ -27,13 +27,15 @@ EIGENJS_INSTANCE_METHOD(Matrix, get,
     const typename Matrix::matrix_type::Index& row = args[0]->Uint32Value();
     const typename Matrix::matrix_type::Index& col = args[1]->Uint32Value();
 
-    if (Matrix::is_out_of_range(matrix, row, col))
+    if (Matrix::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();
+    }
 
-    const typename Matrix::element_type& value = matrix(row, col);
+    const typename Matrix::scalar_type& value = matrix(row, col);
     NanReturnValue(NanNew(value));
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

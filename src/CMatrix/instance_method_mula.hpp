@@ -64,6 +64,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
     }
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

@@ -18,6 +18,9 @@
 
 #include <boost/preprocessor/cat.hpp>
 
+#include "../common_macro.hpp"
+#include "../throw_error.hpp"
+
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                         \
   {                                                                          \
     typedef typename Matrix::CMatrix CMatrix;                                \
@@ -83,6 +86,7 @@
       }                                                                      \
     }                                                                        \
                                                                              \
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -109,6 +113,7 @@
       }                                                                      \
     }                                                                        \
                                                                              \
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/

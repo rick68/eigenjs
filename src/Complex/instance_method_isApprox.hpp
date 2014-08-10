@@ -19,8 +19,10 @@ EIGENJS_INSTANCE_METHOD(Complex, isApprox,
   const int& args_length = args.Length();
   NanScope();
 
-  if (args_length == 0 || args_length > 2 || !Complex::is_complex(args[0]))
+  if (args_length == 0 || args_length > 2 || !Complex::is_complex(args[0])) {
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
     NanReturnUndefined();
+  }
 
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
   const typename Complex::complex_type& complex = **obj;

@@ -81,6 +81,7 @@ EIGENJS_INSTANCE_METHOD(Complex, mul,
       new (&c) typename Complex::complex_type
         (args[0]->NumberValue(), 0);
     } else if (true) {
+      EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
       NanReturnUndefined();
     }
 
@@ -100,6 +101,7 @@ EIGENJS_INSTANCE_METHOD(Complex, mul,
     );
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

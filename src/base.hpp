@@ -32,24 +32,26 @@
 namespace EigenJS {
 
 template <
-  template <typename, const char*> class Derived
+  template <typename, typename, const char*> class Derived
+, typename ScalarType
 , typename ValueType
 , const char* ClassName
 >
 struct base : node::ObjectWrap {
-  typedef ValueType element_type;
+  typedef Derived<ScalarType, ValueType, ClassName> derived_type;
 
-  typedef std::complex<element_type> complex_type;
+  typedef ScalarType scalar_type;
+  typedef ValueType value_type;
+
+  typedef std::complex<scalar_type> complex_type;
   typedef Eigen::Matrix<
-      element_type, Eigen::Dynamic, Eigen::Dynamic> matrix_type;
+      scalar_type, Eigen::Dynamic, Eigen::Dynamic> matrix_type;
   typedef Eigen::Matrix<
       complex_type, Eigen::Dynamic, Eigen::Dynamic> cmatrix_type;
 
-  typedef ::EigenJS::Complex<element_type> Complex;
-  typedef ::EigenJS::Matrix<element_type> Matrix;
-  typedef ::EigenJS::CMatrix<element_type> CMatrix;
-
-  typedef Derived<ValueType, ClassName> derived_type;
+  typedef ::EigenJS::Complex<scalar_type> Complex;
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
 
   static NAN_INLINE bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
@@ -136,25 +138,49 @@ struct base : node::ObjectWrap {
       : false;
   }
 
+ public:
+  NAN_INLINE value_type& operator*() {
+    return value_;
+  }
+
+  NAN_INLINE const value_type& operator*() const {
+    return value_;
+  }
+
+  NAN_INLINE value_type* operator->() {
+    return &value_;
+  }
+
+  NAN_INLINE const value_type* operator->() const {
+    return &value_;
+  }
+
  protected:
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
+
+ private:
+  friend derived_type;
+  value_type value_;
 };
 
 template<
-  template <typename, const char*> class Derived
+  template <typename, typename, const char*> class Derived
+, typename ScalarType
 , typename ValueType
 , const char* ClassName
 >
 v8::Persistent<v8::FunctionTemplate>
-    base<Derived, ValueType, ClassName>::function_template;
+    base<Derived, ScalarType, ValueType, ClassName>::function_template;
 
 template<
-  template <typename, const char*> class Derived
+  template <typename, typename, const char*> class Derived
+, typename ScalarType
 , typename ValueType
 , const char* ClassName
 >
-v8::Persistent<v8::Function> base<Derived, ValueType, ClassName>::constructor;
+v8::Persistent<v8::Function>
+    base<Derived, ScalarType, ValueType, ClassName>::constructor;
 
 }  // namespace EigenJS
 

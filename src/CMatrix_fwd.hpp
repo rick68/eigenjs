@@ -14,12 +14,21 @@
 
 #include <boost/config.hpp>
 
+#include <eigen3/Eigen/Dense>
+
+#include <complex>
+
 namespace EigenJS {
 
 BOOST_CONSTEXPR char cmatrix_class_name[] = "CMatrix";
 
 template <
-  typename ValueType = double
+  typename ScalarType = double
+, typename ValueType = Eigen::Matrix<
+    std::complex<ScalarType>
+  , Eigen::Dynamic
+  , Eigen::Dynamic
+  >
 , const char* ClassName = cmatrix_class_name
 > class CMatrix;
 

@@ -118,9 +118,9 @@ describe('CMatrix', function() {
     cmat.add.should.be.a.Function;
 
     CMatrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]).add(cmat).toString().should.equal(" (3,1)  (6,2)  (9,3)\n(12,4) (14,5) (16,6)\n(18,7) (20,8) (22,9)");
 
     (function() {
@@ -136,9 +136,9 @@ describe('CMatrix', function() {
     cmat.add.should.be.a.Function;
 
     var mat = Matrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]);
 
     cmat.add(mat).toString().should.equal(" (3,1)  (6,2)  (9,3)\n(12,4) (14,5) (16,6)\n(18,7) (20,8) (22,9)");
@@ -181,17 +181,17 @@ describe('CMatrix', function() {
     cmat.adda.should.be.a.Function;
 
     var mat = Matrix(3, 3).set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]);
     cmat.adda(mat).toString().should.equal(" (2,1)  (5,2)  (8,3)\n(11,4) (14,5) (17,6)\n(20,7) (23,8) (26,9)");
 
     (function() {
       cmat.adda(
         CMatrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
+          1, 0, 0,
+          0, 1, 0
         ])
       );
     }).should.throw("Nonconformant arguments");
@@ -201,9 +201,9 @@ describe('CMatrix', function() {
     cmat.sub.should.be.a.Function;
 
     CMatrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]).sub(cmat).toString().should.equal("(1,-1) (2,-2) (3,-3)\n(4,-4) (4,-5) (4,-6)\n(4,-7) (4,-8) (4,-9)");
 
     (function() {
@@ -219,9 +219,9 @@ describe('CMatrix', function() {
     cmat.sub.should.be.a.Function;
 
     var mat = Matrix(3, 3).set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]);
     cmat.sub(mat).toString().should.equal(" (0,1) (-1,2) (-2,3)\n(-3,4) (-4,5) (-5,6)\n(-6,7) (-7,8) (-8,9)");
 
@@ -240,9 +240,9 @@ describe('CMatrix', function() {
 
     var cmat2 = CMatrix(3, 3)
     .set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]);
     cmat.suba(cmat2);
     cmat.toString().should.equal(" (0,1) (-1,2) (-2,3)\n(-3,4) (-4,5) (-5,6)\n(-6,7) (-7,8) (-8,9)");
@@ -263,9 +263,9 @@ describe('CMatrix', function() {
 
     var mat = Matrix(3, 3)
     .set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]);
     cmat.suba(mat);
     cmat.toString().should.equal(" (0,1) (-1,2) (-2,3)\n(-3,4) (-4,5) (-5,6)\n(-6,7) (-7,8) (-8,9)");
@@ -433,6 +433,20 @@ describe('CMatrix', function() {
     cmat.div(9).isApprox(cmat2, 1e-2).should.true;
   });
 
+  it('#Zero() should return a zero complex matrix', function() {
+    CMatrix.Zero.should.be.a.Function;
+
+    CMatrix.Zero(3, 3).toString().should.equal("(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)");
+
+    CMatrix.Zero(3, 4).equals(
+      new CMatrix(3, 4).set([
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0)
+      ])
+    ).should.true;
+  });
+
   it('#Identity() should return a identity complex matrix', function() {
     CMatrix.Identity.should.be.a.Function;
 
@@ -451,19 +465,5 @@ describe('CMatrix', function() {
      Complex(0, 0), Complex(1, 0), Complex(0, 0), Complex(0, 0),
      Complex(0, 0), Complex(0, 0), Complex(1, 0), Complex(0, 0)
     ])).should.true;
-  });
-
-  it('#Zero() should return a zero complex matrix', function() {
-    CMatrix.Zero.should.be.a.Function;
-
-    CMatrix.Zero(3, 3).toString().should.equal("(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)");
-
-    CMatrix.Zero(3, 4).equals(
-      new CMatrix(3, 4).set([
-        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
-        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
-        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0)
-      ])
-    ).should.true;
   });
 });

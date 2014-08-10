@@ -39,16 +39,16 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     } else if (arg0_is_complex && arg1_is_scalar) {
       const Complex* obj0 =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-      const typename Complex::element_type& scalar1 = args[1]->NumberValue();
+      const typename Complex::scalar_type& scalar1 = args[1]->NumberValue();
       c = std::pow(**obj0, scalar1);
     } else if (arg0_is_scalar && arg1_is_complex) {
-      const typename Complex::element_type& scalar0 = args[0]->NumberValue();
+      const typename Complex::scalar_type& scalar0 = args[0]->NumberValue();
       const Complex* obj1 =
         node::ObjectWrap::Unwrap<Complex>(args[1]->ToObject());
       c = std::pow(scalar0, **obj1);
     } else if (arg0_is_scalar && arg1_is_scalar) {
-      const typename Complex::element_type& scalar0 = args[0]->NumberValue();
-      const typename Complex::element_type& scalar1 = args[1]->NumberValue();
+      const typename Complex::scalar_type& scalar0 = args[0]->NumberValue();
+      const typename Complex::scalar_type& scalar1 = args[1]->NumberValue();
       c = std::pow(scalar0, scalar1);
     }
 
@@ -66,6 +66,7 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     );
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 
