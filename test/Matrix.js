@@ -391,4 +391,12 @@ describe('Matrix', function() {
       0, 0, 1, 0
     ])).should.true;
   });
+
+  it('#Random() should return a matrix with random values', function() {
+    Matrix.Random.should.be.a.Function;
+
+    (function() {
+      Matrix.Random(3);
+    }).should.throw("Invalid rows or columns arguments");
+  });
 });

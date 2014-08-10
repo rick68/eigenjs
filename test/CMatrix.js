@@ -466,4 +466,14 @@ describe('CMatrix', function() {
      Complex(0, 0), Complex(0, 0), Complex(1, 0), Complex(0, 0)
     ])).should.true;
   });
+
+  it('#Random() should return a complex matrix with random complex values', function() {
+    CMatrix.Random.should.be.a.Function;
+
+    console.log(CMatrix.Random(3, 3).toString());
+
+    (function() {
+      CMatrix.Random(3);
+    }).should.throw("Invalid rows or columns arguments");
+  });
 });
