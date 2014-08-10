@@ -24,8 +24,8 @@ EIGENJS_CLASS_METHOD(Complex, polar,
       Complex::is_scalar(args[0]) &&
       Complex::is_scalar(args[1])
   ) {
-    const typename Complex::element_type& rho = args[0]->NumberValue();
-    const typename Complex::element_type& theta = args[1]->NumberValue();
+    const typename Complex::scalar_type& rho = args[0]->NumberValue();
+    const typename Complex::scalar_type& theta = args[1]->NumberValue();
 
     v8::Local<v8::Value> argv[] = {
       NanNew<v8::Number>(rho)
@@ -41,6 +41,7 @@ EIGENJS_CLASS_METHOD(Complex, polar,
     );
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

@@ -20,8 +20,10 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
 
   NanScope();
 
-  if (args_length == 0 || args_length > 2 || !Matrix::is_matrix(args[0]))
+  if (args_length == 0 || args_length > 2 || !Matrix::is_matrix(args[0])) {
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
     NanReturnUndefined();
+  }
 
   const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
   const typename Matrix::matrix_type& matrix = **obj;

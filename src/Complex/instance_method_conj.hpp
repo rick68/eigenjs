@@ -19,8 +19,8 @@ EIGENJS_INSTANCE_METHOD(Complex, conj,
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
   const typename Complex::complex_type& complex = **obj;
   const typename Complex::complex_type& c = std::conj(complex);
-  const typename Complex::element_type& real = c.real();
-  const typename Complex::element_type& imag = c.imag();
+  const typename Complex::scalar_type& real = c.real();
+  const typename Complex::scalar_type& imag = c.imag();
 
   v8::Local<v8::Value> argv[] = {
     NanNew<v8::Number>(real)

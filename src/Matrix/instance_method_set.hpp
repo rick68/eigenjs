@@ -46,12 +46,15 @@ EIGENJS_INSTANCE_METHOD(Matrix, set,
   ) {
     const typename Matrix::matrix_type::Index& row = args[0]->Uint32Value();
     const typename Matrix::matrix_type::Index& col = args[1]->Uint32Value();
-    const typename Matrix::element_type& value = args[2]->NumberValue();
+    const typename Matrix::scalar_type& value = args[2]->NumberValue();
 
     if (Matrix::is_out_of_range(matrix, row, col))
       NanReturnUndefined();
 
     matrix(row, col) = value;
+  } else if (true) {
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+    NanReturnUndefined();
   }
 
   NanReturnValue(args.This());

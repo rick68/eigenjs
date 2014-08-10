@@ -29,6 +29,7 @@ EIGENJS_INSTANCE_METHOD(Complex, equals,
     NanReturnValue(NanNew<v8::Boolean>(complex == rhs_complex));
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

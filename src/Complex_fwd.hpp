@@ -14,12 +14,15 @@
 
 #include <boost/config.hpp>
 
+#include <complex>
+
 namespace EigenJS {
 
 BOOST_CONSTEXPR char complex_class_name[] = "Complex";
 
 template <
-  typename ValueType = double
+  typename ScalarType = double
+, typename ValueType = std::complex<ScalarType>
 , const char* ClassName = complex_class_name
 > class Complex;
 
