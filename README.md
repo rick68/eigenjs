@@ -160,7 +160,7 @@ console.log(c1.toString());
 ```js
 var C = require('eigenjs').Complex
   , c1 = new C(3, 4)
-  , c2 = new C(2, -3)
+  , c2 = new Cx(2, -3)
   , c3 = c1.sub(c2);
 console.log(c3.toString());
 ```
@@ -821,6 +821,20 @@ mat1 =
 mat2 =
 1 0 0
 0 1 0
+```
+
+### Eigen.Matrix.Zero(rows, cols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Zero(2, 3);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
 ```
 
 ## Complex Matrix methods
