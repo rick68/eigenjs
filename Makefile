@@ -4,6 +4,7 @@ PYTHON ?= python
 
 SOURCES = \
     src/CMatrix.hpp \
+    src/CMatrix/class_method_Identity.hpp \
     src/CMatrix/definitions.hpp \
     src/CMatrix_fwd.hpp \
     src/CMatrix/instance_method_add.hpp \
