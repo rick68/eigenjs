@@ -41,8 +41,7 @@ EIGENJS_CLASS_METHOD(Matrix, Identity,
     Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
     typename Matrix::matrix_type& new_matrix = **new_obj;
 
-    new_matrix =
-        Matrix::matrix_type::Identity(nbRows, nbCols);
+    new_matrix = Matrix::matrix_type::Identity(nbRows, nbCols);
 
     NanReturnValue(instance);
   }
