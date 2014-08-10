@@ -805,6 +805,24 @@ console.log(mat1.isApprox(mat2, 1e-3));
 true
 ```
 
+### Eigen.Matrix.Identity(n) && Eigen.Matrix.Identity(rows, cols)
+```js
+var M = require('eigenjs').Matrix
+  , mat1 = M.Identity(2)
+  , mat2 = M.Identity(2, 3);
+console.log('mat1 = \n%s', mat1);
+console.log('mat2 = \n%s', mat2);
+```
+
+```txt
+mat1 =
+1 0
+0 1
+mat2 =
+1 0 0
+0 1 0
+```
+
 ## Complex Matrix methods
 
 ### Eigen.CMatrix(rows, cols)
