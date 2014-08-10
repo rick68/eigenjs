@@ -367,6 +367,4 @@ describe('Matrix', function() {
      0, 0, 1, 0
     ])).should.true;
   });
-
-
 });
