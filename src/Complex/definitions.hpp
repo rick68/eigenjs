@@ -14,6 +14,8 @@
 
 #include "../Complex_fwd.hpp"
 
+#include "instance_method_toString.hpp"
+
 #include "property_accessor_real.hpp"
 #include "property_accessor_imag.hpp"
 
@@ -53,8 +55,6 @@
 
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
-
-#include "instance_method_toString.hpp"
 
 namespace EigenJS {
 

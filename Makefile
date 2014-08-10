@@ -64,6 +64,7 @@ SOURCES = \
     src/Complex/property_accessor_real.hpp \
     src/EigenJS.cpp \
     src/Matrix.hpp \
+    src/Matrix/class_method_Identity.hpp \
     src/Matrix/definitions.hpp \
     src/Matrix_fwd.hpp \
     src/Matrix/instance_method_add.hpp \
