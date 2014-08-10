@@ -805,6 +805,24 @@ console.log(mat1.isApprox(mat2, 1e-3));
 true
 ```
 
+### Eigen.Matrix.Identity(n) && Eigen.Matrix.Identity(rows, cols)
+```js
+var M = require('eigenjs').Matrix
+  , mat1 = M.Identity(2)
+  , mat2 = M.Identity(2, 3);
+console.log('mat1 = \n%s', mat1);
+console.log('mat2 = \n%s', mat2);
+```
+
+```txt
+mat1 =
+1 0
+0 1
+mat2 =
+1 0 0
+0 1 0
+```
+
 ## Complex Matrix methods
 
 ### Eigen.CMatrix(rows, cols)
@@ -1148,4 +1166,22 @@ console.log(cmat1.isApprox(cmat2, 1e-3));
 
 ```txt
 true
+```
+
+### Eigen.CMatrix.Identity(n) && Eigen.CMatrix.Identity(rows, cols)
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat1 = CM.Identity(2)
+  , cmat2 = CM.Identity(2, 3);
+console.log('cmat1 = \n%s', cmat1);
+console.log('cmat2 = \n%s', cmat2);
+```
+
+```txt
+cmat1 =
+(1,0) (0,0)
+(0,0) (1,0)
+cmat2 =
+(1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0)
 ```

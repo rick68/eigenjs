@@ -347,4 +347,24 @@ describe('Matrix', function() {
     mat.div(9).isApprox(mat2, 1e-3).should.false;
     mat.div(9).isApprox(mat2, 1e-2).should.true;
   });
+
+  it('#Identity() should return a identity matrix', function() {
+    Matrix.Identity.should.be.a.Function;
+
+    Matrix.Identity(0).toString().should.equal("");
+
+    mat = Matrix.Identity(3);
+    mat.equals(new Matrix(3, 3).set([
+     1, 0, 0,
+     0, 1, 0,
+     0, 0, 1
+    ])).should.true;
+
+    mat = Matrix.Identity(3, 4);
+    mat.equals(new Matrix(3, 4).set([
+     1, 0, 0, 0,
+     0, 1, 0, 0,
+     0, 0, 1, 0
+    ])).should.true;
+  });
 });
