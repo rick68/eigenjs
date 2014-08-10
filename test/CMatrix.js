@@ -452,4 +452,18 @@ describe('CMatrix', function() {
      Complex(0, 0), Complex(0, 0), Complex(1, 0), Complex(0, 0)
     ])).should.true;
   });
+
+  it('#Zero() should return a zero complex matrix', function() {
+    CMatrix.Zero.should.be.a.Function;
+
+    CMatrix.Zero(3, 3).toString().should.equal("(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)");
+
+    CMatrix.Zero(3, 4).equals(
+      new CMatrix(3, 4).set([
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0),
+        Complex(0, 0), Complex(0, 0), Complex(0, 0), Complex(0, 0)
+      ])
+    ).should.true;
+  });
 });
