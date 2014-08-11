@@ -823,11 +823,11 @@ var M = require('eigenjs').Matrix
   , mat3;
 mat1.set([
   1, 3,
-  2, 4,
+  2, 4
 ]);
 mat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 mat3 = mat1.add(mat2);
 console.log("mat3 = \n%s", mat3);
@@ -847,11 +847,11 @@ var M = require('eigenjs').Matrix
   , mat2 = new M(2, 2);
 mat1.set([
   1, 3,
-  2, 4,
+  2, 4
 ]);
 mat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 mat1.adda(mat2);
 console.log("mat1 = \n%s", mat1);
@@ -873,11 +873,11 @@ var M = require('eigenjs').Matrix
   , mat3;
 mat1.set([
   1, 3,
-  2, 4,
+  2, 4
 ]);
 mat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 mat3 = mat1.sub(mat2);
 console.log("mat3 = \n%s", mat3);
@@ -897,11 +897,11 @@ var M = require('eigenjs').Matrix
   , mat2 = new M(2, 2);
 mat1.set([
   1, 3,
-  2, 4,
+  2, 4
 ]);
 mat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 mat1.suba(mat2);
 console.log("mat1 = \n%s", mat1);
@@ -1259,7 +1259,7 @@ cmat1.set([
 ]);
 cmat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 cmat1.adda(cmat2);
 console.log("cmat1 = \n%s", cmat1);
@@ -1287,7 +1287,7 @@ cmat1.set([
 ]);
 cmat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 cmat3 = cmat1.sub(cmat2);
 console.log("cmat3 = \n%s", cmat3);
@@ -1314,7 +1314,7 @@ cmat1.set([
 ]);
 cmat2.set([
   5, 6,
-  7, 8,
+  7, 8
 ]);
 cmat1.suba(cmat2);
 console.log("cmat1 = \n%s", cmat1);
