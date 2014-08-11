@@ -25,12 +25,18 @@
 
 namespace EigenJS {
 
-template <typename ValueType, const char* ClassName>
-class Matrix : public base<Matrix, ValueType, ClassName> {
+template <
+  typename ScalarType
+, typename ValueType
+, const char* ClassName
+>
+class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Matrix, ValueType, ClassName> base_type;
+  typedef base<::EigenJS::Matrix, ScalarType, ValueType, ClassName> base_type;
 
-  typedef typename base_type::element_type element_type;
+  typedef ScalarType scalar_type;
+  typedef ValueType value_type;
+
   typedef typename base_type::complex_type complex_type;
   typedef typename base_type::matrix_type matrix_type;
   typedef typename base_type::cmatrix_type cmatrix_type;
@@ -54,29 +60,12 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
- public:
-  NAN_INLINE matrix_type& operator*() {
-    return matrix_;
-  }
-
-  NAN_INLINE const matrix_type& operator*() const {
-    return matrix_;
-  }
-
-  NAN_INLINE matrix_type* operator->() {
-    return &matrix_;
-  }
-
-  NAN_INLINE const matrix_type* operator->() const {
-    return &matrix_;
-  }
-
  private:
   Matrix(
     const typename matrix_type::Index& rows
   , const typename matrix_type::Index& cols
-  ) : matrix_(matrix_type::Zero(rows, cols))
-  {}
+  )
+      { base_type::value_ = value_type::Zero(rows, cols); }
 
   ~Matrix() {}
 
@@ -105,9 +94,6 @@ class Matrix : public base<Matrix, ValueType, ClassName> {
       );
     }
   }
-
- private:
-  matrix_type matrix_;
 };
 
 }  // namespace EigenJS

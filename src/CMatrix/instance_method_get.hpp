@@ -29,8 +29,9 @@ EIGENJS_INSTANCE_METHOD(CMatrix, get,
     const typename CMatrix::cmatrix_type::Index& row = args[0]->Uint32Value();
     const typename CMatrix::cmatrix_type::Index& col = args[1]->Uint32Value();
 
-    if (CMatrix::is_out_of_range(cmatrix, row, col))
+    if (CMatrix::is_out_of_range(cmatrix, row, col)) {
       NanReturnUndefined();
+    }
 
     const typename CMatrix::complex_type& c = cmatrix(row, col);
 
@@ -48,6 +49,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, get,
     );
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

@@ -20,8 +20,10 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
 
   NanScope();
 
-  if (args_length == 0 || args_length > 2 || !CMatrix::is_cmatrix(args[0]))
+  if (args_length == 0 || args_length > 2 || !CMatrix::is_cmatrix(args[0])) {
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
     NanReturnUndefined();
+  }
 
   const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
   const typename CMatrix::cmatrix_type& cmatrix = **obj;

@@ -28,6 +28,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
     NanReturnValue(NanNew<v8::Boolean>(cmatrix == rhs_cmatrix));
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

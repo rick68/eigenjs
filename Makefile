@@ -5,6 +5,8 @@ PYTHON ?= python
 SOURCES = \
     src/CMatrix.hpp \
     src/CMatrix/class_method_Identity.hpp \
+    src/CMatrix/class_method_Random.hpp \
+    src/CMatrix/class_method_Zero.hpp \
     src/CMatrix/definitions.hpp \
     src/CMatrix_fwd.hpp \
     src/CMatrix/instance_method_add.hpp \
@@ -66,6 +68,8 @@ SOURCES = \
     src/EigenJS.cpp \
     src/Matrix.hpp \
     src/Matrix/class_method_Identity.hpp \
+    src/Matrix/class_method_Random.hpp \
+    src/Matrix/class_method_Zero.hpp \
     src/Matrix/definitions.hpp \
     src/Matrix_fwd.hpp \
     src/Matrix/instance_method_add.hpp \

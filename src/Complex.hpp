@@ -24,12 +24,18 @@
 
 namespace EigenJS {
 
-template <typename ValueType, const char* ClassName>
-class Complex : public base<Complex, ValueType, ClassName> {
+template <
+  typename ScalarType
+, typename ValueType
+, const char* ClassName
+>
+class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Complex, ValueType, ClassName> base_type;
+  typedef base<::EigenJS::Complex, ScalarType, ValueType, ClassName> base_type;
 
-  typedef typename base_type::element_type element_type;
+  typedef ScalarType scalar_type;
+  typedef ValueType value_type;
+
   typedef typename base_type::complex_type complex_type;
   typedef typename base_type::matrix_type matrix_type;
   typedef typename base_type::cmatrix_type cmatrix_type;
@@ -52,27 +58,9 @@ class Complex : public base<Complex, ValueType, ClassName> {
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
- public:
-  NAN_INLINE complex_type& operator*() {
-    return complex_;
-  }
-
-  NAN_INLINE const complex_type& operator*() const {
-    return complex_;
-  }
-
-  NAN_INLINE complex_type* operator->() {
-    return &complex_;
-  }
-
-  NAN_INLINE const complex_type* operator->() const {
-    return &complex_;
-  }
-
  private:
-  Complex(const element_type& real, const element_type& imag)
-    : complex_(real, imag)
-  {}
+  Complex(const scalar_type& real, const scalar_type& imag)
+      { base_type::value_ = value_type(real, imag); }
 
   ~Complex() {}
 
@@ -85,8 +73,8 @@ class Complex : public base<Complex, ValueType, ClassName> {
     }
 
     if (args.IsConstructCall()) {
-      const element_type& real = args[0]->NumberValue();
-      const element_type& imag = args[1]->NumberValue();
+      const scalar_type& real = args[0]->NumberValue();
+      const scalar_type& imag = args[1]->NumberValue();
       Complex* obj = new Complex(real, imag);
       obj->Wrap(args.This());
       NanReturnValue(args.This());
@@ -101,9 +89,6 @@ class Complex : public base<Complex, ValueType, ClassName> {
       );
     }
   }
-
- private:
-  complex_type complex_;
 };
 
 }  // namespace EigenJS

@@ -70,7 +70,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
           cmatrix(row, col) = complex;
 
         } else if (CMatrix::is_scalar(args[2])) {
-          const typename CMatrix::element_type& value = args[2]->NumberValue();
+          const typename CMatrix::scalar_type& value = args[2]->NumberValue();
 
           if (CMatrix::is_out_of_range(cmatrix, row, col))
             NanReturnUndefined();
@@ -81,6 +81,8 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
       break;
 
     default:
+      EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+      NanReturnUndefined();
       break;
   }
 

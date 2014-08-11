@@ -1,6 +1,6 @@
 //
-// Matrix/class_method_Identity.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Matrix/class_method_Random.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,16 +9,16 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_MATRIX_CLASS_METHOD_IDENTITY_HPP
-#define EIGENJS_MATRIX_CLASS_METHOD_IDENTITY_HPP
+#ifndef EIGENJS_MATRIX_CLASS_METHOD_RANDOM_HPP
+#define EIGENJS_MATRIX_CLASS_METHOD_RANDOM_HPP
 
 namespace EigenJS {
 
-EIGENJS_CLASS_METHOD(Matrix, Identity,
+EIGENJS_CLASS_METHOD(Matrix, Random,
 {
-  EIGENJS_COMMON_MATRIX_CLASS_METHOD_IDENTITY_CONTEXT(Matrix)
+  EIGENJS_COMMON_MATRIX_CLASS_METHOD_RANDOM_CONTEXT(Matrix)
 })
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_MATRIX_CLASS_METHOD_IDENTITY_HPP
+#endif  // EIGENJS_MATRIX_CLASS_METHOD_RANDOM_HPP

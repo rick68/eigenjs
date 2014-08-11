@@ -14,12 +14,19 @@
 
 #include <boost/config.hpp>
 
+#include <eigen3/Eigen/Dense>
+
 namespace EigenJS {
 
 BOOST_CONSTEXPR char matrix_class_name[] = "Matrix";
 
 template <
-  typename ValueType = double
+  typename ScalarType = double
+, typename ValueType = Eigen::Matrix<
+    ScalarType
+  , Eigen::Dynamic
+  , Eigen::Dynamic
+  >
 , const char* ClassName = matrix_class_name
 > class Matrix;
 

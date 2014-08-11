@@ -28,6 +28,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, equals,
     NanReturnValue(NanNew<v8::Boolean>(matrix == rhs_matrix));
   }
 
+  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
   NanReturnUndefined();
 })
 

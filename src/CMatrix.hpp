@@ -26,12 +26,18 @@
 
 namespace EigenJS {
 
-template <typename ValueType, const char* ClassName>
-class CMatrix : public base<CMatrix, ValueType, ClassName> {
+template <
+  typename ScalarType
+, typename ValueType
+, const char* ClassName
+>
+class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::CMatrix, ValueType, ClassName> base_type;
+  typedef base<::EigenJS::CMatrix, ScalarType, ValueType, ClassName> base_type;
 
-  typedef typename base_type::element_type element_type;
+  typedef ScalarType scalar_type;
+  typedef ValueType value_type;
+
   typedef typename base_type::complex_type complex_type;
   typedef typename base_type::matrix_type matrix_type;
   typedef typename base_type::cmatrix_type cmatrix_type;
@@ -55,29 +61,12 @@ class CMatrix : public base<CMatrix, ValueType, ClassName> {
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
- public:
-  NAN_INLINE cmatrix_type& operator*() {
-    return cmatrix_;
-  }
-
-  NAN_INLINE const cmatrix_type& operator*() const {
-    return cmatrix_;
-  }
-
-  NAN_INLINE cmatrix_type* operator->() {
-    return &cmatrix_;
-  }
-
-  NAN_INLINE const cmatrix_type* operator->() const {
-    return &cmatrix_;
-  }
-
  private:
   CMatrix(
     const typename cmatrix_type::Index& rows
   , const typename cmatrix_type::Index& cols
-  ) : cmatrix_(cmatrix_type::Zero(rows, cols))
-  {}
+  )
+      { base_type::value_ = value_type::Zero(rows, cols); }
 
   ~CMatrix() {}
 
@@ -107,9 +96,6 @@ class CMatrix : public base<CMatrix, ValueType, ClassName> {
       );
     }
   }
-
- private:
-  cmatrix_type cmatrix_;
 };
 
 }  // namespace EigenJS

@@ -18,6 +18,9 @@
 
 #include <boost/preprocessor/cat.hpp>
 
+#include "../common_macro.hpp"
+#include "../throw_error.hpp"
+
 #define EIGENJS_COMPLEX_BINARY_OPERATOR_CONTEXT( OP )                        \
   {                                                                          \
     NanScope();                                                              \
@@ -33,12 +36,13 @@
         new ( &c ) typename Complex::complex_type                            \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
+        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
+                                                                             \
       const Complex* const& obj =                                            \
         node::ObjectWrap::Unwrap< Complex >( args.This() );                  \
       const typename Complex::complex_type& complex = **obj;                 \
-                                                                             \
       c = complex OP c;                                                      \
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
@@ -55,6 +59,7 @@
       );                                                                     \
     }                                                                        \
                                                                              \
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -76,6 +81,7 @@
         new (&c) typename Complex::complex_type                              \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
+        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
@@ -86,6 +92,7 @@
       NanReturnValue( args.This() );                                         \
     }                                                                        \
                                                                              \
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -107,12 +114,13 @@
         new ( &c ) typename Complex::complex_type                            \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
+        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
       const typename Complex::complex_type& NAME = std::NAME( c );           \
-      const typename Complex::element_type& real = NAME.real();              \
-      const typename Complex::element_type& imag = NAME.imag();              \
+      const typename Complex::scalar_type& real = NAME.real();               \
+      const typename Complex::scalar_type& imag = NAME.imag();               \
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
         NanNew< v8::Number >( real )                                         \
@@ -128,6 +136,7 @@
       );                                                                     \
     }                                                                        \
                                                                              \
+    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/

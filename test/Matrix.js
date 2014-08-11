@@ -70,10 +70,10 @@ describe('Matrix', function() {
 
     (function() {
       Matrix(3, 3).set([
-        1,  2,  3,
-        4,  5,  6,
-        7,  8,  9,
-       10, 11, 12
+         1,  2,  3,
+         4,  5,  6,
+         7,  8,  9,
+        10, 11, 12
       ]);
     }).should.throw('Too many coefficients passed to Matrix');
   });
@@ -105,9 +105,9 @@ describe('Matrix', function() {
     mat.add.should.be.a.Function;
 
     Matrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]).add(mat).toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
 
     (function() {
@@ -142,9 +142,9 @@ describe('Matrix', function() {
     mat.adda(
       Matrix(3, 3)
       .set([
-        2,  4,  6,
-        8,  9, 10,
-       11, 12, 13
+         2,  4,  6,
+         8,  9, 10,
+        11, 12, 13
       ])
     );
     mat.toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
@@ -160,20 +160,23 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
 
     var cmat = CMatrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]);
-    (mat.adda(cmat) == undefined).should.be.true;
+
+    (function() {
+      mat.adda(cmat);
+    }).should.throw("Invalid argument");
   });
 
   it('#sub() should return the difference of two matrices', function() {
     mat.sub.should.be.a.Function;
 
     Matrix(3, 3).set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]).sub(mat).toString().should.equal("0 1 2\n3 4 5\n6 7 8");
 
     (function() {
@@ -210,9 +213,9 @@ describe('Matrix', function() {
 
     var mat2 = Matrix(3, 3)
     .set([
-      1,  3,  5,
-      7,  9, 11,
-     13, 15, 17
+       1,  3,  5,
+       7,  9, 11,
+      13, 15, 17
     ]);
     mat2.suba(mat);
     mat2.toString().should.equal("0 1 2\n3 4 5\n6 7 8");
@@ -228,11 +231,14 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
 
     var cmat = CMatrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
+       2,  4,  6,
+       8,  9, 10,
+      11, 12, 13
     ]);
-    (mat.suba(cmat) == undefined).should.be.true;
+
+    (function() {
+      mat.suba(cmat);
+    }).should.throw("Invalid argument");
   });
 
   it('#mul() should return the product of two matrices', function() {
@@ -348,6 +354,24 @@ describe('Matrix', function() {
     mat.div(9).isApprox(mat2, 1e-2).should.true;
   });
 
+  it('#Zero() should return a zero matrix', function() {
+    Matrix.Zero.should.be.a.Function;
+
+    Matrix.Zero(3, 3).toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+
+    Matrix.Zero(3, 4).equals(
+      new Matrix(3, 4).set([
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0
+      ])
+    ).should.true;
+
+    (function() {
+      Matrix.Zero(3);
+    }).should.throw("Invalid rows or columns arguments");
+  });
+
   it('#Identity() should return a identity matrix', function() {
     Matrix.Identity.should.be.a.Function;
 
@@ -355,16 +379,24 @@ describe('Matrix', function() {
 
     mat = Matrix.Identity(3);
     mat.equals(new Matrix(3, 3).set([
-     1, 0, 0,
-     0, 1, 0,
-     0, 0, 1
+      1, 0, 0,
+      0, 1, 0,
+      0, 0, 1
     ])).should.true;
 
     mat = Matrix.Identity(3, 4);
     mat.equals(new Matrix(3, 4).set([
-     1, 0, 0, 0,
-     0, 1, 0, 0,
-     0, 0, 1, 0
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0
     ])).should.true;
+  });
+
+  it('#Random() should return a matrix with random values', function() {
+    Matrix.Random.should.be.a.Function;
+
+    (function() {
+      Matrix.Random(3);
+    }).should.throw("Invalid rows or columns arguments");
   });
 });
