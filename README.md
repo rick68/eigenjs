@@ -35,7 +35,7 @@ $ npm install eigenjs
     * [Complex.log10(scalar)](#complexlog10scalar)
     * [Complex.log10(comp)](#complexlog10comp)
     * [Complex.pow(scalar, scalar)](#complexpowscalar-scalar)
-    * [Complex.pow(scalar, comp)](#complexporscalar-comp)
+    * [Complex.pow(scalar, comp)](#complexpowscalar-comp)
     * [Complex.pow(comp, scalar)](#complexpowcomp-scalar)
     * [Complex.pow(comp, comp)](#complexpowcomp-comp)
     * [Complex.sin(scalar)](#complexsinscalar)
@@ -85,8 +85,8 @@ $ npm install eigenjs
     * [comp.div(comp)](#compdivcomp)
     * [comp.diva(scalar)](#compdivascalar)
     * [comp.diva(comp)](#compdivacomp)
-    * [comp.equals(Complex)](#compequalscomplex)
-    * [comp.isApprox(comp, [prec = 1e-12])](#compisapproxcompprec--1e-12)
+    * [comp.equals(comp)](#compequalscomp)
+    * [comp.isApprox(comp, [prec = 1e-12])](#compisapproxcomp-prec--1e-12)
     * [comp.toString()](#comptostring)
   * [Complex Properties](#complex-properties)
     * [comp.real](#compreal)
@@ -102,7 +102,7 @@ $ npm install eigenjs
     * [mat.rows()](#matrows)
     * [mat.cols()](#matcols)
     * [mat.set(row, col, scalar)](#matsetrow-col-scalar)
-    * [mat.set(scalar_array)](#matsetscalar-array)
+    * [mat.set(scalar_array)](#matsetscalararray)
     * [mat.get(row, col)](#matgetrow-col)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(cmat)](#mataddcmat)
@@ -114,11 +114,11 @@ $ npm install eigenjs
     * [mat.mul(comp)](#matmulcomp)
     * [mat.mul(mat)](#matmulmat)
     * [mat.mul(cmat)](#matmulcmat)
-    * [mat.mula(scalar))](#matmulascalar)
+    * [mat.mula(scalar)](#matmulascalar)
     * [mat.mula(mat)](#matmulamat)
-    * [mat.div(scalar))](#matdivscalar)
+    * [mat.div(scalar)](#matdivscalar)
     * [mat.div(comp)](#matdivcomp)
-    * [mat.diva(scalar))](#matdivascalar)
+    * [mat.diva(scalar)](#matdivascalar)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.isApprox(mat, [prec = 1e-12])](#matisapproxmat-prec--1e-12)
     * [mat.toString()](#mattostring)
@@ -133,7 +133,7 @@ $ npm install eigenjs
     * [cmat.rows()](#cmatrows)
     * [cmat.cols()](#cmatcols)
     * [cmat.set(row, col, comp)](#cmatsetrow-col-comp)
-    * [cmat.set(comp_array)](#cmatsetcomp-array)
+    * [cmat.set(comp_array)](#cmatsetcomparray)
     * [cmat.get(row, col)](#cmatgetrow-col)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(cmat)](#cmataddcmat)
@@ -147,16 +147,16 @@ $ npm install eigenjs
     * [cmat.mul(comp)](#cmatmulcomp)
     * [cmat.mul(mat)](#cmatmulmat)
     * [cmat.mul(cmat)](#cmatmulcmat)
-    * [cmat.mula(scalar))](#cmatmulascalar)
-    * [cmat.mula(comp))](#cmatmulacomp)
+    * [cmat.mula(scalar)](#cmatmulascalar)
+    * [cmat.mula(comp)](#cmatmulacomp)
     * [cmat.mula(mat)](#cmatmulamat)
     * [cmat.mula(cmat)](#cmatmulacmat)
-    * [cmat.div(scalar))](#cmatdivscalar)
+    * [cmat.div(scalar)](#cmatdivscalar)
     * [cmat.div(comp)](#cmatdivcomp)
-    * [cmat.diva(scalar))](#cmatdivascalar)
-    * [cmat.diva(comp))](#cmatdivacomp)
+    * [cmat.diva(scalar)](#cmatdivascalar)
+    * [cmat.diva(comp)](#cmatdivacomp)
     * [cmat.equals(cmat)](#cmatequalscmat)
-    * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatissapproxcmat-prec--1e-12)
+    * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
     * [cmat.toString()](#cmattostring)
 
 ## Complex
@@ -293,7 +293,7 @@ console.log(c2.toString());
 ```
 
 #### Complex.sinh(scalar)
-#### Complex.sin(comp)
+#### Complex.sinh(comp)
 
 ```js
 var C = require('eigenjs').Complex
@@ -643,6 +643,18 @@ console.log(c1.isApprox(c2, 1e-3));
 
 ```txt
 true
+```
+
+##### comp.toString()
+
+```js
+var C = require('eigenjs').Complex
+  , c = new C(3, -4);
+console.log(c.toString());
+```
+
+```txt
+(3,-4)
 ```
 
 ### Complex Properties
