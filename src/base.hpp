@@ -1,6 +1,6 @@
 //
 // base.hpp
-// ~~~~~~~~~~~
+// ~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -16,14 +16,14 @@
 #include <node.h>
 #include <nan.h>
 
-#include <boost/utility/enable_if.hpp>
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/or.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <eigen3/Eigen/Dense>
 
 #include <complex>
+#include <memory>
+#include <type_traits>
 
 #include "Complex_fwd.hpp"
 #include "Matrix_fwd.hpp"
@@ -42,6 +42,7 @@ struct base : node::ObjectWrap {
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
+  typedef std::shared_ptr<value_type> pointer_type;
 
   typedef std::complex<scalar_type> complex_type;
   typedef Eigen::Matrix<
@@ -105,10 +106,10 @@ struct base : node::ObjectWrap {
 
   template <typename T, typename U>
   static NAN_INLINE
-  typename boost::enable_if_c<
+  typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<boost::is_same<T, Matrix>, boost::is_same<T, CMatrix> >
-    , boost::mpl::or_<boost::is_same<U, Matrix>, boost::is_same<U, CMatrix> >
+      boost::mpl::or_<std::is_same<T, Matrix>, std::is_same<T, CMatrix> >
+    , boost::mpl::or_<std::is_same<U, Matrix>, std::is_same<U, CMatrix> >
     >::value
   , bool
   >::type
@@ -123,10 +124,10 @@ struct base : node::ObjectWrap {
 
   template <typename T, typename U>
   static NAN_INLINE
-  typename boost::enable_if_c<
+  typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<boost::is_same<T, Matrix>, boost::is_same<T, CMatrix> >
-    , boost::mpl::or_<boost::is_same<U, Matrix>, boost::is_same<U, CMatrix> >
+      boost::mpl::or_<std::is_same<T, Matrix>, std::is_same<T, CMatrix> >
+    , boost::mpl::or_<std::is_same<U, Matrix>, std::is_same<U, CMatrix> >
     >::value
   , bool
   >::type
@@ -140,28 +141,36 @@ struct base : node::ObjectWrap {
 
  public:
   NAN_INLINE value_type& operator*() {
-    return value_;
+    return *value_ptr_;
   }
 
   NAN_INLINE const value_type& operator*() const {
-    return value_;
+    return *value_ptr_;
   }
 
   NAN_INLINE value_type* operator->() {
-    return &value_;
+    return value_ptr_.get();
   }
 
   NAN_INLINE const value_type* operator->() const {
-    return &value_;
+    return value_ptr_.get();
   }
 
  protected:
+  base() : value_ptr_(new value_type()) {}
+
+  base(const base& other)
+    : value_ptr_(other.value_ptr_)
+  {}
+
+  ~base() {}
+
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
 
  private:
   friend derived_type;
-  value_type value_;
+  pointer_type value_ptr_;
 };
 
 template<

@@ -59,8 +59,11 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   }
 
  private:
+  Complex(const base_type& base) : base_type(base) {}
+
   Complex(const scalar_type& real, const scalar_type& imag)
-      { base_type::value_ = value_type(real, imag); }
+    : base_type()
+      { *base_type::value_ptr_ = value_type(real, imag); }
 
   ~Complex() {}
 
@@ -79,12 +82,12 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
-      v8::Local<v8::Function> ctr = NanNew(base_type::constructor);
-      v8::Local<v8::Value> argv[] = {args[0], args[1]};
+      v8::Local<v8::Value> argv[] = { args[0], args[1] };
       NanReturnValue(
-        ctr->NewInstance(
-            sizeof(argv) / sizeof(v8::Local<v8::Value>)
-          , argv
+        base_type::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
         )
       );
     }

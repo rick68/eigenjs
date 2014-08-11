@@ -62,11 +62,13 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   }
 
  private:
+  CMatrix(const base_type& base) : base_type(base) {}
+
   CMatrix(
     const typename cmatrix_type::Index& rows
   , const typename cmatrix_type::Index& cols
-  )
-      { base_type::value_ = value_type::Zero(rows, cols); }
+  ) : base_type()
+      { *base_type::value_ptr_ = value_type::Zero(rows, cols); }
 
   ~CMatrix() {}
 
@@ -86,11 +88,11 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
       obj->Wrap(args.This());
       NanReturnValue(args.This());
     } else {
-      v8::Local<v8::Function> ctor = NanNew(base_type::constructor);
-      v8::Local<v8::Value> argv[] = {args[0], args[1]};
+      v8::Local<v8::Value> argv[] = { args[0], args[1] };
       NanReturnValue(
-        ctor->NewInstance(
-          sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        base_type::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
         )
       );
