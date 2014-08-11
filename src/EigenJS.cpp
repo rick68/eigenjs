@@ -19,7 +19,7 @@
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
-  std::srand(std::time(0));
+  std::srand(static_cast<unsigned int>(std::time(0)));
   std::rand();
 
   Complex<>::Init(exports);
