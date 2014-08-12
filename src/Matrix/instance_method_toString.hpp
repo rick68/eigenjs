@@ -19,7 +19,7 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(Matrix, toString,
 {
   const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  const typename Matrix::matrix_type& matrix = **obj;
+  const typename Matrix::value_type& matrix = **obj;
 
   std::ostringstream result;
   result << matrix;

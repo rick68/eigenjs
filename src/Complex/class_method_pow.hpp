@@ -28,7 +28,7 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     const bool& arg1_is_complex = Complex::is_complex(args[1]);
     const bool& arg0_is_scalar = Complex::is_scalar(args[0]);
     const bool& arg1_is_scalar = Complex::is_scalar(args[1]);
-    typename Complex::complex_type c;
+    typename Complex::value_type c;
 
     if (arg0_is_complex && arg1_is_complex) {
       const Complex* obj0 =
@@ -66,7 +66,7 @@ EIGENJS_CLASS_METHOD(Complex, pow,
     );
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

@@ -22,7 +22,7 @@ EIGENJS_PROPERTY_ACCESSOR_GETTER(Complex, imag,
     NanReturnValue(args.This());
 
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-  const typename Complex::complex_type& complex = **obj;
+  const typename Complex::value_type& complex = **obj;
 
   NanReturnValue(NanNew(complex.imag()));
 })
@@ -31,9 +31,9 @@ EIGENJS_PROPERTY_ACCESSOR_SETTER(Complex, imag,
 {
   if (value->IsNumber()) {
     Complex* obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-    typename Complex::complex_type& complex = **obj;
+    typename Complex::value_type& complex = **obj;
 
-    new (&complex) typename Complex::complex_type(
+    new (&complex) typename Complex::value_type(
       complex.real()
     , value->NumberValue()
     );

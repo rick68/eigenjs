@@ -23,9 +23,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, get,
       args[1]->IsNumber()
   ) {
     const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    const typename Matrix::matrix_type& matrix = **obj;
-    const typename Matrix::matrix_type::Index& row = args[0]->Uint32Value();
-    const typename Matrix::matrix_type::Index& col = args[1]->Uint32Value();
+    const typename Matrix::value_type& matrix = **obj;
+    const typename Matrix::value_type::Index& row = args[0]->Uint32Value();
+    const typename Matrix::value_type::Index& col = args[1]->Uint32Value();
 
     if (Matrix::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();
@@ -35,7 +35,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, get,
     NanReturnValue(NanNew(value));
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

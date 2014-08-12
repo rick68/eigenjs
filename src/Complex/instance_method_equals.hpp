@@ -21,15 +21,15 @@ EIGENJS_INSTANCE_METHOD(Complex, equals,
   if (args.Length() == 1 && Complex::is_complex(args[0])) {
     const Complex* const& obj =
       node::ObjectWrap::Unwrap<Complex>(args.This());
-    const typename Complex::complex_type& complex = **obj;
+    const typename Complex::value_type& complex = **obj;
     const Complex* const& rhs_obj =
       node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-    const typename Complex::complex_type& rhs_complex = **rhs_obj;
+    const typename Complex::value_type& rhs_complex = **rhs_obj;
 
     NanReturnValue(NanNew<v8::Boolean>(complex == rhs_complex));
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

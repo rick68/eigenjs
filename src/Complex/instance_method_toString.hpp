@@ -19,7 +19,7 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(Complex, toString,
 {
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-  const typename Complex::complex_type& complex = **obj;
+  const typename Complex::value_type& complex = **obj;
 
   std::ostringstream result;
   result << complex;

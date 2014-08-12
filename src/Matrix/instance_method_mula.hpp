@@ -20,12 +20,12 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
 
   if (args.Length() == 1) {
     Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    typename Matrix::matrix_type& matrix = **obj;
+    typename Matrix::value_type& matrix = **obj;
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-      const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;
+      const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
       if (Matrix::is_invalid_matrix_product(obj, rhs_obj))
         NanReturnUndefined();
@@ -40,7 +40,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
     }
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

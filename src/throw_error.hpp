@@ -14,12 +14,12 @@
 
 #include <nan.h>
 
-#define EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                \
-  NanThrowError("Invalid argument");                                          \
+#define EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
+  NanThrowError("Invalid argument");                                         \
   /**/
 
-#define EIGENJS_THROW_ERROR_INVALID_ROWS_AND_COLUMNS_ARGUMENTS()              \
-  NanThrowError("Invalid rows or columns arguments");                         \
+#define EIGENJS_THROW_ERROR_INVALID_ROWS_AND_COLUMNS_ARGUMENTS()             \
+  NanThrowError("Invalid rows or columns arguments");                        \
   /**/
 
 #endif  // EIGENJS_THROW_ERROR_HPP

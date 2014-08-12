@@ -21,6 +21,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Complex/definitions.hpp"
+#include "throw_error.hpp"
 
 namespace EigenJS {
 
@@ -36,12 +37,8 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef typename base_type::complex_type complex_type;
-  typedef typename base_type::matrix_type matrix_type;
-  typedef typename base_type::cmatrix_type cmatrix_type;
-
-  typedef typename base_type::Matrix Matrix;
-  typedef typename base_type::CMatrix CMatrix;
+  typedef Matrix<scalar_type> Matrix;
+  typedef CMatrix<scalar_type> CMatrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -71,26 +68,31 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
     NanScope();
 
     if (args.Length() < 2) {
-      NanThrowError("Tried creating complex without real and imag arguments");
+      NanThrowError("Tried creating a complex without real and imag arguments");
       NanReturnUndefined();
     }
 
-    if (args.IsConstructCall()) {
-      const scalar_type& real = args[0]->NumberValue();
-      const scalar_type& imag = args[1]->NumberValue();
-      Complex* obj = new Complex(real, imag);
-      obj->Wrap(args.This());
-      NanReturnValue(args.This());
-    } else {
-      v8::Local<v8::Value> argv[] = { args[0], args[1] };
-      NanReturnValue(
-        base_type::new_instance(
-          args
-        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-        )
-      );
+    if (Complex::is_scalar(args[0]) && Complex::is_scalar(args[1])) {
+      if (args.IsConstructCall()) {
+        const scalar_type& real = args[0]->NumberValue();
+        const scalar_type& imag = args[1]->NumberValue();
+        Complex* obj = new Complex(real, imag);
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else {
+        v8::Local<v8::Value> argv[] = { args[0], args[1] };
+        NanReturnValue(
+          base_type::new_instance(
+            args
+          , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+          , argv
+          )
+        );
+      }
     }
+
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+    NanReturnUndefined();
   }
 };
 

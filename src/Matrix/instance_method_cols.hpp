@@ -17,7 +17,7 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(Matrix, cols,
 {
   const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  const typename Matrix::matrix_type& matrix = **obj;
+  const typename Matrix::value_type& matrix = **obj;
 
   NanScope();
   NanReturnValue(NanNew<v8::Integer>(matrix.cols()));

@@ -42,93 +42,30 @@ struct base : node::ObjectWrap {
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
+
   typedef std::shared_ptr<value_type> pointer_type;
-
-  typedef std::complex<scalar_type> complex_type;
-
-  typedef Eigen::Matrix<
-      scalar_type, Eigen::Dynamic, Eigen::Dynamic> matrix_type;
-  typedef Eigen::Matrix<scalar_type, Eigen::Dynamic, 1> vector_type;
-  typedef Eigen::Matrix<scalar_type, 1, Eigen::Dynamic> rowvector_type;
-  typedef Eigen::Block<
-      matrix_type
-    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
-    , 1
-    , !matrix_type::IsRowMajor
-    > colxpr_type;
-  typedef Eigen::Block<
-      matrix_type
-    , 1
-    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
-    , matrix_type::IsRowMajor
-    > rowxpr_type;
-  typedef Eigen::Block<
-      matrix_type
-    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
-    , Eigen::Dynamic
-    , !matrix_type::IsRowMajor
-    > colsblockxpr_type;
-  typedef Eigen::Block<
-      matrix_type
-    , Eigen::Dynamic
-    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
-    , matrix_type::IsRowMajor
-    > rowsblockxpr_type;
-
-  typedef Eigen::Matrix<
-      complex_type, Eigen::Dynamic, Eigen::Dynamic> cmatrix_type;
-  typedef Eigen::Matrix<complex_type, Eigen::Dynamic, 1> cvector_type;
-  typedef Eigen::Matrix<complex_type, 1, Eigen::Dynamic> crowvector_type;
-  typedef Eigen::Block<
-      cmatrix_type
-    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
-    , 1
-    , !matrix_type::IsRowMajor
-    > ccolxpr_type;
-  typedef Eigen::Block<
-      cmatrix_type
-    , 1
-    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
-    , matrix_type::IsRowMajor
-    > crowxpr_type;
-  typedef Eigen::Block<
-      cmatrix_type
-    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
-    , Eigen::Dynamic
-    , !matrix_type::IsRowMajor
-    > ccolsblockxpr_type;
-  typedef Eigen::Block<
-      cmatrix_type
-    , Eigen::Dynamic
-    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
-    , matrix_type::IsRowMajor
-    > crowsblockxpr_type;
-
-  typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
 
   static NAN_INLINE bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
   }
 
   static NAN_INLINE bool is_complex(const v8::Handle<v8::Value>& arg) {
-    return Complex::base_type::has_instance(arg);
+    return Complex<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool
   is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
     return
-      Complex::base_type::has_instance(arg) || arg->IsNumber()
+      Complex<scalar_type>::base_type::has_instance(arg) || arg->IsNumber()
       ? true : false;
   }
 
   static NAN_INLINE bool is_matrix(const v8::Handle<v8::Value>& arg) {
-    return Matrix::base_type::has_instance(arg);
+    return Matrix<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cmatrix(const v8::Handle<v8::Value>& arg) {
-    return CMatrix::base_type::has_instance(arg);
+    return CMatrix<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
@@ -145,13 +82,11 @@ struct base : node::ObjectWrap {
     return instance;
   }
 
-  template <typename T>
+  template <typename T, int Rows, int Cols>
   static NAN_INLINE bool is_out_of_range(
-      const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>& eigen_matrix
-    , const typename Eigen::Matrix<
-          T, Eigen::Dynamic, Eigen::Dynamic>::Index& row
-    , const typename Eigen::Matrix<
-          T, Eigen::Dynamic, Eigen::Dynamic>::Index& col) {
+      const Eigen::Matrix<T, Rows, Cols>& eigen_matrix
+    , const typename Eigen::Matrix<T, Rows, Cols>::Index& row
+    , const typename Eigen::Matrix<T, Rows, Cols>::Index& col) {
     return row < 0 || row >= eigen_matrix.rows() ||
            col < 0 || col >= eigen_matrix.cols()
       ? NanThrowError("Row or column numbers are out of range"), true
@@ -162,8 +97,28 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<std::is_same<T, Matrix>, std::is_same<T, CMatrix> >
-    , boost::mpl::or_<std::is_same<U, Matrix>, std::is_same<U, CMatrix> >
+      std::is_same<
+        typename T::value_type
+      , Eigen::Matrix<
+          typename Eigen::internal::traits<typename T::value_type>::Scalar
+        , Eigen::internal::traits<typename T::value_type>::RowsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::ColsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::Options
+        , Eigen::internal::traits<typename T::value_type>::MaxRowsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::MaxColsAtCompileTime
+        >
+      >
+    , std::is_same<
+        typename U::value_type
+      , Eigen::Matrix<
+          typename Eigen::internal::traits<typename U::value_type>::Scalar
+        , Eigen::internal::traits<typename U::value_type>::RowsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::ColsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::Options
+        , Eigen::internal::traits<typename U::value_type>::MaxRowsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::MaxColsAtCompileTime
+        >
+      >
     >::value
   , bool
   >::type
@@ -180,8 +135,28 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<std::is_same<T, Matrix>, std::is_same<T, CMatrix> >
-    , boost::mpl::or_<std::is_same<U, Matrix>, std::is_same<U, CMatrix> >
+      std::is_same<
+        typename T::value_type
+      , Eigen::Matrix<
+          typename Eigen::internal::traits<typename T::value_type>::Scalar
+        , Eigen::internal::traits<typename T::value_type>::RowsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::ColsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::Options
+        , Eigen::internal::traits<typename T::value_type>::MaxRowsAtCompileTime
+        , Eigen::internal::traits<typename T::value_type>::MaxColsAtCompileTime
+        >
+      >
+    , std::is_same<
+        typename U::value_type
+      , Eigen::Matrix<
+          typename Eigen::internal::traits<typename U::value_type>::Scalar
+        , Eigen::internal::traits<typename U::value_type>::RowsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::ColsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::Options
+        , Eigen::internal::traits<typename U::value_type>::MaxRowsAtCompileTime
+        , Eigen::internal::traits<typename U::value_type>::MaxColsAtCompileTime
+        >
+      >
     >::value
   , bool
   >::type

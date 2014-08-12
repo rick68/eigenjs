@@ -41,7 +41,7 @@ EIGENJS_CLASS_METHOD(Complex, polar,
     );
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

@@ -20,19 +20,19 @@ EIGENJS_INSTANCE_METHOD(Complex, isApprox,
   NanScope();
 
   if (args_length == 0 || args_length > 2 || !Complex::is_complex(args[0])) {
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
     NanReturnUndefined();
   }
 
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-  const typename Complex::complex_type& complex = **obj;
+  const typename Complex::value_type& complex = **obj;
   const Complex* const& rhs_obj =
     node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-  const typename Complex::complex_type& rhs_complex = **rhs_obj;
-  const typename Complex::complex_type& v = complex;
-  const typename Complex::complex_type& w = rhs_complex;
+  const typename Complex::value_type& rhs_complex = **rhs_obj;
+  const typename Complex::value_type& v = complex;
+  const typename Complex::value_type& w = rhs_complex;
 
-  typedef Eigen::NumTraits<typename Complex::complex_type> num_traits;
+  typedef Eigen::NumTraits<typename Complex::value_type> num_traits;
   const typename num_traits::Real& prec =
       args_length == 2
     ? args[1]->NumberValue()

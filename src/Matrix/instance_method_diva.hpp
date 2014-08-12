@@ -20,7 +20,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, diva,
 
   if (args.Length() == 1) {
     Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    typename Matrix::matrix_type& matrix = **obj;
+    typename Matrix::value_type& matrix = **obj;
 
     if (Matrix::is_scalar(args[0])) {
       matrix /= args[0]->NumberValue();
@@ -29,7 +29,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, diva,
     }
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

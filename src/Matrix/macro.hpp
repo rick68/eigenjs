@@ -23,6 +23,7 @@
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                         \
   {                                                                          \
+    typedef typename Matrix::Complex Complex;                                \
     typedef typename Matrix::CMatrix CMatrix;                                \
                                                                              \
     NanScope();                                                              \
@@ -30,9 +31,9 @@
     if ( args.Length() == 1 ) {                                              \
       const Matrix* const& obj =                                             \
           node::ObjectWrap::Unwrap< Matrix >( args.This() );                 \
-      const typename Matrix::matrix_type& matrix = **obj;                    \
-      const typename Matrix::matrix_type::Index& rows = matrix.rows();       \
-      const typename Matrix::matrix_type::Index& cols = matrix.cols();       \
+      const typename Matrix::value_type& matrix = **obj;                     \
+      const typename Matrix::value_type::Index& rows = matrix.rows();        \
+      const typename Matrix::value_type::Index& cols = matrix.cols();        \
       v8::Local<v8::Value> argv[] = {                                        \
         NanNew<v8::Integer>( rows )                                          \
       , NanNew<v8::Integer>( cols )                                          \
@@ -41,7 +42,7 @@
       if ( Matrix::is_matrix( args[0] ) ) {                                  \
         const Matrix* const& rhs_obj =                                       \
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
-        const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;          \
+        const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
         if ( Matrix::is_nonconformate_arguments( obj, rhs_obj ) ) {          \
           NanReturnUndefined();                                              \
@@ -54,7 +55,7 @@
         );                                                                   \
                                                                              \
         Matrix* new_obj = node::ObjectWrap::Unwrap< Matrix >( instance );    \
-        typename Matrix::matrix_type& new_matrix = **new_obj;                \
+        typename Matrix::value_type& new_matrix = **new_obj;                 \
                                                                              \
         new_matrix = matrix OP rhs_matrix;                                   \
                                                                              \
@@ -62,23 +63,23 @@
       } else if ( CMatrix::is_cmatrix( args[0]) ) {                          \
         const CMatrix* const& rhs_obj =                                      \
             node::ObjectWrap::Unwrap< CMatrix >( args[0]->ToObject() );      \
-        const typename CMatrix::cmatrix_type& rhs_cmatrix = **rhs_obj;       \
+        const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;         \
                                                                              \
-        if ( Matrix::template is_nonconformate_arguments( obj, rhs_obj ) ) { \
+        if ( Matrix::is_nonconformate_arguments( obj, rhs_obj ) ) {          \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
         v8::Local< v8::Object > instance = CMatrix::new_instance(            \
           args                                                               \
-        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
         CMatrix* new_obj = node::ObjectWrap::Unwrap< CMatrix >( instance );  \
-        typename CMatrix::cmatrix_type& new_cmatrix = **new_obj;             \
+        typename CMatrix::value_type& new_cmatrix = **new_obj;               \
                                                                              \
         new_cmatrix =                                                        \
-          matrix.template cast< typename CMatrix::complex_type >()           \
+          matrix.template cast< typename Complex::value_type >()             \
             OP                                                               \
           rhs_cmatrix;                                                       \
                                                                              \
@@ -86,7 +87,7 @@
       }                                                                      \
     }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -98,10 +99,10 @@
     if ( args.Length() == 1) {                                               \
       if ( Matrix::is_matrix( args[0] ) ) {                                  \
         Matrix* obj = node::ObjectWrap::Unwrap< Matrix >( args.This() );     \
-        typename Matrix::matrix_type& matrix = **obj;                        \
+        typename Matrix::value_type& matrix = **obj;                         \
         const Matrix* const& rhs_obj =                                       \
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
-        const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;          \
+        const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
         if ( Matrix::is_nonconformate_arguments( obj, rhs_obj ) ) {          \
           NanReturnUndefined();                                              \
@@ -113,7 +114,7 @@
       }                                                                      \
     }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/

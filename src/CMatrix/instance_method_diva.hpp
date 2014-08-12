@@ -22,7 +22,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diva,
 
   if (args.Length() == 1) {
     CMatrix* obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    typename CMatrix::cmatrix_type& cmatrix = **obj;
+    typename CMatrix::value_type& cmatrix = **obj;
 
     if (CMatrix::is_scalar(args[0])) {
       cmatrix /= args[0]->NumberValue();
@@ -31,7 +31,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diva,
     } else if (CMatrix::is_complex(args[0])) {
       const Complex* const& rhs_obj =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-      const typename Complex::complex_type& rhs_complex = **rhs_obj;
+      const typename Complex::value_type& rhs_complex = **rhs_obj;
 
       cmatrix /= rhs_complex;
 
@@ -39,7 +39,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diva,
     }
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

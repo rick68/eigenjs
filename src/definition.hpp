@@ -140,20 +140,28 @@
   /**/
 
 #define EIGENJS_OBJECT_DEFINITIONS( NAME, SEQ )                              \
-  BOOST_PP_CAT(                                                              \
-    typedef boost::mpl::vector                                               \
-  , BOOST_PP_SEQ_SIZE( SEQ )                                                 \
-  )                                                                          \
-  <                                                                          \
-    BOOST_PP_SEQ_FOR_EACH_I                                                  \
-      ( EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO, (NAME)(< NAME<> >), SEQ )   \
-  > BOOST_PP_CAT( NAME, _definitions );                                      \
+  template < typename ScalarType, typename ValueType >                       \
+  struct BOOST_PP_CAT( NAME, _definitions ) {                                \
+    typedef NAME< ScalarType, ValueType > object_type;                       \
+    typedef BOOST_PP_CAT(                                                    \
+        boost::mpl::vector                                                   \
+      , BOOST_PP_SEQ_SIZE( SEQ )                                             \
+      )                                                                      \
+      <                                                                      \
+        BOOST_PP_SEQ_FOR_EACH_I(                                             \
+          EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO                            \
+        , ( NAME )( < object_type > )                                        \
+        , SEQ                                                                \
+        )                                                                    \
+      > type;                                                                \
+  };                                                                         \
   /**/
 
 #define EIGENJS_OBJECT_INITIALIZE( NAME, FT )                                \
-  boost::mpl::for_each< BOOST_PP_CAT( NAME, _definitions ) > (               \
-    detail::initializer( FT )                                                \
-  );                                                                         \
+  boost::mpl::for_each<                                                      \
+    typename BOOST_PP_CAT( NAME, _definitions )                              \
+        < ScalarType, ValueType >::type                                      \
+  > ( detail::initializer( FT ) );                                           \
   /**/
 
 #endif  // EIGENJS_DEFINITION_HPP
