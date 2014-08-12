@@ -59,7 +59,7 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   }
 
  private:
-  Complex(const base_type& base) : base_type(base) {}
+  explicit Complex(const base_type& base) : base_type(base) {}
 
   Complex(const scalar_type& real, const scalar_type& imag)
     : base_type()

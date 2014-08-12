@@ -57,12 +57,11 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
     EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
-
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
  private:
-  CMatrix(const base_type& base) : base_type(base) {}
+  explicit CMatrix(const base_type& base) : base_type(base) {}
 
   CMatrix(
     const typename cmatrix_type::Index& rows

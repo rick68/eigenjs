@@ -56,12 +56,11 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
     EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
-
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
  private:
-  Matrix(const base_type& base) : base_type(base) {}
+  explicit Matrix(const base_type& base) : base_type(base) {}
 
   Matrix(
     const typename matrix_type::Index& rows
