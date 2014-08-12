@@ -158,12 +158,17 @@ $ npm install eigenjs
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
     * [cmat.toString()](#cmattostring)
+* [Vector](#vector) **is inherits from Matrix**
+  * [Vector Class Methods](vector-class-methods) 
+    * [Vector(size)](vectorsize)
+    * [Vector(scalar_array)](vectorscalararray)
+  * [Vector Instance Methods](vector-instance-methods)
 
 ## Complex
 
 ### Complex Class Methods
 
-##### Complex(real, imag)
+#### Complex(real, imag)
 
 ```js
 var C = require('eigenjs').Complex
@@ -1493,3 +1498,39 @@ cmat =
   (0.0123055,0.819031)  (0.0701489,0.992777)
 (-0.538938,0.0627161)  (-0.401951,0.405649)
 ```
+
+## Vector
+
+### Vector Class Methods
+
+#### Vector(size)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V(3);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+0
+0
+0
+```
+
+#### Vector(scalar_array)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V([1, 2, 3]);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+1
+2
+3
+```
+
+### Vector Instance Methods
