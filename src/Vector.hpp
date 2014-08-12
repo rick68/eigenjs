@@ -34,7 +34,7 @@ class Vector : public Matrix<ScalarType, ValueType> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef Matrix<ScalarType, ValueType> Matrix;
+  typedef ::EigenJS::Matrix<ScalarType, ValueType> Matrix;
   typedef typename Matrix::Complex Complex;
   typedef typename Matrix::CMatrix CMatrix;
 

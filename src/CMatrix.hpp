@@ -22,6 +22,7 @@
 #include "definition.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
+#include "CMatrix_fwd.hpp"
 #include "CMatrix/definitions.hpp"
 #include "throw_error.hpp"
 
@@ -39,8 +40,8 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef Complex<scalar_type> Complex;
-  typedef Matrix<
+  typedef ::EigenJS::Complex<scalar_type> Complex;
+  typedef ::EigenJS::Matrix<
       scalar_type
     , Eigen::Matrix<
         scalar_type

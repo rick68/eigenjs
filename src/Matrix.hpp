@@ -21,6 +21,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Complex.hpp"
+#include "Matrix_fwd.hpp"
 #include "Matrix/definitions.hpp"
 #include "throw_error.hpp"
 
@@ -38,8 +39,8 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef Complex<scalar_type> Complex;
-  typedef CMatrix<
+  typedef ::EigenJS::Complex<scalar_type> Complex;
+  typedef ::EigenJS::CMatrix<
       scalar_type
     , Eigen::Matrix<
         typename Complex::value_type
@@ -81,7 +82,8 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
     NanScope();
 
     if (args.Length() < 2) {
-      NanThrowError("Tried creating a matrix without rows and columns arguments");
+      NanThrowError
+          ("Tried creating a matrix without rows and columns arguments");
       NanReturnUndefined();
     }
 

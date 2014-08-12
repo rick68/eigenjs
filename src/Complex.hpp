@@ -20,6 +20,7 @@
 
 #include "base.hpp"
 #include "definition.hpp"
+#include "Complex_fwd.hpp"
 #include "Complex/definitions.hpp"
 #include "throw_error.hpp"
 
@@ -37,8 +38,8 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef Matrix<scalar_type> Matrix;
-  typedef CMatrix<scalar_type> CMatrix;
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
