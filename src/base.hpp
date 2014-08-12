@@ -45,10 +45,64 @@ struct base : node::ObjectWrap {
   typedef std::shared_ptr<value_type> pointer_type;
 
   typedef std::complex<scalar_type> complex_type;
+
   typedef Eigen::Matrix<
       scalar_type, Eigen::Dynamic, Eigen::Dynamic> matrix_type;
+  typedef Eigen::Matrix<scalar_type, Eigen::Dynamic, 1> vector_type;
+  typedef Eigen::Matrix<scalar_type, 1, Eigen::Dynamic> rowvector_type;
+  typedef Eigen::Block<
+      matrix_type
+    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
+    , 1
+    , !matrix_type::IsRowMajor
+    > colxpr_type;
+  typedef Eigen::Block<
+      matrix_type
+    , 1
+    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
+    , matrix_type::IsRowMajor
+    > rowxpr_type;
+  typedef Eigen::Block<
+      matrix_type
+    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
+    , Eigen::Dynamic
+    , !matrix_type::IsRowMajor
+    > colsblockxpr_type;
+  typedef Eigen::Block<
+      matrix_type
+    , Eigen::Dynamic
+    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
+    , matrix_type::IsRowMajor
+    > rowsblockxpr_type;
+
   typedef Eigen::Matrix<
       complex_type, Eigen::Dynamic, Eigen::Dynamic> cmatrix_type;
+  typedef Eigen::Matrix<complex_type, Eigen::Dynamic, 1> cvector_type;
+  typedef Eigen::Matrix<complex_type, 1, Eigen::Dynamic> crowvector_type;
+  typedef Eigen::Block<
+      cmatrix_type
+    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
+    , 1
+    , !matrix_type::IsRowMajor
+    > ccolxpr_type;
+  typedef Eigen::Block<
+      cmatrix_type
+    , 1
+    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
+    , matrix_type::IsRowMajor
+    > crowxpr_type;
+  typedef Eigen::Block<
+      cmatrix_type
+    , Eigen::internal::traits<matrix_type>::RowsAtCompileTime
+    , Eigen::Dynamic
+    , !matrix_type::IsRowMajor
+    > ccolsblockxpr_type;
+  typedef Eigen::Block<
+      cmatrix_type
+    , Eigen::Dynamic
+    , Eigen::internal::traits<matrix_type>::ColsAtCompileTime
+    , matrix_type::IsRowMajor
+    > crowsblockxpr_type;
 
   typedef ::EigenJS::Complex<scalar_type> Complex;
   typedef ::EigenJS::Matrix<scalar_type> Matrix;
