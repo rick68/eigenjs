@@ -159,10 +159,10 @@ $ npm install eigenjs
     * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **is inherits from Matrix**
-  * [Vector Class Methods](vector-class-methods) 
-    * [Vector(size)](vectorsize)
-    * [Vector(scalar_array)](vectorscalararray)
-  * [Vector Instance Methods](vector-instance-methods)
+  * [Vector Class Methods](#vector-class-methods) 
+    * [Vector(size)](#vectorsize)
+    * [Vector(scalar_array)](#vectorscalararray)
+  * [Vector Instance Methods](#vector-instance-methods)
 
 ## Complex
 
