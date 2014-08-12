@@ -12,9 +12,9 @@ describe('CMatrix', function() {
     CMatrix.should.be.a.Function;
   });
 
-  it('should throw error when tried creating complex matrix without rows and columns arguments', function() {
-    (function() { new CMatrix(); }).should.throw('Tried creating complex matrix without rows and columns arguments');
-    (function() { new CMatrix(1); }).should.throw('Tried creating complex matrix without rows and columns arguments');
+  it('should throw error when tried creating a complex matrix without rows and columns arguments', function() {
+    (function() { new CMatrix(); }).should.throw('Tried creating a complex matrix without rows and columns arguments');
+    (function() { new CMatrix(1); }).should.throw('Tried creating a complex matrix without rows and columns arguments');
     (function() { new CMatrix(1, 2); }).should.not.throw();
   });
 
@@ -67,7 +67,7 @@ describe('CMatrix', function() {
       Complex(1, 1), Complex(2, 2), Complex(3, 3),
       Complex(4, 4), Complex(5, 5), Complex(6, 6)
       ]);
-    }).should.throw('Too few coefficients passed to CMatrix');
+    }).should.throw('Too few coefficients');
 
     (function() {
       CMatrix(3, 3).set([
@@ -76,7 +76,7 @@ describe('CMatrix', function() {
       Complex( 7,  7), Complex( 8,  8), Complex( 9,  9),
       Complex(10, 10), Complex(11, 11), Complex(12, 12)
       ]);
-    }).should.throw('Too many coefficients passed to CMatrix');
+    }).should.throw('Too many coefficients');
   });
 
   it('#equals() should return true if two CMatrix are equal', function() {

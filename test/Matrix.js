@@ -1,7 +1,8 @@
 const
-    Matrix = require('../index.js').Matrix,
-    Complex = require('../index.js').Complex,
-    CMatrix = require('../index.js').CMatrix,
+    Eigen = require('../index.js'),
+    Matrix = Eigen.Matrix,
+    Complex = Eigen.Complex,
+    CMatrix = Eigen.CMatrix,
     should = require('should');
 
 describe('Matrix', function() {
@@ -11,9 +12,9 @@ describe('Matrix', function() {
     Matrix.should.be.a.Function;
   });
 
-  it('should throw error when tried creating matrix without rows and columns arguments', function() {
-    (function() { new Matrix(); }).should.throw('Tried creating matrix without rows and columns arguments');
-    (function() { new Matrix(1); }).should.throw('Tried creating matrix without rows and columns arguments');
+  it('should throw error when tried creating a matrix without rows and columns arguments', function() {
+    (function() { new Matrix(); }).should.throw('Tried creating a matrix without rows and columns arguments');
+    (function() { new Matrix(1); }).should.throw('Tried creating a matrix without rows and columns arguments');
     (function() { new Matrix(1, 2); }).should.not.throw();
   });
 
@@ -66,7 +67,7 @@ describe('Matrix', function() {
         1, 2, 3,
         4, 5, 6
       ]);
-    }).should.throw('Too few coefficients passed to Matrix');
+    }).should.throw('Too few coefficients');
 
     (function() {
       Matrix(3, 3).set([
@@ -75,7 +76,7 @@ describe('Matrix', function() {
          7,  8,  9,
         10, 11, 12
       ]);
-    }).should.throw('Too many coefficients passed to Matrix');
+    }).should.throw('Too many coefficients');
   });
 
   it('#get() should return the element value of Matrix', function() {
