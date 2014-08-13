@@ -163,6 +163,8 @@ $ npm install eigenjs
     * [Vector(size)](#vectorsize)
     * [Vector(scalar_array)](#vectorscalararray)
   * [Vector Instance Methods](#vector-instance-methods)
+    * [vec.set(row, scalar)](#vecsetrow-scalar)
+    * [vec.set(scalar_array)](#vecsetscalarvalue)
 
 ## Complex
 
@@ -1523,7 +1525,9 @@ console.log('vec = \n%s', vec);
 ```js
 var Eigen = require('eigenjs')
   , V = Eigen.Vector
-  , vec = new V([1, 2, 3]);
+  , vec = new V([1,
+                 2,
+                 3]);
 console.log('vec = \n%s', vec);
 ```
 
@@ -1534,3 +1538,39 @@ console.log('vec = \n%s', vec);
 ```
 
 ### Vector Instance Methods
+
+#### vec.set(row, scalar)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V(3);
+vec.set(0, 1);
+vec.set(1, 2);
+vec.set(2, 3);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+1
+2
+3
+```
+
+#### vec.set(scalar_array)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V(3);
+vec.set([1,
+         2,
+         3]);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+1
+2
+3
+```
