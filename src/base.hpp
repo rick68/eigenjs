@@ -31,6 +31,22 @@
 
 namespace EigenJS {
 
+namespace detail {
+  template <typename ScalarType>
+  struct std_complex_dummy_ptr {
+    typedef ScalarType scalar_type;
+    typedef std::complex<scalar_type> value_type;
+
+    NAN_INLINE value_type& operator*() { return value_; }
+    NAN_INLINE const value_type& operator*() const { return value_; }
+    NAN_INLINE value_type* operator->() { return &value_; }
+    NAN_INLINE const value_type* operator->() const { return &value_; }
+
+   private:
+    value_type value_;
+  };
+}  // namespace detail
+
 template <
   template <typename, typename, const char*> class Derived
 , typename ScalarType
@@ -43,7 +59,14 @@ struct base : node::ObjectWrap {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef std::shared_ptr<value_type> pointer_type;
+  typedef typename std::conditional<
+      std::is_same<
+        value_type
+      , typename detail::std_complex_dummy_ptr<scalar_type>::value_type
+      >::value
+    , detail::std_complex_dummy_ptr<scalar_type>
+    , std::shared_ptr<value_type>
+    >::type pointer_type;
 
   static NAN_INLINE bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
@@ -169,25 +192,14 @@ struct base : node::ObjectWrap {
   }
 
  public:
-  NAN_INLINE value_type& operator*() {
-    return *value_ptr_;
-  }
-
-  NAN_INLINE const value_type& operator*() const {
-    return *value_ptr_;
-  }
-
-  NAN_INLINE value_type* operator->() {
-    return value_ptr_.get();
-  }
-
-  NAN_INLINE const value_type* operator->() const {
-    return value_ptr_.get();
-  }
+  NAN_INLINE value_type& operator*() { return *value_ptr_; }
+  NAN_INLINE const value_type& operator*() const { return *value_ptr_; }
+  NAN_INLINE value_type* operator->() { return value_ptr_.get(); }
+  NAN_INLINE const value_type* operator->() const { return value_ptr_.get(); }
 
  protected:
   base() : value_ptr_(new value_type()) {}
-
+  base(const Complex<scalar_type>&) : value_ptr_() {}
   base(const base& other)
     : value_ptr_(other.value_ptr_)
   {}
