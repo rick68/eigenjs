@@ -139,9 +139,13 @@
   ) BOOST_PP_SEQ_ELEM(1, data)                                               \
   /**/
 
+#define EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME )                       \
+  BOOST_PP_CAT( NAME, _definitions )                                         \
+  /**/
+
 #define EIGENJS_OBJECT_DEFINITIONS( NAME, SEQ )                              \
   template < typename ScalarType, typename ValueType >                       \
-  struct BOOST_PP_CAT( NAME, _definitions ) {                                \
+  struct EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME ) {                    \
     typedef NAME< ScalarType, ValueType > object_type;                       \
     typedef BOOST_PP_CAT(                                                    \
         boost::mpl::vector                                                   \
@@ -159,7 +163,7 @@
 
 #define EIGENJS_OBJECT_INITIALIZE( NAME, FT )                                \
   boost::mpl::for_each<                                                      \
-    typename BOOST_PP_CAT( NAME, _definitions )                              \
+    typename EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME )                  \
         < ScalarType, ValueType >::type                                      \
   > ( detail::initializer( FT ) );                                           \
   /**/

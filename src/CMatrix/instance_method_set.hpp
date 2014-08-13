@@ -72,8 +72,9 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
         } else if (CMatrix::is_scalar(args[2])) {
           const typename CMatrix::scalar_type& value = args[2]->NumberValue();
 
-          if (CMatrix::is_out_of_range(cmatrix, row, col))
+          if (CMatrix::is_out_of_range(cmatrix, row, col)) {
             NanReturnUndefined();
+          }
 
           cmatrix(row, col) = value;
         }

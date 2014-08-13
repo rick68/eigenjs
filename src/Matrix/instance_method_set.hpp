@@ -48,8 +48,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, set,
     const typename Matrix::value_type::Index& col = args[1]->Uint32Value();
     const typename Matrix::scalar_type& value = args[2]->NumberValue();
 
-    if (Matrix::is_out_of_range(matrix, row, col))
+    if (Matrix::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();
+    }
 
     matrix(row, col) = value;
   } else if (true) {
