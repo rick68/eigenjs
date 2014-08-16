@@ -88,10 +88,23 @@ SOURCES = \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
+    src/Vector.hpp \
+    src/Vector_fwd.hpp \
+    src/Vector/definitions.hpp \
+    src/Vector/instance_method_get.hpp \
+    src/Vector/instance_method_set.hpp \
     src/base.hpp \
-    src/definition.hpp
+    src/common_macro.hpp \
+    src/definition.hpp \
+    src/detail/initializer.hpp \
+    src/detail/is_eigen_matrix.hpp \
+    src/detail/is_matrix_or_cmatrix.hpp \
+    src/detail/is_rowvector_or_crowvector.hpp \
+    src/detail/is_vector_or_cvector.hpp \
+    src/detail/property_accessor_base.hpp \
+    src/throw_error.hpp
 
-FILTER = -build/include_what_you_use,-whitespace/braces,-whitespace/parens
+FILTER = -build/c++11,-build/include_what_you_use,-whitespace/braces,-whitespace/parens
 
 all:
 	cd $(TOPLEVEL) && node-gyp configure build
