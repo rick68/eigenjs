@@ -14,6 +14,8 @@
 
 #include <boost/config.hpp>
 
+#include <eigen3/Eigen/Dense>
+
 namespace EigenJS {
 
 BOOST_CONSTEXPR char vector_class_name[] = "Vector";

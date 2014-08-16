@@ -16,6 +16,9 @@
 #include <node.h>
 #include <nan.h>
 
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/int.hpp>
+
 #include <eigen3/Eigen/Dense>
 
 #include "base.hpp"
@@ -23,6 +26,7 @@
 #include "Complex.hpp"
 #include "Matrix_fwd.hpp"
 #include "Matrix/definitions.hpp"
+#include "Vector_fwd.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {
@@ -40,17 +44,9 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   typedef ValueType value_type;
 
   typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::CMatrix<
-      scalar_type
-    , Eigen::Matrix<
-        typename Complex::value_type
-      , Eigen::internal::traits<value_type>::RowsAtCompileTime
-      , Eigen::internal::traits<value_type>::ColsAtCompileTime
-      , Eigen::internal::traits<value_type>::Options
-      , Eigen::internal::traits<value_type>::MaxRowsAtCompileTime
-      , Eigen::internal::traits<value_type>::MaxColsAtCompileTime
-      >
-    > CMatrix;
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
+
+  typedef ::EigenJS::Vector<scalar_type> Vector;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -90,8 +86,8 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
     if (Matrix::is_scalar(args[0]) && Matrix::is_scalar(args[1])) {
       if (args.IsConstructCall()) {
         typename value_type::Index rows = args[0]->Uint32Value();
-        typename value_type::Index columns = args[1]->Uint32Value();
-        Matrix* obj = new Matrix(rows, columns);
+        typename value_type::Index cols = args[1]->Uint32Value();
+        Matrix* obj = new Matrix(rows, cols);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       } else {

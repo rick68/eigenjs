@@ -16,9 +16,17 @@
 #include <node.h>
 #include <nan.h>
 
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/int.hpp>
+
 #include <eigen3/Eigen/Dense>
 
+#include "base.hpp"
+#include "definition.hpp"
+#include "Complex.hpp"
 #include "Matrix.hpp"
+#include "CMatrix.hpp"
+#include "Vector_fwd.hpp"
 #include "Vector/definitions.hpp"
 #include "throw_error.hpp"
 
@@ -29,16 +37,16 @@ template <
 , typename ValueType
 , const char* ClassName
 >
-class Vector : public Matrix<ScalarType, ValueType> {
+class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
  public:
+  typedef base<::EigenJS::Vector, ScalarType, ValueType, ClassName> base_type;
+
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef ::EigenJS::Matrix<ScalarType, ValueType> Matrix;
-  typedef typename Matrix::Complex Complex;
-  typedef typename Matrix::CMatrix CMatrix;
-
-  typedef typename Matrix::base_type base_type;
+  typedef ::EigenJS::Complex<scalar_type> Complex;
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -57,11 +65,13 @@ class Vector : public Matrix<ScalarType, ValueType> {
   }
 
  private:
-  explicit Vector(const base_type& base) : base_type(base) {}
-
-  Vector(const typename value_type::Index& size)
-    : Matrix(size, 1)
+  explicit Vector(const base_type& base)
+    : base_type(base)
   {}
+
+  explicit Vector(const typename value_type::Index& rows)
+    : base_type()
+      { *base_type::value_ptr_ = value_type::Zero(rows, 1); }
 
   ~Vector() {}
 
@@ -82,8 +92,8 @@ class Vector : public Matrix<ScalarType, ValueType> {
         );
       }
 
-      if (args[0]->IsNumber()) {
-        typename value_type::Index size = args[0]->Uint32Value();
+      if (Vector::is_scalar(args[0])) {
+        typename value_type::Index size = args[0]->Int32Value();
         Vector* obj = new Vector(size);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
@@ -100,6 +110,27 @@ class Vector : public Matrix<ScalarType, ValueType> {
 
         obj->Wrap(args.This());
         NanReturnValue(args.This());
+      }
+    } else if (args_length == 2) {
+      if (Vector::is_scalar(args[0]) && Vector::is_scalar(args[1])) {
+        const typename value_type::Index& rows = args[0]->Int32Value();
+        const typename value_type::Index& cols = args[1]->Int32Value();
+        v8::Local<v8::Value> argv[] = { args[0], args[1] };
+        (void)cols;
+
+        if (args.IsConstructCall()) {
+          Vector* obj = new Vector(rows);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        } else {
+          NanReturnValue(
+            base_type::new_instance(
+              args
+            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+            , argv
+            )
+          );
+        }
       }
     }
 

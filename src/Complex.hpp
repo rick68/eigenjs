@@ -57,13 +57,13 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   }
 
  private:
+  explicit Complex(const value_type& value)
+    : base_type(*this)
+      { *base_type::value_ptr_ = value; }
+
   Complex(const scalar_type& real, const scalar_type& imag)
     : base_type(*this)
       { *base_type::value_ptr_ = value_type(real, imag); }
-
-  Complex(const value_type& value)
-    : base_type(*this)
-      { *base_type::value_ptr_ = value; }
 
   ~Complex() {}
 
