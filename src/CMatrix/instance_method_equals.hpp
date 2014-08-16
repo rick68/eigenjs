@@ -25,6 +25,10 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
         node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
     const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
 
+    if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+      NanReturnUndefined();
+    }
+
     NanReturnValue(NanNew<v8::Boolean>(cmatrix == rhs_cmatrix));
   }
 

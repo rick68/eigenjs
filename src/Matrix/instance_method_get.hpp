@@ -24,8 +24,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, get,
   ) {
     const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
     const typename Matrix::value_type& matrix = **obj;
-    const typename Matrix::value_type::Index& row = args[0]->Uint32Value();
-    const typename Matrix::value_type::Index& col = args[1]->Uint32Value();
+    const typename Matrix::value_type::Index& row = args[0]->Int32Value();
+    const typename Matrix::value_type::Index& col = args[1]->Int32Value();
 
     if (Matrix::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();

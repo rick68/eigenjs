@@ -33,6 +33,10 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
   const typename CMatrix::value_type& v = cmatrix;
   const typename CMatrix::value_type& w = rhs_cmatrix;
 
+  if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+    NanReturnUndefined();
+  }
+
   typedef Eigen::NumTraits<typename CMatrix::value_type::Scalar> num_traits;
   const typename num_traits::Real& prec =
       args_length == 2

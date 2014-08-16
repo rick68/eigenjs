@@ -18,11 +18,11 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, toString,
 {
-  const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  const typename Matrix::value_type& matrix = **obj;
+  const T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  const typename T::value_type& value = **obj;
 
   std::ostringstream result;
-  result << matrix;
+  result << value;
 
   NanScope();
   NanReturnValue(NanNew(result.str().c_str()));

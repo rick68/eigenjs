@@ -44,8 +44,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, set,
              args[1]->IsNumber() &&
              Matrix::is_scalar(args[2])
   ) {
-    const typename Matrix::value_type::Index& row = args[0]->Uint32Value();
-    const typename Matrix::value_type::Index& col = args[1]->Uint32Value();
+    const typename Matrix::value_type::Index& row = args[0]->Int32Value();
+    const typename Matrix::value_type::Index& col = args[1]->Int32Value();
     const typename Matrix::scalar_type& value = args[2]->NumberValue();
 
     if (Matrix::is_out_of_range(matrix, row, col)) {

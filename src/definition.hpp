@@ -31,10 +31,18 @@
 #include "detail/initializer.hpp"
 #include "detail/property_accessor_base.hpp"
 
+#define EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                          \
+  typedef typename T::scalar_type scalar_type;                               \
+  typedef ::EigenJS::Complex<scalar_type> Complex;                           \
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;                             \
+  typedef ::EigenJS::Vector<scalar_type> Vector;                             \
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;                           \
+  /**/
+
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
   template <typename T>                                                      \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _class_method_ ), NAME ) {       \
-    typedef T CLASS;                                                         \
+    EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \
       NODE_SET_METHOD(                                                       \
         ft                                                                   \
@@ -50,7 +58,7 @@
 #define EIGENJS_INSTANCE_METHOD( CLASS, NAME, ... /* CODE */ )               \
   template <typename T>                                                      \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _instance_method_ ), NAME ) {    \
-    typedef T CLASS;                                                         \
+    EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \
       NODE_SET_PROTOTYPE_METHOD(                                             \
         ft                                                                   \
@@ -70,7 +78,7 @@
   , BOOST_PP_CAT( _property_accessor_getter_, NAME )                         \
   ) : virtual ::EigenJS::detail::property_accessor_base                      \
   {                                                                          \
-    typedef T CLASS;                                                         \
+    EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     BOOST_PP_CAT(                                                            \
       CLASS                                                                  \
     , BOOST_PP_CAT( _property_accessor_getter_, NAME )                       \
@@ -86,7 +94,7 @@
   , BOOST_PP_CAT( _property_accessor_setter_, NAME )                         \
   ) : virtual ::EigenJS::detail::property_accessor_base                      \
   {                                                                          \
-    typedef T CLASS;                                                         \
+    EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     BOOST_PP_CAT(                                                            \
       CLASS                                                                  \
     , BOOST_PP_CAT( _property_accessor_setter_, NAME )                       \
@@ -136,7 +144,7 @@
   BOOST_PP_CAT(                                                              \
     BOOST_PP_CAT( BOOST_PP_SEQ_ELEM( 0, data ), _ )                          \
   , elem                                                                     \
-  ) BOOST_PP_SEQ_ELEM(1, data)                                               \
+  ) BOOST_PP_SEQ_ELEM( 1, data )                                             \
   /**/
 
 #define EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME )                       \
@@ -144,9 +152,8 @@
   /**/
 
 #define EIGENJS_OBJECT_DEFINITIONS( NAME, SEQ )                              \
-  template < typename ScalarType, typename ValueType >                       \
+  template < typename T >                                                    \
   struct EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME ) {                    \
-    typedef NAME< ScalarType, ValueType > object_type;                       \
     typedef BOOST_PP_CAT(                                                    \
         boost::mpl::vector                                                   \
       , BOOST_PP_SEQ_SIZE( SEQ )                                             \
@@ -154,7 +161,7 @@
       <                                                                      \
         BOOST_PP_SEQ_FOR_EACH_I(                                             \
           EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO                            \
-        , ( NAME )( < object_type > )                                        \
+        , ( NAME )( < T > )                                                  \
         , SEQ                                                                \
         )                                                                    \
       > type;                                                                \
@@ -164,7 +171,7 @@
 #define EIGENJS_OBJECT_INITIALIZE( NAME, FT )                                \
   boost::mpl::for_each<                                                      \
     typename EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME )                  \
-        < ScalarType, ValueType >::type                                      \
+        < typename base_type::derived_type >::type                           \
   > ( detail::initializer( FT ) );                                           \
   /**/
 

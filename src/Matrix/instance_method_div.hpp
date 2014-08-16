@@ -16,33 +16,30 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, div,
 {
-  typedef typename Matrix::Complex Complex;
-  typedef typename Matrix::CMatrix CMatrix;
-
   NanScope();
 
   if (args.Length() == 1) {
-    const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>( args.This() );
-    const typename Matrix::value_type& matrix = **obj;
+    const T* const& obj = node::ObjectWrap::Unwrap<T>( args.This() );
+    const typename T::value_type& value = **obj;
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Integer>(matrix.rows())
-    , NanNew<v8::Integer>(matrix.cols())
+      NanNew<v8::Integer>(value.rows())
+    , NanNew<v8::Integer>(value.cols())
     };
 
-    if (Matrix::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = Matrix::new_instance(
+    if (T::is_scalar(args[0])) {
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
-      typename Matrix::value_type& new_matrix = **new_obj;
+      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
+      typename T::value_type& new_value = **new_obj;
 
-      new_matrix = matrix / args[0]->NumberValue();
+      new_value = value / args[0]->NumberValue();
 
       NanReturnValue(instance);
-    } else if (Complex::is_complex(args[0])) {
+    } else if (T::is_complex(args[0])) {
       const Complex* const& rhs_obj =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
@@ -57,7 +54,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, div,
       typename CMatrix::value_type& new_cmatrix = **new_obj;
 
       new_cmatrix =
-          matrix.template cast<typename Complex::value_type>()
+          value.template cast<typename Complex::value_type>()
             /
           rhs_complex;
 

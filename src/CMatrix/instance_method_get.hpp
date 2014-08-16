@@ -26,8 +26,8 @@ EIGENJS_INSTANCE_METHOD(CMatrix, get,
   ) {
     const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
     const typename CMatrix::value_type& cmatrix = **obj;
-    const typename CMatrix::value_type::Index& row = args[0]->Uint32Value();
-    const typename CMatrix::value_type::Index& col = args[1]->Uint32Value();
+    const typename CMatrix::value_type::Index& row = args[0]->Int32Value();
+    const typename CMatrix::value_type::Index& col = args[1]->Int32Value();
 
     if (CMatrix::is_out_of_range(cmatrix, row, col)) {
       NanReturnUndefined();

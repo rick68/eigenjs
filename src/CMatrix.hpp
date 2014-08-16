@@ -16,6 +16,9 @@
 #include <node.h>
 #include <nan.h>
 
+#include <boost/mpl/at.hpp>
+#include <boost/mpl/int.hpp>
+
 #include <eigen3/Eigen/Dense>
 
 #include "base.hpp"
@@ -41,17 +44,7 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   typedef ValueType value_type;
 
   typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::Matrix<
-      scalar_type
-    , Eigen::Matrix<
-        scalar_type
-      , Eigen::internal::traits<value_type>::RowsAtCompileTime
-      , Eigen::internal::traits<value_type>::ColsAtCompileTime
-      , Eigen::internal::traits<value_type>::Options
-      , Eigen::internal::traits<value_type>::MaxRowsAtCompileTime
-      , Eigen::internal::traits<value_type>::MaxColsAtCompileTime
-      >
-    > Matrix;
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -69,7 +62,9 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   }
 
  private:
-  explicit CMatrix(const base_type& base) : base_type(base) {}
+  explicit CMatrix(const base_type& base)
+    : base_type(base)
+  {}
 
   CMatrix(
     const typename value_type::Index& rows
@@ -90,9 +85,9 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
 
     if (CMatrix::is_scalar(args[0]) && CMatrix::is_scalar(args[1])) {
       if (args.IsConstructCall()) {
-        typename value_type::Index rows = args[0]->Uint32Value();
-        typename value_type::Index columns = args[1]->Uint32Value();
-        CMatrix* obj = new CMatrix(rows, columns);
+        typename value_type::Index rows = args[0]->Int32Value();
+        typename value_type::Index cols = args[1]->Int32Value();
+        CMatrix* obj = new CMatrix(rows, cols);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       } else {

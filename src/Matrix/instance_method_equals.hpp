@@ -18,14 +18,31 @@ EIGENJS_INSTANCE_METHOD(Matrix, equals,
 {
   NanScope();
 
-  if (args.Length() == 1 && Matrix::is_matrix(args[0])) {
-    const Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    const typename Matrix::value_type& matrix = **obj;
-    const Matrix* rhs_obj =
-        node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-    const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+  if (args.Length() == 1) {
+    const T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
 
-    NanReturnValue(NanNew<v8::Boolean>(matrix == rhs_matrix));
+    if (Matrix::is_matrix(args[0])) {
+      const Matrix* rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_matrix));
+    } else if (Vector::is_vector(args[0])) {
+      const Vector* rhs_obj =
+          node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+      const typename Vector::value_type& rhs_vector = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_vector));
+    }
   }
 
   EIGENJS_THROW_ERROR_INVALID_ARGUMENT()

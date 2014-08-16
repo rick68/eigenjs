@@ -58,9 +58,9 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
     case 3:
       if (args[0]->IsNumber() && args[1]->IsNumber()) {
         const typename CMatrix::value_type::Index& row =
-            args[0]->Uint32Value();
+            args[0]->Int32Value();
         const typename CMatrix::value_type::Index& col =
-            args[1]->Uint32Value();
+            args[1]->Int32Value();
 
         if (CMatrix::is_complex(args[2]->ToObject())) {
           const Complex* const& rhs_obj =
