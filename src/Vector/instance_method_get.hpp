@@ -23,7 +23,7 @@ EIGENJS_INSTANCE_METHOD(Vector, get,
   ) {
     const Vector* const& obj = node::ObjectWrap::Unwrap<Vector>(args.This());
     const typename Vector::value_type& vector = **obj;
-    const typename Vector::value_type::Index& row = args[0]->Uint32Value();
+    const typename Vector::value_type::Index& row = args[0]->Int32Value();
 
     if (Vector::is_out_of_range(vector, row, 0)) {
       NanReturnUndefined();

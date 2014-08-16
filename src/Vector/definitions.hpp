@@ -15,12 +15,14 @@
 #include "../Vector_fwd.hpp"
 
 #include "instance_method_set.hpp"
+#include "instance_method_get.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Vector
 , (instance_method_set)
+  (instance_method_get)
 );
 
 }  // namespace EigenJS

@@ -42,7 +42,7 @@ EIGENJS_INSTANCE_METHOD(Vector, set,
              args[0]->IsNumber() &&
              Vector::is_scalar(args[1])
   ) {
-    const typename Vector::value_type::Index& row = args[0]->Uint32Value();
+    const typename Vector::value_type::Index& row = args[0]->Int32Value();
     const typename Vector::scalar_type& value = args[1]->NumberValue();
 
     if (Vector::is_out_of_range(vector, row, 0)) {
