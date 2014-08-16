@@ -747,6 +747,7 @@ mat2 =
 0 1 0
 ```
 
+#### Matrix.Random(n)
 #### Matrix.Random(rows, cols)
 
 ```js
