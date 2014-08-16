@@ -28,6 +28,9 @@
 #include "Complex_fwd.hpp"
 #include "Matrix_fwd.hpp"
 #include "CMatrix_fwd.hpp"
+#include "Vector_fwd.hpp"
+
+#include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
 
@@ -91,6 +94,10 @@ struct base : node::ObjectWrap {
     return CMatrix<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
+  static NAN_INLINE bool is_vector(const v8::Handle<v8::Value>& arg) {
+    return Vector<scalar_type, value_type>::base_type::has_instance(arg);
+  }
+
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
     NanScope();
     v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
@@ -120,28 +127,8 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      std::is_same<
-        typename T::value_type
-      , Eigen::Matrix<
-          typename Eigen::internal::traits<typename T::value_type>::Scalar
-        , Eigen::internal::traits<typename T::value_type>::RowsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::ColsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::Options
-        , Eigen::internal::traits<typename T::value_type>::MaxRowsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::MaxColsAtCompileTime
-        >
-      >
-    , std::is_same<
-        typename U::value_type
-      , Eigen::Matrix<
-          typename Eigen::internal::traits<typename U::value_type>::Scalar
-        , Eigen::internal::traits<typename U::value_type>::RowsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::ColsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::Options
-        , Eigen::internal::traits<typename U::value_type>::MaxRowsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::MaxColsAtCompileTime
-        >
-      >
+      detail::is_eigen_matrix<typename T::value_type>
+    , detail::is_eigen_matrix<typename U::value_type>
     >::value
   , bool
   >::type
@@ -158,28 +145,8 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      std::is_same<
-        typename T::value_type
-      , Eigen::Matrix<
-          typename Eigen::internal::traits<typename T::value_type>::Scalar
-        , Eigen::internal::traits<typename T::value_type>::RowsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::ColsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::Options
-        , Eigen::internal::traits<typename T::value_type>::MaxRowsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::MaxColsAtCompileTime
-        >
-      >
-    , std::is_same<
-        typename U::value_type
-      , Eigen::Matrix<
-          typename Eigen::internal::traits<typename U::value_type>::Scalar
-        , Eigen::internal::traits<typename U::value_type>::RowsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::ColsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::Options
-        , Eigen::internal::traits<typename U::value_type>::MaxRowsAtCompileTime
-        , Eigen::internal::traits<typename U::value_type>::MaxColsAtCompileTime
-        >
-      >
+      detail::is_eigen_matrix<typename T::value_type>
+    , detail::is_eigen_matrix<typename U::value_type>
     >::value
   , bool
   >::type
@@ -199,7 +166,9 @@ struct base : node::ObjectWrap {
 
  protected:
   base() : value_ptr_(new value_type()) {}
-  base(const Complex<scalar_type>&) : value_ptr_() {}
+
+  explicit base(const Complex<scalar_type>&) : value_ptr_() {}
+
   base(const base& other)
     : value_ptr_(other.value_ptr_)
   {}
