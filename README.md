@@ -94,9 +94,11 @@ $ npm install eigenjs
 * [Matrix](#matrix)
   * [Matrix Class Methods](#matrix-class-methods)
     * [Matrix(rows, cols)](#matrixrows-cols)
+    * [Matrix.Zero(n)](#matrixzeron)
     * [Matrix.Zero(rows, cols)](#matrixzerorows-cols)
     * [Matrix.Identity(n)](#matrixidentityn)
     * [Matrix.Identity(rows, cols)](#matrixidentityrows-cols)
+    * [Matrix.Random(n)](#matrixrandomn)
     * [Matrix.Random(rows, cols)](#matrixrandomrows-cols)
   * [Matrix Instance Methods](#matrix-instance-methods)
     * [mat.rows()](#matrows)
@@ -105,29 +107,39 @@ $ npm install eigenjs
     * [mat.set(scalar_array)](#matsetscalararray)
     * [mat.get(row, col)](#matgetrow-col)
     * [mat.add(mat)](#mataddmat)
+    * [mat.add(vec)](#mataddvec)
     * [mat.add(cmat)](#mataddcmat)
     * [mat.adda(mat)](#mataddamat)
+    * [mat.adda(vec)](#mataddavec)
     * [mat.sub(mat)](#matsubmat)
+    * [mat.sub(vec)](#matsubvec)
     * [mat.sub(cmat)](#matsubcmat)
     * [mat.suba(mat)](#matsubamat)
+    * [mat.suba(vec)](#matsubavec)
     * [mat.mul(scalar)](#matmulscalar)
     * [mat.mul(comp)](#matmulcomp)
     * [mat.mul(mat)](#matmulmat)
+    * [mat.mul(vec)](#matmulvec)
     * [mat.mul(cmat)](#matmulcmat)
     * [mat.mula(scalar)](#matmulascalar)
+    * [mat.mula(vec)](#matmulavec)
     * [mat.mula(mat)](#matmulamat)
     * [mat.div(scalar)](#matdivscalar)
     * [mat.div(comp)](#matdivcomp)
     * [mat.diva(scalar)](#matdivascalar)
     * [mat.equals(mat)](#matequalsmat)
+    * [mat.equals(vec)](#matequalsvec)
     * [mat.isApprox(mat, [prec = 1e-12])](#matisapproxmat-prec--1e-12)
+    * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.toString()](#mattostring)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
+    * [CMatrix.Zero(n)](#cmatrixzeron)
     * [CMatrix.Zero(rows, cols)](#cmatrixzerorows-cols)
     * [CMatrix.Identity(n)](#cmatrixidentityn)
     * [CMatrix.Identity(rows, cols)](#cmatrixidentityrows-cols)
+    * [CMatrix.Random(n)](#cmatrixrandomn)
     * [CMatrix.Random(rows, cols)](#cmatrixrandomrows-cols)
   * [Complex Matrix Instance Methods](#complex-matrix-instance-methods)
     * [cmat.rows()](#cmatrows)
@@ -160,11 +172,12 @@ $ npm install eigenjs
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **is inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods) 
-    * [Vector(size)](#vectorsize)
+    * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalararray)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalarvalue)
+    * [vec.get(row)](#vecgetrow)
 
 ## Complex
 
@@ -699,6 +712,7 @@ mat =
 0 0 0
 ```
 
+#### Matrix.Zero(n)
 #### Matrix.Zero(rows, cols)
 
 ```js
@@ -821,6 +835,7 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 ```
 
 #### mat.add(mat)
+#### mat.add(vec)
 #### mat.add(cmat)
 
 ```js
@@ -847,6 +862,7 @@ mat3 =
 ```
 
 #### mat.adda(mat)
+#### mat.adda(vec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -871,6 +887,7 @@ mat1 =
 ```
 
 #### mat.sub(mat)
+#### mat.sub(vec)
 #### mat.sub(cmat)
 
 ```js
@@ -897,6 +914,7 @@ mat3 =
 ```
 
 #### mat.suba(mat)
+#### mat.suba(vec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -923,6 +941,7 @@ mat1 =
 #### mat.mul(scalar)
 #### mat.mul(comp)
 #### mat.mul(mat)
+#### mat.mul(vec)
 #### mat.mul(cmat)
 
 ```js
@@ -951,6 +970,7 @@ mat2 =
 
 #### mat.mula(scalar)
 #### mat.mula(mat)
+#### mat.mula(vec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1016,6 +1036,7 @@ mat =
 ```
 
 #### mat.equals(mat)
+#### mat.equals(vec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1042,6 +1063,7 @@ true
 ```
 
 #### mat.isApprox(mat, [prec = 1e-12])
+#### mat.isApprox(vec, [prec = 1e-12])
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1096,6 +1118,7 @@ cmat =
 (0,0) (0,0) (0,0)
 ```
 
+#### CMatrix.Zero(n)
 #### CMatrix.Zero(rows, cols)
 
 ```js
@@ -1129,6 +1152,7 @@ cmat2 =
 (0,0) (1,0) (0,0)
 ```
 
+#### CMatrix.Random(n)
 #### CMatrix.Random(rows, cols)
 
 ```js
@@ -1505,7 +1529,7 @@ cmat =
 
 ### Vector Class Methods
 
-#### Vector(size)
+#### Vector(rows)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1567,6 +1591,25 @@ vec.set([1,
          2,
          3]);
 console.log('vec = \n%s', vec);
+```
+
+```txt
+1
+2
+3
+```
+
+#### vec.get(row)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V([1,
+                 2,
+                 3]);
+console.log(vec.get(0).toString());
+console.log(vec.get(1).toString());
+console.log(vec.get(2).toString());
 ```
 
 ```txt
