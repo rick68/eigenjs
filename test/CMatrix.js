@@ -79,7 +79,7 @@ describe('CMatrix', function() {
     }).should.throw('Too many coefficients');
   });
 
-  it('#equals() should return true if two CMatrix are equal', function() {
+  it('#equals() should return true if two complex matrices are equal', function() {
     cmat.equals.should.be.a.Function;
 
     cmat.equals(cmat).should.ok;
@@ -89,6 +89,10 @@ describe('CMatrix', function() {
       Complex(4, 4), Complex(5, 5), Complex(6, 6),
       Complex(7, 7), Complex(8, 8), Complex(9, 9)
     ])).should.ok;
+
+    (function() {
+      cmat.equals(new CMatrix(1, 1).set([68]));
+    }).should.throw("Nonconformant arguments");
   });
 
   it('#get() should return the element value of CMatrix', function() {
@@ -431,6 +435,14 @@ describe('CMatrix', function() {
     ]);
     cmat.div(9).isApprox(cmat2, 1e-3).should.false;
     cmat.div(9).isApprox(cmat2, 1e-2).should.true;
+
+    (function() {
+      cmat.isApprox(
+        new CMatrix(1, 1).set([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
   });
 
   it('#Zero() should return a zero complex matrix', function() {
@@ -470,8 +482,12 @@ describe('CMatrix', function() {
   it('#Random() should return a complex matrix with random complex values', function() {
     CMatrix.Random.should.be.a.Function;
 
-    (function() {
-      CMatrix.Random(3);
-    }).should.throw("Invalid rows or columns arguments");
+    var cmat2 = CMatrix.Random(3);
+    cmat2.rows().should.equal(3);
+    cmat2.cols().should.equal(3);
+
+    var cmat3 = CMatrix.Random(3, 4);
+    cmat3.rows().should.equal(3);
+    cmat3.cols().should.equal(4);
   });
 });

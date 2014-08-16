@@ -1,6 +1,9 @@
 const
     Eigen = require('../index.js'),
     Vector = Eigen.Vector,
+    Matrix = Eigen.Matrix,
+    CMatrix = Eigen.CMatrix,
+    Complex = Eigen.Complex,
     should = require('should');
 
 describe('Vector', function() {
@@ -13,7 +16,7 @@ describe('Vector', function() {
   it('should throw error when tried creating a vector without size or a scalar array argument', function() {
     (function() { new Vector(); }).should.throw('Invalid argument');
     (function() { new Vector(1); }).should.not.throw();
-    (function() { new Vector(1, 2); }).should.throw('Invalid argument');
+    Vector(1, 2).toString().should.equal("0");
   });
 
   it('should be invoked with size argument and return an object', function() {
@@ -35,367 +38,491 @@ describe('Vector', function() {
   })
 
   beforeEach(function() {
-    vec = Vector([1, 2, 3, 4, 5, 6]);
+    vec = Vector([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+      ]);
   });
 
-/*
-  it('#set() should throw message when row or column nubers are out of range', function() {
-    mat.set.should.be.a.Function;
+  it('#set() should throw message when the row is out of range', function() {
+    vec.set.should.be.a.Function;
 
     (function() {
-      mat.set(3, 0, 68);
+      vec.set(6, 68);
     }).should.throw('Row or column numbers are out of range');
     (function() {
-      mat.set(-1, -2, 500);
+      vec.set(-1, 500);
     }).should.throw('Row or column numbers are out of range');
   });
 
   it('#set() with array argument should work ok', function() {
-    mat.set.should.be.a.Function;
+    vec.set.should.be.a.Function;
 
-    Matrix(3, 3).set([
-      1, 2, 3,
-      4, 5, 6,
-      7, 8, 9
-    ]).toString().should.eql(mat.toString());
+    Vector(6).set([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]).toString().should.eql(vec.toString());
 
     (function() {
-      Matrix(3, 3).set([
-        1, 2, 3,
-        4, 5, 6
+      Vector(6).set([
+        1,
+        2,
+        3
       ]);
     }).should.throw('Too few coefficients');
 
     (function() {
-      Matrix(3, 3).set([
-         1,  2,  3,
-         4,  5,  6,
-         7,  8,  9,
-        10, 11, 12
+      Vector(6).set([
+         1,
+         2,
+         3,
+         4,
+         5,
+         6,
+         7
       ]);
     }).should.throw('Too many coefficients');
   });
 
-  it('#get() should return the element value of Matrix', function() {
-    mat.get.should.be.a.Function;
+  it('#get() should return the element value of Vector', function() {
+    vec.get.should.be.a.Function;
 
-    mat.get(0, 0).should.equal(1);
-    mat.get(0, 1).should.equal(2);
-    mat.get(0, 2).should.equal(3);
-    mat.get(1, 0).should.equal(4);
-    mat.get(1, 1).should.equal(5);
-    mat.get(1, 2).should.equal(6);
-    mat.get(2, 0).should.equal(7);
-    mat.get(2, 1).should.equal(8);
-    mat.get(2, 2).should.equal(9);
+    vec.get(0).should.equal(1);
+    vec.get(1).should.equal(2);
+    vec.get(2).should.equal(3);
+    vec.get(3).should.equal(4);
+    vec.get(4).should.equal(5);
+    vec.get(5).should.equal(6);
     (function(){
-      mat.get(3, 0);
+      vec.get(6);
     }).should.throw('Row or column numbers are out of range');
   });
 
-  it('#toString() should return all element values of Matrix', function() {
-    mat.toString.should.be.a.Function;
+  it('#toString() should return all element values of Vector', function() {
+    vec.toString.should.be.a.Function;
 
-    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
   });
 
-  it('#add() should return the sum of two matrices', function() {
-    mat.add.should.be.a.Function;
+  it('#add() should return the sum of two vector', function() {
+    vec.add.should.be.a.Function;
 
-    Matrix(3, 3).set([
-       2,  4,  6,
-       8,  9, 10,
-      11, 12, 13
-    ]).add(mat).toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
+    Vector(6).set([
+       2,
+       4,
+       6,
+       8,
+      10,
+      12
+    ]).add(vec).toString().should.equal(" 3\n 6\n 9\n12\n15\n18");
 
     (function() {
-      Matrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
-      ]).add(mat);
+      Vector(2).set([
+        1,
+        0
+      ]).add(vec);
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#add() should return a CMatrix with the sum of a matrix and a complex matrix', function() {
-    mat.add.should.be.a.Function;
+  it('#add() should return the sum of a vector and a matrix', function() {
+    vec.add.should.be.a.Function;
 
-    var cmat = CMatrix(3, 3).set([
-      2,  4,  6,
-      8,  9, 10,
-     11, 12, 13
-    ]);
-    mat.add(cmat).toString().should.equal(" (3,0)  (6,0)  (9,0)\n(12,0) (14,0) (16,0)\n(18,0) (20,0) (22,0)");
+    vec.add(
+      Matrix(6, 1).set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
+      ])
+     ).toString().should.equal(" 3\n 6\n 9\n12\n15\n18");
 
     (function() {
-      Matrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
-      ]).add(mat);
+      vec.add(
+        Matrix(2, 1).set([
+          1,
+          0
+        ])
+      );
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#adda() should return the sum of two matrices and saves it back', function() {
-    mat.adda.should.be.a.Function;
+  it('#add() should return the sum of a vector and a complex matrix', function() {
+    vec.add.should.be.a.Function;
 
-    mat.adda(
-      Matrix(3, 3)
+    vec.add(
+      CMatrix(6, 1).set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
+      ])
+     ).toString().should.equal(" (3,0)\n (6,0)\n (9,0)\n(12,0)\n(15,0)\n(18,0)");
+
+    (function() {
+      vec.add(
+        CMatrix(2, 1).set([
+          1,
+          0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of two vector and saves it back', function() {
+    vec.adda.should.be.a.Function;
+
+    vec.adda(
+      Vector(6)
       .set([
-         2,  4,  6,
-         8,  9, 10,
-        11, 12, 13
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
       ])
     );
-    mat.toString().should.equal(" 3  6  9\n12 14 16\n18 20 22");
+    vec.toString().should.equal(" 3\n 6\n 9\n12\n15\n18");
 
-    (function() {
-      mat.adda(
-        Matrix(2, 3)
-        .set([
-          1, 0, 0,
-          0, 1, 0
-        ])
-      );
-    }).should.throw("Nonconformant arguments");
+  });
 
-    var cmat = CMatrix(3, 3).set([
-       2,  4,  6,
-       8,  9, 10,
-      11, 12, 13
+  it('#adda() should return the sum of a vector and a matrix then saves it back', function() {
+    vec.adda.should.be.a.Function;
+
+    vec.adda(
+      Matrix(6, 1)
+      .set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
+      ])
+    );
+    vec.toString().should.equal(" 3\n 6\n 9\n12\n15\n18");
+
+    var cmat = CMatrix(6, 1).set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
     ]);
 
     (function() {
-      mat.adda(cmat);
+      vec.adda(cmat);
     }).should.throw("Invalid argument");
   });
 
-  it('#sub() should return the difference of two matrices', function() {
-    mat.sub.should.be.a.Function;
+  it('#sub() should return the difference of two vectors', function() {
+    vec.sub.should.be.a.Function;
 
-    Matrix(3, 3).set([
-       1,  3,  5,
-       7,  9, 11,
-      13, 15, 17
-    ]).sub(mat).toString().should.equal("0 1 2\n3 4 5\n6 7 8");
+    vec.sub(
+      Vector(6).set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
+      ])
+     ).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
 
     (function() {
-      Matrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
-      ]).sub(mat);
+      vec.sub(Vector([
+        1,
+        2,
+        3
+      ]));
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#sub() should return a CMatrix with the sum of a matrix and complex matrix', function() {
-    mat.add.should.be.a.Function;
+  it('#sub() should return the difference of a vector and a matrix', function() {
+    vec.sub.should.be.a.Function;
 
-    var cmat = CMatrix(3, 3).set([
-      Complex( 2, 0), Complex( 4, 1),  Complex(6, 2),
-      Complex( 8, 4), Complex( 9, 5), Complex(10, 6),
-      Complex(11, 7), Complex(12, 8), Complex(13, 9)
-    ]);
-
-    mat.sub(cmat).toString().should.equal(" (-1,0) (-2,-1) (-3,-2)\n(-4,-4) (-4,-5) (-4,-6)\n(-4,-7) (-4,-8) (-4,-9)");
+    vec.sub(
+      Matrix(6, 1).set([
+         2,
+         4,
+         6,
+         8,
+        10,
+        12
+      ])
+     ).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
 
     (function() {
-      mat.sub(
-        CMatrix(2, 3).set([
-          1, 0, 0,
-          0, 1, 0
+      vec.sub(
+        Matrix(3, 1).set([
+          1,
+          2,
+          3
         ])
       );
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#suba() should return the difference of two matrices and saves it back', function() {
-    mat.suba.should.be.a.Function;
+  it('#sub() should return a CMatrix with the sum of a vector and a complex matrix', function() {
+    vec.add.should.be.a.Function;
 
-    var mat2 = Matrix(3, 3)
-    .set([
-       1,  3,  5,
-       7,  9, 11,
-      13, 15, 17
+    var cmat = CMatrix(6, 1).set([
+      Complex( 2, 0),
+      Complex( 4, 1),
+      Complex( 6, 2),
+      Complex( 8, 4),
+      Complex( 9, 5),
+      Complex(10, 6),
     ]);
-    mat2.suba(mat);
-    mat2.toString().should.equal("0 1 2\n3 4 5\n6 7 8");
+
+    vec.sub(cmat).toString().should.equal(" (-1,0)\n(-2,-1)\n(-3,-2)\n(-4,-4)\n(-4,-5)\n(-4,-6)");
 
     (function() {
-      mat.suba(
-        Matrix(2, 3)
-        .set([
-          1, 0, 0,
-          0, 1, 0
+      vec.sub(
+        CMatrix(3, 1).set([
+          1,
+          2,
+          3
         ])
       );
     }).should.throw("Nonconformant arguments");
+  });
 
-    var cmat = CMatrix(3, 3).set([
-       2,  4,  6,
-       8,  9, 10,
-      11, 12, 13
+  it('#suba() should return the difference of two vectors and saves it back', function() {
+    vec.suba.should.be.a.Function;
+
+    var vec2 = Vector([
+       2,
+       4, 
+       6,
+       8,
+      10,
+      12
+    ]);
+    vec2.suba(vec);
+    vec2.toString().should.equal("1\n2\n3\n4\n5\n6");
+  });
+
+  it('#suba() should return the difference of a vector and a matrix then saves it back', function() {
+    vec.suba.should.be.a.Function;
+
+    var mat = Matrix(6, 1).set([
+       2,
+       4, 
+       6,
+       8,
+      10,
+      12
+    ]);
+    vec.suba(mat);
+    vec.toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
+
+    var cmat = CMatrix(6, 1).set([
+       2,
+       4, 
+       6,
+       8,
+      10,
+      12
     ]);
 
     (function() {
-      mat.suba(cmat);
+      vec.suba(cmat);
     }).should.throw("Invalid argument");
   });
 
-  it('#mul() should return the product of two matrices', function() {
-    mat.mul.should.be.a.Function;
+  it('#mul() should return the product of two vectors', function() {
+    vec.mul.should.be.a.Function;
 
-    var vector = new Matrix(3, 1).set([1, 2, 3]);
-    mat.mul(vector).toString().should.equal("14\n32\n50");
+    var vec2 = new Vector([-1]);
+    vec.mul(vec2).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
 
     (function() {
-      vector.mul(mat);
+      vec2.mul(vec)
     }).should.throw("Invalid matrix product");
   });
 
-  it('#mul() should return a CMatrix with the product of a matrix and a complex matrix', function() {
-    mat.mul.should.be.a.Function;
+  it('#mul() should return the product of a vector and a matrix', function() {
+    vec.mul.should.be.a.Function;
 
-    var cvector = new CMatrix(3, 1).set([Complex(1, 1), Complex(2, 2), Complex(3, 3)]);
-    mat.mul(cvector).toString().should.equal("14\n14\n32");
+    var mat = new Matrix(1, 6).set([
+       2, 4, 6, 8, 10, 12
+    ]);
+    vec.mul(mat).toString().should.equal(" 2  4  6  8 10 12\n 4  8 12 16 20 24\n 6 12 18 24 30 36\n 8 16 24 32 40 48\n10 20 30 40 50 60\n12 24 36 48 60 72");
 
     (function() {
-      cvector.mul(mat);
+      vec.mul(Matrix(3, 1).set([2, 4, 6]));
     }).should.throw("Invalid matrix product");
   });
 
-  it('#mul() should return the product of a matrix and a scalar', function() {
-    mat.mul.should.be.a.Function;
+  it('#mul() should return a CMatrix with the product of a vector and a complex matrix', function() {
+    vec.mul.should.be.a.Function;
 
-    mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
+    var cmat = new CMatrix(1, 3).set([Complex(1, 1), Complex(2, 2), Complex(3, 3)]);
+    vec.mul(cmat).toString().should.equal("  (1,1)   (2,2)   (3,3)\n  (2,2)   (4,4)   (6,6)\n  (3,3)   (6,6)   (9,9)\n  (4,4)   (8,8) (12,12)\n  (5,5) (10,10) (15,15)\n  (6,6) (12,12) (18,18)");
   });
 
-  it('#mula() should return the product of two matrices and saves it back', function() {
-    mat.mula.should.be.a.Function;
+  it('#mul() should return the product of a vector and a scalar', function() {
+    vec.mul.should.be.a.Function;
 
-    var vector = new Matrix(3, 1).set([1, 2, 3]);
-    mat.mula(vector);
-    mat.toString().should.equal("14\n32\n50");
-
-    (function() {
-      vector.mula(mat);
-    }).should.throw("Invalid matrix product");
+    vec.mul(-1).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
   });
 
-  it('#mula() should return the product of a matrices and a scalar value then saves it back', function() {
-    mat.mula.should.be.a.Function;
+  it('#mula() should return the product of a vector and a scalar value then saves it back', function() {
+    vec.mula.should.be.a.Function;
 
-    mat.mula(-1);
-    mat.toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
+    vec.mula(-1);
+    vec.toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
   });
 
-  it('#mul() should return a CMatrix with the product of a matrix and a complex', function() {
-    mat.mul.should.be.a.Function;
+  it('#mul() should return a CMatrix with the product of a vector and a complex', function() {
+    vec.mul.should.be.a.Function;
 
     var c = new Complex(-1, 0);
-    mat.mul(c).toString().should.equal("(-1,0) (-2,0) (-3,0)\n(-4,0) (-5,0) (-6,0)\n(-7,0) (-8,0) (-9,0)");
+    vec.mul(c).toString().should.equal("(-1,0)\n(-2,0)\n(-3,0)\n(-4,0)\n(-5,0)\n(-6,0)");
   });
 
-  it('#div() should return a Matrix which be divied by a scalar value', function() {
-    mat.div.should.be.a.Function;
+  it('#div() should return a Vector which be divied by a scalar value', function() {
+    vec.div.should.be.a.Function;
 
-    var mat2 = mat.div(0);
-    mat2.equals(
-      new Matrix(3, 3)
+    var vec2 = vec.div(0);
+
+    vec2.equals(
+      new Vector(6)
       .set([
-        Infinity, Infinity, Infinity,
-        Infinity, Infinity, Infinity,
-        Infinity, Infinity, Infinity
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity
       ])
     ).should.ok;
-    mat.div(2).toString().should.equal("0.5   1 1.5\n  2 2.5   3\n3.5   4 4.5");
+    vec.div(2).toString().should.equal("0.5\n  1\n1.5\n  2\n2.5\n  3");
   });
 
-  it('#div() should return a Matrix which be divied by a complex value', function() {
-    mat.div.should.be.a.Function;
+  it('#div() should return a Vector which be divied by a complex value', function() {
+    vec.div.should.be.a.Function;
 
-    mat.div(Complex(2, 0)).toString().should.equal("(0.5,0)   (1,0) (1.5,0)\n  (2,0) (2.5,0)   (3,0)\n(3.5,0)   (4,0) (4.5,0)");
+    vec.div(Complex(2, 0)).toString().should.equal("(0.5,0)\n  (1,0)\n(1.5,0)\n  (2,0)\n(2.5,0)\n  (3,0)");
   });
 
   it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
-    mat.diva.should.be.a.Function;
+    vec.diva.should.be.a.Function;
 
-    mat.diva(0);
-    mat.equals(
-      new Matrix(3, 3)
+    vec.diva(0);
+    vec.equals(
+      new Vector(6)
       .set([
-        Infinity, Infinity, Infinity,
-        Infinity, Infinity, Infinity,
-        Infinity, Infinity, Infinity
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity,
+        Infinity
       ])
     ).should.ok;
-    mat.get(0, 0).should.be.a.Infinity;
+    vec.get(0).should.be.a.Infinity;
   });
 
-  it('#equals() should return true if two Matrix are equal', function() {
-    mat.equals.should.be.a.Function;
+  it('#equals() should return true if two vectors are equal', function() {
+    vec.equals.should.be.a.Function;
 
-    mat.equals(mat).should.ok;
-    mat.equals(new Matrix(3, 3).set([
-      1, 2, 3,
-      4, 5, 6,
-      7, 8, 9
+    vec.equals(vec).should.ok;
+    vec.equals(new Vector([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
     ])).should.ok;
   });
 
   it('#isApprox() should return true if this is approximately equal to other', function() {
-    mat.isApprox.should.be.a.Function;
+    vec.isApprox.should.be.a.Function;
 
-    var mat2 = new Matrix(3, 3).set([
-      0.111, 0.222, 0.333,
-      0.444, 0.555, 0.666,
-      0.777, 0.888, 0.999
+    var vec2 = new Vector(6).set([
+      0.111,
+      0.222,
+      0.333,
+      0.444,
+      0.555,
+      0.666
     ]);
-    mat.div(9).isApprox(mat2, 1e-3).should.false;
-    mat.div(9).isApprox(mat2, 1e-2).should.true;
+    vec.div(9).isApprox(vec2, 1e-3).should.false;
+    vec.div(9).isApprox(vec2, 1e-2).should.true;
+
+    (function() {
+      vec.isApprox(
+        new Vector([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
   });
 
-  it('#Zero() should return a zero matrix', function() {
-    Matrix.Zero.should.be.a.Function;
+  it('#Zero() should return a zero vector', function() {
+    Vector.Zero.should.be.a.Function;
 
-    Matrix.Zero(3, 3).toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+    Vector.Zero(6).toString().should.equal("0\n0\n0\n0\n0\n0");
 
-    Matrix.Zero(3, 4).equals(
-      new Matrix(3, 4).set([
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0
+    Vector.Zero(3).equals(
+      new Vector([
+        0,
+        0,
+        0, 
       ])
     ).should.true;
-
-    (function() {
-      Matrix.Zero(3);
-    }).should.throw("Invalid rows or columns arguments");
   });
 
-  it('#Identity() should return a identity matrix', function() {
-    Matrix.Identity.should.be.a.Function;
+  it('#Identity() should return a identity vector', function() {
+    Vector.Identity.should.be.a.Function;
 
-    Matrix.Identity(0).toString().should.equal("");
+    Vector.Identity(0).toString().should.equal("");
 
-    mat = Matrix.Identity(3);
-    mat.equals(new Matrix(3, 3).set([
-      1, 0, 0,
-      0, 1, 0,
-      0, 0, 1
+    vec = Vector.Identity(3);
+    vec.equals(new Vector([
+      1,
+      0,
+      0
     ])).should.true;
 
-    mat = Matrix.Identity(3, 4);
-    mat.equals(new Matrix(3, 4).set([
-      1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, 1, 0
-    ])).should.true;
-  });
-
-  it('#Random() should return a matrix with random values', function() {
-    Matrix.Random.should.be.a.Function;
-
     (function() {
-      Matrix.Random(3);
-    }).should.throw("Invalid rows or columns arguments");
+      vec.equals(
+        new Vector([
+          1,
+          0,
+          0,
+          0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
   });
-*/
+
+  it('#Random() should return a vectorx with random values', function() {
+    Vector.Random.should.be.a.Function;
+
+    var vec2 = Vector.Random(3);
+    vec2.rows().should.equal(3);
+    vec2.cols().should.equal(1);
+
+    var vec3 = Vector.Random(3, 999);
+    vec3.rows().should.equal(3);
+    vec3.cols().should.equal(1);
+
+  });
 });

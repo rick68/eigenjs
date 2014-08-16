@@ -1,7 +1,8 @@
 const
     Eigen = require('../index.js'),
-    Matrix = Eigen.Matrix,
     Complex = Eigen.Complex,
+    Matrix = Eigen.Matrix,
+    Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
     should = require('should');
 
@@ -188,7 +189,7 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#sub() should return a CMatrix with the sum of a matrix and complex matrix', function() {
+  it('#sub() should return a CMatrix with the sum of a matrix and a complex matrix', function() {
     mat.add.should.be.a.Function;
 
     var cmat = CMatrix(3, 3).set([
@@ -253,11 +254,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid matrix product");
   });
 
+  it('#mul() should return the product of a matrix and a vector', function() {
+    mat.mul.should.be.a.Function;
+
+    var vec = new Vector([1, 2, 3]);
+    mat.mul(vec).toString().should.equal("14\n32\n50");
+
+    (function() {
+      vec.mul(mat);
+    }).should.throw("Invalid matrix product");
+  });
+
   it('#mul() should return a CMatrix with the product of a matrix and a complex matrix', function() {
     mat.mul.should.be.a.Function;
 
     var cvector = new CMatrix(3, 1).set([Complex(1, 1), Complex(2, 2), Complex(3, 3)]);
-    mat.mul(cvector).toString().should.equal("14\n14\n32");
+    mat.mul(cvector).toString().should.equal("(14,14)\n(32,32)\n(50,50)");
 
     (function() {
       cvector.mul(mat);
@@ -332,7 +344,7 @@ describe('Matrix', function() {
     mat.get(0, 0).should.be.a.Infinity;
   });
 
-  it('#equals() should return true if two Matrix are equal', function() {
+  it('#equals() should return true if two matrices are equal', function() {
     mat.equals.should.be.a.Function;
 
     mat.equals(mat).should.ok;
@@ -353,12 +365,22 @@ describe('Matrix', function() {
     ]);
     mat.div(9).isApprox(mat2, 1e-3).should.false;
     mat.div(9).isApprox(mat2, 1e-2).should.true;
+
+    (function() {
+      mat.isApprox(
+        new Matrix(1, 1).set([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
   });
 
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 
     Matrix.Zero(3, 3).toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+
+    Matrix.Zero(3).toString().should.equal("0 0 0\n0 0 0\n0 0 0");
 
     Matrix.Zero(3, 4).equals(
       new Matrix(3, 4).set([
@@ -367,10 +389,6 @@ describe('Matrix', function() {
         0, 0, 0, 0
       ])
     ).should.true;
-
-    (function() {
-      Matrix.Zero(3);
-    }).should.throw("Invalid rows or columns arguments");
   });
 
   it('#Identity() should return a identity matrix', function() {
@@ -385,19 +403,27 @@ describe('Matrix', function() {
       0, 0, 1
     ])).should.true;
 
-    mat = Matrix.Identity(3, 4);
-    mat.equals(new Matrix(3, 4).set([
+    var mat2 = Matrix.Identity(3, 4);
+    mat2.equals(new Matrix(3, 4).set([
       1, 0, 0, 0,
       0, 1, 0, 0,
       0, 0, 1, 0
     ])).should.true;
+
+    (function() {
+      mat.equals(mat2);
+    }).should.throw("Nonconformant arguments");
   });
 
   it('#Random() should return a matrix with random values', function() {
     Matrix.Random.should.be.a.Function;
 
-    (function() {
-      Matrix.Random(3);
-    }).should.throw("Invalid rows or columns arguments");
+    var mat2 = CMatrix.Random(3);
+    mat2.rows().should.equal(3);
+    mat2.cols().should.equal(3);
+
+    var mat3 = CMatrix.Random(3, 4);
+    mat3.rows().should.equal(3);
+    mat3.cols().should.equal(4);
   });
 });
