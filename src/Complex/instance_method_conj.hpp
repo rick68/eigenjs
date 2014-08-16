@@ -17,8 +17,8 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(Complex, conj,
 {
   const Complex* const& obj = node::ObjectWrap::Unwrap<Complex>(args.This());
-  const typename Complex::complex_type& complex = **obj;
-  const typename Complex::complex_type& c = std::conj(complex);
+  const typename Complex::value_type& complex = **obj;
+  const typename Complex::value_type& c = std::conj(complex);
   const typename Complex::scalar_type& real = c.real();
   const typename Complex::scalar_type& imag = c.imag();
 

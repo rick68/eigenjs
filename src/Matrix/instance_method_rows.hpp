@@ -16,11 +16,11 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, rows,
 {
-  const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  const typename Matrix::matrix_type& matrix = **obj;
+  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+  const typename T::value_type& value = **obj;
 
   NanScope();
-  NanReturnValue(NanNew<v8::Integer>(matrix.rows()));
+  NanReturnValue(NanNew<v8::Integer>(value.rows()));
 })
 
 }  // namespace EigenJS

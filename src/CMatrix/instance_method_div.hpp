@@ -22,7 +22,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
 
   if (args.Length() == 1) {
     const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    const typename CMatrix::cmatrix_type& cmatrix = **obj;
+    const typename CMatrix::value_type& cmatrix = **obj;
     v8::Local<v8::Value> argv[] = {
       NanNew<v8::Integer>(cmatrix.rows())
     , NanNew<v8::Integer>(cmatrix.cols())
@@ -36,7 +36,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
       );
 
       CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-      typename CMatrix::cmatrix_type& new_cmatrix = **new_obj;
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
       new_cmatrix = cmatrix / args[0]->NumberValue();
 
@@ -44,7 +44,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
     } else if (Complex::is_complex(args[0])) {
       const Complex* const& rhs_obj =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-      const typename Complex::complex_type& rhs_complex = **rhs_obj;
+      const typename Complex::value_type& rhs_complex = **rhs_obj;
 
       v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
@@ -53,7 +53,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
       );
 
       CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-      typename CMatrix::cmatrix_type& new_cmatrix = **new_obj;
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
       new_cmatrix = cmatrix / rhs_complex;
 
@@ -61,7 +61,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
     }
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 

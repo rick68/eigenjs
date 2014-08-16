@@ -19,7 +19,7 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(CMatrix, toString,
 {
   const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-  const typename CMatrix::cmatrix_type& cmatrix = **obj;
+  const typename CMatrix::value_type& cmatrix = **obj;
 
   std::ostringstream result;
   result << cmatrix;

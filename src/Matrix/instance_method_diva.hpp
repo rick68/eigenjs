@@ -19,17 +19,17 @@ EIGENJS_INSTANCE_METHOD(Matrix, diva,
   NanScope();
 
   if (args.Length() == 1) {
-    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-    typename Matrix::matrix_type& matrix = **obj;
+    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
 
-    if (Matrix::is_scalar(args[0])) {
-      matrix /= args[0]->NumberValue();
+    if (T::is_scalar(args[0])) {
+      value /= args[0]->NumberValue();
 
       NanReturnValue(args.This());
     }
   }
 
-  EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
   NanReturnUndefined();
 })
 
