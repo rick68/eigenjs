@@ -17,21 +17,21 @@ namespace EigenJS {
 EIGENJS_INSTANCE_METHOD(Matrix, set,
 {
   Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  typename Matrix::matrix_type& matrix = **obj;
+  typename Matrix::value_type& matrix = **obj;
 
   NanScope();
 
   if (args.Length() == 1 && args[0]->IsArray()) {
-    v8::Local<v8::Array> array = args[0].As<v8::Array>();
+    const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename Matrix::matrix_type::Index& rows = matrix.rows();
-    const typename Matrix::matrix_type::Index& cols = matrix.cols();
-    const typename Matrix::matrix_type::Index& elems = rows * cols;
+    const typename Matrix::value_type::Index& rows = matrix.rows();
+    const typename Matrix::value_type::Index& cols = matrix.cols();
+    const typename Matrix::value_type::Index& elems = rows * cols;
 
     if (len != elems) {
       len < rows * cols
-        ? NanThrowError("Too few coefficients passed to Matrix")
-        : NanThrowError("Too many coefficients passed to Matrix");
+        ? NanThrowError("Too few coefficients")
+        : NanThrowError("Too many coefficients");
       NanReturnUndefined();
     }
 
@@ -44,16 +44,17 @@ EIGENJS_INSTANCE_METHOD(Matrix, set,
              args[1]->IsNumber() &&
              Matrix::is_scalar(args[2])
   ) {
-    const typename Matrix::matrix_type::Index& row = args[0]->Uint32Value();
-    const typename Matrix::matrix_type::Index& col = args[1]->Uint32Value();
+    const typename Matrix::value_type::Index& row = args[0]->Int32Value();
+    const typename Matrix::value_type::Index& col = args[1]->Int32Value();
     const typename Matrix::scalar_type& value = args[2]->NumberValue();
 
-    if (Matrix::is_out_of_range(matrix, row, col))
+    if (Matrix::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();
+    }
 
     matrix(row, col) = value;
   } else if (true) {
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
     NanReturnUndefined();
   }
 

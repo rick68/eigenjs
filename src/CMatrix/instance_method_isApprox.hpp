@@ -21,19 +21,23 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
   NanScope();
 
   if (args_length == 0 || args_length > 2 || !CMatrix::is_cmatrix(args[0])) {
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
     NanReturnUndefined();
   }
 
   const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-  const typename CMatrix::cmatrix_type& cmatrix = **obj;
+  const typename CMatrix::value_type& cmatrix = **obj;
   const CMatrix* const& rhs_obj =
       node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
-  const typename CMatrix::cmatrix_type& rhs_cmatrix = **rhs_obj;
-  const typename CMatrix::cmatrix_type& v = cmatrix;
-  const typename CMatrix::cmatrix_type& w = rhs_cmatrix;
+  const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+  const typename CMatrix::value_type& v = cmatrix;
+  const typename CMatrix::value_type& w = rhs_cmatrix;
 
-  typedef Eigen::NumTraits<typename CMatrix::cmatrix_type::Scalar> num_traits;
+  if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+    NanReturnUndefined();
+  }
+
+  typedef Eigen::NumTraits<typename CMatrix::value_type::Scalar> num_traits;
   const typename num_traits::Real& prec =
       args_length == 2
     ? args[1]->NumberValue()

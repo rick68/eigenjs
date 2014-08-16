@@ -16,6 +16,8 @@
 #include "Matrix.hpp"
 #include "CMatrix.hpp"
 
+#include "Vector.hpp"
+
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
@@ -25,6 +27,8 @@ void Init(v8::Handle<v8::Object> exports) {
   Complex<>::Init(exports);
   Matrix<>::Init(exports);
   CMatrix<>::Init(exports);
+
+  Vector<>::Init(exports);
 }
 
 }  // namespace EigenJS

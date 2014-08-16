@@ -26,23 +26,23 @@
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
-      typename Complex::complex_type c;                                      \
+      typename Complex::value_type c;                                        \
                                                                              \
       if ( Complex::is_complex( args[0] ) ) {                                \
-        new ( &c ) typename Complex::complex_type(                           \
+        new ( &c ) typename Complex::value_type(                             \
           **node::ObjectWrap::Unwrap< Complex >( args[0]->ToObject() )       \
         );                                                                   \
       }  else if ( Complex::is_scalar( args[0] ) ) {                         \
-        new ( &c ) typename Complex::complex_type                            \
+        new ( &c ) typename Complex::value_type                              \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
-        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
       const Complex* const& obj =                                            \
         node::ObjectWrap::Unwrap< Complex >( args.This() );                  \
-      const typename Complex::complex_type& complex = **obj;                 \
+      const typename Complex::value_type& complex = **obj;                   \
       c = complex OP c;                                                      \
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
@@ -59,7 +59,7 @@
       );                                                                     \
     }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -69,19 +69,19 @@
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
-      typename Complex::complex_type c;                                      \
+      typename Complex::value_type c;                                        \
                                                                              \
       if( Complex::is_complex( args[0] ) ) {                                 \
-        new ( &c ) typename Complex::complex_type(                           \
+        new ( &c ) typename Complex::value_type(                             \
           **node::ObjectWrap::Unwrap< Complex >(                             \
             args[0]->ToObject()                                              \
           )                                                                  \
         );                                                                   \
       } else if ( Complex::is_scalar( args[0] ) ) {                          \
-        new (&c) typename Complex::complex_type                              \
+        new (&c) typename Complex::value_type                                \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
-        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
@@ -92,7 +92,7 @@
       NanReturnValue( args.This() );                                         \
     }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
@@ -102,23 +102,23 @@
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
-      typename Complex::complex_type c;                                      \
+      typename Complex::value_type c;                                        \
                                                                              \
       if ( Complex::is_complex( args[0] ) ) {                                \
-        new ( &c ) typename Complex::complex_type(                           \
+        new ( &c ) typename Complex::value_type(                             \
             **node::ObjectWrap::Unwrap< Complex >(                           \
               args[0]->ToObject()                                            \
           )                                                                  \
         );                                                                   \
       } else if ( Complex::is_scalar( args[0] ) ) {                          \
-        new ( &c ) typename Complex::complex_type                            \
+        new ( &c ) typename Complex::value_type                              \
           ( args[0]->NumberValue(), 0 );                                     \
       } else if (true) {                                                     \
-        EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                               \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
-      const typename Complex::complex_type& NAME = std::NAME( c );           \
+      const typename Complex::value_type& NAME = std::NAME( c );             \
       const typename Complex::scalar_type& real = NAME.real();               \
       const typename Complex::scalar_type& imag = NAME.imag();               \
                                                                              \
@@ -136,7 +136,7 @@
       );                                                                     \
     }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()                                   \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
     NanReturnUndefined();                                                    \
   }                                                                          \
   /**/

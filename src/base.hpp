@@ -1,6 +1,6 @@
 //
 // base.hpp
-// ~~~~~~~~~~~
+// ~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -16,20 +16,39 @@
 #include <node.h>
 #include <nan.h>
 
-#include <boost/utility/enable_if.hpp>
 #include <boost/mpl/and.hpp>
 #include <boost/mpl/or.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <eigen3/Eigen/Dense>
 
 #include <complex>
+#include <memory>
+#include <type_traits>
 
 #include "Complex_fwd.hpp"
 #include "Matrix_fwd.hpp"
 #include "CMatrix_fwd.hpp"
+#include "Vector_fwd.hpp"
+
+#include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
+
+namespace detail {
+  template <typename ScalarType>
+  struct std_complex_dummy_ptr {
+    typedef ScalarType scalar_type;
+    typedef std::complex<scalar_type> value_type;
+
+    NAN_INLINE value_type& operator*() { return value_; }
+    NAN_INLINE const value_type& operator*() const { return value_; }
+    NAN_INLINE value_type* operator->() { return &value_; }
+    NAN_INLINE const value_type* operator->() const { return &value_; }
+
+   private:
+    value_type value_;
+  };
+}  // namespace detail
 
 template <
   template <typename, typename, const char*> class Derived
@@ -43,37 +62,40 @@ struct base : node::ObjectWrap {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef std::complex<scalar_type> complex_type;
-  typedef Eigen::Matrix<
-      scalar_type, Eigen::Dynamic, Eigen::Dynamic> matrix_type;
-  typedef Eigen::Matrix<
-      complex_type, Eigen::Dynamic, Eigen::Dynamic> cmatrix_type;
-
-  typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
+  typedef typename std::conditional<
+      std::is_same<
+        value_type
+      , typename detail::std_complex_dummy_ptr<scalar_type>::value_type
+      >::value
+    , detail::std_complex_dummy_ptr<scalar_type>
+    , std::shared_ptr<value_type>
+    >::type pointer_type;
 
   static NAN_INLINE bool is_scalar(const v8::Handle<v8::Value>& arg) {
     return arg->IsNumber() ? true : false;
   }
 
   static NAN_INLINE bool is_complex(const v8::Handle<v8::Value>& arg) {
-    return Complex::base_type::has_instance(arg);
+    return Complex<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool
   is_complex_or_saclar(const v8::Handle<v8::Value>& arg) {
     return
-      Complex::base_type::has_instance(arg) || arg->IsNumber()
+      Complex<scalar_type>::base_type::has_instance(arg) || arg->IsNumber()
       ? true : false;
   }
 
   static NAN_INLINE bool is_matrix(const v8::Handle<v8::Value>& arg) {
-    return Matrix::base_type::has_instance(arg);
+    return Matrix<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cmatrix(const v8::Handle<v8::Value>& arg) {
-    return CMatrix::base_type::has_instance(arg);
+    return CMatrix<scalar_type, value_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_vector(const v8::Handle<v8::Value>& arg) {
+    return Vector<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
@@ -90,13 +112,11 @@ struct base : node::ObjectWrap {
     return instance;
   }
 
-  template <typename T>
+  template <typename T, int Rows, int Cols>
   static NAN_INLINE bool is_out_of_range(
-      const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>& eigen_matrix
-    , const typename Eigen::Matrix<
-          T, Eigen::Dynamic, Eigen::Dynamic>::Index& row
-    , const typename Eigen::Matrix<
-          T, Eigen::Dynamic, Eigen::Dynamic>::Index& col) {
+      const Eigen::Matrix<T, Rows, Cols>& eigen_matrix
+    , const typename Eigen::Matrix<T, Rows, Cols>::Index& row
+    , const typename Eigen::Matrix<T, Rows, Cols>::Index& col) {
     return row < 0 || row >= eigen_matrix.rows() ||
            col < 0 || col >= eigen_matrix.cols()
       ? NanThrowError("Row or column numbers are out of range"), true
@@ -105,10 +125,10 @@ struct base : node::ObjectWrap {
 
   template <typename T, typename U>
   static NAN_INLINE
-  typename boost::enable_if_c<
+  typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<boost::is_same<T, Matrix>, boost::is_same<T, CMatrix> >
-    , boost::mpl::or_<boost::is_same<U, Matrix>, boost::is_same<U, CMatrix> >
+      detail::is_eigen_matrix<typename T::value_type>
+    , detail::is_eigen_matrix<typename U::value_type>
     >::value
   , bool
   >::type
@@ -123,10 +143,10 @@ struct base : node::ObjectWrap {
 
   template <typename T, typename U>
   static NAN_INLINE
-  typename boost::enable_if_c<
+  typename std::enable_if<
     boost::mpl::and_<
-      boost::mpl::or_<boost::is_same<T, Matrix>, boost::is_same<T, CMatrix> >
-    , boost::mpl::or_<boost::is_same<U, Matrix>, boost::is_same<U, CMatrix> >
+      detail::is_eigen_matrix<typename T::value_type>
+    , detail::is_eigen_matrix<typename U::value_type>
     >::value
   , bool
   >::type
@@ -139,29 +159,28 @@ struct base : node::ObjectWrap {
   }
 
  public:
-  NAN_INLINE value_type& operator*() {
-    return value_;
-  }
-
-  NAN_INLINE const value_type& operator*() const {
-    return value_;
-  }
-
-  NAN_INLINE value_type* operator->() {
-    return &value_;
-  }
-
-  NAN_INLINE const value_type* operator->() const {
-    return &value_;
-  }
+  NAN_INLINE value_type& operator*() { return *value_ptr_; }
+  NAN_INLINE const value_type& operator*() const { return *value_ptr_; }
+  NAN_INLINE value_type* operator->() { return value_ptr_.get(); }
+  NAN_INLINE const value_type* operator->() const { return value_ptr_.get(); }
 
  protected:
+  base() : value_ptr_(new value_type()) {}
+
+  explicit base(const Complex<scalar_type>&) : value_ptr_() {}
+
+  base(const base& other)
+    : value_ptr_(other.value_ptr_)
+  {}
+
+  ~base() {}
+
   static v8::Persistent<v8::FunctionTemplate> function_template;
   static v8::Persistent<v8::Function> constructor;
 
  private:
   friend derived_type;
-  value_type value_;
+  pointer_type value_ptr_;
 };
 
 template<

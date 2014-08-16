@@ -27,7 +27,7 @@ struct property_accessor_base {
   NAN_SETTER((*s_));
 };
 
-}  // detail
+}  // namespace detail
 }  // namespace EigenJS
 
 #endif  // EIGENJS_DETAIL_PROPERTY_ACCESSOR_BASE_HPP

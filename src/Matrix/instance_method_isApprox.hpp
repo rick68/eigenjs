@@ -20,26 +20,50 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
 
   NanScope();
 
-  if (args_length == 0 || args_length > 2 || !Matrix::is_matrix(args[0])) {
-    EIGENJS_THROW_ERROR_INVAILD_ARGUMENT()
-    NanReturnUndefined();
+  if (args_length == 1 || args_length == 2) {
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type& v = value;
+
+    if (Matrix::is_matrix(args[0])) {
+      const Matrix* const& rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+      const typename Matrix::value_type& w = rhs_matrix;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename Matrix::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (Vector::is_vector(args[0])) {
+      const Vector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+      const typename Vector::value_type& rhs_matrix = **rhs_obj;
+      const typename Vector::value_type& w = rhs_matrix;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename Vector::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    }
   }
 
-  const Matrix* const& obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  const typename Matrix::matrix_type& matrix = **obj;
-  const Matrix* const& rhs_obj =
-      node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-  const typename Matrix::matrix_type& rhs_matrix = **rhs_obj;
-  const typename Matrix::matrix_type& v = matrix;
-  const typename Matrix::matrix_type& w = rhs_matrix;
-
-  typedef Eigen::NumTraits<typename Matrix::matrix_type::Scalar> num_traits;
-  const typename num_traits::Real& prec =
-      args_length == 2
-    ? args[1]->NumberValue()
-    : num_traits::dummy_precision();
-
-  NanReturnValue(NanNew(v.isApprox(w, prec)));
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+  NanReturnUndefined();
 })
 
 }  // namespace EigenJS

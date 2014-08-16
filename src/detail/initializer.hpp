@@ -18,22 +18,23 @@ namespace EigenJS {
 namespace detail {
 
 struct initializer {
-  typedef v8::Local<v8::FunctionTemplate> function_template_type;
+  typedef v8::Local<v8::FunctionTemplate> value_type;
+  typedef value_type& reference_type;
 
-  initializer(function_template_type& function_template)
+  explicit initializer(reference_type function_template)
     : function_template_(function_template)
   {}
 
   template <typename T>
-  void operator()(T& definition) const {
+  void operator()(const T& definition) const {
     definition(function_template_);
   }
 
  private:
-  function_template_type& function_template_;
+  reference_type function_template_;
 };
 
-}  // detail
+}  // namespace detail
 }  // namespace EigenJS
 
 #endif  // EIGENJS_DETAIL_INITIALIZER_HPP
