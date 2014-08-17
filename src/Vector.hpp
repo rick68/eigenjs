@@ -44,9 +44,10 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
+  template <typename S, typename V>
+  struct rebind {
+    typedef Vector<S, V> other;
+  };
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {

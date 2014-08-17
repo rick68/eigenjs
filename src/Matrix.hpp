@@ -43,10 +43,10 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef ::EigenJS::Complex<scalar_type> Complex;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
-
-  typedef ::EigenJS::Vector<scalar_type> Vector;
+  template <typename S, typename V>
+  struct rebind {
+    typedef Matrix<S, V> other;
+  };
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
