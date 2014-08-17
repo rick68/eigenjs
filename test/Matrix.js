@@ -28,7 +28,7 @@ describe('Matrix', function() {
     mat = Matrix(3, 2);
     mat.rows().should.equal(3);
     mat.cols().should.equal(2);
-  })
+  });
 
   beforeEach(function() {
     mat = Matrix(3, 3)

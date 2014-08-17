@@ -28,14 +28,14 @@ describe('Vector', function() {
     vec = Vector(3);
     vec.rows().should.equal(3);
     vec.cols().should.equal(1);
-  })
+  });
 
   it('#Vector() should return the vector with a scalar array', function() {
     vec = Vector([1, 2, 3]);
     vec.rows().should.equal(3);
     vec.cols().should.equal(1);
     vec.toString().should.equal("1\n2\n3");
-  })
+  });
 
   beforeEach(function() {
     vec = Vector([
