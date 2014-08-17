@@ -22,6 +22,10 @@
 #include <type_traits>
 
 #include "is_eigen_matrix.hpp"
+#include "../Matrix_fwd.hpp"
+#include "../CMatrix_fwd.hpp"
+#include "../Vector_fwd.hpp"
+#include "../CVector_fwd.hpp"
 
 namespace EigenJS {
 namespace detail {
@@ -38,18 +42,19 @@ struct add_complex {
   typedef T type;
 };
 
-template <typename T>
-struct add_complex<T, true, true> {
-  typedef typename std::conditional<
-      is_eigen_matrix<typename T::value_type>::value
-    , typename T::template rebind<typename T::scalar_type,
-        Eigen::Matrix<
-          std::complex<typename T::scalar_type>
-        , Eigen::internal::traits<typename T::value_type>::RowsAtCompileTime
-        , Eigen::internal::traits<typename T::value_type>::ColsAtCompileTime
-        >
-      >::other
-    , T
+template <typename ScalarType, typename ValueType>
+struct add_complex<Matrix<ScalarType, ValueType>, true, true> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<ValueType>::value
+    , CMatrix<ScalarType>
+    >::type type;
+};
+
+template <typename ScalarType, typename ValueType>
+struct add_complex<Vector<ScalarType, ValueType>, true, true> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<ValueType>::value
+    , CVector<ScalarType>
     >::type type;
 };
 
