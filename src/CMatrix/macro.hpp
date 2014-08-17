@@ -23,9 +23,6 @@
 
 #define EIGENJS_CMATRIX_BINARY_OPERATOR_CONTEXT( OP )                        \
   {                                                                          \
-    typedef typename CMatrix::Complex Complex;                               \
-    typedef typename CMatrix::Matrix Matrix;                                 \
-                                                                             \
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
@@ -95,9 +92,6 @@
 
 #define EIGENJS_CMATRIX_BINARY_OPERATOR_COMMUTATIVE_CONTEXT( OP )            \
   {                                                                          \
-    typedef typename CMatrix::Complex Complex;                               \
-    typedef typename CMatrix::Matrix Matrix;                                 \
-                                                                             \
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \

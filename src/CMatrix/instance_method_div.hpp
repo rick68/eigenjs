@@ -16,8 +16,6 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, div,
 {
-  typedef typename CMatrix::Complex Complex;
-
   NanScope();
 
   if (args.Length() == 1) {

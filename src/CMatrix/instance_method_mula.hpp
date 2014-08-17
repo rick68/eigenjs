@@ -16,9 +16,6 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, mula,
 {
-  typedef typename CMatrix::Complex Complex;
-  typedef typename CMatrix::Matrix Matrix;
-
   NanScope();
 
   if (args.Length() == 1) {
