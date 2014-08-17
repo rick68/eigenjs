@@ -22,11 +22,11 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diva,
     T* obj = node::ObjectWrap::Unwrap<T>(args.This());
     typename T::value_type& value = **obj;
 
-    if (CMatrix::is_scalar(args[0])) {
+    if (T::is_scalar(args[0])) {
       value /= args[0]->NumberValue();
 
       NanReturnValue(args.This());
-    } else if (CMatrix::is_complex(args[0])) {
+    } else if (Complex::is_complex(args[0])) {
       const Complex* const& rhs_obj =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;

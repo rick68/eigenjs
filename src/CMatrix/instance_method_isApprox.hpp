@@ -23,7 +23,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
   if (args_length == 1 || args_length == 2) {
     const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
     const typename T::value_type& value = **obj;
-    const typename CMatrix::value_type& v = value;
+    const typename T::value_type& v = value;
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =

@@ -26,8 +26,8 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
     , NanNew<v8::Integer>(value.cols())
     };
 
-    if (CMatrix::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = CMatrix::new_instance(
+    if (T::is_scalar(args[0])) {
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
