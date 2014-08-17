@@ -2,6 +2,7 @@ const
     Eigen = require('../index.js'),
     Complex = Eigen.Complex,
     Matrix = Eigen.Matrix,
+    Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
     should = require('should');
 
@@ -336,6 +337,14 @@ describe('CMatrix', function() {
 
     var vector = new Matrix(3, 1).set([1, 2, 3]);
     cmat.mula(vector);
+    cmat.toString().should.equal("(14,14)\n(32,32)\n(50,50)");
+  });
+
+  it('#mula() should return the product of a complex matrix and a vector then saves it back', function() {
+    cmat.mula.should.be.a.Function;
+
+    var vec = new Vector([1, 2, 3]);
+    cmat.mula(vec);
     cmat.toString().should.equal("(14,14)\n(32,32)\n(50,50)");
   });
 

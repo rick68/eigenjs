@@ -16,24 +16,22 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, diva,
 {
-  typedef typename CMatrix::Complex Complex;
-
   NanScope();
 
   if (args.Length() == 1) {
-    CMatrix* obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    typename CMatrix::value_type& cmatrix = **obj;
+    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
 
-    if (CMatrix::is_scalar(args[0])) {
-      cmatrix /= args[0]->NumberValue();
+    if (T::is_scalar(args[0])) {
+      value /= args[0]->NumberValue();
 
       NanReturnValue(args.This());
-    } else if (CMatrix::is_complex(args[0])) {
+    } else if (Complex::is_complex(args[0])) {
       const Complex* const& rhs_obj =
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      cmatrix /= rhs_complex;
+      value /= rhs_complex;
 
       NanReturnValue(args.This());
     }

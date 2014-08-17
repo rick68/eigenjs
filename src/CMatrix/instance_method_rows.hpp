@@ -16,11 +16,11 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, rows,
 {
-  const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-  const typename CMatrix::value_type& cmatrix = **obj;
+  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+  const typename T::value_type& value = **obj;
 
   NanScope();
-  NanReturnValue(NanNew<v8::Integer>(cmatrix.rows()));
+  NanReturnValue(NanNew<v8::Integer>(value.rows()));
 })
 
 }  // namespace EigenJS

@@ -16,9 +16,6 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, mula,
 {
-  typedef typename CMatrix::Complex Complex;
-  typedef typename CMatrix::Matrix Matrix;
-
   NanScope();
 
   if (args.Length() == 1) {
@@ -37,6 +34,18 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
       cmatrix *= rhs_cmatrix;
 
       NanReturnValue(args.This());
+    } else if (CVector::is_cvector(args[0])) {
+      const CVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+      const typename CVector::value_type& rhs_cvector = **rhs_obj;
+
+      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_cvector;
+
+      NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
@@ -47,6 +56,18 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
       }
 
       cmatrix *= rhs_matrix.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (Vector::is_vector(args[0])) {
+      const Vector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+      const typename Vector::value_type& rhs_vector = **rhs_obj;
+
+      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_vector.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (CMatrix::is_scalar(args[0])) {

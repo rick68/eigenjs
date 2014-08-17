@@ -381,6 +381,13 @@ describe('Vector', function() {
     vec.mul(-1).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
   });
 
+  it('#mul() should return a CMatrix with the product of a vector and a complex', function() {
+    vec.mul.should.be.a.Function;
+
+    var c = new Complex(-1, 0);
+    vec.mul(c).toString().should.equal("(-1,0)\n(-2,0)\n(-3,0)\n(-4,0)\n(-5,0)\n(-6,0)");
+  });
+
   it('#mula() should return the product of a vector and a scalar value then saves it back', function() {
     vec.mula.should.be.a.Function;
 
@@ -388,11 +395,15 @@ describe('Vector', function() {
     vec.toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
   });
 
-  it('#mul() should return a CMatrix with the product of a vector and a complex', function() {
-    vec.mul.should.be.a.Function;
+  it('#mula() should return the product of a vector and a matrix(1x1) then saves it back', function() {
+    vec.mula.should.be.a.Function;
 
-    var c = new Complex(-1, 0);
-    vec.mul(c).toString().should.equal("(-1,0)\n(-2,0)\n(-3,0)\n(-4,0)\n(-5,0)\n(-6,0)");
+    vec.mula(Matrix(1, 1).set([-1]));
+    vec.toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
+
+    (function() {
+      vec.mula(Matrix(1, 2).set([-1, -2]));
+    }).should.throw("The matrix size must be 1x1");
   });
 
   it('#div() should return a Vector which be divied by a scalar value', function() {

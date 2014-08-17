@@ -28,6 +28,11 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/for_each.hpp>
 
+#include "Complex_fwd.hpp"
+#include "Matrix_fwd.hpp"
+#include "CMatrix_fwd.hpp"
+#include "Vector_fwd.hpp"
+#include "CVector_fwd.hpp"
 #include "detail/initializer.hpp"
 #include "detail/property_accessor_base.hpp"
 
@@ -37,6 +42,7 @@
   typedef ::EigenJS::Matrix<scalar_type> Matrix;                             \
   typedef ::EigenJS::Vector<scalar_type> Vector;                             \
   typedef ::EigenJS::CMatrix<scalar_type> CMatrix;                           \
+  typedef ::EigenJS::CVector<scalar_type> CVector;                           \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \

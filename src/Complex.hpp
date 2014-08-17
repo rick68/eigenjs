@@ -38,9 +38,6 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
-
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();

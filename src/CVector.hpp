@@ -1,6 +1,6 @@
 //
-// Vector.hpp
-// ~~~~~~~~~~
+// CVector.hpp
+// ~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,8 +9,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_HPP
-#define EIGENJS_VECTOR_HPP
+#ifndef EIGENJS_CVECTOR_HPP
+#define EIGENJS_CVECTOR_HPP
 
 #include <v8.h>
 #include <node.h>
@@ -26,8 +26,8 @@
 #include "Complex.hpp"
 #include "Matrix.hpp"
 #include "CMatrix.hpp"
-#include "Vector_fwd.hpp"
-#include "Vector/definitions.hpp"
+#include "CVector_fwd.hpp"
+#include "CVector/definitions.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {
@@ -37,9 +37,9 @@ template <
 , typename ValueType
 , const char* ClassName
 >
-class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
+class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Vector, ScalarType, ValueType, ClassName> base_type;
+  typedef base<::EigenJS::CVector, ScalarType, ValueType, ClassName> base_type;
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
@@ -53,23 +53,23 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
     tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
-    EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
-    EIGENJS_OBJECT_INITIALIZE(Vector, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
  private:
-  explicit Vector(const base_type& base)
+  explicit CVector(const base_type& base)
     : base_type(base)
   {}
 
-  explicit Vector(const typename value_type::Index& rows)
+  explicit CVector(const typename value_type::Index& rows)
     : base_type()
       { *base_type::value_ptr_ = value_type::Zero(rows, 1); }
 
-  ~Vector() {}
+  ~CVector() {}
 
   static NAN_METHOD(New) {
     const int& args_length = args.Length();
@@ -88,34 +88,34 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
         );
       }
 
-      if (Vector::is_scalar(args[0])) {
+      if (CVector::is_scalar(args[0])) {
         typename value_type::Index size = args[0]->Int32Value();
-        Vector* obj = new Vector(size);
+        CVector* obj = new CVector(size);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       } else if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
-        Vector* obj = new Vector(len);
-        Vector::value_type& vector = **obj;
+        CVector* obj = new CVector(len);
+        CVector::value_type& cvector = **obj;
 
         for (uint32_t i = 0; i < len; ++i) {
           const v8::Local<v8::Value>& elem = array->Get(i);
-          vector(i, 0) = elem->NumberValue();
+          cvector(i, 0) = elem->NumberValue();
         }
 
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       }
     } else if (args_length == 2) {
-      if (Vector::is_scalar(args[0]) && Vector::is_scalar(args[1])) {
+      if (CVector::is_scalar(args[0]) && CVector::is_scalar(args[1])) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
         v8::Local<v8::Value> argv[] = { args[0], args[1] };
         (void)cols;
 
         if (args.IsConstructCall()) {
-          Vector* obj = new Vector(rows);
+          CVector* obj = new CVector(rows);
           obj->Wrap(args.This());
           NanReturnValue(args.This());
         } else {
@@ -137,4 +137,4 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_HPP
+#endif  // EIGENJS_CVECTOR_HPP
