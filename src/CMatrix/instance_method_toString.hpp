@@ -18,14 +18,7 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, toString,
 {
-  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
-  const typename T::value_type& value = **obj;
-
-  std::ostringstream result;
-  result << value;
-
-  NanScope();
-  NanReturnValue(NanNew(result.str().c_str()));
+  EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TOSTRING_CONTEXT()
 })
 
 }  // namespace EigenJS

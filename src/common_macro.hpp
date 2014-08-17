@@ -20,6 +20,7 @@
 #include <boost/mpl/multiplies.hpp>
 #include <boost/mpl/int.hpp>
 
+#include <sstream>
 #include <tuple>
 #include <type_traits>
 
@@ -196,6 +197,19 @@
                                                                              \
     EIGENJS_THROW_ERROR_INVALID_ROWS_AND_COLUMNS_ARGUMENTS()                 \
     NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TOSTRING_CONTEXT()             \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    std::ostringstream result;                                               \
+    result << value;                                                         \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue(NanNew(result.str().c_str()));                            \
   }                                                                          \
   /**/
 
