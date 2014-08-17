@@ -19,8 +19,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
   NanScope();
 
   if (args.Length() == 1) {
-    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
-    typename T::value_type& value = **obj;
+    Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
+    typename Matrix::value_type& matrix = **obj;
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
@@ -30,7 +30,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
       if (Matrix::is_invalid_matrix_product(obj, rhs_obj))
         NanReturnUndefined();
 
-      value *= rhs_matrix;
+      matrix *= rhs_matrix;
 
       NanReturnValue(args.This());
     } else if (Vector::is_vector(args[0])) {
@@ -38,15 +38,15 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
-      value *= rhs_vector;
+      matrix *= rhs_vector;
 
       NanReturnValue(args.This());
-    } else if (T::is_scalar(args[0])) {
-      value *= args[0]->NumberValue();
+    } else if (Matrix::is_scalar(args[0])) {
+      matrix *= args[0]->NumberValue();
 
       NanReturnValue(args.This());
     }
