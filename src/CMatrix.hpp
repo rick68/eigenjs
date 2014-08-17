@@ -43,11 +43,6 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  template <typename S, typename V>
-  struct rebind {
-    typedef CMatrix<S, V> other;
-  };
-
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
