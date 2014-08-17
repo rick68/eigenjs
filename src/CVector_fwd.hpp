@@ -26,8 +26,8 @@ template <
   typename ScalarType = double
 , typename ValueType = Eigen::Matrix<
     std::complex<ScalarType>
-  , Eigen::Dynamic
   , 1
+  , Eigen::Dynamic
   >
 , const char* ClassName = cvector_class_name
 > class CVector;
