@@ -26,11 +26,11 @@
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
-      const CMatrix* const& obj =                                            \
-          node::ObjectWrap::Unwrap< CMatrix >( args.This() );                \
-      const typename CMatrix::value_type& cmatrix = **obj;                   \
-      const typename CMatrix::value_type::Index& rows = cmatrix.rows();      \
-      const typename CMatrix::value_type::Index& cols = cmatrix.cols();      \
+      const T* const& obj =                                                  \
+          node::ObjectWrap::Unwrap< T >( args.This() );                      \
+      const typename T::value_type& value = **obj;                           \
+      const typename T::value_type::Index& rows = value.rows();              \
+      const typename T::value_type::Index& cols = value.cols();              \
       v8::Local< v8::Value > argv[] = {                                      \
         NanNew<v8::Integer>( rows )                                          \
       , NanNew<v8::Integer>( cols )                                          \
@@ -41,20 +41,20 @@
             node::ObjectWrap::Unwrap<CMatrix>( args[0]->ToObject() );        \
         const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;         \
                                                                              \
-        if ( CMatrix::is_nonconformate_arguments( obj, rhs_obj ) ) {         \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = CMatrix::new_instance(            \
+        v8::Local< v8::Object > instance = T::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        CMatrix* new_obj = node::ObjectWrap::Unwrap< CMatrix >( instance );  \
-        typename CMatrix::value_type& new_cmatrix = **new_obj;               \
+        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
+        typename T::value_type& new_value = **new_obj;                       \
                                                                              \
-        new_cmatrix = cmatrix OP rhs_cmatrix;                                \
+        new_value = value OP rhs_cmatrix;                                    \
                                                                              \
         NanReturnValue(instance);                                            \
       } else if ( Matrix::has_instance( args[0] ) ) {                        \
@@ -62,22 +62,21 @@
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
         const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
-        if ( CMatrix::template is_nonconformate_arguments( obj, rhs_obj ) )  \
-        {                                                                    \
+        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = CMatrix::new_instance(            \
+        v8::Local< v8::Object > instance = T::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        CMatrix* new_obj = node::ObjectWrap::Unwrap< CMatrix >( instance );  \
-        typename CMatrix::value_type& new_cmatrix = **new_obj;               \
+        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
+        typename T::value_type& new_value = **new_obj;                       \
                                                                              \
-        new_cmatrix =                                                        \
-          cmatrix                                                            \
+        new_value =                                                          \
+          value                                                              \
             OP                                                               \
           rhs_matrix.template cast< typename Complex::value_type >();        \
                                                                              \
@@ -95,19 +94,19 @@
     NanScope();                                                              \
                                                                              \
     if ( args.Length() == 1 ) {                                              \
-        CMatrix* obj = node::ObjectWrap::Unwrap< CMatrix >( args.This() );   \
-        typename CMatrix::value_type& cmatrix = **obj;                       \
+      T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                 \
+      typename T::value_type& value = **obj;                                 \
                                                                              \
       if ( CMatrix::is_cmatrix( args[0] ) ) {                                \
         const CMatrix* const& rhs_obj =                                      \
             node::ObjectWrap::Unwrap< CMatrix >( args[0]->ToObject() );      \
         const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;         \
                                                                              \
-        if ( CMatrix::is_nonconformate_arguments( obj, rhs_obj ) ) {         \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        cmatrix BOOST_PP_CAT( OP, = ) rhs_cmatrix;                           \
+        value BOOST_PP_CAT( OP, = ) rhs_cmatrix;                             \
                                                                              \
         NanReturnValue( args.This() );                                       \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
@@ -115,11 +114,11 @@
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
         const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
-        if ( CMatrix::is_nonconformate_arguments( obj, rhs_obj ) ) {         \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        cmatrix BOOST_PP_CAT( OP, = )                                        \
+        value BOOST_PP_CAT( OP, = )                                          \
             rhs_matrix.template cast< typename Complex::value_type >();      \
                                                                              \
         NanReturnValue( args.This() );                                       \
