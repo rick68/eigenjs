@@ -106,23 +106,23 @@
                                                                              \
     auto codes = std::make_tuple(                                            \
         [&]{}                                                                \
-      , [&]{ return T::value_type::Identity( nbRows, 1 ).col(0); }           \
-      , [&]{ return T::value_type::Identity( 1, nbCols ).row(0); }           \
+      , [&]{ return T::value_type::Identity( nbRows, 1 ).col( 0 ); }         \
+      , [&]{ return T::value_type::Identity( 1, nbCols ).row( 0 ); }         \
       , [&]{ return T::value_type::Identity( nbRows, nbCols ); }             \
       );                                                                     \
     new_value = std::get<                                                    \
       boost::mpl::plus<                                                      \
         boost::mpl::multiplies<                                              \
-          detail::is_vector_or_cvector<T>                                    \
-        , boost::mpl::int_<1>                                                \
+          detail::is_vector_or_cvector< T >                                  \
+        , boost::mpl::int_< 1 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_rowvector_or_crowvector<T>                              \
-        , boost::mpl::int_<2>                                                \
+          detail::is_rowvector_or_crowvector< T >                            \
+        , boost::mpl::int_< 2 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_matrix_or_cmatrix<T>                                    \
-        , boost::mpl::int_<3>                                                \
+          detail::is_matrix_or_cmatrix< T >                                  \
+        , boost::mpl::int_< 3 >                                              \
         >                                                                    \
       >::value                                                               \
     >( codes )();                                                            \
@@ -170,23 +170,23 @@
                                                                              \
     auto codes = std::make_tuple(                                            \
         [&]{}                                                                \
-      , [&]{ return T::value_type::Random( nbRows, 1 ).col(0); }             \
-      , [&]{ return T::value_type::Random( 1, nbCols ).row(0); }             \
+      , [&]{ return T::value_type::Random( nbRows, 1 ).col( 0 ); }           \
+      , [&]{ return T::value_type::Random( 1, nbCols ).row( 0 ); }           \
       , [&]{ return T::value_type::Random( nbRows, nbCols ); }               \
       );                                                                     \
     new_value = std::get<                                                    \
       boost::mpl::plus<                                                      \
         boost::mpl::multiplies<                                              \
-          detail::is_vector_or_cvector<T>                                    \
-        , boost::mpl::int_<1>                                                \
+          detail::is_vector_or_cvector< T >                                  \
+        , boost::mpl::int_< 1 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_rowvector_or_crowvector<T>                              \
-        , boost::mpl::int_<2>                                                \
+          detail::is_rowvector_or_crowvector< T >                            \
+        , boost::mpl::int_< 2 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_matrix_or_cmatrix<T>                                    \
-        , boost::mpl::int_<3>                                                \
+          detail::is_matrix_or_cmatrix< T >                                  \
+        , boost::mpl::int_< 3 >                                              \
         >                                                                    \
       >::value                                                               \
     >( codes )();                                                            \
