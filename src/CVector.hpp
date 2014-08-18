@@ -24,7 +24,6 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Complex.hpp"
-#include "Matrix.hpp"
 #include "CMatrix.hpp"
 #include "CVector_fwd.hpp"
 #include "CVector/definitions.hpp"

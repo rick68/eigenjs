@@ -58,8 +58,8 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
     } else if (Complex::is_complex(args[1])) {
       const Complex* const& rhs_obj =
           node::ObjectWrap::Unwrap<Complex>(args[1]->ToObject());
-      const typename Complex::value_type& rhs_value = **rhs_obj;
-      value(row, 0) = rhs_value;
+      const typename Complex::value_type& elem_value = **rhs_obj;
+      value(row, 0) = elem_value;
     }
   } else if (true) {
     EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
