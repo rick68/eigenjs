@@ -16,8 +16,6 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, set,
 {
-  typedef typename CMatrix::Complex Complex;
-
   CMatrix* obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
   typename CMatrix::value_type& cmatrix = **obj;
 
@@ -62,7 +60,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
         const typename CMatrix::value_type::Index& col =
             args[1]->Int32Value();
 
-        if (CMatrix::is_complex(args[2]->ToObject())) {
+        if (Complex::is_complex(args[2]->ToObject())) {
           const Complex* const& rhs_obj =
               node::ObjectWrap::Unwrap<Complex>(args[2]->ToObject());
           const typename Complex::value_type complex = **rhs_obj;

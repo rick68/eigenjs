@@ -35,7 +35,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
         NanReturnUndefined();
       }
 
-      typedef Eigen::NumTraits<typename Matrix::value_type::Scalar> num_traits;
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
       const typename num_traits::Real& prec =
           args_length == 2
         ? args[1]->NumberValue()
@@ -52,7 +52,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
         NanReturnUndefined();
       }
 
-      typedef Eigen::NumTraits<typename Vector::value_type::Scalar> num_traits;
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
       const typename num_traits::Real& prec =
           args_length == 2
         ? args[1]->NumberValue()

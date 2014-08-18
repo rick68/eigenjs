@@ -28,7 +28,7 @@ describe('Matrix', function() {
     mat = Matrix(3, 2);
     mat.rows().should.equal(3);
     mat.cols().should.equal(2);
-  })
+  });
 
   beforeEach(function() {
     mat = Matrix(3, 3)
@@ -189,7 +189,7 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#sub() should return a CMatrix with the sum of a matrix and a complex matrix', function() {
+  it('#sub() should return a CMatrix with the difference of a matrix and a complex matrix', function() {
     mat.add.should.be.a.Function;
 
     var cmat = CMatrix(3, 3).set([
@@ -276,7 +276,7 @@ describe('Matrix', function() {
     }).should.throw("Invalid matrix product");
   });
 
-  it('#mul() should return the product of a matrix and a scalar', function() {
+  it('#mul() should return the product of a matrix and a scalar value', function() {
     mat.mul.should.be.a.Function;
 
     mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
@@ -355,6 +355,21 @@ describe('Matrix', function() {
     ])).should.ok;
   });
 
+  it('#equals() should return true if a matrix and a vector are equal', function() {
+    mat.equals.should.be.a.Function;
+
+    var mat2 = new Matrix(3, 1).set([
+      1,
+      2,
+      3
+    ]);
+    mat2.equals(new Vector([
+      1,
+      2,
+      3
+    ])).should.ok;
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     mat.isApprox.should.be.a.Function;
 
@@ -369,6 +384,31 @@ describe('Matrix', function() {
     (function() {
       mat.isApprox(
         new Matrix(1, 1).set([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#isApprox() should return true if this is approximately equal to a vector', function() {
+    mat.isApprox.should.be.a.Function;
+
+    var mat2 = new Matrix(3, 1).set([
+      1,
+      2,
+      3
+    ]);
+    var vec = new Vector([
+      0.111,
+      0.222,
+      0.333
+    ])
+    mat2.div(9).isApprox(vec, 1e-3).should.false;
+    mat2.div(9).isApprox(vec, 1e-2).should.true;
+
+    (function() {
+      mat2.isApprox(
+        new Vector([
           1
         ])
       );

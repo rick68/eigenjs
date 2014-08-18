@@ -29,6 +29,7 @@
 #include "Matrix_fwd.hpp"
 #include "CMatrix_fwd.hpp"
 #include "Vector_fwd.hpp"
+#include "CVector_fwd.hpp"
 
 #include "detail/is_eigen_matrix.hpp"
 
@@ -96,6 +97,10 @@ struct base : node::ObjectWrap {
 
   static NAN_INLINE bool is_vector(const v8::Handle<v8::Value>& arg) {
     return Vector<scalar_type, value_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_cvector(const v8::Handle<v8::Value>& arg) {
+    return CVector<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {

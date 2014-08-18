@@ -20,6 +20,7 @@
 
 #include "../common_macro.hpp"
 #include "../throw_error.hpp"
+#include "../detail/add_complex.hpp"
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                         \
   {                                                                          \
@@ -41,7 +42,7 @@
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
         const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
-        if ( Matrix::is_nonconformate_arguments( obj, rhs_obj ) ) {          \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -87,19 +88,47 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = CMatrix::new_instance(            \
+        typedef typename detail::add_complex<T>::type CT;                    \
+                                                                             \
+        v8::Local< v8::Object > instance = CT::new_instance(                 \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        CMatrix* new_obj = node::ObjectWrap::Unwrap< CMatrix >( instance );  \
-        typename CMatrix::value_type& new_cmatrix = **new_obj;               \
+        CT* new_obj = node::ObjectWrap::Unwrap< CT >( instance );            \
+        typename CT::value_type& new_value = **new_obj;                      \
                                                                              \
-        new_cmatrix =                                                        \
+        new_value =                                                          \
           value.template cast< typename Complex::value_type >()              \
             OP                                                               \
           rhs_cmatrix;                                                       \
+                                                                             \
+        NanReturnValue( instance );                                          \
+      } else if ( CVector::is_cvector( args[0]) ) {                          \
+        const CVector* const& rhs_obj =                                      \
+            node::ObjectWrap::Unwrap< CVector >( args[0]->ToObject() );      \
+        const typename CVector::value_type& rhs_cvector = **rhs_obj;         \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        typedef typename detail::add_complex<T>::type CT;                    \
+                                                                             \
+        v8::Local< v8::Object > instance = CT::new_instance(                 \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        CT* new_obj = node::ObjectWrap::Unwrap< CT >( instance );            \
+        typename CT::value_type& new_value = **new_obj;                      \
+                                                                             \
+        new_value =                                                          \
+          value.template cast< typename Complex::value_type >()              \
+            OP                                                               \
+          rhs_cvector;                                                       \
                                                                              \
         NanReturnValue( instance );                                          \
       }                                                                      \

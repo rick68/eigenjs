@@ -16,29 +16,27 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, div,
 {
-  typedef typename CMatrix::Complex Complex;
-
   NanScope();
 
   if (args.Length() == 1) {
-    const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    const typename CMatrix::value_type& cmatrix = **obj;
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Integer>(cmatrix.rows())
-    , NanNew<v8::Integer>(cmatrix.cols())
+      NanNew<v8::Integer>(value.rows())
+    , NanNew<v8::Integer>(value.cols())
     };
 
-    if (CMatrix::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = CMatrix::new_instance(
+    if (T::is_scalar(args[0])) {
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-      typename CMatrix::value_type& new_cmatrix = **new_obj;
+      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
+      typename T::value_type& new_value = **new_obj;
 
-      new_cmatrix = cmatrix / args[0]->NumberValue();
+      new_value = value / args[0]->NumberValue();
 
       NanReturnValue(instance);
     } else if (Complex::is_complex(args[0])) {
@@ -46,16 +44,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      v8::Local<v8::Object> instance = CMatrix::new_instance(
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-      typename CMatrix::value_type& new_cmatrix = **new_obj;
+      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
+      typename T::value_type& new_value = **new_obj;
 
-      new_cmatrix = cmatrix / rhs_complex;
+      new_value = value / rhs_complex;
 
       NanReturnValue(instance);
     }

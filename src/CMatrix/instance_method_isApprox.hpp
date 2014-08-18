@@ -20,30 +20,50 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
 
   NanScope();
 
-  if (args_length == 0 || args_length > 2 || !CMatrix::is_cmatrix(args[0])) {
-    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
-    NanReturnUndefined();
+  if (args_length == 1 || args_length == 2) {
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type& v = value;
+
+    if (CMatrix::is_cmatrix(args[0])) {
+      const CMatrix* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
+      const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+      const typename CMatrix::value_type& w = rhs_cmatrix;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (CVector::is_cvector(args[0])) {
+      const CVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+      const typename CVector::value_type& rhs_cvector = **rhs_obj;
+      const typename CVector::value_type& w = rhs_cvector;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    }
   }
 
-  const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-  const typename CMatrix::value_type& cmatrix = **obj;
-  const CMatrix* const& rhs_obj =
-      node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
-  const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
-  const typename CMatrix::value_type& v = cmatrix;
-  const typename CMatrix::value_type& w = rhs_cmatrix;
-
-  if (T::is_nonconformate_arguments(obj, rhs_obj)) {
-    NanReturnUndefined();
-  }
-
-  typedef Eigen::NumTraits<typename CMatrix::value_type::Scalar> num_traits;
-  const typename num_traits::Real& prec =
-      args_length == 2
-    ? args[1]->NumberValue()
-    : num_traits::dummy_precision();
-
-  NanReturnValue(NanNew(v.isApprox(w, prec)));
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+  NanReturnUndefined();
 })
 
 }  // namespace EigenJS

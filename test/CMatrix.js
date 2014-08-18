@@ -2,7 +2,9 @@ const
     Eigen = require('../index.js'),
     Complex = Eigen.Complex,
     Matrix = Eigen.Matrix,
+    Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
+    CVector = Eigen.CVector,
     should = require('should');
 
 describe('CMatrix', function() {
@@ -27,7 +29,7 @@ describe('CMatrix', function() {
     cmat = CMatrix(3, 2);
     cmat.rows().should.equal(3);
     cmat.cols().should.equal(2);
-  })
+  });
 
   beforeEach(function() {
     cmat = CMatrix(3, 3)
@@ -93,6 +95,24 @@ describe('CMatrix', function() {
     (function() {
       cmat.equals(new CMatrix(1, 1).set([68]));
     }).should.throw("Nonconformant arguments");
+  });
+
+  it('#equals() should return true if a complex matrix and a complex vector are equal', function() {
+    cmat.equals.should.be.a.Function;
+
+    var cmat2 = new CMatrix(3, 1).set([
+      1,
+      2,
+      3
+    ]);
+
+    cmat2.equals(
+      CVector([
+        1,
+        2,
+        3
+      ])
+    ).should.ok;
   });
 
   it('#get() should return the element value of CMatrix', function() {
@@ -339,6 +359,14 @@ describe('CMatrix', function() {
     cmat.toString().should.equal("(14,14)\n(32,32)\n(50,50)");
   });
 
+  it('#mula() should return the product of a complex matrix and a vector then saves it back', function() {
+    cmat.mula.should.be.a.Function;
+
+    var vec = new Vector([1, 2, 3]);
+    cmat.mula(vec);
+    cmat.toString().should.equal("(14,14)\n(32,32)\n(50,50)");
+  });
+
   it('#mula() should return the product of a complex matrix and a scalar value then saves it back', function() {
     cmat.mula.should.be.a.Function;
 
@@ -439,6 +467,31 @@ describe('CMatrix', function() {
     (function() {
       cmat.isApprox(
         new CMatrix(1, 1).set([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#isApprox() should return true if this is approximately equal to a complex vector', function() {
+    cmat.isApprox.should.be.a.Function;
+
+    var cmat2 = new CMatrix(3, 1).set([
+      Complex(1, 1),
+      Complex(2, 2),
+      Complex(3, 3)
+    ]);
+    var cvec = new CVector([
+      Complex(0.111, 0.111),
+      Complex(0.222, 0.222),
+      Complex(0.333, 0.333)
+    ]);
+    cmat2.div(9).isApprox(cvec, 1e-3).should.false;
+    cmat2.div(9).isApprox(cvec, 1e-2).should.true;
+
+    (function() {
+      cmat2.isApprox(
+        new CVector([
           1
         ])
       );

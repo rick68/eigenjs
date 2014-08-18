@@ -18,18 +18,31 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
 {
   NanScope();
 
-  if (args.Length() == 1 && CMatrix::is_cmatrix(args[0])) {
-    const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    const typename CMatrix::value_type& cmatrix = **obj;
-    const CMatrix* const& rhs_obj =
-        node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
-    const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+  if (args.Length() == 1) {
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
 
-    if (T::is_nonconformate_arguments(obj, rhs_obj)) {
-      NanReturnUndefined();
+    if (CMatrix::is_cmatrix(args[0])) {
+      const CMatrix* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
+      const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_cmatrix));
+    } else if (CVector::is_cvector(args[0])) {
+      const CVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+      const typename CVector::value_type& rhs_cvector = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_cvector));
     }
-
-    NanReturnValue(NanNew<v8::Boolean>(cmatrix == rhs_cmatrix));
   }
 
   EIGENJS_THROW_ERROR_INVALID_ARGUMENT()

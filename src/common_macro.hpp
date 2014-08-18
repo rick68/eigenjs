@@ -20,6 +20,7 @@
 #include <boost/mpl/multiplies.hpp>
 #include <boost/mpl/int.hpp>
 
+#include <sstream>
 #include <tuple>
 #include <type_traits>
 
@@ -106,23 +107,23 @@
                                                                              \
     auto codes = std::make_tuple(                                            \
         [&]{}                                                                \
-      , [&]{ return T::value_type::Identity( nbRows, 1 ).col(0); }           \
-      , [&]{ return T::value_type::Identity( 1, nbCols ).row(0); }           \
+      , [&]{ return T::value_type::Identity( nbRows, 1 ).col( 0 ); }         \
+      , [&]{ return T::value_type::Identity( 1, nbCols ).row( 0 ); }         \
       , [&]{ return T::value_type::Identity( nbRows, nbCols ); }             \
       );                                                                     \
     new_value = std::get<                                                    \
       boost::mpl::plus<                                                      \
         boost::mpl::multiplies<                                              \
-          detail::is_vector_or_cvector<T>                                    \
-        , boost::mpl::int_<1>                                                \
+          detail::is_vector_or_cvector< T >                                  \
+        , boost::mpl::int_< 1 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_rowvector_or_crowvector<T>                              \
-        , boost::mpl::int_<2>                                                \
+          detail::is_rowvector_or_crowvector< T >                            \
+        , boost::mpl::int_< 2 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_matrix_or_cmatrix<T>                                    \
-        , boost::mpl::int_<3>                                                \
+          detail::is_matrix_or_cmatrix< T >                                  \
+        , boost::mpl::int_< 3 >                                              \
         >                                                                    \
       >::value                                                               \
     >( codes )();                                                            \
@@ -170,23 +171,23 @@
                                                                              \
     auto codes = std::make_tuple(                                            \
         [&]{}                                                                \
-      , [&]{ return T::value_type::Random( nbRows, 1 ).col(0); }             \
-      , [&]{ return T::value_type::Random( 1, nbCols ).row(0); }             \
+      , [&]{ return T::value_type::Random( nbRows, 1 ).col( 0 ); }           \
+      , [&]{ return T::value_type::Random( 1, nbCols ).row( 0 ); }           \
       , [&]{ return T::value_type::Random( nbRows, nbCols ); }               \
       );                                                                     \
     new_value = std::get<                                                    \
       boost::mpl::plus<                                                      \
         boost::mpl::multiplies<                                              \
-          detail::is_vector_or_cvector<T>                                    \
-        , boost::mpl::int_<1>                                                \
+          detail::is_vector_or_cvector< T >                                  \
+        , boost::mpl::int_< 1 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_rowvector_or_crowvector<T>                              \
-        , boost::mpl::int_<2>                                                \
+          detail::is_rowvector_or_crowvector< T >                            \
+        , boost::mpl::int_< 2 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_matrix_or_cmatrix<T>                                    \
-        , boost::mpl::int_<3>                                                \
+          detail::is_matrix_or_cmatrix< T >                                  \
+        , boost::mpl::int_< 3 >                                              \
         >                                                                    \
       >::value                                                               \
     >( codes )();                                                            \
@@ -196,6 +197,19 @@
                                                                              \
     EIGENJS_THROW_ERROR_INVALID_ROWS_AND_COLUMNS_ARGUMENTS()                 \
     NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TOSTRING_CONTEXT()             \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    std::ostringstream result;                                               \
+    result << value;                                                         \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue(NanNew(result.str().c_str()));                            \
   }                                                                          \
   /**/
 

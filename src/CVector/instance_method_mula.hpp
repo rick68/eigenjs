@@ -1,5 +1,5 @@
 //
-// CMatrix/instance_method_mula.hpp
+// CVector/instance_method_mula.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
@@ -9,18 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_MULA_HPP
-#define EIGENJS_CMATRIX_INSTANCE_METHOD_MULA_HPP
+#ifndef EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP
+#define EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CMatrix, mula,
+EIGENJS_INSTANCE_METHOD(CVector, mula,
 {
   NanScope();
 
   if (args.Length() == 1) {
-    CMatrix* obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    typename CMatrix::value_type& cmatrix = **obj;
+    CVector* obj = node::ObjectWrap::Unwrap<CVector>(args.This());
+    typename CVector::value_type& value = **obj;
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =
@@ -31,7 +31,12 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         NanReturnUndefined();
       }
 
-      cmatrix *= rhs_cmatrix;
+      if (rhs_cmatrix.cols() != 1) {
+        NanThrowError("The complex matrix size must be 1x1");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_cmatrix;
 
       NanReturnValue(args.This());
     } else if (CVector::is_cvector(args[0])) {
@@ -39,11 +44,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;
 
-      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
-      cmatrix *= rhs_cvector;
+      if (rhs_cvector.cols() != 1) {
+        NanThrowError("The complex vector size must be 1x1");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_cvector;
 
       NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
@@ -55,7 +65,12 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         NanReturnUndefined();
       }
 
-      cmatrix *= rhs_matrix.template cast<typename Complex::value_type>();
+      if (rhs_matrix.cols() != 1) {
+        NanThrowError("The matrix size must be 1x1");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_matrix.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (Vector::is_vector(args[0])) {
@@ -67,11 +82,11 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         NanReturnUndefined();
       }
 
-      cmatrix *= rhs_vector.template cast<typename Complex::value_type>();
+      value *= rhs_vector.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
-    } else if (CMatrix::is_scalar(args[0])) {
-      cmatrix *= args[0]->NumberValue();
+    } else if (T::is_scalar(args[0])) {
+      value *= args[0]->NumberValue();
 
       NanReturnValue(args.This());
     } else if (Complex::is_complex(args[0])) {
@@ -79,7 +94,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      cmatrix *= rhs_complex;
+      value *= rhs_complex;
 
       NanReturnValue(args.This());
     }
@@ -91,4 +106,4 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CMATRIX_INSTANCE_METHOD_MULA_HPP
+#endif  // EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP

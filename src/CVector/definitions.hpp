@@ -1,6 +1,6 @@
 //
-// Vector/definitions.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~
+// CVector/definitions.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,10 +9,10 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_DEFINITIONS_HPP
-#define EIGENJS_VECTOR_DEFINITIONS_HPP
+#ifndef EIGENJS_CVECTOR_DEFINITIONS_HPP
+#define EIGENJS_CVECTOR_DEFINITIONS_HPP
 
-#include "../Vector_fwd.hpp"
+#include "../CVector_fwd.hpp"
 
 #include "instance_method_set.hpp"
 #include "instance_method_get.hpp"
@@ -22,7 +22,7 @@
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
-  Vector
+  CVector
 , (instance_method_set)
   (instance_method_get)
 
@@ -31,4 +31,4 @@ EIGENJS_OBJECT_DEFINITIONS(
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_DEFINITIONS_HPP
+#endif  // EIGENJS_CVECTOR_DEFINITIONS_HPP

@@ -38,9 +38,6 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
-
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
@@ -68,22 +65,13 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
   ~Complex() {}
 
   static NAN_METHOD(New) {
+    const int& args_length = args.Length();
+
     NanScope();
 
-    if (args.Length() < 2) {
-      NanThrowError("Tried creating a complex without real and imag arguments");
-      NanReturnUndefined();
-    }
-
-    if (Complex::is_scalar(args[0]) && Complex::is_scalar(args[1])) {
-      if (args.IsConstructCall()) {
-        const scalar_type& real = args[0]->NumberValue();
-        const scalar_type& imag = args[1]->NumberValue();
-        Complex* obj = new Complex(real, imag);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
-      } else {
-        v8::Local<v8::Value> argv[] = { args[0], args[1] };
+    if (args_length == 1) {
+      if (!args.IsConstructCall()) {
+        v8::Local<v8::Value> argv[] = { args[0], NanNew(0) };
         NanReturnValue(
           base_type::new_instance(
             args
@@ -91,6 +79,31 @@ class Complex : public base<Complex, ScalarType, ValueType, ClassName> {
           , argv
           )
         );
+      }
+
+      if (Complex::is_scalar(args[0])) {
+        Complex* obj = new Complex(args[0]->NumberValue(), 0);
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      }
+    } else if (args_length == 2) {
+      if (Complex::is_scalar(args[0]) && Complex::is_scalar(args[1])) {
+        if (args.IsConstructCall()) {
+          const scalar_type& real = args[0]->NumberValue();
+          const scalar_type& imag = args[1]->NumberValue();
+          Complex* obj = new Complex(real, imag);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        } else {
+          v8::Local<v8::Value> argv[] = { args[0], args[1] };
+          NanReturnValue(
+            base_type::new_instance(
+              args
+            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+            , argv
+            )
+          );
+        }
       }
     }
 
