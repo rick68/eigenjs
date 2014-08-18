@@ -26,7 +26,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, get,
     const typename RowVector::value_type& rowvector = **obj;
     const typename RowVector::value_type::Index& col = args[0]->Int32Value();
 
-    if (RowVector::is_out_of_range(rowvector, col, 0)) {
+    if (RowVector::is_out_of_range(rowvector, 0, col)) {
       NanReturnUndefined();
     }
 
