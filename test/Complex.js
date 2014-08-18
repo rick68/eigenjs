@@ -8,6 +8,13 @@ const
 describe('Complex', function() {
   var c;
 
+  it('should be invoked with arguments and return an object', function() {
+    Complex(0).should.be.an.Object;
+    Complex(0).should.instanceOf(Complex);
+    Complex(0, 0).should.be.an.Object;
+    Complex(0, 0).should.instanceOf(Complex);
+  });
+
   beforeEach(function() {
     c = new Complex(3, -4);
   });
