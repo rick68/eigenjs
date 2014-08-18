@@ -44,7 +44,7 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
-  typedef Complex<scalar_type> Complex;
+  typedef ::EigenJS::Complex<scalar_type> Complex;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
