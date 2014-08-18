@@ -44,6 +44,8 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
+  typedef Complex<scalar_type> Complex;
+
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
@@ -101,7 +103,15 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
 
         for (uint32_t i = 0; i < len; ++i) {
           const v8::Local<v8::Value>& elem = array->Get(i);
-          cvector(i, 0) = elem->NumberValue();
+
+          if (CVector::is_scalar(elem)) {
+            cvector(i, 0) = elem->NumberValue();
+          } else if (Complex::is_complex(elem->ToObject())) {
+            const Complex* const& rhs_obj =
+                node::ObjectWrap::Unwrap<Complex>(elem->ToObject());
+            const typename Complex::value_type& elem_value = **rhs_obj;
+            cvector(i, 0) = elem_value;
+          }
         }
 
         obj->Wrap(args.This());
