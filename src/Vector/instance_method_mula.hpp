@@ -27,7 +27,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
@@ -44,7 +44,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 

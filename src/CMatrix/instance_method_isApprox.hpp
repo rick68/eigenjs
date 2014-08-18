@@ -42,7 +42,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
         : num_traits::dummy_precision();
 
       NanReturnValue(NanNew(v.isApprox(w, prec)));
-    } else if (CVector::is_cmatrix(args[0])) {
+    } else if (CVector::is_cvector(args[0])) {
       const CVector* const& rhs_obj =
         node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;

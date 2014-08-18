@@ -32,6 +32,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
       }
 
       NanReturnValue(NanNew<v8::Boolean>(value == rhs_cmatrix));
+    } else if (CVector::is_cvector(args[0])) {
+      const CVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+      const typename CVector::value_type& rhs_cvector = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_cvector));
     }
   }
 
