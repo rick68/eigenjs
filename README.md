@@ -1691,7 +1691,7 @@ cvec =
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CV = Eigen.Vector
-  , cvec = new CV([  1   ,
+  , cvec = new CV([  1    ,
                    C(2, 4),
                      3    ]);
 console.log('cvec = \n%s', cvec);
@@ -1713,9 +1713,9 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CV = Eigen.CVector
   , cvec = new CV(3);
-cvec.set(0, C(1));
+cvec.set(0, C(1   ));
 cvec.set(1, C(2, 4));
-cvec.set(2, 3);
+cvec.set(2,   3    );
 console.log('cvec = \n%s', cvec);
 ```
 
@@ -1733,7 +1733,7 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CV = Eigen.CVector
   , cvec = new CV(3);
-cvec.set([  1,
+cvec.set([  1    ,
           C(2, 4),
             3     ]);
 console.log('cvec = \n%s', cvec);
@@ -1752,7 +1752,7 @@ cvec =
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CV = Eigen.CVector
-  , cvec = new CV([  1,
+  , cvec = new CV([  1    ,
                    C(2, 4),
                      3     ]);
 console.log(vec.get(0).toString());
