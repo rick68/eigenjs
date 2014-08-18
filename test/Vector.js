@@ -276,7 +276,7 @@ describe('Vector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#sub() should return a CMatrix with the sum of a vector and a complex matrix', function() {
+  it('#sub() should return a CMatrix with the difference of a vector and a complex matrix', function() {
     vec.add.should.be.a.Function;
 
     var cmat = CMatrix(6, 1).set([
@@ -375,7 +375,7 @@ describe('Vector', function() {
     vec.mul(cmat).toString().should.equal("  (1,1)   (2,2)   (3,3)\n  (2,2)   (4,4)   (6,6)\n  (3,3)   (6,6)   (9,9)\n  (4,4)   (8,8) (12,12)\n  (5,5) (10,10) (15,15)\n  (6,6) (12,12) (18,18)");
   });
 
-  it('#mul() should return the product of a vector and a scalar', function() {
+  it('#mul() should return the product of a vector and a scalar value', function() {
     vec.mul.should.be.a.Function;
 
     vec.mul(-1).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
@@ -463,10 +463,46 @@ describe('Vector', function() {
     ])).should.ok;
   });
 
+  it('#equals() should return true if a vector and a matrix are equal', function() {
+    vec.equals.should.be.a.Function;
+
+    vec.equals(new Matrix(6, 1).set([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ])).should.ok;
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     vec.isApprox.should.be.a.Function;
 
     var vec2 = new Vector(6).set([
+      0.111,
+      0.222,
+      0.333,
+      0.444,
+      0.555,
+      0.666
+    ]);
+    vec.div(9).isApprox(vec2, 1e-3).should.false;
+    vec.div(9).isApprox(vec2, 1e-2).should.true;
+
+    (function() {
+      vec.isApprox(
+        new Vector([
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#isApprox() should return true if this is approximately equal to a matrix', function() {
+    vec.isApprox.should.be.a.Function;
+
+    var vec2 = new Matrix(6, 1).set([
       0.111,
       0.222,
       0.333,
@@ -495,7 +531,7 @@ describe('Vector', function() {
       new Vector([
         0,
         0,
-        0, 
+        0,
       ])
     ).should.true;
   });
