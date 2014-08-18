@@ -22,7 +22,7 @@ $ npm install eigenjs
 
 * [Complex](#complex)
   * [Complex Class Methods](#complex-class-methods)
-    * [Complex(real, imag)](#complexreal-imag)
+    * [Complex(real, [imag])](#complexreal-imag)
     * [Complex.polar(scalar, scalar)](#complexpolarscalar-scalar)
     * [Complex.cos(scalar)](#complexcosscalar)
     * [Complex.cos(comp)](#complexcoscomp)
@@ -109,11 +109,13 @@ $ npm install eigenjs
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
     * [mat.add(cmat)](#mataddcmat)
+    * [mat.add(cvec)](#mataddcvec)
     * [mat.adda(mat)](#mataddamat)
     * [mat.adda(vec)](#mataddavec)
     * [mat.sub(mat)](#matsubmat)
     * [mat.sub(vec)](#matsubvec)
     * [mat.sub(cmat)](#matsubcmat)
+    * [mat.sub(cvec)](#matsubcvec)
     * [mat.suba(mat)](#matsubamat)
     * [mat.suba(vec)](#matsubavec)
     * [mat.mul(scalar)](#matmulscalar)
@@ -121,9 +123,10 @@ $ npm install eigenjs
     * [mat.mul(mat)](#matmulmat)
     * [mat.mul(vec)](#matmulvec)
     * [mat.mul(cmat)](#matmulcmat)
+    * [mat.mul(cvec)](#matmulcvec)
     * [mat.mula(scalar)](#matmulascalar)
-    * [mat.mula(vec)](#matmulavec)
     * [mat.mula(mat)](#matmulamat)
+    * [mat.mula(vec)](#matmulavec)
     * [mat.div(scalar)](#matdivscalar)
     * [mat.div(comp)](#matdivcomp)
     * [mat.diva(scalar)](#matdivascalar)
@@ -148,27 +151,41 @@ $ npm install eigenjs
     * [cmat.set(comp_array)](#cmatsetcomparray)
     * [cmat.get(row, col)](#cmatgetrow-col)
     * [cmat.add(mat)](#cmataddmat)
+    * [cmat.add(vec)](#cmataddvec)
     * [cmat.add(cmat)](#cmataddcmat)
+    * [cmat.add(cvec)](#cmataddcvec)
     * [cmat.adda(mat)](#cmataddamat)
+    * [cmat.adda(vec)](#cmataddavec)
     * [cmat.adda(cmat)](#cmataddacmat)
+    * [cmat.adda(cvec)](#cmataddacvec)
     * [cmat.sub(mat)](#cmatsubmat)
+    * [cmat.sub(vec)](#cmatsubvec)
     * [cmat.sub(cmat)](#cmatsubcmat)
+    * [cmat.sub(cvec)](#cmatsubcvec)
     * [cmat.suba(mat)](#cmatsubamat)
+    * [cmat.suba(vec)](#cmatsubavec)
     * [cmat.suba(cmat)](#cmatsubacmat)
+    * [cmat.suba(cvec)](#cmatsubacvec)
     * [cmat.mul(scalar)](#cmatmulscalar)
     * [cmat.mul(comp)](#cmatmulcomp)
     * [cmat.mul(mat)](#cmatmulmat)
+    * [cmat.mul(vec)](#cmatmulvec)
     * [cmat.mul(cmat)](#cmatmulcmat)
+    * [cmat.mul(cvec)](#cmatmulcvec)
     * [cmat.mula(scalar)](#cmatmulascalar)
     * [cmat.mula(comp)](#cmatmulacomp)
     * [cmat.mula(mat)](#cmatmulamat)
+    * [cmat.mula(vec)](#cmatmulavec)
     * [cmat.mula(cmat)](#cmatmulacmat)
+    * [cmat.mula(cvec)](#cmatmulacvec)
     * [cmat.div(scalar)](#cmatdivscalar)
     * [cmat.div(comp)](#cmatdivcomp)
     * [cmat.diva(scalar)](#cmatdivascalar)
     * [cmat.diva(comp)](#cmatdivacomp)
     * [cmat.equals(cmat)](#cmatequalscmat)
+    * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
+    * [cmat.isApprox(cvec, [prec = 1e-12])](#cmatisapproxcvec-prec--1e-12)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **is inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods) 
@@ -176,14 +193,22 @@ $ npm install eigenjs
     * [Vector(scalar_array)](#vectorscalararray)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
-    * [vec.set(scalar_array)](#vecsetscalarvalue)
+    * [vec.set(scalar_array)](#vecsetscalararray)
     * [vec.get(row)](#vecgetrow)
+* [CVector](#cvector) **is inherits from CMatrix**
+  * [CVector Class Methods](#cvector-class-methods) 
+    * [CVector(rows)](#cvectorrows)
+    * [CVector(comp_array)](#cvectorcomparray)
+  * [CVector Instance Methods](#cvector-instance-methods)
+    * [cvec.set(row, comp)](#cvecsetrow-comp)
+    * [cvec.set(comp_array)](#cvecsetcomparray)
+    * [cvec.get(row)](#vecgetrow)
 
 ## Complex
 
 ### Complex Class Methods
 
-#### Complex(real, imag)
+#### Complex(real, [imag])
 
 ```js
 var C = require('eigenjs').Complex
@@ -838,6 +863,7 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 #### mat.add(mat)
 #### mat.add(vec)
 #### mat.add(cmat)
+#### mat.add(cvec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -890,6 +916,7 @@ mat1 =
 #### mat.sub(mat)
 #### mat.sub(vec)
 #### mat.sub(cmat)
+#### mat.sub(cvet)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -944,6 +971,7 @@ mat1 =
 #### mat.mul(mat)
 #### mat.mul(vec)
 #### mat.mul(cmat)
+#### mat.mul(cvec)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1249,7 +1277,9 @@ console.log(cmat.get(1, 0) + ' ' + cmat.get(1, 1));
 ```
 
 #### cmat.add(mat)
+#### cmat.add(vec)
 #### cmat.add(cmat)
+#### cmat.add(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1277,7 +1307,9 @@ cmat3 =
 ```
 
 #### cmat.adda(mat)
+#### cmat.adda(vec)
 #### cmat.adda(cmat)
+#### cmat.adda(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1304,7 +1336,9 @@ cmat1 =
 ```
 
 #### cmat.sub(mat)
+#### cmat.sub(vec)
 #### cmat.sub(cmat)
+#### cmat.sub(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1332,7 +1366,9 @@ cmat3 =
 ```
 
 #### cmat.suba(mat)
+#### cmat.suba(vec)
 #### cmat.suba(cmat)
+#### cmat.suba(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1361,7 +1397,9 @@ mat1 =
 #### cmat.mul(scalar)
 #### cmat.mul(comp)
 #### cmat.mul(mat)
+#### cmat.mul(vec)
 #### cmat.mul(cmat)
+#### cmat.mul(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1393,7 +1431,9 @@ mat2 =
 #### cmat.mula(scalar)
 #### cmat.mula(comp)
 #### cmat.mula(mat)
+#### cmat.mula(vec)
 #### cmat.mula(cmat)
+#### cmat.mula(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1461,6 +1501,7 @@ cmat =
 ```
 
 #### cmat.equals(cmat)
+#### cmat.equals(cvec)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1489,6 +1530,7 @@ true
 ```
 
 #### cmat.isApprox(cmat, [prec = 1e-12])
+#### cmat.isApprox(cvec, [prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
@@ -1540,6 +1582,7 @@ console.log('vec = \n%s', vec);
 ```
 
 ```txt
+vec =
 0
 0
 0
@@ -1557,6 +1600,7 @@ console.log('vec = \n%s', vec);
 ```
 
 ```txt
+vec =
 1
 2
 3
@@ -1577,6 +1621,7 @@ console.log('vec = \n%s', vec);
 ```
 
 ```txt
+vec =
 1
 2
 3
@@ -1595,6 +1640,7 @@ console.log('vec = \n%s', vec);
 ```
 
 ```txt
+vec =
 1
 2
 3
@@ -1617,4 +1663,105 @@ console.log(vec.get(2).toString());
 1
 2
 3
+```
+
+## CVector
+
+### CVector Class Methods
+
+#### CVector(rows)
+
+```js
+var Eigen = require('eigenjs')
+  , CV = Eigen.CVector
+  , cvec = new CV(3);
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+0
+0
+0
+```
+
+#### CVector(comp_array)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.Vector
+  , cvec = new CV([  1   ,
+                   C(2, 4),
+                     3    ]);
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+(1,0)
+(2,4)
+(3,0)
+```
+
+### CVector Instance Methods
+
+#### cvec.set(row, comp)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.CVector
+  , cvec = new CV(3);
+cvec.set(0, C(1));
+cvec.set(1, C(2, 4));
+cvec.set(2, 3);
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+(1,0)
+(2,4)
+(3,0)
+```
+
+#### cvec.set(comp_array)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.CVector
+  , cvec = new CV(3);
+cvec.set([  1,
+          C(2, 4),
+            3     ]);
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+(1,0)
+(2,4)
+(3,0)
+```
+
+#### cvec.get(row)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.CVector
+  , cvec = new CV([  1,
+                   C(2, 4),
+                     3     ]);
+console.log(vec.get(0).toString());
+console.log(vec.get(1).toString());
+console.log(vec.get(2).toString());
+```
+
+```txt
+(1,0)
+(2,4)
+(3,0)
 ```

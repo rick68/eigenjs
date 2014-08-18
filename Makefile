@@ -25,6 +25,13 @@ SOURCES = \
     src/CMatrix/instance_method_suba.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/macro.hpp \
+    src/CRowVector_fwd.hpp \
+    src/CVector.hpp \
+    src/CVector_fwd.hpp \
+    src/CVector/definitions.hpp \
+    src/CVector/instance_method_get.hpp \
+    src/CVector/instance_method_mula.hpp \
+    src/CVector/instance_method_set.hpp \
     src/Complex.hpp \
     src/Complex/class_method_acos.hpp \
     src/Complex/class_method_acosh.hpp \
@@ -88,14 +95,17 @@ SOURCES = \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
+    src/RowVector_fwd.hpp \
     src/Vector.hpp \
     src/Vector_fwd.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_get.hpp \
+    src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_set.hpp \
     src/base.hpp \
     src/common_macro.hpp \
     src/definition.hpp \
+    src/detail/add_complex.hpp \
     src/detail/initializer.hpp \
     src/detail/is_eigen_matrix.hpp \
     src/detail/is_matrix_or_cmatrix.hpp \

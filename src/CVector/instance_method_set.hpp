@@ -57,7 +57,7 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
       value(row, 0) = typename Complex::value_type(new_real, 0);
     } else if (Complex::is_complex(args[1])) {
       const Complex* const& rhs_obj =
-          node::ObjectWrap::Unwrap<Complex>(args.This());
+          node::ObjectWrap::Unwrap<Complex>(args[1]->ToObject());
       const typename Complex::value_type& rhs_value = **rhs_obj;
       value(row, 0) = rhs_value;
     }
