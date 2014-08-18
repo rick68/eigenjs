@@ -535,17 +535,11 @@ describe('CVector', function() {
   it('#div() should return a CVector which be divied by a scalar value', function() {
     cvec.div.should.be.a.Function;
 
-    var cvec2 = cvec.div(0);
-    cvec2.toString().should.equal("(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)");
-
     cvec.div(2).toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
 
   it('#div() should return a CVector which be divied by a comple value', function() {
     cvec.div.should.be.a.Function;
-
-    var cvec2 = cvec.div(Complex(0, 0));
-    cvec2.toString().should.equal("(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)");
 
     cvec.div(Complex(2, 0)).toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
@@ -553,25 +547,15 @@ describe('CVector', function() {
   it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
     cvec.diva.should.be.a.Function;
 
-    cvec.diva(0);
-    cvec.toString().should.equal("(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)");
-
-    var comp = cvec.get(0);
-    comp.should.be.an.instanceOf(Complex);
-    comp.real.should.be.a.NaN;
-    comp.imag.should.be.a.NaN;
+    cvec.diva(2);
+    cvec.toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
 
   it('#diva() should return a Matrix which be divied by a comple value then saves it back', function() {
     cvec.diva.should.be.a.Function;
 
-    cvec.diva(Complex(0, 0));
-    cvec.toString().should.equal("(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)\n(nan,nan)");
-
-    var comp = cvec.get(0);
-    comp.should.be.an.instanceOf(Complex);
-    comp.real.should.be.a.NaN;
-    comp.imag.should.be.a.NaN;
+    cvec.diva(Complex(2, 0));
+    cvec.toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
 
   it('#equals() should return true if two complex vectors are equal', function() {
