@@ -44,6 +44,9 @@ EIGENJS_INSTANCE_METHOD(CVector, get,
       )
     );
   }
+
+  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+  NanReturnUndefined();
 })
 
 }  // namespace EigenJS
