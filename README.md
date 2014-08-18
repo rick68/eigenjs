@@ -201,7 +201,7 @@ $ npm install eigenjs
     * [CVector(comp_array)](#cvectorcomparray)
   * [CVector Instance Methods](#cvector-instance-methods)
     * [cvec.set(row, comp)](#cvecsetrow-comp)
-    * [cvec.set(comp_array)](#cvecsetcomp-array)
+    * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#vecgetrow)
 
 ## Complex
