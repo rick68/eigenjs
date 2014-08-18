@@ -36,7 +36,14 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
 
     for (uint32_t i = 0; i < len; ++i) {
       v8::Local<v8::Value> elem = array->Get(i);
-      value(i, 0) = elem->NumberValue();
+      if (CVector::is_scalar(elem)) {
+        value(i, 0) = elem->NumberValue();
+      } else if (Complex::is_complex(elem->ToObject())) {
+        const Complex* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Complex>(elem->ToObject());
+        const typename Complex::value_type& elem_value = **rhs_obj;
+        value(i, 0) = elem_value;
+      }
     }
   } else if (args_length == 2 && args[0]->IsNumber()) {
     const typename CVector::value_type::Index& row = args[0]->Int32Value();
