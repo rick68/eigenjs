@@ -78,6 +78,27 @@
         new_value = value OP rhs_cvector;                                    \
                                                                              \
         NanReturnValue(instance);                                            \
+      } else if ( CRowVector::is_crowvector( args[0] ) ) {                   \
+        const CRowVector* const& rhs_obj =                                   \
+            node::ObjectWrap::Unwrap<CRowVector>( args[0]->ToObject() );     \
+        const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;   \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = T::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
+        typename T::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value = value OP rhs_crowvector;                                 \
+                                                                             \
+        NanReturnValue(instance);                                            \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
         const Matrix* const& rhs_obj =                                       \
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
@@ -126,6 +147,30 @@
           rhs_vector.template cast< typename Complex::value_type >();        \
                                                                              \
         NanReturnValue( instance );                                          \
+      } else if ( RowVector::is_rowvector( args[0] ) ) {                     \
+        const RowVector* const& rhs_obj =                                    \
+            node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;     \
+                                                                             \
+        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = T::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
+        typename T::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value =                                                          \
+          value                                                              \
+            OP                                                               \
+          rhs_rowvector.template cast< typename Complex::value_type >();     \
+                                                                             \
+        NanReturnValue( instance );                                          \
       }                                                                      \
     }                                                                        \
                                                                              \
@@ -166,6 +211,18 @@
         value BOOST_PP_CAT( OP, = ) rhs_cvector;                             \
                                                                              \
         NanReturnValue( args.This() );                                       \
+      } else if ( CRowVector::is_crowvector( args[0] ) ) {                   \
+        const CRowVector* const& rhs_obj =                                   \
+            node::ObjectWrap::Unwrap< CRowVector >( args[0]->ToObject() );   \
+        const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;   \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        value BOOST_PP_CAT( OP, = ) rhs_crowvector;                          \
+                                                                             \
+        NanReturnValue( args.This() );                                       \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
         const Matrix* const& rhs_obj =                                       \
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
@@ -190,6 +247,19 @@
                                                                              \
         value BOOST_PP_CAT( OP, = )                                          \
             rhs_vector.template cast< typename Complex::value_type >();      \
+                                                                             \
+        NanReturnValue( args.This() );                                       \
+      } else if ( RowVector::is_rowvector( args[0] ) ) {                     \
+        const RowVector* const& rhs_obj =                                    \
+            node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;     \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        value BOOST_PP_CAT( OP, = )                                          \
+            rhs_rowvector.template cast< typename Complex::value_type >();   \
                                                                              \
         NanReturnValue( args.This() );                                       \
       }                                                                      \
