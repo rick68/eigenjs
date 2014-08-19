@@ -46,12 +46,24 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
       cmatrix *= rhs_cvector;
 
       NanReturnValue(args.This());
+    } else if (CRowVector::is_crowvector(args[0])) {
+      const CRowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
+      const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
+
+      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_crowvector;
+
+      NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
@@ -63,7 +75,19 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_vector.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_vector = **rhs_obj;
+
+      if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 

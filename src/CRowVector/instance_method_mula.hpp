@@ -84,7 +84,8 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_matrix.cols() != 1) {
+      if (value.cols() != rhs_matrix.rows() ||
+          value.cols() != rhs_matrix.cols()) {
         NanThrowError("The matrix size must be mxm");
         NanReturnUndefined();
       }
@@ -107,6 +108,23 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
       }
 
       value *= rhs_vector.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+      if (RowVector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvector.rows() != 1 ||
+          rhs_rowvector.cols() != 1
+      ) {
+        NanReturnUndefined();
+      }
+
+      value *= rhs_rowvector.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {
