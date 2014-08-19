@@ -14,11 +14,19 @@
 
 #include "../CRowVector_fwd.hpp"
 
+#include "instance_method_set.hpp"
+#include "instance_method_get.hpp"
+
+#include "instance_method_mula.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   CRowVector
-,
+, (instance_method_set)
+  (instance_method_get)
+
+  (instance_method_mula)
 );
 
 }  // namespace EigenJS
