@@ -9,7 +9,7 @@ const
     should = require('should');
 
 describe('RowVector', function() {
-  var vec;
+  var rvec;
 
   it('#RowVector() should be a function', function() {
     RowVector.should.be.a.Function;
@@ -42,8 +42,7 @@ describe('RowVector', function() {
   beforeEach(function() {
     rvec = RowVector([
       1, 2, 3, 4, 5, 6
-      ]
-    );
+    ]);
   });
 
   it('#set() should throw message when the row is out of range', function() {
@@ -172,13 +171,6 @@ describe('RowVector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#adda() should return the sum of a row-vector and a vector then saves it back', function() {
-    rvec.adda.should.be.a.Function;
-
-    var rvec2 = RowVector([1]);
-    rvec2.adda(Vector([2])).toString().should.equal("3");
-  });
-
   it('#adda() should return the sum of a row-vector and a matrix then saves it back', function() {
     rvec.adda.should.be.a.Function;
 
@@ -197,15 +189,22 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it('#adda() should return the sum of a row-vector and a vector then saves it back', function() {
+    rvec.adda.should.be.a.Function;
+
+    var rvec2 = RowVector([1]);
+    rvec2.adda(Vector([2])).toString().should.equal("3");
+  });
+
   it('#sub() should return the difference of two row-vectors', function() {
     rvec.sub.should.be.a.Function;
 
     rvec.sub(
       RowVector([ 2, 4, 6, 8, 10, 12 ])
-     ).toString().should.equal("-1 -2 -3 -4 -5 -6");
+    ).toString().should.equal("-1 -2 -3 -4 -5 -6");
 
     (function() {
-      rvec.sub(RowVector([1, 2, 3]));
+      rvec.sub(RowVector([ 1, 2, 3 ]));
     }).should.throw("Nonconformant arguments");
   });
 
@@ -231,7 +230,7 @@ describe('RowVector', function() {
   });
 
   it('#sub() should return a CMatrix with the difference of a row-vector and a complex matrix', function() {
-    rvec.add.should.be.a.Function;
+    rvec.sub.should.be.a.Function;
 
     var cmat = CMatrix(1, 6).set([
       Complex( 2, 0),
@@ -258,12 +257,12 @@ describe('RowVector', function() {
   it('#suba() should return the difference of two row-vectors and saves it back', function() {
     rvec.suba.should.be.a.Function;
 
-    var rvec2 = RowVector([2, 4, 6, 8, 10, 12]);
+    var rvec2 = RowVector([ 2, 4, 6, 8, 10, 12 ]);
     rvec2.suba(rvec);
     rvec2.toString().should.equal("1 2 3 4 5 6");
   });
 
-  it('#suba() should return the difference of a vector and a matrix then saves it back', function() {
+  it('#suba() should return the difference of a row-vector and a matrix then saves it back', function() {
     rvec.suba.should.be.a.Function;
 
     var mat = Matrix(1, 6).set([ 2, 4, 6, 8, 10, 12 ]);
@@ -277,7 +276,7 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
-  it('#suba() should return the difference of a vector and a vector then saves it back', function() {
+  it('#suba() should return the difference of a row-vector and a vector then saves it back', function() {
     rvec.suba.should.be.a.Function;
 
     var rvec2 = RowVector([1]);
@@ -311,9 +310,7 @@ describe('RowVector', function() {
     (function() {
       rvec.mul(Matrix(1, 3)
         .set([
-          2,
-          4,
-          6
+          2, 4, 6
         ])
       );
     }).should.throw("Invalid matrix product");
