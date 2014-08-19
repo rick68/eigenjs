@@ -60,8 +60,8 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
 
       NanReturnValue(NanNew(v.isApprox(w, prec)));
     } else if (CRowVector::is_crowvector(args[0])) {
-      const CVector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+      const CRowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
       const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
       const typename CRowVector::value_type& w = rhs_crowvector;
 

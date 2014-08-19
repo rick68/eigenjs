@@ -12,8 +12,6 @@
 #ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_MUL_HPP
 #define EIGENJS_CMATRIX_INSTANCE_METHOD_MUL_HPP
 
-#include "../detail/add_complex.hpp"
-
 namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, mul,
@@ -60,16 +58,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value * rhs_cvector;
+      new_cmatrix = value * rhs_cvector;
 
       NanReturnValue(instance);
     } else if (CRowVector::is_crowvector(args[0])) {
@@ -81,16 +79,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value * rhs_crowvector;
+      new_cmatrix = value * rhs_crowvector;
 
       NanReturnValue(instance);
     } else if (Matrix::is_matrix(args[0])) {
@@ -130,10 +128,10 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value *
+      new_cmatrix = value *
           rhs_vector.template cast<typename Complex::value_type>();
 
       NanReturnValue(instance);
@@ -152,15 +150,15 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value *
+      new_cmatrix = value *
           rhs_rowvector.template cast<typename Complex::value_type>();
 
       NanReturnValue(instance);
     } else if (T::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = CMatrix::new_instance(
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
