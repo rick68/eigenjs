@@ -45,7 +45,12 @@ EIGENJS_INSTANCE_METHOD(RowVector, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Vector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_vector.rows() != 1 ||
+          rhs_vector.cols() != 1
+      ) {
         NanReturnUndefined();
       }
 

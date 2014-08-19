@@ -24,7 +24,7 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =
-        node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
       const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
 
       if (CMatrix::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -41,7 +41,7 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
       NanReturnValue(args.This());
     } else if (CVector::is_cvector(args[0])) {
       const CVector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;
 
       if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -58,7 +58,7 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
       NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
       if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -75,7 +75,7 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
       NanReturnValue(args.This());
     } else if (Vector::is_vector(args[0])) {
       const Vector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
       if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -91,7 +91,7 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
       NanReturnValue(args.This());
     } else if (Complex::is_complex(args[0])) {
       const Complex* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
       value *= rhs_complex;
