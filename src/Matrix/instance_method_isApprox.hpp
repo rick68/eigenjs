@@ -45,8 +45,25 @@ EIGENJS_INSTANCE_METHOD(Matrix, isApprox,
     } else if (Vector::is_vector(args[0])) {
       const Vector* const& rhs_obj =
           node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
-      const typename Vector::value_type& rhs_matrix = **rhs_obj;
-      const typename Vector::value_type& w = rhs_matrix;
+      const typename Vector::value_type& rhs_vector = **rhs_obj;
+      const typename Vector::value_type& w = rhs_vector;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+      const typename RowVector::value_type& w = rhs_rowvector;
 
       if (T::is_nonconformate_arguments(obj, rhs_obj)) {
         NanReturnUndefined();

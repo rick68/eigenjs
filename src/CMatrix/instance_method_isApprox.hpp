@@ -59,6 +59,23 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
         : num_traits::dummy_precision();
 
       NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (CRowVector::is_crowvector(args[0])) {
+      const CRowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
+      const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
+      const typename CRowVector::value_type& w = rhs_crowvector;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
     }
   }
 

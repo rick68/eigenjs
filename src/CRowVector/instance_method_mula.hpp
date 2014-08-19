@@ -1,6 +1,6 @@
 //
-// CVector/instance_method_mula.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CRowVector/instance_method_mula.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,18 +9,19 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP
-#define EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP
+#ifndef EIGENJS_CROWVECTOR_INSTANCE_METHOD_MULA_HPP
+#define EIGENJS_CROWVECTOR_INSTANCE_METHOD_MULA_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CVector, mula,
+EIGENJS_INSTANCE_METHOD(CRowVector, mula,
 {
   NanScope();
 
   if (args.Length() == 1) {
-    CVector* obj = node::ObjectWrap::Unwrap<CVector>(args.This());
-    typename CVector::value_type& value = **obj;
+    CRowVector* obj =
+        node::ObjectWrap::Unwrap<CRowVector>(args.This());
+    typename CRowVector::value_type& value = **obj;
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =
@@ -31,8 +32,9 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_cmatrix.cols() != 1) {
-        NanThrowError("The complex matrix size must be 1x1");
+      if (value.cols() != rhs_cmatrix.rows() ||
+          value.cols() != rhs_cmatrix.cols()) {
+        NanThrowError("The complex matrix size must be mxm");
         NanReturnUndefined();
       }
 
@@ -44,7 +46,12 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
           node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;
 
-      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (CVector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_cvector.rows() != 1 ||
+          rhs_cvector.cols() != 1
+      ) {
         NanReturnUndefined();
       }
 
@@ -56,6 +63,18 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
       value *= rhs_cvector;
 
       NanReturnValue(args.This());
+    } else if (CRowVector::is_crowvector(args[0])) {
+      const CRowVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
+      const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
+
+      if (CRowVector::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      value *= rhs_crowvector;
+
+      NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
@@ -65,8 +84,9 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_matrix.cols() != 1) {
-        NanThrowError("The matrix size must be 1x1");
+      if (value.cols() != rhs_matrix.rows() ||
+          value.cols() != rhs_matrix.cols()) {
+        NanThrowError("The matrix size must be mxm");
         NanReturnUndefined();
       }
 
@@ -78,11 +98,33 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
           node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Vector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_vector.rows() != 1 ||
+          rhs_vector.cols() != 1
+      ) {
         NanReturnUndefined();
       }
 
       value *= rhs_vector.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+          node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+      if (RowVector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvector.rows() != 1 ||
+          rhs_rowvector.cols() != 1
+      ) {
+        NanReturnUndefined();
+      }
+
+      value *= rhs_rowvector.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {
@@ -106,4 +148,4 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CVECTOR_INSTANCE_METHOD_MULA_HPP
+#endif  // EIGENJS_CROWVECTOR_INSTANCE_METHOD_MULA_HPP

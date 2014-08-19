@@ -45,6 +45,18 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
       matrix *= rhs_vector;
 
       NanReturnValue(args.This());
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      matrix *= rhs_rowvector;
+
+      NanReturnValue(args.This());
     } else if (Matrix::is_scalar(args[0])) {
       matrix *= args[0]->NumberValue();
 

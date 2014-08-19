@@ -79,6 +79,27 @@
         new_value = value OP rhs_vector;                                     \
                                                                              \
         NanReturnValue( instance );                                          \
+      } else if ( RowVector::is_rowvector( args[0] ) ) {                     \
+        const RowVector* const& rhs_obj =                                    \
+            node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;     \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = T::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
+        typename T::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value = value OP rhs_rowvector;                                  \
+                                                                             \
+        NanReturnValue( instance );                                          \
       } else if ( CMatrix::is_cmatrix( args[0]) ) {                          \
         const CMatrix* const& rhs_obj =                                      \
             node::ObjectWrap::Unwrap< CMatrix >( args[0]->ToObject() );      \
@@ -169,6 +190,18 @@
         }                                                                    \
                                                                              \
         value BOOST_PP_CAT( OP, = ) rhs_vector;                              \
+                                                                             \
+        NanReturnValue( args.This() );                                       \
+      } else if ( RowVector::is_rowvector( args[0] ) ) {                     \
+        const RowVector* const& rhs_obj =                                    \
+            node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
+        const typename Vector::value_type& rhs_rowvector = **rhs_obj;        \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        value BOOST_PP_CAT( OP, = ) rhs_rowvector;                           \
                                                                              \
         NanReturnValue( args.This() );                                       \
       }                                                                      \

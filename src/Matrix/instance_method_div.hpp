@@ -12,6 +12,8 @@
 #ifndef EIGENJS_MATRIX_INSTANCE_METHOD_DIV_HPP
 #define EIGENJS_MATRIX_INSTANCE_METHOD_DIV_HPP
 
+#include "../detail/add_complex.hpp"
+
 namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, div,
@@ -44,14 +46,16 @@ EIGENJS_INSTANCE_METHOD(Matrix, div,
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      v8::Local<v8::Object> instance = CMatrix::new_instance(
+      typedef typename detail::add_complex<T>::type CT;
+
+      v8::Local<v8::Object> instance = CT::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-      typename CMatrix::value_type& new_cmatrix = **new_obj;
+      CT* new_obj = node::ObjectWrap::Unwrap<CT>(instance);
+      typename CT::value_type& new_cmatrix = **new_obj;
 
       new_cmatrix =
           value.template cast<typename Complex::value_type>()

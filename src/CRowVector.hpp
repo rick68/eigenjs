@@ -1,6 +1,6 @@
 //
-// Vector.hpp
-// ~~~~~~~~~~
+// CRowVector.hpp
+// ~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,8 +9,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_HPP
-#define EIGENJS_VECTOR_HPP
+#ifndef EIGENJS_CROWVECTOR_HPP
+#define EIGENJS_CROWVECTOR_HPP
 
 #include <v8.h>
 #include <node.h>
@@ -23,10 +23,10 @@
 
 #include "base.hpp"
 #include "definition.hpp"
-#include "Matrix.hpp"
-#include "CVector.hpp"
-#include "Vector_fwd.hpp"
-#include "Vector/definitions.hpp"
+#include "Complex.hpp"
+#include "CMatrix.hpp"
+#include "CRowVector_fwd.hpp"
+#include "CRowVector/definitions.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {
@@ -36,12 +36,15 @@ template <
 , typename ValueType
 , const char* ClassName
 >
-class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
+class CRowVector : public base<CRowVector, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Vector, ScalarType, ValueType, ClassName> base_type;
+  typedef base<
+      ::EigenJS::CRowVector, ScalarType, ValueType, ClassName> base_type;
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
+
+  typedef ::EigenJS::Complex<scalar_type> Complex;
 
  public:
   static void Init(v8::Handle<v8::Object> exports) {
@@ -52,23 +55,23 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
     tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
-    EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
-    EIGENJS_OBJECT_INITIALIZE(Vector, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CRowVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
  private:
-  explicit Vector(const base_type& base)
+  explicit CRowVector(const base_type& base)
     : base_type(base)
   {}
 
-  explicit Vector(const typename value_type::Index& rows)
+  explicit CRowVector(const typename value_type::Index& cols)
     : base_type()
-      { *base_type::value_ptr_ = value_type::Zero(rows, 1); }
+      { *base_type::value_ptr_ = value_type::Zero(1, cols); }
 
-  ~Vector() {}
+  ~CRowVector() {}
 
   static NAN_METHOD(New) {
     const int& args_length = args.Length();
@@ -87,34 +90,42 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
         );
       }
 
-      if (Vector::is_scalar(args[0])) {
+      if (CRowVector::is_scalar(args[0])) {
         typename value_type::Index size = args[0]->Int32Value();
-        Vector* obj = new Vector(size);
+        CRowVector* obj = new CRowVector(size);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       } else if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
-        Vector* obj = new Vector(len);
-        Vector::value_type& vector = **obj;
+        CRowVector* obj = new CRowVector(len);
+        CRowVector::value_type& crowvector = **obj;
 
         for (uint32_t i = 0; i < len; ++i) {
           const v8::Local<v8::Value>& elem = array->Get(i);
-          vector(i, 0) = elem->NumberValue();
+
+          if (CRowVector::is_scalar(elem)) {
+            crowvector(0, i) = elem->NumberValue();
+          } else if (Complex::is_complex(elem->ToObject())) {
+            const Complex* const& rhs_obj =
+                node::ObjectWrap::Unwrap<Complex>(elem->ToObject());
+            const typename Complex::value_type& elem_value = **rhs_obj;
+            crowvector(0, i) = elem_value;
+          }
         }
 
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       }
     } else if (args_length == 2) {
-      if (Vector::is_scalar(args[0]) && Vector::is_scalar(args[1])) {
+      if (CRowVector::is_scalar(args[0]) && CRowVector::is_scalar(args[1])) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
         v8::Local<v8::Value> argv[] = { args[0], args[1] };
-        (void)cols;
+        (void)rows;
 
         if (args.IsConstructCall()) {
-          Vector* obj = new Vector(rows);
+          CRowVector* obj = new CRowVector(cols);
           obj->Wrap(args.This());
           NanReturnValue(args.This());
         } else {
@@ -136,4 +147,4 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_HPP
+#endif  // EIGENJS_CROWVECTOR_HPP

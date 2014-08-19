@@ -31,7 +31,11 @@ describe('Vector', function() {
   });
 
   it('#Vector() should return the vector with a scalar array', function() {
-    vec = Vector([1, 2, 3]);
+    vec = Vector([
+      1,
+      2,
+      3]
+    );
     vec.rows().should.equal(3);
     vec.cols().should.equal(1);
     vec.toString().should.equal("1\n2\n3");
@@ -45,7 +49,8 @@ describe('Vector', function() {
       4,
       5,
       6
-      ]);
+      ]
+    );
   });
 
   it('#set() should throw message when the row is out of range', function() {
@@ -285,7 +290,7 @@ describe('Vector', function() {
       Complex( 6, 2),
       Complex( 8, 4),
       Complex( 9, 5),
-      Complex(10, 6),
+      Complex(10, 6)
     ]);
 
     vec.sub(cmat).toString().should.equal(" (-1,0)\n(-2,-1)\n(-3,-2)\n(-4,-4)\n(-4,-5)\n(-4,-6)");
@@ -431,7 +436,7 @@ describe('Vector', function() {
     vec.div(Complex(2, 0)).toString().should.equal("(0.5,0)\n  (1,0)\n(1.5,0)\n  (2,0)\n(2.5,0)\n  (3,0)");
   });
 
-  it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
+  it('#diva() should return a Vector which be divied by a scalar value then saves it back', function() {
     vec.diva.should.be.a.Function;
 
     vec.diva(0);
@@ -502,7 +507,7 @@ describe('Vector', function() {
   it('#isApprox() should return true if this is approximately equal to a matrix', function() {
     vec.isApprox.should.be.a.Function;
 
-    var vec2 = new Matrix(6, 1).set([
+    var mat = new Matrix(6, 1).set([
       0.111,
       0.222,
       0.333,
@@ -510,12 +515,12 @@ describe('Vector', function() {
       0.555,
       0.666
     ]);
-    vec.div(9).isApprox(vec2, 1e-3).should.false;
-    vec.div(9).isApprox(vec2, 1e-2).should.true;
+    vec.div(9).isApprox(mat, 1e-3).should.false;
+    vec.div(9).isApprox(mat, 1e-2).should.true;
 
     (function() {
       vec.isApprox(
-        new Vector([
+        new Matrix(1, 1).set([
           1
         ])
       );
@@ -531,7 +536,7 @@ describe('Vector', function() {
       new Vector([
         0,
         0,
-        0,
+        0
       ])
     ).should.true;
   });
