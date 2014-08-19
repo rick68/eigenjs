@@ -12,8 +12,6 @@
 #ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_MUL_HPP
 #define EIGENJS_CMATRIX_INSTANCE_METHOD_MUL_HPP
 
-#include "../detail/add_complex.hpp"
-
 namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, mul,
@@ -60,16 +58,37 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value * rhs_cvector;
+      new_cmatrix = value * rhs_cvector;
+
+      NanReturnValue(instance);
+    } else if (CRowVector::is_crowvector(args[0])) {
+      const CRowVector* rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
+      const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix = value * rhs_crowvector;
 
       NanReturnValue(instance);
     } else if (Matrix::is_matrix(args[0])) {
@@ -109,15 +128,37 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-      new_value = value *
+      new_cmatrix = value *
           rhs_vector.template cast<typename Complex::value_type>();
 
       NanReturnValue(instance);
-    } else if (T::is_scalar(args[0])) {
+    } else if (RowVector::is_rowvector(args[0])) {
+      const RowVector* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+      const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
       v8::Local<v8::Object> instance = CMatrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix = value *
+          rhs_rowvector.template cast<typename Complex::value_type>();
+
+      NanReturnValue(instance);
+    } else if (T::is_scalar(args[0])) {
+      v8::Local<v8::Object> instance = T::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv

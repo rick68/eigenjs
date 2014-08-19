@@ -23,10 +23,8 @@
 
 #include "base.hpp"
 #include "definition.hpp"
-#include "Complex.hpp"
 #include "Matrix_fwd.hpp"
 #include "Matrix/definitions.hpp"
-#include "Vector_fwd.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {

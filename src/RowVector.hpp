@@ -1,6 +1,6 @@
 //
-// Vector.hpp
-// ~~~~~~~~~~
+// RowVector.hpp
+// ~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,8 +9,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_HPP
-#define EIGENJS_VECTOR_HPP
+#ifndef EIGENJS_ROWVECTOR_HPP
+#define EIGENJS_ROWVECTOR_HPP
 
 #include <v8.h>
 #include <node.h>
@@ -24,9 +24,9 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Matrix.hpp"
-#include "CVector.hpp"
-#include "Vector_fwd.hpp"
-#include "Vector/definitions.hpp"
+#include "CRowVector.hpp"
+#include "RowVector_fwd.hpp"
+#include "RowVector/definitions.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {
@@ -36,9 +36,10 @@ template <
 , typename ValueType
 , const char* ClassName
 >
-class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
+class RowVector : public base<RowVector, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Vector, ScalarType, ValueType, ClassName> base_type;
+  typedef base<
+      ::EigenJS::RowVector, ScalarType, ValueType, ClassName> base_type;
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
@@ -53,22 +54,22 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
-    EIGENJS_OBJECT_INITIALIZE(Vector, tpl)
+    EIGENJS_OBJECT_INITIALIZE(RowVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
   }
 
  private:
-  explicit Vector(const base_type& base)
+  explicit RowVector(const base_type& base)
     : base_type(base)
   {}
 
-  explicit Vector(const typename value_type::Index& rows)
+  explicit RowVector(const typename value_type::Index& cols)
     : base_type()
-      { *base_type::value_ptr_ = value_type::Zero(rows, 1); }
+      { *base_type::value_ptr_ = value_type::Zero(1, cols); }
 
-  ~Vector() {}
+  ~RowVector() {}
 
   static NAN_METHOD(New) {
     const int& args_length = args.Length();
@@ -87,34 +88,34 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
         );
       }
 
-      if (Vector::is_scalar(args[0])) {
+      if (RowVector::is_scalar(args[0])) {
         typename value_type::Index size = args[0]->Int32Value();
-        Vector* obj = new Vector(size);
+        RowVector* obj = new RowVector(size);
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       } else if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
-        Vector* obj = new Vector(len);
-        Vector::value_type& vector = **obj;
+        RowVector* obj = new RowVector(len);
+        RowVector::value_type& rowvector = **obj;
 
         for (uint32_t i = 0; i < len; ++i) {
           const v8::Local<v8::Value>& elem = array->Get(i);
-          vector(i, 0) = elem->NumberValue();
+          rowvector(0, i) = elem->NumberValue();
         }
 
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       }
     } else if (args_length == 2) {
-      if (Vector::is_scalar(args[0]) && Vector::is_scalar(args[1])) {
+      if (RowVector::is_scalar(args[0]) && RowVector::is_scalar(args[1])) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
         v8::Local<v8::Value> argv[] = { args[0], args[1] };
-        (void)cols;
+        (void)rows;
 
         if (args.IsConstructCall()) {
-          Vector* obj = new Vector(rows);
+          RowVector* obj = new RowVector(cols);
           obj->Wrap(args.This());
           NanReturnValue(args.This());
         } else {
@@ -136,4 +137,4 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_HPP
+#endif  // EIGENJS_ROWVECTOR_HPP

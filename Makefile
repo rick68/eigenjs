@@ -25,7 +25,12 @@ SOURCES = \
     src/CMatrix/instance_method_suba.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/macro.hpp \
+    src/CRowVectorhpp \
     src/CRowVector_fwd.hpp \
+    src/CRowVector/definitions.hpp \
+    src/CRowVector/instance_method_get.hpp \
+    src/CRowVector/instance_method_mula.hpp \
+    src/CRowVector/instance_method_set.hpp \
     src/CVector.hpp \
     src/CVector_fwd.hpp \
     src/CVector/definitions.hpp \
@@ -95,7 +100,12 @@ SOURCES = \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
+    src/RowVector.hpp \
     src/RowVector_fwd.hpp \
+    src/RowVector/definitions.hpp \
+    src/RowVector/instance_method_get.hpp \
+    src/RowVector/instance_method_mula.hpp \
+    src/RowVector/instance_method_set.hpp \
     src/Vector.hpp \
     src/Vector_fwd.hpp \
     src/Vector/definitions.hpp \

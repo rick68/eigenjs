@@ -26,6 +26,8 @@
 #include "../CMatrix_fwd.hpp"
 #include "../Vector_fwd.hpp"
 #include "../CVector_fwd.hpp"
+#include "../RowVector_fwd.hpp"
+#include "../CRowVector_fwd.hpp"
 
 namespace EigenJS {
 namespace detail {
@@ -55,6 +57,14 @@ struct add_complex<Vector<ScalarType, ValueType>, true, true> {
   typedef typename std::enable_if<
       is_eigen_matrix<ValueType>::value
     , CVector<ScalarType>
+    >::type type;
+};
+
+template <typename ScalarType, typename ValueType>
+struct add_complex<RowVector<ScalarType, ValueType>, true, true> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<ValueType>::value
+    , CRowVector<ScalarType>
     >::type type;
 };
 

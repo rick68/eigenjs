@@ -1,6 +1,6 @@
 //
-// Vector/instance_method_mula.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// RowVector/instance_method_mula.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,18 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
-#define EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
+#ifndef EIGENJS_ROWVECTOR_INSTANCE_METHOD_MULA_HPP
+#define EIGENJS_ROWVECTOR_INSTANCE_METHOD_MULA_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(Vector, mula,
+EIGENJS_INSTANCE_METHOD(RowVector, mula,
 {
   NanScope();
 
   if (args.Length() == 1) {
-    Vector* obj = node::ObjectWrap::Unwrap<Vector>(args.This());
-    typename Vector::value_type& value = **obj;
+    RowVector* obj = node::ObjectWrap::Unwrap<RowVector>(args.This());
+    typename RowVector::value_type& value = **obj;
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
@@ -31,8 +31,9 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_matrix.cols() != 1) {
-        NanThrowError("The matrix size must be 1x1");
+      if (value.cols() != rhs_matrix.rows() ||
+          value.cols() != rhs_matrix.cols()) {
+        NanThrowError("The matrix size must be mxm");
         NanReturnUndefined();
       }
 
@@ -44,7 +45,12 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (Vector::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (Vector::is_invalid_matrix_product(obj, rhs_obj) ||
+          value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_vector.rows() != 1 ||
+          rhs_vector.cols() != 1
+      ) {
         NanReturnUndefined();
       }
 
@@ -76,4 +82,4 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
+#endif  // EIGENJS_ROWVECTOR_INSTANCE_METHOD_MULA_HPP
