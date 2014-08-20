@@ -57,10 +57,6 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
   }
 
  private:
-  explicit CMatrix(const base_type& base)
-    : base_type(base)
-  {}
-
   CMatrix(
     const typename value_type::Index& rows
   , const typename value_type::Index& cols
@@ -78,22 +74,25 @@ class CMatrix : public base<CMatrix, ScalarType, ValueType, ClassName> {
       NanReturnUndefined();
     }
 
-    if (CMatrix::is_scalar(args[0]) && CMatrix::is_scalar(args[1])) {
-      if (args.IsConstructCall()) {
-        typename value_type::Index rows = args[0]->Int32Value();
-        typename value_type::Index cols = args[1]->Int32Value();
-        CMatrix* obj = new CMatrix(rows, cols);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
-      } else {
-        v8::Local<v8::Value> argv[] = { args[0], args[1] };
-        NanReturnValue(
-          base_type::new_instance(
-            args
-          , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-          , argv
-          )
-        );
+    if (args[0]->IsNumber() && args[1]->IsNumber()) {
+      typename value_type::Index rows = args[0]->Int32Value();
+      typename value_type::Index cols = args[1]->Int32Value();
+
+      if (rows >= 0 && cols >= 0) {
+        if (args.IsConstructCall()) {
+          CMatrix* obj = new CMatrix(rows, cols);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        } else {
+          v8::Local<v8::Value> argv[] = { args[0], args[1] };
+          NanReturnValue(
+            base_type::new_instance(
+              args
+            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+            , argv
+            )
+          );
+        }
       }
     }
 

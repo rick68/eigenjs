@@ -57,8 +57,6 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   }
 
  protected:
-  explicit Matrix(const base_type& base) : base_type(base) {}
-
   Matrix(
     const typename value_type::Index& rows
   , const typename value_type::Index& cols
@@ -76,22 +74,25 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
       NanReturnUndefined();
     }
 
-    if (Matrix::is_scalar(args[0]) && Matrix::is_scalar(args[1])) {
-      if (args.IsConstructCall()) {
-        typename value_type::Index rows = args[0]->Uint32Value();
-        typename value_type::Index cols = args[1]->Uint32Value();
-        Matrix* obj = new Matrix(rows, cols);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
-      } else {
-        v8::Local<v8::Value> argv[] = { args[0], args[1] };
-        NanReturnValue(
-          base_type::new_instance(
-            args
-          , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-          , argv
-          )
-        );
+    if (args[0]->IsNumber() && args[1]->IsNumber()) {
+      typename value_type::Index rows = args[0]->Int32Value();
+      typename value_type::Index cols = args[1]->Int32Value();
+
+      if (rows >= 0 && cols >= 0) {
+        if (args.IsConstructCall()) {
+          Matrix* obj = new Matrix(rows, cols);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        } else {
+          v8::Local<v8::Value> argv[] = { args[0], args[1] };
+          NanReturnValue(
+            base_type::new_instance(
+              args
+            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+            , argv
+            )
+          );
+        }
       }
     }
 
