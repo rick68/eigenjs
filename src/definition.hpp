@@ -152,9 +152,9 @@
 #define EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO( r, data, i, elem )          \
   BOOST_PP_COMMA_IF( i )                                                     \
   BOOST_PP_CAT(                                                              \
-    BOOST_PP_CAT( BOOST_PP_SEQ_ELEM( 0, data ), _ )                          \
+    BOOST_PP_CAT( data , _ )                                                 \
   , elem                                                                     \
-  ) BOOST_PP_SEQ_ELEM( 1, data )                                             \
+  ) < T >                                                                    \
   /**/
 
 #define EIGENJS_DETAIL_OBJECT_DEFINITIONS_NAME( NAME )                       \
@@ -171,7 +171,7 @@
       <                                                                      \
         BOOST_PP_SEQ_FOR_EACH_I(                                             \
           EIGENJS_DETAIL_OBJECT_DEFINITIONS_MACRO                            \
-        , ( NAME )( < T > )                                                  \
+        , NAME                                                               \
         , SEQ                                                                \
         )                                                                    \
       > type;                                                                \

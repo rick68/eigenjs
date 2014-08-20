@@ -1,3 +1,4 @@
+build/
 test/
 .travis.yml
 .npmignore
