@@ -32,7 +32,9 @@
 #include "CVector_fwd.hpp"
 #include "RowVector_fwd.hpp"
 #include "CRowVector_fwd.hpp"
+#include "Block_fwd.hpp"
 
+#include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
@@ -51,6 +53,19 @@ namespace detail {
    private:
     value_type value_;
   };
+
+  template <typename T>
+  struct unwrap_block {
+    typedef T type;
+  };
+
+  template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel>
+  struct unwrap_block<
+    Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
+  > {
+    typedef XprType type;
+  };
+
 }  // namespace detail
 
 template <
@@ -63,7 +78,7 @@ struct base : node::ObjectWrap {
   typedef Derived<ScalarType, ValueType, ClassName> derived_type;
 
   typedef ScalarType scalar_type;
-  typedef ValueType value_type;
+  typedef typename detail::unwrap_block<ValueType>::type value_type;
 
   typedef typename std::conditional<
       std::is_same<
@@ -179,13 +194,17 @@ struct base : node::ObjectWrap {
   NAN_INLINE value_type* operator->() { return value_ptr_.get(); }
   NAN_INLINE const value_type* operator->() const { return value_ptr_.get(); }
 
+  NAN_INLINE operator const pointer_type&() const {
+    return value_ptr_;
+  }
+
  protected:
   base() : value_ptr_(new value_type()) {}
 
   explicit base(const Complex<scalar_type>&) : value_ptr_() {}
 
-  base(const base& other)
-    : value_ptr_(other.value_ptr_)
+  base(const pointer_type& value_ptr)
+    : value_ptr_(value_ptr)
   {}
 
   ~base() {}
