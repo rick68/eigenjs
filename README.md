@@ -12,10 +12,16 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
 
-## Getting Started
+## Installation
 
+OS X and Linux (GCC 4.8):
 ```bash
 $ npm install eigenjs
+```
+
+Windows7/8 (Visual Studio 2012):
+```bash
+$ npm install eigenjs --msvs_version=2012
 ```
 
 ## API
