@@ -22,6 +22,8 @@
 #include "RowVector.hpp"
 #include "CRowVector.hpp"
 
+#include "Block.hpp"
+
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
@@ -37,6 +39,8 @@ void Init(v8::Handle<v8::Object> exports) {
 
   RowVector<>::Init(exports);
   CRowVector<>::Init(exports);
+
+  Block<>::Init(exports);
 }
 
 }  // namespace EigenJS
