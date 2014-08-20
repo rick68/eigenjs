@@ -50,7 +50,7 @@
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
-  template <typename T>                                                      \
+  template < typename T >                                                    \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _class_method_ ), NAME ) {       \
     EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \
@@ -66,7 +66,7 @@
   /**/
 
 #define EIGENJS_INSTANCE_METHOD( CLASS, NAME, ... /* CODE */ )               \
-  template <typename T>                                                      \
+  template < typename T >                                                    \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _instance_method_ ), NAME ) {    \
     EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \
