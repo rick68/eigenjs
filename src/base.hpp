@@ -34,7 +34,6 @@
 #include "CRowVector_fwd.hpp"
 #include "Block_fwd.hpp"
 
-#include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
@@ -203,7 +202,7 @@ struct base : node::ObjectWrap {
 
   explicit base(const Complex<scalar_type>&) : value_ptr_() {}
 
-  base(const pointer_type& value_ptr)
+  explicit base(const pointer_type& value_ptr)
     : value_ptr_(value_ptr)
   {}
 
