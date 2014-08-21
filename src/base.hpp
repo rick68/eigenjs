@@ -35,6 +35,7 @@
 #include "MatrixBlock_fwd.hpp"
 #include "CMatrixBlock_fwd.hpp"
 
+#include "detail/unwrap_eigen_block.hpp"
 #include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
 
@@ -55,18 +56,6 @@ namespace detail {
     value_type value_;
   };
 
-  template <typename T>
-  struct unwrap_block {
-    typedef T type;
-  };
-
-  template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel>
-  struct unwrap_block<
-    Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
-  > {
-    typedef XprType type;
-  };
-
 }  // namespace detail
 
 template <
@@ -79,7 +68,7 @@ struct base : node::ObjectWrap {
   typedef Derived<ScalarType, ValueType, ClassName> derived_type;
 
   typedef ScalarType scalar_type;
-  typedef typename detail::unwrap_block<ValueType>::type value_type;
+  typedef typename detail::unwrap_eigen_block<ValueType>::type value_type;
 
   typedef typename std::conditional<
       std::is_same<
