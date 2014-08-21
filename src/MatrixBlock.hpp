@@ -1,6 +1,6 @@
 //
-// Block.hpp
-// ~~~~~~~~~
+// MatrixBlock.hpp
+// ~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,8 +9,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_BLOCK_HPP
-#define EIGENJS_BLOCK_HPP
+#ifndef EIGENJS_MATRIXBLOCK_HPP
+#define EIGENJS_MATRIXBLOCK_HPP
 
 #include <v8.h>
 #include <node.h>
@@ -24,8 +24,8 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Matrix.hpp"
-#include "Block_fwd.hpp"
-#include "Block/definitions.hpp"
+#include "MatrixBlock_fwd.hpp"
+#include "MatrixBlock/definitions.hpp"
 #include "throw_error.hpp"
 
 namespace EigenJS {
@@ -35,9 +35,11 @@ template <
 , typename ValueType
 , const char* ClassName
 >
-class Block : public base<Block, ScalarType, ValueType, ClassName> {
+class MatrixBlock
+  : public base<MatrixBlock, ScalarType, ValueType, ClassName> {
  public:
-  typedef base<::EigenJS::Block, ScalarType, ValueType, ClassName> base_type;
+  typedef base<
+      ::EigenJS::MatrixBlock, ScalarType, ValueType, ClassName> base_type;
 
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
@@ -53,7 +55,7 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
     tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
-    EIGENJS_OBJECT_INITIALIZE(Block, tpl)
+    EIGENJS_OBJECT_INITIALIZE(MatrixBlock, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
     NanAssignPersistent(base_type::constructor, tpl->GetFunction());
@@ -65,7 +67,7 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
   NAN_INLINE const value_type* operator->() const { return &block_; }
 
  protected:
-  explicit Block(
+  explicit MatrixBlock(
       const typename base_type::pointer_type& value_ptr
     , const typename value_type::Index& startRow
     , const typename value_type::Index& startCol
@@ -76,7 +78,7 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
         base_type::value_ptr_->block(startRow, startCol, blockRows, blockCols)
       ) {}
 
-  ~Block() {}
+  ~MatrixBlock() {}
 
   static NAN_METHOD(New) {
     NanScope();
@@ -97,22 +99,22 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
       const Matrix* const& rhs_obj =
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const Matrix& rhs_Matrix = *rhs_obj;
-      typename value_type::Index startRow = args[1]->Int32Value();
-      typename value_type::Index startCol = args[2]->Int32Value();
-      typename value_type::Index blockRows = args[3]->Int32Value();
-      typename value_type::Index blockCols = args[4]->Int32Value();
+      const typename value_type::Index startRow = args[1]->Int32Value();
+      const typename value_type::Index startCol = args[2]->Int32Value();
+      const typename value_type::Index blockRows = args[3]->Int32Value();
+      const typename value_type::Index blockCols = args[4]->Int32Value();
 
       if (startRow >= 0 && startCol >= 0 &&
           blockRows >= 0 && blockCols >= 0
       ) {
         if (args.IsConstructCall()) {
-          Block* obj = new Block(
+          MatrixBlock* obj = new MatrixBlock(
               rhs_Matrix, startRow, startCol, blockRows, blockCols);
           obj->Wrap(args.This());
           NanReturnValue(args.This());
         } else {
           v8::Local<v8::Value> argv[] = {
-              NanNew(args[0]), args[1], args[2], args[3], args[4], args[5] };
+              args[0], args[1], args[2], args[3], args[4], args[5] };
           NanReturnValue(
             base_type::new_instance(
               args
@@ -134,4 +136,4 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_BLOCK_HPP
+#endif  // EIGENJS_MATRIXBLOCK_HPP

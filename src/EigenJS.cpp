@@ -22,7 +22,8 @@
 #include "RowVector.hpp"
 #include "CRowVector.hpp"
 
-#include "Block.hpp"
+#include "MatrixBlock.hpp"
+#include "CMatrixBlock.hpp"
 
 namespace EigenJS {
 
@@ -40,7 +41,8 @@ void Init(v8::Handle<v8::Object> exports) {
   RowVector<>::Init(exports);
   CRowVector<>::Init(exports);
 
-  Block<>::Init(exports);
+  MatrixBlock<>::Init(exports);
+  CMatrixBlock<>::Init(exports);
 }
 
 }  // namespace EigenJS

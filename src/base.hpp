@@ -32,8 +32,10 @@
 #include "CVector_fwd.hpp"
 #include "RowVector_fwd.hpp"
 #include "CRowVector_fwd.hpp"
-#include "Block_fwd.hpp"
+#include "MatrixBlock_fwd.hpp"
+#include "CMatrixBlock_fwd.hpp"
 
+#include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
@@ -156,8 +158,14 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      detail::is_eigen_matrix<typename T::value_type>
-    , detail::is_eigen_matrix<typename U::value_type>
+      boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
+    , boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
     >::value
   , bool
   >::type
@@ -174,8 +182,14 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      detail::is_eigen_matrix<typename T::value_type>
-    , detail::is_eigen_matrix<typename U::value_type>
+      boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
+    , boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
     >::value
   , bool
   >::type

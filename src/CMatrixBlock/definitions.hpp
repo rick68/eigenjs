@@ -1,6 +1,6 @@
 //
-// Block/definitions.hpp
-// ~~~~~~~~~~~~~~~~~~~~~
+// CMatrixBlock/definitions.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,20 +9,20 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_BLOCK_DEFINITIONS_HPP
-#define EIGENJS_BLOCK_DEFINITIONS_HPP
+#ifndef EIGENJS_CMATRIXBLOCK_DEFINITIONS_HPP
+#define EIGENJS_CMATRIXBLOCK_DEFINITIONS_HPP
 
-#include "../Block_fwd.hpp"
+#include "../CMatrixBlock_fwd.hpp"
 
 #include "instance_method_toString.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
-  Block
+  CMatrixBlock
 , (instance_method_toString)
 );
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_BLOCK_DEFINITIONS_HPP
+#endif  // EIGENJS_CMATRIXBLOCK_DEFINITIONS_HPP

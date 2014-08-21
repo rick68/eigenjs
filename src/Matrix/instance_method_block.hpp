@@ -24,15 +24,15 @@ EIGENJS_INSTANCE_METHOD(Matrix, block,
         args[2]->IsNumber() &&
         args[3]->IsNumber()
     ) {
-      // typename Matrix::value_type::Index& startRow = args[0]->Int32Value();
-      // typename Matrix::value_type::Index& startCol = args[1]->Int32Value();
-      // typename Matrix::value_type::Index& blockRows = args[2]->Int32Value();
-      // typename Matrix::value_type::Index& blockCols = args[3]->Int32Value();
+      // const typename Matrix::value_type::Index& startRow = args[0]->Int32Value();
+      // const typename Matrix::value_type::Index& startCol = args[1]->Int32Value();
+      // const typename Matrix::value_type::Index& blockRows = args[2]->Int32Value();
+      // const typename Matrix::value_type::Index& blockCols = args[3]->Int32Value();
       v8::Local<v8::Value> argv[] = {
-          args.This(), args[0], args[1], args[2], args[3], args[4] };
+          args.This(), args[0], args[1], args[2], args[3] };
 
       NanReturnValue(
-        Block::new_instance(
+        MatrixBlock::new_instance(
           args
         , sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv

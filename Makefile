@@ -3,7 +3,6 @@ CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
 SOURCES = \
-    src/CMatrix.hpp \
     src/CMatrix/class_method_Identity.hpp \
     src/CMatrix/class_method_Random.hpp \
     src/CMatrix/class_method_Zero.hpp \
@@ -25,6 +24,11 @@ SOURCES = \
     src/CMatrix/instance_method_suba.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/macro.hpp \
+    src/CMatrixBlock.hpp \
+    src/CMatrixBlock/instance_method_toString.hpp \
+    src/CMatrixBlock/definitions.hpp \
+    src/CMatrixBlock_fwd.hpp \
+    src/CMatrix.hpp \
     src/CRowVectorhpp \
     src/CRowVector_fwd.hpp \
     src/CRowVector/definitions.hpp \
@@ -100,6 +104,10 @@ SOURCES = \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
+    src/MatrixBlock.hpp \
+    src/MatrixBlock/instance_method_toString.hpp \
+    src/MatrixBlock/definitions.hpp \
+    src/MatrixBlock_fwd.hpp \
     src/RowVector.hpp \
     src/RowVector_fwd.hpp \
     src/RowVector/definitions.hpp \

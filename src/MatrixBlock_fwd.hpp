@@ -1,6 +1,6 @@
 //
-// Block_fwd.hpp
-// ~~~~~~~~~~~~~
+// MatrixBlock_fwd.hpp
+// ~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,8 +9,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_BLOCK_FWD_HPP
-#define EIGENJS_BLOCK_FWD_HPP
+#ifndef EIGENJS_MATRIXBLOCK_FWD_HPP
+#define EIGENJS_MATRIXBLOCK_FWD_HPP
 
 #include <boost/config.hpp>
 
@@ -18,7 +18,7 @@
 
 namespace EigenJS {
 
-BOOST_CONSTEXPR char block_class_name[] = "Block";
+BOOST_CONSTEXPR char matrixblock_class_name[] = "MatrixBlock";
 
 template <
   typename ScalarType = double
@@ -31,9 +31,9 @@ template <
   , Eigen::Dynamic
   , Eigen::Dynamic
   >
-, const char* ClassName = block_class_name
-> class Block;
+, const char* ClassName = matrixblock_class_name
+> class MatrixBlock;
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_BLOCK_FWD_HPP
+#endif  // EIGENJS_MATRIXBLOCK_FWD_HPP
