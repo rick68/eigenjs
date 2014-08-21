@@ -105,21 +105,23 @@ class Block : public base<Block, ScalarType, ValueType, ClassName> {
       if (startRow >= 0 && startCol >= 0 &&
           blockRows >= 0 && blockCols >= 0
       ) {
-        Block* obj = new Block(
-            rhs_Matrix, startRow, startCol, blockRows, blockCols);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
+        if (args.IsConstructCall()) {
+          Block* obj = new Block(
+              rhs_Matrix, startRow, startCol, blockRows, blockCols);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        } else {
+          v8::Local<v8::Value> argv[] = {
+              NanNew(args[0]), args[1], args[2], args[3], args[4], args[5] };
+          NanReturnValue(
+            base_type::new_instance(
+              args
+            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+            , argv
+            )
+          );
+        }
       }
-    } else {
-      v8::Local<v8::Value> argv[] = {
-          args[0], args[1], args[2], args[3], args[4], args[5] };
-      NanReturnValue(
-        base_type::new_instance(
-          args
-        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-        , argv
-        )
-      );
     }
 
     EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
