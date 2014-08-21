@@ -626,7 +626,7 @@ console.log(c1.toString());
 ```js
 var C = require('eigenjs').Complex
   , c1 = new C(3, 4)
-  , c2 = new Cx(2, -3)
+  , c2 = new C(2, -3)
   , c3 = c1.sub(c2);
 console.log(c3.toString());
 ```
@@ -1991,7 +1991,7 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CRV = Eigen.CRowVector
   , crvec = new CRV(3);
-crvec.set([1. C(2, 4), 3]);
+crvec.set([1, C(2, 4), 3]);
 console.log('crvec = \n%s', crvec);
 ```
 
