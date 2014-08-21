@@ -14,11 +14,13 @@
 
 #include "../Block_fwd.hpp"
 
+#include "instance_method_toString.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   Block
-,
+, (instance_method_toString)
 );
 
 }  // namespace EigenJS
