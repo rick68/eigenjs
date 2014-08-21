@@ -35,6 +35,7 @@
 #include "CVector_fwd.hpp"
 #include "RowVector_fwd.hpp"
 #include "CRowVector_fwd.hpp"
+#include "Block_fwd.hpp"
 #include "detail/initializer.hpp"
 #include "detail/property_accessor_base.hpp"
 
@@ -47,6 +48,7 @@
   typedef ::EigenJS::CMatrix<scalar_type> CMatrix;                           \
   typedef ::EigenJS::CVector<scalar_type> CVector;                           \
   typedef ::EigenJS::CRowVector<scalar_type> CRowVector;                     \
+  typedef ::EigenJS::Block<scalar_type> Block;                               \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
