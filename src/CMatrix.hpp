@@ -19,8 +19,6 @@
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/int.hpp>
 
-#include <eigen3/Eigen/Dense>
-
 #include "base.hpp"
 #include "definition.hpp"
 #include "CMatrix_fwd.hpp"
