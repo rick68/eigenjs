@@ -14,6 +14,8 @@
 
 #include <sstream>
 
+#include "../common_macro.hpp"
+
 namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, toString,

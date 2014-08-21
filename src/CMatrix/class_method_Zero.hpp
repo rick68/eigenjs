@@ -12,6 +12,8 @@
 #ifndef EIGENJS_CMATRIX_CLASS_METHOD_ZERO_HPP
 #define EIGENJS_CMATRIX_CLASS_METHOD_ZERO_HPP
 
+#include "../common_macro.hpp"
+
 namespace EigenJS {
 
 EIGENJS_CLASS_METHOD(CMatrix, Zero,

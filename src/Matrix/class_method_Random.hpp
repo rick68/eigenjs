@@ -12,6 +12,8 @@
 #ifndef EIGENJS_MATRIX_CLASS_METHOD_RANDOM_HPP
 #define EIGENJS_MATRIX_CLASS_METHOD_RANDOM_HPP
 
+#include "../common_macro.hpp"
+
 namespace EigenJS {
 
 EIGENJS_CLASS_METHOD(Matrix, Random,

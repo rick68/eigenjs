@@ -18,7 +18,6 @@
 
 #include <boost/preprocessor/cat.hpp>
 
-#include "../common_macro.hpp"
 #include "../throw_error.hpp"
 #include "../detail/add_complex.hpp"
 

@@ -18,7 +18,6 @@
 
 #include <boost/preprocessor/cat.hpp>
 
-#include "../common_macro.hpp"
 #include "../throw_error.hpp"
 
 #define EIGENJS_CMATRIX_BINARY_OPERATOR_CONTEXT( OP )                        \
