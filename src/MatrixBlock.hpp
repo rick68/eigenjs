@@ -53,6 +53,7 @@ class MatrixBlock
     tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
+    EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
     EIGENJS_OBJECT_INITIALIZE(MatrixBlock, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
@@ -97,10 +98,19 @@ class MatrixBlock
       const Matrix* const& rhs_obj =
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const Matrix& rhs_Matrix = *rhs_obj;
+      const typename Matrix::value_type& rhs_matrix = *rhs_Matrix;
       const typename value_type::Index startRow = args[1]->Int32Value();
       const typename value_type::Index startCol = args[2]->Int32Value();
       const typename value_type::Index blockRows = args[3]->Int32Value();
       const typename value_type::Index blockCols = args[4]->Int32Value();
+
+      const typename value_type::Index&& rows = startRow + blockRows - 1;
+      const typename value_type::Index&& cols = startCol + blockCols - 1;
+
+      if (Matrix::is_out_of_range(rhs_matrix, rows, cols)
+      ) {
+        NanReturnUndefined();
+      }
 
       if (startRow >= 0 && startCol >= 0 &&
           blockRows >= 0 && blockCols >= 0
