@@ -20,6 +20,7 @@
 
 #include "../throw_error.hpp"
 #include "../detail/add_complex.hpp"
+#include "../detail/unwrap_eigen_block.hpp"
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                         \
   {                                                                          \
@@ -45,14 +46,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_matrix;                                     \
                                                                              \
@@ -66,14 +67,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_vector;                                     \
                                                                              \
@@ -87,14 +88,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_rowvector;                                  \
                                                                              \
@@ -108,16 +109,16 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        typedef typename detail::add_complex<T>::type CT;                    \
+        typedef typename detail::add_complex<U>::type CU;                    \
                                                                              \
-        v8::Local< v8::Object > instance = CT::new_instance(                 \
+        v8::Local< v8::Object > instance = CU::new_instance(                 \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        CT* new_obj = node::ObjectWrap::Unwrap< CT >( instance );            \
-        typename CT::value_type& new_value = **new_obj;                      \
+        CU* new_obj = node::ObjectWrap::Unwrap< CU >( instance );            \
+        typename CU::value_type& new_value = **new_obj;                      \
                                                                              \
         new_value =                                                          \
           value.template cast< typename Complex::value_type >()              \
@@ -134,16 +135,16 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        typedef typename detail::add_complex<T>::type CT;                    \
+        typedef typename detail::add_complex<U>::type CU;                    \
                                                                              \
-        v8::Local< v8::Object > instance = CT::new_instance(                 \
+        v8::Local< v8::Object > instance = CU::new_instance(                 \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        CT* new_obj = node::ObjectWrap::Unwrap< CT >( instance );            \
-        typename CT::value_type& new_value = **new_obj;                      \
+        CU* new_obj = node::ObjectWrap::Unwrap< CU >( instance );            \
+        typename CU::value_type& new_value = **new_obj;                      \
                                                                              \
         new_value =                                                          \
           value.template cast< typename Complex::value_type >()              \
