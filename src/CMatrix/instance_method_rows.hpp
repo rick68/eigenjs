@@ -12,15 +12,13 @@
 #ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_ROWS_HPP
 #define EIGENJS_CMATRIX_INSTANCE_METHOD_ROWS_HPP
 
+#include "../common_macro.hpp"
+
 namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, rows,
 {
-  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
-  const typename T::value_type& value = **obj;
-
-  NanScope();
-  NanReturnValue(NanNew<v8::Integer>(value.rows()));
+  EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ROWS_CONTEXT()
 })
 
 }  // namespace EigenJS

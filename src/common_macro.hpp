@@ -32,17 +32,17 @@
   {                                                                          \
     const int& args_length = args.Length();                                  \
                                                                              \
-    typename T::value_type::Index nbRows = 0;                                \
-    typename T::value_type::Index nbCols = 0;                                \
+    typename U::value_type::Index nbRows = 0;                                \
+    typename U::value_type::Index nbCols = 0;                                \
                                                                              \
     switch ( args_length ) {                                                 \
       case 1:                                                                \
-        nbRows = nbCols = T::is_scalar( args[0] )                            \
+        nbRows = nbCols = args[0]->IsNumber()                                \
             ? args[0]->Int32Value() : 0;                                     \
         break;                                                               \
       case 2:                                                                \
-        nbRows = T::is_scalar( args[0] ) ? args[0]->Int32Value() : 0;        \
-        nbCols = T::is_scalar( args[1] ) ? args[1]->Int32Value() : 0;        \
+        nbRows = args[0]->IsNumber() ? args[0]->Int32Value() : 0;            \
+        nbCols = args[1]->IsNumber() ? args[1]->Int32Value() : 0;            \
         break;                                                               \
       default:                                                               \
         break;                                                               \
@@ -56,7 +56,7 @@
       , NanNew< v8::Number >( nbCols )                                       \
       };                                                                     \
                                                                              \
-      v8::Local< v8::Object > instance = T::new_instance(                    \
+      v8::Local< v8::Object > instance = U::new_instance(                    \
         args                                                                 \
       , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                    \
       , argv                                                                 \
@@ -73,17 +73,17 @@
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_IDENTITY_CONTEXT()                \
   {                                                                          \
     const int& args_length = args.Length();                                  \
-    typename T::value_type::Index nbRows = 0;                                \
-    typename T::value_type::Index nbCols = 0;                                \
+    typename U::value_type::Index nbRows = 0;                                \
+    typename U::value_type::Index nbCols = 0;                                \
                                                                              \
     switch ( args_length ) {                                                 \
       case 1:                                                                \
-        nbRows = nbCols = T::is_scalar( args[0] )                            \
+        nbRows = nbCols = args[0]->IsNumber()                                \
             ? args[0]->Int32Value() : 0;                                     \
         break;                                                               \
       case 2:                                                                \
-        nbRows = T::is_scalar( args[0] ) ? args[0]->Int32Value() : 0;        \
-        nbCols = T::is_scalar( args[1] ) ? args[1]->Int32Value() : 0;        \
+        nbRows = args[0]->IsNumber() ? args[0]->Int32Value() : 0;            \
+        nbCols = args[1]->IsNumber() ? args[1]->Int32Value() : 0;            \
         break;                                                               \
       default:                                                               \
         break;                                                               \
@@ -96,33 +96,33 @@
     , NanNew< v8::Number >( 0 )                                              \
     };                                                                       \
                                                                              \
-    v8::Local< v8::Object > instance = T::new_instance(                      \
+    v8::Local< v8::Object > instance = U::new_instance(                      \
       args                                                                   \
     , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
     , argv                                                                   \
     );                                                                       \
                                                                              \
-    T* new_obj = node::ObjectWrap::Unwrap< T >( instance );                  \
-    typename T::value_type& new_value = **new_obj;                           \
+    U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                  \
+    typename U::value_type& new_value = **new_obj;                           \
                                                                              \
     auto codes = std::make_tuple(                                            \
         [&]{}                                                                \
-      , [&]{ return T::value_type::Identity( nbRows, 1 ).col( 0 ); }         \
-      , [&]{ return T::value_type::Identity( 1, nbCols ).row( 0 ); }         \
-      , [&]{ return T::value_type::Identity( nbRows, nbCols ); }             \
+      , [&]{ return U::value_type::Identity( nbRows, 1 ).col( 0 ); }         \
+      , [&]{ return U::value_type::Identity( 1, nbCols ).row( 0 ); }         \
+      , [&]{ return U::value_type::Identity( nbRows, nbCols ); }             \
       );                                                                     \
     new_value = std::get<                                                    \
       boost::mpl::plus<                                                      \
         boost::mpl::multiplies<                                              \
-          detail::is_vector_or_cvector< T >                                  \
+          detail::is_vector_or_cvector< U >                                  \
         , boost::mpl::int_< 1 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_rowvector_or_crowvector< T >                            \
+          detail::is_rowvector_or_crowvector< U >                            \
         , boost::mpl::int_< 2 >                                              \
         >                                                                    \
       , boost::mpl::multiplies<                                              \
-          detail::is_matrix_or_cmatrix< T >                                  \
+          detail::is_matrix_or_cmatrix< U >                                  \
         , boost::mpl::int_< 3 >                                              \
         >                                                                    \
       >::value                                                               \
@@ -136,17 +136,17 @@
   {                                                                          \
     const int& args_length = args.Length();                                  \
                                                                              \
-    typename T::value_type::Index nbRows = 0;                                \
-    typename T::value_type::Index nbCols = 0;                                \
+    typename U::value_type::Index nbRows = 0;                                \
+    typename U::value_type::Index nbCols = 0;                                \
                                                                              \
     switch ( args_length ) {                                                 \
       case 1:                                                                \
-        nbRows = nbCols = T::is_scalar( args[0] )                            \
+        nbRows = nbCols = args[0]->IsNumber()                                \
             ? args[0]->Int32Value() : 0;                                     \
         break;                                                               \
       case 2:                                                                \
-        nbRows = T::is_scalar( args[0] ) ? args[0]->Int32Value() : 0;        \
-        nbCols = T::is_scalar( args[1] ) ? args[1]->Int32Value() : 0;        \
+        nbRows = args[0]->IsNumber() ? args[0]->Int32Value() : 0;            \
+        nbCols = args[1]->IsNumber() ? args[1]->Int32Value() : 0;            \
         break;                                                               \
       default:                                                               \
         break;                                                               \
@@ -160,33 +160,33 @@
       , NanNew< v8::Number >( 0 )                                            \
       };                                                                     \
                                                                              \
-      v8::Local< v8::Object > instance = T::new_instance(                    \
+      v8::Local< v8::Object > instance = U::new_instance(                    \
         args                                                                 \
       , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                    \
       , argv                                                                 \
       );                                                                     \
                                                                              \
-      T* new_obj = node::ObjectWrap::Unwrap< T >( instance );                \
-      typename T::value_type& new_value = **new_obj;                         \
+      U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                \
+      typename U::value_type& new_value = **new_obj;                         \
                                                                              \
       auto codes = std::make_tuple(                                          \
           [&]{}                                                              \
-        , [&]{ return T::value_type::Random( nbRows, 1 ).col( 0 ); }         \
-        , [&]{ return T::value_type::Random( 1, nbCols ).row( 0 ); }         \
-        , [&]{ return T::value_type::Random( nbRows, nbCols ); }             \
+        , [&]{ return U::value_type::Random( nbRows, 1 ).col( 0 ); }         \
+        , [&]{ return U::value_type::Random( 1, nbCols ).row( 0 ); }         \
+        , [&]{ return U::value_type::Random( nbRows, nbCols ); }             \
         );                                                                   \
       new_value = std::get<                                                  \
         boost::mpl::plus<                                                    \
           boost::mpl::multiplies<                                            \
-            detail::is_vector_or_cvector< T >                                \
+            detail::is_vector_or_cvector< U >                                \
           , boost::mpl::int_< 1 >                                            \
           >                                                                  \
         , boost::mpl::multiplies<                                            \
-            detail::is_rowvector_or_crowvector< T >                          \
+            detail::is_rowvector_or_crowvector< U >                          \
           , boost::mpl::int_< 2 >                                            \
           >                                                                  \
         , boost::mpl::multiplies<                                            \
-            detail::is_matrix_or_cmatrix< T >                                \
+            detail::is_matrix_or_cmatrix< U >                                \
           , boost::mpl::int_< 3 >                                            \
           >                                                                  \
         >::value                                                             \
@@ -202,14 +202,34 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TOSTRING_CONTEXT()             \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
     std::ostringstream result;                                               \
     result << value;                                                         \
                                                                              \
     NanScope();                                                              \
-    NanReturnValue(NanNew(result.str().c_str()));                            \
+    NanReturnValue( NanNew( result.str().c_str() ) );                        \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ROWS_CONTEXT()                 \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Integer >( value.rows() ) );                 \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_COLS_CONTEXT()                 \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Integer >( value.cols() ) );                 \
   }                                                                          \
   /**/
 
