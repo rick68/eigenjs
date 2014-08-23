@@ -38,19 +38,21 @@
 #include "MatrixBlock_fwd.hpp"
 #include "CMatrixBlock_fwd.hpp"
 #include "detail/initializer.hpp"
+#include "detail/unwrap_block.hpp"
 #include "detail/property_accessor_base.hpp"
 
 #define EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                          \
+  typedef typename detail::unwrap_block< T >::type U;                        \
   typedef typename T::scalar_type scalar_type;                               \
-  typedef ::EigenJS::Complex<scalar_type> Complex;                           \
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;                             \
-  typedef ::EigenJS::Vector<scalar_type> Vector;                             \
-  typedef ::EigenJS::RowVector<scalar_type> RowVector;                       \
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;                           \
-  typedef ::EigenJS::CVector<scalar_type> CVector;                           \
-  typedef ::EigenJS::CRowVector<scalar_type> CRowVector;                     \
-  typedef ::EigenJS::MatrixBlock<scalar_type> MatrixBlock;                   \
-  typedef ::EigenJS::CMatrixBlock<scalar_type> CMatrixBlock;                 \
+  typedef ::EigenJS::Complex< scalar_type > Complex;                         \
+  typedef ::EigenJS::Matrix< scalar_type > Matrix;                           \
+  typedef ::EigenJS::Vector< scalar_type > Vector;                           \
+  typedef ::EigenJS::RowVector< scalar_type > RowVector;                     \
+  typedef ::EigenJS::CMatrix< scalar_type > CMatrix;                         \
+  typedef ::EigenJS::CVector< scalar_type > CVector;                         \
+  typedef ::EigenJS::CRowVector< scalar_type > CRowVector;                   \
+  typedef ::EigenJS::MatrixBlock< scalar_type > MatrixBlock;                 \
+  typedef ::EigenJS::CMatrixBlock< scalar_type > CMatrixBlock;               \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
