@@ -16,17 +16,17 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, set,
 {
-  Matrix* obj = node::ObjectWrap::Unwrap<Matrix>(args.This());
-  typename Matrix::value_type& matrix = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& matrix = **obj;
 
   NanScope();
 
   if (args.Length() == 1 && args[0]->IsArray()) {
     const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename Matrix::value_type::Index& rows = matrix.rows();
-    const typename Matrix::value_type::Index& cols = matrix.cols();
-    const typename Matrix::value_type::Index& elems = rows * cols;
+    const typename T::value_type::Index& rows = matrix.rows();
+    const typename T::value_type::Index& cols = matrix.cols();
+    const typename T::value_type::Index& elems = rows * cols;
 
     if (len != elems) {
       len < rows * cols
@@ -44,11 +44,11 @@ EIGENJS_INSTANCE_METHOD(Matrix, set,
              args[1]->IsNumber() &&
              Matrix::is_scalar(args[2])
   ) {
-    const typename Matrix::value_type::Index& row = args[0]->Int32Value();
-    const typename Matrix::value_type::Index& col = args[1]->Int32Value();
-    const typename Matrix::scalar_type& value = args[2]->NumberValue();
+    const typename T::value_type::Index& row = args[0]->Int32Value();
+    const typename T::value_type::Index& col = args[1]->Int32Value();
+    const typename T::scalar_type& value = args[2]->NumberValue();
 
-    if (Matrix::is_out_of_range(matrix, row, col)) {
+    if (T::is_out_of_range(matrix, row, col)) {
       NanReturnUndefined();
     }
 
