@@ -173,8 +173,8 @@ struct base : node::ObjectWrap {
       , detail::is_eigen_matrix<typename T::value_type>
       >
     , boost::mpl::or_<
-        detail::is_eigen_block<typename T::value_type>
-      , detail::is_eigen_matrix<typename T::value_type>
+        detail::is_eigen_block<typename U::value_type>
+      , detail::is_eigen_matrix<typename U::value_type>
       >
     >::value
   , bool
@@ -197,8 +197,8 @@ struct base : node::ObjectWrap {
       , detail::is_eigen_matrix<typename T::value_type>
       >
     , boost::mpl::or_<
-        detail::is_eigen_block<typename T::value_type>
-      , detail::is_eigen_matrix<typename T::value_type>
+        detail::is_eigen_block<typename U::value_type>
+      , detail::is_eigen_matrix<typename U::value_type>
       >
     >::value
   , bool
