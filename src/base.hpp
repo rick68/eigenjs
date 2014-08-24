@@ -143,6 +143,27 @@ struct base : node::ObjectWrap {
       : false;
   }
 
+  template <
+    typename XprType
+  , int BlockRows
+  , int BlockCols
+  , bool InnerPanel
+  >
+  static NAN_INLINE bool is_out_of_range(
+      const Eigen::Block<
+        XprType
+      , BlockRows
+      , BlockCols
+      , InnerPanel
+      >& eigen_block
+    , const typename XprType::Index& row
+    , const typename XprType::Index& col) {
+    return row < 0 || row >= eigen_block.rows() ||
+           col < 0 || col >= eigen_block.cols()
+      ? NanThrowError("Row or column numbers are out of range"), true
+      : false;
+  }
+
   template <typename T, typename U>
   static NAN_INLINE
   typename std::enable_if<
