@@ -14,7 +14,7 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 ## Installation
 
-OS X and Linux (GCC 4.8):
+OS X and Linux (GCC >= 4.8):
 ```bash
 $ npm install eigenjs
 ```
