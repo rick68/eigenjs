@@ -20,7 +20,6 @@
 
 #include "../throw_error.hpp"
 #include "../detail/add_complex.hpp"
-#include "../detail/unwrap_eigen_block.hpp"
 
 #define EIGENJS_MATRIX_BINARY_OPERATOR_CONTEXT( OP )                         \
   {                                                                          \
@@ -152,6 +151,32 @@
           rhs_cvector;                                                       \
                                                                              \
         NanReturnValue( instance );                                          \
+      } else if ( CRowVector::is_crowvector( args[0] ) ) {                   \
+        const CRowVector* const& rhs_obj =                                   \
+            node::ObjectWrap::Unwrap< CRowVector >( args[0]->ToObject() );   \
+        const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;   \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        typedef typename detail::add_complex<U>::type CU;                    \
+                                                                             \
+        v8::Local< v8::Object > instance = CU::new_instance(                 \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        CU* new_obj = node::ObjectWrap::Unwrap< CU >( instance );            \
+        typename CU::value_type& new_value = **new_obj;                      \
+                                                                             \
+        new_value =                                                          \
+          value.template cast< typename Complex::value_type >()              \
+            OP                                                               \
+          rhs_crowvector;                                                    \
+                                                                             \
+        NanReturnValue( instance );                                          \
       }                                                                      \
     }                                                                        \
                                                                              \
@@ -195,7 +220,7 @@
       } else if ( RowVector::is_rowvector( args[0] ) ) {                     \
         const RowVector* const& rhs_obj =                                    \
             node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
-        const typename Vector::value_type& rhs_rowvector = **rhs_obj;        \
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;     \
                                                                              \
         if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
