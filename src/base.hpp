@@ -118,6 +118,14 @@ struct base : node::ObjectWrap {
     return CRowVector<scalar_type, value_type>::base_type::has_instance(arg);
   }
 
+  static NAN_INLINE bool is_matrixblock(const v8::Handle<v8::Value>& arg) {
+    return MatrixBlock<scalar_type, value_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_cmatrixblock(const v8::Handle<v8::Value>& arg) {
+    return CMatrixBlock<scalar_type, value_type>::base_type::has_instance(arg);
+  }
+
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
     NanScope();
     v8::Local<v8::FunctionTemplate> tpl = NanNew(function_template);
