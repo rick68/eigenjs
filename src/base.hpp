@@ -95,35 +95,35 @@ struct base : node::ObjectWrap {
   }
 
   static NAN_INLINE bool is_matrix(const v8::Handle<v8::Value>& arg) {
-    return Matrix<scalar_type, value_type>::base_type::has_instance(arg);
+    return Matrix<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cmatrix(const v8::Handle<v8::Value>& arg) {
-    return CMatrix<scalar_type, value_type>::base_type::has_instance(arg);
+    return CMatrix<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_vector(const v8::Handle<v8::Value>& arg) {
-    return Vector<scalar_type, value_type>::base_type::has_instance(arg);
+    return Vector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cvector(const v8::Handle<v8::Value>& arg) {
-    return CVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return CVector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_rowvector(const v8::Handle<v8::Value>& arg) {
-    return RowVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return RowVector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_crowvector(const v8::Handle<v8::Value>& arg) {
-    return CRowVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return CRowVector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_matrixblock(const v8::Handle<v8::Value>& arg) {
-    return MatrixBlock<scalar_type, value_type>::base_type::has_instance(arg);
+    return MatrixBlock<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cmatrixblock(const v8::Handle<v8::Value>& arg) {
-    return CMatrixBlock<scalar_type, value_type>::base_type::has_instance(arg);
+    return CMatrixBlock<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
