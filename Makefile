@@ -26,6 +26,7 @@ SOURCES = \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/macro.hpp \
     src/CMatrixBlock.hpp \
+    src/CMatrixBlock/instance_method_assign.hpp \
     src/CMatrixBlock/instance_method_mula.hpp \
     src/CMatrixBlock/definitions.hpp \
     src/CMatrixBlock_fwd.hpp \
@@ -106,6 +107,7 @@ SOURCES = \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
     src/MatrixBlock.hpp \
+    src/MatrixBlock/instance_method_assign.hpp \
     src/MatrixBlock/instance_method_mula.hpp \
     src/MatrixBlock/definitions.hpp \
     src/MatrixBlock_fwd.hpp \
