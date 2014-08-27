@@ -270,12 +270,12 @@ $ npm install eigenjs --msvs_version=2012
     * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#matrixblockcvec-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#matrixblockcrvec-startrow-startcol-blockrows-blockcols)
   * [CMatrixBlock Instance Methods](#cmatrixblock-instance-methods)
-    * [cmblock.assign(mat)](#mblockassignmat)
-    * [cmblock.assign(vec)](#mblockassignvec)
-    * [cmblock.assign(rvec)](#mblockassignrvec)
-    * [cmblock.assign(cmat)](#mblockassigncmat)
-    * [cmblock.assign(cvec)](#mblockassigncvec)
-    * [cmblock.assign(crvec)](#mblockassigncrvec)
+    * [cmblock.assign(mat)](#cmblockassignmat)
+    * [cmblock.assign(vec)](#cmblockassignvec)
+    * [cmblock.assign(rvec)](#cmblockassignrvec)
+    * [cmblock.assign(cmat)](#cmblockassigncmat)
+    * [cmblock.assign(cvec)](#cmblockassigncvec)
+    * [cmblock.assign(crvec)](#cmblockassigncrvec)
 
 ## Complex
 
