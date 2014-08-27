@@ -27,14 +27,14 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
     };
 
     if (T::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = U::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      U* new_obj = node::ObjectWrap::Unwrap<U>(instance);
+      typename U::value_type& new_value = **new_obj;
 
       new_value = value / args[0]->NumberValue();
 
@@ -44,14 +44,14 @@ EIGENJS_INSTANCE_METHOD(CMatrix, div,
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = U::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      U* new_obj = node::ObjectWrap::Unwrap<U>(instance);
+      typename U::value_type& new_value = **new_obj;
 
       new_value = value / rhs_complex;
 
