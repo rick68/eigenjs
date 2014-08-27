@@ -17,6 +17,17 @@ describe('MatrixBlock', function() {
     MatrixBlock.should.be.a.Function;
   });
 
+  beforeEach(function() {
+    mat = Matrix(4, 4).set([
+       1,  2,  3,  4,
+       5,  6,  7,  8,
+       9, 10, 11, 12,
+      13, 14, 15, 16
+    ]);
+
+    mblock = new MatrixBlock(mat, 1, 1, 2, 2);
+  });
+
   it('should throw error when tried creating a matrix block with invalid arguments', function() {
     (function() {
       new MatrixBlock(mat, -1, -2, -3, -4);
@@ -36,29 +47,18 @@ describe('MatrixBlock', function() {
   });
 
   it('should be invoked with arguments and return an object', function() {
-    var mb = new MatrixBlock(mat, 1, 1, 2, 2);
-    mb.should.be.an.Object;
-    mb.should.instanceOf(MatrixBlock);
+    var mblock2 = new MatrixBlock(mat, 1, 1, 2, 2);
+    mblock2.should.be.an.Object;
+    mblock2.should.instanceOf(MatrixBlock);
   });
 
   it('#MatrixBlock(mat, 1, 1, 2, 2) should return the matrix block of size 2x2', function() {
-    var mb = new MatrixBlock(mat, 1, 1, 2, 2);
-    mb.rows().should.equal(2);
-    mb.cols().should.equal(2);
+    var mblock2 = new MatrixBlock(mat, 1, 1, 2, 2);
+    mblock2.rows().should.equal(2);
+    mblock2.cols().should.equal(2);
   });
 
-  beforeEach(function() {
-    mat = Matrix(4, 4).set([
-       1,  2,  3,  4,
-       5,  6,  7,  8,
-       9, 10, 11, 12,
-      13, 14, 15, 16
-    ]);
-
-    mblock = new MatrixBlock(mat, 1, 1, 2, 2);
-  });
-
-  it('#set() should throw message when row or column nubers are out of range', function() {
+  it('#set() should throw message when row or column numbers are out of range', function() {
     mblock.set.should.be.a.Function;
 
     (function() {
