@@ -26,11 +26,6 @@
 #include "../CRowVector_fwd.hpp"
 #include "../MatrixBlock_fwd.hpp"
 #include "../CMatrixBlock_fwd.hpp"
-#include "../Matrix_fwd.hpp"
-#include "../CMatrix_fwd.hpp"
-#include "../MatrixBlock_fwd.hpp"
-#include "../CMatrixBlock_fwd.hpp"
-
 
 namespace EigenJS {
 namespace detail {
