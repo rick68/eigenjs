@@ -52,6 +52,16 @@ EIGENJS_INSTANCE_METHOD(Matrix, equals,
       }
 
       NanReturnValue(NanNew<v8::Boolean>(value == rhs_rowvector));
+    } else if (MatrixBlock::is_matrixblock(args[0])) {
+      const MatrixBlock* rhs_obj =
+          node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+      const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_matrixblock));
     }
   }
 

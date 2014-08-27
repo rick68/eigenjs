@@ -35,22 +35,28 @@
 #include "CVector_fwd.hpp"
 #include "RowVector_fwd.hpp"
 #include "CRowVector_fwd.hpp"
+#include "MatrixBlock_fwd.hpp"
+#include "CMatrixBlock_fwd.hpp"
 #include "detail/initializer.hpp"
+#include "detail/unwrap_block.hpp"
 #include "detail/property_accessor_base.hpp"
 
 #define EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                          \
+  typedef typename detail::unwrap_block< T >::type U;                        \
   typedef typename T::scalar_type scalar_type;                               \
-  typedef ::EigenJS::Complex<scalar_type> Complex;                           \
-  typedef ::EigenJS::Matrix<scalar_type> Matrix;                             \
-  typedef ::EigenJS::Vector<scalar_type> Vector;                             \
-  typedef ::EigenJS::RowVector<scalar_type> RowVector;                       \
-  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;                           \
-  typedef ::EigenJS::CVector<scalar_type> CVector;                           \
-  typedef ::EigenJS::CRowVector<scalar_type> CRowVector;                     \
+  typedef ::EigenJS::Complex< scalar_type > Complex;                         \
+  typedef ::EigenJS::Matrix< scalar_type > Matrix;                           \
+  typedef ::EigenJS::Vector< scalar_type > Vector;                           \
+  typedef ::EigenJS::RowVector< scalar_type > RowVector;                     \
+  typedef ::EigenJS::CMatrix< scalar_type > CMatrix;                         \
+  typedef ::EigenJS::CVector< scalar_type > CVector;                         \
+  typedef ::EigenJS::CRowVector< scalar_type > CRowVector;                   \
+  typedef ::EigenJS::MatrixBlock< scalar_type > MatrixBlock;                 \
+  typedef ::EigenJS::CMatrixBlock< scalar_type > CMatrixBlock;               \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
-  template <typename T>                                                      \
+  template < typename T >                                                    \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _class_method_ ), NAME ) {       \
     EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \
@@ -66,7 +72,7 @@
   /**/
 
 #define EIGENJS_INSTANCE_METHOD( CLASS, NAME, ... /* CODE */ )               \
-  template <typename T>                                                      \
+  template < typename T >                                                    \
   struct BOOST_PP_CAT( BOOST_PP_CAT( CLASS, _instance_method_ ), NAME ) {    \
     EIGENJS_DETAIL_DEFINITION_COMMON_TYPEDEFS()                              \
     void operator()( v8::Local<v8::FunctionTemplate>& ft ) const {           \

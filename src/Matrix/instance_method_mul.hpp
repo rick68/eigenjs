@@ -23,11 +23,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
   if (args.Length() == 1) {
     const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
     const typename T::value_type& value = **obj;
-    const typename T::value_type::Index& rows = value.rows();
-    const typename T::value_type::Index& cols = value.cols();
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Integer>(rows)
-    , NanNew<v8::Integer>(cols)
+      NanNew<v8::Integer>(0)
+    , NanNew<v8::Integer>(0)
     };
 
     if (Matrix::is_matrix(args[0])) {
@@ -35,8 +33,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj))
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
+      }
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
         args
@@ -55,8 +54,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj))
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
+      }
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
         args
@@ -75,8 +75,9 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
         node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
       const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
 
-      if (T::is_invalid_matrix_product(obj, rhs_obj))
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
+      }
 
       v8::Local<v8::Object> instance = Matrix::new_instance(
         args
@@ -88,6 +89,28 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
       typename Matrix::value_type& new_matrix = **new_obj;
 
       new_matrix = value * rhs_rowvector;
+
+      NanReturnValue(instance);
+    } else if (MatrixBlock::is_matrixblock(args[0])) {
+      const MatrixBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+      const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = Matrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
+      typename Matrix::value_type& new_matrix = **new_obj;
+
+      new_matrix = value;
+      new_matrix *= rhs_matrixblock;
 
       NanReturnValue(instance);
     } else if (CMatrix::is_cmatrix(args[0])) {
@@ -143,7 +166,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
         NanReturnUndefined();
       }
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
@@ -156,15 +179,37 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
           * rhs_crowvector;
 
       NanReturnValue(instance);
-    } else if (T::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = T::new_instance(
+    } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+      const CMatrixBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+      const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix = value.template cast<typename Complex::value_type>();
+      new_cmatrix *= rhs_cmatrixblock;
+
+      NanReturnValue(instance);
+    } else if (T::is_scalar(args[0])) {
+      v8::Local<v8::Object> instance = U::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      U* new_obj = node::ObjectWrap::Unwrap<U>(instance);
+      typename U::value_type& new_value = **new_obj;
 
       new_value = value * args[0]->NumberValue();
 
@@ -174,16 +219,16 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      typedef typename detail::add_complex<T>::type CT;
+      typedef typename detail::add_complex<U>::type CU;
 
-      v8::Local<v8::Object> instance = CT::new_instance(
+      v8::Local<v8::Object> instance = CU::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      CT* new_obj = node::ObjectWrap::Unwrap<CT>(instance);
-      typename CT::value_type& new_value = **new_obj;
+      CU* new_obj = node::ObjectWrap::Unwrap<CU>(instance);
+      typename CU::value_type& new_value = **new_obj;
 
       new_value = value * rhs_complex;
 

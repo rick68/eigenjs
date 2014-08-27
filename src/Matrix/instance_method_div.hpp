@@ -29,14 +29,14 @@ EIGENJS_INSTANCE_METHOD(Matrix, div,
     };
 
     if (T::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = U::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      T* new_obj = node::ObjectWrap::Unwrap<T>(instance);
-      typename T::value_type& new_value = **new_obj;
+      U* new_obj = node::ObjectWrap::Unwrap<U>(instance);
+      typename U::value_type& new_value = **new_obj;
 
       new_value = value / args[0]->NumberValue();
 
@@ -46,18 +46,18 @@ EIGENJS_INSTANCE_METHOD(Matrix, div,
         node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      typedef typename detail::add_complex<T>::type CT;
+      typedef typename detail::add_complex<U>::type CU;
 
-      v8::Local<v8::Object> instance = CT::new_instance(
+      v8::Local<v8::Object> instance = CU::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
       );
 
-      CT* new_obj = node::ObjectWrap::Unwrap<CT>(instance);
-      typename CT::value_type& new_cmatrix = **new_obj;
+      CU* new_obj = node::ObjectWrap::Unwrap<CU>(instance);
+      typename CU::value_type& new_value = **new_obj;
 
-      new_cmatrix =
+      new_value =
           value.template cast<typename Complex::value_type>()
             /
           rhs_complex;

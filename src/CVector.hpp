@@ -19,8 +19,6 @@
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/int.hpp>
 
-#include <eigen3/Eigen/Dense>
-
 #include "base.hpp"
 #include "definition.hpp"
 #include "Complex.hpp"
@@ -62,10 +60,6 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
   }
 
  private:
-  explicit CVector(const base_type& base)
-    : base_type(base)
-  {}
-
   explicit CVector(const typename value_type::Index& rows)
     : base_type()
       { *base_type::value_ptr_ = value_type::Zero(rows, 1); }
@@ -89,11 +83,13 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
         );
       }
 
-      if (CVector::is_scalar(args[0])) {
+      if (args[0]->IsNumber()) {
         typename value_type::Index size = args[0]->Int32Value();
-        CVector* obj = new CVector(size);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
+        if (size >= 0) {
+          CVector* obj = new CVector(size);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        }
       } else if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
@@ -117,24 +113,26 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
         NanReturnValue(args.This());
       }
     } else if (args_length == 2) {
-      if (CVector::is_scalar(args[0]) && CVector::is_scalar(args[1])) {
+      if (args[0]->IsNumber() && args[1]->IsNumber()) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
         v8::Local<v8::Value> argv[] = { args[0], args[1] };
         (void)cols;
 
-        if (args.IsConstructCall()) {
-          CVector* obj = new CVector(rows);
-          obj->Wrap(args.This());
-          NanReturnValue(args.This());
-        } else {
-          NanReturnValue(
-            base_type::new_instance(
-              args
-            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-            )
-          );
+        if (rows >= 0 && cols >= 0) {
+          if (args.IsConstructCall()) {
+            CVector* obj = new CVector(rows);
+            obj->Wrap(args.This());
+            NanReturnValue(args.This());
+          } else {
+            NanReturnValue(
+              base_type::new_instance(
+                args
+              , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+              , argv
+              )
+            );
+          }
         }
       }
     }

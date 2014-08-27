@@ -12,8 +12,6 @@
 #ifndef EIGENJS_DETAIL_IS_EIGEN_MATRIX_HPP
 #define EIGENJS_DETAIL_IS_EIGEN_MATRIX_HPP
 
-#include <boost/mpl/bool.hpp>
-
 #include <eigen3/Eigen/Dense>
 
 #include <type_traits>
@@ -22,17 +20,28 @@ namespace EigenJS {
 namespace detail {
 
 template <typename EigenMatrix>
-struct is_eigen_matrix
-  : boost::mpl::bool_<
-      std::is_same<
-        EigenMatrix
-      , Eigen::Matrix<
-          typename Eigen::internal::traits<EigenMatrix>::Scalar
-        , Eigen::internal::traits<EigenMatrix>::RowsAtCompileTime
-        , Eigen::internal::traits<EigenMatrix>::ColsAtCompileTime
-        >
-      >::value
-    >
+struct is_eigen_matrix : std::false_type
+{};
+
+template<
+  typename _Scalar
+, int _Rows
+, int _Cols
+, int _Options
+, int _MaxRows
+, int _MaxCols
+>
+struct is_eigen_matrix<
+  Eigen::Matrix<
+    _Scalar
+  , _Rows
+  , _Cols
+  , _Options
+  , _MaxRows
+  , _MaxCols
+  >
+>
+  : std::true_type
 {};
 
 }  // namespace detail

@@ -12,6 +12,8 @@
 #ifndef EIGENJS_MATRIX_CLASS_METHOD_ZERO_HPP
 #define EIGENJS_MATRIX_CLASS_METHOD_ZERO_HPP
 
+#include "../common_macro.hpp"
+
 namespace EigenJS {
 
 EIGENJS_CLASS_METHOD(Matrix, Zero,

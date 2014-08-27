@@ -43,7 +43,7 @@ describe('Matrix', function() {
       .set(2, 2, 9);
   });
 
-  it('#set() should throw message when row or column nubers are out of range', function() {
+  it('#set() should throw message when row or column numbers are out of range', function() {
     mat.set.should.be.a.Function;
 
     (function() {
@@ -190,7 +190,7 @@ describe('Matrix', function() {
   });
 
   it('#sub() should return a CMatrix with the difference of a matrix and a complex matrix', function() {
-    mat.add.should.be.a.Function;
+    mat.sub.should.be.a.Function;
 
     var cmat = CMatrix(3, 3).set([
       Complex( 2, 0), Complex( 4, 1),  Complex(6, 2),
@@ -282,6 +282,13 @@ describe('Matrix', function() {
     mat.mul(-1).toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
   });
 
+  it('#mul() should return a CMatrix with the product of a matrix and a complex', function() {
+    mat.mul.should.be.a.Function;
+
+    var c = new Complex(-1, 0);
+    mat.mul(c).toString().should.equal("(-1,0) (-2,0) (-3,0)\n(-4,0) (-5,0) (-6,0)\n(-7,0) (-8,0) (-9,0)");
+  });
+
   it('#mula() should return the product of two matrices and saves it back', function() {
     mat.mula.should.be.a.Function;
 
@@ -299,13 +306,6 @@ describe('Matrix', function() {
 
     mat.mula(-1);
     mat.toString().should.equal("-1 -2 -3\n-4 -5 -6\n-7 -8 -9");
-  });
-
-  it('#mul() should return a CMatrix with the product of a matrix and a complex', function() {
-    mat.mul.should.be.a.Function;
-
-    var c = new Complex(-1, 0);
-    mat.mul(c).toString().should.equal("(-1,0) (-2,0) (-3,0)\n(-4,0) (-5,0) (-6,0)\n(-7,0) (-8,0) (-9,0)");
   });
 
   it('#div() should return a Matrix which be divied by a scalar value', function() {
@@ -458,11 +458,11 @@ describe('Matrix', function() {
   it('#Random() should return a matrix with random values', function() {
     Matrix.Random.should.be.a.Function;
 
-    var mat2 = CMatrix.Random(3);
+    var mat2 = Matrix.Random(3);
     mat2.rows().should.equal(3);
     mat2.cols().should.equal(3);
 
-    var mat3 = CMatrix.Random(3, 4);
+    var mat3 = Matrix.Random(3, 4);
     mat3.rows().should.equal(3);
     mat3.cols().should.equal(4);
   });

@@ -1,6 +1,6 @@
 //
-// Vector/instance_method_mula.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// MatrixBlock/instance_method_mula.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,18 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
-#define EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
+#ifndef EIGENJS_MATRIXBLOCK_INSTANCE_METHOD_MULA_HPP
+#define EIGENJS_MATRIXBLOCK_INSTANCE_METHOD_MULA_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(Vector, mula,
+EIGENJS_INSTANCE_METHOD(MatrixBlock, mula,
 {
   NanScope();
 
   if (args.Length() == 1) {
-    Vector* obj = node::ObjectWrap::Unwrap<Vector>(args.This());
-    typename Vector::value_type& value = **obj;
+    MatrixBlock* obj = node::ObjectWrap::Unwrap<MatrixBlock>(args.This());
+    typename MatrixBlock::value_type& value = **obj;
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
@@ -31,8 +31,9 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_matrix.cols() != 1) {
-        NanThrowError("The matrix size must be 1x1");
+      if (value.cols() != rhs_matrix.rows() ||
+          value.cols() != rhs_matrix.cols()) {
+        NanThrowError("The matrix block size must be mxm");
         NanReturnUndefined();
       }
 
@@ -48,6 +49,13 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
+      if (value.cols() != rhs_vector.rows() ||
+          value.cols() != rhs_vector.cols()
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
       value *= rhs_vector;
 
       NanReturnValue(args.This());
@@ -57,6 +65,15 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvector.rows() != 1 ||
+          rhs_rowvector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
@@ -72,7 +89,13 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
-      value *= typename Matrix::value_type(rhs_matrixblock);
+      if (value.cols() != rhs_matrixblock.rows() ||
+          value.cols() != rhs_matrixblock.cols()) {
+        NanThrowError("The matrix block size must be mxm");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_matrixblock;
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {
@@ -88,4 +111,4 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_VECTOR_INSTANCE_METHOD_MULA_HPP
+#endif  // EIGENJS_MATRIXBLOCK_INSTANCE_METHOD_MULA_HPP
