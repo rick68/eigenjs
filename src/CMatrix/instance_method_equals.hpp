@@ -52,6 +52,16 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
       }
 
       NanReturnValue(NanNew<v8::Boolean>(value == rhs_crowvector));
+    } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+      const CMatrixBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+      const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_cmatrixblock));
     }
   }
 
