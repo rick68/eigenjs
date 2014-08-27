@@ -12,10 +12,16 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
 
-## Getting Started
+## Installation
 
+**OS X** and **Linux** (GCC >= 4.8):
 ```bash
 $ npm install eigenjs
+```
+
+**Windows7/8** (Visual Studio 2012):
+```bash
+$ npm install eigenjs --msvs_version=2012
 ```
 
 ## API
@@ -145,6 +151,7 @@ $ npm install eigenjs
     * [mat.isApprox(mat, [prec = 1e-12])](#matisapproxmat-prec--1e-12)
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
+    * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.toString()](#mattostring)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -211,39 +218,64 @@ $ npm install eigenjs
     * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
     * [cmat.isApprox(cvec, [prec = 1e-12])](#cmatisapproxcvec-prec--1e-12)
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
+    * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.toString()](#cmattostring)
-* [Vector](#vector) **is inherits from Matrix**
-  * [Vector Class Methods](#vector-class-methods) 
+* [Vector](#vector) **inherits from Matrix**
+  * [Vector Class Methods](#vector-class-methods)
     * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalar_array)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
-* [CVector](#cvector) **is inherits from CMatrix**
-  * [CVector Class Methods](#cvector-class-methods) 
+* [CVector](#cvector) **inherits from CMatrix**
+  * [CVector Class Methods](#cvector-class-methods)
     * [CVector(rows)](#cvectorrows)
     * [CVector(comp_array)](#cvectorcomp_array)
   * [CVector Instance Methods](#cvector-instance-methods)
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#cvecgetrow)
-* [RowVector](#rowvector) **is inherits from Matrix**
-  * [RowVector Class Methods](#rowvector-class-methods) 
+* [RowVector](#rowvector) **inherits from Matrix**
+  * [RowVector Class Methods](#rowvector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
   * [RowVector Instance Methods](#rowvector-instance-methods)
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
-* [CRowVector](#crowvector) **is inherits from CMatrix**
-  * [CRowVector Class Methods](#crowvector-class-methods) 
+* [CRowVector](#crowvector) **inherits from CMatrix**
+  * [CRowVector Class Methods](#crowvector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
     * [CRowVector(comp_array)](#crowvectorcomp_array)
   * [CRowVector Instance Methods](#crowvector-instance-methods)
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
     * [crvec.get(col)](#crvecgetcol)
+* [MatrixBlock](#matrixblock) **inherits from Matrix**
+  * [MatrixBlock Class Methods](#matrixblock-class-methods)
+    * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
+    * [MatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
+    * [MatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
+  * [MatrixBlock Instance Methods](#matrixblock-instance-methods)
+    * [mblock.assign(mat)](#mblockassignmat)
+    * [mblock.assign(vec)](#mblockassignvec)
+    * [mblock.assign(rvec)](#mblockassignrvec)
+* [CMatrixBlock](#cmatrixblock) **inherits from CMatrix**
+  * [CMatrixBlock Class Methods](#cmatrixblock-class-methods)
+    * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)](#matrixblockcmat-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#matrixblockcvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#matrixblockcrvec-startrow-startcol-blockrows-blockcols)
+  * [CMatrixBlock Instance Methods](#cmatrixblock-instance-methods)
+    * [cmblock.assign(mat)](#mblockassignmat)
+    * [cmblock.assign(vec)](#mblockassignvec)
+    * [cmblock.assign(rvec)](#mblockassignrvec)
+    * [cmblock.assign(cmat)](#mblockassigncmat)
+    * [cmblock.assign(cvec)](#mblockassigncvec)
+    * [cmblock.assign(crvec)](#mblockassigncrvec)
 
 ## Complex
 
@@ -620,7 +652,7 @@ console.log(c1.toString());
 ```js
 var C = require('eigenjs').Complex
   , c1 = new C(3, 4)
-  , c2 = new Cx(2, -3)
+  , c2 = new C(2, -3)
   , c3 = c1.sub(c2);
 console.log(c3.toString());
 ```
@@ -1165,6 +1197,24 @@ console.log(mat1.isApprox(mat2, 1e-3));
 true
 ```
 
+### mat.block(startRow, startCol, blockRows, blockCols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Identity(4, 4)
+  , mblock = mat.block(1, 1, 2, 2);
+mblock.assign(M.Random(2, 2));
+console.log('mat =\n%s', mat);
+```
+
+```txt
+mat =
+        1         0         0         0
+        0 -0.822352  0.533723         0
+        0  0.721993  0.287646         0
+        0         0         0         1
+```
+
 #### mat.toString()
 
 ```js
@@ -1617,6 +1667,24 @@ console.log(cmat1.isApprox(cmat2, 1e-3));
 true
 ```
 
+### cmat.block(startRow, startCol, blockRows, blockCols)
+
+```js
+var CM = require('eigenjs').Matrix
+  , cmat = new CM.Identity(4, 4)
+  , cmblock = cmat.block(1, 1, 2, 2);
+cmblock.assign(CM.Random(2, 2));
+console.log('cmat =\n%s', cmat);
+```
+
+```txt
+cmat =
+               (1,0)                (0,0)                (0,0)                (0,0)
+               (0,0) (0.490586,-0.722033) (-0.380859,0.895456)                (0,0)
+               (0,0)  (0.794101,0.457882) (-0.068657,0.081439)                (0,0)
+               (0,0)                (0,0)                (0,0)                (1,0)
+```
+
 #### cmat.toString()
 
 ```js
@@ -1830,18 +1898,6 @@ console.log(vec.get(2).toString());
 (3,0)
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## RowVector
 
 ### RowVector Class Methods
@@ -1985,7 +2041,7 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CRV = Eigen.CRowVector
   , crvec = new CRV(3);
-crvec.set([1. C(2, 4), 3]);
+crvec.set([1, C(2, 4), 3]);
 console.log('crvec = \n%s', crvec);
 ```
 
@@ -2010,4 +2066,116 @@ console.log(crvec.get(2).toString());
 (1,0)
 (2,4)
 (3,0)
+```
+
+## MatrixBlock
+
+### MatrixBlock Class Methods
+
+#### MatrixBlock(mat, startRow, startCol, blockRows, blockCols)
+#### MatrixBlock(vec, startRow, startCol, blockRows, blockCols)
+#### MatrixBlock(rvec, startRow, startCol, blockRows, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , MB = Eigen.MatrixBlock
+  , mat = new M.Random(4, 4)
+  , mblock = new MB(mat, 1, 1, 2, 2);
+console.log('mat = \n%s', mat);
+console.log('mblock = \n%s', mblock);
+```
+
+```txt
+mat =
+     0.63505     0.904788    -0.727407     0.187778
+   -0.709806     0.764849     0.467046   -0.0105777
+    0.295743     0.813348    -0.350211     0.221291
+    0.557679   -0.0634692 -0.000702816     -0.76436
+mblock =
+ 0.764849  0.467046
+ 0.813348 -0.350211
+```
+
+### MatrixBlock Instance Methods
+
+#### mblock.assign(mat)
+#### mblock.assign(vec)
+#### mblock.assign(rvec)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , MB = Eigen.MatrixBlock
+  , mat = new M.Zero(4, 4)
+  , mblock = new MB(mat, 1, 1, 2, 2);
+mblock.assign(new M.Random(2, 2));
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+        0         0         0         0
+        0 -0.863823  0.989624         0
+        0 -0.279349  0.611228         0
+        0         0         0         0
+```
+
+## CMatrixBlock
+
+### CMatrixBlock Class Methods
+
+#### CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)
+#### CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)
+#### CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)
+#### CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)
+#### CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)
+#### CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CMB = Eigen.CMatrixBlock
+  , cmat = new CM.Random(4, 4)
+  , cmblock = new CMB(cmat, 1, 1, 2, 2);
+console.log('cmat = \n%s', cmat);
+console.log('cmblock = \n%s', cmblock);
+```
+
+```txt
+cmat =
+(-0.406409,-0.520207) (0.0597013,-0.600286)  (0.598643,-0.611622)  (-0.15127,-0.400805)
+  (0.879061,0.384306)   (0.99717,-0.562756)     (0.4726,0.993408)  (-0.321745,0.432513)
+  (-0.962292,0.76398) (-0.233766,-0.910678)  (0.206301,-0.699413)  (-0.755963,0.536944)
+   (0.217467,0.96008)    (0.237669,0.50304)  (0.969348,-0.163869)   (0.413094,0.866642)
+cmblock =
+  (0.99717,-0.562756)     (0.4726,0.993408)
+(-0.233766,-0.910678)  (0.206301,-0.699413)
+```
+
+### CMatrixBlock Instance Methods
+
+#### cmblock.assign(mat)
+#### cmblock.assign(vec)
+#### cmblock.assign(rvec)
+#### cmblock.assign(cmat)
+#### cmblock.assign(cvec)
+#### cmblock.assign(crvec)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CMB = Eigen.CMatrixBlock
+  , cmat = new CM.Zero(4, 4)
+  , cmblock = new MB(mat, 1, 1, 2, 2);
+cmblock.assign(new CM.Random(2, 2));
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+                 (0,0)                  (0,0)                  (0,0)                  (0,0)
+                 (0,0)  (-0.951329,-0.986601) (0.00726055,0.0281469)                  (0,0)
+                 (0,0)   (0.188921,-0.804902) (-0.935681,0.00205515)                  (0,0)
+                 (0,0)                  (0,0)                  (0,0)                  (0,0)
 ```

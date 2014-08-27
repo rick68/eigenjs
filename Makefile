@@ -8,9 +8,9 @@ SOURCES = \
     src/CMatrix/class_method_Random.hpp \
     src/CMatrix/class_method_Zero.hpp \
     src/CMatrix/definitions.hpp \
-    src/CMatrix_fwd.hpp \
     src/CMatrix/instance_method_add.hpp \
     src/CMatrix/instance_method_adda.hpp \
+    src/CMatrix/instance_method_block.hpp \
     src/CMatrix/instance_method_cols.hpp \
     src/CMatrix/instance_method_div.hpp \
     src/CMatrix/instance_method_diva.hpp \
@@ -25,18 +25,24 @@ SOURCES = \
     src/CMatrix/instance_method_suba.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/macro.hpp \
-    src/CRowVectorhpp \
-    src/CRowVector_fwd.hpp \
+    src/CMatrixBlock.hpp \
+    src/CMatrixBlock/instance_method_assign.hpp \
+    src/CMatrixBlock/instance_method_mula.hpp \
+    src/CMatrixBlock/definitions.hpp \
+    src/CMatrixBlock_fwd.hpp \
+    src/CMatrix_fwd.hpp \
+    src/CRowVector.hpp \
     src/CRowVector/definitions.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_mula.hpp \
     src/CRowVector/instance_method_set.hpp \
+    src/CRowVector_fwd.hpp \
     src/CVector.hpp \
-    src/CVector_fwd.hpp \
     src/CVector/definitions.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_mula.hpp \
     src/CVector/instance_method_set.hpp \
+    src/CVector_fwd.hpp \
     src/Complex.hpp \
     src/Complex/class_method_acos.hpp \
     src/Complex/class_method_acosh.hpp \
@@ -58,7 +64,6 @@ SOURCES = \
     src/Complex/class_method_tan.hpp \
     src/Complex/class_method_tanh.hpp \
     src/Complex/definitions.hpp \
-    src/Complex_fwd.hpp \
     src/Complex/instance_method_abs.hpp \
     src/Complex/instance_method_add.hpp \
     src/Complex/instance_method_adda.hpp \
@@ -77,15 +82,16 @@ SOURCES = \
     src/Complex/macro.hpp \
     src/Complex/property_accessor_imag.hpp \
     src/Complex/property_accessor_real.hpp \
+    src/Complex_fwd.hpp \
     src/EigenJS.cpp \
     src/Matrix.hpp \
     src/Matrix/class_method_Identity.hpp \
     src/Matrix/class_method_Random.hpp \
     src/Matrix/class_method_Zero.hpp \
     src/Matrix/definitions.hpp \
-    src/Matrix_fwd.hpp \
     src/Matrix/instance_method_add.hpp \
     src/Matrix/instance_method_adda.hpp \
+    src/Matrix/instance_method_block.hpp \
     src/Matrix/instance_method_cols.hpp \
     src/Matrix/instance_method_div.hpp \
     src/Matrix/instance_method_diva.hpp \
@@ -100,6 +106,12 @@ SOURCES = \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/macro.hpp \
+    src/MatrixBlock.hpp \
+    src/MatrixBlock/instance_method_assign.hpp \
+    src/MatrixBlock/instance_method_mula.hpp \
+    src/MatrixBlock/definitions.hpp \
+    src/MatrixBlock_fwd.hpp \
+    src/Matrix_fwd.hpp \
     src/RowVector.hpp \
     src/RowVector_fwd.hpp \
     src/RowVector/definitions.hpp \
@@ -107,11 +119,11 @@ SOURCES = \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_set.hpp \
     src/Vector.hpp \
-    src/Vector_fwd.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_set.hpp \
+    src/Vector_fwd.hpp \
     src/base.hpp \
     src/common_macro.hpp \
     src/definition.hpp \
@@ -124,7 +136,7 @@ SOURCES = \
     src/detail/property_accessor_base.hpp \
     src/throw_error.hpp
 
-FILTER = -build/c++11,-build/include_what_you_use,-whitespace/braces,-whitespace/parens
+FILTER = -build/c++11,-build/include_what_you_use,-whitespace/braces,-whitespace/parens,-whitespace/operators
 
 all:
 	cd $(TOPLEVEL) && node-gyp configure build

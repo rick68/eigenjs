@@ -27,7 +27,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (Matrix::is_invalid_matrix_product(obj, rhs_obj))
+      if (T::is_invalid_matrix_product(obj, rhs_obj))
         NanReturnUndefined();
 
       matrix *= rhs_matrix;
@@ -38,7 +38,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
         node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
-      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
@@ -50,11 +50,23 @@ EIGENJS_INSTANCE_METHOD(Matrix, mula,
         node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
       const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
 
-      if (Matrix::is_invalid_matrix_product(obj, rhs_obj)) {
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();
       }
 
       matrix *= rhs_rowvector;
+
+      NanReturnValue(args.This());
+    } else if (MatrixBlock::is_matrixblock(args[0])) {
+      const MatrixBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+      const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      matrix *= rhs_matrixblock;
 
       NanReturnValue(args.This());
     } else if (Matrix::is_scalar(args[0])) {

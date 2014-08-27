@@ -19,8 +19,6 @@
 #include <boost/mpl/at.hpp>
 #include <boost/mpl/int.hpp>
 
-#include <eigen3/Eigen/Dense>
-
 #include "base.hpp"
 #include "definition.hpp"
 #include "Complex.hpp"
@@ -63,10 +61,6 @@ class CRowVector : public base<CRowVector, ScalarType, ValueType, ClassName> {
   }
 
  private:
-  explicit CRowVector(const base_type& base)
-    : base_type(base)
-  {}
-
   explicit CRowVector(const typename value_type::Index& cols)
     : base_type()
       { *base_type::value_ptr_ = value_type::Zero(1, cols); }
@@ -90,11 +84,13 @@ class CRowVector : public base<CRowVector, ScalarType, ValueType, ClassName> {
         );
       }
 
-      if (CRowVector::is_scalar(args[0])) {
+      if (args[0]->IsNumber()) {
         typename value_type::Index size = args[0]->Int32Value();
-        CRowVector* obj = new CRowVector(size);
-        obj->Wrap(args.This());
-        NanReturnValue(args.This());
+        if (size >= 0) {
+          CRowVector* obj = new CRowVector(size);
+          obj->Wrap(args.This());
+          NanReturnValue(args.This());
+        }
       } else if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
@@ -118,24 +114,26 @@ class CRowVector : public base<CRowVector, ScalarType, ValueType, ClassName> {
         NanReturnValue(args.This());
       }
     } else if (args_length == 2) {
-      if (CRowVector::is_scalar(args[0]) && CRowVector::is_scalar(args[1])) {
+      if (args[0]->IsNumber() && args[1]->IsNumber()) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
         v8::Local<v8::Value> argv[] = { args[0], args[1] };
         (void)rows;
 
-        if (args.IsConstructCall()) {
-          CRowVector* obj = new CRowVector(cols);
-          obj->Wrap(args.This());
-          NanReturnValue(args.This());
-        } else {
-          NanReturnValue(
-            base_type::new_instance(
-              args
-            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-            )
-          );
+        if (rows >= 0 && cols >= 0) {
+          if (args.IsConstructCall()) {
+            CRowVector* obj = new CRowVector(cols);
+            obj->Wrap(args.This());
+            NanReturnValue(args.This());
+          } else {
+            NanReturnValue(
+              base_type::new_instance(
+                args
+              , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+              , argv
+              )
+            );
+          }
         }
       }
     }

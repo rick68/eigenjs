@@ -32,7 +32,11 @@
 #include "CVector_fwd.hpp"
 #include "RowVector_fwd.hpp"
 #include "CRowVector_fwd.hpp"
+#include "MatrixBlock_fwd.hpp"
+#include "CMatrixBlock_fwd.hpp"
 
+#include "detail/unwrap_eigen_block.hpp"
+#include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
 
 namespace EigenJS {
@@ -51,6 +55,7 @@ namespace detail {
    private:
     value_type value_;
   };
+
 }  // namespace detail
 
 template <
@@ -63,7 +68,7 @@ struct base : node::ObjectWrap {
   typedef Derived<ScalarType, ValueType, ClassName> derived_type;
 
   typedef ScalarType scalar_type;
-  typedef ValueType value_type;
+  typedef typename detail::unwrap_eigen_block<ValueType>::type value_type;
 
   typedef typename std::conditional<
       std::is_same<
@@ -90,27 +95,35 @@ struct base : node::ObjectWrap {
   }
 
   static NAN_INLINE bool is_matrix(const v8::Handle<v8::Value>& arg) {
-    return Matrix<scalar_type, value_type>::base_type::has_instance(arg);
+    return Matrix<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cmatrix(const v8::Handle<v8::Value>& arg) {
-    return CMatrix<scalar_type, value_type>::base_type::has_instance(arg);
+    return CMatrix<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_vector(const v8::Handle<v8::Value>& arg) {
-    return Vector<scalar_type, value_type>::base_type::has_instance(arg);
+    return Vector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_cvector(const v8::Handle<v8::Value>& arg) {
-    return CVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return CVector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_rowvector(const v8::Handle<v8::Value>& arg) {
-    return RowVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return RowVector<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool is_crowvector(const v8::Handle<v8::Value>& arg) {
-    return CRowVector<scalar_type, value_type>::base_type::has_instance(arg);
+    return CRowVector<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_matrixblock(const v8::Handle<v8::Value>& arg) {
+    return MatrixBlock<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_cmatrixblock(const v8::Handle<v8::Value>& arg) {
+    return CMatrixBlock<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
@@ -138,12 +151,39 @@ struct base : node::ObjectWrap {
       : false;
   }
 
+  template <
+    typename XprType
+  , int BlockRows
+  , int BlockCols
+  , bool InnerPanel
+  >
+  static NAN_INLINE bool is_out_of_range(
+      const Eigen::Block<
+        XprType
+      , BlockRows
+      , BlockCols
+      , InnerPanel
+      >& eigen_block
+    , const typename XprType::Index& row
+    , const typename XprType::Index& col) {
+    return row < 0 || row >= eigen_block.rows() ||
+           col < 0 || col >= eigen_block.cols()
+      ? NanThrowError("Row or column numbers are out of range"), true
+      : false;
+  }
+
   template <typename T, typename U>
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      detail::is_eigen_matrix<typename T::value_type>
-    , detail::is_eigen_matrix<typename U::value_type>
+      boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
+    , boost::mpl::or_<
+        detail::is_eigen_block<typename U::value_type>
+      , detail::is_eigen_matrix<typename U::value_type>
+      >
     >::value
   , bool
   >::type
@@ -160,8 +200,14 @@ struct base : node::ObjectWrap {
   static NAN_INLINE
   typename std::enable_if<
     boost::mpl::and_<
-      detail::is_eigen_matrix<typename T::value_type>
-    , detail::is_eigen_matrix<typename U::value_type>
+      boost::mpl::or_<
+        detail::is_eigen_block<typename T::value_type>
+      , detail::is_eigen_matrix<typename T::value_type>
+      >
+    , boost::mpl::or_<
+        detail::is_eigen_block<typename U::value_type>
+      , detail::is_eigen_matrix<typename U::value_type>
+      >
     >::value
   , bool
   >::type
@@ -179,13 +225,17 @@ struct base : node::ObjectWrap {
   NAN_INLINE value_type* operator->() { return value_ptr_.get(); }
   NAN_INLINE const value_type* operator->() const { return value_ptr_.get(); }
 
+  NAN_INLINE operator const pointer_type&() const {
+    return value_ptr_;
+  }
+
  protected:
   base() : value_ptr_(new value_type()) {}
 
   explicit base(const Complex<scalar_type>&) : value_ptr_() {}
 
-  base(const base& other)
-    : value_ptr_(other.value_ptr_)
+  explicit base(const pointer_type& value_ptr)
+    : value_ptr_(value_ptr)
   {}
 
   ~base() {}

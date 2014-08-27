@@ -22,20 +22,20 @@ EIGENJS_INSTANCE_METHOD(CMatrix, get,
       args[0]->IsNumber() &&
       args[1]->IsNumber()
   ) {
-    const CMatrix* const& obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-    const typename CMatrix::value_type& cmatrix = **obj;
-    const typename CMatrix::value_type::Index& row = args[0]->Int32Value();
-    const typename CMatrix::value_type::Index& col = args[1]->Int32Value();
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type::Index& row = args[0]->Int32Value();
+    const typename T::value_type::Index& col = args[1]->Int32Value();
 
-    if (CMatrix::is_out_of_range(cmatrix, row, col)) {
+    if (T::is_out_of_range(value, row, col)) {
       NanReturnUndefined();
     }
 
-    const typename Complex::value_type& c = cmatrix(row, col);
+    const typename Complex::value_type& elem = value(row, col);
 
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Number>(c.real())
-    , NanNew<v8::Number>(c.imag())
+      NanNew<v8::Number>(elem.real())
+    , NanNew<v8::Number>(elem.imag())
     };
 
     NanReturnValue(

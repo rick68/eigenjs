@@ -36,6 +36,8 @@
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
 
+#include "instance_method_block.hpp"
+
 #include "class_method_Zero.hpp"
 #include "class_method_Identity.hpp"
 #include "class_method_Random.hpp"
@@ -65,6 +67,8 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
+
+  (instance_method_block)
 
   (class_method_Zero)
   (class_method_Identity)

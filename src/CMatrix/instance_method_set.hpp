@@ -16,8 +16,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, set,
 {
-  CMatrix* obj = node::ObjectWrap::Unwrap<CMatrix>(args.This());
-  typename CMatrix::value_type& cmatrix = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& value = **obj;
 
   NanScope();
 
@@ -26,9 +26,9 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
       if (args[0]->IsArray()) {
         const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
         uint32_t len = array->Length();
-        const typename CMatrix::value_type::Index& rows = cmatrix.rows();
-        const typename CMatrix::value_type::Index& cols = cmatrix.cols();
-        const typename CMatrix::value_type::Index& elems = rows * cols;
+        const typename T::value_type::Index& rows = value.rows();
+        const typename T::value_type::Index& cols = value.cols();
+        const typename T::value_type::Index& elems = rows * cols;
 
         if (len != elems) {
           len < rows * cols
@@ -41,13 +41,13 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
           v8::Local<v8::Value> elem = array->Get(i);
 
           if (elem->IsNumber()) {
-            cmatrix(i / cols, i % cols) = elem->NumberValue();
+            value(i / cols, i % cols) = elem->NumberValue();
           } else if (Complex::is_complex(elem->ToObject())) {
             const Complex* const& rhs_obj =
                 node::ObjectWrap::Unwrap<Complex>(elem->ToObject());
             const typename Complex::value_type complex = **rhs_obj;
 
-            cmatrix(i / cols, i % cols) = complex;
+            value(i / cols, i % cols) = complex;
           }
         }
       }
@@ -55,9 +55,9 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
 
     case 3:
       if (args[0]->IsNumber() && args[1]->IsNumber()) {
-        const typename CMatrix::value_type::Index& row =
+        const typename T::value_type::Index& row =
             args[0]->Int32Value();
-        const typename CMatrix::value_type::Index& col =
+        const typename T::value_type::Index& col =
             args[1]->Int32Value();
 
         if (Complex::is_complex(args[2]->ToObject())) {
@@ -65,16 +65,17 @@ EIGENJS_INSTANCE_METHOD(CMatrix, set,
               node::ObjectWrap::Unwrap<Complex>(args[2]->ToObject());
           const typename Complex::value_type complex = **rhs_obj;
 
-          cmatrix(row, col) = complex;
+          value(row, col) = complex;
 
         } else if (CMatrix::is_scalar(args[2])) {
-          const typename CMatrix::scalar_type& value = args[2]->NumberValue();
+          const typename CMatrix::scalar_type& elem_value
+              = args[2]->NumberValue();
 
-          if (CMatrix::is_out_of_range(cmatrix, row, col)) {
+          if (T::is_out_of_range(value, row, col)) {
             NanReturnUndefined();
           }
 
-          cmatrix(row, col) = value;
+          value(row, col) = elem_value;
         }
       }
       break;
