@@ -15,6 +15,7 @@
 #include "../CMatrixBlock_fwd.hpp"
 
 #include "instance_method_assign.hpp"
+#include "instance_method_mula.hpp"
 
 namespace EigenJS {
 
