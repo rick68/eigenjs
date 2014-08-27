@@ -115,6 +115,19 @@ describe('MatrixBlock', function() {
     mblock.toString().should.equal(" 6  7\n10 11");
   });
 
+  it('#assign() should return the sum of two matrix blocks', function() {
+    mblock.assign.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var mblock2 = mat.block(0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
+
+    mblock.assign(mblock2).toString().should.equal("1 2\n5 1");
+    mat.toString().should.equal(" 1  2  3  4\n 5  1  2  8\n 9  5  1 12\n13 14 15 16");
+  });
+
   it('#assign() should return the sum of a matrix block and a matrix', function() {
     mblock.assign.should.be.a.Function;
 
@@ -122,6 +135,30 @@ describe('MatrixBlock', function() {
     mblock.toString().should.equal(" 6  7\n10 11");
     mblock.assign(Matrix.Zero(2)).toString().should.equal("0 0\n0 0");
     mat.toString().should.equal(" 1  2  3  4\n 5  0  0  8\n 9  0  0 12\n13 14 15 16");
+  });
+
+  it('#assign() should return the sum of a matrix block and a vector', function() {
+    mblock.assign.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+
+    var mblock2 = mat.block(0, 0, 4, 1);
+    mblock2.toString().should.equal(" 1\n 5\n 9\n13");
+
+    mblock2.assign(Vector.Zero(4)).toString().should.equal("0\n0\n0\n0");
+    mat.toString().should.equal(" 0  2  3  4\n 0  6  7  8\n 0 10 11 12\n 0 14 15 16");
+  });
+
+  it('#assign() should return the sum of a matrix block and a row-vector', function() {
+    mblock.assign.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+
+    var mblock2 = mat.block(0, 0, 1, 4);
+    mblock2.toString().should.equal("1 2 3 4");
+
+    mblock2.assign(RowVector.Zero(4)).toString().should.equal("0 0 0 0");
+    mat.toString().should.equal(" 0  0  0  0\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
   });
 
   it('#add() should return the sum of two matrix blocks', function() {
