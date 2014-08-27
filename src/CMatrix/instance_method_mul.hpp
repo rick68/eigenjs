@@ -203,7 +203,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
 
       NanReturnValue(instance);
     } else if (T::is_scalar(args[0])) {
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = U::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
@@ -220,7 +220,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
       const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-      v8::Local<v8::Object> instance = T::new_instance(
+      v8::Local<v8::Object> instance = U::new_instance(
         args
       , sizeof(argv) / sizeof(v8::Local<v8::Value>)
       , argv
