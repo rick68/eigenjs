@@ -11,7 +11,7 @@ const
     should = require('should');
 
 describe('MatrixBlock', function() {
-  var mat, block;
+  var mat, mblock;
 
   it('#MatrixBlock() should be a function', function() {
     MatrixBlock.should.be.a.Function;
@@ -166,10 +166,10 @@ describe('MatrixBlock', function() {
 
     mblock.toString().should.equal(" 6  7\n10 11");
 
-    var block2 = MatrixBlock(mat, 0, 0, 2, 2);
-    block2.toString().should.equal("1 2\n5 6");
+    var mblock2 = MatrixBlock(mat, 0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
 
-    var mat2 = mblock.add(block2);
+    var mat2 = mblock.add(mblock2);
     mat2.should.instanceOf(Matrix);
     mat2.toString().should.equal(" 7  9\n15 17");
   });
@@ -201,9 +201,9 @@ describe('MatrixBlock', function() {
   it('#add() should return the sum of a matrix block and a vector', function() {
     mblock.add.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 1, 4, 1);
-    block2.toString().should.equal(" 2\n 6\n10\n14");
-    var vec = Vector(block2.rows())
+    var mblock2 = new MatrixBlock(mat, 0, 1, 4, 1);
+    mblock2.toString().should.equal(" 2\n 6\n10\n14");
+    var vec = Vector(mblock2.rows())
       .set([
          2,
          6,
@@ -211,7 +211,7 @@ describe('MatrixBlock', function() {
         14
       ]);
 
-    var vec2 = block2.add(vec);
+    var vec2 = mblock2.add(vec);
     vec2.should.instanceOf(Matrix);
     vec2.toString().should.equal(" 4\n12\n20\n28");
   });
@@ -219,14 +219,14 @@ describe('MatrixBlock', function() {
   it('#add() should return the sum of a matrix block and a row-vector', function() {
     mblock.add.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 1, 0, 1, 4);
-    block2.toString().should.equal("5 6 7 8");
-    var rvec = RowVector(block2.cols())
+    var mblock2 = new MatrixBlock(mat, 1, 0, 1, 4);
+    mblock2.toString().should.equal("5 6 7 8");
+    var rvec = RowVector(mblock2.cols())
       .set([
         2, 6, 10, 14
       ]);
 
-    var rvec2 = block2.add(rvec);
+    var rvec2 = mblock2.add(rvec);
     rvec2.should.instanceOf(Matrix);
     rvec2.toString().should.equal(" 7 12 17 22");
   });
@@ -251,9 +251,9 @@ describe('MatrixBlock', function() {
   it('#add() should return the sum of a matrix block and a complex vector', function() {
     mblock.add.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 1, 4, 1);
-    block2.toString().should.equal(" 2\n 6\n10\n14");
-    var cvec = CVector(block2.rows())
+    var mblock2 = new MatrixBlock(mat, 0, 1, 4, 1);
+    mblock2.toString().should.equal(" 2\n 6\n10\n14");
+    var cvec = CVector(mblock2.rows())
       .set([
          2,
          6,
@@ -261,7 +261,7 @@ describe('MatrixBlock', function() {
         14
       ]);
 
-    var cvec2 = block2.add(cvec);
+    var cvec2 = mblock2.add(cvec);
     cvec2.should.instanceOf(CMatrix);
     cvec2.toString().should.equal(" (4,0)\n(12,0)\n(20,0)\n(28,0)");
   });
@@ -269,14 +269,14 @@ describe('MatrixBlock', function() {
   it('#add() should return the sum of a matrix block and a complex row-vector', function() {
     mblock.add.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 1, 0, 1, 4);
-    block2.toString().should.equal("5 6 7 8");
-    var crvec = CRowVector(block2.cols())
+    var mblock2 = new MatrixBlock(mat, 1, 0, 1, 4);
+    mblock2.toString().should.equal("5 6 7 8");
+    var crvec = CRowVector(mblock2.cols())
       .set([
         2, 6, 10, 14
       ]);
 
-    var crvec2 = block2.add(crvec);
+    var crvec2 = mblock2.add(crvec);
     crvec2.should.instanceOf(CMatrix);
     crvec2.toString().should.equal(" (7,0) (12,0) (17,0) (22,0)");
   });
@@ -286,12 +286,12 @@ describe('MatrixBlock', function() {
 
     mblock.toString().should.equal(" 6  7\n10 11");
 
-    var block2 = MatrixBlock(mat, 0, 0, 2, 2);
-    block2.toString().should.equal("1 2\n5 6");
+    var mblock2 = MatrixBlock(mat, 0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
 
-    mblock.adda(block2);
+    mblock.adda(mblock2);
     mblock.toString().should.equal(" 7  9\n15 18");
-    block2.toString().should.equal("1 2\n5 7");
+    mblock2.toString().should.equal("1 2\n5 7");
 
     mat.toString().should.equal(" 1  2  3  4\n 5  7  9  8\n 9 15 18 12\n13 14 15 16");
   });
@@ -333,11 +333,11 @@ describe('MatrixBlock', function() {
   it('#adda() should return the sum of a matrix block and a vector and saves it back', function() {
     mblock.adda.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 2, 4, 1);
-    block2.toString().should.equal(" 3\n 7\n11\n15");
+    var mblock2 = new MatrixBlock(mat, 0, 2, 4, 1);
+    mblock2.toString().should.equal(" 3\n 7\n11\n15");
 
-    block2.adda(
-      Vector(block2.rows())
+    mblock2.adda(
+      Vector(mblock2.rows())
       .set([
         -2,
         -4,
@@ -345,10 +345,10 @@ describe('MatrixBlock', function() {
         -8
       ])
     );
-    block2.toString().should.equal("1\n3\n5\n7");
+    mblock2.toString().should.equal("1\n3\n5\n7");
 
     (function() {
-      block2.adda(
+      mblock2.adda(
         Vector(3)
         .set([
           1,
@@ -364,26 +364,26 @@ describe('MatrixBlock', function() {
     ]);
 
     (function() {
-      block2.adda(cmat);
+      mblock2.adda(cmat);
     }).should.throw("Invalid argument");
   });
 
   it('#adda() should return the sum of a matrix block and a row-vector and saves it back', function() {
     mblock.adda.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 2, 0, 1, 4);
-    block2.toString().should.equal(" 9 10 11 12");
+    var mblock2 = new MatrixBlock(mat, 2, 0, 1, 4);
+    mblock2.toString().should.equal(" 9 10 11 12");
 
-    block2.adda(
-      RowVector(block2.cols())
+    mblock2.adda(
+      RowVector(mblock2.cols())
       .set([
         -2, -4, -6, -8
       ])
     );
-    block2.toString().should.equal("7 6 5 4");
+    mblock2.toString().should.equal("7 6 5 4");
 
     (function() {
-      block2.adda(
+      mblock2.adda(
         RowVector(2)
         .set([
           1, 0
@@ -396,7 +396,7 @@ describe('MatrixBlock', function() {
     ]);
 
     (function() {
-      block2.adda(cmat);
+      mblock2.adda(cmat);
     }).should.throw("Invalid argument");
   });
 
@@ -405,10 +405,10 @@ describe('MatrixBlock', function() {
 
     mblock.toString().should.equal(" 6  7\n10 11");
 
-    var block2 = MatrixBlock(mat, 0, 0, 2, 2);
-    block2.toString().should.equal("1 2\n5 6");
+    var mblock2 = MatrixBlock(mat, 0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
 
-    var mat2 = mblock.sub(block2);
+    var mat2 = mblock.sub(mblock2);
     mat2.should.instanceOf(Matrix);
     mat2.toString().should.equal("5 5\n5 5");
   });
@@ -436,10 +436,10 @@ describe('MatrixBlock', function() {
   it('#sub() should return the difference of a matrix block and a vector', function() {
     mblock.sub.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 4, 1);
-    block2.toString().should.equal(" 1\n 5\n 9\n13");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 4, 1);
+    mblock2.toString().should.equal(" 1\n 5\n 9\n13");
 
-    var vec = block2.sub(new Vector([
+    var vec = mblock2.sub(new Vector([
       1,
       2,
       3,
@@ -449,7 +449,7 @@ describe('MatrixBlock', function() {
     vec.toString().should.equal("0\n3\n6\n9");
 
     (function() {
-      block2.sub(new Matrix(2, 3).set([
+      mblock2.sub(new Matrix(2, 3).set([
         1, 0, 0,
         0, 1, 0
       ]));
@@ -459,17 +459,17 @@ describe('MatrixBlock', function() {
   it('#sub() should return the difference of a matrix block and a row-vector', function() {
     mblock.sub.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 1, 4);
-    block2.toString().should.equal("1 2 3 4");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 1, 4);
+    mblock2.toString().should.equal("1 2 3 4");
 
-    var rvec = block2.sub(new RowVector([
+    var rvec = mblock2.sub(new RowVector([
       1, 2, 3, 4
     ]));
     rvec.should.instanceOf(Matrix);
     rvec.toString().should.equal("0 0 0 0");
 
     (function() {
-      block2.sub(new Matrix(2, 3).set([
+      mblock2.sub(new Matrix(2, 3).set([
         1, 0, 0,
         0, 1, 0
       ]));
@@ -501,8 +501,8 @@ describe('MatrixBlock', function() {
   it('#sub() should return a CMatrix with the difference of a matrix block and a complex vector', function() {
     mblock.sub.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 4, 1);
-    block2.toString().should.equal(" 1\n 5\n 9\n13");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 4, 1);
+    mblock2.toString().should.equal(" 1\n 5\n 9\n13");
 
     var cvec = CVector([
       Complex(2, 0),
@@ -511,12 +511,12 @@ describe('MatrixBlock', function() {
       Complex(8, 4)
     ]);
 
-    var cmat2 = block2.sub(cvec);
+    var cmat2 = mblock2.sub(cvec);
     cmat2.should.instanceOf(CMatrix);
     cmat2.toString().should.equal("(-1,0)\n(1,-1)\n(3,-2)\n(5,-4)");
 
     (function() {
-      block2.sub(
+      mblock2.sub(
         CMatrix(2, 3).set([
           1, 0, 0,
           0, 1, 0
@@ -528,19 +528,19 @@ describe('MatrixBlock', function() {
   it('#sub() should return a CMatrix with the difference of a matrix block and a complex row-vector', function() {
     mblock.sub.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 1, 4);
-    block2.toString().should.equal("1 2 3 4");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 1, 4);
+    mblock2.toString().should.equal("1 2 3 4");
 
     var crvec = CRowVector([
       Complex(2, 0), Complex(4, 1), Complex(6, 2), Complex(8, 4)
     ]);
 
-    var cmat2 = block2.sub(crvec);
+    var cmat2 = mblock2.sub(crvec);
     cmat2.should.instanceOf(CMatrix);
     cmat2.toString().should.equal(" (-1,0) (-2,-1) (-3,-2) (-4,-4)");
 
     (function() {
-      block2.sub(
+      mblock2.sub(
         CMatrix(3, 2).set([
           1, 0,
           0, 1,
@@ -555,12 +555,12 @@ describe('MatrixBlock', function() {
 
     mblock.toString().should.equal(" 6  7\n10 11");
 
-    var block2 = MatrixBlock(mat, 0, 0, 2, 2);
-    block2.toString().should.equal("1 2\n5 6");
+    var mblock2 = MatrixBlock(mat, 0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
 
-    mblock.suba(block2);
+    mblock.suba(mblock2);
     mblock.toString().should.equal("5 5\n5 6");
-    block2.toString().should.equal("1 2\n5 5");
+    mblock2.toString().should.equal("1 2\n5 5");
 
     mat.toString().should.equal(" 1  2  3  4\n 5  5  5  8\n 9  5  6 12\n13 14 15 16");
   });
@@ -599,8 +599,8 @@ describe('MatrixBlock', function() {
   it('#suba() should return the difference of a matrix block and a vector then saves it back', function() {
     mblock.suba.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 2, 4, 1);
-    block2.toString().should.equal(" 3\n 7\n11\n15");
+    var mblock2 = MatrixBlock(mat, 0, 2, 4, 1);
+    mblock2.toString().should.equal(" 3\n 7\n11\n15");
 
     var vec = new Vector([
       1,
@@ -608,8 +608,8 @@ describe('MatrixBlock', function() {
       5,
       7
     ]);
-    block2.suba(vec);
-    block2.toString().should.equal("2\n4\n6\n8");
+    mblock2.suba(vec);
+    mblock2.toString().should.equal("2\n4\n6\n8");
 
     mat.toString().should.equal(" 1  2  2  4\n 5  6  4  8\n 9 10  6 12\n13 14  8 16");
   });
@@ -617,10 +617,10 @@ describe('MatrixBlock', function() {
   it('#mul() should return the product of two matrix blocks', function() {
     mblock.mul.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 2, 2);
-    block2.toString().should.equal("1 2\n5 6");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 2, 2);
+    mblock2.toString().should.equal("1 2\n5 6");
 
-    var mat2 = mblock.mul(block2);
+    var mat2 = mblock.mul(mblock2);
     mat2.should.instanceOf(Matrix);
     mat2.toString().should.equal("41 54\n65 86");
 
@@ -647,15 +647,15 @@ describe('MatrixBlock', function() {
   it('#mul() should return the product of a matrix block and a vector', function() {
     mblock.mul.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 3, 1, 1, 3);
-    block2.toString().should.equal("14 15 16");
+    var mblock2 = new MatrixBlock(mat, 3, 1, 1, 3);
+    mblock2.toString().should.equal("14 15 16");
 
     var vec = new Vector([
       1,
       2,
       3
     ]);
-    var mat2 = block2.mul(vec);
+    var mat2 = mblock2.mul(vec);
     mat2.should.instanceOf(Matrix);
     mat2.toString().should.equal("92");
 
@@ -667,11 +667,11 @@ describe('MatrixBlock', function() {
   it('#mul() should return the product of a matrix block and a row-vector', function() {
     mblock.mul.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 1, 3, 3, 1);
-    block2.toString().should.equal(" 8\n12\n16");
+    var mblock2 = new MatrixBlock(mat, 1, 3, 3, 1);
+    mblock2.toString().should.equal(" 8\n12\n16");
 
     var rvec = new RowVector([1, 2, 3]);
-    var mat2 = block2.mul(rvec);
+    var mat2 = mblock2.mul(rvec);
     mat2.should.instanceOf(Matrix);
     mat2.toString().should.equal(" 8 16 24\n12 24 36\n16 32 48");
 
@@ -699,15 +699,15 @@ describe('MatrixBlock', function() {
   it('#mul() should return a CMatrix with the product of a matrix block and a complex vector', function() {
     mblock.mul.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 1, 3);
-    block2.toString().should.equal("1 2 3");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 1, 3);
+    mblock2.toString().should.equal("1 2 3");
 
     var cvec = new CVector(3).set([
       Complex(1, 1),
       Complex(2, 2),
       Complex(3, 3)
     ]);
-    var cmat = block2.mul(cvec);
+    var cmat = mblock2.mul(cvec);
     cmat.should.instanceOf(CMatrix);
     cmat.toString().should.equal("(14,14)");
 
@@ -719,13 +719,13 @@ describe('MatrixBlock', function() {
   it('#mul() should return a CMatrix with the product of a matrix block and a complex row-vector', function() {
     mblock.mul.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 3, 1);
-    block2.toString().should.equal("1\n5\n9");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 3, 1);
+    mblock2.toString().should.equal("1\n5\n9");
 
     var crvec = new CRowVector(3).set([
       Complex(1, 1), Complex(2, 2), Complex(3, 3)
     ]);
-    var cmat = block2.mul(crvec);
+    var cmat = mblock2.mul(crvec);
     cmat.should.instanceOf(CMatrix);
     cmat.toString().should.equal("  (1,1)   (2,2)   (3,3)\n  (5,5) (10,10) (15,15)\n  (9,9) (18,18) (27,27)");
 
@@ -753,18 +753,18 @@ describe('MatrixBlock', function() {
   it('#mula() should return the product of two matrix block and saves it back', function() {
     mblock.mula.should.be.a.Function;
 
-    var block2 = new MatrixBlock(mat, 0, 0, 1, 3);
-    block2.toString().should.equal("1 2 3");
-    var block3 = new MatrixBlock(mat, 1, 1, 3, 3);
-    block3.toString().should.equal(" 6  7  8\n10 11 12\n14 15 16");
+    var mblock2 = new MatrixBlock(mat, 0, 0, 1, 3);
+    mblock2.toString().should.equal("1 2 3");
+    var mblock3 = new MatrixBlock(mat, 1, 1, 3, 3);
+    mblock3.toString().should.equal(" 6  7  8\n10 11 12\n14 15 16");
 
-    block2.mula(block3);
-    block2.toString().should.equal("68 74 80");
+    mblock2.mula(mblock3);
+    mblock2.toString().should.equal("68 74 80");
 
     mat.toString().should.equal("68 74 80  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
 
     (function() {
-      block3.mula(new MatrixBlock(mat, 0, 0, 3, 2));
+      mblock3.mula(new MatrixBlock(mat, 0, 0, 3, 2));
     }).should.throw("The matrix block size must be mxm");
   });
 
@@ -790,11 +790,11 @@ describe('MatrixBlock', function() {
   it('#mula() should return the product of a matrix block and a vector then saves it back', function() {
     mblock.mula.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 1, 1);
-    block2.toString().should.equal("1");
+    var mblock2 = MatrixBlock(mat, 0, 0, 1, 1);
+    mblock2.toString().should.equal("1");
 
-    block2.mula(new Vector([-1]));
-    block2.toString().should.equal("-1");
+    mblock2.mula(new Vector([-1]));
+    mblock2.toString().should.equal("-1");
 
     mat.toString().should.equal("-1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
 
@@ -809,16 +809,16 @@ describe('MatrixBlock', function() {
   it('#mula() should return the product of a matrix block and a row-vector then saves it back', function() {
     mblock.mula.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 1, 1);
-    block2.toString().should.equal("1");
+    var mblock2 = MatrixBlock(mat, 0, 0, 1, 1);
+    mblock2.toString().should.equal("1");
 
-    block2.mula(new RowVector([-1]));
-    block2.toString().should.equal("-1");
+    mblock2.mula(new RowVector([-1]));
+    mblock2.toString().should.equal("-1");
 
     mat.toString().should.equal("-1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
 
     (function() {
-      block2.mula(new RowVector([
+      mblock2.mula(new RowVector([
         -1, -2
       ]))
     }).should.throw("The operation result is out of range");
@@ -873,27 +873,27 @@ describe('MatrixBlock', function() {
     mblock.equals.should.be.a.Function;
 
     var mat2 = new Matrix.Identity(4, 4);
-    var block2 = MatrixBlock(mat2, 0, 0, 2, 2);
-    var block3 = MatrixBlock(mat2, 2, 2, 2, 2);
+    var mblock2 = MatrixBlock(mat2, 0, 0, 2, 2);
+    var mblock3 = MatrixBlock(mat2, 2, 2, 2, 2);
 
-    block2.equals(block3).should.ok;
+    mblock2.equals(mblock3).should.ok;
   });
 
   it('#equals() should return true if a matrix block and a matrix are equal', function() {
     mblock.equals.should.be.a.Function;
 
     var mat2 = new Matrix.Identity(4, 4);
-    var block2 = MatrixBlock(mat2, 0, 0, 2, 2);
-    var block3 = MatrixBlock(mat2, 2, 2, 2, 2);
+    var mblock2 = MatrixBlock(mat2, 0, 0, 2, 2);
+    var mblock3 = MatrixBlock(mat2, 2, 2, 2, 2);
 
-    block2.equals(block3).should.ok;
+    mblock2.equals(mblock3).should.ok;
   });
 
   it('#equals() should return true if a matrix block and a vector are equal', function() {
     mblock.equals.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 4, 1);
-    block2.toString().should.equal(" 1\n 5\n 9\n13");
+    var mblock2 = MatrixBlock(mat, 0, 0, 4, 1);
+    mblock2.toString().should.equal(" 1\n 5\n 9\n13");
 
     var vec = new Vector([
        1,
@@ -902,20 +902,20 @@ describe('MatrixBlock', function() {
       13
     ]);
 
-    block2.equals(vec).should.ok;
+    mblock2.equals(vec).should.ok;
   });
 
   it('#equals() should return true if a matrix block and a row-vector are equal', function() {
     mblock.equals.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 1, 4);
-    block2.toString().should.equal("1 2 3 4");
+    var mblock2 = MatrixBlock(mat, 0, 0, 1, 4);
+    mblock2.toString().should.equal("1 2 3 4");
 
     var rvec = new RowVector([
       1, 2, 3, 4
     ]);
 
-    block2.equals(rvec).should.ok;
+    mblock2.equals(rvec).should.ok;
   });
 
   it('#isApprox() should return true if this is approximately equal to other', function() {
@@ -944,11 +944,11 @@ describe('MatrixBlock', function() {
   it('#isApprox() should return true if this is approximately equal to a vector', function() {
     mblock.isApprox.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 4, 1);
-    block2.toString().should.equal(" 1\n 5\n 9\n13");
+    var mblock2 = MatrixBlock(mat, 0, 0, 4, 1);
+    mblock2.toString().should.equal(" 1\n 5\n 9\n13");
 
-    block2.diva(99);
-    block2.toString().should.equal(" 0.010101\n0.0505051\n0.0909091\n 0.131313");
+    mblock2.diva(99);
+    mblock2.toString().should.equal(" 0.010101\n0.0505051\n0.0909091\n 0.131313");
 
     var vec = new Vector([
       0.010,
@@ -957,11 +957,11 @@ describe('MatrixBlock', function() {
       0.131
     ]);
 
-    block2.isApprox(vec, 1e-3).should.false;
-    block2.isApprox(vec, 1e-2).should.true;
+    mblock2.isApprox(vec, 1e-3).should.false;
+    mblock2.isApprox(vec, 1e-2).should.true;
 
     (function() {
-      block2.isApprox(
+      mblock2.isApprox(
         new Vector([
           1
         ])
@@ -972,21 +972,21 @@ describe('MatrixBlock', function() {
   it('#isApprox() should return true if this is approximately equal to a row-vector', function() {
     mblock.isApprox.should.be.a.Function;
 
-    var block2 = MatrixBlock(mat, 0, 0, 1, 4);
-    block2.toString().should.equal("1 2 3 4");
+    var mblock2 = MatrixBlock(mat, 0, 0, 1, 4);
+    mblock2.toString().should.equal("1 2 3 4");
 
-    block2.diva(9);
-    block2.toString().should.equal("0.111111 0.222222 0.333333 0.444444");
+    mblock2.diva(9);
+    mblock2.toString().should.equal("0.111111 0.222222 0.333333 0.444444");
 
     var rvec = new RowVector([
       0.111, 0.222, 0.333, 0.444
     ]);
 
-    block2.isApprox(rvec, 1e-3).should.false;
-    block2.isApprox(rvec, 1e-2).should.true;
+    mblock2.isApprox(rvec, 1e-3).should.false;
+    mblock2.isApprox(rvec, 1e-2).should.true;
 
     (function() {
-      block2.isApprox(
+      mblock2.isApprox(
         new RowVector([
           1
         ])
