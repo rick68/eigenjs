@@ -19,15 +19,11 @@ EIGENJS_INSTANCE_METHOD(CMatrix, block,
   NanScope();
 
   if (args.Length() == 4) {
-    if (args[0]->IsNumber() &&
-        args[1]->IsNumber() &&
-        args[2]->IsNumber() &&
-        args[3]->IsNumber()
+    if (args[0]->IsNumber() /* startRow */ &&
+        args[1]->IsNumber() /* startCol */ &&
+        args[2]->IsNumber() /* blockRows */ &&
+        args[3]->IsNumber() /* blockCols */
     ) {
-      // const typename CMatrix::value_type::Index& startRow = args[0]->Int32Value();
-      // const typename CMatrix::value_type::Index& startCol = args[1]->Int32Value();
-      // const typename CMatrix::value_type::Index& blockRows = args[2]->Int32Value();
-      // const typename CMatrix::value_type::Index& blockCols = args[3]->Int32Value();
       v8::Local<v8::Value> argv[] = {
           args.This(), args[0], args[1], args[2], args[3] };
 
