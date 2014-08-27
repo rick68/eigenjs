@@ -192,7 +192,7 @@
           rhs_rowvector.template cast< typename Complex::value_type >();     \
                                                                              \
         NanReturnValue( instance );                                          \
-      } else if ( MatrixBlock::is_cmatrixblock( args[0] ) ) {                \
+      } else if ( MatrixBlock::is_matrixblock( args[0] ) ) {                \
         const MatrixBlock* const& rhs_obj =                                  \
             node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
         const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
