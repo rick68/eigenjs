@@ -2167,7 +2167,7 @@ var Eigen = require('eigenjs')
   , CM = Eigen.CMatrix
   , CMB = Eigen.CMatrixBlock
   , cmat = new CM.Zero(4, 4)
-  , cmblock = new MB(mat, 1, 1, 2, 2);
+  , cmblock = new CMB(cmat, 1, 1, 2, 2);
 cmblock.assign(new CM.Random(2, 2));
 console.log('cmat = \n%s', cmat);
 ```
