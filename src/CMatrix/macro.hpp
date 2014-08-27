@@ -44,14 +44,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_cmatrix;                                    \
                                                                              \
@@ -65,14 +65,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_cvector;                                    \
                                                                              \
@@ -86,16 +86,38 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value = value OP rhs_crowvector;                                 \
+                                                                             \
+        NanReturnValue(instance);                                            \
+      } else if ( CMatrixBlock::is_cmatrixblock( args[0] ) ) {               \
+        const CMatrixBlock* const& rhs_obj =                                 \
+            node::ObjectWrap::Unwrap<CMatrixBlock>( args[0]->ToObject() );   \
+        const typename CMatrixBlock::value_type& rhs_cmatrixblock =          \
+            **rhs_obj;                                                       \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value = value OP rhs_cmatrixblock;                                 \
                                                                              \
         NanReturnValue(instance);                                            \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
@@ -107,14 +129,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value =                                                          \
           value                                                              \
@@ -131,14 +153,14 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value =                                                          \
           value                                                              \
@@ -155,19 +177,43 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        v8::Local< v8::Object > instance = T::new_instance(                  \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
         , argv                                                               \
         );                                                                   \
                                                                              \
-        T* new_obj = node::ObjectWrap::Unwrap< T >( instance );              \
-        typename T::value_type& new_value = **new_obj;                       \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
                                                                              \
         new_value =                                                          \
           value                                                              \
             OP                                                               \
           rhs_rowvector.template cast< typename Complex::value_type >();     \
+                                                                             \
+        NanReturnValue( instance );                                          \
+      } else if ( MatrixBlock::is_cmatrixblock( args[0] ) ) {                \
+        const MatrixBlock* const& rhs_obj =                                  \
+            node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
+        const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
+                                                                             \
+        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value =                                                          \
+          value                                                              \
+            OP                                                               \
+          rhs_matrixblock.template cast< typename Complex::value_type >();   \
                                                                              \
         NanReturnValue( instance );                                          \
       }                                                                      \
