@@ -14,13 +14,11 @@
 
 #include "../CMatrixBlock_fwd.hpp"
 
-#include "instance_method_toString.hpp"
-
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   CMatrixBlock
-, (instance_method_toString)
+,
 );
 
 }  // namespace EigenJS
