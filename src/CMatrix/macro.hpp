@@ -268,6 +268,19 @@
         value BOOST_PP_CAT( OP, = ) rhs_crowvector;                          \
                                                                              \
         NanReturnValue( args.This() );                                       \
+      } else if ( CMatrixBlock::is_cmatrixblock( args[0] ) ) {                 \
+        const CMatrixBlock* const& rhs_obj =                                 \
+            node::ObjectWrap::Unwrap< CMatrixBlock >( args[0]->ToObject() ); \
+        const typename CMatrixBlock::value_type& rhs_cmatrixblock =          \
+             **rhs_obj;                                                      \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        value BOOST_PP_CAT( OP, = ) rhs_cmatrixblock;                          \
+                                                                             \
+        NanReturnValue( args.This() );                                       \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
         const Matrix* const& rhs_obj =                                       \
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
@@ -305,6 +318,19 @@
                                                                              \
         value BOOST_PP_CAT( OP, = )                                          \
             rhs_rowvector.template cast< typename Complex::value_type >();   \
+                                                                             \
+        NanReturnValue( args.This() );                                       \
+      } else if ( MatrixBlock::is_matrixblock( args[0] ) ) {                 \
+        const MatrixBlock* const& rhs_obj =                                  \
+            node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
+        const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        value BOOST_PP_CAT( OP, = )                                          \
+            rhs_matrixblock.template cast< typename Complex::value_type >(); \
                                                                              \
         NanReturnValue( args.This() );                                       \
       }                                                                      \
