@@ -43,7 +43,7 @@ describe('Matrix', function() {
       .set(2, 2, 9);
   });
 
-  it('#set() should throw message when row or column nubers are out of range', function() {
+  it('#set() should throw message when row or column numbers are out of range', function() {
     mat.set.should.be.a.Function;
 
     (function() {
