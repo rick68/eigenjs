@@ -107,8 +107,7 @@ class MatrixBlock
       const typename value_type::Index&& rows = startRow + blockRows - 1;
       const typename value_type::Index&& cols = startCol + blockCols - 1;
 
-      if (Matrix::is_out_of_range(rhs_matrix, rows, cols)
-      ) {
+      if (Matrix::is_out_of_range(rhs_matrix, rows, cols)) {
         NanReturnUndefined();
       }
 
@@ -122,7 +121,7 @@ class MatrixBlock
           NanReturnValue(args.This());
         } else {
           v8::Local<v8::Value> argv[] = {
-              args[0], args[1], args[2], args[3], args[4], args[5] };
+              args[0], args[1], args[2], args[3], args[4] };
           NanReturnValue(
             base_type::new_instance(
               args
