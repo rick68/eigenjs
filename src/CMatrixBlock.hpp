@@ -53,6 +53,7 @@ class CMatrixBlock
     tpl->SetClassName(NanNew(ClassName));
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
+    EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
     EIGENJS_OBJECT_INITIALIZE(CMatrixBlock, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
