@@ -220,7 +220,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.toString()](#cmattostring)
-* [Vector](#vector) **is inherits from Matrix**
+* [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
     * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalar_array)
@@ -228,7 +228,7 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
-* [CVector](#cvector) **is inherits from CMatrix**
+* [CVector](#cvector) **inherits from CMatrix**
   * [CVector Class Methods](#cvector-class-methods)
     * [CVector(rows)](#cvectorrows)
     * [CVector(comp_array)](#cvectorcomp_array)
@@ -236,7 +236,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#cvecgetrow)
-* [RowVector](#rowvector) **is inherits from Matrix**
+* [RowVector](#rowvector) **inherits from Matrix**
   * [RowVector Class Methods](#rowvector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
@@ -244,7 +244,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
-* [CRowVector](#crowvector) **is inherits from CMatrix**
+* [CRowVector](#crowvector) **inherits from CMatrix**
   * [CRowVector Class Methods](#crowvector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
     * [CRowVector(comp_array)](#crowvectorcomp_array)
@@ -252,7 +252,7 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
     * [crvec.get(col)](#crvecgetcol)
-* [MatrixBlock](#matrixblock) **is inherits from Matrix**
+* [MatrixBlock](#matrixblock) **inherits from Matrix**
   * [MatrixBlock Class Methods](#matrixblock-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
     * [MatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
