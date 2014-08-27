@@ -1670,7 +1670,7 @@ true
 ### cmat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
-var CM = require('eigenjs').Matrix
+var CM = require('eigenjs').CMatrix
   , cmat = new CM.Identity(4, 4)
   , cmblock = cmat.block(1, 1, 2, 2);
 cmblock.assign(CM.Random(2, 2));
