@@ -296,7 +296,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  7  9  8\n 9 15 18 12\n13 14 15 16");
   });
 
-  it('#adda() should return the sum of a matrix block and a matrix and saves it back', function() {
+  it('#adda() should return the sum of a matrix block and a matrix then saves it back', function() {
     mblock.adda.should.be.a.Function;
 
     mblock.toString().should.equal(" 6  7\n10 11");
@@ -330,7 +330,7 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it('#adda() should return the sum of a matrix block and a vector and saves it back', function() {
+  it('#adda() should return the sum of a matrix block and a vector then saves it back', function() {
     mblock.adda.should.be.a.Function;
 
     var mblock2 = new MatrixBlock(mat, 0, 2, 4, 1);
@@ -368,7 +368,7 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it('#adda() should return the sum of a matrix block and a row-vector and saves it back', function() {
+  it('#adda() should return the sum of a matrix block and a row-vector then saves it back', function() {
     mblock.adda.should.be.a.Function;
 
     var mblock2 = new MatrixBlock(mat, 2, 0, 1, 4);
@@ -439,19 +439,19 @@ describe('MatrixBlock', function() {
     var mblock2 = new MatrixBlock(mat, 0, 0, 4, 1);
     mblock2.toString().should.equal(" 1\n 5\n 9\n13");
 
-    var vec = mblock2.sub(new Vector([
+    var mat2 = mblock2.sub(new Vector([
       1,
       2,
       3,
       4
     ]));
-    vec.should.instanceOf(Matrix);
-    vec.toString().should.equal("0\n3\n6\n9");
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("0\n3\n6\n9");
 
     (function() {
-      mblock2.sub(new Matrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
+      mblock2.sub(new Vector(2).set([
+        1,
+        0
       ]));
     }).should.throw("Nonconformant arguments");
   });
@@ -462,16 +462,15 @@ describe('MatrixBlock', function() {
     var mblock2 = new MatrixBlock(mat, 0, 0, 1, 4);
     mblock2.toString().should.equal("1 2 3 4");
 
-    var rvec = mblock2.sub(new RowVector([
+    var mat2 = mblock2.sub(new RowVector([
       1, 2, 3, 4
     ]));
-    rvec.should.instanceOf(Matrix);
-    rvec.toString().should.equal("0 0 0 0");
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("0 0 0 0");
 
     (function() {
-      mblock2.sub(new Matrix(2, 3).set([
-        1, 0, 0,
-        0, 1, 0
+      mblock2.sub(new RowVector(2).set([
+        1, 0
       ]));
     }).should.throw("Nonconformant arguments");
   });
@@ -517,9 +516,9 @@ describe('MatrixBlock', function() {
 
     (function() {
       mblock2.sub(
-        CMatrix(2, 3).set([
-          1, 0, 0,
-          0, 1, 0
+        CVector(2).set([
+          1,
+          0
         ])
       );
     }).should.throw("Nonconformant arguments");
@@ -541,16 +540,14 @@ describe('MatrixBlock', function() {
 
     (function() {
       mblock2.sub(
-        CMatrix(3, 2).set([
-          1, 0,
-          0, 1,
-          0, 0
+        CRowVector(2).set([
+          1, 0
         ])
       );
     }).should.throw("Nonconformant arguments");
   });
 
-  it('#suba() should return the sum of two matrix blocks  and saves it back', function() {
+  it('#suba() should return the sum of two matrix blocks and saves it back', function() {
     mblock.suba.should.be.a.Function;
 
     mblock.toString().should.equal(" 6  7\n10 11");
@@ -612,6 +609,21 @@ describe('MatrixBlock', function() {
     mblock2.toString().should.equal("2\n4\n6\n8");
 
     mat.toString().should.equal(" 1  2  2  4\n 5  6  4  8\n 9 10  6 12\n13 14  8 16");
+  });
+
+  it('#suba() should return the difference of a matrix block and a row-vector then saves it back', function() {
+    mblock.suba.should.be.a.Function;
+
+    var mblock2 = MatrixBlock(mat, 3, 0, 1, 4);
+    mblock2.toString().should.equal("13 14 15 16");
+
+    var rvec = new RowVector([
+      1, 3, 5, 7
+    ]);
+    mblock2.suba(rvec);
+    mblock2.toString().should.equal("12 11 10  9");
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n12 11 10  9");
   });
 
   it('#mul() should return the product of two matrix blocks', function() {
@@ -882,11 +894,12 @@ describe('MatrixBlock', function() {
   it('#equals() should return true if a matrix block and a matrix are equal', function() {
     mblock.equals.should.be.a.Function;
 
-    var mat2 = new Matrix.Identity(4, 4);
-    var mblock2 = MatrixBlock(mat2, 0, 0, 2, 2);
-    var mblock3 = MatrixBlock(mat2, 2, 2, 2, 2);
+    var mat2 = new Matrix(2, 2).set([
+       6, 7,
+      10, 11
+    ]);
 
-    mblock2.equals(mblock3).should.ok;
+    mblock.equals(mat2).should.ok;
   });
 
   it('#equals() should return true if a matrix block and a vector are equal', function() {
@@ -1015,22 +1028,22 @@ describe('MatrixBlock', function() {
 
     MatrixBlock.Identity(0).toString().should.equal("");
 
-    mat = MatrixBlock.Identity(3);
-    mat.equals(new Matrix(3, 3).set([
+    mat2 = MatrixBlock.Identity(3);
+    mat2.equals(new Matrix(3, 3).set([
       1, 0, 0,
       0, 1, 0,
       0, 0, 1
     ])).should.true;
 
-    var mat2 = MatrixBlock.Identity(3, 4);
-    mat2.equals(new Matrix(3, 4).set([
+    var mat3 = MatrixBlock.Identity(3, 4);
+    mat3.equals(new Matrix(3, 4).set([
       1, 0, 0, 0,
       0, 1, 0, 0,
       0, 0, 1, 0
     ])).should.true;
 
     (function() {
-      mat.equals(mat2);
+      mat.equals(mat3);
     }).should.throw("Nonconformant arguments");
   });
 
