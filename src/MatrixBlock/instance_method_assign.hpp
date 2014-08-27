@@ -59,6 +59,18 @@ EIGENJS_INSTANCE_METHOD(MatrixBlock, assign,
       value = rhs_rowvector;
 
       NanReturnValue(args.This());
+    } else if (MatrixBlock::is_matrixblock(args[0])) {
+      const MatrixBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+      const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      value = rhs_matrixblock;
+
+      NanReturnValue(args.This());
     }
   }
 
