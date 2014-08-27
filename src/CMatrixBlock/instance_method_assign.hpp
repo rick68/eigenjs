@@ -47,7 +47,7 @@ EIGENJS_INSTANCE_METHOD(CMatrixBlock, assign,
       value = rhs_cvector;
 
       NanReturnValue(args.This());
-    } else if (CRowVector::is_rowvector(args[0])) {
+    } else if (CRowVector::is_crowvector(args[0])) {
       const CRowVector* const& rhs_obj =
         node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
       const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
