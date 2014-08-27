@@ -22,6 +22,8 @@ namespace EigenJS {
 EIGENJS_OBJECT_DEFINITIONS(
   CMatrixBlock
 , (instance_method_assign)
+
+  (instance_method_mula)
 );
 
 }  // namespace EigenJS
