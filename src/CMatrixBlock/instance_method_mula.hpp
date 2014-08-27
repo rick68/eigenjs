@@ -42,7 +42,7 @@ EIGENJS_INSTANCE_METHOD(CMatrixBlock, mula,
       NanReturnValue(args.This());
     } else if (CVector::is_cvector(args[0])) {
       const CVector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+        node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
