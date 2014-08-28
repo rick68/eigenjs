@@ -34,6 +34,10 @@
 #include "CRowVector_fwd.hpp"
 #include "MatrixBlock_fwd.hpp"
 #include "CMatrixBlock_fwd.hpp"
+#include "VectorBlock_fwd.hpp"
+#include "CVectorBlock_fwd.hpp"
+#include "RowVectorBlock_fwd.hpp"
+#include "CRowVectorBlock_fwd.hpp"
 
 #include "detail/unwrap_eigen_block.hpp"
 #include "detail/is_eigen_block.hpp"
@@ -124,6 +128,22 @@ struct base : node::ObjectWrap {
 
   static NAN_INLINE bool is_cmatrixblock(const v8::Handle<v8::Value>& arg) {
     return CMatrixBlock<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_vectorblock(const v8::Handle<v8::Value>& arg) {
+    return VectorBlock<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_cvectorblock(const v8::Handle<v8::Value>& arg) {
+    return CVectorBlock<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_rowvectorblock(const v8::Handle<v8::Value>& arg) {
+    return RowVectorBlock<scalar_type>::base_type::has_instance(arg);
+  }
+
+  static NAN_INLINE bool is_crowvectorblock(const v8::Handle<v8::Value>& arg) {
+    return CRowVectorBlock<scalar_type>::base_type::has_instance(arg);
   }
 
   static NAN_INLINE bool has_instance(const v8::Handle<v8::Value>& value) {
