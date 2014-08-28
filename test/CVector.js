@@ -5,6 +5,7 @@ const
     CMatrix = Eigen.CMatrix,
     CVector = Eigen.CVector,
     Complex = Eigen.Complex,
+    CVectorBlock = Eigen.CVectorBlock,
     should = require('should');
 
 describe('CVector', function() {
@@ -683,5 +684,18 @@ describe('CVector', function() {
     cvec3.rows().should.equal(3);
     cvec3.cols().should.equal(1);
 
+  });
+
+  it("#block() should return a complex vector block", function() {
+    var cvblock = cvec.block(2, 2);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(3,3)\n(4,4)");
+
+    cvblock.assign(CVector([
+      -1,
+      -2
+    ]));
+
+    cvec.toString().should.equal(" (1,1)\n (2,2)\n(-1,0)\n(-2,0)\n (5,5)\n (6,6)");
   });
 });

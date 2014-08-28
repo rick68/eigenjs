@@ -5,6 +5,7 @@ const
     Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
     CVector = Eigen.CVector,
+    CMatrixBlock = Eigen.CMatrixBlock,
     should = require('should');
 
 describe('CMatrix', function() {
@@ -542,5 +543,18 @@ describe('CMatrix', function() {
     var cmat3 = CMatrix.Random(3, 4);
     cmat3.rows().should.equal(3);
     cmat3.cols().should.equal(4);
+  });
+
+  it("#block() should return a complex matrix block", function() {
+    var cmblock = cmat.block(0, 0, 2, 2);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(1,1) (2,2)\n(4,4) (5,5)");
+
+    cmblock.assign(CMatrix(2, 2).set([
+      -1, -2,
+      -3, -4
+    ]));
+
+    cmat.toString().should.equal("(-1,0) (-2,0)  (3,3)\n(-3,0) (-4,0)  (6,6)\n (7,7)  (8,8)  (9,9)");
   });
 });

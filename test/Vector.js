@@ -4,6 +4,7 @@ const
     Matrix = Eigen.Matrix,
     CMatrix = Eigen.CMatrix,
     Complex = Eigen.Complex,
+    VectorBlock = Eigen.VectorBlock,
     should = require('should');
 
 describe('Vector', function() {
@@ -576,5 +577,18 @@ describe('Vector', function() {
     vec3.rows().should.equal(3);
     vec3.cols().should.equal(1);
 
+  });
+
+  it("#block() should return a vector block", function() {
+    var vblock = vec.block(2, 2);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("3\n4");
+
+    vblock.assign(Vector([
+      -1,
+      -2
+    ]));
+
+    vec.toString().should.equal(" 1\n 2\n-1\n-2\n 5\n 6");
   });
 });

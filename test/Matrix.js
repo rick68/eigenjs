@@ -4,6 +4,7 @@ const
     Matrix = Eigen.Matrix,
     Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
+    MatrixBlock = Eigen.MatrixBlock,
     should = require('should');
 
 describe('Matrix', function() {
@@ -465,5 +466,18 @@ describe('Matrix', function() {
     var mat3 = Matrix.Random(3, 4);
     mat3.rows().should.equal(3);
     mat3.cols().should.equal(4);
+  });
+
+  it("#block() should return a matrix block", function() {
+    var mblock = mat.block(0, 0, 2, 2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("1 2\n4 5");
+
+    mblock.assign(Matrix(2, 2).set([
+      -1, -2,
+      -3, -4
+    ]));
+
+    mat.toString().should.equal("-1 -2  3\n-3 -4  6\n 7  8  9");
   });
 });
