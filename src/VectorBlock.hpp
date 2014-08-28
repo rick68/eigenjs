@@ -55,6 +55,7 @@ class VectorBlock
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(MatrixBlock, tpl)
     EIGENJS_OBJECT_INITIALIZE(Vector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
