@@ -19,6 +19,8 @@
 
 #include "instance_method_mula.hpp"
 
+#include "instance_method_block.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
@@ -27,6 +29,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_get)
 
   (instance_method_mula)
+
+  (instance_method_block)
 );
 
 }  // namespace EigenJS
