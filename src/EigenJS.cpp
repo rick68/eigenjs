@@ -25,6 +25,12 @@
 #include "MatrixBlock.hpp"
 #include "CMatrixBlock.hpp"
 
+#include "VectorBlock.hpp"
+#include "CVectorBlock.hpp"
+
+#include "RowVectorBlock.hpp"
+#include "CRowVectorBlock.hpp"
+
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
@@ -32,6 +38,7 @@ void Init(v8::Handle<v8::Object> exports) {
   std::rand();
 
   Complex<>::Init(exports);
+
   Matrix<>::Init(exports);
   CMatrix<>::Init(exports);
 
@@ -43,6 +50,12 @@ void Init(v8::Handle<v8::Object> exports) {
 
   MatrixBlock<>::Init(exports);
   CMatrixBlock<>::Init(exports);
+
+  VectorBlock<>::Init(exports);
+  CVectorBlock<>::Init(exports);
+
+  RowVectorBlock<>::Init(exports);
+  CRowVectorBlock<>::Init(exports);
 }
 
 }  // namespace EigenJS

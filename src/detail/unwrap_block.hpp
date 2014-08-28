@@ -26,6 +26,10 @@
 #include "../CRowVector_fwd.hpp"
 #include "../MatrixBlock_fwd.hpp"
 #include "../CMatrixBlock_fwd.hpp"
+#include "../VectorBlock_fwd.hpp"
+#include "../CVectorBlock_fwd.hpp"
+#include "../RowVectorBlock_fwd.hpp"
+#include "../CRowVectorBlock_fwd.hpp"
 
 namespace EigenJS {
 namespace detail {
@@ -70,6 +74,82 @@ struct unwrap_block<
   typedef typename std::enable_if<
       is_eigen_matrix<XprType>::value
     , CMatrix<ScalarType, XprType>
+    >::type type;
+};
+
+template<
+  typename ScalarType
+, typename XprType
+, int BlockRows
+, int BlockCols
+, bool InnerPanel
+>
+struct unwrap_block<
+  VectorBlock<
+    ScalarType
+  , Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
+  >
+> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<XprType>::value
+    , Vector<ScalarType, XprType>
+    >::type type;
+};
+
+template<
+  typename ScalarType
+, typename XprType
+, int BlockRows
+, int BlockCols
+, bool InnerPanel
+>
+struct unwrap_block<
+  CVectorBlock<
+    ScalarType
+  , Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
+  >
+> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<XprType>::value
+    , CVector<ScalarType, XprType>
+    >::type type;
+};
+
+template<
+  typename ScalarType
+, typename XprType
+, int BlockRows
+, int BlockCols
+, bool InnerPanel
+>
+struct unwrap_block<
+  RowVectorBlock<
+    ScalarType
+  , Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
+  >
+> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<XprType>::value
+    , RowVector<ScalarType, XprType>
+    >::type type;
+};
+
+template<
+  typename ScalarType
+, typename XprType
+, int BlockRows
+, int BlockCols
+, bool InnerPanel
+>
+struct unwrap_block<
+  CRowVectorBlock<
+    ScalarType
+  , Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>
+  >
+> {
+  typedef typename std::enable_if<
+      is_eigen_matrix<XprType>::value
+    , CRowVector<ScalarType, XprType>
     >::type type;
 };
 
