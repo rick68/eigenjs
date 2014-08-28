@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "mocha": "^1.21.4",
-    "node-gyp": "^0.13.1",
     "should": "^4.0.4"
   },
   "licenses": [
