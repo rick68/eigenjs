@@ -82,7 +82,7 @@ class VectorBlock
   static NAN_METHOD(New) {
     NanScope();
 
-    if (args.Length() < 3) {
+    if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
           "Vector, startRow and blockRows arguments");

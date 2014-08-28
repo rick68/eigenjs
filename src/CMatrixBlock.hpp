@@ -82,7 +82,7 @@ class CMatrixBlock
   static NAN_METHOD(New) {
     NanScope();
 
-    if (args.Length() < 5) {
+    if (args.Length() != 5) {
       NanThrowError(
           "Tried creating a complex block without "
           "Matrix, startRow, startCol, blockRows and blockCols arguments");

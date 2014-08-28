@@ -81,7 +81,7 @@ class CVectorBlock
   static NAN_METHOD(New) {
     NanScope();
 
-    if (args.Length() < 3) {
+    if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
           "CVector, startRow and blockRows arguments");
