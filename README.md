@@ -115,18 +115,22 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
     * [mat.add(rvec)](#mataddrvec)
+    * [mat.add(mblock)](#mataddmblock)
     * [mat.add(cmat)](#mataddcmat)
     * [mat.add(cvec)](#mataddcvec)
     * [mat.add(crvec)](#mataddcrvec)
+    * [mat.add(cmblock)](#mataddcmblock)
     * [mat.adda(mat)](#mataddamat)
     * [mat.adda(vec)](#mataddavec)
     * [mat.adda(rvec)](#mataddarvec)
     * [mat.sub(mat)](#matsubmat)
     * [mat.sub(vec)](#matsubvec)
     * [mat.sub(rvec)](#matsubrvec)
+    * [mat.sub(mblock)](#matsubmblock)
     * [mat.sub(cmat)](#matsubcmat)
     * [mat.sub(cvec)](#matsubcvec)
     * [mat.sub(crvec)](#matsubcrvec)
+    * [mat.sub(cmblock)](#matsubcmblock)
     * [mat.suba(mat)](#matsubamat)
     * [mat.suba(vec)](#matsubavec)
     * [mat.suba(rvec)](#matsubarvec)
@@ -135,9 +139,11 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.mul(mat)](#matmulmat)
     * [mat.mul(vec)](#matmulvec)
     * [mat.mul(rvec)](#matmulrvec)
+    * [mat.mul(mblock)](#matmulmblock)
     * [mat.mul(cmat)](#matmulcmat)
     * [mat.mul(cvec)](#matmulcvec)
     * [mat.mul(crvec)](#matmulcrvec)
+    * [mat.mul(cmblock)](#matmulcmblock)
     * [mat.mula(scalar)](#matmulascalar)
     * [mat.mula(mat)](#matmulamat)
     * [mat.mula(vec)](#matmulavec)
@@ -148,6 +154,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
+    * [mat.equals(mblock)](#matequalsmblock)
     * [mat.isApprox(mat, [prec = 1e-12])](#matisapproxmat-prec--1e-12)
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
@@ -171,43 +178,55 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
     * [cmat.add(rvec)](#cmataddrvec)
+    * [cmat.add(mblock)](#cmataddmblock)
     * [cmat.add(cmat)](#cmataddcmat)
     * [cmat.add(cvec)](#cmataddcvec)
     * [cmat.add(crvec)](#cmataddcrvec)
+    * [cmat.add(cmblock)](#cmataddcmblock)
     * [cmat.adda(mat)](#cmataddamat)
     * [cmat.adda(vec)](#cmataddavec)
     * [cmat.adda(rvec)](#cmataddarvec)
+    * [cmat.adda(mblock)](#cmataddamblock)
     * [cmat.adda(cmat)](#cmataddacmat)
     * [cmat.adda(cvec)](#cmataddacvec)
     * [cmat.adda(crvec)](#cmataddacrvec)
+    * [cmat.adda(cmblock)](#cmataddacmblock)
     * [cmat.sub(mat)](#cmatsubmat)
     * [cmat.sub(vec)](#cmatsubvec)
     * [cmat.sub(rvec)](#cmatsubrvec)
+    * [cmat.sub(mblock)](#cmatsubmblock)
     * [cmat.sub(cmat)](#cmatsubcmat)
     * [cmat.sub(cvec)](#cmatsubcvec)
     * [cmat.sub(crvec)](#cmatsubcrvec)
+    * [cmat.sub(cmblock)](#cmatsubcmblock)
     * [cmat.suba(mat)](#cmatsubamat)
     * [cmat.suba(vec)](#cmatsubavec)
     * [cmat.suba(rvec)](#cmatsubarvec)
+    * [cmat.suba(mblock)](#cmatsubamblock)
     * [cmat.suba(cmat)](#cmatsubacmat)
     * [cmat.suba(cvec)](#cmatsubacvec)
     * [cmat.suba(crvec)](#cmatsubacrvec)
+    * [cmat.suba(cmblock)](#cmatsubacmblock)
     * [cmat.mul(scalar)](#cmatmulscalar)
     * [cmat.mul(comp)](#cmatmulcomp)
     * [cmat.mul(mat)](#cmatmulmat)
     * [cmat.mul(vec)](#cmatmulvec)
     * [cmat.mul(rvec)](#cmatmulrvec)
+    * [cmat.mul(mblock)](#cmatmulmblock)
     * [cmat.mul(cmat)](#cmatmulcmat)
     * [cmat.mul(cvec)](#cmatmulcvec)
     * [cmat.mul(crvec)](#cmatmulcrvec)
+    * [cmat.mul(cmblock)](#cmatmulcmblock)
     * [cmat.mula(scalar)](#cmatmulascalar)
     * [cmat.mula(comp)](#cmatmulacomp)
     * [cmat.mula(mat)](#cmatmulamat)
     * [cmat.mula(vec)](#cmatmulavec)
     * [cmat.mula(rvec)](#cmatmularvec)
+    * [cmat.mula(mblock)](#cmatmulamblock)
     * [cmat.mula(cmat)](#cmatmulacmat)
     * [cmat.mula(cvec)](#cmatmulacvec)
     * [cmat.mula(crvec)](#cmatmulacrvec)
+    * [cmat.mula(cmblock)](#cmatmulacmblock)
     * [cmat.div(scalar)](#cmatdivscalar)
     * [cmat.div(comp)](#cmatdivcomp)
     * [cmat.diva(scalar)](#cmatdivascalar)
@@ -215,9 +234,11 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
+    * [cmat.equals(cmblock)](#cmatequalscmblock)
     * [cmat.isApprox(cmat, [prec = 1e-12])](#cmatisapproxcmat-prec--1e-12)
     * [cmat.isApprox(cvec, [prec = 1e-12])](#cmatisapproxcvec-prec--1e-12)
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
+    * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **inherits from Matrix**
@@ -261,6 +282,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mblock.assign(mat)](#mblockassignmat)
     * [mblock.assign(vec)](#mblockassignvec)
     * [mblock.assign(rvec)](#mblockassignrvec)
+    * [mblock.assign(mblock)](#mblockassignmblock)
 * [CMatrixBlock](#cmatrixblock) **inherits from CMatrix**
   * [CMatrixBlock Class Methods](#cmatrixblock-class-methods)
     * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
@@ -273,9 +295,11 @@ $ npm install eigenjs --msvs_version=2012
     * [cmblock.assign(mat)](#cmblockassignmat)
     * [cmblock.assign(vec)](#cmblockassignvec)
     * [cmblock.assign(rvec)](#cmblockassignrvec)
+    * [cmblock.assign(mblock)](#cmblockassignmblock)
     * [cmblock.assign(cmat)](#cmblockassigncmat)
     * [cmblock.assign(cvec)](#cmblockassigncvec)
     * [cmblock.assign(crvec)](#cmblockassigncrvec)
+    * [cmblock.assign(cmblock)](#cmblockassigncmblock)
 
 ## Complex
 
@@ -936,9 +960,11 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 #### mat.add(mat)
 #### mat.add(vec)
 #### mat.add(rvec)
+#### mat.add(mblock)
 #### mat.add(cmat)
 #### mat.add(cvec)
 #### mat.add(crvec)
+#### mat.add(cmblock)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -992,9 +1018,11 @@ mat1 =
 #### mat.sub(mat)
 #### mat.sub(vec)
 #### mat.sub(rvec)
+#### mat.sub(mblock)
 #### mat.sub(cmat)
 #### mat.sub(cvet)
 #### mat.sub(crvet)
+#### mat.sub(cmblock)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1050,9 +1078,11 @@ mat1 =
 #### mat.mul(mat)
 #### mat.mul(vec)
 #### mat.mul(rvec)
+#### mat.mul(mblock)
 #### mat.mul(cmat)
 #### mat.mul(cvec)
 #### mat.mul(crvec)
+#### mat.mul(cmblock)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1149,6 +1179,7 @@ mat =
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
+#### mat.equals(mblock)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1177,6 +1208,7 @@ true
 #### mat.isApprox(mat, [prec = 1e-12])
 #### mat.isApprox(vec, [prec = 1e-12])
 #### mat.isApprox(rvec, [prec = 1e-12])
+#### mat.isApprox(mblock, [prec = 1e-12])
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1381,9 +1413,11 @@ console.log(cmat.get(1, 0) + ' ' + cmat.get(1, 1));
 #### cmat.add(mat)
 #### cmat.add(vec)
 #### cmat.add(rvec)
+#### cmat.add(mblock)
 #### cmat.add(cmat)
 #### cmat.add(cvec)
 #### cmat.add(crvec)
+#### cmat.add(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1412,8 +1446,12 @@ cmat3 =
 
 #### cmat.adda(mat)
 #### cmat.adda(vec)
+#### cmat.adda(rvec)
+#### cmat.adda(mblock)
 #### cmat.adda(cmat)
 #### cmat.adda(cvec)
+#### cmat.adda(crvec)
+#### cmat.adda(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1442,9 +1480,11 @@ cmat1 =
 #### cmat.sub(mat)
 #### cmat.sub(vec)
 #### cmat.sub(rvec)
+#### cmat.sub(mblock)
 #### cmat.sub(cmat)
 #### cmat.sub(cvec)
 #### cmat.sub(crvec)
+#### cmat.sub(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1474,9 +1514,11 @@ cmat3 =
 #### cmat.suba(mat)
 #### cmat.suba(vec)
 #### cmat.suba(rvec)
+#### cmat.suba(mblock)
 #### cmat.suba(cmat)
 #### cmat.suba(cvec)
 #### cmat.suba(crvec)
+#### cmat.suba(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1507,9 +1549,11 @@ mat1 =
 #### cmat.mul(mat)
 #### cmat.mul(vec)
 #### cmat.mul(rvec)
+#### cmat.mul(mblock)
 #### cmat.mul(cmat)
 #### cmat.mul(cvec)
 #### cmat.mul(crvec)
+#### cmat.mul(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1543,9 +1587,11 @@ mat2 =
 #### cmat.mula(mat)
 #### cmat.mula(vec)
 #### cmat.mula(rvec)
+#### cmat.mula(mblock)
 #### cmat.mula(cmat)
 #### cmat.mula(cvec)
 #### cmat.mula(crvec)
+#### cmat.mula(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1615,6 +1661,7 @@ cmat =
 #### cmat.equals(cmat)
 #### cmat.equals(cvec)
 #### cmat.equals(crvec)
+#### cmat.equals(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1645,6 +1692,7 @@ true
 #### cmat.isApprox(cmat, [prec = 1e-12])
 #### cmat.isApprox(cvec, [prec = 1e-12])
 #### cmat.isApprox(crvec, [prec = 1e-12])
+#### cmat.isApprox(cmblock, [prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
@@ -2102,6 +2150,7 @@ mblock =
 #### mblock.assign(mat)
 #### mblock.assign(vec)
 #### mblock.assign(rvec)
+#### mblock.assign(mblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2158,9 +2207,11 @@ cmblock =
 #### cmblock.assign(mat)
 #### cmblock.assign(vec)
 #### cmblock.assign(rvec)
+#### cmblock.assign(mblock)
 #### cmblock.assign(cmat)
 #### cmblock.assign(cvec)
 #### cmblock.assign(crvec)
+#### cmblock.assign(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
