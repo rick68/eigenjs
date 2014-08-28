@@ -16,8 +16,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Vector, set,
 {
-  Vector* obj = node::ObjectWrap::Unwrap<Vector>(args.This());
-  typename Vector::value_type& vector = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& value = **obj;
   const int& args_length = args.Length();
 
   NanScope();
@@ -25,7 +25,7 @@ EIGENJS_INSTANCE_METHOD(Vector, set,
   if (args_length == 1 && args[0]->IsArray()) {
     const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename Vector::value_type::Index& rows = vector.rows();
+    const typename T::value_type::Index& rows = value.rows();
 
     if (len != rows) {
       len < rows
@@ -36,20 +36,20 @@ EIGENJS_INSTANCE_METHOD(Vector, set,
 
     for (uint32_t i = 0; i < len; ++i) {
       v8::Local<v8::Value> elem = array->Get(i);
-      vector(i, 0) = elem->NumberValue();
+      value(i, 0) = elem->NumberValue();
     }
   } else if (args_length == 2 &&
              args[0]->IsNumber() &&
-             Vector::is_scalar(args[1])
+             T::is_scalar(args[1])
   ) {
-    const typename Vector::value_type::Index& row = args[0]->Int32Value();
-    const typename Vector::scalar_type& value = args[1]->NumberValue();
+    const typename T::value_type::Index& row = args[0]->Int32Value();
+    const typename T::scalar_type& elem_value = args[1]->NumberValue();
 
-    if (Vector::is_out_of_range(vector, row, 0)) {
+    if (T::is_out_of_range(value, row, 0)) {
       NanReturnUndefined();
     }
 
-    vector(row, 0) = value;
+    value(row, 0) = elem_value;
   } else if (true) {
     EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
     NanReturnUndefined();
