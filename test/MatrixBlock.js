@@ -115,7 +115,7 @@ describe('MatrixBlock', function() {
     mblock.toString().should.equal(" 6  7\n10 11");
   });
 
-  it('#assign() should return the sum of two matrix blocks', function() {
+  it('#assign() should assign a matrix blocks in another', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -128,7 +128,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  1  2  8\n 9  5  1 12\n13 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a matrix', function() {
+  it('#assign() should assign a matrix block in a matrix', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -137,7 +137,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  0  0  8\n 9  0  0 12\n13 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a vector', function() {
+  it('#assign() should assign a matrix block in a vector', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -149,7 +149,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 0  2  3  4\n 0  6  7  8\n 0 10 11 12\n 0 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a row-vector', function() {
+  it('#assign() should assign a matrix block in a row-vector', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
