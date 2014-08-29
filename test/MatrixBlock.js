@@ -479,7 +479,7 @@ describe('MatrixBlock', function() {
     mblock.sub.should.be.a.Function;
 
     var cmat = CMatrix(2, 2).set([
-      Complex(2, 0), Complex(4, 1), 
+      Complex(2, 0), Complex(4, 1),
       Complex(6, 2), Complex(8, 4)
     ]);
 
@@ -505,7 +505,7 @@ describe('MatrixBlock', function() {
 
     var cvec = CVector([
       Complex(2, 0),
-      Complex(4, 1), 
+      Complex(4, 1),
       Complex(6, 2),
       Complex(8, 4)
     ]);
