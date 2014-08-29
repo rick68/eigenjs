@@ -132,6 +132,28 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
       new_cmatrix = value * rhs_cvectorblock;
 
       NanReturnValue(instance);
+    } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
+      const CRowVectorBlock* rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix = value * rhs_crowvectorblock;
+
+      NanReturnValue(instance);
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
@@ -243,6 +265,31 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mul,
           value
             *
           rhs_vectorblock.template cast<typename Complex::value_type>();
+
+      NanReturnValue(instance);
+    } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+      const RowVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+      const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix =
+          value
+            *
+          rhs_rowvectorblock.template cast<typename Complex::value_type>();
 
       NanReturnValue(instance);
     } else if (T::is_scalar(args[0])) {
