@@ -24,8 +24,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
     const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
     const typename T::value_type& value = **obj;
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Integer>(0)
-    , NanNew<v8::Integer>(0)
+      NanNew<v8::Integer>(0) /* rows */
+    , NanNew<v8::Integer>(0) /* cols */
     };
 
     if (Matrix::is_matrix(args[0])) {
@@ -111,6 +111,27 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
 
       new_matrix = value;
       new_matrix *= rhs_matrixblock;
+
+      NanReturnValue(instance);
+    } else if (VectorBlock::is_vectorblock(args[0])) {
+      const VectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+      const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = Matrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
+      typename Matrix::value_type& new_matrix = **new_obj;
+
+      new_matrix = value * rhs_vectorblock;
 
       NanReturnValue(instance);
     } else if (CMatrix::is_cmatrix(args[0])) {
@@ -199,6 +220,30 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
 
       new_cmatrix = value.template cast<typename Complex::value_type>();
       new_cmatrix *= rhs_cmatrixblock;
+
+      NanReturnValue(instance);
+    } else if (CVectorBlock::is_cvectorblock(args[0])) {
+      const CVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+      const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      v8::Local<v8::Object> instance = CMatrix::new_instance(
+        args
+      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+      , argv
+      );
+
+      CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+      typename CMatrix::value_type& new_cmatrix = **new_obj;
+
+      new_cmatrix =
+          value.template cast<typename Complex::value_type>()
+            *
+          rhs_cvectorblock;
 
       NanReturnValue(instance);
     } else if (T::is_scalar(args[0])) {
