@@ -62,6 +62,27 @@ EIGENJS_INSTANCE_METHOD(CMatrix, equals,
       }
 
       NanReturnValue(NanNew<v8::Boolean>(value == rhs_cmatrixblock));
+    } else if (CVectorBlock::is_cvectorblock(args[0])) {
+      const CVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+      const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_cvectorblock));
+    } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
+      const CRowVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+          **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_crowvectorblock));
     }
   }
 
