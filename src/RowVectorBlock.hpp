@@ -22,6 +22,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Matrix.hpp"
+#include "MatrixBlock.hpp"
 #include "RowVector.hpp"
 #include "RowVectorBlock_fwd.hpp"
 #include "RowVectorBlock/definitions.hpp"
@@ -55,6 +56,7 @@ class RowVectorBlock
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     EIGENJS_OBJECT_INITIALIZE(Matrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(MatrixBlock, tpl)
     EIGENJS_OBJECT_INITIALIZE(RowVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
