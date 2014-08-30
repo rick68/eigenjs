@@ -795,7 +795,7 @@ describe('MatrixBlock', function() {
       mblock.mula(new Vector([
         -1,
         -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
@@ -814,7 +814,7 @@ describe('MatrixBlock', function() {
       mblock.mula(new Vector([
         -1,
         -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
@@ -832,7 +832,7 @@ describe('MatrixBlock', function() {
     (function() {
       mblock2.mula(new RowVector([
         -1, -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
