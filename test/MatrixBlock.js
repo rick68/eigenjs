@@ -1028,7 +1028,7 @@ describe('MatrixBlock', function() {
 
     MatrixBlock.Identity(0).toString().should.equal("");
 
-    mat2 = MatrixBlock.Identity(3);
+    var mat2 = MatrixBlock.Identity(3);
     mat2.equals(new Matrix(3, 3).set([
       1, 0, 0,
       0, 1, 0,
