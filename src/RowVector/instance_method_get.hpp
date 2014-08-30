@@ -21,16 +21,15 @@ EIGENJS_INSTANCE_METHOD(RowVector, get,
   if (args.Length() == 1 &&
       args[0]->IsNumber()
   ) {
-    const RowVector* const& obj =
-        node::ObjectWrap::Unwrap<RowVector>(args.This());
-    const typename RowVector::value_type& rowvector = **obj;
-    const typename RowVector::value_type::Index& col = args[0]->Int32Value();
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& rowvector = **obj;
+    const typename T::value_type::Index& col = args[0]->Int32Value();
 
-    if (RowVector::is_out_of_range(rowvector, 0, col)) {
+    if (T::is_out_of_range(rowvector, 0, col)) {
       NanReturnUndefined();
     }
 
-    const typename RowVector::scalar_type& value = rowvector(0, col);
+    const typename T::scalar_type& value = rowvector(0, col);
     NanReturnValue(NanNew(value));
   }
 
