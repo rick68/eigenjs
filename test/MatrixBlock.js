@@ -868,17 +868,17 @@ describe('MatrixBlock', function() {
   it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
     mblock.diva.should.be.a.Function;
 
-    mblock.diva(0);
+    mblock.diva(2);
     mblock.equals(
       new Matrix(2, 2)
       .set([
-        Infinity, Infinity,
-        Infinity, Infinity
+        3, 3.5,
+        5, 5.5
       ])
     ).should.ok;
-    mblock.get(0, 0).should.be.a.Infinity;
+    mblock.get(0, 0).should.equal(3);
 
-    mat.toString().should.equal("  1   2   3   4\n  5 inf inf   8\n  9 inf inf  12\n 13  14  15  16");
+    mat.toString().should.equal("  1   2   3   4\n  5   3 3.5   8\n  9   5 5.5  12\n 13  14  15  16");
   });
 
   it('#equals() should return true if two matrix block are equal', function() {
