@@ -22,6 +22,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "Matrix.hpp"
+#include "MatrixBlock.hpp"
 #include "Vector.hpp"
 #include "VectorBlock_fwd.hpp"
 #include "VectorBlock/definitions.hpp"
