@@ -170,7 +170,7 @@
             node::ObjectWrap::Unwrap< Matrix >( args[0]->ToObject() );       \
         const typename Matrix::value_type& rhs_matrix = **rhs_obj;           \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -194,7 +194,7 @@
             node::ObjectWrap::Unwrap< Vector >( args[0]->ToObject() );       \
         const typename Vector::value_type& rhs_vector = **rhs_obj;           \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -218,7 +218,7 @@
             node::ObjectWrap::Unwrap< RowVector >( args[0]->ToObject() );    \
         const typename RowVector::value_type& rhs_rowvector = **rhs_obj;     \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -242,7 +242,7 @@
             node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
         const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -266,7 +266,7 @@
             node::ObjectWrap::Unwrap< VectorBlock >( args[0]->ToObject() );  \
         const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj; \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -292,7 +292,7 @@
         const typename RowVectorBlock::value_type& rhs_rowvectorblock =      \
             **rhs_obj;                                                       \
                                                                              \
-        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
