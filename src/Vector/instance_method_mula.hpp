@@ -48,6 +48,11 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
+      if (rhs_vector.cols() != 1) {
+        NanThrowError("The vector size must be 1x1");
+        NanReturnUndefined();
+      }
+
       value *= rhs_vector;
 
       NanReturnValue(args.This());
@@ -57,6 +62,15 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvector.rows() != 1 ||
+          rhs_rowvector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
@@ -84,6 +98,11 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
+      if (rhs_vectorblock.cols() != 1) {
+        NanThrowError("The vector block size must be 1x1");
+        NanReturnUndefined();
+      }
+
       value *= rhs_vectorblock;
 
       NanReturnValue(args.This());
@@ -94,6 +113,15 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
           **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvectorblock.rows() != 1 ||
+          rhs_rowvectorblock.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
