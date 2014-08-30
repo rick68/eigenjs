@@ -86,6 +86,11 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
         NanReturnUndefined();
       }
 
+      if (rhs_matrixblock.cols() != 1) {
+        NanThrowError("The matrix block size must be 1x1");
+        NanReturnUndefined();
+      }
+
       value *= typename Matrix::value_type(rhs_matrixblock);
 
       NanReturnValue(args.This());
