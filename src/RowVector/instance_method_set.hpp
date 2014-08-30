@@ -16,8 +16,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(RowVector, set,
 {
-  RowVector* obj = node::ObjectWrap::Unwrap<RowVector>(args.This());
-  typename RowVector::value_type& rowvector = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& value = **obj;
   const int& args_length = args.Length();
 
   NanScope();
@@ -25,7 +25,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, set,
   if (args_length == 1 && args[0]->IsArray()) {
     const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename RowVector::value_type::Index& cols = rowvector.cols();
+    const typename T::value_type::Index& cols = value.cols();
 
     if (len != cols) {
       len < cols
@@ -36,20 +36,20 @@ EIGENJS_INSTANCE_METHOD(RowVector, set,
 
     for (uint32_t i = 0; i < len; ++i) {
       v8::Local<v8::Value> elem = array->Get(i);
-      rowvector(0, i) = elem->NumberValue();
+      value(0, i) = elem->NumberValue();
     }
   } else if (args_length == 2 &&
              args[0]->IsNumber() &&
-             RowVector::is_scalar(args[1])
+             T::is_scalar(args[1])
   ) {
-    const typename RowVector::value_type::Index& col = args[0]->Int32Value();
-    const typename RowVector::scalar_type& elem_value = args[1]->NumberValue();
+    const typename T::value_type::Index& col = args[0]->Int32Value();
+    const typename T::scalar_type& elem_value = args[1]->NumberValue();
 
-    if (RowVector::is_out_of_range(rowvector, 0, col)) {
+    if (T::is_out_of_range(value, 0, col)) {
       NanReturnUndefined();
     }
 
-    rowvector(0, col) = elem_value;
+    value(0, col) = elem_value;
   } else if (true) {
     EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
     NanReturnUndefined();
