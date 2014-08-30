@@ -117,7 +117,52 @@
         U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
         typename U::value_type& new_value = **new_obj;                       \
                                                                              \
-        new_value = value OP rhs_cmatrixblock;                                 \
+        new_value = value OP rhs_cmatrixblock;                               \
+                                                                             \
+        NanReturnValue(instance);                                            \
+      } else if ( CVectorBlock::is_cvectorblock( args[0] ) ) {               \
+        const CVectorBlock* const& rhs_obj =                                 \
+            node::ObjectWrap::Unwrap<CVectorBlock>( args[0]->ToObject() );   \
+        const typename CVectorBlock::value_type& rhs_cvectorblock =          \
+            **rhs_obj;                                                       \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value = value OP rhs_cvectorblock;                               \
+                                                                             \
+        NanReturnValue(instance);                                            \
+      } else if ( CRowVectorBlock::is_crowvectorblock( args[0] ) ) {         \
+        const CRowVectorBlock* const& rhs_obj =                              \
+            node::ObjectWrap::Unwrap<CRowVectorBlock>                        \
+                ( args[0]->ToObject() );                                     \
+        const typename CRowVectorBlock::value_type& rhs_crowvectorblock =    \
+            **rhs_obj;                                                       \
+                                                                             \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value = value OP rhs_crowvectorblock;                            \
                                                                              \
         NanReturnValue(instance);                                            \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
@@ -192,7 +237,7 @@
           rhs_rowvector.template cast< typename Complex::value_type >();     \
                                                                              \
         NanReturnValue( instance );                                          \
-      } else if ( MatrixBlock::is_matrixblock( args[0] ) ) {                \
+      } else if ( MatrixBlock::is_matrixblock( args[0] ) ) {                 \
         const MatrixBlock* const& rhs_obj =                                  \
             node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
         const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
@@ -214,6 +259,57 @@
           value                                                              \
             OP                                                               \
           rhs_matrixblock.template cast< typename Complex::value_type >();   \
+                                                                             \
+        NanReturnValue( instance );                                          \
+      } else if ( VectorBlock::is_vectorblock( args[0] ) ) {                 \
+        const VectorBlock* const& rhs_obj =                                  \
+            node::ObjectWrap::Unwrap< VectorBlock >( args[0]->ToObject() );  \
+        const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj; \
+                                                                             \
+        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value =                                                          \
+          value                                                              \
+            OP                                                               \
+          rhs_vectorblock.template cast< typename Complex::value_type >();   \
+                                                                             \
+        NanReturnValue( instance );                                          \
+      } else if ( RowVectorBlock::is_rowvectorblock( args[0] ) ) {           \
+        const RowVectorBlock* const& rhs_obj =                               \
+            node::ObjectWrap::Unwrap< RowVectorBlock >                       \
+                ( args[0]->ToObject() );                                     \
+        const typename RowVectorBlock::value_type& rhs_rowvectorblock =      \
+            **rhs_obj;                                                       \
+                                                                             \
+        if ( T::template is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+          NanReturnUndefined();                                              \
+        }                                                                    \
+                                                                             \
+        v8::Local< v8::Object > instance = U::new_instance(                  \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local<v8::Value> )                    \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+        U* new_obj = node::ObjectWrap::Unwrap< U >( instance );              \
+        typename U::value_type& new_value = **new_obj;                       \
+                                                                             \
+        new_value =                                                          \
+          value                                                              \
+            OP                                                               \
+          rhs_rowvectorblock.template cast                                   \
+              < typename Complex::value_type >();                            \
                                                                              \
         NanReturnValue( instance );                                          \
       }                                                                      \
@@ -268,7 +364,7 @@
         value BOOST_PP_CAT( OP, = ) rhs_crowvector;                          \
                                                                              \
         NanReturnValue( args.This() );                                       \
-      } else if ( CMatrixBlock::is_cmatrixblock( args[0] ) ) {                 \
+      } else if ( CMatrixBlock::is_cmatrixblock( args[0] ) ) {               \
         const CMatrixBlock* const& rhs_obj =                                 \
             node::ObjectWrap::Unwrap< CMatrixBlock >( args[0]->ToObject() ); \
         const typename CMatrixBlock::value_type& rhs_cmatrixblock =          \
@@ -278,7 +374,7 @@
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
-        value BOOST_PP_CAT( OP, = ) rhs_cmatrixblock;                          \
+        value BOOST_PP_CAT( OP, = ) rhs_cmatrixblock;                        \
                                                                              \
         NanReturnValue( args.This() );                                       \
       } else if ( Matrix::is_matrix( args[0] ) ) {                           \
