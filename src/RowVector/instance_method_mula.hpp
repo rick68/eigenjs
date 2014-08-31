@@ -19,8 +19,8 @@ EIGENJS_INSTANCE_METHOD(RowVector, mula,
   NanScope();
 
   if (args.Length() == 1) {
-    RowVector* obj = node::ObjectWrap::Unwrap<RowVector>(args.This());
-    typename RowVector::value_type& value = **obj;
+    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
@@ -70,6 +70,15 @@ EIGENJS_INSTANCE_METHOD(RowVector, mula,
         NanReturnUndefined();
       }
 
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvector.rows() != 1 ||
+          rhs_rowvector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
       value *= rhs_rowvector;
 
       NanReturnValue(args.This());
@@ -82,16 +91,56 @@ EIGENJS_INSTANCE_METHOD(RowVector, mula,
         NanReturnUndefined();
       }
 
+      if (value.cols() != rhs_matrixblock.rows() ||
+          value.cols() != rhs_matrixblock.cols()) {
+        NanThrowError("The matrix block size must be mxm");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_matrixblock;
+
+      NanReturnValue(args.This());
+    } else if (VectorBlock::is_vectorblock(args[0])) {
+      const VectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+      const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
       if (value.rows() != 1 ||
           value.cols() != 1 ||
-          rhs_matrixblock.rows() != 1 ||
-          rhs_matrixblock.cols() != 1
+          rhs_vectorblock.rows() != 1 ||
+          rhs_vectorblock.cols() != 1
       ) {
         NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
-      value *= rhs_matrixblock;
+      value *= rhs_vectorblock;
+
+      NanReturnValue(args.This());
+    } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+      const RowVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+      const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvectorblock.rows() != 1 ||
+          rhs_rowvectorblock.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_rowvectorblock;
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {
