@@ -19,8 +19,8 @@ EIGENJS_INSTANCE_METHOD(CVector, mula,
   NanScope();
 
   if (args.Length() == 1) {
-    CVector* obj = node::ObjectWrap::Unwrap<CVector>(args.This());
-    typename CVector::value_type& value = **obj;
+    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =
