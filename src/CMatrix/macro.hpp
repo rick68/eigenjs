@@ -242,7 +242,7 @@
             node::ObjectWrap::Unwrap< MatrixBlock >( args[0]->ToObject() );  \
         const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj; \
                                                                              \
-        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -266,7 +266,7 @@
             node::ObjectWrap::Unwrap< VectorBlock >( args[0]->ToObject() );  \
         const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj; \
                                                                              \
-        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {      \
+        if ( T::is_nonconformate_arguments( obj, rhs_obj ) ) {               \
           NanReturnUndefined();                                              \
         }                                                                    \
                                                                              \
@@ -390,7 +390,7 @@
         value BOOST_PP_CAT( OP, = ) rhs_cvectorblock;                        \
                                                                              \
         NanReturnValue( args.This() );                                       \
-      } else if ( CRowVectorBlock::is_cvectorblock( args[0] ) ) {            \
+      } else if ( CRowVectorBlock::is_crowvectorblock( args[0] ) ) {         \
         const CRowVectorBlock* const& rhs_obj = node::ObjectWrap::Unwrap     \
             < CRowVectorBlock >( args[0]->ToObject() );                      \
         const typename CRowVectorBlock::value_type& rhs_crowvectorblock =    \
