@@ -1319,21 +1319,6 @@ describe('VectorBlock', function() {
     vblock.isApprox(mat2, 1e-2).should.true;
   });
 
-  it('#isApprox() should return true if this is approxivecely equal to a vector', function() {
-    vblock.isApprox.should.be.a.Function;
-
-    vblock.diva(9);
-    vblock.toString().should.equal("0.333333\n0.444444");
-
-    var vec2 = new Vector(2, 1).set([
-      0.333,
-      0.444
-    ]);
-
-    vblock.isApprox(vec2, 1e-3).should.false;
-    vblock.isApprox(vec2, 1e-2).should.true;
-  });
-
   it('#isApprox() should return true if this is approxivecely equal to a row-vector', function() {
     vblock.isApprox.should.be.a.Function;
 
@@ -1349,6 +1334,53 @@ describe('VectorBlock', function() {
 
     vblock2.isApprox(rvec, 1e-3).should.false;
     vblock2.isApprox(rvec, 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a matrix block', function() {
+    vblock.isApprox.should.be.a.Function;
+
+    vblock.diva(9);
+    vblock.toString().should.equal("0.333333\n0.444444");
+
+    var mat2 = new Matrix(2, 1).set([
+      0.333,
+      0.444
+    ]);
+
+    vblock.isApprox(mat2.block(0, 0, 2, 1), 1e-3).should.false;
+    vblock.isApprox(mat2.block(0, 0, 2, 1), 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a vector block', function() {
+    vblock.isApprox.should.be.a.Function;
+
+    vblock.diva(9);
+    vblock.toString().should.equal("0.333333\n0.444444");
+
+    var vec2 = new Vector(2, 1).set([
+      0.333,
+      0.444
+    ]);
+
+    vblock.isApprox(vec2.block(0, 2), 1e-3).should.false;
+    vblock.isApprox(vec2.block(0, 2), 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a row-vector block', function() {
+    vblock.isApprox.should.be.a.Function;
+
+    var vblock2 = VectorBlock(vec, 0, 1);
+    vblock2.toString().should.equal("1");
+
+    vblock2.diva(9);
+    vblock2.toString().should.equal("0.111111");
+
+    var rvec = new RowVector([
+      0.111
+    ]);
+
+    vblock2.isApprox(rvec.block(0, 1), 1e-3).should.false;
+    vblock2.isApprox(rvec.block(0, 1), 1e-2).should.true;
   });
 
   it('#Zero() should return a zero matrix', function() {
