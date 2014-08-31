@@ -261,8 +261,8 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
-      value *= rhs_rowvectorblock.template cast
-          <typename Complex::value_type>();
+      value *=
+          rhs_rowvectorblock.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {
