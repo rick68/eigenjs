@@ -118,7 +118,7 @@ describe('VectorBlock', function() {
     vblock.toString().should.equal("3\n4");
   });
 
-  it('#assign() should assign a vector blocks in another', function() {
+  it('#assign() should assign a vector block', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -131,7 +131,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n1\n2\n5\n6");
   });
 
-  it('#assign() should assign a vector block in a matrix', function() {
+  it('#assign() should assign a matrix', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -140,7 +140,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n0\n0\n5\n6");
   });
 
-  it('#assign() should assign a vector block in a vector', function() {
+  it('#assign() should assign a vector', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -152,7 +152,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n3\n0\n0\n6");
   });
 
-  it('#assign() should assign a vector block in a row-vector', function() {
+  it('#assign() should assign a row-vector', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -164,7 +164,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n0\n4\n5\n6");
   });
 
-  it('#assign() should assign a vector block in a matrix block', function() {
+  it('#assign() should assign a matrix block', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -173,7 +173,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n1\n0\n5\n6");
   });
 
-  it('#assign() should assign a vector block in a vector block', function() {
+  it('#assign() should assign a vector block', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -182,7 +182,7 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n1\n0\n5\n6");
   });
 
-  it('#assign() should assign a vector block in a row-vector block', function() {
+  it('#assign() should assign a row-vector block', function() {
     vblock.assign.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
@@ -426,7 +426,6 @@ describe('VectorBlock', function() {
 
     vblock.adda(vblock2);
     vblock.toString().should.equal("4\n6");
-    vblock2.toString().should.equal("1\n2");
 
     vec.toString().should.equal("1\n2\n4\n6\n5\n6");
   });
@@ -1160,9 +1159,9 @@ describe('VectorBlock', function() {
     vec.toString().should.equal(" 1\n-2\n 3\n 4\n 5\n 6");
 
     (function() {
-     vblock2.mula(new RowVector([
+      vblock2.mula(new RowVector([
         -1, -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
