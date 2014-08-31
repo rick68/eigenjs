@@ -22,6 +22,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "CMatrix.hpp"
+#include "CMatrixBlock.hpp"
 #include "CRowVector.hpp"
 #include "CRowVectorBlock_fwd.hpp"
 #include "CRowVectorBlock/definitions.hpp"
@@ -55,6 +56,7 @@ class CRowVectorBlock
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CMatrixBlock, tpl)
     EIGENJS_OBJECT_INITIALIZE(CRowVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());

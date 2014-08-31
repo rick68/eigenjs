@@ -22,6 +22,7 @@
 #include "base.hpp"
 #include "definition.hpp"
 #include "CMatrix.hpp"
+#include "CMatrixBlock.hpp"
 #include "CVector.hpp"
 #include "CVectorBlock_fwd.hpp"
 #include "CVectorBlock/definitions.hpp"
@@ -55,6 +56,7 @@ class CVectorBlock
     tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     EIGENJS_OBJECT_INITIALIZE(CMatrix, tpl)
+    EIGENJS_OBJECT_INITIALIZE(CMatrixBlock, tpl)
     EIGENJS_OBJECT_INITIALIZE(CVector, tpl)
 
     exports->Set(NanNew(ClassName), tpl->GetFunction());
