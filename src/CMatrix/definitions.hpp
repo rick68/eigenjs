@@ -22,6 +22,9 @@
 #include "instance_method_set.hpp"
 #include "instance_method_get.hpp"
 
+#include "instance_method_assign.hpp"
+#include "instance_method_block.hpp"
+
 #include "instance_method_add.hpp"
 #include "instance_method_adda.hpp"
 #include "instance_method_sub.hpp"
@@ -35,8 +38,6 @@
 
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
-
-#include "instance_method_block.hpp"
 
 #include "class_method_Zero.hpp"
 #include "class_method_Identity.hpp"
@@ -54,6 +55,9 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_set)
   (instance_method_get)
 
+  (instance_method_assign)
+  (instance_method_block)
+
   (instance_method_add)
   (instance_method_adda)
   (instance_method_sub)
@@ -67,8 +71,6 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_equals)
   (instance_method_isApprox)
-
-  (instance_method_block)
 
   (class_method_Zero)
   (class_method_Identity)

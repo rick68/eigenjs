@@ -21,16 +21,16 @@ EIGENJS_INSTANCE_METHOD(Vector, get,
   if (args.Length() == 1 &&
       args[0]->IsNumber()
   ) {
-    const Vector* const& obj = node::ObjectWrap::Unwrap<Vector>(args.This());
-    const typename Vector::value_type& vector = **obj;
-    const typename Vector::value_type::Index& row = args[0]->Int32Value();
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type::Index& row = args[0]->Int32Value();
 
-    if (Vector::is_out_of_range(vector, row, 0)) {
+    if (T::is_out_of_range(value, row, 0)) {
       NanReturnUndefined();
     }
 
-    const typename Vector::scalar_type& value = vector(row, 0);
-    NanReturnValue(NanNew(value));
+    const typename T::scalar_type& elem = value(row, 0);
+    NanReturnValue(NanNew(elem));
   }
 
   EIGENJS_THROW_ERROR_INVALID_ARGUMENT()

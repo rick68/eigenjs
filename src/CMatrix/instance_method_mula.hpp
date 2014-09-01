@@ -70,6 +70,31 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
       cmatrix *= rhs_cmatrixblock;
 
       NanReturnValue(args.This());
+    } else if (CVectorBlock::is_cmatrixblock(args[0])) {
+      const CVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+      const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_cvectorblock;
+
+      NanReturnValue(args.This());
+    } else if (CRowVectorBlock::is_cmatrixblock(args[0])) {
+      const CRowVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_crowvectorblock;
+
+      NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
         node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
@@ -118,7 +143,33 @@ EIGENJS_INSTANCE_METHOD(CMatrix, mula,
       cmatrix *= rhs_matrixblock.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
-    } else if (CMatrix::is_scalar(args[0])) {
+    } else if (VectorBlock::is_vectorblock(args[0])) {
+      const VectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+      const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *= rhs_vectorblock.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+      const RowVectorBlock* const& rhs_obj =
+        node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+      const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      cmatrix *=
+          rhs_rowvectorblock.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (T::is_scalar(args[0])) {
       cmatrix *= args[0]->NumberValue();
 
       NanReturnValue(args.This());

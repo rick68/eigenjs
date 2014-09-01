@@ -115,7 +115,7 @@ describe('MatrixBlock', function() {
     mblock.toString().should.equal(" 6  7\n10 11");
   });
 
-  it('#assign() should return the sum of two matrix blocks', function() {
+  it('#assign() should assign a matrix blocks in another', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -128,7 +128,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  1  2  8\n 9  5  1 12\n13 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a matrix', function() {
+  it('#assign() should assign a matrix block in a matrix', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -137,7 +137,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  0  0  8\n 9  0  0 12\n13 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a vector', function() {
+  it('#assign() should assign a matrix block in a vector', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -149,7 +149,7 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 0  2  3  4\n 0  6  7  8\n 0 10 11 12\n 0 14 15 16");
   });
 
-  it('#assign() should return the sum of a matrix block and a row-vector', function() {
+  it('#assign() should assign a matrix block in a row-vector', function() {
     mblock.assign.should.be.a.Function;
 
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
@@ -479,7 +479,7 @@ describe('MatrixBlock', function() {
     mblock.sub.should.be.a.Function;
 
     var cmat = CMatrix(2, 2).set([
-      Complex(2, 0), Complex(4, 1), 
+      Complex(2, 0), Complex(4, 1),
       Complex(6, 2), Complex(8, 4)
     ]);
 
@@ -505,7 +505,7 @@ describe('MatrixBlock', function() {
 
     var cvec = CVector([
       Complex(2, 0),
-      Complex(4, 1), 
+      Complex(4, 1),
       Complex(6, 2),
       Complex(8, 4)
     ]);
@@ -795,7 +795,7 @@ describe('MatrixBlock', function() {
       mblock.mula(new Vector([
         -1,
         -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
@@ -814,7 +814,7 @@ describe('MatrixBlock', function() {
       mblock.mula(new Vector([
         -1,
         -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
@@ -832,7 +832,7 @@ describe('MatrixBlock', function() {
     (function() {
       mblock2.mula(new RowVector([
         -1, -2
-      ]))
+      ]));
     }).should.throw("The operation result is out of range");
   });
 
@@ -868,17 +868,17 @@ describe('MatrixBlock', function() {
   it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
     mblock.diva.should.be.a.Function;
 
-    mblock.diva(0);
+    mblock.diva(2);
     mblock.equals(
       new Matrix(2, 2)
       .set([
-        Infinity, Infinity,
-        Infinity, Infinity
+        3, 3.5,
+        5, 5.5
       ])
     ).should.ok;
-    mblock.get(0, 0).should.be.a.Infinity;
+    mblock.get(0, 0).should.equal(3);
 
-    mat.toString().should.equal("  1   2   3   4\n  5 inf inf   8\n  9 inf inf  12\n 13  14  15  16");
+    mat.toString().should.equal("  1   2   3   4\n  5   3 3.5   8\n  9   5 5.5  12\n 13  14  15  16");
   });
 
   it('#equals() should return true if two matrix block are equal', function() {
@@ -1028,7 +1028,7 @@ describe('MatrixBlock', function() {
 
     MatrixBlock.Identity(0).toString().should.equal("");
 
-    mat2 = MatrixBlock.Identity(3);
+    var mat2 = MatrixBlock.Identity(3);
     mat2.equals(new Matrix(3, 3).set([
       1, 0, 0,
       0, 1, 0,

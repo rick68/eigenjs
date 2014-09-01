@@ -19,9 +19,9 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
   NanScope();
 
   if (args.Length() == 1) {
-    CRowVector* obj =
-        node::ObjectWrap::Unwrap<CRowVector>(args.This());
-    typename CRowVector::value_type& value = **obj;
+    T* obj =
+        node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
 
     if (CMatrix::is_cmatrix(args[0])) {
       const CMatrix* const& rhs_obj =
@@ -50,8 +50,12 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_cvector.cols() != 1) {
-        NanThrowError("The complex vector size must be 1x1");
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_cvector.rows() != 1 ||
+          rhs_cvector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
@@ -67,7 +71,76 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_crowvector.rows() != 1 ||
+          rhs_crowvector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
       value *= rhs_crowvector;
+
+      NanReturnValue(args.This());
+    } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+      const CMatrixBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+      const typename CMatrix::value_type& rhs_cmatrixblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.cols() != rhs_cmatrixblock.rows() ||
+          value.cols() != rhs_cmatrixblock.cols()) {
+        NanThrowError("The complex matrix block size must be mxm");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_cmatrixblock;
+
+      NanReturnValue(args.This());
+    } else if (CVectorBlock::is_cvectorblock(args[0])) {
+      const CVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+      const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_cvectorblock.rows() != 1 ||
+          rhs_cvectorblock.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_cvectorblock;
+
+      NanReturnValue(args.This());
+    } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
+      const CRowVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock = **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_crowvectorblock.rows() != 1 ||
+          rhs_crowvectorblock.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_crowvectorblock;
 
       NanReturnValue(args.This());
     } else if (Matrix::is_matrix(args[0])) {
@@ -97,8 +170,12 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
-      if (rhs_vector.cols() != 1) {
-        NanThrowError("The complex vector size must be 1x1");
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_vector.rows() != 1 ||
+          rhs_vector.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
@@ -135,16 +212,57 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
         NanReturnUndefined();
       }
 
+      if (value.cols() != rhs_matrixblock.rows() ||
+          value.cols() != rhs_matrixblock.cols()) {
+        NanThrowError("The matrix block size must be mxm");
+        NanReturnUndefined();
+      }
+
+      value *= rhs_matrixblock.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (VectorBlock::is_vectorblock(args[0])) {
+      const VectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+      const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+     if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
       if (value.rows() != 1 ||
           value.cols() != 1 ||
-          rhs_matrixblock.rows() != 1 ||
-          rhs_matrixblock.cols() != 1
+          rhs_vectorblock.rows() != 1 ||
+          rhs_vectorblock.cols() != 1
       ) {
         NanThrowError("The operation result is out of range");
         NanReturnUndefined();
       }
 
-      value *= rhs_matrixblock.template cast<typename Complex::value_type>();
+      value *= rhs_vectorblock.template cast<typename Complex::value_type>();
+
+      NanReturnValue(args.This());
+    } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+      const RowVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+      const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+          **rhs_obj;
+
+      if (T::is_invalid_matrix_product(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      if (value.rows() != 1 ||
+          value.cols() != 1 ||
+          rhs_rowvectorblock.rows() != 1 ||
+          rhs_rowvectorblock.cols() != 1
+      ) {
+        NanThrowError("The operation result is out of range");
+        NanReturnUndefined();
+      }
+
+      value *=
+          rhs_rowvectorblock.template cast<typename Complex::value_type>();
 
       NanReturnValue(args.This());
     } else if (T::is_scalar(args[0])) {

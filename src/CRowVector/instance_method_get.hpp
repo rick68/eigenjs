@@ -21,12 +21,12 @@ EIGENJS_INSTANCE_METHOD(CRowVector, get,
   if (args.Length() == 1 &&
       args[0]->IsNumber()
   ) {
-    const CRowVector* const& obj =
-        node::ObjectWrap::Unwrap<CRowVector>(args.This());
-    const typename CRowVector::value_type& value = **obj;
-    const typename CRowVector::value_type::Index& col = args[0]->Int32Value();
+    const T* const& obj =
+        node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type::Index& col = args[0]->Int32Value();
 
-    if (CRowVector::is_out_of_range(value, 0, col)) {
+    if (T::is_out_of_range(value, 0, col)) {
       NanReturnUndefined();
     }
 

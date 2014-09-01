@@ -76,6 +76,58 @@ EIGENJS_INSTANCE_METHOD(CMatrix, isApprox,
         : num_traits::dummy_precision();
 
       NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+      const CMatrixBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+      const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
+      const typename CMatrixBlock::value_type& w = rhs_cmatrixblock;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (CVectorBlock::is_cvectorblock(args[0])) {
+      const CVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+      const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+      const typename CVectorBlock::value_type& w = rhs_cvectorblock;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
+    } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
+      const CRowVectorBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+          **rhs_obj;
+      const typename CRowVectorBlock::value_type& w = rhs_crowvectorblock;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;
+      const typename num_traits::Real& prec =
+          args_length == 2
+        ? args[1]->NumberValue()
+        : num_traits::dummy_precision();
+
+      NanReturnValue(NanNew(v.isApprox(w, prec)));
     }
   }
 
