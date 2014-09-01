@@ -2173,7 +2173,7 @@ crvec =
 (1,0) (2,4) (3,0)
 ```
 
-#### crvec.get(row)
+#### crvec.get(col)
 
 ```js
 var Eigen = require('eigenjs')
