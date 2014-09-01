@@ -1,0 +1,1651 @@
+const
+    Eigen = require('../index.js'),
+    Complex = Eigen.Complex,
+    Matrix = Eigen.Matrix,
+    Vector = Eigen.Vector,
+    RowVector = Eigen.RowVector,
+    CMatrix = Eigen.CMatrix,
+    CVector = Eigen.CVector,
+    CRowVector = Eigen.CRowVector,
+    MatrixBlock = Eigen.MatrixBlock,
+    VectorBlock = Eigen.VectorBlock,
+    CVectorBlock = Eigen.CVectorBlock,
+    CRowVectorBlock = Eigen.CRowVectorBlock,
+    should = require('should');
+
+describe('CVectorBlock', function() {
+  var cvec, cvblock;
+
+  it('#CVectorBlock() should be a function', function() {
+    CVectorBlock.should.be.a.Function;
+  });
+
+  beforeEach(function() {
+    cvec = new CVector(6).set([
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]);
+
+    cvblock = new CVectorBlock(cvec, 2, 2);
+  });
+
+  it('should throw error when tried creating a complex vector block with invalid arguments', function() {
+    (function() {
+      new CVectorBlock(cvec, -1, -2);
+    }).should.throw('Row or column numbers are out of range');
+
+    (function() {
+      new CVectorBlock(cvec, 0, 1);
+    }).should.not.throw();
+
+    (function() {
+      new CVectorBlock(cvec, 4, 2);
+    }).should.not.throw();
+
+    (function() {
+      new CVectorBlock(cvec, 6, 3);
+    }).should.throw('Row or column numbers are out of range');
+  });
+
+  it('should be invoked with arguments and return an object', function() {
+    var cvblock2 = new CVectorBlock(cvec, 2, 2);
+    cvblock2.should.be.an.Object;
+    cvblock2.should.instanceOf(CVectorBlock);
+  });
+
+  it('#CVectorBlock(cvec, 2, 2) should return the complex vector block of size 2x1', function() {
+    var cvblock2 = new CVectorBlock(cvec, 2, 2);
+    cvblock2.rows().should.equal(2);
+    cvblock2.cols().should.equal(1);
+  });
+
+  it('#set() should throw message when row or column numbers are out of range', function() {
+    cvblock.set.should.be.a.Function;
+
+    (function() {
+      cvblock.set(7, 68);
+    }).should.throw('Row or column numbers are out of range');
+
+    (function() {
+      cvblock.set(-1, 500);
+    }).should.throw('Row or column numbers are out of range');
+  });
+
+  it('#set() with array argument should work ok', function() {
+    cvblock.set.should.be.a.Function;
+
+    cvblock.set([
+      -1,
+      -2
+    ]).toString().should.eql("(-1,0)\n(-2,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-1,0)\n(-2,0)\n (5,0)\n (6,0)");
+
+    (function() {
+      cvblock.set([
+        1
+      ]);
+    }).should.throw('Too few coefficients');
+
+    (function() {
+      cvblock.set([
+         1,
+         2,
+         3,
+         4
+      ]);
+    }).should.throw('Too many coefficients');
+  });
+
+  it('#get() should return the element value of CVectorBlock', function() {
+    cvblock.get.should.be.a.Function;
+
+    cvblock.get(0).equals(new Complex(3, 0));
+    cvblock.get(1).equals(new Complex(4, 0));
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    (function(){
+      cvblock.get(2);
+    }).should.throw('Row or column numbers are out of range');
+  });
+
+  it('#toString() should return all element values of CVectorBlock', function() {
+    cvblock.toString.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+  });
+
+  it('#assign() should assign a matrix', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(Matrix.Zero(2, 1)).toString().should.equal("(0,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a vector', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    var cvblock2 = cvec.block(3, 2);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)");
+
+    cvblock2.assign(Vector.Zero(2)).toString().should.equal("(0,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(0,0)\n(0,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a row-vector', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    var cvblock2 = cvec.block(2, 1);
+    cvblock2.toString().should.equal("(3,0)");
+
+    cvblock2.assign(RowVector.Zero(1)).toString().should.equal("(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(4,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex matrix', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(CMatrix.Zero(2, 1)).toString().should.equal("(0,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex vector', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    var cvblock2 = cvec.block(3, 2);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)");
+
+    cvblock2.assign(CVector.Zero(2)).toString().should.equal("(0,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(0,0)\n(0,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex row-vector', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    var cvblock2 = cvec.block(2, 1);
+    cvblock2.toString().should.equal("(3,0)");
+
+    cvblock2.assign(CRowVector.Zero(1)).toString().should.equal("(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(4,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a matrix block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(Matrix.Identity(2).block(0, 0, 2, 1)).toString().should.equal("(1,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a vector block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(Vector.Identity(2).block(0, 2)).toString().should.equal("(1,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a row-vector block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    var cvblock2 = cvec.block(3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock2.assign(RowVector.Identity(1).block(0, 1)).toString().should.equal("(1,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(1,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex matrix block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(CMatrix.Identity(2).block(0, 0, 2, 1)).toString().should.equal("(1,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex vector block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(CVector.Identity(2).block(0, 2)).toString().should.equal("(1,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#assign() should assign a complex row-vector block', function() {
+    cvblock.assign.should.be.a.Function;
+
+    var cvblock2 = cvec.block(3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock2.assign(RowVector.Identity(1).block(0, 1)).toString().should.equal("(1,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(1,0)\n(5,0)\n(6,0)");
+  });
+
+
+  it('#add() should return the sum of two complex vector blocks', function() {
+    cvblock.add.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvblock2 = CVectorBlock(cvec, 2, 2);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvec2 = cvblock.add(cvblock2);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(6,0)\n(8,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a matrix', function() {
+    cvblock.add.should.be.a.Function;
+
+    var mat2 = Matrix(2, 1).set([
+       -1,
+       -2
+    ]);
+
+    var cvec2 = cvblock.add(mat2);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(2,0)\n(2,0)");
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(cvec2);
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(2,0)\n(2,0)\n(5,0)\n(6,0)");
+
+    (function() {
+      cvblock.assign(Matrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex vector', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+    var cvec2 = new Vector(cvblock2.rows())
+      .set([
+         2,
+         6,
+        10
+      ]);
+
+    var cvec3 = cvblock2.add(cvec2);
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal(" (4,0)\n (9,0)\n(14,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a row-vector', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 2, 1);
+    cvblock2.toString().should.equal("(3,0)");
+    var rvec = RowVector(cvblock2.cols())
+      .set([
+        9
+      ]);
+
+    var cvec2 = cvblock2.add(rvec);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(12,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a matrix block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var mat2 = Matrix(2, 1).set([
+       -1,
+       -2
+    ]);
+
+    var cvec2 = cvblock.add(mat2);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(2,0)\n(2,0)");
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.assign(cvec2.block(0, 2));
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(2,0)\n(2,0)\n(5,0)\n(6,0)");
+
+    (function() {
+      cvblock.assign(Matrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex vector block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+    var cvec2 = new Vector(cvblock2.rows())
+      .set([
+         2,
+         6,
+        10
+      ]);
+
+    var cvec3 = cvblock2.add(cvec2.block(0, 3));
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal(" (4,0)\n (9,0)\n(14,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a row-vector block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 2, 1);
+    cvblock2.toString().should.equal("(3,0)");
+    var rvec = RowVector(cvblock2.cols())
+      .set([
+        9
+      ]);
+
+    var cvec2 = cvblock2.add(rvec.block(0, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(12,0)");
+  });
+
+  it('#add() should return a CMatrix with the sum of a complex vector block and a complex matrix', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvec = CMatrix(2, 1).set([
+      -1,
+      -2
+    ]);
+    cvblock.add(cvec).toString().should.equal("(2,0)\n(2,0)");
+
+    (function() {
+      cvblock.add(CMatrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex vector', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvec2 = CVector(cvblock.rows())
+      .set([
+         2,
+         6
+      ]);
+
+    var cvec3 = cvblock.add(cvec2);
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal(" (5,0)\n(10,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex row-vector', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+    var crvec = CRowVector(1)
+      .set([
+        10
+      ]);
+
+    var crvec2 = cvblock2.add(crvec);
+    crvec2.should.instanceOf(CVector);
+    crvec2.toString().should.equal("(12,0)");
+  });
+
+  it('#add() should return a CMatrix with the sum of a complex vector block and a complex matrix block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvec = CMatrix(2, 1).set([
+      -1,
+      -2
+    ]);
+    cvblock.add(cvec.block(0, 0, 2, 1)).toString().should.equal("(2,0)\n(2,0)");
+
+    (function() {
+      cvblock.add(CMatrix(2, 3).set([
+        1, 0, 0,
+        0, 1, 0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex complex vector block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvec2 = CVector(cvblock.rows())
+      .set([
+         2,
+         6
+      ]);
+
+    var cvec3 = cvblock.add(cvec2.block(0, 2));
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal(" (5,0)\n(10,0)");
+  });
+
+  it('#add() should return the sum of a complex vector block and a complex row-vector block', function() {
+    cvblock.add.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+    var crvec = CRowVector(1)
+      .set([
+        10
+      ]);
+
+    var crvec2 = cvblock2.add(crvec.block(0, 1));
+    crvec2.should.instanceOf(CVector);
+    crvec2.toString().should.equal("(12,0)");
+  });
+
+  it('#adda() should return the sum of two complex vector blocks and saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvblock2 = CVectorBlock(cvec, 0, 2);
+    cvblock2.toString().should.equal("(1,0)\n(2,0)");
+
+    cvblock.adda(cvblock2);
+    cvblock.toString().should.equal("(4,0)\n(6,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(4,0)\n(6,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a matrix then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.adda(
+      Matrix(2, 1)
+        .set([
+          -2,
+          -4
+        ])
+    );
+    cvblock.toString().should.equal("(1,0)\n(0,0)");
+
+    (function() {
+      cvblock.adda(
+        Matrix(3, 1)
+        .set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a vector then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 2, 4);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock2.adda(
+      Vector(cvblock2.rows())
+      .set([
+        -2,
+        -4,
+        -6,
+        -8
+      ])
+    );
+    cvblock2.toString().should.equal(" (1,0)\n (0,0)\n(-1,0)\n(-2,0)");
+
+    (function() {
+      cvblock2.adda(
+        Vector(3)
+        .set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a row-vector then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvblock2.adda(
+      RowVector(cvblock2.cols())
+      .set([
+        -2
+      ])
+    );
+    cvblock2.toString().should.equal("(2,0)");
+
+    (function() {
+      cvblock2.adda(
+        RowVector(2)
+        .set([
+          1, 0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a matrix block then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.adda(
+      Matrix(2, 1)
+        .set([
+          -2,
+          -4
+        ]).block(0, 0, 2, 1)
+    );
+    cvblock.toString().should.equal("(1,0)\n(0,0)");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a vector block then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvblock2.adda(
+      Vector(cvblock2.cols())
+      .set([
+        -2
+      ]).block(0, 1)
+    );
+    cvblock2.toString().should.equal("(2,0)");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a row-vector block then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvblock2.adda(
+      RowVector(cvblock2.cols())
+      .set([
+        -2
+      ]).block(0, 1)
+    );
+    cvblock2.toString().should.equal("(2,0)");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a complex matrix then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.adda(
+      Matrix(2, 1)
+        .set([
+          -2,
+          -4
+        ])
+    );
+    cvblock.toString().should.equal("(1,0)\n(0,0)");
+
+    (function() {
+      cvblock.adda(
+        CMatrix(3, 1)
+        .set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a complex vector then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 2, 4);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock2.adda(
+      CVector(cvblock2.rows())
+      .set([
+        -2,
+        -4,
+        -6,
+        -8
+      ])
+    );
+    cvblock2.toString().should.equal(" (1,0)\n (0,0)\n(-1,0)\n(-2,0)");
+
+    (function() {
+      cvblock2.adda(
+        Vector(3)
+        .set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a complex row-vector then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvblock2.adda(
+      CRowVector(cvblock2.cols())
+      .set([
+        -2
+      ])
+    );
+    cvblock2.toString().should.equal("(2,0)");
+
+    (function() {
+      cvblock2.adda(
+        RowVector(2)
+        .set([
+          1, 0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a complex matrix block then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.adda(
+      Matrix(2, 1)
+        .set([
+          -2,
+          -4
+        ]).block(0, 0, 2, 1)
+    );
+    cvblock.toString().should.equal("(1,0)\n(0,0)");
+
+    (function() {
+      cvblock.adda(
+        CMatrix(3, 1)
+        .set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#adda() should return the sum of a complex vector block and a complex row-vector block then saves it back', function() {
+    cvblock.adda.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 1);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvblock2.adda(
+      CRowVector(cvblock2.cols())
+      .set([
+        -2
+      ]).block(0, 1)
+    );
+    cvblock2.toString().should.equal("(2,0)");
+
+    (function() {
+      cvblock2.adda(
+        RowVector(2)
+        .set([
+          1, 0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of two complex vector block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvblock2 = CVectorBlock(cvec, 3, 2);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)");
+
+    var cvec2 = cvblock.sub(cvblock2);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(-1,0)\n(-1,0)");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a matrix', function() {
+    cvblock.sub.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvec2 = cvblock.sub(new Matrix(2, 1).set([
+      1,
+      2
+    ]));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(2,0)\n(2,0)");
+
+    (function() {
+      cvblock.sub(new Matrix(3, 1).set([
+        1,
+        0,
+        1
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a complex vector', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+
+    var cvec2 = cvblock2.sub(new Vector([
+      1,
+      2,
+      3
+    ]));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(1,0)\n(1,0)\n(1,0)");
+
+    (function() {
+      cvblock2.sub(new Vector(2).set([
+        1,
+        0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a row-vector', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    var cvec2 = cvblock2.sub(new RowVector([
+      9
+    ]));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(-7,0)");
+
+    (function() {
+      cvblock2.sub(new RowVector(2).set([
+        1, 0
+      ]));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a matrix block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvec2 = cvblock.sub(new Matrix(2, 1).set([
+      1,
+      2
+    ]).block(0, 0, 2, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(2,0)\n(2,0)");
+
+    (function() {
+      cvblock.sub(new Matrix(3, 1).set([
+        1,
+        0,
+        1
+      ]).block(0, 0, 3, 1));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a vector block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    var cvec2 = cvblock2.sub(new Vector([
+      9
+    ]).block(0, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(-7,0)");
+
+    (function() {
+      cvblock2.sub(new Vector(2).set([
+        1, 0
+      ]).block(0, 2));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return the difference of a complex vector block and a row-vector block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    var cvec2 = cvblock2.sub(new RowVector([
+      9
+    ]).block(0, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(-7,0)");
+
+    (function() {
+      cvblock2.sub(new RowVector(2).set([
+        1, 0
+      ]).block(0, 2));
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex matrix', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvec = CMatrix(2, 1).set([
+      Complex(2, 0),
+      Complex(4, 1)
+    ]);
+
+    var cvec2 = cvblock.sub(cvec);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal(" (1,0)\n(0,-1)");
+
+    (function() {
+      cvblock.sub(
+        CMatrix(3, 1).set([
+          1,
+          0,
+          0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex vector', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 2, 2);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvec2 = CVector([
+      Complex(2, 0),
+      Complex(4, 1)
+    ]);
+
+    var cvec3 = cvblock2.sub(cvec2);
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal(" (1,0)\n(0,-1)");
+
+    (function() {
+      cvblock2.sub(
+        CVector(3).set([
+          1,
+          0,
+          1
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex row-vector', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    var crvec = CRowVector([
+      Complex(2, 0)
+    ]);
+
+    var cvec2 = cvblock2.sub(crvec);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(0,0)");
+
+    (function() {
+      cvblock2.sub(
+        CRowVector(2).set([
+          1, 0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex matrix block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvec = CMatrix(2, 1).set([
+      Complex(2, 0),
+      Complex(4, 1)
+    ]);
+
+    var cvec2 = cvblock.sub(cvec.block(0, 0, 2, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal(" (1,0)\n(0,-1)");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex row-vector block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = cvec.block(2, 1);
+    cvblock2.toString().should.equal("(3,0)");
+
+    var cvec2 = CRowVector(1).set([
+      Complex(2, 0)
+    ]);
+
+    var cvec3 = cvblock2.sub(cvec2.block(0, 1));
+    cvec3.should.instanceOf(CVector);
+    cvec3.toString().should.equal("(1,0)");
+  });
+
+  it('#sub() should return a CMatrix with the difference of a complex vector block and a complex row-vector block', function() {
+    cvblock.sub.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 0, 1);
+    cvblock2.toString().should.equal("(1,0)");
+
+    var crvec = CRowVector([
+      Complex(2, 0)
+    ]);
+
+    var cvec2 = cvblock2.sub(crvec.block(0, 1));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(-1,0)");
+  });
+
+  it('#suba() should return the sum of two complex vector blocks and saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvblock2 = CVectorBlock(cvec, 3, 2);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)");
+
+    cvblock.suba(cvblock2);
+    cvblock.toString().should.equal("(-1,0)\n(-1,0)");
+    cvblock2.toString().should.equal("(-1,0)\n (5,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-1,0)\n(-1,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#suba() should return the difference of a complex vector block and a matrix then saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    var cvec2 = Matrix(2, 1)
+    .set([
+      1,
+      3
+    ]);
+    cvblock.suba(cvec2);
+    cvblock.toString().should.equal("(2,0)\n(1,0)");
+
+    (function() {
+      cvblock.suba(
+        Matrix(3, 1)
+        .set([
+          1,
+          0,
+          0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#suba() should return the difference of a complex vector block and a vector then saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 2, 4);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    var cvec2 = new Vector([
+      1,
+      3,
+      5,
+      7
+    ]);
+    cvblock2.suba(cvec2);
+    cvblock2.toString().should.equal(" (2,0)\n (1,0)\n (0,0)\n(-1,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n (2,0)\n (1,0)\n (0,0)\n(-1,0)");
+  });
+
+  it('#suba() should return the difference of a complex vector block and a row-vector then saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 4, 1);
+    cvblock2.toString().should.equal("(5,0)");
+
+    var rvec = new RowVector([
+      1
+    ]);
+    cvblock2.suba(rvec);
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(4,0)\n(6,0)");
+  });
+
+  it('#suba() should return the difference of a complex vector block and a matrix block then saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    var cvec2 = Matrix(2, 1)
+    .set([
+      1,
+      3
+    ]);
+    cvblock.suba(cvec2.block(0, 0, 2, 1));
+    cvblock.toString().should.equal("(2,0)\n(1,0)");
+
+    (function() {
+      cvblock.suba(
+        Matrix(3, 1)
+        .set([
+          1,
+          0,
+          0
+        ])
+      );
+    }).should.throw("Nonconformant arguments");
+  });
+
+  it('#suba() should return the difference of a complex vector block and a row-vector block then saves it back', function() {
+    cvblock.suba.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 4, 1);
+    cvblock2.toString().should.equal("(5,0)");
+
+    var rvec = new RowVector([
+      1
+    ]);
+    cvblock2.suba(rvec.block(0, 1));
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(4,0)\n(6,0)");
+  });
+
+  it('#mul() should return the product of two complex vector blocks', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 0, 1);
+    cvblock2.toString().should.equal("(1,0)");
+
+    var cvec2 = cvblock.mul(cvblock2);
+    cvec2.should.instanceOf(CMatrix);
+    cvec2.toString().should.equal("(3,0)\n(4,0)");
+
+    (function() {
+      cvblock.mul(CVectorBlock(cvec, 0, 2));
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return the product of a complex vector block and a matrix', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvec2 = cvblock.mul(new Matrix(1, 2).set([
+      1, 2
+    ]));
+    cvec2.should.instanceOf(CMatrix);
+    cvec2.toString().should.equal("(3,0) (6,0)\n(4,0) (8,0)");
+
+    (function() {
+      cvblock.mul(Matrix(3, 2));
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return the product of a complex vector block and a complex vector', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 3);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)\n(6,0)");
+
+    var cvec2 = new Vector([
+      -1
+    ]);
+    var cvec3 = cvblock2.mul(cvec2);
+    cvec3.should.instanceOf(CMatrix);
+    cvec3.toString().should.equal("(-4,0)\n(-5,0)\n(-6,0)");
+
+    (function() {
+      cvblock.mul(cvec);
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return the product of a complex vector block and a row-vector', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+
+    var rvec = new RowVector([1, 2, 3]);
+    var mat2 = cvblock2.mul(rvec);
+    mat2.should.instanceOf(CMatrix);
+    mat2.toString().should.equal(" (2,0)  (4,0)  (6,0)\n (3,0)  (6,0)  (9,0)\n (4,0)  (8,0) (12,0)");
+  });
+
+  it('#mul() should return the product of a complex vector block and a matrix block', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvec2 = cvblock.mul(new Matrix(1, 2).set([
+      1, 2
+    ]).block(0, 0, 1, 2));
+    cvec2.should.instanceOf(CMatrix);
+    cvec2.toString().should.equal("(3,0) (6,0)\n(4,0) (8,0)");
+  });
+
+  it('#mul() should return the product of a complex vector block and a row-vector block', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+
+    var rvec = new RowVector([1, 2, 3]);
+    var mat2 = cvblock2.mul(rvec.block(0, 3));
+    mat2.should.instanceOf(CMatrix);
+    mat2.toString().should.equal(" (2,0)  (4,0)  (6,0)\n (3,0)  (6,0)  (9,0)\n (4,0)  (8,0) (12,0)");
+  });
+
+  it('#mul() should return a CMatrix with the product of a complex vector block and a complex matrix', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cmat = new CMatrix(1, 2).set([
+      Complex(1, 1), Complex(2, 2)
+    ]);
+    var cmat2 = cvblock.mul(cmat);
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(3,3) (6,6)\n(4,4) (8,8)");
+
+    (function() {
+      cvblock.mul(new CMatrix(3, 3));
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return a CMatrix with the product of a complex vector block and a complex vector', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 3);
+    cvblock2.toString().should.equal("(2,0)\n(3,0)\n(4,0)");
+
+    var cvec2 = new CVector(1).set([
+      Complex(1, 1)
+    ]);
+    var cmat2 = cvblock2.mul(cvec2);
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(2,2)\n(3,3)\n(4,4)");
+
+    (function() {
+      cvblock.mul(new CVector(2));
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return a CMatrix with the product of a complex vector block and a complex row-vector', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 3, 2);
+    cvblock2.toString().should.equal("(4,0)\n(5,0)");
+
+    var crvec = new CRowVector(3).set([
+      Complex(1, 1), Complex(2, 2), Complex(3, 3)
+    ]);
+    var cmat = cvblock2.mul(crvec);
+    cmat.should.instanceOf(CMatrix);
+    cmat.toString().should.equal("  (4,4)   (8,8) (12,12)\n  (5,5) (10,10) (15,15)");
+  });
+
+  it('#mul() should return a CMatrix with the product of a complex vector block and a complex matrix block', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cmat = new CMatrix(1, 2).set([
+      Complex(1, 1), Complex(2, 2)
+    ]);
+    var cmat2 = cvblock.mul(cmat.block(0, 0, 1, 2));
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(3,3) (6,6)\n(4,4) (8,8)");
+
+    (function() {
+      cvblock.mul(new CMatrix(3, 3));
+    }).should.throw("Invalid matrix product");
+  });
+
+  it('#mul() should return a CMatrix with the product of a complex vector block and a complex row-vector block', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var crvec = new CRowVector(3).set([
+      Complex(1, 1), Complex(2, 2), Complex(3, 3)
+    ]);
+    var cmat = cvblock.mul(crvec.block(0, 3));
+    cmat.should.instanceOf(CMatrix);
+    cmat.toString().should.equal("  (3,3)   (6,6)   (9,9)\n  (4,4)   (8,8) (12,12)");
+  });
+
+  it('#mul() should return the product of a complex vector block and a scalar value', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var mat2 = cvblock.mul(-1);
+    mat2.should.instanceOf(CVector);
+    mat2.toString().should.equal("(-3,0)\n(-4,0)");
+  });
+
+  it('#mul() should return the product of a complex vector block and a complex value', function() {
+    cvblock.mul.should.be.a.Function;
+
+    var cvec = cvblock.mul(Complex(-1));
+    cvec.should.instanceOf(CVector);
+    cvec.toString().should.equal("(-3,0)\n(-4,0)");
+  });
+
+  it('#mula() should return the product of two complex vector block and saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = new CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+    var cvblock3 = new CVectorBlock(cvec, 3, 1);
+    cvblock3.toString().should.equal("(4,0)");
+
+    cvblock2.mula(cvblock3);
+    cvblock2.toString().should.equal("(8,0)");
+
+    cvec.toString().should.equal("(1,0)\n(8,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a matrix then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(new Matrix(1, 1).set([
+      -1
+    ]));
+    cvblock.toString().should.equal("(-3,0)\n(-4,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a vector then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new Vector([-1]));
+    cvblock2.toString().should.equal("(-2,0)");
+
+    cvec.toString().should.equal(" (1,0)\n(-2,0)\n (3,0)\n (4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a row-vector then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new RowVector([2]));
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(4,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    (function() {
+      cvblock2.mula(new RowVector([
+        -1, -2
+      ]));
+    }).should.throw("The operation result is out of range");
+  });
+
+  it('#mula() should return the product of a complex vector block and a matrix block then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(new Matrix(1, 1).set([
+      -1
+    ]).block(0, 0, 1, 1));
+    cvblock.toString().should.equal("(-3,0)\n(-4,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a row-vector block then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new RowVector([2]));
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(4,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    (function() {
+     cvblock2.mula(new RowVector([
+        -1, -2
+      ]).block(0, 2));
+    }).should.throw("The operation result is out of range");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex matrix then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(new CMatrix(1, 1).set([
+      -1
+    ]));
+    cvblock.toString().should.equal("(-3,0)\n(-4,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex vector then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new CVector([-1]));
+    cvblock2.toString().should.equal("(-2,0)");
+
+    cvec.toString().should.equal(" (1,0)\n(-2,0)\n (3,0)\n (4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex row-vector then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new CRowVector([2]));
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(4,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    (function() {
+      cvblock2.mula(new CRowVector([
+        -1, -2
+      ]));
+    }).should.throw("The operation result is out of range");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex matrix block then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(new CMatrix(1, 1).set([
+      -1
+    ]).block(0, 0, 1, 1));
+    cvblock.toString().should.equal("(-3,0)\n(-4,0)");
+
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex row-vector block then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 1, 1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(2,0)");
+
+    cvblock2.mula(new CRowVector([2]).block(0, 1));
+    cvblock2.toString().should.equal("(4,0)");
+
+    cvec.toString().should.equal("(1,0)\n(4,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    (function() {
+      cvblock2.mula(new CRowVector([
+        -1, -2
+      ]).block(0, 2));
+    }).should.throw("The operation result is out of range");
+  });
+
+  it('#mula() should return the product of a complex vector block and a scalar value then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(-1);
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#mula() should return the product of a complex vector block and a complex value then saves it back', function() {
+    cvblock.mula.should.be.a.Function;
+
+    cvblock.mula(Complex(-1, 0));
+    cvec.toString().should.equal(" (1,0)\n (2,0)\n(-3,0)\n(-4,0)\n (5,0)\n (6,0)");
+  });
+
+  it('#div() should return a CMatrix which be divied by a scalar value', function() {
+    cvblock.div.should.be.a.Function;
+
+    var cvec2 = cvblock.div(2);
+    cvec2.equals(
+      new CMatrix(2, 1)
+      .set([
+        1.5,
+        2
+      ])
+    ).should.ok;
+    cvblock.div(2).toString().should.equal("(1.5,0)\n  (2,0)");
+  });
+
+  it('#div() should return a Matrix which be divied by a complex value', function() {
+    cvblock.div.should.be.a.Function;
+
+    var cvec2 = cvblock.div(Complex(2, 0));
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(1.5,0)\n  (2,0)");
+  });
+
+  it('#diva() should return a Matrix which be divied by a scalar value then saves it back', function() {
+    cvblock.diva.should.be.a.Function;
+
+    cvblock.diva(2);
+    cvblock.equals(
+      new CMatrix(2, 1)
+      .set([
+        1.5,
+        2
+      ])
+    ).should.ok;
+    cvblock.get(0).equals(Complex(1.5,0));
+
+    cvec.toString().should.equal("  (1,0)\n  (2,0)\n(1.5,0)\n  (2,0)\n  (5,0)\n  (6,0)");
+  });
+
+  it('#equals() should return true if two complex vector block are equal', function() {
+    cvblock.equals.should.be.a.Function;
+
+    var cvec2 = new CVector([
+      1,
+      2,
+      1,
+      2
+    ]);
+    var cvblock2 = CVectorBlock(cvec2, 0, 2);
+    var cvblock3 = CVectorBlock(cvec2, 2, 2);
+
+    cvblock2.equals(cvblock3).should.ok;
+  });
+
+  it('#equals() should return true if a complex vector block and a complex matrix are equal', function() {
+    cvblock.equals.should.be.a.Function;
+
+    var mat2 = new CMatrix(2, 1).set([
+      3,
+      4
+    ]);
+
+    cvblock.equals(mat2).should.ok;
+  });
+
+  it('#equals() should return true if a complex vector block and a complex vector are equal', function() {
+    cvblock.equals.should.be.a.Function;
+
+    var cvec2 = new CVector([
+      3,
+      4
+    ]);
+
+    cvblock.equals(cvec2).should.ok;
+  });
+
+  it('#equals() should return true if a complex vector block and a complex row-vector are equal', function() {
+    cvblock.equals.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 0, 1);
+    cvblock2.toString().should.equal("(1,0)");
+
+    var crvec2 = new CRowVector([
+      1
+    ]);
+
+    cvblock2.equals(crvec2).should.ok;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to other', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    cvblock.diva(9);
+    cvblock.toString().should.equal("(0.333333,0)\n(0.444444,0)");
+
+    var cvec2 = new CVector([
+      0.333,
+      0.444
+    ]);
+
+    cvblock.isApprox(cvec2.block(0, 2), 1e-3).should.false;
+    cvblock.isApprox(cvec2.block(0, 2), 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a complex matrix', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    cvblock.diva(9);
+    cvblock.toString().should.equal("(0.333333,0)\n(0.444444,0)");
+
+    var mat2 = new CMatrix(2, 1).set([
+      0.333,
+      0.444
+    ]);
+
+    cvblock.isApprox(mat2, 1e-3).should.false;
+    cvblock.isApprox(mat2, 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a complex row-vector', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 0, 1);
+    cvblock2.toString().should.equal("(1,0)");
+
+    cvblock2.diva(9);
+    cvblock2.toString().should.equal("(0.111111,0)");
+
+    var crvec2 = new CRowVector([
+      0.111
+    ]);
+
+    cvblock2.isApprox(crvec2, 1e-3).should.false;
+    cvblock2.isApprox(crvec2, 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a complex matrix block', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    cvblock.diva(9);
+    cvblock.toString().should.equal("(0.333333,0)\n(0.444444,0)");
+
+    var cmat2 = new CMatrix(2, 1).set([
+      0.333,
+      0.444
+    ]);
+
+    cvblock.isApprox(cmat2.block(0, 0, 2, 1), 1e-3).should.false;
+    cvblock.isApprox(cmat2.block(0, 0, 2, 1), 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a complex vector block', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    cvblock.diva(9);
+    cvblock.toString().should.equal("(0.333333,0)\n(0.444444,0)");
+
+    var cvec2 = new CVector(2, 1).set([
+      0.333,
+      0.444
+    ]);
+
+    cvblock.isApprox(cvec2.block(0, 2), 1e-3).should.false;
+    cvblock.isApprox(cvec2.block(0, 2), 1e-2).should.true;
+  });
+
+  it('#isApprox() should return true if this is approxivecely equal to a complex row-vector block', function() {
+    cvblock.isApprox.should.be.a.Function;
+
+    var cvblock2 = CVectorBlock(cvec, 0, 1);
+    cvblock2.toString().should.equal("(1,0)");
+
+    cvblock2.diva(9);
+    cvblock2.toString().should.equal("(0.111111,0)");
+
+    var crvec2 = new CRowVector([
+      0.111
+    ]);
+
+    cvblock2.isApprox(crvec2.block(0, 1), 1e-3).should.false;
+    cvblock2.isApprox(crvec2.block(0, 1), 1e-2).should.true;
+  });
+
+  it('#Zero() should return a complex matrix with zero values', function() {
+    CVectorBlock.Zero.should.be.a.Function;
+
+    CVectorBlock.Zero(3).toString().should.equal("(0,0)\n(0,0)\n(0,0)");
+    CVectorBlock.Zero(3).should.instanceOf(CVector);
+
+    CVectorBlock.Zero(3).equals(
+      new CMatrix(3, 1).set([
+        0,
+        0,
+        0
+      ])
+    ).should.true;
+  });
+
+  it('#Identity() should return a complex identity vector', function() {
+    CVectorBlock.Identity.should.be.a.Function;
+
+    CVectorBlock.Identity(0).toString().should.equal("");
+
+    var cvec2 = CVectorBlock.Identity(3);
+    cvec2.equals(new CMatrix(3, 1).set([
+      1,
+      0,
+      0
+    ])).should.true;
+  });
+
+  it('#Random() should return a matrix with random values', function() {
+    CVectorBlock.Random.should.be.a.Function;
+
+    var cvec2 = CVectorBlock.Random(3);
+    cvec2.should.instanceOf(CVector);
+    cvec2.rows().should.equal(3);
+    cvec2.cols().should.equal(1);
+  });
+});
