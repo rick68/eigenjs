@@ -37,6 +37,10 @@
 #include "CRowVector_fwd.hpp"
 #include "MatrixBlock_fwd.hpp"
 #include "CMatrixBlock_fwd.hpp"
+#include "VectorBlock_fwd.hpp"
+#include "CVectorBlock_fwd.hpp"
+#include "RowVectorBlock_fwd.hpp"
+#include "CRowVectorBlock_fwd.hpp"
 #include "detail/initializer.hpp"
 #include "detail/unwrap_block.hpp"
 #include "detail/property_accessor_base.hpp"
@@ -48,11 +52,15 @@
   typedef ::EigenJS::Matrix< scalar_type > Matrix;                           \
   typedef ::EigenJS::Vector< scalar_type > Vector;                           \
   typedef ::EigenJS::RowVector< scalar_type > RowVector;                     \
+  typedef ::EigenJS::MatrixBlock< scalar_type > MatrixBlock;                 \
+  typedef ::EigenJS::VectorBlock< scalar_type > VectorBlock;                 \
+  typedef ::EigenJS::RowVectorBlock< scalar_type > RowVectorBlock;           \
   typedef ::EigenJS::CMatrix< scalar_type > CMatrix;                         \
   typedef ::EigenJS::CVector< scalar_type > CVector;                         \
   typedef ::EigenJS::CRowVector< scalar_type > CRowVector;                   \
-  typedef ::EigenJS::MatrixBlock< scalar_type > MatrixBlock;                 \
   typedef ::EigenJS::CMatrixBlock< scalar_type > CMatrixBlock;               \
+  typedef ::EigenJS::CVectorBlock< scalar_type > CVectorBlock;               \
+  typedef ::EigenJS::CRowVectorBlock< scalar_type > CRowVectorBlock;         \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \

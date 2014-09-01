@@ -116,7 +116,7 @@ describe('CMatrixBlock', function() {
     cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
   });
 
-  it('#assign() should return the sum of two complex matrix blocks', function() {
+  it('#assign() should assign a complex matrix blocks in another', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -125,7 +125,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a matrix', function() {
+  it('#assign() should assign a complex matrix block in a matrix', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -134,7 +134,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a vector', function() {
+  it('#assign() should assign a complex matrix block in a vector', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -146,7 +146,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (0,0)  (2,0)  (3,0)  (4,0)\n (0,0)  (6,0)  (7,0)  (8,0)\n (0,0) (10,0) (11,0) (12,0)\n (0,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a row-vector', function() {
+  it('#assign() should assign a complex matrix block in a row-vector', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -158,7 +158,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (0,0)  (0,0)  (0,0)  (0,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a complex matrix', function() {
+  it('#assign() should assign a complex matrix block in a complex matrix', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -167,7 +167,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a complex vector', function() {
+  it('#assign() should assign a complex matrix block in a complex vector', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
@@ -179,7 +179,7 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (0,0)  (2,0)  (3,0)  (4,0)\n (0,0)  (6,0)  (7,0)  (8,0)\n (0,0) (10,0) (11,0) (12,0)\n (0,0) (14,0) (15,0) (16,0)");
   });
 
-  it('#assign() should return the sum of a complex matrix block and a complex row-vector', function() {
+  it('#assign() should assign a complex matrix block in a complex row-vector', function() {
     cmblock.assign.should.be.a.Function;
 
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");

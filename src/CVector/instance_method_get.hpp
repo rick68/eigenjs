@@ -21,11 +21,11 @@ EIGENJS_INSTANCE_METHOD(CVector, get,
   if (args.Length() == 1 &&
       args[0]->IsNumber()
   ) {
-    const CVector* const& obj = node::ObjectWrap::Unwrap<CVector>(args.This());
-    const typename CVector::value_type& value = **obj;
-    const typename CVector::value_type::Index& row = args[0]->Int32Value();
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
+    const typename T::value_type& value = **obj;
+    const typename T::value_type::Index& row = args[0]->Int32Value();
 
-    if (CVector::is_out_of_range(value, row, 0)) {
+    if (T::is_out_of_range(value, row, 0)) {
       NanReturnUndefined();
     }
 

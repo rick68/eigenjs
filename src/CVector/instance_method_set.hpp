@@ -16,8 +16,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CVector, set,
 {
-  CVector* obj = node::ObjectWrap::Unwrap<CVector>(args.This());
-  typename CVector::value_type& value = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& value = **obj;
   const int& args_length = args.Length();
 
   NanScope();

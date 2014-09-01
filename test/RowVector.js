@@ -6,6 +6,7 @@ const
     CMatrix = Eigen.CMatrix,
     CRowVector = Eigen.CRowVector,
     Complex = Eigen.Complex,
+    RowVectorBlock = Eigen.RowVectorBlock,
     should = require('should');
 
 describe('RowVector', function() {
@@ -533,5 +534,17 @@ describe('RowVector', function() {
     rvec3.rows().should.equal(1);
     rvec3.cols().should.equal(3);
 
+  });
+
+  it("#block() should return a row-vector block", function() {
+    var rvblock = rvec.block(2, 2);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("3 4");
+
+    rvblock.assign(RowVector([
+      -1, -2
+    ]));
+
+    rvec.toString().should.equal(" 1  2 -1 -2  5  6");
   });
 });

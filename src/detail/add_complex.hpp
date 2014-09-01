@@ -31,6 +31,10 @@
 #include "../CRowVector_fwd.hpp"
 #include "../MatrixBlock_fwd.hpp"
 #include "../CMatrixBlock_fwd.hpp"
+#include "../VectorBlock_fwd.hpp"
+#include "../CVectorBlock_fwd.hpp"
+#include "../RowVectorBlock_fwd.hpp"
+#include "../CRowVectorBlock_fwd.hpp"
 
 namespace EigenJS {
 namespace detail {
@@ -76,6 +80,22 @@ struct add_complex<MatrixBlock<ScalarType, ValueType>, true, true> {
   typedef typename std::enable_if<
       is_eigen_block<ValueType>::value
     , CMatrixBlock<ScalarType>
+    >::type type;
+};
+
+template <typename ScalarType, typename ValueType>
+struct add_complex<VectorBlock<ScalarType, ValueType>, true, true> {
+  typedef typename std::enable_if<
+      is_eigen_block<ValueType>::value
+    , CVectorBlock<ScalarType>
+    >::type type;
+};
+
+template <typename ScalarType, typename ValueType>
+struct add_complex<RowVectorBlock<ScalarType, ValueType>, true, true> {
+  typedef typename std::enable_if<
+      is_eigen_block<ValueType>::value
+    , CRowVectorBlock<ScalarType>
     >::type type;
 };
 

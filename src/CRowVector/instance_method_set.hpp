@@ -16,8 +16,8 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CRowVector, set,
 {
-  CRowVector* obj = node::ObjectWrap::Unwrap<CRowVector>(args.This());
-  typename CRowVector::value_type& value = **obj;
+  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+  typename T::value_type& value = **obj;
   const int& args_length = args.Length();
 
   NanScope();
@@ -25,7 +25,7 @@ EIGENJS_INSTANCE_METHOD(CRowVector, set,
   if (args_length == 1 && args[0]->IsArray()) {
     const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename CRowVector::value_type::Index& cols = value.cols();
+    const typename T::value_type::Index& cols = value.cols();
 
     if (len != cols) {
       len < cols
@@ -36,7 +36,7 @@ EIGENJS_INSTANCE_METHOD(CRowVector, set,
 
     for (uint32_t i = 0; i < len; ++i) {
       v8::Local<v8::Value> elem = array->Get(i);
-      if (CVector::is_scalar(elem)) {
+      if (T::is_scalar(elem)) {
         value(0, i) = elem->NumberValue();
       } else if (Complex::is_complex(elem->ToObject())) {
         const Complex* const& rhs_obj =
@@ -46,14 +46,14 @@ EIGENJS_INSTANCE_METHOD(CRowVector, set,
       }
     }
   } else if (args_length == 2 && args[0]->IsNumber()) {
-    const typename CRowVector::value_type::Index& col = args[0]->Int32Value();
+    const typename T::value_type::Index& col = args[0]->Int32Value();
 
-    if (CRowVector::is_out_of_range(value, 0, col)) {
+    if (T::is_out_of_range(value, 0, col)) {
       NanReturnUndefined();
     }
 
-    if (CVector::is_scalar(args[1])) {
-      const typename CVector::scalar_type& new_real = args[1]->NumberValue();
+    if (T::is_scalar(args[1])) {
+      const typename T::scalar_type& new_real = args[1]->NumberValue();
       value(0, col) = typename Complex::value_type(new_real, 0);
     } else if (Complex::is_complex(args[1])) {
       const Complex* const& rhs_obj =

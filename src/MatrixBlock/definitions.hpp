@@ -14,16 +14,13 @@
 
 #include "../MatrixBlock_fwd.hpp"
 
-#include "instance_method_assign.hpp"
 #include "instance_method_mula.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   MatrixBlock
-, (instance_method_assign)
-
-  (instance_method_mula)
+, (instance_method_mula)
 );
 
 }  // namespace EigenJS

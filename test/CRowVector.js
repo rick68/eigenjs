@@ -7,6 +7,7 @@ const
     CVector = Eigen.CVector,
     CRowVector = Eigen.CRowVector,
     Complex = Eigen.Complex,
+    CRowVectorBlock = Eigen.CRowVectorBlock,
     should = require('should');
 
 describe('CRowVector', function() {
@@ -625,5 +626,17 @@ describe('CRowVector', function() {
     crvec3.rows().should.equal(1);
     crvec3.cols().should.equal(3);
 
+  });
+
+  it("#block() should return a complex row-vector block", function() {
+    var crvblock = crvec.block(1, 2);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(2,2) (3,3)");
+
+    crvblock.assign(CRowVector([
+      -1, -2
+    ]));
+
+    crvec.toString().should.equal(" (1,1) (-1,0) (-2,0)");
   });
 });

@@ -62,6 +62,27 @@ EIGENJS_INSTANCE_METHOD(Matrix, equals,
       }
 
       NanReturnValue(NanNew<v8::Boolean>(value == rhs_matrixblock));
+    } else if (VectorBlock::is_vectorblock(args[0])) {
+      const VectorBlock* rhs_obj =
+          node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+      const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_vectorblock));
+    } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+      const RowVectorBlock* rhs_obj =
+          node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+      const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+          **rhs_obj;
+
+      if (T::is_nonconformate_arguments(obj, rhs_obj)) {
+        NanReturnUndefined();
+      }
+
+      NanReturnValue(NanNew<v8::Boolean>(value == rhs_rowvectorblock));
     }
   }
 
