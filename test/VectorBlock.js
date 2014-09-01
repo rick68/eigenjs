@@ -136,7 +136,7 @@ describe('VectorBlock', function() {
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
     vblock.toString().should.equal("3\n4");
-    vblock.assign(Vector.Zero(2)).toString().should.equal("0\n0");
+    vblock.assign(Matrix.Zero(2, 1)).toString().should.equal("0\n0");
     vec.toString().should.equal("1\n2\n0\n0\n5\n6");
   });
 

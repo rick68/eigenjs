@@ -387,7 +387,7 @@ describe('Vector', function() {
     vec.mul(-1).toString().should.equal("-1\n-2\n-3\n-4\n-5\n-6");
   });
 
-  it('#mul() should return a CMatrix with the product of a vector and a complex', function() {
+  it('#mul() should return a CMatrix with the product of a vector and a complex value', function() {
     vec.mul.should.be.a.Function;
 
     var c = new Complex(-1, 0);
