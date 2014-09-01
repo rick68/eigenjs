@@ -482,7 +482,7 @@ describe('RowVectorBlock', function() {
     rvblock.toString().should.equal("1 0");
   });
 
-  it('#sub() should return the difference of two vector block', function() {
+  it('#sub() should return the difference of two row-vector block', function() {
     rvblock.sub.should.be.a.Function;
 
     rvblock.toString().should.equal("3 4");
@@ -1288,8 +1288,8 @@ describe('RowVectorBlock', function() {
 
     RowVectorBlock.Identity(0).toString().should.equal("");
 
-    var vec2 = RowVectorBlock.Identity(3);
-    vec2.equals(new Matrix(1, 3).set([
+    var rvec2 = RowVectorBlock.Identity(3);
+    rvec2.equals(new Matrix(1, 3).set([
       1, 0, 0
     ])).should.true;
   });
