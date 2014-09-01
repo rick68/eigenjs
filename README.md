@@ -261,45 +261,75 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
-* [CVector](#cvector) **inherits from CMatrix**
-  * [CVector Class Methods](#cvector-class-methods)
-    * [CVector(rows)](#cvectorrows)
-    * [CVector(comp_array)](#cvectorcomp_array)
-  * [CVector Instance Methods](#cvector-instance-methods)
+* [Complex Vector](#complex-vector) **inherits from CMatrix**
+  * [Complex Vector Class Methods](#complex-vector-class-methods)
+    * [Complex Vector(rows)](#complex-vectorrows)
+    * [Complex Vector(comp_array)](#complex-vectorcomp_array)
+  * [Complex Vector Instance Methods](#complex-vector-instance-methods)
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#cvecgetrow)
-* [RowVector](#rowvector) **inherits from Matrix**
-  * [RowVector Class Methods](#rowvector-class-methods)
+* [Row Vector](#row-vector) **inherits from Matrix**
+  * [Row Vector Class Methods](#row-vector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
-  * [RowVector Instance Methods](#rowvector-instance-methods)
+  * [Row Vector Instance Methods](#row-vector-instance-methods)
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
-* [CRowVector](#crowvector) **inherits from CMatrix**
-  * [CRowVector Class Methods](#crowvector-class-methods)
-    * [CRowVector(cols)](#crowvectorcols)
-    * [CRowVector(comp_array)](#crowvectorcomp_array)
-  * [CRowVector Instance Methods](#crowvector-instance-methods)
+* [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
+  * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
+    * [CRowVector(cols)](#complex-rowvectorcols)
+    * [CRowVector(comp_array)](#complex-rowvectorcomp_array)
+  * [Complex Row Vector Instance Methods](#complex-row-vector-instance-methods)
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
     * [crvec.get(col)](#crvecgetcol)
-* [MatrixBlock](#matrixblock) **inherits from Matrix**
-  * [MatrixBlock Class Methods](#matrixblock-class-methods)
+* [Matrix Block](#matrix-block) **inherits from Matrix**
+  * [Matrix Block Class Methods](#matrix-block-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
     * [MatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
     * [MatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
-  * [MatrixBlock Instance Methods](#matrixblock-instance-methods)
-* [CMatrixBlock](#cmatrixblock) **inherits from CMatrix**
-  * [CMatrixBlock Class Methods](#cmatrixblock-class-methods)
+  * [Matrix Block Instance Methods](#matrix-block-instance-methods)
+* [Complex Matrix Block](#complex-matrix-block) **inherits from CMatrix**
+  * [Complex Matrix Block Class Methods](#complex-matrix-block-class-methods)
     * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)](#matrixblockcmat-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#matrixblockcvec-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#matrixblockcrvec-startrow-startcol-blockrows-blockcols)
-  * [CMatrixBlock Instance Methods](#cmatrixblock-instance-methods)
+  * [Complex Matrix Block Instance Methods](#complex-matrix-block-instance-methods)
+* [Vector Block](#vector-block) **inherits from Vector and MatrixBlock**
+  * [Vector Block Class Methods](#vector-block-class-methods)
+    * [VectorBlock(mat, startRow, blockRows)](#vectorblockmat-startrow-blockrows)
+    * [VectorBlock(vec, startRow, blockRows)](#vectorblockvec-startrow-blockrows)
+    * [VectorBlock(rvec, startRow, blockRows)](#vectorblockrvec-startrow-blockrows)
+  * [VectorBlock Instance Methods](#vectorblock-instance-methods)
+* [Complex Vector Block](#complex-vector-block) **inherits from CVector and CMatrixBlock**
+  * [Complex Vector Block Class Methods](#complex-vector-block-class-methods)
+    * [CVectorBlock(mat, startRow, blockRows)](#cvectorblockmat-startrow-blockrows)
+    * [CVectorBlock(vec, startRow, blockRows)](#cvectorblockvec-startrow-blockrows)
+    * [CVectorBlock(rvec, startRow, blockRows)](#cvectorblockrvec-startrow-blockrows)
+    * [CVectorBlock(cmat, startRow, blockRows)](#cvectorblockcmat-startrow-blockrows)
+    * [CVectorBlock(cvec, startRow, blockRows)](#cvectorblockcvec-startrow-blockrows)
+    * [CVectorBlock(crvec, startRow, blockRows)](#cvectorblockcrvec-startrow-blockrows)
+  * [Complex Vector Block Instance Methods](#complex-vector-block-instance-methods)
+* [Row Vector Block](#row-vector-block) **inherits from RowVector and MatrixBlock**
+  * [Row Vector Block Class Methods](#row-vector-block-class-methods)
+    * [RowVectorBlock(mat, startCol, blockCols)](#rowvectorblockmat-startcol-blockcols)
+    * [RowVectorBlock(vec, startCol, blockCols)](#rowvectorblockvec-startcol-blockcols)
+    * [RowVectorBlock(rvec, startCol, blockCols)](#rowvectorblockrvec-startcol-blockcols)
+  * [Row Vector Block Instance Methods](#row-vector-block-instance-methods)
+* [Complex Row Vector Block](#complex-row-vector-block) **inherits from CRowVector and CMatrixBlock**
+  * [Complex Row Vector Block Class Methods](#complex-row-vector-block-class-methods)
+    * [CRowVectorBlock(mat, startCol, blockCols)](#crowvectorblockmat-startcol-blockcols)
+    * [CRowVectorBlock(vec, startCol, blockCols)](#crowvectorblockvec-startcol-blockcols)
+    * [CRowVectorBlock(rvec, startCol, blockCols)](#crowvectorblockrvec-startcol-blockcols)
+    * [CRowVectorBlock(cmat, startCol, blockCols)](#crowvectorblockcmat-startcol-blockcols)
+    * [CRowVectorBlock(cvec, startCol, blockCols)](#crowvectorblockcvec-startcol-blockcols)
+    * [CRowVectorBlock(crvec, startCol, blockCols)](#crowvectorblockcrvec-startcol-blockcols)
+  * [Complex Row Vector Block Instance Methods](#complex-row-vector-block-instance-methods)
 
 ## Complex
 
@@ -1890,9 +1920,9 @@ console.log(vec.get(2).toString());
 3
 ```
 
-## CVector
+## Complex Vector
 
-### CVector Class Methods
+### Complex Vector Class Methods
 
 #### CVector(rows)
 
@@ -1929,7 +1959,7 @@ cvec =
 (3,0)
 ```
 
-### CVector Instance Methods
+### Complex Vector Instance Methods
 
 #### cvec.set(row, comp)
 
@@ -1991,9 +2021,9 @@ console.log(vec.get(2).toString());
 (3,0)
 ```
 
-## RowVector
+## Row Vector
 
-### RowVector Class Methods
+### Row Vector Class Methods
 
 #### RowVector(cols)
 
@@ -2023,7 +2053,7 @@ rvec =
 1 2 3
 ```
 
-### RowVector Instance Methods
+### Row Vector Instance Methods
 
 #### rvec.set(col, scalar)
 
@@ -2074,9 +2104,9 @@ console.log(rvec.get(2).toString());
 3
 ```
 
-## CRowVector
+## Complex Row Vector
 
-### CRowVector Class Methods
+### Complex Row Vector Class Methods
 
 #### CRowVector(cols)
 
@@ -2107,7 +2137,7 @@ crvec =
 (1,0) (2,4) (3,0)
 ```
 
-### CRowVector Instance Methods
+### Complex Row Vector Instance Methods
 
 #### crvec.set(col, comp)
 
@@ -2161,9 +2191,9 @@ console.log(crvec.get(2).toString());
 (3,0)
 ```
 
-## MatrixBlock
+## Matrix Block
 
-### MatrixBlock Class Methods
+### Matrix Block Class Methods
 
 #### MatrixBlock(mat, startRow, startCol, blockRows, blockCols)
 #### MatrixBlock(vec, startRow, startCol, blockRows, blockCols)
@@ -2190,11 +2220,11 @@ mblock =
  0.813348 -0.350211
 ```
 
-### MatrixBlock Instance Methods
+### Matrix Block Instance Methods
 
-## CMatrixBlock
+## Complex Matrix Block
 
-### CMatrixBlock Class Methods
+### Complex Matrix Block Class Methods
 
 #### CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)
 #### CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)
@@ -2224,4 +2254,50 @@ cmblock =
 (-0.233766,-0.910678)  (0.206301,-0.699413)
 ```
 
-### CMatrixBlock Instance Methods
+### Complex Matrix Block Instance Methods
+
+## Vector Block
+
+### Vector Block Class Methods
+
+#### VectorBlock(mat, startRow, blockRows)
+#### VectorBlock(vec, startRow, blockRows)
+#### VectorBlock(rvec, startRow, blockRows)
+
+### Vector Block Instance Methods
+
+## Complex Vector Block
+
+### Complex Vector Block Class Methods
+
+#### CVectorBlock(mat, startRow, blockRows)
+#### CVectorBlock(vec, startRow, blockRows)
+#### CVectorBlock(rvec, startRow, blockRows)
+#### CVectorBlock(cmat, startRow, blockRows)
+#### CVectorBlock(cvec, startRow, blockRows)
+#### CVectorBlock(crvec, startRow, blockRows)
+
+### Complex Vector Block Instance Methods
+
+## Row Vector Block
+
+### Row Vector Block Class Methods
+
+#### RowVectorBlock(mat, startCol, blockCols)
+#### RowVectorBlock(vec, startCol, blockCols)
+#### RowVectorBlock(rvec, startCol, blockCols)
+
+### Row Vector Block Instance Methods
+
+## Complex Row Vector Block
+
+### Complex Row Vector Block Class Methods
+
+#### CRowVectorBlock(mat, startCol, blockCols)
+#### CRowVectorBlock(vec, startCol, blockCols)
+#### CRowVectorBlock(rvec, startCol, blockCols)
+#### CRowVectorBlock(cmat, startCol, blockCols)
+#### CRowVectorBlock(cvec, startCol, blockCols)
+#### CRowVectorBlock(crvec, startCol, blockCols)
+
+### Complex Row Vector Block Instance Methods
