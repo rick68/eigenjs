@@ -288,46 +288,25 @@ $ npm install eigenjs --msvs_version=2012
 * [Matrix Block](#matrix-block) **inherits from Matrix**
   * [Matrix Block Class Methods](#matrix-block-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
-    * [MatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
-    * [MatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
   * [Matrix Block Instance Methods](#matrix-block-instance-methods)
 * [Complex Matrix Block](#complex-matrix-block) **inherits from CMatrix**
   * [Complex Matrix Block Class Methods](#complex-matrix-block-class-methods)
-    * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#cmatrixblockmat-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#cmatrixblockvec-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockrvec-startrow-startcol-blockrows-blockcols)
     * [CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)](#cmatrixblockcmat-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockcvec-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockcrvec-startrow-startcol-blockrows-blockcols)
   * [Complex Matrix Block Instance Methods](#complex-matrix-block-instance-methods)
 * [Vector Block](#vector-block) **inherits from Vector and MatrixBlock**
   * [Vector Block Class Methods](#vector-block-class-methods)
-    * [VectorBlock(mat, startRow, blockRows)](#vectorblockmat-startrow-blockrows)
     * [VectorBlock(vec, startRow, blockRows)](#vectorblockvec-startrow-blockrows)
-    * [VectorBlock(rvec, startRow, blockRows)](#vectorblockrvec-startrow-blockrows)
   * [Vector Block Instance Methods](#vector-block-instance-methods)
 * [Complex Vector Block](#complex-vector-block) **inherits from CVector and CMatrixBlock**
   * [Complex Vector Block Class Methods](#complex-vector-block-class-methods)
-    * [CVectorBlock(mat, startRow, blockRows)](#cvectorblockmat-startrow-blockrows)
-    * [CVectorBlock(vec, startRow, blockRows)](#cvectorblockvec-startrow-blockrows)
-    * [CVectorBlock(rvec, startRow, blockRows)](#cvectorblockrvec-startrow-blockrows)
-    * [CVectorBlock(cmat, startRow, blockRows)](#cvectorblockcmat-startrow-blockrows)
     * [CVectorBlock(cvec, startRow, blockRows)](#cvectorblockcvec-startrow-blockrows)
-    * [CVectorBlock(crvec, startRow, blockRows)](#cvectorblockcrvec-startrow-blockrows)
   * [Complex Vector Block Instance Methods](#complex-vector-block-instance-methods)
 * [Row Vector Block](#row-vector-block) **inherits from RowVector and MatrixBlock**
   * [Row Vector Block Class Methods](#row-vector-block-class-methods)
-    * [RowVectorBlock(mat, startCol, blockCols)](#rowvectorblockmat-startcol-blockcols)
-    * [RowVectorBlock(vec, startCol, blockCols)](#rowvectorblockvec-startcol-blockcols)
     * [RowVectorBlock(rvec, startCol, blockCols)](#rowvectorblockrvec-startcol-blockcols)
   * [Row Vector Block Instance Methods](#row-vector-block-instance-methods)
 * [Complex Row Vector Block](#complex-row-vector-block) **inherits from CRowVector and CMatrixBlock**
   * [Complex Row Vector Block Class Methods](#complex-row-vector-block-class-methods)
-    * [CRowVectorBlock(mat, startCol, blockCols)](#crowvectorblockmat-startcol-blockcols)
-    * [CRowVectorBlock(vec, startCol, blockCols)](#crowvectorblockvec-startcol-blockcols)
-    * [CRowVectorBlock(rvec, startCol, blockCols)](#crowvectorblockrvec-startcol-blockcols)
-    * [CRowVectorBlock(cmat, startCol, blockCols)](#crowvectorblockcmat-startcol-blockcols)
-    * [CRowVectorBlock(cvec, startCol, blockCols)](#crowvectorblockcvec-startcol-blockcols)
     * [CRowVectorBlock(crvec, startCol, blockCols)](#crowvectorblockcrvec-startcol-blockcols)
   * [Complex Row Vector Block Instance Methods](#complex-row-vector-block-instance-methods)
 
@@ -2196,8 +2175,6 @@ console.log(crvec.get(2).toString());
 ### Matrix Block Class Methods
 
 #### MatrixBlock(mat, startRow, startCol, blockRows, blockCols)
-#### MatrixBlock(vec, startRow, startCol, blockRows, blockCols)
-#### MatrixBlock(rvec, startRow, startCol, blockRows, blockCols)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2226,12 +2203,7 @@ mblock =
 
 ### Complex Matrix Block Class Methods
 
-#### CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)
-#### CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)
-#### CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)
 #### CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)
-#### CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)
-#### CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2260,9 +2232,28 @@ cmblock =
 
 ### Vector Block Class Methods
 
-#### VectorBlock(mat, startRow, blockRows)
 #### VectorBlock(vec, startRow, blockRows)
-#### VectorBlock(rvec, startRow, blockRows)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , VB = Eigen.VectorBlock
+  , vec = new V.Random(4)
+  , vblock = new VB(vec, 1, 2);
+console.log('vec = \n%s', vec);
+console.log('vblock = \n%s', vblock);
+```
+
+```txt
+vec =
+ 0.588843
+ 0.686789
+ 0.856138
+-0.895627
+vblock =
+0.686789
+0.856138
+```
 
 ### Vector Block Instance Methods
 
@@ -2270,12 +2261,28 @@ cmblock =
 
 ### Complex Vector Block Class Methods
 
-#### CVectorBlock(mat, startRow, blockRows)
-#### CVectorBlock(vec, startRow, blockRows)
-#### CVectorBlock(rvec, startRow, blockRows)
-#### CVectorBlock(cmat, startRow, blockRows)
 #### CVectorBlock(cvec, startRow, blockRows)
-#### CVectorBlock(crvec, startRow, blockRows)
+
+```js
+var Eigen = require('eigenjs')
+  , CV = Eigen.CVector
+  , CVB = Eigen.CVectorBlock
+  , cvec = new CV.Random(4)
+  , cvblock = new CVB(cvec, 1, 2);
+console.log('cvec = \n%s', cvec);
+console.log('cvblock = \n%s', cvblock);
+```
+
+```txt
+cvec =
+  (0.152345,0.457992)
+ (-0.536544,0.301383)
+  (-0.65206,0.819627)
+(-0.523377,-0.399041)
+cvblock =
+(-0.536544,0.301383)
+ (-0.65206,0.819627)
+```
 
 ### Complex Vector Block Instance Methods
 
@@ -2283,9 +2290,24 @@ cmblock =
 
 ### Row Vector Block Class Methods
 
-#### RowVectorBlock(mat, startCol, blockCols)
-#### RowVectorBlock(vec, startCol, blockCols)
 #### RowVectorBlock(rvec, startCol, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , RV = Eigen.RowVector
+  , RVB = Eigen.RowVectorBlock
+  , rvec = new RV.Random(4)
+  , rvblock = new RVB(rvec, 1, 2);
+console.log('rvec = \n%s', rvec);
+console.log('rvblock = \n%s', rvblock);
+```
+
+```txt
+rvec =
+ 0.922803  -0.45235 -0.640183  0.439847
+rvblock =
+ -0.45235 -0.640183
+```
 
 ### Row Vector Block Instance Methods
 
@@ -2293,11 +2315,23 @@ cmblock =
 
 ### Complex Row Vector Block Class Methods
 
-#### CRowVectorBlock(mat, startCol, blockCols)
-#### CRowVectorBlock(vec, startCol, blockCols)
-#### CRowVectorBlock(rvec, startCol, blockCols)
-#### CRowVectorBlock(cmat, startCol, blockCols)
-#### CRowVectorBlock(cvec, startCol, blockCols)
 #### CRowVectorBlock(crvec, startCol, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , CRV = Eigen.CRowVector
+  , CRVB = Eigen.CRowVectorBlock
+  , crvec = new CRV.Random(4)
+  , crvblock = new CRVB(crvec, 1, 2);
+console.log('crvec = \n%s', crvec);
+console.log('crvblock = \n%s', crvblock);
+```
+
+```txt
+crvec =
+(0.707337,0.220289) (0.397833,0.371915) (0.782186,0.199594) (0.575888,0.951467)
+crvblock =
+(0.397833,0.371915) (0.782186,0.199594)
+```
 
 ### Complex Row Vector Block Instance Methods
