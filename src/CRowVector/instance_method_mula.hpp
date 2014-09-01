@@ -125,7 +125,8 @@ EIGENJS_INSTANCE_METHOD(CRowVector, mula,
     } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
       const CRowVectorBlock* const& rhs_obj =
           node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
-      const typename CRowVectorBlock::value_type& rhs_crowvectorblock = **rhs_obj;
+      const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+          **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
         NanReturnUndefined();

@@ -112,7 +112,8 @@ class CVectorBlock
 
       if (startRow >= 0 && blockRows >= 0) {
         if (args.IsConstructCall()) {
-          CVectorBlock* obj = new CVectorBlock(rhs_CVector, startRow, blockRows);
+          CVectorBlock* obj =
+              new CVectorBlock(rhs_CVector, startRow, blockRows);
           obj->Wrap(args.This());
           NanReturnValue(args.This());
         } else {
