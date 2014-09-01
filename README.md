@@ -263,8 +263,8 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.get(row)](#vecgetrow)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
-    * [Complex Vector(rows)](#complex-vectorrows)
-    * [Complex Vector(comp_array)](#complex-vectorcomp_array)
+    * [CVector(rows)](#cvectorrows)
+    * [CVector(comp_array)](#cvectorcomp_array)
   * [Complex Vector Instance Methods](#complex-vector-instance-methods)
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
@@ -279,8 +279,8 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.get(col)](#rvecgetcol)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
-    * [CRowVector(cols)](#complex-rowvectorcols)
-    * [CRowVector(comp_array)](#complex-rowvectorcomp_array)
+    * [CRowVector(cols)](#crowvectorcols)
+    * [CRowVector(comp_array)](#crowvectorcomp_array)
   * [Complex Row Vector Instance Methods](#complex-row-vector-instance-methods)
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
@@ -293,19 +293,19 @@ $ npm install eigenjs --msvs_version=2012
   * [Matrix Block Instance Methods](#matrix-block-instance-methods)
 * [Complex Matrix Block](#complex-matrix-block) **inherits from CMatrix**
   * [Complex Matrix Block Class Methods](#complex-matrix-block-class-methods)
-    * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#matrixblockvec-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#matrixblockrvec-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)](#matrixblockcmat-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#matrixblockcvec-startrow-startcol-blockrows-blockcols)
-    * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#matrixblockcrvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#cmatrixblockmat-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(vec, startRow, startCol, blockRows, blockCols)](#cmatrixblockvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(rvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockrvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(cmat, startRow, startCol, blockRows, blockCols)](#cmatrixblockcmat-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(cvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockcvec-startrow-startcol-blockrows-blockcols)
+    * [CMatrixBlock(crvec, startRow, startCol, blockRows, blockCols)](#cmatrixblockcrvec-startrow-startcol-blockrows-blockcols)
   * [Complex Matrix Block Instance Methods](#complex-matrix-block-instance-methods)
 * [Vector Block](#vector-block) **inherits from Vector and MatrixBlock**
   * [Vector Block Class Methods](#vector-block-class-methods)
     * [VectorBlock(mat, startRow, blockRows)](#vectorblockmat-startrow-blockrows)
     * [VectorBlock(vec, startRow, blockRows)](#vectorblockvec-startrow-blockrows)
     * [VectorBlock(rvec, startRow, blockRows)](#vectorblockrvec-startrow-blockrows)
-  * [VectorBlock Instance Methods](#vectorblock-instance-methods)
+  * [Vector Block Instance Methods](#vector-block-instance-methods)
 * [Complex Vector Block](#complex-vector-block) **inherits from CVector and CMatrixBlock**
   * [Complex Vector Block Class Methods](#complex-vector-block-class-methods)
     * [CVectorBlock(mat, startRow, blockRows)](#cvectorblockmat-startrow-blockrows)
@@ -2173,7 +2173,7 @@ crvec =
 (1,0) (2,4) (3,0)
 ```
 
-#### cvec.get(row)
+#### crvec.get(row)
 
 ```js
 var Eigen = require('eigenjs')
