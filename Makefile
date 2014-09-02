@@ -4,6 +4,7 @@ PYTHON ?= python
 
 SOURCES = \
     src/CMatrix.hpp \
+    src/CMatrix/class_method_Constant.hpp \
     src/CMatrix/class_method_Identity.hpp \
     src/CMatrix/class_method_Random.hpp \
     src/CMatrix/class_method_Zero.hpp \
@@ -17,6 +18,7 @@ SOURCES = \
     src/CMatrix/instance_method_equals.hpp \
     src/CMatrix/instance_method_get.hpp \
     src/CMatrix/instance_method_isApprox.hpp \
+    src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
     src/CMatrix/instance_method_rows.hpp \
@@ -31,6 +33,7 @@ SOURCES = \
     src/CMatrixBlock_fwd.hpp \
     src/CMatrix_fwd.hpp \
     src/CRowVector.hpp \
+    src/CRowVector/class_method_Constant.hpp \
     src/CRowVector/definitions.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_mula.hpp \
@@ -40,6 +43,7 @@ SOURCES = \
     src/CRowVectorBlock/definitions.hpp \
     src/CRowVectorBlock_fwd.hpp \
     src/CVector.hpp \
+    src/CVector/class_method_Constant.hpp \
     src/CVector/definitions.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_mula.hpp \
@@ -90,6 +94,7 @@ SOURCES = \
     src/Complex_fwd.hpp \
     src/EigenJS.cpp \
     src/Matrix.hpp \
+    src/Matrix/class_method_Constant.hpp \
     src/Matrix/class_method_Identity.hpp \
     src/Matrix/class_method_Random.hpp \
     src/Matrix/class_method_Zero.hpp \
@@ -103,6 +108,7 @@ SOURCES = \
     src/Matrix/instance_method_equals.hpp \
     src/Matrix/instance_method_get.hpp \
     src/Matrix/instance_method_isApprox.hpp \
+    src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
     src/Matrix/instance_method_rows.hpp \
@@ -117,6 +123,7 @@ SOURCES = \
     src/MatrixBlock_fwd.hpp \
     src/Matrix_fwd.hpp \
     src/RowVector.hpp \
+    src/RowVector/class_method_Constant.hpp \
     src/RowVector/definitions.hpp \
     src/RowVector/instance_method_block.hpp \
     src/RowVector/instance_method_get.hpp \
@@ -127,6 +134,7 @@ SOURCES = \
     src/RowVectorBlock/definitions.hpp \
     src/RowVectorBlock_fwd.hpp \
     src/Vector.hpp \
+    src/Vector/class_method_Constant.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_block.hpp \
     src/Vector/instance_method_get.hpp \

@@ -1262,6 +1262,13 @@ describe('CMatrixBlock', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    cmblock.isSquare.should.be.a.Function;
+
+    cmblock.isSquare().should.be.true;
+    CMatrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CMatrixBlock.Zero.should.be.a.Function;
 

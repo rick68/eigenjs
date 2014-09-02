@@ -584,6 +584,13 @@ describe('CRowVector', function() {
     crvec2.div(9).isApprox(cvec, 1e-2).should.true;
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    crvec.isSquare.should.be.a.Function;
+
+    crvec.isSquare().should.be.false;
+    CRowVector(1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a zero complex row-vector', function() {
     CRowVector.Zero.should.be.a.Function;
 

@@ -529,6 +529,13 @@ describe('Vector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    vec.isSquare.should.be.a.Function;
+
+    vec.isSquare().should.be.false;
+    Vector(1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a zero vector', function() {
     Vector.Zero.should.be.a.Function;
 

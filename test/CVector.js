@@ -611,6 +611,13 @@ describe('CVector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    cvec.isSquare.should.be.a.Function;
+
+    cvec.isSquare().should.be.false;
+    CVector(1).isSquare().should.be.true;
+  });
+
   it('#isApprox() should return true if this is approximately equal to a complex matrix', function() {
     cvec.isApprox.should.be.a.Function;
 

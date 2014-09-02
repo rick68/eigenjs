@@ -165,6 +165,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isApprox(mat, [prec = 1e-12])](#matisapproxmat-prec--1e-12)
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
+    * [mat.isSquare()](#matissquare)
     * [mat.toString()](#mattostring)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -256,6 +257,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(cvec, [prec = 1e-12])](#cmatisapproxcvec-prec--1e-12)
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
+    * [cmat.isSquare()](#cmatissquare)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
@@ -1305,6 +1307,21 @@ console.log(mat1.isApprox(mat2, 1e-3));
 true
 ```
 
+#### mat.isSquare()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat1 = new M(4, 4)
+  , mat2 = new M(3, 2);
+console.log(mat1.isSquare());
+console.log(mat2.isSquare());
+```
+
+```txt
+true
+false
+```
+
 #### mat.toString()
 
 ```js
@@ -1831,6 +1848,21 @@ console.log(cmat1.isApprox(cmat2, 1e-3));
 
 ```txt
 true
+```
+
+#### cmat.isSquare()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat1 = new CM(4, 4)
+  , cmat2 = new CM(3, 2);
+console.log(cmat1.isSquare());
+console.log(cmat2.isSquare());
+```
+
+```txt
+true
+false
 ```
 
 #### cmat.toString()

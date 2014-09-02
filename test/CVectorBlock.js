@@ -1612,6 +1612,13 @@ describe('CVectorBlock', function() {
     cvblock2.isApprox(crvec2.block(0, 1), 1e-2).should.true;
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    cvblock.isSquare.should.be.a.Function;
+
+    cvblock.isSquare().should.be.false;
+    CVector(1).block(0, 1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a complex matrix with zero values', function() {
     CVectorBlock.Zero.should.be.a.Function;
 

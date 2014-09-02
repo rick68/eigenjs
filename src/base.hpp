@@ -239,6 +239,21 @@ struct base : node::ObjectWrap {
       : false;
   }
 
+  template <typename T>
+  static NAN_INLINE
+  typename std::enable_if<
+    boost::mpl::or_<
+      detail::is_eigen_block<typename T::value_type>
+    , detail::is_eigen_matrix<typename T::value_type>
+    >::value
+  , bool
+  >::type
+  is_square_matrix(const T* const& op1) {
+    return (*op1)->cols() == (*op1)->rows()
+      ? true
+      : (NanThrowError("The Matrix must be square"), false);
+  }
+
  public:
   NAN_INLINE value_type& operator*() { return *value_ptr_; }
   NAN_INLINE const value_type& operator*() const { return *value_ptr_; }
