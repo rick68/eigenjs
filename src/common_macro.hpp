@@ -233,4 +233,14 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISSQUARE_CONTEXT()             \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Boolean >( value.rows() == value.cols() ) ); \
+  }                                                                          \
+  /**/
+
 #endif  // EIGENJS_COMMON_MACRO_HPP
