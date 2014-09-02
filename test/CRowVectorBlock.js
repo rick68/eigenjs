@@ -1609,6 +1609,13 @@ describe('CRowVectorBlock', function() {
     crvblock2.isApprox(crvec2, 1e-2).should.true;
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    crvblock.isSquare.should.be.a.Function;
+
+    crvblock.isSquare().should.be.false;
+    CRowVector(1).block(0, 1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CRowVectorBlock.Zero.should.be.a.Function;
 

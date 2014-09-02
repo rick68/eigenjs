@@ -499,6 +499,13 @@ describe('CMatrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    cmat.isSquare.should.be.a.Function;
+
+    cmat.isSquare().should.be.true;
+    CMatrix(3, 4).isSquare().should.be.false;
+  });
+
   it('#Zero() should return a zero complex matrix', function() {
     CMatrix.Zero.should.be.a.Function;
 

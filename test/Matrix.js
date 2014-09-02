@@ -416,6 +416,13 @@ describe('Matrix', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    mat.isSquare.should.be.a.Function;
+
+    mat.isSquare().should.be.true;
+    Matrix(3, 4).isSquare().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 

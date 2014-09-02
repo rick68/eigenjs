@@ -1383,6 +1383,13 @@ describe('VectorBlock', function() {
     vblock2.isApprox(rvec.block(0, 1), 1e-2).should.true;
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    vblock.isSquare.should.be.a.Function;
+
+    vblock.isSquare().should.be.false;
+    Vector(1).block(0, 1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     VectorBlock.Zero.should.be.a.Function;
 

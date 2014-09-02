@@ -492,6 +492,13 @@ describe('RowVector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    rvec.isSquare.should.be.a.Function;
+
+    rvec.isSquare().should.be.false;
+    RowVector(1).isSquare().should.be.true;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 

@@ -1007,6 +1007,13 @@ describe('MatrixBlock', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isSquare() should return true if this is square', function() {
+    mblock.isSquare.should.be.a.Function;
+
+    mblock.isSquare().should.be.true;
+    Matrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 
