@@ -1058,4 +1058,16 @@ describe('MatrixBlock', function() {
     mat3.rows().should.equal(3);
     mat3.cols().should.equal(4);
   });
+
+  it('#Constant() should return a Matrix with constant values', function() {
+    MatrixBlock.Constant.should.be.a.Function;
+
+    var mat2 = MatrixBlock.Constant(4, 4, 0.6);
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6");
+
+    var cmat = MatrixBlock.Constant(4, 4, Complex(0.6, 0));
+    cmat.should.instanceOf(CMatrix);
+    cmat.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
 });
