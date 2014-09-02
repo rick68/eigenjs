@@ -547,4 +547,17 @@ describe('RowVector', function() {
 
     rvec.toString().should.equal(" 1  2 -1 -2  5  6");
   });
+
+  it('#Constant() should return a RowVector with constant values', function() {
+    RowVector.Constant.should.be.a.Function;
+
+    var rvec2 = RowVector.Constant(4, 0.6);
+    rvec2.should.instanceOf(RowVector);
+    rvec2.toString().should.equal("0.6 0.6 0.6 0.6");
+
+    var crvec = RowVector.Constant(4, Complex(0.6, 0));
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
 });

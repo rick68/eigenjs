@@ -1302,4 +1302,16 @@ describe('RowVectorBlock', function() {
     rvec2.rows().should.equal(1);
     rvec2.cols().should.equal(3);
   });
+
+  it('#Constant() should return a RowVector with constant values', function() {
+    RowVectorBlock.Constant.should.be.a.Function;
+
+    var rvec2 = RowVectorBlock.Constant(4, 0.6);
+    rvec2.should.instanceOf(RowVector);
+    rvec2.toString().should.equal("0.6 0.6 0.6 0.6");
+
+    var crvec = RowVectorBlock.Constant(4, Complex(0.6, 0));
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
 });

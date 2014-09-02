@@ -21,6 +21,8 @@
 
 #include "instance_method_block.hpp"
 
+#include "class_method_Constant.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
@@ -31,6 +33,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_mula)
 
   (instance_method_block)
+
+  (class_method_Constant)
 );
 
 }  // namespace EigenJS

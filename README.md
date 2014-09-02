@@ -106,6 +106,8 @@ $ npm install eigenjs --msvs_version=2012
     * [Matrix.Identity(rows, cols)](#matrixidentityrows-cols)
     * [Matrix.Random(n)](#matrixrandomn)
     * [Matrix.Random(rows, cols)](#matrixrandomrows-cols)
+    * [Matrix.Constant(rows, cols, scalar)](#matrixconstantrows-cols-scalar)
+    * [Matrix.Constant(rows, cols, comp)](#matrixconstantrows-cols-comp)
   * [Matrix Instance Methods](#matrix-instance-methods)
     * [mat.rows()](#matrows)
     * [mat.cols()](#matcols)
@@ -173,6 +175,8 @@ $ npm install eigenjs --msvs_version=2012
     * [CMatrix.Identity(rows, cols)](#cmatrixidentityrows-cols)
     * [CMatrix.Random(n)](#cmatrixrandomn)
     * [CMatrix.Random(rows, cols)](#cmatrixrandomrows-cols)
+    * [CMatrix.Constant(rows, cols, scalar)](#cmatrixconstantrows-cols-scalar)
+    * [CMatrix.Constant(rows, cols, comp)](#cmatrixconstantrows-cols-comp)
   * [Complex Matrix Instance Methods](#complex-matrix-instance-methods)
     * [cmat.rows()](#cmatrows)
     * [cmat.cols()](#cmatcols)
@@ -257,6 +261,8 @@ $ npm install eigenjs --msvs_version=2012
   * [Vector Class Methods](#vector-class-methods)
     * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalar_array)
+    * [Vector.Constant(rows, scalar)](#vectorconstantrows-scalar)
+    * [Vector.Constant(rows, comp)](#vectorconstantrows-comp)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
@@ -265,6 +271,8 @@ $ npm install eigenjs --msvs_version=2012
   * [Complex Vector Class Methods](#complex-vector-class-methods)
     * [CVector(rows)](#cvectorrows)
     * [CVector(comp_array)](#cvectorcomp_array)
+    * [CVector.Constant(cols, scalar)](#cvectorconstantcols-scalar)
+    * [CVector.Constant(cols, comp)](#cvectorconstantcols-comp)
   * [Complex Vector Instance Methods](#complex-vector-instance-methods)
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
@@ -273,6 +281,8 @@ $ npm install eigenjs --msvs_version=2012
   * [Row Vector Class Methods](#row-vector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
+    * [RowVector.Constant(rows, scalar)](#rowvectorconstantrows-scalar)
+    * [RowVector.Constant(rows, comp)](#rowvectorconstantrows-comp)
   * [Row Vector Instance Methods](#row-vector-instance-methods)
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
@@ -281,6 +291,8 @@ $ npm install eigenjs --msvs_version=2012
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
     * [CRowVector(comp_array)](#crowvectorcomp_array)
+    * [CRowVector.Constant(cols, scalar)](#crowvectorconstantcols-scalar)
+    * [CRowVector.Constant(cols, comp)](#crowvectorconstantcols-comp)
   * [Complex Row Vector Instance Methods](#complex-row-vector-instance-methods)
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
@@ -893,6 +905,23 @@ mat =
  0.260209  -0.13622  0.464891
 ```
 
+#### Matrix.Constant(rows, cols, scalar)
+#### Matrix.Constant(rows, cols, comp)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Constant(4, 4, 0.6);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+```
+
 ### Matrix Instance Methods
 
 #### mat.rows()
@@ -1357,6 +1386,23 @@ console.log('cmat = \n%s', cmat);
 cmat =
    (0.827048,0.18844)  (-0.130621,0.648239)  (-0.946608,0.364096)
 (-0.895631,-0.864291)  (0.952898,-0.648834)  (-0.646252,0.440248)
+```
+
+#### CMatrix.Constant(rows, cols, scalar)
+#### CMatrix.Constant(rows, cols, comp)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Constant(4, 4, 0.6);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
 ```
 
 ### Complex Matrix Instance Methods
@@ -1840,6 +1886,23 @@ vec =
 3
 ```
 
+#### Vector.Constant(rows, scalar)
+#### Vector.Constant(rows, comp)
+
+```js
+var V = require('eigenjs').Vector
+  , vec = V.Constant(4, 0.6);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+0.6
+0.6
+0.6
+0.6
+```
+
 ### Vector Instance Methods
 
 #### vec.set(row, scalar)
@@ -1938,6 +2001,23 @@ cvec =
 (3,0)
 ```
 
+#### CVector.Constant(rows, scalar)
+#### CVector.Constant(rows, comp)
+
+```js
+var CV = require('eigenjs').CVector
+  , cvec = CV.Constant(4, 0.6);
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+(0.6,0)
+(0.6,0)
+(0.6,0)
+(0.6,0)
+```
+
 ### Complex Vector Instance Methods
 
 #### cvec.set(row, comp)
@@ -2032,6 +2112,20 @@ rvec =
 1 2 3
 ```
 
+#### RowVector.Constant(cols, scalar)
+#### RowVector.Constant(cols, comp)
+
+```js
+var RV = require('eigenjs').RVector
+  , rvec = RV.Constant(4, 0.6);
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+0.6 0.6 0.6 0.6
+```
+
 ### Row Vector Instance Methods
 
 #### rvec.set(col, scalar)
@@ -2114,6 +2208,20 @@ console.log('crvec = \n%s', crvec);
 ```txt
 crvec =
 (1,0) (2,4) (3,0)
+```
+
+#### CRowVector.Constant(cols, scalar)
+#### CRowVector.Constant(cols, comp)
+
+```js
+var CRV = require('eigenjs').CRVector
+  , crvec = CRV.Constant(4, 0.6);
+console.log('crvec = \n%s', crvec);
+```
+
+```txt
+crvec =
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
 ```
 
 ### Complex Row Vector Instance Methods
