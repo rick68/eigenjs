@@ -25,7 +25,7 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
   if (args_length == 1 && args[0]->IsArray()) {
     const v8::Local<v8::Array>& array = args[0].As<v8::Array>();
     uint32_t len = array->Length();
-    const typename CVector::value_type::Index& rows = value.rows();
+    const typename T::value_type::Index& rows = value.rows();
 
     if (len != rows) {
       len < rows
@@ -36,7 +36,7 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
 
     for (uint32_t i = 0; i < len; ++i) {
       v8::Local<v8::Value> elem = array->Get(i);
-      if (CVector::is_scalar(elem)) {
+      if (T::is_scalar(elem)) {
         value(i, 0) = elem->NumberValue();
       } else if (Complex::is_complex(elem->ToObject())) {
         const Complex* const& rhs_obj =
@@ -48,11 +48,11 @@ EIGENJS_INSTANCE_METHOD(CVector, set,
   } else if (args_length == 2 && args[0]->IsNumber()) {
     const typename CVector::value_type::Index& row = args[0]->Int32Value();
 
-    if (CVector::is_out_of_range(value, row, 0)) {
+    if (T::is_out_of_range(value, row, 0)) {
       NanReturnUndefined();
     }
 
-    if (CVector::is_scalar(args[1])) {
+    if (T::is_scalar(args[1])) {
       const typename CVector::scalar_type& new_real = args[1]->NumberValue();
       value(row, 0) = typename Complex::value_type(new_real, 0);
     } else if (Complex::is_complex(args[1])) {
