@@ -18,6 +18,7 @@ SOURCES = \
     src/CMatrix/instance_method_equals.hpp \
     src/CMatrix/instance_method_get.hpp \
     src/CMatrix/instance_method_isApprox.hpp \
+    src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
     src/CMatrix/instance_method_rows.hpp \
@@ -107,6 +108,7 @@ SOURCES = \
     src/Matrix/instance_method_equals.hpp \
     src/Matrix/instance_method_get.hpp \
     src/Matrix/instance_method_isApprox.hpp \
+    src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
     src/Matrix/instance_method_rows.hpp \
