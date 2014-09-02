@@ -698,4 +698,12 @@ describe('CVector', function() {
 
     cvec.toString().should.equal(" (1,1)\n (2,2)\n(-1,0)\n(-2,0)\n (5,5)\n (6,6)");
   });
+
+  it('#Constant() should return a CVector with constant values', function() {
+    CVector.Constant.should.be.a.Function;
+
+    var cvec2 = CVector.Constant(4, 0.6);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
+  });
 });

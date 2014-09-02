@@ -1313,4 +1313,12 @@ describe('CMatrixBlock', function() {
     cmat3.rows().should.equal(3);
     cmat3.cols().should.equal(4);
   });
+
+  it('#Constant() should return a CMatrix with constant values', function() {
+    CMatrixBlock.Constant.should.be.a.Function;
+
+    var cmat2 = CMatrixBlock.Constant(4, 4, 0.6);
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
 });

@@ -1648,4 +1648,12 @@ describe('CVectorBlock', function() {
     cvec2.rows().should.equal(3);
     cvec2.cols().should.equal(1);
   });
+
+  it('#Constant() should return a CVectorBlock with constant values', function() {
+    CVectorBlock.Constant.should.be.a.Function;
+
+    var cvec2 = CVectorBlock.Constant(4, 0.6);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
+  });
 });

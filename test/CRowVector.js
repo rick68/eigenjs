@@ -639,4 +639,12 @@ describe('CRowVector', function() {
 
     crvec.toString().should.equal(" (1,1) (-1,0) (-2,0)");
   });
+
+  it('#Constant() should return a CRowVector with constant values', function() {
+    CRowVector.Constant.should.be.a.Function;
+
+    var crvec2 = CRowVectorBlock.Constant(4, 0.6);
+    crvec2.should.instanceOf(CRowVector);
+    crvec2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
 });

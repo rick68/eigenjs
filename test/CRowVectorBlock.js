@@ -1641,4 +1641,12 @@ describe('CRowVectorBlock', function() {
     crvec2.rows().should.equal(1);
     crvec2.cols().should.equal(3);
   });
+
+  it('#Constant() should return a CRowVector with constant values', function() {
+    CRowVectorBlock.Constant.should.be.a.Function;
+
+    var crvec2 = CRowVectorBlock.Constant(4, 0.6);
+    crvec2.should.instanceOf(CRowVector);
+    crvec2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
 });
