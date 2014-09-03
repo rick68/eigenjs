@@ -1,4 +1,4 @@
-# EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url]
+# EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68](http://img.shields.io/gittip/rick68.svg)](https://www.gittip.com/rick68)
 The goal of this project is to port Eigen library into JavaScript for linear algebar.
 
 [npm-image]: http://img.shields.io/npm/v/eigenjs.svg
