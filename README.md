@@ -1,4 +1,6 @@
 # EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68](http://img.shields.io/gittip/rick68.svg)](https://www.gittip.com/rick68)
+[![NPM](https://nodei.co/npm/eigenjs.png?downloads=true&downloadRank=true)](https://nodei.co/npm/eigenjs/) [![NPM](https://nodei.co/npm-dl/eigenjs.png?months=6&height=3)](https://nodei.co/npm/eigenjs/)
+
 The goal of this project is to port Eigen library into JavaScript for linear algebar.
 
 [npm-image]: http://img.shields.io/npm/v/eigenjs.svg
