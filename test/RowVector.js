@@ -439,6 +439,16 @@ describe('RowVector', function() {
     rvec.get(0).should.be.a.Infinity;
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    rvec.determinant.should.be.a.Function;
+
+    (function() {
+      rvec.determinant();
+    }).should.throw("The matrix must be square");
+
+    RowVector([2]).determinant().should.equal(2);
+  });
+
   it('#equals() should return true if two row-vectors are equal', function() {
     rvec.equals.should.be.a.Function;
 

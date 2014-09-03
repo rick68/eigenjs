@@ -559,6 +559,16 @@ describe('CVector', function() {
     cvec.toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
 
+  it('#determinant() should return the determinant of a complex matrix', function() {
+    cvec.determinant.should.be.a.Function;
+
+    (function() {
+      cvec.determinant();
+    }).should.throw("The matrix must be square");
+
+    CVector([5]).determinant().equals(Complex(5)).should.true;
+  });
+
   it('#equals() should return true if two complex vectors are equal', function() {
     cvec.equals.should.be.a.Function;
 

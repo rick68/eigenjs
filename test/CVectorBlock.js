@@ -1468,6 +1468,16 @@ describe('CVectorBlock', function() {
     cvec.toString().should.equal("  (1,0)\n  (2,0)\n(1.5,0)\n  (2,0)\n  (5,0)\n  (6,0)");
   });
 
+  it('#determinant() should return the determinant of a complex matrix', function() {
+    cvblock.determinant.should.be.a.Function;
+
+    (function() {
+      cvblock.determinant();
+    }).should.throw("The matrix must be square");
+
+    CVector([3]).block(0, 1).determinant().equals(Complex(3)).should.true;
+  });
+
   it('#equals() should return true if two complex vector block are equal', function() {
     cvblock.equals.should.be.a.Function;
 
