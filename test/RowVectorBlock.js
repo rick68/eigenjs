@@ -1142,6 +1142,16 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("  1   2 1.5   2   5   6");
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    rvblock.determinant.should.be.a.Function;
+
+    (function() {
+      rvblock.determinant();
+    }).should.throw("The matrix must be square");
+
+    RowVector([9]).block(0, 1).determinant().should.equal(9);
+  });
+
   it('#equals() should return true if two row-vector blocks are equal', function() {
     rvblock.equals.should.be.a.Function;
 

@@ -454,6 +454,25 @@ describe('CMatrix', function() {
     (NaN !== NaN).should.true;
   });
 
+  it('#determinant() should return the determinant of a complex matrix', function() {
+    cmat.determinant.should.be.a.Function;
+
+    var result = cmat.determinant();
+    result.should.instanceOf(Complex);
+    result.abs().should.approximately(0, 1e-12);
+
+    CMatrix.Identity(2).determinant().equals(Complex(1)).should.true;
+
+    CMatrix(2, 2).set([
+      1, 2,
+      3, 4
+    ]).determinant().equals(Complex(-2)).should.true;
+
+    (function() {
+      CMatrix(3, 2).determinant();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     cmat.isApprox.should.be.a.Function;
 
@@ -472,6 +491,10 @@ describe('CMatrix', function() {
         ])
       );
     }).should.throw("Nonconformant arguments");
+
+    (function() {
+      CMatrix(3, 2).determinant();
+    }).should.throw("The matrix must be square");
   });
 
   it('#isApprox() should return true if this is approximately equal to a complex vector', function() {

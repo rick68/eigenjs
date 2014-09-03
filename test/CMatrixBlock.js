@@ -1124,6 +1124,14 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal("  (1,0)   (2,0)   (3,0)   (4,0)\n  (5,0)   (3,0) (3.5,0)   (8,0)\n  (9,0)   (5,0) (5.5,0)  (12,0)\n (13,0)  (14,0)  (15,0)  (16,0)");
   });
 
+  it('#determinant() should return the determinant of a complex matrix', function() {
+    cmblock.determinant.should.be.a.Function;
+
+    var result = cmblock.determinant();
+    result.should.instanceOf(Complex);
+    result.abs().should.approximately(4, 1e-12);
+  });
+
   it('#equals() should return true if two complex matrix block are equal', function() {
     cmblock.equals.should.be.a.Function;
 

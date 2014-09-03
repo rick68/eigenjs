@@ -251,7 +251,7 @@ struct base : node::ObjectWrap {
   is_square_matrix(const T* const& op1) {
     return (*op1)->cols() == (*op1)->rows()
       ? true
-      : (NanThrowError("The Matrix must be square"), false);
+      : (NanThrowError("The matrix must be square"), false);
   }
 
  public:
