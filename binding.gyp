@@ -13,10 +13,14 @@
         ['OS=="win"', {
           'msvs_settings': {
             'VCCLCompilerTool': {
-              'ExceptionHandling': 1,
-              'AdditionalOptions': [ '/GR', '/EHsc', '/wd4018', '/wd4506' ]
+              'ExceptionHandling': 1, # /EHsc
+              'AdditionalOptions': [ '/GR' ]
             }
-          }
+          },
+          'msvs_disable_warnings': [
+            4018, # signed/unsigned mismatch
+            4506  # no definition for inline function 'function'
+          ]
         }],
         ['OS=="linux" or OS=="freebsd" or OS=="openbsd" or OS=="solaris"', {
           'cflags': [ '-std=c++11' ],
