@@ -456,6 +456,16 @@ describe('Vector', function() {
     vec.get(0).should.be.a.Infinity;
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    vec.determinant.should.be.a.Function;
+
+    (function() {
+      vec.determinant();
+    }).should.throw("The matrix must be square");
+
+    Vector([10]).determinant().should.equal(10);
+  });
+
   it('#equals() should return true if two vectors are equal', function() {
     vec.equals.should.be.a.Function;
 

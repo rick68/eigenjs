@@ -1481,6 +1481,16 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal("  (1,0)   (2,0) (1.5,0)   (2,0)   (5,0)   (6,0)");
   });
 
+  it('#determinant() should return the determinant of a complex matrix', function() {
+    crvblock.determinant.should.be.a.Function;
+
+    (function() {
+      crvblock.determinant();
+    }).should.throw("The matrix must be square");
+
+    CRowVector([6]).block(0, 1).determinant().equals(Complex(6)).should.true;
+  });
+
   it('#equals() should return true if two complex row-vector blocks are equal', function() {
     crvblock.equals.should.be.a.Function;
 

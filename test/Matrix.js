@@ -345,6 +345,19 @@ describe('Matrix', function() {
     mat.get(0, 0).should.be.a.Infinity;
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    mat.determinant.should.be.a.Function;
+
+    var result = mat.determinant();
+    result.should.approximately(0, 1e-3);
+
+    Matrix.Identity(2).determinant().should.equal(1);
+
+    (function() {
+      Matrix(3, 2).determinant();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#equals() should return true if two matrices are equal', function() {
     mat.equals.should.be.a.Function;
 

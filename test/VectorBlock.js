@@ -1239,6 +1239,16 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("  1\n  2\n1.5\n  2\n  5\n  6");
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    vblock.determinant.should.be.a.Function;
+
+    (function() {
+      vblock.determinant();
+    }).should.throw("The matrix must be square");
+
+    Vector([1]).block(0, 1).determinant().should.equal(1);
+  });
+
   it('#equals() should return true if two vector block are equal', function() {
     vblock.equals.should.be.a.Function;
 

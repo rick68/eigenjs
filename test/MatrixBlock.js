@@ -881,6 +881,19 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal("  1   2   3   4\n  5   3 3.5   8\n  9   5 5.5  12\n 13  14  15  16");
   });
 
+  it('#determinant() should return the determinant of a matrix', function() {
+    mblock.determinant.should.be.a.Function;
+
+    var result = mblock.determinant();
+    result.should.approximately(-4, 1e-3);
+
+    Matrix.Identity(2).block(0, 0, 2, 2).determinant().should.equal(1);
+
+    (function() {
+      Matrix(3, 2).block(0, 0, 3, 2).determinant();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#equals() should return true if two matrix block are equal', function() {
     mblock.equals.should.be.a.Function;
 
