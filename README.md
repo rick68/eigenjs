@@ -158,6 +158,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.div(scalar)](#matdivscalar)
     * [mat.div(comp)](#matdivcomp)
     * [mat.diva(scalar)](#matdivascalar)
+    * [mat.determinant()](#matdeterminant)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -249,6 +250,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.div(comp)](#cmatdivcomp)
     * [cmat.diva(scalar)](#cmatdivascalar)
     * [cmat.diva(comp)](#cmatdivacomp)
+    * [cmat.determinant()](#cmatdeterminant)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -1020,7 +1022,7 @@ mat2.set([
   7, 8
 ]);
 mat3 = mat1.add(mat2);
-console.log("mat3 = \n%s", mat3);
+console.log('mat3 = \n%s', mat3);
 ```
 
 ```txt
@@ -1084,7 +1086,7 @@ mat2.set([
   7, 8
 ]);
 mat1.adda(mat2);
-console.log("mat1 = \n%s", mat1);
+console.log('mat1 = \n%s', mat1);
 ```
 
 ```txt
@@ -1116,7 +1118,7 @@ mat2.set([
   7, 8
 ]);
 mat3 = mat1.sub(mat2);
-console.log("mat3 = \n%s", mat3);
+console.log('mat3 = \n%s', mat3);
 ```
 
 ```txt
@@ -1142,7 +1144,7 @@ mat2.set([
   7, 8
 ]);
 mat1.suba(mat2);
-console.log("mat1 = \n%s", mat1);
+console.log('mat1 = \n%s', mat1);
 ```
 
 ```txt
@@ -1177,7 +1179,7 @@ vec.set([
   8
 ]);
 mat2 = mat1.mul(vec);
-console.log("mat2 = \n%s", mat2);
+console.log('mat2 = \n%s', mat2);
 ```
 
 ```txt
@@ -1205,7 +1207,7 @@ vec.set([
   8
 ]);
 mat.mula(vec);
-console.log("mat = \n%s", mat);
+console.log('mat = \n%s', mat);
 ```
 
 ```txt
@@ -1226,7 +1228,7 @@ mat1.set([
   3, 4
 ]);
 mat2 = mat1.div(2);
-console.log("mat2 = \n%s", mat2);
+console.log('mat2 = \n%s', mat2);
 ```
 
 ```txt
@@ -1245,13 +1247,30 @@ mat.set([
   3, 4
 ]);
 mat.diva(2);
-console.log("mat = \n%s", mat);
+console.log('mat = \n%s', mat);
 ```
 
 ```txt
 mat =
 0.5   1
 1.5   2
+```
+
+#### mat.determinant()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(2, 2);
+console.log('mat = \n%s\n', mat);
+console.log('det = %d', mat.determinant());
+```
+
+```txt
+mat =
+ 0.132371 -0.813862
+ 0.758326  -0.58171
+
+det = 0.540171350604003
 ```
 
 #### mat.equals(mat)
@@ -1552,7 +1571,7 @@ cmat2.set([
   C(7,7), C(8,8)
 ]);
 cmat3 = cmat1.add(cmat2);
-console.log("cmat3 = \n%s", cmat3);
+console.log('cmat3 = \n%s', cmat3);
 ```
 
 ```txt
@@ -1603,7 +1622,7 @@ cmat2.set([
   7, 8
 ]);
 cmat1.adda(cmat2);
-console.log("cmat1 = \n%s", cmat1);
+console.log('cmat1 = \n%s', cmat1);
 ```
 
 ```txt
@@ -1637,7 +1656,7 @@ cmat2.set([
   7, 8
 ]);
 cmat3 = cmat1.sub(cmat2);
-console.log("cmat3 = \n%s", cmat3);
+console.log('cmat3 = \n%s', cmat3);
 ```
 
 ```txt
@@ -1670,7 +1689,7 @@ cmat2.set([
   7, 8
 ]);
 cmat1.suba(cmat2);
-console.log("cmat1 = \n%s", cmat1);
+console.log('cmat1 = \n%s', cmat1);
 ```
 
 ```txt
@@ -1708,7 +1727,7 @@ vec.set([
   3
 ]);
 cmat2 = cmat1.mul(vec);
-console.log("cmat2 = \n%s", cmat2);
+console.log('cmat2 = \n%s', cmat2);
 ```
 
 ```txt
@@ -1739,7 +1758,7 @@ cmat.set([
   C(4,4), C(5,5), C(6,6)
 ]);
 cmat.mula(c);
-console.log("cmat = \n%s", cmat);
+console.log('cmat = \n%s', cmat);
 ```
 
 ```txt
@@ -1762,7 +1781,7 @@ cmat1.set([
   C(3,3), C(4,4)
 ]);
 cmat2 = cmat1.div(C(2,0));
-console.log("cmat2 = \n%s", cmat2);
+console.log('cmat2 = \n%s', cmat2);
 ```
 
 ```txt
@@ -1784,13 +1803,30 @@ cmat.set([
   C(3,3), C(4,4)
 ]);
 cmat.diva(2);
-console.log("cmat = \n%s", cmat);
+console.log('cmat = \n%s', cmat);
 ```
 
 ```txt
 cmat =
 (0.5,0.5)     (1,1)
 (1.5,1.5)     (2,2)
+```
+
+#### cmat.determinant()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(2, 2);
+console.log('cmat = \n%s\n', cmat);
+console.log('det = %s', mat.determinant());
+```
+
+```txt
+cmat =
+ (0.528893,-0.900902) (-0.307532,-0.690669)
+  (0.541616,0.947563)  (-0.072443,0.450036)
+
+det = (-0.120764,0.968768)
 ```
 
 #### cmat.equals(cmat)
