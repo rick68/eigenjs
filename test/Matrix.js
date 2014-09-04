@@ -358,6 +358,25 @@ describe('Matrix', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#inverse() should return the inverse of a matrix', function() {
+    mat.determinant.should.be.a.Function;
+
+    var mat2 = new Matrix(3, 3).set([
+      1, 2, 3,
+      0, 1, 4,
+      5, 6, 0
+    ]);
+
+    var mat3 = mat2.inverse();
+    mat3.toString().should.equal("-24  18   5\n 20 -15  -4\n -5   4   1");
+
+    mat2.mul(mat3).isApprox(Matrix.Identity(3)).should.be.true;
+
+    (function() {
+      Matrix(3, 2).inverse();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#equals() should return true if two matrices are equal', function() {
     mat.equals.should.be.a.Function;
 

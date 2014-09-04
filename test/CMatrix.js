@@ -473,6 +473,26 @@ describe('CMatrix', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cmat.determinant.should.be.a.Function;
+
+    var cmat2 = new CMatrix(3, 3).set([
+      1, 2, 3,
+      0, 1, 4,
+      5, 6, 0
+    ]);
+
+    var cmat3 = cmat2.inverse();
+    cmat3.should.instanceOf(CMatrix);
+    cmat3.toString().should.equal("(-24,0)  (18,0)   (5,0)\n (20,0) (-15,0)  (-4,0)\n(-5,-0)   (4,0)   (1,0)");
+
+    cmat2.mul(cmat3).isApprox(CMatrix.Identity(3)).should.be.true;
+
+    (function() {
+      CMatrix(3, 2).inverse();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     cmat.isApprox.should.be.a.Function;
 
