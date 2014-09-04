@@ -881,6 +881,16 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal("  1   2   3   4\n  5   3 3.5   8\n  9   5 5.5  12\n 13  14  15  16");
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    mblock.transpose.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var mat2 = mblock.transpose();
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal(" 6 10\n 7 11");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     mblock.determinant.should.be.a.Function;
 
@@ -891,6 +901,19 @@ describe('MatrixBlock', function() {
 
     (function() {
       Matrix(3, 2).block(0, 0, 3, 2).determinant();
+    }).should.throw("The matrix must be square");
+  });
+
+  it('#inverse() should return the inverse of a matrix', function() {
+    mblock.inverse.should.be.a.Function;
+
+    var mat2 = mblock.inverse();
+    mat2.toString().should.equal("-2.75  1.75\n  2.5  -1.5");
+
+    mat2.mul(mblock).isApprox(Matrix.Identity(2)).should.be.true;
+
+    (function() {
+      Matrix(3, 2).block(0, 0, 3, 2).inverse();
     }).should.throw("The matrix must be square");
   });
 

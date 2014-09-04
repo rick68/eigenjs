@@ -1124,12 +1124,36 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal("  (1,0)   (2,0)   (3,0)   (4,0)\n  (5,0)   (3,0) (3.5,0)   (8,0)\n  (9,0)   (5,0) (5.5,0)  (12,0)\n (13,0)  (14,0)  (15,0)  (16,0)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    cmblock.transpose.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var cmat2 = cmblock.transpose();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal(" (6,0) (10,0)\n (7,0) (11,0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cmblock.determinant.should.be.a.Function;
 
     var result = cmblock.determinant();
     result.should.instanceOf(Complex);
     result.abs().should.approximately(4, 1e-12);
+  });
+
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cmblock.inverse.should.be.a.Function;
+
+    var cmat2 = cmblock.inverse();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(-2.75,0)  (1.75,0)\n  (2.5,0)  (-1.5,0)");
+
+    cmblock.mul(cmat2).isApprox(CMatrix.Identity(2)).should.be.true;
+
+    (function() {
+      CMatrix(3, 2).block(0, 0, 3, 2).inverse();
+    }).should.throw("The matrix must be square");
   });
 
   it('#equals() should return true if two complex matrix block are equal', function() {

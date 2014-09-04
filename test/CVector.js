@@ -6,6 +6,7 @@ const
     CVector = Eigen.CVector,
     Complex = Eigen.Complex,
     CVectorBlock = Eigen.CVectorBlock,
+    CRowVector = Eigen.CRowVector,
     should = require('should');
 
 describe('CVector', function() {
@@ -559,6 +560,16 @@ describe('CVector', function() {
     cvec.toString().should.equal("(0.5,0.5)\n    (1,1)\n(1.5,1.5)\n    (2,2)\n(2.5,2.5)\n    (3,3)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    cvec.transpose.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var crvec = cvec.transpose();
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(1,1) (2,2) (3,3) (4,4) (5,5) (6,6)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cvec.determinant.should.be.a.Function;
 
@@ -567,6 +578,18 @@ describe('CVector', function() {
     }).should.throw("The matrix must be square");
 
     CVector([5]).determinant().equals(Complex(5)).should.true;
+  });
+
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cvec.inverse.should.be.a.Function;
+
+    (function() {
+      cvec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = Vector([6]).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 6])).should.true;
   });
 
   it('#equals() should return true if two complex vectors are equal', function() {

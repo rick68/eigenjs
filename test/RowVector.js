@@ -439,6 +439,16 @@ describe('RowVector', function() {
     rvec.get(0).should.be.a.Infinity;
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    rvec.transpose.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var vec = rvec.transpose();
+    vec.should.instanceOf(Vector);
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     rvec.determinant.should.be.a.Function;
 
@@ -447,6 +457,18 @@ describe('RowVector', function() {
     }).should.throw("The matrix must be square");
 
     RowVector([2]).determinant().should.equal(2);
+  });
+
+  it('#inverse() should return the inverse of a matrix', function() {
+    rvec.inverse.should.be.a.Function;
+
+    (function() {
+      rvec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = RowVector([3]).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
   it('#equals() should return true if two row-vectors are equal', function() {

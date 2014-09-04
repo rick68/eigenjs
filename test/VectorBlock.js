@@ -1239,6 +1239,16 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("  1\n  2\n1.5\n  2\n  5\n  6");
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    vblock.transpose.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var rvec = vblock.transpose();
+    rvec.should.instanceOf(RowVector);
+    rvec.toString().should.equal("3 4");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     vblock.determinant.should.be.a.Function;
 
@@ -1247,6 +1257,18 @@ describe('VectorBlock', function() {
     }).should.throw("The matrix must be square");
 
     Vector([1]).block(0, 1).determinant().should.equal(1);
+  });
+
+  it('#inverse() should return the inverse of a matrix', function() {
+    vblock.inverse.should.be.a.Function;
+
+    (function() {
+      vblock.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = Vector([3]).block(0, 1).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
   it('#equals() should return true if two vector block are equal', function() {

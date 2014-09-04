@@ -6,6 +6,7 @@ const
     Complex = Eigen.Complex,
     VectorBlock = Eigen.VectorBlock,
     CVector = Eigen.CVector,
+    RowVector = Eigen.RowVector,
     should = require('should');
 
 describe('Vector', function() {
@@ -456,6 +457,16 @@ describe('Vector', function() {
     vec.get(0).should.be.a.Infinity;
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    vec.transpose.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var rvec = vec.transpose();
+    rvec.should.instanceOf(RowVector);
+    rvec.toString().should.equal("1 2 3 4 5 6");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     vec.determinant.should.be.a.Function;
 
@@ -464,6 +475,18 @@ describe('Vector', function() {
     }).should.throw("The matrix must be square");
 
     Vector([10]).determinant().should.equal(10);
+  });
+
+  it('#inverse() should return the inverse of a matrix', function() {
+    vec.inverse.should.be.a.Function;
+
+    (function() {
+      vec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = Vector([3]).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
   it('#equals() should return true if two vectors are equal', function() {

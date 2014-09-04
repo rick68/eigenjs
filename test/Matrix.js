@@ -345,6 +345,16 @@ describe('Matrix', function() {
     mat.get(0, 0).should.be.a.Infinity;
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    mat.transpose.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var mat2 = mat.transpose();
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("1 4 7\n2 5 8\n3 6 9");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     mat.determinant.should.be.a.Function;
 
@@ -359,7 +369,7 @@ describe('Matrix', function() {
   });
 
   it('#inverse() should return the inverse of a matrix', function() {
-    mat.determinant.should.be.a.Function;
+    mat.inverse.should.be.a.Function;
 
     var mat2 = new Matrix(3, 3).set([
       1, 2, 3,

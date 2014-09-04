@@ -1468,6 +1468,16 @@ describe('CVectorBlock', function() {
     cvec.toString().should.equal("  (1,0)\n  (2,0)\n(1.5,0)\n  (2,0)\n  (5,0)\n  (6,0)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    cvblock.transpose.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var crvec = cvblock.transpose();
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(3,0) (4,0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cvblock.determinant.should.be.a.Function;
 
@@ -1476,6 +1486,18 @@ describe('CVectorBlock', function() {
     }).should.throw("The matrix must be square");
 
     CVector([3]).block(0, 1).determinant().equals(Complex(3)).should.true;
+  });
+
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cvblock.inverse.should.be.a.Function;
+
+    (function() {
+      cvblock.inverse();
+    }).should.throw("The matrix must be square");
+
+    var cmat2 = CVector([6]).inverse();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.equals(CMatrix(1, 1).set([1 / 6])).should.true;
   });
 
   it('#equals() should return true if two complex vector block are equal', function() {

@@ -515,6 +515,16 @@ describe('CRowVector', function() {
     crvec2.toString().should.equal("(0.5,0.5)     (1,1) (1.5,1.5)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    crvec.transpose.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var cvec = crvec.transpose();
+    cvec.should.instanceOf(CVector);
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     crvec.determinant.should.be.a.Function;
 
@@ -523,6 +533,18 @@ describe('CRowVector', function() {
     }).should.throw("The matrix must be square");
 
     CRowVector([8]).determinant().equals(Complex(8)).should.true;
+  });
+
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    crvec.inverse.should.be.a.Function;
+
+    (function() {
+      crvec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var cmat2 = CRowVector([6]).inverse();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.equals(CMatrix(1, 1).set([1 / 6])).should.true;
   });
 
   it('#equals() should return true if two complex row-vectors are equal', function() {

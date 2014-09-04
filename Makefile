@@ -28,6 +28,7 @@ SOURCES = \
     src/CMatrix/instance_method_sub.hpp \
     src/CMatrix/instance_method_suba.hpp \
     src/CMatrix/instance_method_toString.hpp \
+    src/CMatrix/instance_method_transpose.hpp \
     src/CMatrix/macro.hpp \
     src/CMatrixBlock.hpp \
     src/CMatrixBlock/instance_method_mula.hpp \
@@ -120,6 +121,7 @@ SOURCES = \
     src/Matrix/instance_method_sub.hpp \
     src/Matrix/instance_method_suba.hpp \
     src/Matrix/instance_method_toString.hpp \
+    src/Matrix/instance_method_transpose.hpp \
     src/Matrix/macro.hpp \
     src/MatrixBlock.hpp \
     src/MatrixBlock/instance_method_mula.hpp \
