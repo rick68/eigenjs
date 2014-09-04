@@ -14,6 +14,7 @@ SOURCES = \
     src/CMatrix/instance_method_adjoint.hpp \
     src/CMatrix/instance_method_block.hpp \
     src/CMatrix/instance_method_cols.hpp \
+    src/CMatrix/instance_method_conjugate.hpp \
     src/CMatrix/instance_method_determinant.hpp \
     src/CMatrix/instance_method_div.hpp \
     src/CMatrix/instance_method_diva.hpp \
@@ -108,6 +109,7 @@ SOURCES = \
     src/Matrix/instance_method_adjoint.hpp \
     src/Matrix/instance_method_block.hpp \
     src/Matrix/instance_method_cols.hpp \
+    src/Matrix/instance_method_conjugate.hpp \
     src/Matrix/instance_method_determinant.hpp \
     src/Matrix/instance_method_div.hpp \
     src/Matrix/instance_method_diva.hpp \
