@@ -1,5 +1,14 @@
-# EigenJS [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url]
+# EigenJS
+
 The goal of this project is to port Eigen library into JavaScript for linear algebar.
+
+[![NPM][nodeico-download]][nodeico-url] [![NPM][nodeico-months]][nodeico-url]
+
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68][gittip-image]][gittip-url]
+
+[nodeico-download]: https://nodei.co/npm/eigenjs.png?downloads=true&downloadRank=true&stars=true
+[nodeico-months]: https://nodei.co/npm-dl/eigenjs.png?months=6&height=3
+[nodeico-url]: https://nodei.co/npm/eigenjs/
 
 [npm-image]: http://img.shields.io/npm/v/eigenjs.svg
 [npm-url]: https://npmjs.org/package/eigenjs
@@ -11,6 +20,9 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
+
+[gittip-image]: http://img.shields.io/gittip/rick68.svg
+[gittip-url]: https://www.gittip.com/rick68
 
 ## Installation
 
@@ -159,6 +171,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.div(comp)](#matdivcomp)
     * [mat.diva(scalar)](#matdivascalar)
     * [mat.determinant()](#matdeterminant)
+    * [mat.inverse()](#matinverse)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -251,6 +264,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.diva(scalar)](#cmatdivascalar)
     * [cmat.diva(comp)](#cmatdivacomp)
     * [cmat.determinant()](#cmatdeterminant)
+    * [cmat.inverse()](#cmatinverse)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -271,6 +285,7 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
+    * [vec.block(startRow, blockRows)](#vecblockstartrow-blockrows)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
     * [CVector(rows)](#cvectorrows)
@@ -281,6 +296,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.set(row, comp)](#cvecsetrow-comp)
     * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#cvecgetrow)
+    * [cvec.block(startRow, blockRows)](#cvecblockstartrow-blockrows)
 * [Row Vector](#row-vector) **inherits from Matrix**
   * [Row Vector Class Methods](#row-vector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
@@ -291,6 +307,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
+    * [rvec.block(startCol, blockCols)](#rvecblockstartcol-blockcols)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
@@ -301,6 +318,7 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.set(col, comp)](#crvecsetcol-comp)
     * [crvec.set(comp_array)](#crvecsetcomp_array)
     * [crvec.get(col)](#crvecgetcol)
+    * [crvec.block(startCol, blockCols)](#crvecblockstartcol-blockcols)
 * [Matrix Block](#matrix-block) **inherits from Matrix**
   * [Matrix Block Class Methods](#matrix-block-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
@@ -1273,6 +1291,27 @@ mat =
 det = 0.540171350604003
 ```
 
+#### mat.inverse()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 2, 3,
+            0, 1, 4,
+            5, 6, 0
+          ])
+  , inv = mat.inverse();
+
+console.log('inv = \n%s', inv);
+```
+
+```txt
+inv =
+-24  18   5
+ 20 -15  -4
+ -5   4   1
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -1829,6 +1868,27 @@ cmat =
 det = (-0.120764,0.968768)
 ```
 
+#### cmat.inverse()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+            1, 2, 3,
+            0, 1, 4,
+            5, 6, 0
+          ])
+  , inv = cmat.inverse();
+
+console.log('inv = \n%s', inv);
+```
+
+```txt
+inv =
+(-24,0)  (18,0)   (5,0)
+ (20,0) (-15,0)  (-4,0)
+(-5,-0)   (4,0)   (1,0)
+```
+
 #### cmat.equals(cmat)
 #### cmat.equals(cvec)
 #### cmat.equals(crvec)
@@ -2030,6 +2090,25 @@ console.log(vec.get(2).toString());
 3
 ```
 
+#### vec.block(startRow, blockRows)
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V([1,
+                 2,
+                 3,
+                 4])
+  , vblock = vec.block(1, 2);
+console.log('vblock = %s', vblock);
+```
+
+```txt
+vblock =
+2
+3
+```
+
 ## Complex Vector
 
 ### Complex Vector Class Methods
@@ -2148,6 +2227,26 @@ console.log(vec.get(2).toString());
 (3,0)
 ```
 
+#### cvec.block(startRow, blockRows)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.CVector
+  , cvec = new CV([  1    ,
+                     2    ,
+                   C(3   ),
+                   C(4, 0)])
+  , cvblock = cvec.block(1, 2);
+console.log('cvblock = \n%s', cvblock);
+```
+
+```txt
+cvblock =
+(2,0)
+(3,0)
+```
+
 ## Row Vector
 
 ### Row Vector Class Methods
@@ -2243,6 +2342,21 @@ console.log(rvec.get(2).toString());
 1
 2
 3
+```
+
+#### rvec.block(startCol, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , RV = Eigen.RowVector
+  , rvec = new RV([1, 2, 3, 4])
+  , rvblock = rvec.block(1, 2);
+console.log('rvblock = \n%s', rvblock);
+```
+
+```txt
+rvblock =
+2 3
 ```
 
 ## Complex Row Vector
@@ -2344,6 +2458,22 @@ console.log(crvec.get(2).toString());
 (1,0)
 (2,4)
 (3,0)
+```
+
+#### crvec.block(startCol, blockCols)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CRV = Eigen.CRowVector
+  , crvec = new CRV([1, 2, C(3), C(4, 0)])
+  , crvblock = crvec.block(1, 2);
+console.log('crvblock = \n%s', crvblock);
+```
+
+```txt
+crvblock =
+(2,0) (3,0)
 ```
 
 ## Matrix Block

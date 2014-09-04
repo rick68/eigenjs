@@ -13,10 +13,12 @@ SOURCES = \
     src/CMatrix/instance_method_adda.hpp \
     src/CMatrix/instance_method_block.hpp \
     src/CMatrix/instance_method_cols.hpp \
+    src/CMatrix/instance_method_determinant.hpp \
     src/CMatrix/instance_method_div.hpp \
     src/CMatrix/instance_method_diva.hpp \
     src/CMatrix/instance_method_equals.hpp \
     src/CMatrix/instance_method_get.hpp \
+    src/CMatrix/instance_method_inverse.hpp \
     src/CMatrix/instance_method_isApprox.hpp \
     src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_mul.hpp \
@@ -103,10 +105,12 @@ SOURCES = \
     src/Matrix/instance_method_adda.hpp \
     src/Matrix/instance_method_block.hpp \
     src/Matrix/instance_method_cols.hpp \
+    src/Matrix/instance_method_determinant.hpp \
     src/Matrix/instance_method_div.hpp \
     src/Matrix/instance_method_diva.hpp \
     src/Matrix/instance_method_equals.hpp \
     src/Matrix/instance_method_get.hpp \
+    src/Matrix/instance_method_inverse.hpp \
     src/Matrix/instance_method_isApprox.hpp \
     src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_mul.hpp \
