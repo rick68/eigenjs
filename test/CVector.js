@@ -570,6 +570,16 @@ describe('CVector', function() {
     crvec.toString().should.equal("(1,1) (2,2) (3,3) (4,4) (5,5) (6,6)");
   });
 
+  it('#adjoint() should return the adjoint of a complex matrix', function() {
+    cvec.adjoint.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var crvec = cvec.adjoint();
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(1,-1) (2,-2) (3,-3) (4,-4) (5,-5) (6,-6)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cvec.determinant.should.be.a.Function;
 

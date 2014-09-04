@@ -449,6 +449,16 @@ describe('RowVector', function() {
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
   });
 
+  it('#adjoint() should return the adjoint of a matrix', function() {
+    rvec.adjoint.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var vec = rvec.adjoint();
+    vec.should.instanceOf(Vector);
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     rvec.determinant.should.be.a.Function;
 

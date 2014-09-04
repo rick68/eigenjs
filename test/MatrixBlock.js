@@ -891,6 +891,16 @@ describe('MatrixBlock', function() {
     mat2.toString().should.equal(" 6 10\n 7 11");
   });
 
+  it('#adjoint() should return the adjoint of a matrix', function() {
+    mblock.adjoint.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var mat2 = mblock.adjoint();
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal(" 6 10\n 7 11");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     mblock.determinant.should.be.a.Function;
 

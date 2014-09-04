@@ -355,6 +355,16 @@ describe('Matrix', function() {
     mat2.toString().should.equal("1 4 7\n2 5 8\n3 6 9");
   });
 
+  it('#adjoint() should return the adjoint of a matrix', function() {
+    mat.adjoint.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var mat2 = mat.adjoint();
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("1 4 7\n2 5 8\n3 6 9");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     mat.determinant.should.be.a.Function;
 
