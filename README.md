@@ -170,6 +170,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.div(scalar)](#matdivscalar)
     * [mat.div(comp)](#matdivcomp)
     * [mat.diva(scalar)](#matdivascalar)
+    * [mat.transpose()](#mattranspose)
     * [mat.determinant()](#matdeterminant)
     * [mat.inverse()](#matinverse)
     * [mat.equals(mat)](#matequalsmat)
@@ -263,6 +264,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.div(comp)](#cmatdivcomp)
     * [cmat.diva(scalar)](#cmatdivascalar)
     * [cmat.diva(comp)](#cmatdivacomp)
+    * [cmat.transpose()](#cmattranspose)
     * [cmat.determinant()](#cmatdeterminant)
     * [cmat.inverse()](#cmatinverse)
     * [cmat.equals(cmat)](#cmatequalscmat)
@@ -1274,6 +1276,26 @@ mat =
 1.5   2
 ```
 
+#### mat.transpose()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat1 = new M.Random(3, 2)
+  , mat2 = mat1.transpose();
+console.log('mat1 = \n%s', mat1);
+console.log('mat2 = \n%s', mat2);
+```
+
+```txt
+mat1 =
+ -0.112813  -0.325566
+-0.0500345   0.213005
+ -0.930346  -0.022705
+mat2 =
+ -0.112813 -0.0500345  -0.930346
+ -0.325566   0.213005  -0.022705
+```
+
 #### mat.determinant()
 
 ```js
@@ -1849,6 +1871,26 @@ console.log('cmat = \n%s', cmat);
 cmat =
 (0.5,0.5)     (1,1)
 (1.5,1.5)     (2,2)
+```
+
+#### cmat.transpose()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat1 = new CM.Random(3, 2)
+  , cmat2 = cmat1.transpose();
+console.log('cmat1 = \n%s', cmat1);
+console.log('cmat2 = \n%s', cmat2);
+```
+
+```txt
+cmat1 =
+(-0.0175928,0.317664)  (0.0405036,0.744415)
+  (0.980286,-0.33036)  (-0.617894,-0.94324)
+(-0.360953,-0.543819)  (0.958967,-0.649626)
+cmat2 =
+(-0.0175928,0.317664)   (0.980286,-0.33036) (-0.360953,-0.543819)
+ (0.0405036,0.744415)  (-0.617894,-0.94324)  (0.958967,-0.649626)
 ```
 
 #### cmat.determinant()
