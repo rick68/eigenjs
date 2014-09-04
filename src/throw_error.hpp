@@ -22,4 +22,8 @@
   NanThrowError("Invalid rows or columns arguments");                        \
   /**/
 
+#define EIGENJS_THROW_ERROR_INVALID_INDEX_ARGUMENTS()                        \
+  NanThrowError("Invalid index argument");                                   \
+  /**/
+
 #endif  // EIGENJS_THROW_ERROR_HPP

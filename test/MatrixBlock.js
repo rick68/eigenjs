@@ -954,6 +954,30 @@ describe('MatrixBlock', function() {
     trace.should.equal(17);
   });
 
+  it('#diagonal() should return the diagonal of a matrix', function() {
+    mat.diagonal.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+
+    var dia = mat.diagonal();
+    dia.should.instanceOf(Vector);
+    dia.toString().should.equal(" 1\n 6\n11\n16");
+    mat.diagonal(1).toString().should.equal(" 2\n 7\n12");
+    mat.diagonal(2).toString().should.equal("3\n8");
+    mat.diagonal(3).toString().should.equal("4");
+    mat.diagonal(-1).toString().should.equal(" 5\n10\n15");
+    mat.diagonal(-2).toString().should.equal(" 9\n14");
+    mat.diagonal(-3).toString().should.equal("13");
+
+    (function() {
+      mat.diagonal(mat.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      mat.diagonal(-mat.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if a matrix block and a matrix are equal', function() {
     mblock.equals.should.be.a.Function;
 

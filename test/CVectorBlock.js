@@ -1530,6 +1530,25 @@ describe('CVectorBlock', function() {
     trace.equals(Complex(3, 0)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    cvblock.diagonal.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var dia = cvblock.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal("(3,0)");
+    cvblock.diagonal(-1).toString().should.equal("(4,0)");
+
+    (function() {
+      cvblock.diagonal(cvblock.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      cvblock.diagonal(-cvblock.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two complex vector block are equal', function() {
     cvblock.equals.should.be.a.Function;
 

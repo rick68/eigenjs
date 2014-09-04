@@ -577,6 +577,26 @@ describe('CRowVector', function() {
     trace.equals(Complex(1, 1)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    crvec.diagonal.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var dia = crvec.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal("(1,1)");
+    crvec.diagonal(1).toString().should.equal("(2,2)");
+    crvec.diagonal(2).toString().should.equal("(3,3)");
+
+    (function() {
+      crvec.diagonal(crvec.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      crvec.diagonal(-crvec.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two complex row-vectors are equal', function() {
     crvec.equals.should.be.a.Function;
 

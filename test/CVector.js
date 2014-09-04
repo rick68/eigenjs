@@ -622,6 +622,29 @@ describe('CVector', function() {
     trace.equals(Complex(1, 1)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    cvec.diagonal.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var dia = cvec.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal("(1,1)");
+    cvec.diagonal(-1).toString().should.equal("(2,2)");
+    cvec.diagonal(-2).toString().should.equal("(3,3)");
+    cvec.diagonal(-3).toString().should.equal("(4,4)");
+    cvec.diagonal(-4).toString().should.equal("(5,5)");
+    cvec.diagonal(-5).toString().should.equal("(6,6)");
+
+    (function() {
+      cvec.diagonal(cvec.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      cvec.diagonal(-cvec.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two complex vectors are equal', function() {
     cvec.equals.should.be.a.Function;
 

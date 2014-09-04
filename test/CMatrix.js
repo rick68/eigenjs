@@ -533,6 +533,28 @@ describe('CMatrix', function() {
     trace.equals(Complex(15, 15)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    cmat.diagonal.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var dia = cmat.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal("(1,1)\n(5,5)\n(9,9)");
+    cmat.diagonal(1).toString().should.equal("(2,2)\n(6,6)");
+    cmat.diagonal(2).toString().should.equal("(3,3)");
+    cmat.diagonal(-1).toString().should.equal("(4,4)\n(8,8)");
+    cmat.diagonal(-2).toString().should.equal("(7,7)");
+
+    (function() {
+      cmat.diagonal(cmat.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      cmat.diagonal(-cmat.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     cmat.isApprox.should.be.a.Function;
 

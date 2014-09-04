@@ -1201,6 +1201,25 @@ describe('RowVectorBlock', function() {
     trace.should.equal(3);
   });
 
+  it('#diagonal() should return the diagonal of a matrix', function() {
+    rvblock.diagonal.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var dia = rvblock.diagonal();
+    dia.should.instanceOf(Vector);
+    dia.toString().should.equal("3");
+    rvblock.diagonal(1).toString().should.equal("4");
+
+    (function() {
+      rvblock.diagonal(rvblock.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      rvblock.diagonal(-rvblock.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two row-vector blocks are equal', function() {
     rvblock.equals.should.be.a.Function;
 

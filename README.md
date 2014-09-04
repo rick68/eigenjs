@@ -176,6 +176,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.determinant()](#matdeterminant)
     * [mat.inverse()](#matinverse)
     * [mat.trace()](#mattrace)
+    * [mat.diagonal([index = 0])](#matdiagonalindex--0)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -273,6 +274,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.determinant()](#cmatdeterminant)
     * [cmat.inverse()](#cmatinverse)
     * [cmat.trace()](#cmattrace)
+    * [cmat.diagonal([index = 0])](#cmatdiagonalindex--0)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -1393,6 +1395,25 @@ mat =
 tr =  6
 ```
 
+#### mat.diagonal([index = 0])
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5, -3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.diagonal(1).transpose());
+console.log('%s', mat.diagonal(-2).transpose());
+```
+
+```txt
+9 1 9
+6 6
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -2049,6 +2070,24 @@ cmat =
 (4,0) (5,6) (7,0)
 
 tr = (6,6)
+```
+
+#### cmat.diagonal([index = 0])
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Random(2, 3);
+console.log('cmat = \n%s\n', cmat);
+console.log('%s', cmat.diagonal());
+```
+
+```txt
+cmat =
+   (0.345978,0.85694)  (0.99589,-0.0742672) (-0.763035,-0.329107)
+   (0.592024,0.15202)   (-0.20903,0.834369)   (0.692856,0.838519)
+
+ (0.345978,0.85694)
+(-0.20903,0.834369)
 ```
 
 #### cmat.equals(cmat)
