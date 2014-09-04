@@ -1360,7 +1360,6 @@ var M = require('eigenjs').Matrix
             5, 6, 0
           ])
   , inv = mat.inverse();
-
 console.log('inv = \n%s', inv);
 ```
 
@@ -1996,7 +1995,6 @@ var CM = require('eigenjs').CMatrix
             5, 6, 0
           ])
   , inv = cmat.inverse();
-
 console.log('inv = \n%s', inv);
 ```
 
