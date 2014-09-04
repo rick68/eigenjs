@@ -1142,6 +1142,16 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("  1   2 1.5   2   5   6");
   });
 
+  it('#transpose() should return the transpose of a matrix', function() {
+    rvblock.transpose.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var vec = rvblock.transpose();
+    vec.should.instanceOf(Vector);
+    vec.toString().should.equal("3\n4");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     rvblock.determinant.should.be.a.Function;
 

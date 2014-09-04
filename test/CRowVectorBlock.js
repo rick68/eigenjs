@@ -1481,6 +1481,16 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal("  (1,0)   (2,0) (1.5,0)   (2,0)   (5,0)   (6,0)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    crvblock.transpose.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var cvec = crvblock.transpose();
+    cvec.should.instanceOf(CVector);
+    cvec.toString().should.equal("(3,0)\n(4,0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     crvblock.determinant.should.be.a.Function;
 

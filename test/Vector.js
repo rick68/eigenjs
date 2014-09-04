@@ -6,6 +6,7 @@ const
     Complex = Eigen.Complex,
     VectorBlock = Eigen.VectorBlock,
     CVector = Eigen.CVector,
+    RowVector = Eigen.RowVector,
     should = require('should');
 
 describe('Vector', function() {
@@ -454,6 +455,16 @@ describe('Vector', function() {
       ])
     ).should.ok;
     vec.get(0).should.be.a.Infinity;
+  });
+
+  it('#transpose() should return the transpose of a matrix', function() {
+    vec.transpose.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var rvec = vec.transpose();
+    rvec.should.instanceOf(RowVector);
+    rvec.toString().should.equal("1 2 3 4 5 6");
   });
 
   it('#determinant() should return the determinant of a matrix', function() {

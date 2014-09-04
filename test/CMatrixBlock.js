@@ -1124,6 +1124,16 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal("  (1,0)   (2,0)   (3,0)   (4,0)\n  (5,0)   (3,0) (3.5,0)   (8,0)\n  (9,0)   (5,0) (5.5,0)  (12,0)\n (13,0)  (14,0)  (15,0)  (16,0)");
   });
 
+  it('#transpose() should return the transpose of a complex matrix', function() {
+    cmblock.transpose.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var cmat2 = cmblock.transpose();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal(" (6,0) (10,0)\n (7,0) (11,0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cmblock.determinant.should.be.a.Function;
 
