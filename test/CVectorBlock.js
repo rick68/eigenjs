@@ -1478,6 +1478,16 @@ describe('CVectorBlock', function() {
     crvec.toString().should.equal("(3,0) (4,0)");
   });
 
+  it('#adjoint() should return the adjoint of a complex matrix', function() {
+    cvblock.adjoint.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var crvec = cvblock.adjoint();
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(3,-0) (4,-0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cvblock.determinant.should.be.a.Function;
 

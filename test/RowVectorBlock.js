@@ -1152,6 +1152,16 @@ describe('RowVectorBlock', function() {
     vec.toString().should.equal("3\n4");
   });
 
+  it('#adjoint() should return the adjoint of a matrix', function() {
+    rvblock.adjoint.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var vec = rvblock.adjoint();
+    vec.should.instanceOf(Vector);
+    vec.toString().should.equal("3\n4");
+  });
+
   it('#determinant() should return the determinant of a matrix', function() {
     rvblock.determinant.should.be.a.Function;
 

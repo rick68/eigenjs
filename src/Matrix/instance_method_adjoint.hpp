@@ -1,6 +1,6 @@
 //
-// Matrix/instance_method_transpose.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Matrix/instance_method_adjoint.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,18 +9,18 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_MATRIX_INSTANCE_METHOD_TRANSPOSE_HPP
-#define EIGENJS_MATRIX_INSTANCE_METHOD_TRANSPOSE_HPP
+#ifndef EIGENJS_MATRIX_INSTANCE_METHOD_ADJOINT_HPP
+#define EIGENJS_MATRIX_INSTANCE_METHOD_ADJOINT_HPP
 
 #include "../common_macro.hpp"
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(Matrix, transpose,
+EIGENJS_INSTANCE_METHOD(Matrix, adjoint,
 {
-  EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TRANSPOSE_CONTEXT()
+  EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ADJOINT_CONTEXT()
 })
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_MATRIX_INSTANCE_METHOD_TRANSPOSE_HPP
+#endif  // EIGENJS_MATRIX_INSTANCE_METHOD_ADJOINT_HPP

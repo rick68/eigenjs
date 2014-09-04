@@ -272,4 +272,32 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ADJOINT_CONTEXT()              \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+    v8::Local< v8::Value > argv[] = {                                        \
+      NanNew< v8::Number >( 0 )                                              \
+    , NanNew< v8::Number >( 0 )                                              \
+    };                                                                       \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    typedef typename detail::transpose< U >::type TT;                        \
+                                                                             \
+    v8::Local< v8::Object > instance = TT::new_instance(                     \
+      args                                                                   \
+    , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
+    , argv                                                                   \
+    );                                                                       \
+                                                                             \
+    TT* new_obj = node::ObjectWrap::Unwrap< TT >( instance );                \
+    typename TT::value_type& new_value = **new_obj;                          \
+                                                                             \
+    new_value = value.adjoint();                                             \
+                                                                             \
+    NanReturnValue( instance );                                              \
+  }                                                                          \
+  /**/
+
 #endif  // EIGENJS_COMMON_MACRO_HPP
