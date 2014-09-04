@@ -1289,6 +1289,15 @@ describe('VectorBlock', function() {
     mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    vblock.trace.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var trace = vblock.trace();
+    trace.should.equal(3);
+  });
+
   it('#equals() should return true if two vector block are equal', function() {
     vblock.equals.should.be.a.Function;
 

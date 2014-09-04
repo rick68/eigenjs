@@ -568,6 +568,15 @@ describe('CRowVector', function() {
     cmat2.equals(CMatrix(1, 1).set([1 / 6])).should.true;
   });
 
+  it('#trace() should return the trace of a complex matrix', function() {
+    crvec.trace.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var trace = crvec.trace();
+    trace.equals(Complex(1, 1)).should.be.true;
+  });
+
   it('#equals() should return true if two complex row-vectors are equal', function() {
     crvec.equals.should.be.a.Function;
 

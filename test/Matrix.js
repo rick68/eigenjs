@@ -405,6 +405,15 @@ describe('Matrix', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    mat.trace.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var trace = mat.trace();
+    trace.should.equal(15);
+  });
+
   it('#equals() should return true if two matrices are equal', function() {
     mat.equals.should.be.a.Function;
 

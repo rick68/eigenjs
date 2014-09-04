@@ -489,6 +489,15 @@ describe('RowVector', function() {
     mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    rvec.trace.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var trace = rvec.trace();
+    trace.should.equal(1);
+  });
+
   it('#equals() should return true if two row-vectors are equal', function() {
     rvec.equals.should.be.a.Function;
 
