@@ -1186,6 +1186,26 @@ describe('CMatrixBlock', function() {
     trace.equals(Complex(17, 0)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    cmblock.diagonal.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var dia = cmblock.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal(" (6,0)\n(11,0)");
+    cmblock.diagonal(1).toString().should.equal("(7,0)");
+    cmblock.diagonal(-1).toString().should.equal("(10,0)");
+
+    (function() {
+      cmblock.diagonal(cmblock.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      cmblock.diagonal(-cmblock.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two complex matrix block are equal', function() {
     cmblock.equals.should.be.a.Function;
 

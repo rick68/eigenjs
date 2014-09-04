@@ -498,6 +498,29 @@ describe('RowVector', function() {
     trace.should.equal(1);
   });
 
+  it('#diagonal() should return the diagonal of a matrix', function() {
+    rvec.diagonal.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var dia = rvec.diagonal();
+    dia.should.instanceOf(Vector);
+    dia.toString().should.equal("1");
+    rvec.diagonal(1).toString().should.equal("2");
+    rvec.diagonal(2).toString().should.equal("3");
+    rvec.diagonal(3).toString().should.equal("4");
+    rvec.diagonal(4).toString().should.equal("5");
+    rvec.diagonal(5).toString().should.equal("6");
+
+    (function() {
+      rvec.diagonal(rvec.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      rvec.diagonal(-rvec.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two row-vectors are equal', function() {
     rvec.equals.should.be.a.Function;
 

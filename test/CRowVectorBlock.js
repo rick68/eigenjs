@@ -1543,6 +1543,25 @@ describe('CRowVectorBlock', function() {
     trace.equals(Complex(3, 0)).should.be.true;
   });
 
+  it('#diagonal() should return the diagonal of a complex matrix', function() {
+    crvblock.diagonal.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var dia = crvblock.diagonal();
+    dia.should.instanceOf(CVector);
+    dia.toString().should.equal("(3,0)");
+    crvblock.diagonal(1).toString().should.equal("(4,0)");
+
+    (function() {
+      crvblock.diagonal(crvblock.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      crvblock.diagonal(-crvblock.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two complex row-vector blocks are equal', function() {
     crvblock.equals.should.be.a.Function;
 

@@ -1298,6 +1298,25 @@ describe('VectorBlock', function() {
     trace.should.equal(3);
   });
 
+  it('#diagonal() should return the diagonal of a matrix', function() {
+    vblock.diagonal.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var dia = vblock.diagonal();
+    dia.should.instanceOf(Vector);
+    dia.toString().should.equal("3");
+    vblock.diagonal(-1).toString().should.equal("4");
+
+    (function() {
+      vblock.diagonal(vblock.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      vblock.diagonal(-vblock.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two vector block are equal', function() {
     vblock.equals.should.be.a.Function;
 

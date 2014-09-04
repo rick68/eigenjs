@@ -516,6 +516,29 @@ describe('Vector', function() {
     trace.should.equal(1);
   });
 
+  it('#diagonal() should return the diagonal of a matrix', function() {
+    vec.diagonal.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var dia = vec.diagonal();
+    dia.should.instanceOf(Vector);
+    dia.toString().should.equal("1");
+    vec.diagonal(-1).toString().should.equal("2");
+    vec.diagonal(-2).toString().should.equal("3");
+    vec.diagonal(-3).toString().should.equal("4");
+    vec.diagonal(-4).toString().should.equal("5");
+    vec.diagonal(-5).toString().should.equal("6");
+
+    (function() {
+      vec.diagonal(vec.cols());
+    }).should.throw("Invalid index argument");
+
+    (function() {
+      vec.diagonal(-vec.rows());
+    }).should.throw("Invalid index argument");
+  });
+
   it('#equals() should return true if two vectors are equal', function() {
     vec.equals.should.be.a.Function;
 
