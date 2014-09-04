@@ -1488,6 +1488,17 @@ describe('CVectorBlock', function() {
     crvec.toString().should.equal("(3,-0) (4,-0)");
   });
 
+  it('#conjugate() should return the conjugate of a complex matrix', function() {
+    cvblock.conjugate.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var cvec2 = cvblock.conjugate();
+    cvec2.should.instanceOf(CVector);
+
+    cvec2.toString().should.equal("(3,-0)\n(4,-0)");
+  });
+
   it('#determinant() should return the determinant of a complex matrix', function() {
     cvblock.determinant.should.be.a.Function;
 

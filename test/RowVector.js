@@ -449,6 +449,14 @@ describe('RowVector', function() {
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
   });
 
+  it('#conjugate() should return the conjugate of a matrix', function() {
+    rvec.conjugate.should.be.a.Function;
+
+    var rvec2 = rvec.conjugate();
+    rvec2.should.instanceOf(RowVector);
+    rvec.equals(rvec2).should.be.true;
+  });
+
   it('#adjoint() should return the adjoint of a matrix', function() {
     rvec.adjoint.should.be.a.Function;
 

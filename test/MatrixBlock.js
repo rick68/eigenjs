@@ -891,6 +891,14 @@ describe('MatrixBlock', function() {
     mat2.toString().should.equal(" 6 10\n 7 11");
   });
 
+  it('#conjugate() should return the conjugate of a matrix', function() {
+    mblock.conjugate.should.be.a.Function;
+
+    var mat2 = mblock.conjugate();
+    mat2.should.instanceOf(Matrix);
+    mblock.equals(mat2).should.be.true;
+  });
+
   it('#adjoint() should return the adjoint of a matrix', function() {
     mblock.adjoint.should.be.a.Function;
 

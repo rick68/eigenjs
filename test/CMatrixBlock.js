@@ -1134,6 +1134,17 @@ describe('CMatrixBlock', function() {
     cmat2.toString().should.equal(" (6,0) (10,0)\n (7,0) (11,0)");
   });
 
+  it('#conjugate() should return the conjugate of a complex matrix', function() {
+    cmblock.conjugate.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var cmat2 = cmblock.conjugate();
+    cmat2.should.instanceOf(CMatrix);
+
+    cmat2.toString().should.equal(" (6,-0)  (7,-0)\n(10,-0) (11,-0)");
+  });
+
   it('#adjoint() should return the adjoint of a complex matrix', function() {
     cmblock.adjoint.should.be.a.Function;
 

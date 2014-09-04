@@ -37,6 +37,7 @@
 #include "instance_method_diva.hpp"
 
 #include "instance_method_transpose.hpp"
+#include "instance_method_conjugate.hpp"
 #include "instance_method_adjoint.hpp"
 #include "instance_method_determinant.hpp"
 #include "instance_method_inverse.hpp"
@@ -77,6 +78,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_diva)
 
   (instance_method_transpose)
+  (instance_method_conjugate)
   (instance_method_adjoint)
   (instance_method_determinant)
   (instance_method_inverse)

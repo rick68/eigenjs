@@ -570,6 +570,17 @@ describe('CVector', function() {
     crvec.toString().should.equal("(1,1) (2,2) (3,3) (4,4) (5,5) (6,6)");
   });
 
+  it('#conjugate() should return the conjugate of a complex matrix', function() {
+    cvec.conjugate.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var cvec2 = cvec.conjugate();
+    cvec2.should.instanceOf(CVector);
+
+    cmat2.toString().should.equal("(1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0)\n(0,0) (0,0) (1,0)");
+  });
+
   it('#adjoint() should return the adjoint of a complex matrix', function() {
     cvec.adjoint.should.be.a.Function;
 
