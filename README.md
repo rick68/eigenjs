@@ -1291,6 +1291,27 @@ mat =
 det = 0.540171350604003
 ```
 
+#### mat.inverse()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 2, 3,
+            0, 1, 4,
+            5, 6, 0
+          ])
+  , inv = mat.inverse();
+
+console.log('inv = \n%s', inv);
+```
+
+```txt
+inv =
+-24  18   5
+ 20 -15  -4
+ -5   4   1
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -1845,6 +1866,27 @@ cmat =
   (0.541616,0.947563)  (-0.072443,0.450036)
 
 det = (-0.120764,0.968768)
+```
+
+#### cmat.inverse()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+            1, 2, 3,
+            0, 1, 4,
+            5, 6, 0
+          ])
+  , inv = cmat.inverse();
+
+console.log('inv = \n%s', inv);
+```
+
+```txt
+inv =
+(-24,0)  (18,0)   (5,0)
+ (20,0) (-15,0)  (-4,0)
+(-5,-0)   (4,0)   (1,0)
 ```
 
 #### cmat.equals(cmat)
