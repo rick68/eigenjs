@@ -1521,6 +1521,15 @@ describe('CVectorBlock', function() {
     cmat2.equals(CMatrix(1, 1).set([1 / 6])).should.true;
   });
 
+  it('#trace() should return the trace of a complex matrix', function() {
+    cvblock.trace.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var trace = cvblock.trace();
+    trace.equals(Complex(3, 0)).should.be.true;
+  });
+
   it('#equals() should return true if two complex vector block are equal', function() {
     cvblock.equals.should.be.a.Function;
 

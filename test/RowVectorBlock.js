@@ -1192,6 +1192,15 @@ describe('RowVectorBlock', function() {
     mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    rvblock.trace.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var trace = rvblock.trace();
+    trace.should.equal(3);
+  });
+
   it('#equals() should return true if two row-vector blocks are equal', function() {
     rvblock.equals.should.be.a.Function;
 

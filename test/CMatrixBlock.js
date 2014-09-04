@@ -1177,6 +1177,15 @@ describe('CMatrixBlock', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#trace() should return the trace of a complex matrix', function() {
+    cmblock.trace.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var trace = cmblock.trace();
+    trace.equals(Complex(17, 0)).should.be.true;
+  });
+
   it('#equals() should return true if two complex matrix block are equal', function() {
     cmblock.equals.should.be.a.Function;
 

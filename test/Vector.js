@@ -507,6 +507,15 @@ describe('Vector', function() {
     mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    vec.trace.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var trace = vec.trace();
+    trace.should.equal(1);
+  });
+
   it('#equals() should return true if two vectors are equal', function() {
     vec.equals.should.be.a.Function;
 

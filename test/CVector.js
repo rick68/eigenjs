@@ -613,6 +613,15 @@ describe('CVector', function() {
     mat2.equals(Matrix(1, 1).set([1 / 6])).should.true;
   });
 
+  it('#trace() should return the trace of a complex matrix', function() {
+    cvec.trace.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var trace = cvec.trace();
+    trace.equals(Complex(1, 1)).should.be.true;
+  });
+
   it('#equals() should return true if two complex vectors are equal', function() {
     cvec.equals.should.be.a.Function;
 

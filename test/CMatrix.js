@@ -524,6 +524,15 @@ describe('CMatrix', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#trace() should return the trace of a complex matrix', function() {
+    cmat.trace.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var trace = cmat.trace();
+    trace.equals(Complex(15, 15)).should.be.true;
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     cmat.isApprox.should.be.a.Function;
 
