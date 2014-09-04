@@ -945,6 +945,15 @@ describe('MatrixBlock', function() {
     mblock2.equals(mblock3).should.ok;
   });
 
+  it('#trace() should return the trace of a matrix', function() {
+    mblock.trace.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var trace = mblock.trace();
+    trace.should.equal(17);
+  });
+
   it('#equals() should return true if a matrix block and a matrix are equal', function() {
     mblock.equals.should.be.a.Function;
 
