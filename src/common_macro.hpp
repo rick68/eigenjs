@@ -272,6 +272,32 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_CONJUGATE_CONTEXT()            \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+    v8::Local< v8::Value > argv[] = {                                        \
+      NanNew< v8::Number >( 0 )                                              \
+    , NanNew< v8::Number >( 0 )                                              \
+    };                                                                       \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    v8::Local< v8::Object > instance = U::new_instance(                      \
+      args                                                                   \
+    , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
+    , argv                                                                   \
+    );                                                                       \
+                                                                             \
+    U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                  \
+    typename U::value_type& new_value = **new_obj;                           \
+                                                                             \
+    new_value = value.conjugate();                                           \
+                                                                             \
+    NanReturnValue( instance );                                              \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ADJOINT_CONTEXT()              \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
@@ -295,32 +321,6 @@
     typename TT::value_type& new_value = **new_obj;                          \
                                                                              \
     new_value = value.adjoint();                                             \
-                                                                             \
-    NanReturnValue( instance );                                              \
-  }                                                                          \
-  /**/
-
-#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_CONJUGATE_CONTEXT()            \
-  {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
-    const typename T::value_type& value = **obj;                             \
-    v8::Local< v8::Value > argv[] = {                                        \
-      NanNew< v8::Number >( 0 )                                              \
-    , NanNew< v8::Number >( 0 )                                              \
-    };                                                                       \
-                                                                             \
-    NanScope();                                                              \
-                                                                             \
-    v8::Local< v8::Object > instance = U::new_instance(                      \
-      args                                                                   \
-    , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
-    , argv                                                                   \
-    );                                                                       \
-                                                                             \
-    U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                  \
-    typename U::value_type& new_value = **new_obj;                           \
-                                                                             \
-    new_value = value.conjugate();                                           \
                                                                              \
     NanReturnValue( instance );                                              \
   }                                                                          \
