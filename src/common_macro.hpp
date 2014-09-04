@@ -27,6 +27,7 @@
 #include "detail/is_vector_or_cvector.hpp"
 #include "detail/is_rowvector_or_crowvector.hpp"
 #include "detail/is_matrix_or_cmatrix.hpp"
+#include "detail/transpose.hpp"
 
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_ZERO_CONTEXT()                    \
   {                                                                          \
@@ -240,6 +241,34 @@
                                                                              \
     NanScope();                                                              \
     NanReturnValue( NanNew< v8::Boolean >( value.rows() == value.cols() ) ); \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TRANSPOSE_CONTEXT()            \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+    v8::Local< v8::Value > argv[] = {                                        \
+      NanNew< v8::Number >( 0 )                                              \
+    , NanNew< v8::Number >( 0 )                                              \
+    };                                                                       \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    typedef typename detail::transpose< U >::type TT;                        \
+                                                                             \
+    v8::Local< v8::Object > instance = TT::new_instance(                     \
+      args                                                                   \
+    , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
+    , argv                                                                   \
+    );                                                                       \
+                                                                             \
+    TT* new_obj = node::ObjectWrap::Unwrap< TT >( instance );                \
+    typename TT::value_type& new_value = **new_obj;                          \
+                                                                             \
+    new_value = value.transpose();                                           \
+                                                                             \
+    NanReturnValue( instance );                                              \
   }                                                                          \
   /**/
 

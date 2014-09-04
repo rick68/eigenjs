@@ -25,24 +25,24 @@ struct transpose {
   typedef T type;
 };
 
-template <typename ScalarType, typename ValueType>
-struct transpose<Vector<ScalarType, ValueType> > {
-  typedef RowVector<ScalarType, ValueType> type;
+template <typename ScalarType>
+struct transpose<Vector<ScalarType> > {
+  typedef RowVector<ScalarType> type;
 };
 
-template <typename ScalarType, typename ValueType>
-struct transpose<RowVector<ScalarType, ValueType> > {
-  typedef Vector<ScalarType, ValueType> type;
+template <typename ScalarType>
+struct transpose<RowVector<ScalarType> > {
+  typedef Vector<ScalarType> type;
 };
 
-template <typename ScalarType, typename ValueType>
-struct transpose<CVector<ScalarType, ValueType> > {
-  typedef CRowVector<ScalarType, ValueType> type;
+template <typename ScalarType>
+struct transpose<CVector<ScalarType> > {
+  typedef CRowVector<ScalarType> type;
 };
 
-template <typename ScalarType, typename ValueType>
-struct transpose<CRowVector<ScalarType, ValueType> > {
-  typedef CVector<ScalarType, ValueType> type;
+template <typename ScalarType>
+struct transpose<CRowVector<ScalarType> > {
+  typedef CVector<ScalarType> type;
 };
 
 }  // namespace detail
