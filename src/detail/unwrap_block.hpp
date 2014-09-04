@@ -16,7 +16,6 @@
 
 #include <type_traits>
 
-
 #include "is_eigen_matrix.hpp"
 #include "../Matrix_fwd.hpp"
 #include "../CMatrix_fwd.hpp"
