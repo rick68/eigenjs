@@ -12,8 +12,6 @@
 #ifndef EIGENJS_MATRIX_INSTANCE_METHOD_TRANSPOSE_HPP
 #define EIGENJS_MATRIX_INSTANCE_METHOD_TRANSPOSE_HPP
 
-#include <sstream>
-
 #include "../common_macro.hpp"
 
 namespace EigenJS {
