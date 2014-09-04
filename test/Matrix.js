@@ -359,7 +359,7 @@ describe('Matrix', function() {
   });
 
   it('#inverse() should return the inverse of a matrix', function() {
-    mat.determinant.should.be.a.Function;
+    mat.inverse.should.be.a.Function;
 
     var mat2 = new Matrix(3, 3).set([
       1, 2, 3,

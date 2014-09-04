@@ -569,6 +569,18 @@ describe('CVector', function() {
     CVector([5]).determinant().equals(Complex(5)).should.true;
   });
 
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cvec.inverse.should.be.a.Function;
+
+    (function() {
+      cvec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = Vector([6]).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 6])).should.true;
+  });
+
   it('#equals() should return true if two complex vectors are equal', function() {
     cvec.equals.should.be.a.Function;
 

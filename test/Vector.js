@@ -466,6 +466,18 @@ describe('Vector', function() {
     Vector([10]).determinant().should.equal(10);
   });
 
+  it('#inverse() should return the inverse of a matrix', function() {
+    vec.inverse.should.be.a.Function;
+
+    (function() {
+      vec.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = Vector([3]).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
+  });
+
   it('#equals() should return true if two vectors are equal', function() {
     vec.equals.should.be.a.Function;
 

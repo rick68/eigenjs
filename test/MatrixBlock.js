@@ -894,6 +894,19 @@ describe('MatrixBlock', function() {
     }).should.throw("The matrix must be square");
   });
 
+  it('#inverse() should return the inverse of a matrix', function() {
+    mblock.inverse.should.be.a.Function;
+
+    var mat2 = mblock.inverse();
+    mat2.toString().should.equal("-2.75  1.75\n  2.5  -1.5");
+
+    mat2.mul(mblock).isApprox(Matrix.Identity(2)).should.be.true;
+
+    (function() {
+      Matrix(3, 2).block(0, 0, 3, 2).inverse();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#equals() should return true if two matrix block are equal', function() {
     mblock.equals.should.be.a.Function;
 

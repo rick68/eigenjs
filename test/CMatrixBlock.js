@@ -1132,6 +1132,20 @@ describe('CMatrixBlock', function() {
     result.abs().should.approximately(4, 1e-12);
   });
 
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cmblock.inverse.should.be.a.Function;
+
+    var cmat2 = cmblock.inverse();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(-2.75,0)  (1.75,0)\n  (2.5,0)  (-1.5,0)");
+
+    cmblock.mul(cmat2).isApprox(CMatrix.Identity(2)).should.be.true;
+
+    (function() {
+      CMatrix(3, 2).block(0, 0, 3, 2).inverse();
+    }).should.throw("The matrix must be square");
+  });
+
   it('#equals() should return true if two complex matrix block are equal', function() {
     cmblock.equals.should.be.a.Function;
 

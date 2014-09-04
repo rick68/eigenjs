@@ -474,7 +474,7 @@ describe('CMatrix', function() {
   });
 
   it('#inverse() should return the inverse of a complex matrix', function() {
-    cmat.determinant.should.be.a.Function;
+    cmat.inverse.should.be.a.Function;
 
     var cmat2 = new CMatrix(3, 3).set([
       1, 2, 3,

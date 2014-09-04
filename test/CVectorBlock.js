@@ -1478,6 +1478,18 @@ describe('CVectorBlock', function() {
     CVector([3]).block(0, 1).determinant().equals(Complex(3)).should.true;
   });
 
+  it('#inverse() should return the inverse of a complex matrix', function() {
+    cvblock.inverse.should.be.a.Function;
+
+    (function() {
+      cvblock.inverse();
+    }).should.throw("The matrix must be square");
+
+    var cmat2 = CVector([6]).inverse();
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.equals(CMatrix(1, 1).set([1 / 6])).should.true;
+  });
+
   it('#equals() should return true if two complex vector block are equal', function() {
     cvblock.equals.should.be.a.Function;
 

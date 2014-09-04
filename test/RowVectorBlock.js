@@ -1152,6 +1152,18 @@ describe('RowVectorBlock', function() {
     RowVector([9]).block(0, 1).determinant().should.equal(9);
   });
 
+  it('#inverse() should return the inverse of a matrix', function() {
+    rvblock.inverse.should.be.a.Function;
+
+    (function() {
+      rvblock.inverse();
+    }).should.throw("The matrix must be square");
+
+    var mat2 = RowVector([3]).block(0, 1).inverse();
+    mat2.should.instanceOf(Matrix);
+    mat2.equals(Matrix(1, 1).set([1 / 3])).should.be.true;
+  });
+
   it('#equals() should return true if two row-vector blocks are equal', function() {
     rvblock.equals.should.be.a.Function;
 
