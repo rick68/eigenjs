@@ -1152,6 +1152,14 @@ describe('RowVectorBlock', function() {
     vec.toString().should.equal("3\n4");
   });
 
+  it('#conjugate() should return the conjugate of a matrix', function() {
+    rvblock.conjugate.should.be.a.Function;
+
+    var rvblock2 = rvblock.conjugate();
+    rvblock2.should.instanceOf(RowVector);
+    rvblock.equals(rvblock2).should.be.true;
+  });
+
   it('#adjoint() should return the adjoint of a matrix', function() {
     rvblock.adjoint.should.be.a.Function;
 

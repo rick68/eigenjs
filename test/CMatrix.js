@@ -464,6 +464,17 @@ describe('CMatrix', function() {
     cmat2.toString().should.equal("(1,1) (4,4) (7,7)\n(2,2) (5,5) (8,8)\n(3,3) (6,6) (9,9)");
   });
 
+  it('#conjugate() should return the conjugate of a complex matrix', function() {
+    cmat.conjugate.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var cmat2 = cmat.conjugate();
+    cmat2.should.instanceOf(CMatrix);
+
+    cmat2.toString().should.equal("(1,-1) (2,-2) (3,-3)\n(4,-4) (5,-5) (6,-6)\n(7,-7) (8,-8) (9,-9)");
+  });
+
   it('#adjoint() should return the adjoint of a complex matrix', function() {
     cmat.adjoint.should.be.a.Function;
 

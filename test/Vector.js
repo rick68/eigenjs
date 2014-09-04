@@ -467,6 +467,14 @@ describe('Vector', function() {
     rvec.toString().should.equal("1 2 3 4 5 6");
   });
 
+  it('#conjugate() should return the conjugate of a matrix', function() {
+    vec.conjugate.should.be.a.Function;
+
+    var vec2 = vec.conjugate();
+    vec2.should.instanceOf(Vector);
+    vec.equals(vec2).should.be.true;
+  });
+
   it('#adjoint() should return the adjoint of a matrix', function() {
     vec.adjoint.should.be.a.Function;
 

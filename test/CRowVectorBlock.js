@@ -1491,6 +1491,17 @@ describe('CRowVectorBlock', function() {
     cvec.toString().should.equal("(3,0)\n(4,0)");
   });
 
+  it('#conjugate() should return the conjugate of a complex matrix', function() {
+    crvblock.conjugate.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var crvec2 = crvblock.conjugate();
+    crvec2.should.instanceOf(CRowVector);
+
+    crvec2.toString().should.equal("(3,-0) (4,-0)");
+  });
+
   it('#adjoint() should return the adjoint of a complex matrix', function() {
     crvblock.adjoint.should.be.a.Function;
 

@@ -355,6 +355,14 @@ describe('Matrix', function() {
     mat2.toString().should.equal("1 4 7\n2 5 8\n3 6 9");
   });
 
+  it('#conjugate() should return the conjugate of a matrix', function() {
+    mat.conjugate.should.be.a.Function;
+
+    var mat2 = mat.conjugate();
+    mat2.should.instanceOf(Matrix);
+    mat.equals(mat2).should.be.true;
+  });
+
   it('#adjoint() should return the adjoint of a matrix', function() {
     mat.adjoint.should.be.a.Function;
 
