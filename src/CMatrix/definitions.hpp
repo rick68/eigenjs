@@ -37,6 +37,7 @@
 #include "instance_method_diva.hpp"
 
 #include "instance_method_determinant.hpp"
+#include "instance_method_inverse.hpp"
 
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
@@ -74,6 +75,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_diva)
 
   (instance_method_determinant)
+  (instance_method_inverse)
 
   (instance_method_equals)
   (instance_method_isApprox)
