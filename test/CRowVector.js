@@ -673,6 +673,19 @@ describe('CRowVector', function() {
     CRowVector(1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    crvec.isOnes.should.be.a.Function;
+
+    crvec.isOnes().should.be.false;
+
+    var crvec2 = new CRowVector(3).set([
+      1, 1.0001, 0.9997
+    ]);
+    crvec2.isOnes().should.be.false;
+    crvec2.isOnes(1e-4).should.be.false;
+    crvec2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     crvec.isIdentity.should.be.a.Function;
 

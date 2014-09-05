@@ -704,6 +704,21 @@ describe('CVector', function() {
     CVector(1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    cvec.isOnes.should.be.a.Function;
+
+    cvec.isOnes().should.be.false;
+
+    var cvec2 = new CVector(3).set([
+      1,
+      1.0001,
+      0.9997
+    ]);
+    cvec2.isOnes().should.be.false;
+    cvec2.isOnes(1e-4).should.be.false;
+    cvec2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isApprox() should return true if this is approximately equal to a complex matrix', function() {
     cvec.isApprox.should.be.a.Function;
 

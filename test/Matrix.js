@@ -514,6 +514,21 @@ describe('Matrix', function() {
     Matrix(3, 4).isSquare().should.be.false;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    mat.isOnes.should.be.a.Function;
+
+    mat.isOnes().should.be.false;
+
+    var mat2 = new Matrix(3, 3).set([
+      1,      1, 1.0001,
+      1, 0.9997,      1,
+      1,      1,      1
+    ]);
+    mat2.isOnes().should.be.false;
+    mat2.isOnes(1e-4).should.be.false;
+    mat2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     mat.isIdentity.should.be.a.Function;
 
