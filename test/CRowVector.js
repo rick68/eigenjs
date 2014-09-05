@@ -673,6 +673,15 @@ describe('CRowVector', function() {
     CRowVector(1).isSquare().should.be.true;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    crvec.isDiagonal.should.be.a.Function;
+
+    crvec.isDiagonal().should.be.false;
+
+    var crvec2 = crvec.block(0, 1);
+    crvec2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a zero complex row-vector', function() {
     CRowVector.Zero.should.be.a.Function;
 

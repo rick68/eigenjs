@@ -1468,6 +1468,15 @@ describe('VectorBlock', function() {
     Vector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    vblock.isDiagonal.should.be.a.Function;
+
+    vblock.isDiagonal().should.be.false;
+
+    var vblock2 = vec.block(0, 1);
+    vblock2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     VectorBlock.Zero.should.be.a.Function;
 

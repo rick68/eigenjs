@@ -728,6 +728,15 @@ describe('CVector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    cvec.isDiagonal.should.be.a.Function;
+
+    cvec.isDiagonal().should.be.false;
+
+    var cvec2 = new CVector(1);
+    cvec2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a zero complex vector', function() {
     CVector.Zero.should.be.a.Function;
 

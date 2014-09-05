@@ -1700,6 +1700,15 @@ describe('CVectorBlock', function() {
     CVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    cvblock.isDiagonal.should.be.a.Function;
+
+    cvblock.isDiagonal().should.be.false;
+
+    var cvblock2 = cvec.block(0, 1);
+    cvblock2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a complex matrix with zero values', function() {
     CVectorBlock.Zero.should.be.a.Function;
 

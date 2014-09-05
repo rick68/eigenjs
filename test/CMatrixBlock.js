@@ -1351,6 +1351,15 @@ describe('CMatrixBlock', function() {
     CMatrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    cmblock.isDiagonal.should.be.a.Function;
+
+    cmblock.isDiagonal().should.be.false;
+
+    var cmblock2 = cmat.block(0, 0, 1, 1);
+    cmblock2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CMatrixBlock.Zero.should.be.a.Function;
 

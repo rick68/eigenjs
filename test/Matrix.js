@@ -514,6 +514,21 @@ describe('Matrix', function() {
     Matrix(3, 4).isSquare().should.be.false;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    mat.isDiagonal.should.be.a.Function;
+
+    mat.isDiagonal().should.be.false;
+
+    var mat2 = new Matrix(3, 3).set([
+      1e+04,     0,     1,
+          0, 1e+04,     0,
+          0,     0, 1e+04
+    ]);
+    mat2.isDiagonal().should.be.false;
+    mat2.isDiagonal(1e-5).should.be.false;
+    mat2.isDiagonal(1e-4).should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 

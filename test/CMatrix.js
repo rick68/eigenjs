@@ -611,6 +611,21 @@ describe('CMatrix', function() {
     CMatrix(3, 4).isSquare().should.be.false;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    cmat.isDiagonal.should.be.a.Function;
+
+    cmat.isDiagonal().should.be.false;
+
+    var cmat2 = new CMatrix(3, 3).set([
+      1e+04,     0,     1,
+          0, 1e+04,     0,
+          0,     0, 1e+04
+    ]);
+    cmat2.isDiagonal().should.be.false;
+    cmat2.isDiagonal(1e-5).should.be.false;
+    cmat2.isDiagonal(1e-4).should.be.true;
+  });
+
   it('#Zero() should return a zero complex matrix', function() {
     CMatrix.Zero.should.be.a.Function;
 

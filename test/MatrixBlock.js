@@ -1101,6 +1101,15 @@ describe('MatrixBlock', function() {
     Matrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    mblock.isDiagonal.should.be.a.Function;
+
+    mblock.isDiagonal().should.be.false;
+
+    var mblock2 = mat.block(0, 0, 1, 1);
+    mblock2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 
