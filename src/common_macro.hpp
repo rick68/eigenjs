@@ -328,6 +328,23 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISIDENTITY_CONTEXT()           \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    const typename num_traits::Real& prec =                                  \
+        args.Length() == 1 && args[0]->IsNumber()                            \
+      ? args[0]->NumberValue()                                               \
+      : num_traits::dummy_precision();                                       \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    NanReturnValue( NanNew< v8::Boolean >( value.isIdentity( prec ) ) );     \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISDIAGONAL_CONTEXT()           \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
@@ -341,7 +358,7 @@
                                                                              \
     NanScope();                                                              \
                                                                              \
-    NanReturnValue(NanNew<v8::Boolean>(value.isDiagonal(prec)));             \
+    NanReturnValue( NanNew< v8::Boolean >( value.isDiagonal( prec ) ) );     \
   }                                                                          \
   /**/
 
