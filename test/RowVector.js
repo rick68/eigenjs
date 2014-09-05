@@ -581,6 +581,15 @@ describe('RowVector', function() {
     RowVector(1).isSquare().should.be.true;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    rvec.isIdentity.should.be.a.Function;
+
+    rvec.isIdentity().should.be.false;
+
+    var rvec2 = new RowVector([1]);
+    rvec2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     rvec.isDiagonal.should.be.a.Function;
 

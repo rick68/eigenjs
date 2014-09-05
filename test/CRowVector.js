@@ -673,6 +673,15 @@ describe('CRowVector', function() {
     CRowVector(1).isSquare().should.be.true;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    crvec.isIdentity.should.be.a.Function;
+
+    crvec.isIdentity().should.be.false;
+
+    var crvec2 = new CRowVector([1]);
+    crvec2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     crvec.isDiagonal.should.be.a.Function;
 
