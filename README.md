@@ -276,7 +276,6 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.inverse()](#cmatinverse)
     * [cmat.trace()](#cmattrace)
     * [cmat.diagonal([index = 0])](#cmatdiagonalindex--0)
-    * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -286,7 +285,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.isSquare()](#cmatissquare)
-    * [cmat.isDiagonal()](#cmatisdiagonal)
+    * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
