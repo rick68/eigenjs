@@ -1101,6 +1101,21 @@ describe('MatrixBlock', function() {
     Matrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    mblock.isOnes.should.be.a.Function;
+
+    mblock.isOnes().should.be.false;
+
+    var mblock2 = new Matrix(3, 3).set([
+      1,      1, 1.0001,
+      1, 0.9997,      1,
+      1,      1,      1
+    ]).block(0, 0, 3, 3);
+    mblock2.isOnes().should.be.false;
+    mblock2.isOnes(1e-4).should.be.false;
+    mblock2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     mblock.isIdentity.should.be.a.Function;
 

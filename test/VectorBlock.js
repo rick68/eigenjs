@@ -1468,6 +1468,21 @@ describe('VectorBlock', function() {
     Vector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    vblock.isOnes.should.be.a.Function;
+
+    vblock.isOnes().should.be.false;
+
+    var vblock2 = new Vector(3).set([
+      1,
+      1.0001,
+      0.9997
+    ]).block(0, 3);
+    vblock2.isOnes().should.be.false;
+    vblock2.isOnes(1e-4).should.be.false;
+    vblock2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     vblock.isDiagonal.should.be.a.Function;
 

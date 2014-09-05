@@ -619,6 +619,21 @@ describe('Vector', function() {
     Vector(1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    vec.isOnes.should.be.a.Function;
+
+    vec.isOnes().should.be.false;
+
+    var vec2 = new Vector(3).set([
+      1,
+      1.0001,
+      0.9997
+    ]);
+    vec2.isOnes().should.be.false;
+    vec2.isOnes(1e-4).should.be.false;
+    vec2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     vec.isIdentity.should.be.a.Function;
 

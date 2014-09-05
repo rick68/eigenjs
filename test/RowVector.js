@@ -581,6 +581,19 @@ describe('RowVector', function() {
     RowVector(1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    rvec.isOnes.should.be.a.Function;
+
+    rvec.isOnes().should.be.false;
+
+    var rvec2 = new RowVector(3).set([
+      1, 1.0001, 0.9997
+    ]);
+    rvec2.isOnes().should.be.false;
+    rvec2.isOnes(1e-4).should.be.false;
+    rvec2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     rvec.isIdentity.should.be.a.Function;
 

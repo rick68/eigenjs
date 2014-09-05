@@ -1697,6 +1697,19 @@ describe('CRowVectorBlock', function() {
     CRowVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isOnes() should return true if this is ones', function() {
+    crvblock.isOnes.should.be.a.Function;
+
+    crvblock.isOnes().should.be.false;
+
+    var crvblock2 = new CRowVector(3).set([
+      1, 1.0001, 0.9997
+    ]).block(0, 3);
+    crvblock2.isOnes().should.be.false;
+    crvblock2.isOnes(1e-4).should.be.false;
+    crvblock2.isOnes(1e-3).should.be.true;
+  });
+
   it('#isIdentity() should return true if this is identity', function() {
     crvblock.isIdentity.should.be.a.Function;
 
