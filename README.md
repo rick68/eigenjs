@@ -114,6 +114,8 @@ $ npm install eigenjs --msvs_version=2012
     * [Matrix(rows, cols)](#matrixrows-cols)
     * [Matrix.Zero(n)](#matrixzeron)
     * [Matrix.Zero(rows, cols)](#matrixzerorows-cols)
+    * [Matrix.Ones(n)](#matrixonesn)
+    * [Matrix.Ones(rows, cols)](#matrixonesrows-cols)
     * [Matrix.Constant(rows, cols, scalar)](#matrixconstantrows-cols-scalar)
     * [Matrix.Constant(rows, cols, comp)](#matrixconstantrows-cols-comp)
     * [Matrix.Identity(n)](#matrixidentityn)
@@ -193,6 +195,8 @@ $ npm install eigenjs --msvs_version=2012
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
     * [CMatrix.Zero(n)](#cmatrixzeron)
     * [CMatrix.Zero(rows, cols)](#cmatrixzerorows-cols)
+    * [CMatrix.Ones(n)](#cmatrixonesn)
+    * [CMatrix.Ones(rows, cols)](#cmatrixonesrows-cols)
     * [CMatrix.Constant(rows, cols, scalar)](#cmatrixconstantrows-cols-scalar)
     * [CMatrix.Constant(rows, cols, comp)](#cmatrixconstantrows-cols-comp)
     * [CMatrix.Identity(n)](#cmatrixidentityn)
@@ -906,6 +910,21 @@ mat =
 0 0 0
 ```
 
+#### Matrix.Ones(n)
+#### Matrix.Ones(rows, cols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Ones(2, 3);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+1 1 1
+1 1 1
+```
+
 #### Matrix.Constant(rows, cols, scalar)
 #### Matrix.Constant(rows, cols, comp)
 
@@ -1569,6 +1588,21 @@ console.log('cmat = \n%s', cmat);
 cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+```
+
+#### CMatrix.Ones(n)
+#### CMatrix.Ones(rows, cols)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Ones(2, 3);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(1,0) (1,0) (1,0)
+(1,0) (1,0) (1,0)
 ```
 
 #### CMatrix.Constant(rows, cols, scalar)
