@@ -187,6 +187,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
     * [mat.isSquare()](#matissquare)
+    * [mat.isZero([prec = 1e-12])](#matiszeroprec--1e-12)
     * [mat.isOnes([prec = 1e-12])](#matisonesprec--1e-12)
     * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
@@ -291,6 +292,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.isSquare()](#cmatissquare)
+    * [cmat.isZero([prec = 1e-12])](#cmatisonesprec--1e-12)
     * [cmat.isOnes([prec = 1e-12])](#cmatisonesprec--1e-12)
     * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
@@ -1507,6 +1509,23 @@ true
 false
 ```
 
+#### mat.isZero([prec = 1e-12])
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 3).set([
+            0,      0, 0.0001,
+            0,      0,      0
+          ]);
+console.log(mat.isZero());
+console.log(mat.isZero(1e-3));
+```
+
+```txt
+false
+true
+```
+
 #### mat.isOnes([prec = 1e-12])
 
 ```js
@@ -2255,6 +2274,25 @@ true
 false
 ```
 
+#### cmat.isZero([prec = 1e-12])
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 3).set([
+            0,           0 ,      0.0001,
+            0, C(0, 0.0007),           0
+          ]);
+console.log(cmat.isZero());
+console.log(cmat.isZero(1e-3));
+```
+
+```txt
+false
+true
+```
+
 #### cmat.isOnes([prec = 1e-12])
 
 ```js
@@ -2262,8 +2300,8 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CM = Eigen.CMatrix
   , cmat = new CM(2, 3).set([
-            1,      1,      1.0001 ,
-            1, 0.9997, C(1, 0.0001)
+            1,            1,      1.0001 ,
+            1,       0.9997, C(1, 0.0001)
           ]);
 console.log(cmat.isOnes());
 console.log(cmat.isOnes(1e-3));
