@@ -655,6 +655,28 @@ describe('CMatrix', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones complex matrix', function() {
+    CMatrix.Ones.should.be.a.Function;
+
+    CMatrix.Ones(3, 3).toString().should.equal("(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)");
+
+    CMatrix.Ones(3, 4).equals(
+      new CMatrix(3, 4).set([
+        Complex(1, 0), Complex(1, 0), Complex(1, 0), Complex(1, 0),
+        Complex(1, 0), Complex(1, 0), Complex(1, 0), Complex(1, 0),
+        Complex(1, 0), Complex(1, 0), Complex(1, 0), Complex(1, 0)
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a CMatrix with constant values', function() {
+    CMatrix.Constant.should.be.a.Function;
+
+    var cmat2 = CMatrix.Constant(4, 4, 0.6);
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a identity complex matrix', function() {
     CMatrix.Identity.should.be.a.Function;
 
@@ -698,13 +720,5 @@ describe('CMatrix', function() {
     ]));
 
     cmat.toString().should.equal("(-1,0) (-2,0)  (3,3)\n(-3,0) (-4,0)  (6,6)\n (7,7)  (8,8)  (9,9)");
-  });
-
-  it('#Constant() should return a CMatrix with constant values', function() {
-    CMatrix.Constant.should.be.a.Function;
-
-    var cmat2 = CMatrix.Constant(4, 4, 0.6);
-    cmat2.should.instanceOf(CMatrix);
-    cmat2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });

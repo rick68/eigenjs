@@ -703,6 +703,26 @@ describe('CRowVector', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones complex row-vector', function() {
+    CRowVector.Ones.should.be.a.Function;
+
+    CRowVector.Ones(3).toString().should.equal("(1,0) (1,0) (1,0)");
+
+    CRowVector.Ones(3).equals(
+      new CRowVector([
+        Complex(1, 0), Complex(1, 0), Complex(1, 0)
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a CRowVector with constant values', function() {
+    CRowVector.Constant.should.be.a.Function;
+
+    var crvec2 = CRowVectorBlock.Constant(4, 0.6);
+    crvec2.should.instanceOf(CRowVector);
+    crvec2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a identity complex row-vector', function() {
     CRowVector.Identity.should.be.a.Function;
 
@@ -745,13 +765,5 @@ describe('CRowVector', function() {
     ]));
 
     crvec.toString().should.equal(" (1,1) (-1,0) (-2,0)");
-  });
-
-  it('#Constant() should return a CRowVector with constant values', function() {
-    CRowVector.Constant.should.be.a.Function;
-
-    var crvec2 = CRowVectorBlock.Constant(4, 0.6);
-    crvec2.should.instanceOf(CRowVector);
-    crvec2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });
