@@ -1355,6 +1355,15 @@ describe('RowVectorBlock', function() {
     RowVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    rvblock.isIdentity.should.be.a.Function;
+
+    rvblock.isIdentity().should.be.false;
+
+    var rvblock2 = rvec.block(0, 1);
+    rvblock2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     rvblock.isDiagonal.should.be.a.Function;
 

@@ -514,6 +514,21 @@ describe('Matrix', function() {
     Matrix(3, 4).isSquare().should.be.false;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    mat.isIdentity.should.be.a.Function;
+
+    mat.isIdentity().should.be.false;
+
+    var mat2 = new Matrix(3, 3).set([
+      1,      0, 0.0001,
+      0,      1,      0,
+      0,      0,      1
+    ]);
+    mat2.isIdentity().should.be.false;
+    mat2.isIdentity(1e-5).should.be.false;
+    mat2.isIdentity(1e-4).should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     mat.isDiagonal.should.be.a.Function;
 

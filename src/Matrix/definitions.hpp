@@ -47,6 +47,7 @@
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
 #include "instance_method_isSquare.hpp"
+#include "instance_method_isIdentity.hpp"
 #include "instance_method_isDiagonal.hpp"
 
 #include "class_method_Zero.hpp"
@@ -91,6 +92,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_equals)
   (instance_method_isApprox)
   (instance_method_isSquare)
+  (instance_method_isIdentity)
   (instance_method_isDiagonal)
 
   (class_method_Zero)
