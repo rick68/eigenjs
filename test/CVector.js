@@ -728,6 +728,15 @@ describe('CVector', function() {
     }).should.throw("Nonconformant arguments");
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    cvec.isIdentity.should.be.a.Function;
+
+    cvec.isIdentity().should.be.false;
+
+    var cvec2 = new CVector([1]);
+    cvec2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     cvec.isDiagonal.should.be.a.Function;
 

@@ -185,6 +185,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
     * [mat.isSquare()](#matissquare)
+    * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
     * [mat.toString()](#mattostring)
 * [Complex Matrix](#complex-matrix)
@@ -285,6 +286,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.isSquare()](#cmatissquare)
+    * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **inherits from Matrix**
@@ -1484,6 +1486,24 @@ true
 false
 ```
 
+#### mat.isIdentity([prec = 1e-12])
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1,       0, 0.0001,
+            0,       1,      0,
+            0,       0,      1
+          ]);
+console.log(mat.isIdentity());
+console.log(mat.isIdentity(1e-3));
+```
+
+```txt
+false
+true
+```
+
 #### mat.isDiagonal([prec = 1e-12])
 
 ```js
@@ -2180,6 +2200,24 @@ console.log(cmat2.isSquare());
 ```txt
 true
 false
+```
+
+#### cmat.isIdentity([prec = 1e-12])
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+            1,       0, 0.0001,
+            0,       1,      0,
+            0,       0,      1
+          ]);
+console.log(cmat.isIdentity());
+console.log(cmat.isIdentity(1e-3));
+```
+
+```txt
+false
+true
 ```
 
 #### cmat.isDiagonal([prec = 1e-12])

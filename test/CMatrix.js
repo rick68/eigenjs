@@ -611,6 +611,21 @@ describe('CMatrix', function() {
     CMatrix(3, 4).isSquare().should.be.false;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    cmat.isIdentity.should.be.a.Function;
+
+    cmat.isIdentity().should.be.false;
+
+    var cmat2 = new CMatrix(3, 3).set([
+      1,      0, 0.0001,
+      0,      1,      0,
+      0,      0,      1
+    ]);
+    cmat2.isIdentity().should.be.false;
+    cmat2.isIdentity(1e-5).should.be.false;
+    cmat2.isIdentity(1e-4).should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     cmat.isDiagonal.should.be.a.Function;
 

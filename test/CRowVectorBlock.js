@@ -1697,6 +1697,15 @@ describe('CRowVectorBlock', function() {
     CRowVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    crvblock.isIdentity.should.be.a.Function;
+
+    crvblock.isIdentity().should.be.false;
+
+    var crvblock2 = crvec.block(0, 1);
+    crvblock2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     crvblock.isDiagonal.should.be.a.Function;
 

@@ -619,6 +619,15 @@ describe('Vector', function() {
     Vector(1).isSquare().should.be.true;
   });
 
+  it('#isIdentity() should return true if this is identity', function() {
+    vec.isIdentity.should.be.a.Function;
+
+    vec.isIdentity().should.be.false;
+
+    var vec2 = new Vector([1]);
+    vec2.isIdentity().should.be.true;
+  });
+
   it('#isDiagonal() should return true if this is diagonal', function() {
     vec.isDiagonal.should.be.a.Function;
 
