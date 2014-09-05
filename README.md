@@ -187,7 +187,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
     * [mat.isSquare()](#matissquare)
-    * [mat.isOnes()](#matisones)
+    * [mat.isOnes([prec = 1e-12])](#matisonesprec--1e-12)
     * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
     * [mat.toString()](#mattostring)
@@ -291,7 +291,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.isSquare()](#cmatissquare)
-    * [cmat.isOnes()](#cmatisones)
+    * [cmat.isOnes([prec = 1e-12])](#cmatisonesprec--1e-12)
     * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.toString()](#cmattostring)
@@ -1507,14 +1507,14 @@ true
 false
 ```
 
-#### mat.isOnes()
+#### mat.isOnes([prec = 1e-12])
 
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M(2, 3).set([
             1,      1, 1.0001,
             1, 0.9997,      1
-          ])
+          ]);
 console.log(mat.isOnes());
 console.log(mat.isOnes(1e-3));
 ```
@@ -2255,16 +2255,16 @@ true
 false
 ```
 
-#### cmat.isOnes()
+#### cmat.isOnes([prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CM = Eigen.CMatrix
   , cmat = new CM(2, 3).set([
-            1,      1,       1.0001,
+            1,      1,      1.0001 ,
             1, 0.9997, C(1, 0.0001)
-          ])
+          ]);
 console.log(cmat.isOnes());
 console.log(cmat.isOnes(1e-3));
 ```
