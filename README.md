@@ -1492,7 +1492,7 @@ false
 var M = require('eigenjs').Matrix
   , mat = new M(3, 3).set([
             1,       0, 0.0001,
-            0,       1,      0,
+            0,  0.9997,      0,
             0,       0,      1
           ]);
 console.log(mat.isIdentity());
@@ -2208,7 +2208,7 @@ false
 var CM = require('eigenjs').CMatrix
   , cmat = new CM(3, 3).set([
             1,       0, 0.0001,
-            0,       1,      0,
+            0,  0.9997,      0,
             0,       0,      1
           ]);
 console.log(cmat.isIdentity());
