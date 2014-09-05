@@ -20,6 +20,8 @@
 #include <boost/mpl/multiplies.hpp>
 #include <boost/mpl/int.hpp>
 
+#include <eigen3/Eigen/Dense>
+
 #include <sstream>
 #include <tuple>
 #include <type_traits>
@@ -323,6 +325,23 @@
     new_value = value.adjoint();                                             \
                                                                              \
     NanReturnValue( instance );                                              \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISDIAGONAL_CONTEXT()           \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    const typename num_traits::Real& prec =                                  \
+        args.Length() == 1 && args[0]->IsNumber()                            \
+      ? args[0]->NumberValue()                                               \
+      : num_traits::dummy_precision();                                       \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    NanReturnValue(NanNew<v8::Boolean>(value.isDiagonal(prec)));             \
   }                                                                          \
   /**/
 

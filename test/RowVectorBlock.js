@@ -1314,13 +1314,6 @@ describe('RowVectorBlock', function() {
     rvblock.isApprox(rvec2, 1e-2).should.true;
   });
 
-  it('#isSquare() should return true if this is square', function() {
-    rvblock.isSquare.should.be.a.Function;
-
-    rvblock.isSquare().should.be.false;
-    RowVector(1).block(0, 1).isSquare().should.be.true;
-  });
-
   it('#isApprox() should return true if this is approxivecely equal to a vector', function() {
     rvblock.isApprox.should.be.a.Function;
 
@@ -1353,6 +1346,22 @@ describe('RowVectorBlock', function() {
 
     rvblock2.isApprox(rvec2, 1e-3).should.false;
     rvblock2.isApprox(rvec2, 1e-2).should.true;
+  });
+
+  it('#isSquare() should return true if this is square', function() {
+    rvblock.isSquare.should.be.a.Function;
+
+    rvblock.isSquare().should.be.false;
+    RowVector(1).block(0, 1).isSquare().should.be.true;
+  });
+
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    rvblock.isDiagonal.should.be.a.Function;
+
+    rvblock.isDiagonal().should.be.false;
+
+    var rvblock2 = rvec.block(0, 1);
+    rvblock2.isDiagonal().should.be.true;
   });
 
   it('#Zero() should return a zero matrix', function() {

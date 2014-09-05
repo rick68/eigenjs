@@ -14,7 +14,6 @@
 
 #include <boost/config.hpp>
 
-#include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/Dense>
 
 #include <complex>

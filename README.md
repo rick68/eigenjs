@@ -185,6 +185,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isApprox(vec, [prec = 1e-12])](#matisapproxvec-prec--1e-12)
     * [mat.isApprox(rvec, [prec = 1e-12])](#matisapproxrvec-prec--1e-12)
     * [mat.isSquare()](#matissquare)
+    * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
     * [mat.toString()](#mattostring)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -275,6 +276,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.inverse()](#cmatinverse)
     * [cmat.trace()](#cmattrace)
     * [cmat.diagonal([index = 0])](#cmatdiagonalindex--0)
+    * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -284,6 +286,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isApprox(crvec, [prec = 1e-12])](#cmatisapproxcrvec-prec--1e-12)
     * [cmat.isApprox(cmblock, [prec = 1e-12])](#cmatisapproxcmblock-prec--1e-12)
     * [cmat.isSquare()](#cmatissquare)
+    * [cmat.isDiagonal()](#cmatisdiagonal)
     * [cmat.toString()](#cmattostring)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
@@ -1482,6 +1485,24 @@ true
 false
 ```
 
+#### mat.isDiagonal([prec = 1e-12])
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1e+04,     0,     1,
+                0, 1e+04,     0,
+                0,     0, 1e+04
+          ]);
+console.log(mat.isDiagonal());
+console.log(mat.isDiagonal(1e-3));
+```
+
+```txt
+false
+true
+```
+
 #### mat.toString()
 
 ```js
@@ -2160,6 +2181,24 @@ console.log(cmat2.isSquare());
 ```txt
 true
 false
+```
+
+#### cmat.isDiagonal([prec = 1e-12])
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+            1e+04,     0,     1,
+                0, 1e+04,     0,
+                0,     0, 1e+04
+          ]);
+console.log(cmat.isDiagonal());
+console.log(cmat.isDiagonal(1e-3));
+```
+
+```txt
+false
+true
 ```
 
 #### cmat.toString()

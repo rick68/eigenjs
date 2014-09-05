@@ -581,6 +581,15 @@ describe('RowVector', function() {
     RowVector(1).isSquare().should.be.true;
   });
 
+  it('#isDiagonal() should return true if this is diagonal', function() {
+    rvec.isDiagonal.should.be.a.Function;
+
+    rvec.isDiagonal().should.be.false;
+
+    var rvec2 = cmat.block(0, 0, 1, 1);
+    rvec2.isDiagonal().should.be.true;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 
