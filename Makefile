@@ -23,6 +23,7 @@ SOURCES = \
     src/CMatrix/instance_method_get.hpp \
     src/CMatrix/instance_method_inverse.hpp \
     src/CMatrix/instance_method_isApprox.hpp \
+    src/CMatrix/instance_method_isDiagonal.hpp \
     src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
@@ -120,6 +121,7 @@ SOURCES = \
     src/Matrix/instance_method_get.hpp \
     src/Matrix/instance_method_inverse.hpp \
     src/Matrix/instance_method_isApprox.hpp \
+    src/Matrix/instance_method_isDiagonal.hpp \
     src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
