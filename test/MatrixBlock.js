@@ -1101,6 +1101,20 @@ describe('MatrixBlock', function() {
     Matrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    mblock.isZero.should.be.a.Function;
+
+    mblock.isZero().should.be.false;
+
+    var mblock2 = new Matrix(3, 3).set([
+      0,      0, 0.0001,
+      0,      0,      0,
+      0,      0,      0
+    ]).block(0, 0, 3, 3);
+    mblock2.isZero().should.be.false;
+    mblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     mblock.isOnes.should.be.a.Function;
 

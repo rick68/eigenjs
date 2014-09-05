@@ -704,6 +704,20 @@ describe('CVector', function() {
     CVector(1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    cvec.isZero.should.be.a.Function;
+
+    cvec.isZero().should.be.false;
+
+    var cvec2 = new CVector(3).set([
+      0,
+      0,
+      0.0001
+    ]);
+    cvec2.isZero().should.be.false;
+    cvec2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     cvec.isOnes.should.be.a.Function;
 
