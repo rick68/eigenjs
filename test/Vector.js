@@ -619,6 +619,20 @@ describe('Vector', function() {
     Vector(1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    vec.isZero.should.be.a.Function;
+
+    vec.isZero().should.be.false;
+
+    var vec2 = new Vector(3).set([
+      0,
+      0,
+      0.0001
+    ]);
+    vec2.isZero().should.be.false;
+    vec2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     vec.isOnes.should.be.a.Function;
 

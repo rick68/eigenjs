@@ -1468,6 +1468,20 @@ describe('VectorBlock', function() {
     Vector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    vblock.isZero.should.be.a.Function;
+
+    vblock.isZero().should.be.false;
+
+    var vblock2 = new Vector(3).set([
+      0,
+      0,
+      0.0001
+    ]).block(0, 3);
+    vblock2.isZero().should.be.false;
+    vblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     vblock.isOnes.should.be.a.Function;
 

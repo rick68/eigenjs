@@ -1697,6 +1697,18 @@ describe('CRowVectorBlock', function() {
     CRowVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    crvblock.isZero.should.be.a.Function;
+
+    crvblock.isZero().should.be.false;
+
+    var crvblock2 = new CRowVector(3).set([
+      0, 0, 0.0001
+    ]).block(0, 3);
+    crvblock2.isZero().should.be.false;
+    crvblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     crvblock.isOnes.should.be.a.Function;
 

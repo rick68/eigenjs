@@ -1355,6 +1355,18 @@ describe('RowVectorBlock', function() {
     RowVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    rvblock.isZero.should.be.a.Function;
+
+    rvblock.isZero().should.be.false;
+
+    var rvblock2 = new RowVector(3).set([
+      0, 0, 0.0001
+    ]).block(0, 3);
+    rvblock2.isZero().should.be.false;
+    rvblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     rvblock.isOnes.should.be.a.Function;
 

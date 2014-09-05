@@ -1351,6 +1351,20 @@ describe('CMatrixBlock', function() {
     CMatrix(3, 4).block(0, 0, 3, 4).isSquare().should.be.false;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    cmblock.isZero.should.be.a.Function;
+
+    cmblock.isZero().should.be.false;
+
+    var cmblock2 = new Matrix(3, 3).set([
+      0,      0, 0.0001,
+      0,      0,      0,
+      0,      0,      0
+    ]).block(0, 0, 3, 3);
+    cmblock2.isZero().should.be.false;
+    cmblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     cmblock.isOnes.should.be.a.Function;
 

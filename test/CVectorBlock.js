@@ -1700,6 +1700,20 @@ describe('CVectorBlock', function() {
     CVector(1).block(0, 1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    cvblock.isZero.should.be.a.Function;
+
+    cvblock.isZero().should.be.false;
+
+    var cvblock2 = new CVector(3).set([
+      0,
+      0,
+      0.0001
+    ]).block(0, 3);
+    cvblock2.isZero().should.be.false;
+    cvblock2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     cvblock.isOnes.should.be.a.Function;
 

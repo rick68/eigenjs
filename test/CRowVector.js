@@ -673,6 +673,18 @@ describe('CRowVector', function() {
     CRowVector(1).isSquare().should.be.true;
   });
 
+  it('#isZero() should return true if this is zero', function() {
+    crvec.isZero.should.be.a.Function;
+
+    crvec.isZero().should.be.false;
+
+    var crvec2 = new CRowVector(3).set([
+      0, 0, 0.0001
+    ]);
+    crvec2.isZero().should.be.false;
+    crvec2.isZero(1e-4).should.be.true;
+  });
+
   it('#isOnes() should return true if this is ones', function() {
     crvec.isOnes.should.be.a.Function;
 
