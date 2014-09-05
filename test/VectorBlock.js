@@ -1492,6 +1492,33 @@ describe('VectorBlock', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones matrix', function() {
+    VectorBlock.Ones.should.be.a.Function;
+
+    VectorBlock.Ones(3).toString().should.equal("1\n1\n1");
+    VectorBlock.Ones(3).should.instanceOf(Vector);
+
+    VectorBlock.Ones(3).equals(
+      new Matrix(3, 1).set([
+        1,
+        1,
+        1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a Vector with constant values', function() {
+    MatrixBlock.Constant.should.be.a.Function;
+
+    var vec2 = VectorBlock.Constant(4, 0.6);
+    vec2.should.instanceOf(Vector);
+    vec2.toString().should.equal("0.6\n0.6\n0.6\n0.6");
+
+    var cmat = VectorBlock.Constant(4, Complex(0.6, 0));
+    cmat.should.instanceOf(CVector);
+    cmat.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
+  });
+
   it('#Identity() should return a identity vector', function() {
     VectorBlock.Identity.should.be.a.Function;
 
@@ -1512,17 +1539,5 @@ describe('VectorBlock', function() {
     vec2.should.instanceOf(Vector);
     vec2.rows().should.equal(3);
     vec2.cols().should.equal(1);
-  });
-
-  it('#Constant() should return a Vector with constant values', function() {
-    MatrixBlock.Constant.should.be.a.Function;
-
-    var vec2 = VectorBlock.Constant(4, 0.6);
-    vec2.should.instanceOf(Vector);
-    vec2.toString().should.equal("0.6\n0.6\n0.6\n0.6");
-
-    var cmat = VectorBlock.Constant(4, Complex(0.6, 0));
-    cmat.should.instanceOf(CVector);
-    cmat.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
   });
 });

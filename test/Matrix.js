@@ -560,6 +560,34 @@ describe('Matrix', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones matrix', function() {
+    Matrix.Ones.should.be.a.Function;
+
+    Matrix.Ones(3, 3).toString().should.equal("1 1 1\n1 1 1\n1 1 1");
+
+    Matrix.Ones(3).toString().should.equal("1 1 1\n1 1 1\n1 1 1");
+
+    Matrix.Ones(3, 4).equals(
+      new Matrix(3, 4).set([
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a Matrix with constant values', function() {
+    Matrix.Constant.should.be.a.Function;
+
+    var mat2 = Matrix.Constant(4, 4, 0.6);
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6");
+
+    var cmat = Matrix.Constant(4, 4, Complex(0.6, 0));
+    cmat.should.instanceOf(CMatrix);
+    cmat.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a identity matrix', function() {
     Matrix.Identity.should.be.a.Function;
 
@@ -607,17 +635,5 @@ describe('Matrix', function() {
     ]));
 
     mat.toString().should.equal("-1 -2  3\n-3 -4  6\n 7  8  9");
-  });
-
-  it('#Constant() should return a Matrix with constant values', function() {
-    Matrix.Constant.should.be.a.Function;
-
-    var mat2 = Matrix.Constant(4, 4, 0.6);
-    mat2.should.instanceOf(Matrix);
-    mat2.toString().should.equal("0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6");
-
-    var cmat = Matrix.Constant(4, 4, Complex(0.6, 0));
-    cmat.should.instanceOf(CMatrix);
-    cmat.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });

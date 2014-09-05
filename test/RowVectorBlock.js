@@ -1386,6 +1386,31 @@ describe('RowVectorBlock', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones matrix', function() {
+    RowVectorBlock.Ones.should.be.a.Function;
+
+    RowVectorBlock.Ones(3).toString().should.equal("1 1 1");
+    RowVectorBlock.Ones(3).should.instanceOf(RowVector);
+
+    RowVectorBlock.Ones(3).equals(
+      new Matrix(1, 3).set([
+        1, 1, 1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a RowVector with constant values', function() {
+    RowVectorBlock.Constant.should.be.a.Function;
+
+    var rvec2 = RowVectorBlock.Constant(4, 0.6);
+    rvec2.should.instanceOf(RowVector);
+    rvec2.toString().should.equal("0.6 0.6 0.6 0.6");
+
+    var crvec = RowVectorBlock.Constant(4, Complex(0.6, 0));
+    crvec.should.instanceOf(CRowVector);
+    crvec.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a identity vector', function() {
     RowVectorBlock.Identity.should.be.a.Function;
 
@@ -1404,17 +1429,5 @@ describe('RowVectorBlock', function() {
     rvec2.should.instanceOf(RowVector);
     rvec2.rows().should.equal(1);
     rvec2.cols().should.equal(3);
-  });
-
-  it('#Constant() should return a RowVector with constant values', function() {
-    RowVectorBlock.Constant.should.be.a.Function;
-
-    var rvec2 = RowVectorBlock.Constant(4, 0.6);
-    rvec2.should.instanceOf(RowVector);
-    rvec2.toString().should.equal("0.6 0.6 0.6 0.6");
-
-    var crvec = RowVectorBlock.Constant(4, Complex(0.6, 0));
-    crvec.should.instanceOf(CRowVector);
-    crvec.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });

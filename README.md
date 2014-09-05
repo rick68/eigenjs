@@ -114,12 +114,14 @@ $ npm install eigenjs --msvs_version=2012
     * [Matrix(rows, cols)](#matrixrows-cols)
     * [Matrix.Zero(n)](#matrixzeron)
     * [Matrix.Zero(rows, cols)](#matrixzerorows-cols)
+    * [Matrix.Ones(n)](#matrixonesn)
+    * [Matrix.Ones(rows, cols)](#matrixonesrows-cols)
+    * [Matrix.Constant(rows, cols, scalar)](#matrixconstantrows-cols-scalar)
+    * [Matrix.Constant(rows, cols, comp)](#matrixconstantrows-cols-comp)
     * [Matrix.Identity(n)](#matrixidentityn)
     * [Matrix.Identity(rows, cols)](#matrixidentityrows-cols)
     * [Matrix.Random(n)](#matrixrandomn)
     * [Matrix.Random(rows, cols)](#matrixrandomrows-cols)
-    * [Matrix.Constant(rows, cols, scalar)](#matrixconstantrows-cols-scalar)
-    * [Matrix.Constant(rows, cols, comp)](#matrixconstantrows-cols-comp)
   * [Matrix Instance Methods](#matrix-instance-methods)
     * [mat.rows()](#matrows)
     * [mat.cols()](#matcols)
@@ -193,12 +195,14 @@ $ npm install eigenjs --msvs_version=2012
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
     * [CMatrix.Zero(n)](#cmatrixzeron)
     * [CMatrix.Zero(rows, cols)](#cmatrixzerorows-cols)
+    * [CMatrix.Ones(n)](#cmatrixonesn)
+    * [CMatrix.Ones(rows, cols)](#cmatrixonesrows-cols)
+    * [CMatrix.Constant(rows, cols, scalar)](#cmatrixconstantrows-cols-scalar)
+    * [CMatrix.Constant(rows, cols, comp)](#cmatrixconstantrows-cols-comp)
     * [CMatrix.Identity(n)](#cmatrixidentityn)
     * [CMatrix.Identity(rows, cols)](#cmatrixidentityrows-cols)
     * [CMatrix.Random(n)](#cmatrixrandomn)
     * [CMatrix.Random(rows, cols)](#cmatrixrandomrows-cols)
-    * [CMatrix.Constant(rows, cols, scalar)](#cmatrixconstantrows-cols-scalar)
-    * [CMatrix.Constant(rows, cols, comp)](#cmatrixconstantrows-cols-comp)
   * [Complex Matrix Instance Methods](#complex-matrix-instance-methods)
     * [cmat.rows()](#cmatrows)
     * [cmat.cols()](#cmatcols)
@@ -906,6 +910,38 @@ mat =
 0 0 0
 ```
 
+#### Matrix.Ones(n)
+#### Matrix.Ones(rows, cols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Ones(2, 3);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+1 1 1
+1 1 1
+```
+
+#### Matrix.Constant(rows, cols, scalar)
+#### Matrix.Constant(rows, cols, comp)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Constant(4, 4, 0.6);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+0.6 0.6 0.6 0.6
+```
+
 #### Matrix.Identity(n)
 #### Matrix.Identity(rows, cols)
 
@@ -939,23 +975,6 @@ console.log('mat = \n%s', mat);
 mat =
 -0.421952 -0.671276  0.547419
  0.260209  -0.13622  0.464891
-```
-
-#### Matrix.Constant(rows, cols, scalar)
-#### Matrix.Constant(rows, cols, comp)
-
-```js
-var M = require('eigenjs').Matrix
-  , mat = M.Constant(4, 4, 0.6);
-console.log('mat = \n%s', mat);
-```
-
-```txt
-mat =
-0.6 0.6 0.6 0.6
-0.6 0.6 0.6 0.6
-0.6 0.6 0.6 0.6
-0.6 0.6 0.6 0.6
 ```
 
 ### Matrix Instance Methods
@@ -1571,6 +1590,38 @@ cmat =
 (0,0) (0,0) (0,0)
 ```
 
+#### CMatrix.Ones(n)
+#### CMatrix.Ones(rows, cols)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Ones(2, 3);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(1,0) (1,0) (1,0)
+(1,0) (1,0) (1,0)
+```
+
+#### CMatrix.Constant(rows, cols, scalar)
+#### CMatrix.Constant(rows, cols, comp)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Constant(4, 4, 0.6);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+(0.6,0) (0.6,0) (0.6,0) (0.6,0)
+```
+
 #### CMatrix.Identity(n)
 #### CMatrix.Identity(rows, cols)
 ```js
@@ -1603,23 +1654,6 @@ console.log('cmat = \n%s', cmat);
 cmat =
    (0.827048,0.18844)  (-0.130621,0.648239)  (-0.946608,0.364096)
 (-0.895631,-0.864291)  (0.952898,-0.648834)  (-0.646252,0.440248)
-```
-
-#### CMatrix.Constant(rows, cols, scalar)
-#### CMatrix.Constant(rows, cols, comp)
-
-```js
-var CM = require('eigenjs').CMatrix
-  , cmat = CM.Constant(4, 4, 0.6);
-console.log('cmat = \n%s', cmat);
-```
-
-```txt
-cmat =
-(0.6,0) (0.6,0) (0.6,0) (0.6,0)
-(0.6,0) (0.6,0) (0.6,0) (0.6,0)
-(0.6,0) (0.6,0) (0.6,0) (0.6,0)
-(0.6,0) (0.6,0) (0.6,0) (0.6,0)
 ```
 
 ### Complex Matrix Instance Methods

@@ -1733,6 +1733,29 @@ describe('CVectorBlock', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a complex matrix with ones values', function() {
+    CVectorBlock.Ones.should.be.a.Function;
+
+    CVectorBlock.Ones(3).toString().should.equal("(1,0)\n(1,0)\n(1,0)");
+    CVectorBlock.Ones(3).should.instanceOf(CVector);
+
+    CVectorBlock.Ones(3).equals(
+      new CMatrix(3, 1).set([
+        1,
+        1,
+        1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a CVectorBlock with constant values', function() {
+    CVectorBlock.Constant.should.be.a.Function;
+
+    var cvec2 = CVectorBlock.Constant(4, 0.6);
+    cvec2.should.instanceOf(CVector);
+    cvec2.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
+  });
+
   it('#Identity() should return a complex identity vector', function() {
     CVectorBlock.Identity.should.be.a.Function;
 
@@ -1753,13 +1776,5 @@ describe('CVectorBlock', function() {
     cvec2.should.instanceOf(CVector);
     cvec2.rows().should.equal(3);
     cvec2.cols().should.equal(1);
-  });
-
-  it('#Constant() should return a CVectorBlock with constant values', function() {
-    CVectorBlock.Constant.should.be.a.Function;
-
-    var cvec2 = CVectorBlock.Constant(4, 0.6);
-    cvec2.should.instanceOf(CVector);
-    cvec2.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
   });
 });

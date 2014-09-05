@@ -651,6 +651,32 @@ describe('Vector', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones vector', function() {
+    Vector.Ones.should.be.a.Function;
+
+    Vector.Ones(6).toString().should.equal("1\n1\n1\n1\n1\n1");
+
+    Vector.Ones(3).equals(
+      new Vector([
+        1,
+        1,
+        1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a Vector with constant values', function() {
+    Vector.Constant.should.be.a.Function;
+
+    var vec2 = Vector.Constant(4, 0.6);
+    vec2.should.instanceOf(Vector);
+    vec2.toString().should.equal("0.6\n0.6\n0.6\n0.6");
+
+    var cmat = Vector.Constant(4, Complex(0.6, 0));
+    cmat.should.instanceOf(CVector);
+    cmat.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
+  });
+
   it('#Identity() should return a identity vector', function() {
     Vector.Identity.should.be.a.Function;
 
@@ -699,17 +725,5 @@ describe('Vector', function() {
     ]));
 
     vec.toString().should.equal(" 1\n 2\n-1\n-2\n 5\n 6");
-  });
-
-  it('#Constant() should return a Vector with constant values', function() {
-    Vector.Constant.should.be.a.Function;
-
-    var vec2 = Vector.Constant(4, 0.6);
-    vec2.should.instanceOf(Vector);
-    vec2.toString().should.equal("0.6\n0.6\n0.6\n0.6");
-
-    var cmat = Vector.Constant(4, Complex(0.6, 0));
-    cmat.should.instanceOf(CVector);
-    cmat.toString().should.equal("(0.6,0)\n(0.6,0)\n(0.6,0)\n(0.6,0)");
   });
 });
