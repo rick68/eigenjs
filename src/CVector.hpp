@@ -116,7 +116,6 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
       if (args[0]->IsNumber() && args[1]->IsNumber()) {
         const typename value_type::Index& rows = args[0]->Int32Value();
         const typename value_type::Index& cols = args[1]->Int32Value();
-        v8::Local<v8::Value> argv[] = { args[0], args[1] };
         (void)cols;
 
         if (rows >= 0 && cols >= 0) {
@@ -125,6 +124,8 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
             obj->Wrap(args.This());
             NanReturnValue(args.This());
           } else {
+            v8::Local<v8::Value> argv[] = { args[0], args[1] };
+
             NanReturnValue(
               base_type::new_instance(
                 args

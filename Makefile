@@ -6,6 +6,7 @@ SOURCES = \
     src/CMatrix.hpp \
     src/CMatrix/class_method_Constant.hpp \
     src/CMatrix/class_method_Identity.hpp \
+    src/CMatrix/class_method_Ones.hpp \
     src/CMatrix/class_method_Random.hpp \
     src/CMatrix/class_method_Zero.hpp \
     src/CMatrix/definitions.hpp \
@@ -105,6 +106,7 @@ SOURCES = \
     src/Matrix.hpp \
     src/Matrix/class_method_Constant.hpp \
     src/Matrix/class_method_Identity.hpp \
+    src/Matrix/class_method_Ones.hpp \
     src/Matrix/class_method_Random.hpp \
     src/Matrix/class_method_Zero.hpp \
     src/Matrix/definitions.hpp \

@@ -73,6 +73,68 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_CLASS_METHOD_ONES_CONTEXT()                    \
+  {                                                                          \
+    const int& args_length = args.Length();                                  \
+    typename U::value_type::Index nbRows = 0;                                \
+    typename U::value_type::Index nbCols = 0;                                \
+                                                                             \
+    switch ( args_length ) {                                                 \
+      case 1:                                                                \
+        nbRows = nbCols = args[0]->IsNumber()                                \
+            ? args[0]->Int32Value() : 0;                                     \
+        break;                                                               \
+      case 2:                                                                \
+        nbRows = args[0]->IsNumber() ? args[0]->Int32Value() : 0;            \
+        nbCols = args[1]->IsNumber() ? args[1]->Int32Value() : 0;            \
+        break;                                                               \
+      default:                                                               \
+        break;                                                               \
+    }                                                                        \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    v8::Local<v8::Value> argv[] = {                                          \
+      NanNew< v8::Number >( 0 )                                              \
+    , NanNew< v8::Number >( 0 )                                              \
+    };                                                                       \
+                                                                             \
+    v8::Local< v8::Object > instance = U::new_instance(                      \
+      args                                                                   \
+    , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                      \
+    , argv                                                                   \
+    );                                                                       \
+                                                                             \
+    U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                  \
+    typename U::value_type& new_value = **new_obj;                           \
+                                                                             \
+    auto codes = std::make_tuple(                                            \
+        [&]{}                                                                \
+      , [&]{ return U::value_type::Ones( nbRows, 1 ).col( 0 ); }             \
+      , [&]{ return U::value_type::Ones( 1, nbCols ).row( 0 ); }             \
+      , [&]{ return U::value_type::Ones( nbRows, nbCols ); }                 \
+      );                                                                     \
+    new_value = std::get<                                                    \
+      boost::mpl::plus<                                                      \
+        boost::mpl::multiplies<                                              \
+          detail::is_vector_or_cvector< U >                                  \
+        , boost::mpl::int_< 1 >                                              \
+        >                                                                    \
+      , boost::mpl::multiplies<                                              \
+          detail::is_rowvector_or_crowvector< U >                            \
+        , boost::mpl::int_< 2 >                                              \
+        >                                                                    \
+      , boost::mpl::multiplies<                                              \
+          detail::is_matrix_or_cmatrix< U >                                  \
+        , boost::mpl::int_< 3 >                                              \
+        >                                                                    \
+      >::value                                                               \
+    >( codes )();                                                            \
+                                                                             \
+    NanReturnValue( instance );                                              \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_IDENTITY_CONTEXT()                \
   {                                                                          \
     const int& args_length = args.Length();                                  \
@@ -347,7 +409,7 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISDIAGONAL_CONTEXT()           \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap<T>( args.This() );        \
     const typename T::value_type& value = **obj;                             \
                                                                              \
     typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \

@@ -1135,6 +1135,34 @@ describe('MatrixBlock', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a ones matrix', function() {
+    MatrixBlock.Ones.should.be.a.Function;
+
+    MatrixBlock.Ones(3, 3).toString().should.equal("1 1 1\n1 1 1\n1 1 1");
+
+    MatrixBlock.Ones(3).toString().should.equal("1 1 1\n1 1 1\n1 1 1");
+
+    MatrixBlock.Ones(3, 4).equals(
+      new Matrix(3, 4).set([
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a Matrix with constant values', function() {
+    MatrixBlock.Constant.should.be.a.Function;
+
+    var mat2 = MatrixBlock.Constant(4, 4, 0.6);
+    mat2.should.instanceOf(Matrix);
+    mat2.toString().should.equal("0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6");
+
+    var cmat = MatrixBlock.Constant(4, 4, Complex(0.6, 0));
+    cmat.should.instanceOf(CMatrix);
+    cmat.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a identity matrix', function() {
     MatrixBlock.Identity.should.be.a.Function;
 
@@ -1169,17 +1197,5 @@ describe('MatrixBlock', function() {
     var mat3 = MatrixBlock.Random(3, 4);
     mat3.rows().should.equal(3);
     mat3.cols().should.equal(4);
-  });
-
-  it('#Constant() should return a Matrix with constant values', function() {
-    MatrixBlock.Constant.should.be.a.Function;
-
-    var mat2 = MatrixBlock.Constant(4, 4, 0.6);
-    mat2.should.instanceOf(Matrix);
-    mat2.toString().should.equal("0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6\n0.6 0.6 0.6 0.6");
-
-    var cmat = MatrixBlock.Constant(4, 4, Complex(0.6, 0));
-    cmat.should.instanceOf(CMatrix);
-    cmat.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });

@@ -1385,6 +1385,30 @@ describe('CMatrixBlock', function() {
     ).should.true;
   });
 
+  it('#Ones() should return a complex ones matrix', function() {
+    CMatrixBlock.Ones.should.be.a.Function;
+
+    CMatrixBlock.Ones(3, 3).toString().should.equal("(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)");
+
+    CMatrixBlock.Ones(3).toString().should.equal("(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)");
+
+    CMatrixBlock.Ones(3, 4).equals(
+      new CMatrix(3, 4).set([
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1
+      ])
+    ).should.true;
+  });
+
+  it('#Constant() should return a CMatrix with constant values', function() {
+    CMatrixBlock.Constant.should.be.a.Function;
+
+    var cmat2 = CMatrixBlock.Constant(4, 4, 0.6);
+    cmat2.should.instanceOf(CMatrix);
+    cmat2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
+  });
+
   it('#Identity() should return a complex identity matrix', function() {
     CMatrixBlock.Identity.should.be.a.Function;
 
@@ -1419,13 +1443,5 @@ describe('CMatrixBlock', function() {
     var cmat3 = CMatrixBlock.Random(3, 4);
     cmat3.rows().should.equal(3);
     cmat3.cols().should.equal(4);
-  });
-
-  it('#Constant() should return a CMatrix with constant values', function() {
-    CMatrixBlock.Constant.should.be.a.Function;
-
-    var cmat2 = CMatrixBlock.Constant(4, 4, 0.6);
-    cmat2.should.instanceOf(CMatrix);
-    cmat2.toString().should.equal("(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0) (0.6,0)");
   });
 });
