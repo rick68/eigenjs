@@ -51,9 +51,10 @@
 #include "instance_method_isDiagonal.hpp"
 
 #include "class_method_Zero.hpp"
+#include "class_method_Ones.hpp"
+#include "class_method_Constant.hpp"
 #include "class_method_Identity.hpp"
 #include "class_method_Random.hpp"
-#include "class_method_Constant.hpp"
 
 namespace EigenJS {
 
@@ -96,9 +97,10 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_isDiagonal)
 
   (class_method_Zero)
+  (class_method_Ones)
+  (class_method_Constant)
   (class_method_Identity)
   (class_method_Random)
-  (class_method_Constant)
 );
 
 }  // namespace EigenJS
