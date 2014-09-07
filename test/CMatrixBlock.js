@@ -32,7 +32,7 @@ describe('CMatrixBlock', function() {
   it('should throw error when tried creating a complex matrix block with invalid arguments', function() {
     (function() {
       new CMatrixBlock(cmat, -1, -2, -3, -4);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
 
     (function() {
       new CMatrixBlock(cmat, 0, 0, 4, 4);
@@ -44,7 +44,7 @@ describe('CMatrixBlock', function() {
 
     (function() {
       new CMatrixBlock(cmat, 0, 0, 5, 4);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('should be invoked with arguments and return an object', function() {
@@ -64,11 +64,11 @@ describe('CMatrixBlock', function() {
 
     (function() {
       cmblock.set(3, 0, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
 
     (function() {
       cmblock.set(-1, -2, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -107,7 +107,7 @@ describe('CMatrixBlock', function() {
 
     (function(){
       cmblock.get(2, 0);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of CMatrixBlock', function() {
@@ -1472,5 +1472,44 @@ describe('CMatrixBlock', function() {
     var cmat3 = CMatrixBlock.Random(3, 4);
     cmat3.rows().should.equal(3);
     cmat3.cols().should.equal(4);
+  });
+
+  it("#block() should return a complex matrix block", function() {
+    cmat.block.should.be.a.Function;
+
+    var cmblock2 = cmblock.block(0, 0, 2, 1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal(" (6,0)\n(10,0)");
+
+    cmblock2.assign(CMatrix(2, 1).set([
+      -1,
+      -2
+    ]));
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0) (-1,0)  (7,0)  (8,0)\n (9,0) (-2,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+  });
+
+  it("#row() should return a row matrix block of the complex matrix block", function() {
+    cmblock.row.should.be.a.Function;
+
+    var row = cmblock.row(0);
+    row.should.instanceOf(CMatrixBlock);
+    row.toString().should.equal("(6,0) (7,0)");
+
+    (function() {
+      cmblock.row(3);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix block of the complex matrix block", function() {
+    cmblock.col.should.be.a.Function;
+
+    var col = cmblock.col(0);
+    col.should.instanceOf(CMatrixBlock);
+    col.toString().should.equal(" (6,0)\n(10,0)");
+
+    (function() {
+      cmblock.col(3);
+    }).should.throw("The row or column number is out of range");
   });
 });

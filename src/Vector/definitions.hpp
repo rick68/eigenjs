@@ -17,9 +17,11 @@
 #include "instance_method_set.hpp"
 #include "instance_method_get.hpp"
 
-#include "instance_method_mula.hpp"
-
 #include "instance_method_block.hpp"
+#include "instance_method_row.hpp"
+#include "instance_method_col.hpp"
+
+#include "instance_method_mula.hpp"
 
 #include "class_method_Constant.hpp"
 
@@ -30,9 +32,11 @@ EIGENJS_OBJECT_DEFINITIONS(
 , (instance_method_set)
   (instance_method_get)
 
-  (instance_method_mula)
-
   (instance_method_block)
+  (instance_method_row)
+  (instance_method_col)
+
+  (instance_method_mula)
 
   (class_method_Constant)
 );
