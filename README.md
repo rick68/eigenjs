@@ -1128,7 +1128,7 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 #### mat.assign(vec)
 #### mat.assign(rvec)
 #### mat.assign(mblock)
-#### mat.assign(rblock)
+#### mat.assign(vblock)
 #### mat.assign(rvblock)
 
 ```js
@@ -1206,13 +1206,13 @@ mat =
 #### mat.add(vec)
 #### mat.add(rvec)
 #### mat.add(mblock)
-#### mat.add(rblock)
+#### mat.add(vblock)
 #### mat.add(vrblock)
 #### mat.add(cmat)
 #### mat.add(cvec)
 #### mat.add(crvec)
 #### mat.add(cmblock)
-#### mat.add(crblock)
+#### mat.add(cvblock)
 #### mat.add(crvblock)
 
 ```js
