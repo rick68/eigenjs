@@ -135,6 +135,8 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(vblock)](#matassignvblock)
     * [mat.assign(rvblock)](#matassignrvblock)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
+    * [mat.row(n)](#matrown)
+    * [mat.col(n)](#matcoln)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
     * [mat.add(rvec)](#mataddrvec)
@@ -252,6 +254,8 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(cvblock)](#cmatassigncvblock)
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
+    * [cmat.row(n)](#cmatrown)
+    * [cmat.col(n)](#cmatcoln)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
     * [cmat.add(rvec)](#cmataddrvec)
@@ -1160,6 +1164,44 @@ mat =
         0         0         0         1
 ```
 
+### mat.row(n)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , RV = Eigen.RowVector
+  , mat = new M.Zero(3, 3)
+  , mblock = mat.row(1);
+mblock.assign(RV.Random(3));
+console.log('mat =\n%s', mat);
+```
+
+```txt
+mat =
+        0         0         0
+-0.843392 -0.891355  0.991578
+        0         0         0
+```
+
+### mat.col(n)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , mat = new M.Zero(3, 3)
+  , mblock = mat.col(1);
+mblock.assign(V.Random(3));
+console.log('mat =\n%s', mat);
+```
+
+```txt
+mat =
+         0   0.674939          0
+         0  -0.303923          0
+         0 -0.0302965          0
+```
+
 #### mat.add(mat)
 #### mat.add(vec)
 #### mat.add(rvec)
@@ -1866,7 +1908,6 @@ console.log(cmat.get(1, 0) + ' ' + cmat.get(1, 1));
 (3,3) (4,4)
 ```
 
-
 #### cmat.assign(mat)
 #### cmat.assign(vec)
 #### cmat.assign(rvec)
@@ -1893,6 +1934,62 @@ cmat =
 (0,0) (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0) (0,0)
+```
+
+### cmat.block(startRow, startCol, blockRows, blockCols)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Identity(4, 4)
+  , cmblock = cmat.block(1, 1, 2, 2);
+cmblock.assign(CM.Random(2, 2));
+console.log('cmat =\n%s', cmat);
+```
+
+```txt
+cmat =
+               (1,0)                (0,0)                (0,0)                (0,0)
+               (0,0) (0.490586,-0.722033) (-0.380859,0.895456)                (0,0)
+               (0,0)  (0.794101,0.457882) (-0.068657,0.081439)                (0,0)
+               (0,0)                (0,0)                (0,0)                (1,0)
+```
+
+### cmat.row(n)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CRV = Eigen.CRowVector
+  , cmat = new CM.Zero(3, 3)
+  , cmblock = cmat.row(1);
+cmblock.assign(CRV.Random(3));
+console.log('cmat =\n%s', cmat);
+```
+
+```txt
+cmat =
+               (0,0)                (0,0)                (0,0)
+(0.500827,-0.595426)  (0.677855,0.716979) (0.271854,-0.943846)
+               (0,0)                (0,0)                (0,0)
+```
+
+### mat.col(n)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CV = Eigen.CVector
+  , cmat = new CM.Zero(3, 3)
+  , cmblock = cmat.col(1);
+cmblock.assign(CV.Random(3));
+console.log('cmat =\n%s', cmat);
+```
+
+```txt
+cmat =
+                (0,0)     (-0.97615,-0.147)                 (0,0)
+                (0,0) (-0.630134,-0.661642)                 (0,0)
+                (0,0)  (-0.211411,0.819724)                 (0,0)
 ```
 
 #### cmat.add(mat)
@@ -1931,24 +2028,6 @@ console.log('cmat3 = \n%s', cmat3);
 cmat3 =
   (6,1)   (8,2)
 (10,10) (12,12)
-```
-
-### cmat.block(startRow, startCol, blockRows, blockCols)
-
-```js
-var CM = require('eigenjs').CMatrix
-  , cmat = new CM.Identity(4, 4)
-  , cmblock = cmat.block(1, 1, 2, 2);
-cmblock.assign(CM.Random(2, 2));
-console.log('cmat =\n%s', cmat);
-```
-
-```txt
-cmat =
-               (1,0)                (0,0)                (0,0)                (0,0)
-               (0,0) (0.490586,-0.722033) (-0.380859,0.895456)                (0,0)
-               (0,0)  (0.794101,0.457882) (-0.068657,0.081439)                (0,0)
-               (0,0)                (0,0)                (0,0)                (1,0)
 ```
 
 #### cmat.adda(mat)
