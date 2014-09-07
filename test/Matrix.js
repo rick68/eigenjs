@@ -49,10 +49,10 @@ describe('Matrix', function() {
 
     (function() {
       mat.set(3, 0, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       mat.set(-1, -2, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -95,7 +95,7 @@ describe('Matrix', function() {
     mat.get(2, 2).should.equal(9);
     (function(){
       mat.get(3, 0);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of Matrix', function() {
@@ -654,6 +654,8 @@ describe('Matrix', function() {
   });
 
   it("#block() should return a matrix block", function() {
+    mat.block.should.be.a.Function;
+
     var mblock = mat.block(0, 0, 2, 2);
     mblock.should.instanceOf(MatrixBlock);
     mblock.toString().should.equal("1 2\n4 5");
@@ -664,5 +666,29 @@ describe('Matrix', function() {
     ]));
 
     mat.toString().should.equal("-1 -2  3\n-3 -4  6\n 7  8  9");
+  });
+
+  it("#row() should return a row matrix of the matrix", function() {
+    mat.row.should.be.a.Function;
+
+    var row = mat.row(0);
+    row.should.instanceOf(MatrixBlock);
+    row.toString().should.equal("1 2 3");
+
+    (function() {
+      mat.row(3);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the matrix", function() {
+    mat.col.should.be.a.Function;
+
+    var col = mat.col(0);
+    col.should.instanceOf(MatrixBlock);
+    col.toString().should.equal("1\n4\n7");
+
+    (function() {
+      mat.col(3);
+    }).should.throw("The row or column number is out of range");
   });
 });

@@ -167,7 +167,7 @@ struct base : node::ObjectWrap {
     , const typename Eigen::Matrix<T, Rows, Cols>::Index& col) {
     return row < 0 || row >= eigen_matrix.rows() ||
            col < 0 || col >= eigen_matrix.cols()
-      ? NanThrowError("Row or column numbers are out of range"), true
+      ? NanThrowError("The row or column number is out of range"), true
       : false;
   }
 
@@ -188,7 +188,7 @@ struct base : node::ObjectWrap {
     , const typename XprType::Index& col) {
     return row < 0 || row >= eigen_block.rows() ||
            col < 0 || col >= eigen_block.cols()
-      ? NanThrowError("Row or column numbers are out of range"), true
+      ? NanThrowError("The row or column number is out of range"), true
       : false;
   }
 
