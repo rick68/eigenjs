@@ -191,7 +191,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isOnes([prec = 1e-12])](#matisonesprec--1e-12)
     * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
-    * [mat.toString()](#mattostring)
+    * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
@@ -296,7 +296,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isOnes([prec = 1e-12])](#cmatisonesprec--1e-12)
     * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
-    * [cmat.toString()](#cmattostring)
+    * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
     * [Vector(rows)](#vectorrows)
@@ -1579,7 +1579,18 @@ false
 true
 ```
 
-#### mat.toString()
+#### mat.toString([options])
+
++ options `Object`
+  - precision `Number` Default=`6`. The number of digits for floating point values.
+  - fullPrecision `Booleam` Default=`false`. If set to true, then the number of digits will be computed to match the full precision of each floating-point type.
+  - dontAlignCols `Booleam` Default=`false`. If set to true, it allows to disable the alignment of columnt, resulting in faster code.
+  - coeffSeparator `String` Default=`' '`. The string printed between two coefficients of the same row.
+  - rowSeparator `String` Default=`''`. The string printed between two rows.
+  - rowPrefix `String` Default=`''`. The string printed at the beginning of each row.
+  - rowSuffix `String` Default=`''`. The string printed at the end of each row.
+  - matPrefix `String` Default=`''`. The string printed at the beginning of the matrix.
+  - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
 var Eigen = require('eigenjs')
@@ -2348,7 +2359,18 @@ false
 true
 ```
 
-#### cmat.toString()
+#### cmat.toString([options])
+
++ options `Object`
+  - precision `Number` Default=`6`. The number of digits for floating point values.
+  - fullPrecision `Booleam` Default=`false`. If set to true, then the number of digits will be computed to match the full precision of each floating-point type.
+  - dontAlignCols `Booleam` Default=`false`. If set to true, it allows to disable the alignment of columnt, resulting in faster code.
+  - coeffSeparator `String` Default=`' '`. The string printed between two coefficients of the same row.
+  - rowSeparator `String` Default=`''`. The string printed between two rows.
+  - rowPrefix `String` Default=`''`. The string printed at the beginning of each row.
+  - rowSuffix `String` Default=`''`. The string printed at the end of each row.
+  - matPrefix `String` Default=`''`. The string printed at the beginning of the matrix.
+  - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
 var Eigen = require('eigenjs')
