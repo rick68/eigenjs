@@ -1128,7 +1128,7 @@ console.log(mat.get(1, 0) + ' ' + mat.get(1, 1));
 #### mat.assign(vec)
 #### mat.assign(rvec)
 #### mat.assign(mblock)
-#### mat.assign(rblock)
+#### mat.assign(vblock)
 #### mat.assign(rvblock)
 
 ```js
@@ -1206,13 +1206,13 @@ mat =
 #### mat.add(vec)
 #### mat.add(rvec)
 #### mat.add(mblock)
-#### mat.add(rblock)
-#### mat.add(vrblock)
+#### mat.add(vblock)
+#### mat.add(rvblock)
 #### mat.add(cmat)
 #### mat.add(cvec)
 #### mat.add(crvec)
 #### mat.add(cmblock)
-#### mat.add(crblock)
+#### mat.add(cvblock)
 #### mat.add(crvblock)
 
 ```js
@@ -1973,7 +1973,7 @@ cmat =
                (0,0)                (0,0)                (0,0)
 ```
 
-### mat.col(n)
+### cmat.col(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2115,8 +2115,8 @@ cmat3 =
 #### cmat.suba(cvec)
 #### cmat.suba(crvec)
 #### cmat.suba(cmblock)
-#### cmat.suba(vmblock)
-#### cmat.suba(rvmblock)
+#### cmat.suba(vblock)
+#### cmat.suba(rvblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2405,6 +2405,8 @@ cmat =
 #### cmat.equals(cvec)
 #### cmat.equals(crvec)
 #### cmat.equals(cmblock)
+#### cmat.equals(cvblock)
+#### cmat.equals(crvblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2436,6 +2438,8 @@ true
 #### cmat.isApprox(cvec, [prec = 1e-12])
 #### cmat.isApprox(crvec, [prec = 1e-12])
 #### cmat.isApprox(cmblock, [prec = 1e-12])
+#### cmat.isApprox(cvblock, [prec = 1e-12])
+#### cmat.isApprox(crvblock, [prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
