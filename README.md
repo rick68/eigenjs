@@ -1736,7 +1736,7 @@ var M = require('eigenjs').Matrix
       , rowPrefix: "["
       , rowSuffix: "]"
       };
-console.log('mat =\n' + mat.toString());
+console.log('mat =\n%s\n', mat.toString());
 console.log('mat =\n' + mat.toString(cleanfmt));
 ```
 
@@ -1745,6 +1745,7 @@ mat =
    0.611558    0.725525   -0.550208
    0.457785  -0.0968169    0.657662
 0.000162166    0.797849    -0.68232
+
 mat =
 [   0.6116,    0.7255,   -0.5502]
 [   0.4578,  -0.09682,    0.6577]
@@ -2596,14 +2597,16 @@ var CM = require('eigenjs').CMatrix
       , rowPrefix: "["
       , rowSuffix: "]"
       };
-console.log('cmat =\n' + cmat.toString());
+console.log('cmat =\n%s\n', cmat.toString());
 console.log('cmat =\n' + cmat.toString(octavefmt));
 ```
 
 ```txt
+cmat =
 (-0.881059,0.0362337) (-0.272438,-0.865992) (-0.230511,-0.192664)
  (0.979223,-0.201546)  (-0.723588,0.651508)  (-0.105755,0.579535)
   (0.624409,0.438373)  (-0.109684,0.538095)   (0.244085,0.332142)
+
 cmat =
 [(-0.881059,0.0362337), (-0.272438,-0.865992), (-0.230511,-0.192664)];
 [ (0.979223,-0.201546),  (-0.723588,0.651508),  (-0.105755,0.579535)];
