@@ -1207,7 +1207,7 @@ mat =
 #### mat.add(rvec)
 #### mat.add(mblock)
 #### mat.add(vblock)
-#### mat.add(vrblock)
+#### mat.add(rvblock)
 #### mat.add(cmat)
 #### mat.add(cvec)
 #### mat.add(crvec)
