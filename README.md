@@ -1727,16 +1727,28 @@ true
   - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
-var Eigen = require('eigenjs')
-  , M = Eigen.Matrix
-  , mat = new M.Random(2, 2);
-console.log('mat =\n', mat.toString());
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , cleanfmt = {
+        precision: 4
+      , coeffSeparator: ", "
+      , rowSeparator: "\n"
+      , rowPrefix: "["
+      , rowSuffix: "]"
+      };
+console.log('mat =\n' + mat.toString());
+console.log('mat =\n' + mat.toString(cleanfmt));
 ```
 
 ```txt
 mat =
--0.838421  0.550552
- 0.657735 -0.874757
+   0.611558    0.725525   -0.550208
+   0.457785  -0.0968169    0.657662
+0.000162166    0.797849    -0.68232
+mat =
+[   0.6116,    0.7255,   -0.5502]
+[   0.4578,  -0.09682,    0.6577]
+[0.0001622,    0.7978,   -0.6823]
 ```
 
 ## Complex Matrix
@@ -2576,16 +2588,26 @@ true
   - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
-  , cmat = new CM.Random(2, 2);
-console.log('cmat =\n', cmat.toString());
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(3, 3)
+  , octavefmt = {
+        coeffSeparator: ", "
+      , rowSeparator: ";\n"
+      , rowPrefix: "["
+      , rowSuffix: "]"
+      };
+console.log('cmat =\n' + cmat.toString());
+console.log('cmat =\n' + cmat.toString(octavefmt));
 ```
 
 ```txt
+(-0.881059,0.0362337) (-0.272438,-0.865992) (-0.230511,-0.192664)
+ (0.979223,-0.201546)  (-0.723588,0.651508)  (-0.105755,0.579535)
+  (0.624409,0.438373)  (-0.109684,0.538095)   (0.244085,0.332142)
 cmat =
-  (0.0123055,0.819031)  (0.0701489,0.992777)
-(-0.538938,0.0627161)  (-0.401951,0.405649)
+[(-0.881059,0.0362337), (-0.272438,-0.865992), (-0.230511,-0.192664)];
+[ (0.979223,-0.201546),  (-0.723588,0.651508),  (-0.105755,0.579535)];
+[  (0.624409,0.438373),  (-0.109684,0.538095),   (0.244085,0.332142)]
 ```
 
 ## Vector
