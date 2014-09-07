@@ -14,6 +14,7 @@ SOURCES = \
     src/CMatrix/instance_method_adda.hpp \
     src/CMatrix/instance_method_adjoint.hpp \
     src/CMatrix/instance_method_block.hpp \
+    src/CMatrix/instance_method_col.hpp \
     src/CMatrix/instance_method_cols.hpp \
     src/CMatrix/instance_method_conjugate.hpp \
     src/CMatrix/instance_method_determinant.hpp \
@@ -31,6 +32,7 @@ SOURCES = \
     src/CMatrix/instance_method_isZero.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
+    src/CMatrix/instance_method_row.hpp \
     src/CMatrix/instance_method_rows.hpp \
     src/CMatrix/instance_method_set.hpp \
     src/CMatrix/instance_method_sub.hpp \
@@ -47,8 +49,11 @@ SOURCES = \
     src/CRowVector.hpp \
     src/CRowVector/class_method_Constant.hpp \
     src/CRowVector/definitions.hpp \
+    src/CRowVector/instance_method_block.hpp \
+    src/CRowVector/instance_method_col.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_mula.hpp \
+    src/CRowVector/instance_method_row.hpp \
     src/CRowVector/instance_method_set.hpp \
     src/CRowVector_fwd.hpp \
     src/CRowVectorBlock.hpp \
@@ -57,8 +62,11 @@ SOURCES = \
     src/CVector.hpp \
     src/CVector/class_method_Constant.hpp \
     src/CVector/definitions.hpp \
+    src/CVector/instance_method_block.hpp \
+    src/CVector/instance_method_col.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_mula.hpp \
+    src/CVector/instance_method_row.hpp \
     src/CVector/instance_method_set.hpp \
     src/CVector_fwd.hpp \
     src/CVectorBlock.hpp \
@@ -116,6 +124,7 @@ SOURCES = \
     src/Matrix/instance_method_adda.hpp \
     src/Matrix/instance_method_adjoint.hpp \
     src/Matrix/instance_method_block.hpp \
+    src/Matrix/instance_method_col.hpp \
     src/Matrix/instance_method_cols.hpp \
     src/Matrix/instance_method_conjugate.hpp \
     src/Matrix/instance_method_determinant.hpp \
@@ -133,6 +142,7 @@ SOURCES = \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
+    src/Matrix/instance_method_row.hpp \
     src/Matrix/instance_method_rows.hpp \
     src/Matrix/instance_method_set.hpp \
     src/Matrix/instance_method_sub.hpp \
@@ -150,8 +160,10 @@ SOURCES = \
     src/RowVector/class_method_Constant.hpp \
     src/RowVector/definitions.hpp \
     src/RowVector/instance_method_block.hpp \
+    src/RowVector/instance_method_col.hpp \
     src/RowVector/instance_method_get.hpp \
     src/RowVector/instance_method_mula.hpp \
+    src/RowVector/instance_method_row.hpp \
     src/RowVector/instance_method_set.hpp \
     src/RowVector_fwd.hpp \
     src/RowVectorBlock.hpp \
@@ -161,8 +173,10 @@ SOURCES = \
     src/Vector/class_method_Constant.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_block.hpp \
+    src/Vector/instance_method_col.hpp \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_mula.hpp \
+    src/Vector/instance_method_row.hpp \
     src/Vector/instance_method_set.hpp \
     src/Vector_fwd.hpp \
     src/VectorBlock.hpp \
