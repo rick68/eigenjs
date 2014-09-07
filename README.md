@@ -2115,8 +2115,8 @@ cmat3 =
 #### cmat.suba(cvec)
 #### cmat.suba(crvec)
 #### cmat.suba(cmblock)
-#### cmat.suba(vmblock)
-#### cmat.suba(rvmblock)
+#### cmat.suba(vblock)
+#### cmat.suba(rvblock)
 
 ```js
 var Eigen = require('eigenjs')
