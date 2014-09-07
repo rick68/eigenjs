@@ -73,6 +73,8 @@ class MatrixBlock
     , const typename value_type::Index& blockRows
     , const typename value_type::Index& blockCols
   ) : base_type(value_ptr)
+    , start_row_(startRow)
+    , start_column_(startCol)
     , block_(
         base_type::value_ptr_->block(startRow, startCol, blockRows, blockCols)
       ) {}
@@ -89,47 +91,69 @@ class MatrixBlock
       NanReturnUndefined();
     }
 
-    if (Matrix::is_matrix(args[0]) &&
-        args[1]->IsNumber() &&
+    if (!args.IsConstructCall()) {
+      v8::Local<v8::Value> argv[] = {
+          args[0], args[1], args[2], args[3], args[4] };
+      NanReturnValue(
+        base_type::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
+    }
+
+    if (args[1]->IsNumber() &&
         args[2]->IsNumber() &&
         args[3]->IsNumber() &&
         args[4]->IsNumber()
     ) {
-      const Matrix* const& rhs_obj =
-          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
-      const Matrix& rhs_Matrix = *rhs_obj;
-      const typename Matrix::value_type& rhs_matrix = *rhs_Matrix;
-      const typename value_type::Index startRow = args[1]->Int32Value();
-      const typename value_type::Index startCol = args[2]->Int32Value();
-      const typename value_type::Index blockRows = args[3]->Int32Value();
-      const typename value_type::Index blockCols = args[4]->Int32Value();
-
+      typename value_type::Index startRow = args[1]->Int32Value();
+      typename value_type::Index startCol = args[2]->Int32Value();
+      const typename value_type::Index& blockRows = args[3]->Int32Value();
+      const typename value_type::Index& blockCols = args[4]->Int32Value();
       const typename value_type::Index&& rows = startRow + blockRows - 1;
       const typename value_type::Index&& cols = startCol + blockCols - 1;
 
-      if (Matrix::is_out_of_range(rhs_matrix, rows, cols)) {
+      typename base_type::pointer_type value_ptr;
+
+      if (Matrix::is_matrix(args[0])) {
+        const Matrix* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+        const Matrix& rhs_Matrix = *rhs_obj;
+        const typename Matrix::value_type& rhs_matrix = *rhs_Matrix;
+
+        if (Matrix::is_out_of_range(rhs_matrix, rows, cols)) {
+          NanReturnUndefined();
+        }
+
+        value_ptr = rhs_Matrix;
+      } else if (MatrixBlock::is_matrixblock(args[0])) {
+        const MatrixBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+        const MatrixBlock& rhs_MatrixBlock = *rhs_obj;
+        const typename MatrixBlock::value_type& rhs_matrixblock =
+            *rhs_MatrixBlock;
+
+        if (MatrixBlock::is_out_of_range(rhs_matrixblock, rows, cols)) {
+          NanReturnUndefined();
+        }
+
+        value_ptr = rhs_MatrixBlock;
+        startRow += rhs_MatrixBlock.start_row_;
+        startCol += rhs_MatrixBlock.start_column_;
+      } else if (true) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
 
       if (startRow >= 0 && startCol >= 0 &&
           blockRows >= 0 && blockCols >= 0
       ) {
-        if (args.IsConstructCall()) {
-          MatrixBlock* obj = new MatrixBlock(
-              rhs_Matrix, startRow, startCol, blockRows, blockCols);
-          obj->Wrap(args.This());
-          NanReturnValue(args.This());
-        } else {
-          v8::Local<v8::Value> argv[] = {
-              args[0], args[1], args[2], args[3], args[4] };
-          NanReturnValue(
-            base_type::new_instance(
-              args
-            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-            )
-          );
-        }
+        MatrixBlock* obj = new MatrixBlock(
+            value_ptr, startRow, startCol, blockRows, blockCols);
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
       }
     }
 
@@ -138,6 +162,8 @@ class MatrixBlock
   }
 
  private:
+  typename value_type::Index start_row_;
+  typename value_type::Index start_column_;
   value_type block_;
 };
 
