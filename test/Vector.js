@@ -61,10 +61,10 @@ describe('Vector', function() {
 
     (function() {
       vec.set(6, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       vec.set(-1, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -111,7 +111,7 @@ describe('Vector', function() {
     vec.get(5).should.equal(6);
     (function(){
       vec.get(6);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of Vector', function() {
@@ -744,6 +744,8 @@ describe('Vector', function() {
   });
 
   it("#block() should return a vector block", function() {
+    vec.col.should.be.a.Function;
+
     var vblock = vec.block(2, 2);
     vblock.should.instanceOf(VectorBlock);
     vblock.toString().should.equal("3\n4");
@@ -754,5 +756,30 @@ describe('Vector', function() {
     ]));
 
     vec.toString().should.equal(" 1\n 2\n-1\n-2\n 5\n 6");
+  });
+
+  it("#row() should return a column matrix of the vector", function() {
+    vec
+    .row.should.be.a.Function;
+
+    var row = vec.row(0);
+    row.should.instanceOf(VectorBlock);
+    row.toString().should.equal("1");
+
+    (function() {
+      vec.row(6);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the vector", function() {
+    vec.col.should.be.a.Function;
+
+    var col = vec.col(0);
+    col.should.instanceOf(VectorBlock);
+    col.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    (function() {
+      vec.col(1);
+    }).should.throw("The row or column number is out of range");
   });
 });

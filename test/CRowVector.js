@@ -52,10 +52,10 @@ describe('CRowVector', function() {
 
     (function() {
       crvec.set(4, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       crvec.set(-1, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -86,7 +86,7 @@ describe('CRowVector', function() {
     crvec.get(2).equals(Complex(3, 3));
     (function(){
       crvec.get(3);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of CRowVector', function() {
@@ -781,6 +781,8 @@ describe('CRowVector', function() {
   });
 
   it("#block() should return a complex row-vector block", function() {
+    crvec.block.should.be.a.Function;
+
     var crvblock = crvec.block(1, 2);
     crvblock.should.instanceOf(CRowVectorBlock);
     crvblock.toString().should.equal("(2,2) (3,3)");
@@ -790,5 +792,29 @@ describe('CRowVector', function() {
     ]));
 
     crvec.toString().should.equal(" (1,1) (-1,0) (-2,0)");
+  });
+
+  it("#row() should return a row matrix of the complex row-vector", function() {
+    crvec.row.should.be.a.Function;
+
+    var row = crvec.row(0);
+    row.should.instanceOf(CRowVectorBlock);
+    row.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    (function() {
+      crvec.row(1);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the complex row-vector", function() {
+    crvec.col.should.be.a.Function;
+
+    var col = crvec.col(0);
+    col.should.instanceOf(CRowVectorBlock);
+    col.toString().should.equal("(1,1)");
+
+    (function() {
+      crvec.col(3);
+    }).should.throw("The row or column number is out of range");
   });
 });

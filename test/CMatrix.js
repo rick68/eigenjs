@@ -50,10 +50,10 @@ describe('CMatrix', function() {
 
     (function() {
       cmat.set(3, 0, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       cmat.set(-1, -2, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -130,7 +130,7 @@ describe('CMatrix', function() {
     cmat.get(2, 2).equals(Complex(9, 9)).should.ok;
     (function(){
       cmat.get(3, 0);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of CMatrix', function() {
@@ -739,6 +739,8 @@ describe('CMatrix', function() {
   });
 
   it("#block() should return a complex matrix block", function() {
+    cmat.block.should.be.a.Function;
+
     var cmblock = cmat.block(0, 0, 2, 2);
     cmblock.should.instanceOf(CMatrixBlock);
     cmblock.toString().should.equal("(1,1) (2,2)\n(4,4) (5,5)");
@@ -749,5 +751,29 @@ describe('CMatrix', function() {
     ]));
 
     cmat.toString().should.equal("(-1,0) (-2,0)  (3,3)\n(-3,0) (-4,0)  (6,6)\n (7,7)  (8,8)  (9,9)");
+  });
+
+  it("#row() should return a row matrix of the complex matrix", function() {
+    cmat.row.should.be.a.Function;
+
+    var row = cmat.row(0);
+    row.should.instanceOf(CMatrixBlock);
+    row.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    (function() {
+      cmat.row(3);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the complex matrix", function() {
+    cmat.col.should.be.a.Function;
+
+    var col = cmat.col(0);
+    col.should.instanceOf(CMatrixBlock);
+    col.toString().should.equal("(1,1)\n(4,4)\n(7,7)");
+
+    (function() {
+      cmat.col(3);
+    }).should.throw("The row or column number is out of range");
   });
 });

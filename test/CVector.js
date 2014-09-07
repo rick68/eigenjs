@@ -56,10 +56,10 @@ describe('CVector', function() {
 
     (function() {
       cvec.set(6, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       cvec.set(-1, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -100,7 +100,7 @@ describe('CVector', function() {
 
     (function(){
       cvec.get(6);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of CVector', function() {
@@ -849,6 +849,8 @@ describe('CVector', function() {
   });
 
   it("#block() should return a complex vector block", function() {
+    cvec.block.should.be.a.Function;
+
     var cvblock = cvec.block(2, 2);
     cvblock.should.instanceOf(CVectorBlock);
     cvblock.toString().should.equal("(3,3)\n(4,4)");
@@ -859,5 +861,29 @@ describe('CVector', function() {
     ]));
 
     cvec.toString().should.equal(" (1,1)\n (2,2)\n(-1,0)\n(-2,0)\n (5,5)\n (6,6)");
+  });
+
+  it("#row() should return a column matrix of the complex vector", function() {
+    cvec.row.should.be.a.Function;
+
+    var row = cvec.row(0);
+    row.should.instanceOf(CVectorBlock);
+    row.toString().should.equal("(1,1)");
+
+    (function() {
+      cvec.row(6);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the complex vector", function() {
+    cvec.col.should.be.a.Function;
+
+    var col = cvec.col(0);
+    col.should.instanceOf(CVectorBlock);
+    col.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.col(1);
+    }).should.throw("The row or column number is out of range");
   });
 });
