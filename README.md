@@ -1973,7 +1973,7 @@ cmat =
                (0,0)                (0,0)                (0,0)
 ```
 
-### mat.col(n)
+### cmat.col(n)
 
 ```js
 var Eigen = require('eigenjs')
