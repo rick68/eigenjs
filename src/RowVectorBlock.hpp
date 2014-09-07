@@ -74,6 +74,7 @@ class RowVectorBlock
     , const typename value_type::Index& startCol
     , const typename value_type::Index& blockCols
   ) : base_type(value_ptr)
+    , start_column_(startCol)
     , block_(
         base_type::value_ptr_->block(0, startCol, 1, blockCols)
       ) {}
@@ -90,42 +91,64 @@ class RowVectorBlock
       NanReturnUndefined();
     }
 
-    if (RowVector::is_rowvector(args[0]) &&
-        args[1]->IsNumber() &&
+    if (!args.IsConstructCall()) {
+      v8::Local<v8::Value> argv[] = { args[0], args[1], args[2] };
+      NanReturnValue(
+        base_type::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
+    }
+
+    if (args[1]->IsNumber() &&
         args[2]->IsNumber()
     ) {
-      const RowVector* const& rhs_obj =
-          node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
-      const RowVector& rhs_RowVector = *rhs_obj;
-      const typename RowVector::value_type& rhs_rowvector = *rhs_RowVector;
-      const typename value_type::Index startRow = 0;
-      const typename value_type::Index startCol = args[1]->Int32Value();
-      const typename value_type::Index blockRows = 1;
-      const typename value_type::Index blockCols = args[2]->Int32Value();
-
+      typename value_type::Index startRow = 0;
+      typename value_type::Index startCol = args[1]->Int32Value();
+      const typename value_type::Index& blockRows = 1;
+      const typename value_type::Index& blockCols = args[2]->Int32Value();
       const typename value_type::Index&& rows = startRow + blockRows - 1;
       const typename value_type::Index&& cols = startCol + blockCols - 1;
 
-      if (RowVector::is_out_of_range(rhs_rowvector, rows, cols)) {
+      typename base_type::pointer_type value_ptr;
+
+      if (RowVector::is_rowvector(args[0])) {
+        const RowVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+        const RowVector& rhs_RowVector = *rhs_obj;
+        const typename RowVector::value_type& rhs_rowvector =
+            *rhs_RowVector;
+
+        if (RowVector::is_out_of_range(rhs_rowvector, rows, cols)) {
+          NanReturnUndefined();
+        }
+
+        value_ptr = rhs_RowVector;
+      } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+        const RowVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+        const RowVectorBlock& rhs_RowVectorBlock = *rhs_obj;
+        const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+            *rhs_RowVectorBlock;
+
+        if (RowVectorBlock::is_out_of_range(rhs_rowvectorblock, rows, cols)) {
+          NanReturnUndefined();
+        }
+
+        value_ptr = rhs_RowVectorBlock;
+        startCol += rhs_RowVectorBlock.start_column_;
+      } else if (true) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
 
       if (startCol >= 0 && blockCols >= 0) {
-        if (args.IsConstructCall()) {
-          RowVectorBlock* obj =
-              new RowVectorBlock(rhs_RowVector, startCol, blockCols);
-          obj->Wrap(args.This());
-          NanReturnValue(args.This());
-        } else {
-          v8::Local<v8::Value> argv[] = { args[0], args[1], args[2] };
-          NanReturnValue(
-            base_type::new_instance(
-              args
-            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-            )
-          );
-        }
+        RowVectorBlock* obj =
+            new RowVectorBlock(value_ptr, startCol, blockCols);
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
       }
     }
 
@@ -134,6 +157,7 @@ class RowVectorBlock
   }
 
  private:
+  typename value_type::Index start_column_;
   value_type block_;
 };
 

@@ -51,10 +51,10 @@ describe('RowVector', function() {
 
     (function() {
       rvec.set(6, 68);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
     (function() {
       rvec.set(-1, 500);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#set() with array argument should work ok', function() {
@@ -88,7 +88,7 @@ describe('RowVector', function() {
     rvec.get(5).should.equal(6);
     (function(){
       rvec.get(6);
-    }).should.throw('Row or column numbers are out of range');
+    }).should.throw('The row or column number is out of range');
   });
 
   it('#toString() should return all element values of RowVector', function() {
@@ -702,5 +702,43 @@ describe('RowVector', function() {
     ]));
 
     rvec.toString().should.equal(" 1  2 -1 -2  5  6");
+  });
+
+  it("#block() should return a row-vector block", function() {
+    rvec.block.should.be.a.Function;
+
+    var rvblock = rvec.block(1, 2);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("2 3");
+
+    rvblock.assign(RowVector([
+      -1, -2
+    ]));
+
+    rvec.toString().should.equal(" 1 -1 -2  4  5  6");
+  });
+
+  it("#row() should return a row matrix of the row-vector", function() {
+    rvec.row.should.be.a.Function;
+
+    var row = rvec.row(0);
+    row.should.instanceOf(RowVectorBlock);
+    row.toString().should.equal("1 2 3 4 5 6");
+
+    (function() {
+      rvec.row(1);
+    }).should.throw("The row or column number is out of range");
+  });
+
+  it("#col() should return a column matrix of the row-vector", function() {
+    rvec.col.should.be.a.Function;
+
+    var col = rvec.col(0);
+    col.should.instanceOf(RowVectorBlock);
+    col.toString().should.equal("1");
+
+    (function() {
+      rvec.col(6);
+    }).should.throw("The row or column number is out of range");
   });
 });
