@@ -221,7 +221,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isOnes([prec = 1e-12])](#matisonesprec--1e-12)
     * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
-    * [mat.toString()](#mattostring)
+    * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
@@ -360,7 +360,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isOnes([prec = 1e-12])](#cmatisonesprec--1e-12)
     * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
-    * [cmat.toString()](#cmattostring)
+    * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
     * [Vector(rows)](#vectorrows)
@@ -1713,19 +1713,42 @@ false
 true
 ```
 
-#### mat.toString()
+#### mat.toString([options])
+
++ options `Object`
+  - precision `Number` Default=`6`. The number of digits for floating point values.
+  - fullPrecision `Booleam` Default=`false`. If set to true, then the number of digits will be computed to match the full precision of each floating-point type.
+  - dontAlignCols `Booleam` Default=`false`. If set to true, it allows to disable the alignment of columnt, resulting in faster code.
+  - coeffSeparator `String` Default=`' '`. The string printed between two coefficients of the same row.
+  - rowSeparator `String` Default=`''`. The string printed between two rows.
+  - rowPrefix `String` Default=`''`. The string printed at the beginning of each row.
+  - rowSuffix `String` Default=`''`. The string printed at the end of each row.
+  - matPrefix `String` Default=`''`. The string printed at the beginning of the matrix.
+  - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
-var Eigen = require('eigenjs')
-  , M = Eigen.Matrix
-  , mat = new M.Random(2, 2);
-console.log('mat =\n', mat.toString());
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , cleanfmt = {
+        precision: 4
+      , coeffSeparator: ", "
+      , rowSeparator: "\n"
+      , rowPrefix: "["
+      , rowSuffix: "]"
+      };
+console.log('mat =\n' + mat.toString());
+console.log('mat =\n' + mat.toString(cleanfmt));
 ```
 
 ```txt
 mat =
--0.838421  0.550552
- 0.657735 -0.874757
+   0.611558    0.725525   -0.550208
+   0.457785  -0.0968169    0.657662
+0.000162166    0.797849    -0.68232
+mat =
+[   0.6116,    0.7255,   -0.5502]
+[   0.4578,  -0.09682,    0.6577]
+[0.0001622,    0.7978,   -0.6823]
 ```
 
 ## Complex Matrix
@@ -2551,19 +2574,40 @@ false
 true
 ```
 
-#### cmat.toString()
+#### cmat.toString([options])
+
++ options `Object`
+  - precision `Number` Default=`6`. The number of digits for floating point values.
+  - fullPrecision `Booleam` Default=`false`. If set to true, then the number of digits will be computed to match the full precision of each floating-point type.
+  - dontAlignCols `Booleam` Default=`false`. If set to true, it allows to disable the alignment of columnt, resulting in faster code.
+  - coeffSeparator `String` Default=`' '`. The string printed between two coefficients of the same row.
+  - rowSeparator `String` Default=`''`. The string printed between two rows.
+  - rowPrefix `String` Default=`''`. The string printed at the beginning of each row.
+  - rowSuffix `String` Default=`''`. The string printed at the end of each row.
+  - matPrefix `String` Default=`''`. The string printed at the beginning of the matrix.
+  - matSuffix `String` Default=`''`. The string printed at the end of the matrix.
 
 ```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
-  , cmat = new CM.Random(2, 2);
-console.log('cmat =\n', cmat.toString());
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(3, 3)
+  , octavefmt = {
+        coeffSeparator: ", "
+      , rowSeparator: ";\n"
+      , rowPrefix: "["
+      , rowSuffix: "]"
+      };
+console.log('cmat =\n' + cmat.toString());
+console.log('cmat =\n' + cmat.toString(octavefmt));
 ```
 
 ```txt
+(-0.881059,0.0362337) (-0.272438,-0.865992) (-0.230511,-0.192664)
+ (0.979223,-0.201546)  (-0.723588,0.651508)  (-0.105755,0.579535)
+  (0.624409,0.438373)  (-0.109684,0.538095)   (0.244085,0.332142)
 cmat =
-  (0.0123055,0.819031)  (0.0701489,0.992777)
-(-0.538938,0.0627161)  (-0.401951,0.405649)
+[(-0.881059,0.0362337), (-0.272438,-0.865992), (-0.230511,-0.192664)];
+[ (0.979223,-0.201546),  (-0.723588,0.651508),  (-0.105755,0.579535)];
+[  (0.624409,0.438373),  (-0.109684,0.538095),   (0.244085,0.332142)]
 ```
 
 ## Vector

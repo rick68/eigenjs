@@ -269,11 +269,130 @@
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
-                                                                             \
+    const int& args_length = args.Length();                                  \
     std::ostringstream result;                                               \
-    result << value;                                                         \
                                                                              \
     NanScope();                                                              \
+                                                                             \
+    if ( args_length == 0 ) {                                                \
+      result << value;                                                       \
+    } else if ( args_length == 1 && args[0]->IsObject() ) {                  \
+      const v8::Local< v8::Object >& options = args[0]->ToObject();          \
+                                                                             \
+      int precision = Eigen::StreamPrecision;                                \
+      const v8::Local< v8::String >& precision_string =                      \
+          NanNew( "precision" );                                             \
+      if ( options->Has( precision_string ) ) {                              \
+        const v8::Local< v8::Value >& precision_value =                      \
+            options->Get( precision_string );                                \
+        if ( precision_value->IsNumber() ) {                                 \
+          precision = precision_value->Int32Value();                         \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      const v8::Local< v8::String >& full_precision_string =                 \
+          NanNew( "fullPrecision" );                                         \
+      if ( options->Has( full_precision_string ) ) {                         \
+        const v8::Local< v8::Value >& full_precision_value =                 \
+            options->Get( full_precision_string );                           \
+        if ( full_precision_value->IsTrue() ) {                              \
+          precision = Eigen::FullPrecision;                                  \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      int flags = 0;                                                         \
+      const v8::Local< v8::String >& dont_align_cols_string =                \
+          NanNew( "dontAlignCols" );                                         \
+      if ( options->Has( dont_align_cols_string ) ) {                        \
+        const v8::Local< v8::Value >& dont_align_cols_value =                \
+            options->Get( dont_align_cols_string );                          \
+        if ( dont_align_cols_value->IsTrue() ) {                             \
+          flags = Eigen::DontAlignCols;                                      \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string coefficient_separator = " ";                               \
+      const v8::Local< v8::String >& coefficient_separator_string =          \
+          NanNew( "coeffSeparator" );                                        \
+      if ( options->Has( coefficient_separator_string ) ) {                  \
+        const v8::Local< v8::Value >& coefficient_separator_value =          \
+            options->Get( coefficient_separator_string );                    \
+        if ( coefficient_separator_value->IsString() ) {                     \
+          coefficient_separator =                                            \
+              *NanUtf8String( coefficient_separator_value );                 \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string row_separator = "\n";                                      \
+      const v8::Local< v8::String >& row_separator_string =                  \
+          NanNew( "rowSeparator" );                                          \
+      if ( options->Has( row_separator_string ) ) {                          \
+        const v8::Local< v8::Value >& row_separator_value =                  \
+            options->Get( row_separator_string );                            \
+        if ( row_separator_value->IsString() ) {                             \
+          row_separator =                                                    \
+              *NanUtf8String( row_separator_value );                         \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string row_prefix = "";                                           \
+      const v8::Local< v8::String >& row_prefix_string =                     \
+          NanNew( "rowPrefix" );                                             \
+      if ( options->Has( row_prefix_string ) ) {                             \
+        const v8::Local< v8::Value >& row_prefix_value =                     \
+            options->Get( row_prefix_string );                               \
+        if ( row_prefix_value->IsString() ) {                                \
+          row_prefix = *NanUtf8String( row_prefix_value );                   \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string row_suffix = "";                                           \
+      const v8::Local< v8::String >& row_suffix_string =                     \
+          NanNew( "rowSuffix" );                                             \
+      if ( options->Has( row_suffix_string ) ) {                             \
+        const v8::Local< v8::Value >& row_suffix_value =                     \
+            options->Get( row_suffix_string );                               \
+        if ( row_suffix_value->IsString() ) {                                \
+          row_suffix = *NanUtf8String( row_suffix_value );                   \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string mat_prefix = "";                                           \
+      const v8::Local< v8::String >& mat_prefix_string =                     \
+          NanNew( "matPrefix" );                                             \
+      if ( options->Has( mat_prefix_string ) ) {                             \
+        const v8::Local< v8::Value >& mat_prefix_value =                     \
+            options->Get( mat_prefix_string );                               \
+        if ( mat_prefix_value->IsString() ) {                                \
+          mat_prefix = *NanUtf8String( mat_prefix_value );                   \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      std::string mat_suffix = "";                                           \
+      const v8::Local< v8::String >& mat_suffix_string =                     \
+          NanNew( "matSuffix" );                                             \
+      if ( options->Has( mat_suffix_string ) ) {                             \
+        const v8::Local< v8::Value >& mat_suffix_value =                     \
+            options->Get( mat_suffix_string );                               \
+        if ( mat_suffix_value->IsString() ) {                                \
+          mat_suffix = *NanUtf8String( mat_suffix_value );                   \
+        }                                                                    \
+      }                                                                      \
+                                                                             \
+      Eigen::IOFormat fmt(                                                   \
+            precision                                                        \
+          , flags                                                            \
+          , coefficient_separator                                            \
+          , row_separator                                                    \
+          , row_prefix                                                       \
+          , row_suffix                                                       \
+          , mat_prefix                                                       \
+          , mat_suffix                                                       \
+          );                                                                 \
+                                                                             \
+      result << value.format( fmt );                                         \
+    }                                                                        \
+                                                                             \
     NanReturnValue( NanNew( result.str().c_str() ) );                        \
   }                                                                          \
   /**/
