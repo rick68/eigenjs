@@ -2405,6 +2405,8 @@ cmat =
 #### cmat.equals(cvec)
 #### cmat.equals(crvec)
 #### cmat.equals(cmblock)
+#### cmat.equals(cvblock)
+#### cmat.equals(crvblock)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2436,6 +2438,8 @@ true
 #### cmat.isApprox(cvec, [prec = 1e-12])
 #### cmat.isApprox(crvec, [prec = 1e-12])
 #### cmat.isApprox(cmblock, [prec = 1e-12])
+#### cmat.isApprox(cvblock, [prec = 1e-12])
+#### cmat.isApprox(crvblock, [prec = 1e-12])
 
 ```js
 var Eigen = require('eigenjs')
