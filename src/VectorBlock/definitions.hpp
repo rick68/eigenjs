@@ -12,13 +12,15 @@
 #ifndef EIGENJS_VECTORBLOCK_DEFINITIONS_HPP
 #define EIGENJS_VECTORBLOCK_DEFINITIONS_HPP
 
+#include <boost/preprocessor/empty.hpp>
+
 #include "../VectorBlock_fwd.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   VectorBlock
-,
+, BOOST_PP_EMPTY()
 );
 
 }  // namespace EigenJS
