@@ -593,8 +593,8 @@
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
           args.This()                                                        \
-        , args[0]                                                            \
-        , NanNew<v8::Integer>( value.cols() )                                \
+        , args[0]                              /* startCol */                \
+        , NanNew<v8::Integer>( value.cols() )  /* blockCols */               \
         };                                                                   \
                                                                              \
       typedef typename detail::add_block< U >::type B;                       \
@@ -627,9 +627,9 @@
                                                                              \
       v8::Local< v8::Value > argv[] = {                                      \
           args.This()                                                        \
-        , args[0]                                                            \
-        , NanNew<v8::Integer>( 1 )                                           \
-        };                                                                       \
+        , args[0]                   /* startRow */                           \
+        , NanNew<v8::Integer>( 1 )  /* blockRows */                          \
+        };                                                                   \
       typedef typename detail::add_block< U >::type B;                       \
       NanReturnValue(                                                        \
         B::new_instance(                                                     \
