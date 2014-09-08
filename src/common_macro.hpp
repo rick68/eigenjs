@@ -19,6 +19,7 @@
 #include <boost/mpl/plus.hpp>
 #include <boost/mpl/multiplies.hpp>
 #include <boost/mpl/int.hpp>
+#include <boost/mpl/or.hpp>
 
 #include <eigen3/Eigen/Dense>
 
@@ -30,6 +31,7 @@
 #include "detail/is_rowvector_or_crowvector.hpp"
 #include "detail/is_matrix_or_cmatrix.hpp"
 #include "detail/transpose.hpp"
+#include "detail/is_complex.hpp"
 
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_ZERO_CONTEXT()                    \
   {                                                                          \
@@ -574,6 +576,54 @@
     NanScope();                                                              \
                                                                              \
     NanReturnValue( NanNew< v8::Boolean >( value.isDiagonal( prec ) ) );     \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ASDIAGONAL_CONTEXT()           \
+  {                                                                          \
+    NanScope();                                                              \
+                                                                             \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    if ( value.rows() && value.cols() ) {                                    \
+      v8::Local<v8::Value> argv[] = {                                        \
+        NanNew<v8::Integer>( 0 )  /* rows */                                 \
+      , NanNew<v8::Integer>( 0 )  /* cols */                                 \
+      };                                                                     \
+                                                                             \
+      typedef typename std::conditional<                                     \
+          detail::is_complex< T >::value                                     \
+        , CMatrix                                                            \
+        , Matrix                                                             \
+        >::type MT;                                                          \
+                                                                             \
+      v8::Local< v8::Object > instance = MT::new_instance(                   \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+      );                                                                     \
+                                                                             \
+      MT* new_obj = node::ObjectWrap::Unwrap< MT >( instance );              \
+      typename MT::value_type& new_matrix_or_cmatirx = **new_obj;            \
+                                                                             \
+      auto codes = std::make_tuple(                                          \
+          [&]{ new_matrix_or_cmatirx =                                       \
+                   typename U::value_type( value ).asDiagonal(); }           \
+        , [&]{ new_matrix_or_cmatirx = value.asDiagonal(); }                 \
+        );                                                                   \
+      std::get<                                                              \
+        boost::mpl::or_<                                                     \
+          detail::is_vector_or_cvector< T >                                  \
+        , detail::is_rowvector_or_crowvector< T >                            \
+        >::value                                                             \
+      >( codes )();                                                          \
+                                                                             \
+      NanReturnValue( instance );                                            \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
 
