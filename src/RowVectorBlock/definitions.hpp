@@ -12,13 +12,15 @@
 #ifndef EIGENJS_ROWVECTORBLOCK_DEFINITIONS_HPP
 #define EIGENJS_ROWVECTORBLOCK_DEFINITIONS_HPP
 
+#include <boost/preprocessor/empty.hpp>
+
 #include "../RowVectorBlock_fwd.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   RowVectorBlock
-,
+, BOOST_PP_EMPTY()
 );
 
 }  // namespace EigenJS

@@ -14,7 +14,9 @@
           'msvs_settings': {
             'VCCLCompilerTool': {
               'ExceptionHandling': 1,
-              'AdditionalOptions': [ '/GR', '/EHsc', '/wd4018', '/wd4506' ]
+              'AdditionalOptions': [
+                '/GR', '/EHsc', '/wd4003', '/wd4018', '/wd4506'
+              ]
             }
           }
         }],

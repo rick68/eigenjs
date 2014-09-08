@@ -607,9 +607,10 @@
       MT* new_obj = node::ObjectWrap::Unwrap< MT >( instance );              \
       typename MT::value_type& new_matrix_or_cmatirx = **new_obj;            \
                                                                              \
+      typedef typename U::value_type UV;                                     \
+                                                                             \
       auto codes = std::make_tuple(                                          \
-          [&]{ new_matrix_or_cmatirx =                                       \
-                   typename U::value_type( value ).asDiagonal(); }           \
+          [&]{ new_matrix_or_cmatirx = UV( value ).asDiagonal(); }           \
         , [&]{ new_matrix_or_cmatirx = value.asDiagonal(); }                 \
         );                                                                   \
       std::get<                                                              \

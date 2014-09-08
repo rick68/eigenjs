@@ -12,13 +12,15 @@
 #ifndef EIGENJS_CROWVECTORBLOCK_DEFINITIONS_HPP
 #define EIGENJS_CROWVECTORBLOCK_DEFINITIONS_HPP
 
+#include <boost/preprocessor/empty.hpp>
+
 #include "../CRowVectorBlock_fwd.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   CRowVectorBlock
-,
+, BOOST_PP_EMPTY()
 );
 
 }  // namespace EigenJS
