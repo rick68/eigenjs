@@ -1845,4 +1845,15 @@ describe('CVectorBlock', function() {
       cvblock.col(1);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a complex diagonal", function() {
+    cvblock.asDiagonal.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var dia = cvblock.asDiagonal();
+    dia.should.instanceOf(CMatrix);
+
+    dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
+  });
 });

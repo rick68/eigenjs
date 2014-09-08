@@ -1493,4 +1493,15 @@ describe('RowVectorBlock', function() {
       rvblock.col(2);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a diagonal", function() {
+    rvblock.asDiagonal.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var dia = rvblock.asDiagonal();
+    dia.should.instanceOf(Matrix);
+
+    dia.toString().should.equal("3 0\n0 4");
+  });
 });

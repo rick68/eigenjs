@@ -741,4 +741,15 @@ describe('RowVector', function() {
       rvec.col(6);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a diagonal", function() {
+    rvec.asDiagonal.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var dia = rvec.asDiagonal();
+    dia.should.instanceOf(Matrix);
+
+    dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
+  });
 });

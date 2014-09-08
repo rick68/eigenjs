@@ -1607,4 +1607,15 @@ describe('VectorBlock', function() {
       vblock.col(1);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a diagonal", function() {
+    vblock.asDiagonal.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var dia = vblock.asDiagonal();
+    dia.should.instanceOf(Matrix);
+
+    dia.toString().should.equal("3 0\n0 4");
+  });
 });

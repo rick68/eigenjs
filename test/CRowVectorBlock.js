@@ -1832,4 +1832,26 @@ describe('CRowVectorBlock', function() {
       crvec.col(6);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a complex diagonal", function() {
+    crvblock.asDiagonal.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var dia = crvblock.asDiagonal();
+    dia.should.instanceOf(CMatrix);
+
+    dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
+  });
+
+  it("#asDiagonal() should return a complex diagonal", function() {
+    crvblock.asDiagonal.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var dia = crvblock.asDiagonal();
+    dia.should.instanceOf(CMatrix);
+
+    dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
+  });
 });
