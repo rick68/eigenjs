@@ -12,8 +12,6 @@
 #ifndef EIGENJS_DETAIL_ADD_COMPLEX_HPP
 #define EIGENJS_DETAIL_ADD_COMPLEX_HPP
 
-#include <v8.h>
-
 #include <boost/mpl/has_xxx.hpp>
 
 #include <eigen3/Eigen/Dense>
