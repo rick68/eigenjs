@@ -30,6 +30,7 @@
 #include "detail/is_rowvector_or_crowvector.hpp"
 #include "detail/is_matrix_or_cmatrix.hpp"
 #include "detail/transpose.hpp"
+#include "detail/add_block.hpp"
 
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_ZERO_CONTEXT()                    \
   {                                                                          \
@@ -574,6 +575,40 @@
     NanScope();                                                              \
                                                                              \
     NanReturnValue( NanNew< v8::Boolean >( value.isDiagonal( prec ) ) );     \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ROW_CONTEXT()                  \
+  {                                                                          \
+    NanScope();                                                              \
+                                                                             \
+    if (args.Length() == 1 && args[0]->IsNumber()) {                         \
+      const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());        \
+      const typename T::value_type& value = **obj;                           \
+      const typename T::value_type::Index& n = args[0]->Int32Value();        \
+                                                                             \
+      if (T::is_out_of_range(value, n, 0)) {                                 \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      v8::Local<v8::Value> argv[] = {                                        \
+          args.This()                                                        \
+        , args[0]                                                            \
+        , NanNew<v8::Integer>(1)                                             \
+        };                                                                   \
+                                                                             \
+      typedef typename detail::add_block<U>::type B;                         \
+      NanReturnValue(                                                        \
+        B::new_instance(                                                     \
+          args                                                               \
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)                        \
+        , argv                                                               \
+        )                                                                    \
+      );                                                                     \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
 
