@@ -1823,11 +1823,11 @@ describe('CVectorBlock', function() {
   });
 
   it("#row() should return a column matrix block of the complex vector block", function() {
-    cvec.row.should.be.a.Function;
+    cvblock.row.should.be.a.Function;
 
-    var row = cvec.row(0);
+    var row = cvblock.row(0);
     row.should.instanceOf(CVectorBlock);
-    row.toString().should.equal("(1,0)");
+    row.toString().should.equal("(3,0)");
 
     (function() {
       cvblock.row(2);
@@ -1835,11 +1835,11 @@ describe('CVectorBlock', function() {
   });
 
   it("#col() should return a column matrix block of the complex vector block", function() {
-    cvec.col.should.be.a.Function;
+    cvblock.col.should.be.a.Function;
 
-    var col = cvec.col(0);
+    var col = cvblock.col(0);
     col.should.instanceOf(CVectorBlock);
-    col.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    col.toString().should.equal("(3,0)\n(4,0)");
 
     (function() {
       cvblock.col(1);
