@@ -24,8 +24,8 @@ EIGENJS_INSTANCE_METHOD(Matrix, mul,
     const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
     const typename T::value_type& value = **obj;
     v8::Local<v8::Value> argv[] = {
-      NanNew<v8::Integer>(0) /* rows */
-    , NanNew<v8::Integer>(0) /* cols */
+      NanNew<v8::Integer>(0)  /* rows */
+    , NanNew<v8::Integer>(0)  /* cols */
     };
 
     if (Matrix::is_matrix(args[0])) {

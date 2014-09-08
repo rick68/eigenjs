@@ -511,10 +511,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISZERO_CONTEXT()               \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -528,10 +528,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISONES_CONTEXT()               \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >(args.This());        \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -545,10 +545,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISIDENTITY_CONTEXT()           \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -562,10 +562,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISDIAGONAL_CONTEXT()           \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>( args.This() );        \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
