@@ -49,6 +49,7 @@ SOURCES = \
     src/CRowVector.hpp \
     src/CRowVector/class_method_Constant.hpp \
     src/CRowVector/definitions.hpp \
+    src/CRowVector/instance_method_asDiagonal.hpp \
     src/CRowVector/instance_method_block.hpp \
     src/CRowVector/instance_method_col.hpp \
     src/CRowVector/instance_method_get.hpp \
@@ -62,6 +63,7 @@ SOURCES = \
     src/CVector.hpp \
     src/CVector/class_method_Constant.hpp \
     src/CVector/definitions.hpp \
+    src/CVector/instance_method_asDiagonal.hpp \
     src/CVector/instance_method_block.hpp \
     src/CVector/instance_method_col.hpp \
     src/CVector/instance_method_get.hpp \
@@ -159,6 +161,7 @@ SOURCES = \
     src/RowVector.hpp \
     src/RowVector/class_method_Constant.hpp \
     src/RowVector/definitions.hpp \
+    src/RowVector/instance_method_asDiagonal.hpp \
     src/RowVector/instance_method_block.hpp \
     src/RowVector/instance_method_col.hpp \
     src/RowVector/instance_method_get.hpp \
@@ -172,6 +175,7 @@ SOURCES = \
     src/Vector.hpp \
     src/Vector/class_method_Constant.hpp \
     src/Vector/definitions.hpp \
+    src/Vector/instance_method_asDiagonal.hpp \
     src/Vector/instance_method_block.hpp \
     src/Vector/instance_method_col.hpp \
     src/Vector/instance_method_get.hpp \
@@ -187,6 +191,7 @@ SOURCES = \
     src/definition.hpp \
     src/detail/add_complex.hpp \
     src/detail/initializer.hpp \
+    src/detail/is_complex.hpp \
     src/detail/is_eigen_block.hpp \
     src/detail/is_eigen_matrix.hpp \
     src/detail/is_matrix_or_cmatrix.hpp \

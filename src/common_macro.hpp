@@ -19,6 +19,7 @@
 #include <boost/mpl/plus.hpp>
 #include <boost/mpl/multiplies.hpp>
 #include <boost/mpl/int.hpp>
+#include <boost/mpl/or.hpp>
 
 #include <eigen3/Eigen/Dense>
 
@@ -30,7 +31,7 @@
 #include "detail/is_rowvector_or_crowvector.hpp"
 #include "detail/is_matrix_or_cmatrix.hpp"
 #include "detail/transpose.hpp"
-#include "detail/add_block.hpp"
+#include "detail/is_complex.hpp"
 
 #define EIGENJS_COMMON_MATRIX_CLASS_METHOD_ZERO_CONTEXT()                    \
   {                                                                          \
@@ -433,8 +434,8 @@
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
     v8::Local< v8::Value > argv[] = {                                        \
-      NanNew< v8::Number >( 0 )                                              \
-    , NanNew< v8::Number >( 0 )                                              \
+      NanNew<v8::Integer>( 0 )  /* rows */                                   \
+    , NanNew<v8::Integer>( 0 )  /* cols */                                   \
     };                                                                       \
                                                                              \
     NanScope();                                                              \
@@ -461,8 +462,8 @@
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
     v8::Local< v8::Value > argv[] = {                                        \
-      NanNew< v8::Number >( 0 )                                              \
-    , NanNew< v8::Number >( 0 )                                              \
+      NanNew<v8::Integer>( 0 )  /* rows */                                   \
+    , NanNew<v8::Integer>( 0 )  /* cols */                                   \
     };                                                                       \
                                                                              \
     NanScope();                                                              \
@@ -487,8 +488,8 @@
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
     v8::Local< v8::Value > argv[] = {                                        \
-      NanNew< v8::Number >( 0 )                                              \
-    , NanNew< v8::Number >( 0 )                                              \
+      NanNew<v8::Integer>( 0 )  /* rows */                                   \
+    , NanNew<v8::Integer>( 0 )  /* cols */                                   \
     };                                                                       \
                                                                              \
     NanScope();                                                              \
@@ -578,66 +579,47 @@
   }                                                                          \
   /**/
 
-#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ROW_CONTEXT()                  \
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ASDIAGONAL_CONTEXT()           \
   {                                                                          \
     NanScope();                                                              \
                                                                              \
-    if ( args.Length() == 1 && args[0]->IsNumber() ) {                       \
-      const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
-      const typename T::value_type& value = **obj;                           \
-      const typename T::value_type::Index& n = args[0]->Int32Value();        \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
                                                                              \
-      if ( T::is_out_of_range( value, n, 0 ) ) {                             \
-        NanReturnUndefined();                                                \
-      }                                                                      \
+    if ( value.rows() && value.cols() ) {                                    \
+      v8::Local<v8::Value> argv[] = {                                        \
+        NanNew<v8::Integer>( 0 )  /* rows */                                 \
+      , NanNew<v8::Integer>( 0 )  /* cols */                                 \
+      };                                                                     \
                                                                              \
-      v8::Local< v8::Value > argv[] = {                                      \
-          args.This()                                                        \
-        , args[0]                              /* startCol */                \
-        , NanNew<v8::Integer>( value.cols() )  /* blockCols */               \
-        };                                                                   \
+      typedef typename std::conditional<                                     \
+          detail::is_complex< T >::value                                     \
+        , CMatrix                                                            \
+        , Matrix                                                             \
+        >::type MT;                                                          \
                                                                              \
-      typedef typename detail::add_block< U >::type B;                       \
-      NanReturnValue(                                                        \
-        B::new_instance(                                                     \
+      v8::Local< v8::Object > instance = MT::new_instance(                   \
           args                                                               \
         , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
-        )                                                                    \
       );                                                                     \
-    }                                                                        \
                                                                              \
-    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
-    NanReturnUndefined();                                                    \
-  }                                                                          \
-  /**/
-
-#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_COL_CONTEXT()                  \
-  {                                                                          \
-    NanScope();                                                              \
+      MT* new_obj = node::ObjectWrap::Unwrap< MT >( instance );              \
+      typename MT::value_type& new_matrix_or_cmatirx = **new_obj;            \
                                                                              \
-    if ( args.Length() == 1 && args[0]->IsNumber() ) {                       \
-      const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
-      const typename T::value_type& value = **obj;                           \
-      const typename T::value_type::Index& n = args[0]->Int32Value();        \
+      auto codes = std::make_tuple(                                          \
+          [&]{ new_matrix_or_cmatirx =                                       \
+                   typename U::value_type( value ).asDiagonal(); }           \
+        , [&]{ new_matrix_or_cmatirx = value.asDiagonal(); }                 \
+        );                                                                   \
+      std::get<                                                              \
+        boost::mpl::or_<                                                     \
+          detail::is_vector_or_cvector< T >                                  \
+        , detail::is_rowvector_or_crowvector< T >                            \
+        >::value                                                             \
+      >( codes )();                                                          \
                                                                              \
-      if ( T::is_out_of_range( value, 0, n ) ) {                             \
-        NanReturnUndefined();                                                \
-      }                                                                      \
-                                                                             \
-      v8::Local< v8::Value > argv[] = {                                      \
-          args.This()                                                        \
-        , args[0]                   /* startRow */                           \
-        , NanNew<v8::Integer>( 1 )  /* blockRows */                          \
-        };                                                                   \
-      typedef typename detail::add_block< U >::type B;                       \
-      NanReturnValue(                                                        \
-        B::new_instance(                                                     \
-          args                                                               \
-        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
-        , argv                                                               \
-        )                                                                    \
-      );                                                                     \
+      NanReturnValue( instance );                                            \
     }                                                                        \
                                                                              \
     EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
