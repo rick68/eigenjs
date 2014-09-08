@@ -16,34 +16,7 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CRowVector, col,
 {
-  NanScope();
-
-  if (args.Length() == 1 && args[0]->IsNumber()) {
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
-    const typename T::value_type& value = **obj;
-    const typename T::value_type::Index& n = args[0]->Int32Value();
-
-    if (T::is_out_of_range(value, 0, n)) {
-      NanReturnUndefined();
-    }
-
-    v8::Local<v8::Value> argv[] = {
-        args.This()
-      , args[0]                 // startCol
-      , NanNew<v8::Integer>(1)  // blockCols
-      };
-
-    NanReturnValue(
-      CRowVectorBlock::new_instance(
-        args
-      , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-      , argv
-      )
-    );
-  }
-
-  EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
-  NanReturnUndefined();
+  EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_COL_CONTEXT()
 })
 
 }  // namespace EigenJS

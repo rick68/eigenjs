@@ -512,10 +512,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISZERO_CONTEXT()               \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -529,10 +529,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISONES_CONTEXT()               \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >(args.This());        \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -546,10 +546,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISIDENTITY_CONTEXT()           \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -563,10 +563,10 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISDIAGONAL_CONTEXT()           \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap<T>( args.This() );        \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
-    typedef Eigen::NumTraits<typename T::value_type::Scalar> num_traits;     \
+    typedef Eigen::NumTraits< typename T::value_type::Scalar > num_traits;   \
     const typename num_traits::Real& prec =                                  \
         args.Length() == 1 && args[0]->IsNumber()                            \
       ? args[0]->NumberValue()                                               \
@@ -582,26 +582,59 @@
   {                                                                          \
     NanScope();                                                              \
                                                                              \
-    if (args.Length() == 1 && args[0]->IsNumber()) {                         \
-      const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());        \
+    if ( args.Length() == 1 && args[0]->IsNumber() ) {                       \
+      const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
       const typename T::value_type& value = **obj;                           \
       const typename T::value_type::Index& n = args[0]->Int32Value();        \
                                                                              \
-      if (T::is_out_of_range(value, n, 0)) {                                 \
+      if ( T::is_out_of_range( value, n, 0 ) ) {                             \
         NanReturnUndefined();                                                \
       }                                                                      \
                                                                              \
-      v8::Local<v8::Value> argv[] = {                                        \
+      v8::Local< v8::Value > argv[] = {                                      \
           args.This()                                                        \
         , args[0]                                                            \
-        , NanNew<v8::Integer>(1)                                             \
+        , NanNew<v8::Integer>( value.cols() )                                \
         };                                                                   \
                                                                              \
-      typedef typename detail::add_block<U>::type B;                         \
+      typedef typename detail::add_block< U >::type B;                       \
       NanReturnValue(                                                        \
         B::new_instance(                                                     \
           args                                                               \
-        , sizeof(argv) / sizeof(v8::Local<v8::Value>)                        \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+        )                                                                    \
+      );                                                                     \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_COL_CONTEXT()                  \
+  {                                                                          \
+    NanScope();                                                              \
+                                                                             \
+    if ( args.Length() == 1 && args[0]->IsNumber() ) {                       \
+      const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
+      const typename T::value_type& value = **obj;                           \
+      const typename T::value_type::Index& n = args[0]->Int32Value();        \
+                                                                             \
+      if ( T::is_out_of_range( value, 0, n ) ) {                             \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      v8::Local< v8::Value > argv[] = {                                      \
+          args.This()                                                        \
+        , args[0]                                                            \
+        , NanNew<v8::Integer>( 1 )                                           \
+        };                                                                       \
+      typedef typename detail::add_block< U >::type B;                       \
+      NanReturnValue(                                                        \
+        B::new_instance(                                                     \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
         , argv                                                               \
         )                                                                    \
       );                                                                     \
