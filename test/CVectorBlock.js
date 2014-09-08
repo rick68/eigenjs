@@ -1823,11 +1823,11 @@ describe('CVectorBlock', function() {
   });
 
   it("#row() should return a column matrix block of the complex vector block", function() {
-    cvec.row.should.be.a.Function;
+    cvblock.row.should.be.a.Function;
 
-    var row = cvec.row(0);
+    var row = cvblock.row(0);
     row.should.instanceOf(CVectorBlock);
-    row.toString().should.equal("(1,0)");
+    row.toString().should.equal("(3,0)");
 
     (function() {
       cvblock.row(2);
@@ -1835,14 +1835,25 @@ describe('CVectorBlock', function() {
   });
 
   it("#col() should return a column matrix block of the complex vector block", function() {
-    cvec.col.should.be.a.Function;
+    cvblock.col.should.be.a.Function;
 
-    var col = cvec.col(0);
+    var col = cvblock.col(0);
     col.should.instanceOf(CVectorBlock);
-    col.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    col.toString().should.equal("(3,0)\n(4,0)");
 
     (function() {
       cvblock.col(1);
     }).should.throw("The row or column number is out of range");
+  });
+
+  it("#asDiagonal() should return a complex diagonal", function() {
+    cvblock.asDiagonal.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var dia = cvblock.asDiagonal();
+    dia.should.instanceOf(CMatrix);
+
+    dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
   });
 });

@@ -372,6 +372,7 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
     * [vec.block(startRow, blockRows)](#vecblockstartrow-blockrows)
+    * [vec.asDiagonal()](#vecasdiagonal)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
     * [CVector(rows)](#cvectorrows)
@@ -383,6 +384,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.set(comp_array)](#cvecsetcomp_array)
     * [cvec.get(row)](#cvecgetrow)
     * [cvec.block(startRow, blockRows)](#cvecblockstartrow-blockrows)
+    * [cvec.asDiagonal()](#cvecasdiagonal)
 * [Row Vector](#row-vector) **inherits from Matrix**
   * [Row Vector Class Methods](#row-vector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
@@ -394,6 +396,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
     * [rvec.block(startCol, blockCols)](#rvecblockstartcol-blockcols)
+    * [rvec.asDiagonal()](#rvecasdiagonal)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
@@ -405,6 +408,7 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.set(comp_array)](#crvecsetcomp_array)
     * [crvec.get(col)](#crvecgetcol)
     * [crvec.block(startCol, blockCols)](#crvecblockstartcol-blockcols)
+    * [crvec.asDiagonal()](#crvecasdiagonal)
 * [Matrix Block](#matrix-block) **inherits from Matrix**
   * [Matrix Block Class Methods](#matrix-block-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
@@ -2746,6 +2750,29 @@ vblock =
 3
 ```
 
+#### vec.asDiagonal()
+
+```js
+var Eigen = require('eigenjs')
+  , V = Eigen.Vector
+  , vec = new V.Random(3)
+  , dia = vec.asDiagonal();
+console.log('vec = \n%s\n', vec);
+console.log('dia = \n%s', dia);
+```
+
+```txt
+vec =
+ 0.593699
+ 0.299713
+-0.718297
+
+dia =
+ 0.593699         0         0
+        0  0.299713         0
+        0         0 -0.718297
+```
+
 ## Complex Vector
 
 ### Complex Vector Class Methods
@@ -2884,6 +2911,29 @@ cvblock =
 (3,0)
 ```
 
+#### cvec.asDiagonal()
+
+```js
+var Eigen = require('eigenjs')
+  , CV = Eigen.CVector
+  , cvec = new CV.Random(3)
+  , dia = cvec.asDiagonal();
+console.log('cvec = \n%s\n', cvec);
+console.log('dia = \n%s', dia);
+```
+
+```txt
+cvec =
+ (-0.350871,0.918551)
+(0.0934938,-0.649058)
+(-0.725789,-0.339967)
+
+dia =
+ (-0.350871,0.918551)                 (0,0)                 (0,0)
+                (0,0) (0.0934938,-0.649058)                 (0,0)
+                (0,0)                 (0,0) (-0.725789,-0.339967)
+```
+
 ## Row Vector
 
 ### Row Vector Class Methods
@@ -2994,6 +3044,27 @@ console.log('rvblock = \n%s', rvblock);
 ```txt
 rvblock =
 2 3
+```
+
+#### rvec.asDiagonal()
+
+```js
+var Eigen = require('eigenjs')
+  , RV = Eigen.RowVector
+  , rvec = new RV.Random(3)
+  , dia = rvec.asDiagonal();
+console.log('rvec = \n%s\n', rvec);
+console.log('dia = \n%s', dia);
+```
+
+```txt
+rvec =
+0.00429723   0.223465  -0.221164
+
+dia =
+0.00429723          0          0
+         0   0.223465          0
+         0          0  -0.221164
 ```
 
 ## Complex Row Vector
@@ -3111,6 +3182,27 @@ console.log('crvblock = \n%s', crvblock);
 ```txt
 crvblock =
 (2,0) (3,0)
+```
+
+#### crvec.asDiagonal()
+
+```js
+var Eigen = require('eigenjs')
+  , CRV = Eigen.CRowVector
+  , crvec = new CRV.Random(3)
+  , dia = crvec.asDiagonal();
+console.log('crvec = \n%s\n', crvec);
+console.log('dia = \n%s', dia);
+```
+
+```txt
+crvec =
+ (-0.52811,0.0530528) (-0.340944,-0.248457)  (0.185028,-0.228998)
+
+dia =
+ (-0.52811,0.0530528)                 (0,0)                 (0,0)
+                (0,0) (-0.340944,-0.248457)                 (0,0)
+                (0,0)                 (0,0)  (0.185028,-0.228998)
 ```
 
 ## Matrix Block

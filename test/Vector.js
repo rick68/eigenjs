@@ -782,4 +782,26 @@ describe('Vector', function() {
       vec.col(1);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a diagonal", function() {
+    vec.asDiagonal.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var dia = vec.asDiagonal();
+    dia.should.instanceOf(Matrix);
+
+    dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
+  });
+
+  it("#asDiagonal() should return a diagonal", function() {
+    vec.asDiagonal.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var dia = vec.asDiagonal();
+    dia.should.instanceOf(Matrix);
+
+    dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
+  });
 });

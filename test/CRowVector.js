@@ -817,4 +817,15 @@ describe('CRowVector', function() {
       crvec.col(3);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#asDiagonal() should return a complex diagonal", function() {
+    crvec.asDiagonal.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var dia = crvec.asDiagonal();
+    dia.should.instanceOf(CMatrix);
+
+    dia.toString().should.equal("(1,1) (0,0) (0,0)\n(0,0) (2,2) (0,0)\n(0,0) (0,0) (3,3)");
+  });
 });

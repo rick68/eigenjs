@@ -28,7 +28,7 @@ EIGENJS_INSTANCE_METHOD(CVector, row,
     }
 
     v8::Local<v8::Value> argv[] = {
-        args.This()             // CVector
+        args.This()
       , args[0]                 // startRow
       , NanNew<v8::Integer>(1)  // blockRows
       };

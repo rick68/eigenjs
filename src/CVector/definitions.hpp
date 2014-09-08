@@ -23,6 +23,8 @@
 
 #include "instance_method_mula.hpp"
 
+#include "instance_method_asDiagonal.hpp"
+
 #include "class_method_Constant.hpp"
 
 namespace EigenJS {
@@ -37,6 +39,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_col)
 
   (instance_method_mula)
+
+  (instance_method_asDiagonal)
 
   (class_method_Constant)
 );
