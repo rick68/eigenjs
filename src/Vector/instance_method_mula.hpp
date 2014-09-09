@@ -24,7 +24,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
 
     if (Matrix::is_matrix(args[0])) {
       const Matrix* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -41,7 +41,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       NanReturnValue(args.This());
     } else if (Vector::is_vector(args[0])) {
       const Vector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
       const typename Vector::value_type& rhs_vector = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -58,7 +58,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       NanReturnValue(args.This());
     } else if (RowVector::is_rowvector(args[0])) {
       const RowVector* const& rhs_obj =
-        node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
       const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -79,7 +79,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       NanReturnValue(args.This());
     } else if (MatrixBlock::is_matrixblock(args[0])) {
       const MatrixBlock* const& rhs_obj =
-        node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
       const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -96,7 +96,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       NanReturnValue(args.This());
     } else if (VectorBlock::is_vectorblock(args[0])) {
       const VectorBlock* const& rhs_obj =
-        node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
       const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
 
       if (T::is_invalid_matrix_product(obj, rhs_obj)) {
@@ -113,7 +113,7 @@ EIGENJS_INSTANCE_METHOD(Vector, mula,
       NanReturnValue(args.This());
     } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
       const RowVectorBlock* const& rhs_obj =
-        node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+          node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
       const typename RowVectorBlock::value_type& rhs_rowvectorblock =
           **rhs_obj;
 

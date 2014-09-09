@@ -23,6 +23,7 @@
 
 #include "instance_method_mula.hpp"
 
+#include "instance_method_dot.hpp"
 #include "instance_method_asDiagonal.hpp"
 
 #include "class_method_Constant.hpp"
@@ -40,6 +41,7 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_mula)
 
+  (instance_method_dot)
   (instance_method_asDiagonal)
 
   (class_method_Constant)

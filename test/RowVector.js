@@ -7,6 +7,7 @@ const
     CRowVector = Eigen.CRowVector,
     Complex = Eigen.Complex,
     RowVectorBlock = Eigen.RowVectorBlock,
+    CVector = Eigen.CVector,
     should = require('should');
 
 describe('RowVector', function() {
@@ -620,7 +621,7 @@ describe('RowVector', function() {
 
     rvec.isDiagonal().should.be.false;
 
-    var rvec2 = cmat.block(0, 0, 1, 1);
+    var rvec2 = rvec.block(0, 1);
     rvec2.isDiagonal().should.be.true;
   });
 
@@ -740,6 +741,125 @@ describe('RowVector', function() {
     (function() {
       rvec.col(6);
     }).should.throw("The row or column number is out of range");
+  });
+
+  it("#dot() should return the dot product of two row-vectors", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Vector(rvec.cols())).should.equal(0);
+    rvec.dot(rvec).should.equal(91);
+
+    (function() {
+      rvec.dot(new RowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a vector", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Vector(rvec.cols())).should.equal(0);
+    rvec.dot(new Vector([ 7,
+                          8,
+                          9,
+                         10,
+                         11,
+                         12])).should.equal(217);
+
+    (function() {
+      rvec.dot(new Vector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex vector", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CVector(rvec.cols())).equals(Complex(0));
+    rvec.dot(new CVector([ 7,
+                          8,
+                          9,
+                         10,
+                         11,
+                         12])).equals(Complex(217, 0)).should.be.true;
+
+    (function() {
+      rvec.dot(new CVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex row-vector", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CRowVector(rvec.cols())).equals(Complex(0));
+    rvec.dot(new CRowVector([7, 8, 9, 10, 11, 12])).equals(Complex(217, 0)).should.be.true;
+
+    (function() {
+      rvec.dot(new CRowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a vector block", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Vector(rvec.cols()).block(0, rvec.cols())).should.equal(0);
+    rvec.dot(rvec.block(0, rvec.cols())).should.equal(91);
+
+    (function() {
+      rvec.dot(new Vector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a row-vector block", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new RowVector(rvec.cols()).block(0, rvec.cols())).should.equal(0);
+    rvec.dot(new RowVector([7, 8, 9, 10, 11, 12]).block(0, 6)).should.equal(217);
+
+    (function() {
+      rvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex vector block", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CVector(rvec.cols()).block(0, rvec.cols())).equals(Complex(0)).should.be.true;
+    rvec.dot(new CVector([ 7,
+                           8,
+                           9,
+                          10,
+                          11,
+                          12]).block(0, 6)).equals(Complex(217)).should.be.true;
+
+    (function() {
+      rvec.dot(new CVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex row-vector block", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CRowVector(rvec.cols()).block(0, rvec.cols())).equals(Complex(0)).should.be.true;
+    rvec.dot(new CRowVector([7, 8, 9, 10, 11, 12]).block(0, 6)).equals(Complex(217)).should.be.true;
+
+    (function() {
+      rvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
   });
 
   it("#asDiagonal() should return a diagonal", function() {
