@@ -7,6 +7,7 @@ const
     Complex = Eigen.Complex,
     CVectorBlock = Eigen.CVectorBlock,
     CRowVector = Eigen.CRowVector,
+    RowVector = Eigen.RowVector,
     should = require('should');
 
 describe('CVector', function() {
@@ -885,6 +886,103 @@ describe('CVector', function() {
     (function() {
       cvec.col(1);
     }).should.throw("The row or column number is out of range");
+  });
+
+  it("#dot() should return the dot product of two complex vectors", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CVector(cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(cvec).equals(Complex(182)).should.be.true;
+
+    (function() {
+      cvec.dot(new CVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a vector", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Vector(cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(new Vector([ 7,
+                          8,
+                          9,
+                         10,
+                         11,
+                         12
+                         ])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new Vector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a row-vector", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new RowVector(cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(new RowVector([7, 8, 9, 10, 11, 12])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new RowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a complex row-vector", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CRowVector(cvec.rows())).equals(Complex(0));
+    cvec.dot(new CRowVector([7, 8, 9, 10, 11, 12])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new CRowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a vector block", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Vector(cvec.rows()).block(0, cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(cvec.block(0, cvec.rows())).equals(Complex(182)).should.be.true;
+
+    (function() {
+      cvec.dot(new Vector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a row-vector block", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new RowVector(cvec.rows()).block(0, cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(new RowVector([7, 8, 9, 10, 11, 12]).block(0, 6)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a complex row-vector block", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CRowVector(cvec.rows()).block(0, cvec.rows())).equals(Complex(0)).should.be.true;
+    cvec.dot(new CRowVector([7, 8, 9, 10, 11, 12]).block(0, 6)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
   });
 
   it("#asDiagonal() should return a complex diagonal", function() {

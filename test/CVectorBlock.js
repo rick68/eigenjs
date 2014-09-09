@@ -1846,6 +1846,114 @@ describe('CVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#dot() should return the dot product of two complex vector blocks", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new CVector(cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(cvblock).equals(Complex(25)).should.be.true;
+
+    (function() {
+      cvblock.dot(new CVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a vector", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new Vector(cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(new Vector([5,
+                            6,
+                            ])).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new Vector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a row-vector", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new RowVector(cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(new RowVector([5, 6])).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new RowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a complex vector", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new CVector(cvblock.rows())).equals(Complex(0));
+    cvblock.dot(new CVector([5,
+                             6])).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new CVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a complex row-vector", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new CRowVector(cvblock.rows())).equals(Complex(0));
+    cvblock.dot(new CRowVector([5, 6])).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new CRowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a vector block", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new Vector(cvblock.rows()).block(0, cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(new Vector([5,
+                            6]).block(0, 2)).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new Vector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a row-vector block", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new RowVector(cvblock.rows()).block(0, cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(new RowVector([5, 6]).block(0, 2)).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector block and a complex row-vector block", function() {
+    cvblock.dot.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    cvblock.dot(new CRowVector(cvblock.rows()).block(0, cvblock.rows())).equals(Complex(0)).should.be.true;
+    cvblock.dot(new CRowVector([5, 6]).block(0, 2)).equals(Complex(39)).should.be.true;
+
+    (function() {
+      cvblock.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
   it("#asDiagonal() should return a complex diagonal", function() {
     cvblock.asDiagonal.should.be.a.Function;
 

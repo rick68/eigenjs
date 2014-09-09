@@ -818,6 +818,118 @@ describe('CRowVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#dot() should return the dot product of two complex row-vectors", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new CRowVector(crvec.cols())).equals(Complex(0));
+    crvec.dot(crvec).equals(Complex(28)).should.be.true;
+
+    (function() {
+      crvec.dot(new CRowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a vector", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new Vector(crvec.cols())).equals(Complex(0));
+    crvec.dot(new Vector([5,
+                          6,
+                          7])).equals(Complex(38, -38)).should.be.true;
+
+    (function() {
+      crvec.dot(new Vector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a row-vector", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new RowVector(crvec.cols())).equals(Complex(0));
+    crvec.dot(new RowVector([4, 5, 6])).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new RowVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a complex vector", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new CVector(crvec.cols())).equals(Complex(0));
+    crvec.dot(new CVector([4,
+                           5,
+                           6])).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new CVector(1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a vector block", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new Vector(crvec.cols()).block(0, crvec.cols())).equals(Complex(0)).should.be.true;
+    crvec.dot(new Vector([4,
+                          5,
+                          6]).block(0, crvec.cols())).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new Vector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a row-vector block", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new RowVector(crvec.cols()).block(0, crvec.cols())).equals(Complex(0)).should.be.true;
+    crvec.dot(new RowVector([4, 5, 6]).block(0, 3)).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a complex vector block", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new CVector(crvec.cols()).block(0, crvec.cols())).equals(Complex(0)).should.be.true;
+    crvec.dot(new CVector([4,
+                           5,
+                           6]).block(0, 3)).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new CVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex row-vector and a complex row-vector block", function() {
+    crvec.dot.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    crvec.dot(new CRowVector(crvec.cols()).block(0, crvec.cols())).equals(Complex(0)).should.be.true;
+    crvec.dot(new CRowVector([4, 5, 6]).block(0, 3)).equals(Complex(32, -32)).should.be.true;
+
+    (function() {
+      crvec.dot(new RowVector(1).block(0, 1));
+    }).should.throw("Invalid argument")
+  });
+
   it("#asDiagonal() should return a complex diagonal", function() {
     crvec.asDiagonal.should.be.a.Function;
 
