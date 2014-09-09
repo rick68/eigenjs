@@ -103,6 +103,7 @@ $ npm install eigenjs --msvs_version=2012
     * [comp.div(comp)](#compdivcomp)
     * [comp.diva(scalar)](#compdivascalar)
     * [comp.diva(comp)](#compdivacomp)
+    * [comp.equals(scalar)](#compequalsscalar)
     * [comp.equals(comp)](#compequalscomp)
     * [comp.isApprox(comp, [prec = 1e-12])](#compisapproxcomp-prec--1e-12)
     * [comp.toString()](#comptostring)
@@ -933,6 +934,7 @@ console.log(c2.toString());
 (0.333333,1)
 ```
 
+#### comp.equals(scalar)
 #### comp.equals(comp)
 
 ```js
