@@ -620,7 +620,7 @@ describe('RowVector', function() {
 
     rvec.isDiagonal().should.be.false;
 
-    var rvec2 = cmat.block(0, 0, 1, 1);
+    var rvec2 = rvec.block(0, 1);
     rvec2.isDiagonal().should.be.true;
   });
 
