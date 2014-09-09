@@ -18,15 +18,22 @@ EIGENJS_INSTANCE_METHOD(Complex, equals,
 {
   NanScope();
 
-  if (args.Length() == 1 && Complex::is_complex(args[0])) {
+  if (args.Length() == 1) {
     const Complex* const& obj =
       node::ObjectWrap::Unwrap<Complex>(args.This());
     const typename Complex::value_type& complex = **obj;
-    const Complex* const& rhs_obj =
-      node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
-    const typename Complex::value_type& rhs_complex = **rhs_obj;
 
-    NanReturnValue(NanNew<v8::Boolean>(complex == rhs_complex));
+    if (Complex::is_scalar(args[0])) {
+      const typename Complex::value_type rhs_scalar(args[0]->NumberValue());
+
+      NanReturnValue(NanNew<v8::Boolean>(complex == rhs_scalar));
+    } else if (Complex::is_complex(args[0])) {
+      const Complex* const& rhs_obj =
+        node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
+      const typename Complex::value_type& rhs_complex = **rhs_obj;
+
+      NanReturnValue(NanNew<v8::Boolean>(complex == rhs_complex));
+    }
   }
 
   EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
