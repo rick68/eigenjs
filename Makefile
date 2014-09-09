@@ -52,6 +52,7 @@ SOURCES = \
     src/CRowVector/instance_method_asDiagonal.hpp \
     src/CRowVector/instance_method_block.hpp \
     src/CRowVector/instance_method_col.hpp \
+    src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_mula.hpp \
     src/CRowVector/instance_method_row.hpp \
@@ -66,6 +67,7 @@ SOURCES = \
     src/CVector/instance_method_asDiagonal.hpp \
     src/CVector/instance_method_block.hpp \
     src/CVector/instance_method_col.hpp \
+    src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_mula.hpp \
     src/CVector/instance_method_row.hpp \
@@ -164,6 +166,7 @@ SOURCES = \
     src/RowVector/instance_method_asDiagonal.hpp \
     src/RowVector/instance_method_block.hpp \
     src/RowVector/instance_method_col.hpp \
+    src/RowVector/instance_method_dot.hpp \
     src/RowVector/instance_method_get.hpp \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_row.hpp \
@@ -178,6 +181,7 @@ SOURCES = \
     src/Vector/instance_method_asDiagonal.hpp \
     src/Vector/instance_method_block.hpp \
     src/Vector/instance_method_col.hpp \
+    src/Vector/instance_method_dot.hpp \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_row.hpp \
