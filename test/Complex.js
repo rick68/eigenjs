@@ -292,8 +292,15 @@ describe('Complex', function() {
 
   it('#equals() should return true if two complexes are equal', function() {
     c.equals.should.be.a.Function;
-    c.equals(c).should.be.a.true;
-    c.equals(new Complex(3, -4)).should.be.a.true;
+    c.equals(new Complex(3, -4)).should.be.true;
+  });
+
+  it('#equals() should return true if a complex and a scalar are equal', function() {
+    c.equals.should.be.a.Function;
+    new Complex(0, 0).equals(0).should.be.true;
+    new Complex(0).equals(0).should.be.true;
+    Complex(0, 0).equals(0).should.be.true;
+    Complex(0).equals(0).should.be.true;
   });
 
   it('#isApprox() should return true if this is approximately equal to other', function() {
