@@ -4,7 +4,7 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 [![NPM][nodeico-download]][nodeico-url] [![NPM][nodeico-months]][nodeico-url]
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68][gittip-image]][gittip-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Build status][appveyor-image]][appveyor-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68][gittip-image]][gittip-url]
 
 [nodeico-download]: https://nodei.co/npm/eigenjs.png?downloads=true&downloadRank=true&stars=true
 [nodeico-months]: https://nodei.co/npm-dl/eigenjs.png?months=6&height=3
@@ -17,6 +17,9 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 [travis-image]: https://travis-ci.org/rick68/eigenjs.svg?branch=master
 [travis-url]: https://travis-ci.org/rick68/eigenjs
+
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/jot11x58urjndseb/branch/master
+[appveyor-url]: https://ci.appveyor.com/project/rick68/eigenjs/branch/master
 
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
