@@ -1,0 +1,30 @@
+# appveyor file
+# http://www.appveyor.com/docs/appveyor-yml
+project_id: "jot11x58urjndseb"
+
+# build version format
+version: "{build}"
+
+# fix lineendings in Windows
+init:
+  - git config --global core.autocrlf input
+
+# what combinations to test
+environment:
+  matrix:
+    - nodejs_version: 0.10
+    - nodejs_version: 0.11
+
+# Get the latest stable version of Node 0.STABLE.latest
+install:
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
+  - cmd: SET PATH=C:\Program Files (x86)\MSBuild\12.0\bin\;%PATH%
+  - cmd: npm install -g node-gyp
+  - npm install --msvs_version=2013
+
+build: off
+
+test_script:
+  - node --version
+  - npm --version
+  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
