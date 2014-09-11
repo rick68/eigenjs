@@ -1491,20 +1491,24 @@ describe('RowVectorBlock', function() {
     rvec2.cols().should.equal(3);
   });
 
-  it('#LinSpaced() should return a linearly space vector', function() {
+  it('#LinSpaced() should return a linearly space row-vector', function() {
     RowVectorBlock.LinSpaced.should.be.a.Function;
 
     var rvec2 = RowVectorBlock.LinSpaced(5, 0, 1);
     rvec2.should.instanceOf(RowVector);
     rvec2.toString().should.equal("   0 0.25  0.5 0.75    1");
  
-    var rvec3 = RowVector.LinSpaced(5, 1, 0);
+    var rvec3 = RowVectorBlock.LinSpaced(5, 1, 0);
     rvec3.should.instanceOf(RowVector);
     rvec3.toString().should.equal("   1 0.75  0.5 0.25    0");
 
-    var rvec4 = RowVector.LinSpaced(5, 1, 1);
+    var rvec4 = RowVectorBlock.LinSpaced(5, 1, 1);
     rvec4.should.instanceOf(RowVector);
     rvec4.toString().should.equal("1 1 1 1 1");
+
+    (function() {
+      RowVectorBlock.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a row-vector block", function() {

@@ -1612,13 +1612,17 @@ describe('VectorBlock', function() {
     vec2.should.instanceOf(Vector);
     vec2.toString().should.equal("   0\n0.25\n 0.5\n0.75\n   1");
  
-    var vec3 = Vector.LinSpaced(5, 1, 0);
+    var vec3 = VectorBlock.LinSpaced(5, 1, 0);
     vec3.should.instanceOf(Vector);
     vec3.toString().should.equal("   1\n0.75\n 0.5\n0.25\n   0");
 
-    var vec4 = Vector.LinSpaced(5, 1, 1);
+    var vec4 = VectorBlock.LinSpaced(5, 1, 1);
     vec4.should.instanceOf(Vector);
     vec4.toString().should.equal("1\n1\n1\n1\n1");
+
+    (function() {
+      VectorBlock.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a vector block", function() {

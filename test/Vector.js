@@ -784,6 +784,10 @@ describe('Vector', function() {
 
     var vec4 = Vector.LinSpaced(5, 1, 1);
     vec4.toString().should.equal("1\n1\n1\n1\n1");
+
+    (function() {
+      Vector.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a vector block", function() {
