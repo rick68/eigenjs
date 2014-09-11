@@ -152,6 +152,8 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(rvblock)](#matassignrvblock)
     * [mat.setZero()](#matsetzero)
     * [mat.setOnes()](#matsetones)
+    * [mat.setRandom()](#matsetrandom)
+    * [mat.setConstant(scalar)](#matsetconstantscalar)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -273,6 +275,9 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
     * [cmat.setZero()](#cmatsetzero)
     * [cmat.setOnes()](#cmatsetones)
+    * [cmat.setRandom()](#cmatsetrandom)
+    * [cmat.setConstant(scalar)](#cmatsetconstantscalar)
+    * [cmat.setConstant(comp)](#cmatsetconstantcomp)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -1251,6 +1256,47 @@ mat =
 1 1 1
 1 1 1
 1 1 1
+```
+
+#### mat.setRandom()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setRandom());
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+mat =
+ -0.292434 -0.0673437   0.283946
+ -0.938224   0.154289   0.283845
+ -0.725773  -0.862362   0.583097
+```
+
+#### mat.setConstant(scalar)
+
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setConstant());
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+mat =
+ -0.292434 -0.0673437   0.283946
+ -0.938224   0.154289   0.283845
+ -0.725773  -0.862362   0.583097
 ```
 
 #### mat.block(startRow, startCol, blockRows, blockCols)
