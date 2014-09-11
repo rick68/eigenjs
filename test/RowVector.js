@@ -723,6 +723,19 @@ describe('RowVector', function() {
 
   });
 
+  it('#LinSpaced() should return a linearly space vector', function() {
+    RowVector.LinSpaced.should.be.a.Function;
+
+    var rvec2 = RowVector.LinSpaced(5, 0, 1);
+    rvec2.toString().should.equal("   0 0.25  0.5 0.75    1");
+ 
+    var rvec3 = RowVector.LinSpaced(5, 1, 0);
+    rvec3.toString().should.equal("   1 0.75  0.5 0.25    0");
+
+    var rvec4 = RowVector.LinSpaced(5, 1, 1);
+    rvec4.toString().should.equal("1 1 1 1 1");
+  });
+
   it("#block() should return a row-vector block", function() {
     var rvblock = rvec.block(2, 2);
     rvblock.should.instanceOf(RowVectorBlock);

@@ -1605,6 +1605,22 @@ describe('VectorBlock', function() {
     vec2.cols().should.equal(1);
   });
 
+  it('#LinSpaced() should return a linearly space vector', function() {
+    VectorBlock.LinSpaced.should.be.a.Function;
+
+    var vec2 = VectorBlock.LinSpaced(5, 0, 1);
+    vec2.should.instanceOf(Vector);
+    vec2.toString().should.equal("   0\n0.25\n 0.5\n0.75\n   1");
+ 
+    var vec3 = Vector.LinSpaced(5, 1, 0);
+    vec3.should.instanceOf(Vector);
+    vec3.toString().should.equal("   1\n0.75\n 0.5\n0.25\n   0");
+
+    var vec4 = Vector.LinSpaced(5, 1, 1);
+    vec4.should.instanceOf(Vector);
+    vec4.toString().should.equal("1\n1\n1\n1\n1");
+  });
+
   it("#block() should return a vector block", function() {
     vblock.col.should.be.a.Function;
 
