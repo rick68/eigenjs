@@ -105,6 +105,13 @@ describe('Matrix', function() {
     mat.setZero().toString().should.equal("0 0 0\n0 0 0\n0 0 0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    mat.setOnes.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setOnes().toString().should.equal("1 1 1\n1 1 1\n1 1 1");
+  });
+
   it('#toString() should return all element values of Matrix', function() {
     mat.toString.should.be.a.Function;
 

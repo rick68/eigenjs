@@ -123,6 +123,15 @@ describe('CVectorBlock', function() {
     cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(0,0)\n(5,0)\n(6,0)");
   });
 
+  it('#setOner() should set all coefficients to ones', function() {
+    cvblock.setOnes.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.setOnes().toString().should.equal("(1,0)\n(1,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(1,0)\n(5,0)\n(6,0)");
+  });
+
   it('#toString() should return all element values of CVectorBlock', function() {
     cvblock.toString.should.be.a.Function;
 

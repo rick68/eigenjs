@@ -115,6 +115,16 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal("(1,0) (2,0) (0,0) (0,0) (5,0) (6,0)");
   });
 
+
+  it('#setOnes() should set all coefficients to ones', function() {
+    crvblock.setOnes.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.setOnes().toString().should.equal("(1,0) (1,0)");
+
+    crvec.toString().should.equal("(1,0) (2,0) (1,0) (1,0) (5,0) (6,0)");
+  });
+
   it('#toString() should return all element values of CRowVectorBlock', function() {
     crvblock.toString.should.be.a.Function;
 

@@ -111,6 +111,13 @@ describe('CVector', function() {
     cvec.setZero().toString().should.equal("(0,0)\n(0,0)\n(0,0)\n(0,0)\n(0,0)\n(0,0)");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    cvec.setOnes.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setOnes().toString().should.equal("(1,0)\n(1,0)\n(1,0)\n(1,0)\n(1,0)\n(1,0)");
+  });
+
   it('#toString() should return all element values of CVector', function() {
     cvec.toString.should.be.a.Function;
 

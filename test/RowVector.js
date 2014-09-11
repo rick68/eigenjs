@@ -99,6 +99,13 @@ describe('RowVector', function() {
     rvec.setZero().toString().should.equal("0 0 0 0 0 0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    rvec.setOnes.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setOnes().toString().should.equal("1 1 1 1 1 1");
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 

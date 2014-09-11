@@ -96,6 +96,13 @@ describe('CRowVector', function() {
     crvec.setZero().toString().should.equal("(0,0) (0,0) (0,0)");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    crvec.setOnes.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.setOnes().toString().should.equal("(1,0) (1,0) (1,0)");
+  });
+
   it('#toString() should return all element values of CRowVector', function() {
     crvec.toString.should.be.a.Function;
 

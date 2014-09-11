@@ -121,6 +121,15 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n0\n0\n5\n6");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    vblock.setOnes.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setOnes().toString().should.equal("1\n1");
+
+    vec.toString().should.equal("1\n2\n1\n1\n5\n6");
+  });
+
   it('#toString() should return all element values of VectorBlock', function() {
     vblock.toString.should.be.a.Function;
 

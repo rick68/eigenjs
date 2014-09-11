@@ -122,6 +122,13 @@ describe('Vector', function() {
     vec.setZero().toString().should.equal("0\n0\n0\n0\n0\n0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    vec.setOnes.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setOnes().toString().should.equal("1\n1\n1\n1\n1\n1");
+  });
+
   it('#toString() should return all element values of Vector', function() {
     vec.toString.should.be.a.Function;
 

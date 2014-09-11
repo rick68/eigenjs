@@ -118,6 +118,14 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    cmblock.setOnes.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.setOnes().toString().should.equal("(1,0) (1,0)\n(1,0) (1,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (1,0)  (1,0)  (8,0)\n (9,0)  (1,0)  (1,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+  });
+
   it('#toString() should return all element values of CMatrixBlock', function() {
     cmblock.toString.should.be.a.Function;
 

@@ -116,6 +116,13 @@ describe('MatrixBlock', function() {
     mblock.setZero().toString().should.equal("0 0\n0 0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    mblock.setOnes.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.setOnes().toString().should.equal("1 1\n1 1");
+  });
+
   it('#toString() should return all element values of MatrixBlock', function() {
     mblock.toString.should.be.a.Function;
 

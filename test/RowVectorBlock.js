@@ -115,6 +115,15 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("1 2 0 0 5 6");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    rvblock.setOnes.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setOnes().toString().should.equal("1 1");
+
+    rvec.toString().should.equal("1 2 1 1 5 6");
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 

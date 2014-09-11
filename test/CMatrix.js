@@ -140,6 +140,13 @@ describe('CMatrix', function() {
     cmat.setZero().toString().should.equal("(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    cmat.setOnes.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.setOnes().toString().should.equal("(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)");
+  });
+
   it('#toString() should return all element values of CMatrix', function() {
     cmat.toString.should.be.a.Function;
 
