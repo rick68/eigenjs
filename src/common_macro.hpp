@@ -419,13 +419,16 @@
   }                                                                          \
   /**/
 
-#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISSQUARE_CONTEXT()             \
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_SETZERO_CONTEXT()              \
   {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
-    const typename T::value_type& value = **obj;                             \
+    T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
+    typename T::value_type& value = **obj;                                   \
                                                                              \
     NanScope();                                                              \
-    NanReturnValue( NanNew< v8::Boolean >( value.rows() == value.cols() ) ); \
+                                                                             \
+    value.setZero();                                                         \
+                                                                             \
+    NanReturnValue( args.This() );                                           \
   }                                                                          \
   /**/
 
@@ -508,6 +511,16 @@
     new_value = value.adjoint();                                             \
                                                                              \
     NanReturnValue( instance );                                              \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISSQUARE_CONTEXT()             \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Boolean >( value.rows() == value.cols() ) ); \
   }                                                                          \
   /**/
 

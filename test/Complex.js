@@ -3,6 +3,10 @@ const
     Complex = Eigen.Complex,
     Matrix = Eigen.Matrix,
     CMatrix = Eigen.CMatrix,
+    Vector = Eigen.Vector,
+    CVector = Eigen.CVector,
+    RowVector = Eigen.RowVector,
+    CRowVector = Eigen.CRowVector,
     should = require('should');
 
 describe('Complex', function() {
@@ -110,12 +114,88 @@ describe('Complex', function() {
     c.mul(mat).toString().should.equal("  (3,-4)   (6,-8)\n (9,-12) (12,-16)");
   });
 
+  it('#mul() should return CMatrix with the product of a complex and a vector', function() {
+    var vec = new Vector(3).set([
+      1,
+      2,
+      3
+    ]);
+    c.mul(vec).toString().should.equal(" (3,-4)\n (6,-8)\n(9,-12)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a row-vector', function() {
+    var rvec = new RowVector(3).set([1, 2, 3]);
+    c.mul(rvec).toString().should.equal(" (3,-4)  (6,-8) (9,-12)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a matrix block', function() {
+    var mat = new Matrix(2, 2).set([
+      1, 2,
+      3, 4
+    ]);
+    c.mul(mat.block(0, 0, 2, 2)).toString().should.equal("  (3,-4)   (6,-8)\n (9,-12) (12,-16)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a vector block', function() {
+    var vec = new Vector(3).set([
+      1,
+      2,
+      3
+    ]);
+    c.mul(vec.block(0, 3)).toString().should.equal(" (3,-4)\n (6,-8)\n(9,-12)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a row-vector block', function() {
+    var rvec = new RowVector(3).set([1, 2, 3]);
+    c.mul(rvec.block(0, 3)).toString().should.equal(" (3,-4)  (6,-8) (9,-12)");
+  });
+
   it('#mul() should return CMatrix with the product of a complex and a complex matrix', function() {
     var cmat = new CMatrix(2, 2).set([
       Complex(1, 1), Complex(2, 2),
       Complex(3, 3), Complex(4, 4)
     ]);
     c.mul(cmat).toString().should.equal(" (7,-1) (14,-2)\n(21,-3) (28,-4)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex vector', function() {
+    var cvec = new CVector(3).set([
+      Complex(1, 1),
+      Complex(2, 2),
+      Complex(3, 3)
+    ]);
+    c.mul(cvec).toString().should.equal(" (7,-1)\n(14,-2)\n(21,-3)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex row-vector', function() {
+    var crvec = new CRowVector(3).set([
+      Complex(1, 1), Complex(2, 2), Complex(3, 3)
+    ]);
+    c.mul(crvec).toString().should.equal(" (7,-1) (14,-2) (21,-3)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex matrix block', function() {
+    var cmat = new CMatrix(2, 2).set([
+      Complex(1, 1), Complex(2, 2),
+      Complex(3, 3), Complex(4, 4)
+    ]);
+    c.mul(cmat.block(0, 0, 2, 2)).toString().should.equal(" (7,-1) (14,-2)\n(21,-3) (28,-4)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex vector block', function() {
+    var cvec = new CVector(3).set([
+      Complex(1, 1),
+      Complex(2, 2),
+      Complex(3, 3)
+    ]);
+    c.mul(cvec.block(0, 3)).toString().should.equal(" (7,-1)\n(14,-2)\n(21,-3)");
+  });
+
+  it('#mul() should return CMatrix with the product of a complex and a complex row-vector block', function() {
+    var crvec = new CRowVector(3).set([
+      Complex(1, 1), Complex(2, 2), Complex(3, 3)
+    ]);
+    c.mul(crvec.block(0, 3)).toString().should.equal(" (7,-1) (14,-2) (21,-3)");
   });
 
   it('#mula() should return the product of two complexes and saves it back', function() {
@@ -292,8 +372,15 @@ describe('Complex', function() {
 
   it('#equals() should return true if two complexes are equal', function() {
     c.equals.should.be.a.Function;
-    c.equals(c).should.be.a.true;
-    c.equals(new Complex(3, -4)).should.be.a.true;
+    c.equals(new Complex(3, -4)).should.be.true;
+  });
+
+  it('#equals() should return true if a complex and a scalar are equal', function() {
+    c.equals.should.be.a.Function;
+    new Complex(0, 0).equals(0).should.be.true;
+    new Complex(0).equals(0).should.be.true;
+    Complex(0, 0).equals(0).should.be.true;
+    Complex(0).equals(0).should.be.true;
   });
 
   it('#isApprox() should return true if this is approximately equal to other', function() {

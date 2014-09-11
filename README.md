@@ -4,7 +4,7 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 [![NPM][nodeico-download]][nodeico-url] [![NPM][nodeico-months]][nodeico-url]
 
-[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68][gittip-image]][gittip-url]
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Build status][appveyor-image]][appveyor-url] [![Gitter chat][gitter-image]][gitter-url] [![gittip.com/rick68][gittip-image]][gittip-url]
 
 [nodeico-download]: https://nodei.co/npm/eigenjs.png?downloads=true&downloadRank=true&stars=true
 [nodeico-months]: https://nodei.co/npm-dl/eigenjs.png?months=6&height=3
@@ -18,6 +18,9 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 [travis-image]: https://travis-ci.org/rick68/eigenjs.svg?branch=master
 [travis-url]: https://travis-ci.org/rick68/eigenjs
 
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/jot11x58urjndseb/branch/master
+[appveyor-url]: https://ci.appveyor.com/project/rick68/eigenjs/branch/master
+
 [gitter-image]: https://badges.gitter.im/rick68/eigenjs.png
 [gitter-url]: https://gitter.im/rick68/eigenjs
 
@@ -26,12 +29,14 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 ## Installation
 
-**OS X** and **Linux** (GCC >= 4.8):
+**OS X** (XCode & Command Line Tools) and **Linux** (GCC >= 4.8):
+
 ```bash
 $ npm install eigenjs
 ```
 
 **Windows7/8** (Visual Studio 2012):
+
 ```bash
 $ npm install eigenjs --msvs_version=2012
 ```
@@ -96,13 +101,24 @@ $ npm install eigenjs --msvs_version=2012
     * [comp.mul(scalar)](#compmulscalar)
     * [comp.mul(comp)](#compmulcomp)
     * [comp.mul(mat)](#compmulmat)
+    * [comp.mul(vec)](#compmulvec)
+    * [comp.mul(rvec)](#compmulrvec)
+    * [comp.mul(mblock)](#compmulmblock)
+    * [comp.mul(vblock)](#compmulvblock)
+    * [comp.mul(rvblock)](#compmulrvblock)
     * [comp.mul(cmat)](#compmulcmat)
+    * [comp.mul(cvec)](#compmulcvec)
+    * [comp.mul(crvec)](#compmulcrvec)
+    * [comp.mul(cmblock)](#compmulcmblock)
+    * [comp.mul(cvblock)](#compmulcvblock)
+    * [comp.mul(crvblock)](#compmulcrvblock)
     * [comp.mula(scalar)](#compmulascalar)
     * [comp.mula(comp)](#compmulacomp)
     * [comp.div(scalar)](#compdivscalar)
     * [comp.div(comp)](#compdivcomp)
     * [comp.diva(scalar)](#compdivascalar)
     * [comp.diva(comp)](#compdivacomp)
+    * [comp.equals(scalar)](#compequalsscalar)
     * [comp.equals(comp)](#compequalscomp)
     * [comp.isApprox(comp, [prec = 1e-12])](#compisapproxcomp-prec--1e-12)
     * [comp.toString()](#comptostring)
@@ -134,6 +150,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(mblock)](#matassignmblock)
     * [mat.assign(vblock)](#matassignvblock)
     * [mat.assign(rvblock)](#matassignrvblock)
+    * [mat.setZero()](#matsetzero)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -253,6 +270,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(cmblock)](#cmatassigncmblock)
     * [cmat.assign(cvblock)](#cmatassigncvblock)
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
+    * [cmat.setZero()](#cmatsetzero)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -874,7 +892,17 @@ console.log(c1.toString());
 #### comp.mul(scalar)
 #### comp.mul(comp)
 #### comp.mul(mat)
+#### comp.mul(vec)
+#### comp.mul(rvec)
+#### comp.mul(mblock)
+#### comp.mul(vblock)
+#### comp.mul(rvblock)
 #### comp.mul(cmat)
+#### comp.mul(cvec)
+#### comp.mul(crvec)
+#### comp.mul(cmblock)
+#### comp.mul(cvblock)
+#### comp.mul(crvblock)
 
 ```js
 var C = require('eigenjs').Complex
@@ -933,6 +961,7 @@ console.log(c2.toString());
 (0.333333,1)
 ```
 
+#### comp.equals(scalar)
 #### comp.equals(comp)
 
 ```js
@@ -1182,7 +1211,27 @@ mat =
 0 0 0 0
 ```
 
-### mat.block(startRow, startCol, blockRows, blockCols)
+#### mat.setZero()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(4, 4);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setZero());
+```
+
+```txt
+mat =
+ 0.244911 -0.752925 -0.562905
+ 0.215088 -0.406688 -0.750836
+ 0.983236  0.800109  0.695126
+mat =
+0 0 0
+0 0 0
+0 0 0
+```
+
+#### mat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1200,7 +1249,7 @@ mat =
         0         0         0         1
 ```
 
-### mat.row(n)
+#### mat.row(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1219,7 +1268,7 @@ mat =
         0         0         0
 ```
 
-### mat.col(n)
+#### mat.col(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1996,7 +2045,27 @@ cmat =
 (0,0) (0,0) (0,0) (0,0)
 ```
 
-### cmat.block(startRow, startCol, blockRows, blockCols)
+#### cmat.setZero()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setZero());
+```
+
+```txt
+cmat =
+  (0.828056,-0.856655)  (0.192893,-0.0390696)   (-0.477729,0.812314)
+   (0.200923,0.904817)  (-0.643549,-0.129635)    (0.566937,0.514797)
+(-0.740525,0.00155845)   (-0.780958,0.437884)    (0.194337,0.223802)
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+```
+
+#### cmat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -2014,7 +2083,7 @@ cmat =
                (0,0)                (0,0)                (0,0)                (1,0)
 ```
 
-### cmat.row(n)
+#### cmat.row(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2033,7 +2102,7 @@ cmat =
                (0,0)                (0,0)                (0,0)
 ```
 
-### cmat.col(n)
+#### cmat.col(n)
 
 ```js
 var Eigen = require('eigenjs')

@@ -23,6 +23,8 @@
 #include "instance_method_get.hpp"
 #include "instance_method_assign.hpp"
 
+#include "instance_method_setZero.hpp"
+
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
 #include "instance_method_col.hpp"
@@ -72,6 +74,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_set)
   (instance_method_get)
   (instance_method_assign)
+
+  (instance_method_setZero)
 
   (instance_method_block)
   (instance_method_row)

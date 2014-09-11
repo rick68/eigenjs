@@ -133,6 +133,13 @@ describe('CMatrix', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    cmat.setZero.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.setZero().toString().should.equal("(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0)");
+  });
+
   it('#toString() should return all element values of CMatrix', function() {
     cmat.toString.should.be.a.Function;
 

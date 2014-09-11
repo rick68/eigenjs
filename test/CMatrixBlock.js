@@ -110,6 +110,14 @@ describe('CMatrixBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    cmblock.setZero.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.setZero().toString().should.equal("(0,0) (0,0)\n(0,0) (0,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+  });
+
   it('#toString() should return all element values of CMatrixBlock', function() {
     cmblock.toString.should.be.a.Function;
 

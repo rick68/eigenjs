@@ -106,6 +106,15 @@ describe('RowVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    rvblock.setZero.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setZero().toString().should.equal("0 0");
+
+    rvec.toString().should.equal("1 2 0 0 5 6");
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 
