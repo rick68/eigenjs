@@ -2153,6 +2153,49 @@ cmat =
 (1,0) (1,0) (1,0)
 ```
 
+#### cmat.setRandom()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Zero(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setRandom());
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+cmat =
+   (0.298345,0.285858)   (-0.693147,0.286686)  (-0.91605,-0.0576106)
+  (0.410026,-0.685715)     (0.33597,0.656071)   (-0.261633,0.736407)
+(-0.808358,-0.0710831)    (0.588954,0.544957)   (0.800236,-0.434336)
+```
+
+#### cmat.setConstant(scalar)
+#### cmat.setConstant(complex)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM.Zero(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setConstant(C(6, 8)));
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+cmat =
+(6,8) (6,8) (6,8)
+(6,8) (6,8) (6,8)
+(6,8) (6,8) (6,8)
+```
+
 #### cmat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
