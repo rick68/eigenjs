@@ -419,6 +419,19 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_SETZERO_CONTEXT()              \
+  {                                                                          \
+    T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
+    typename T::value_type& value = **obj;                                   \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    value.setZero();                                                         \
+                                                                             \
+    NanReturnValue( args.This() );                                           \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TRANSPOSE_CONTEXT()            \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
