@@ -150,6 +150,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(mblock)](#matassignmblock)
     * [mat.assign(vblock)](#matassignvblock)
     * [mat.assign(rvblock)](#matassignrvblock)
+    * [mat.setZero()](#matsetzero)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -269,6 +270,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(cmblock)](#cmatassigncmblock)
     * [cmat.assign(cvblock)](#cmatassigncvblock)
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
+    * [cmat.setZero()](#cmatsetzero)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -1209,7 +1211,27 @@ mat =
 0 0 0 0
 ```
 
-### mat.block(startRow, startCol, blockRows, blockCols)
+#### mat.setZero()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(4, 4);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setZero());
+```
+
+```txt
+mat =
+ 0.244911 -0.752925 -0.562905
+ 0.215088 -0.406688 -0.750836
+ 0.983236  0.800109  0.695126
+mat =
+0 0 0
+0 0 0
+0 0 0
+```
+
+#### mat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1227,7 +1249,7 @@ mat =
         0         0         0         1
 ```
 
-### mat.row(n)
+#### mat.row(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -1246,7 +1268,7 @@ mat =
         0         0         0
 ```
 
-### mat.col(n)
+#### mat.col(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2023,7 +2045,27 @@ cmat =
 (0,0) (0,0) (0,0) (0,0)
 ```
 
-### cmat.block(startRow, startCol, blockRows, blockCols)
+#### cmat.setZero()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setZero());
+```
+
+```txt
+cmat =
+  (0.828056,-0.856655)  (0.192893,-0.0390696)   (-0.477729,0.812314)
+   (0.200923,0.904817)  (-0.643549,-0.129635)    (0.566937,0.514797)
+(-0.740525,0.00155845)   (-0.780958,0.437884)    (0.194337,0.223802)
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+```
+
+#### cmat.block(startRow, startCol, blockRows, blockCols)
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -2041,7 +2083,7 @@ cmat =
                (0,0)                (0,0)                (0,0)                (1,0)
 ```
 
-### cmat.row(n)
+#### cmat.row(n)
 
 ```js
 var Eigen = require('eigenjs')
@@ -2060,7 +2102,7 @@ cmat =
                (0,0)                (0,0)                (0,0)
 ```
 
-### cmat.col(n)
+#### cmat.col(n)
 
 ```js
 var Eigen = require('eigenjs')
