@@ -151,6 +151,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(vblock)](#matassignvblock)
     * [mat.assign(rvblock)](#matassignrvblock)
     * [mat.setZero()](#matsetzero)
+    * [mat.setOnes()](#matsetones)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -271,6 +272,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(cvblock)](#cmatassigncvblock)
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
     * [cmat.setZero()](#cmatsetzero)
+    * [cmat.setOnes()](#cmatsetones)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -1215,7 +1217,7 @@ mat =
 
 ```js
 var M = require('eigenjs').Matrix
-  , mat = new M.Random(4, 4);
+  , mat = new M.Random(3, 3);
 console.log('mat =\n%s', mat);
 console.log('mat =\n%s', mat.setZero());
 ```
@@ -1229,6 +1231,26 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+```
+
+#### mat.setOnes()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setOnes());
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+mat =
+1 1 1
+1 1 1
+1 1 1
 ```
 
 #### mat.block(startRow, startCol, blockRows, blockCols)
@@ -2063,6 +2085,26 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+```
+
+#### cmat.setOnes()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Zero(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setOnes());
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+cmat =
+(1,0) (1,0) (1,0)
+(1,0) (1,0) (1,0)
+(1,0) (1,0) (1,0)
 ```
 
 #### cmat.block(startRow, startCol, blockRows, blockCols)
