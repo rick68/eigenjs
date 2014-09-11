@@ -89,6 +89,13 @@ describe('CRowVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    crvec.setZero.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.setZero().toString().should.equal("(0,0) (0,0) (0,0)");
+  });
+
   it('#toString() should return all element values of CRowVector', function() {
     crvec.toString.should.be.a.Function;
 

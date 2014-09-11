@@ -92,6 +92,13 @@ describe('RowVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    rvec.setZero.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setZero().toString().should.equal("0 0 0 0 0 0");
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 

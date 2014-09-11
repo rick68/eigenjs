@@ -112,6 +112,15 @@ describe('VectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    vblock.setZero.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setZero().toString().should.equal("0\n0");
+
+    vblock.toString().should.equal("0\n0");
+  });
+
   it('#toString() should return all element values of VectorBlock', function() {
     vblock.toString.should.be.a.Function;
 

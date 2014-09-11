@@ -114,6 +114,15 @@ describe('CVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    cvblock.setZero.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.setZero().toString().should.equal("(0,0)\n(0,0)");
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
   it('#toString() should return all element values of CVectorBlock', function() {
     cvblock.toString.should.be.a.Function;
 

@@ -109,6 +109,13 @@ describe('MatrixBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    mblock.setZero.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.setZero().toString().should.equal("0 0\n0 0");
+  });
+
   it('#toString() should return all element values of MatrixBlock', function() {
     mblock.toString.should.be.a.Function;
 

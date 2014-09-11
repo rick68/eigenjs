@@ -98,6 +98,13 @@ describe('Matrix', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    mat.setZero.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setZero().toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+  });
+
   it('#toString() should return all element values of Matrix', function() {
     mat.toString.should.be.a.Function;
 

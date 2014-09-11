@@ -104,6 +104,13 @@ describe('CVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    cvec.setZero.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setZero().toString().should.equal("(0,0)\n(0,0)\n(0,0)\n(0,0)\n(0,0)\n(0,0)");
+  });
+
   it('#toString() should return all element values of CVector', function() {
     cvec.toString.should.be.a.Function;
 

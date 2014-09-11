@@ -106,6 +106,15 @@ describe('CRowVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#setZero() should set all coefficients to zero', function() {
+    crvblock.setZero.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.setZero().toString().should.equal("(0,0) (0,0)");
+
+    crvec.toString().should.equal("(1,0) (2,0) (0,0) (0,0) (5,0) (6,0)");
+  });
+
   it('#toString() should return all element values of CRowVectorBlock', function() {
     crvblock.toString.should.be.a.Function;
 
