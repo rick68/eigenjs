@@ -118,7 +118,7 @@ describe('VectorBlock', function() {
     vblock.toString().should.equal("3\n4");
     vblock.setZero().toString().should.equal("0\n0");
 
-    vblock.toString().should.equal("0\n0");
+    vec.toString().should.equal("1\n2\n0\n0\n5\n6");
   });
 
   it('#toString() should return all element values of VectorBlock', function() {
