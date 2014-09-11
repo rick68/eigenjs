@@ -445,6 +445,19 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_SETRANDOM_CONTEXT()            \
+  {                                                                          \
+    T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
+    typename T::value_type& value = **obj;                                   \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    value.setRandom();                                                       \
+                                                                             \
+    NanReturnValue( args.This() );                                           \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_TRANSPOSE_CONTEXT()            \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
