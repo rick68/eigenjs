@@ -170,6 +170,7 @@ SOURCES = \
     src/Matrix_fwd.hpp \
     src/RowVector.hpp \
     src/RowVector/class_method_Constant.hpp \
+    src/RowVector/class_method_LinSpaced.hpp \
     src/RowVector/definitions.hpp \
     src/RowVector/instance_method_asDiagonal.hpp \
     src/RowVector/instance_method_block.hpp \
@@ -185,6 +186,7 @@ SOURCES = \
     src/RowVectorBlock_fwd.hpp \
     src/Vector.hpp \
     src/Vector/class_method_Constant.hpp \
+    src/Vector/class_method_LinSpaced.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_asDiagonal.hpp \
     src/Vector/instance_method_block.hpp \
