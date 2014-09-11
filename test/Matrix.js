@@ -122,6 +122,10 @@ describe('Matrix', function() {
 
     mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
     mat.setConstant(0.6).toString().should.equal("0.6 0.6 0.6\n0.6 0.6 0.6\n0.6 0.6 0.6");
+
+    (function(){
+      mat.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of Matrix', function() {

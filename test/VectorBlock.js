@@ -141,6 +141,10 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
     vblock.setConstant(0.6).toString().should.equal("0.6\n0.6");
     vec.toString().should.equal("  1\n  2\n0.6\n0.6\n  5\n  6");
+
+    (function(){
+      vblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of VectorBlock', function() {

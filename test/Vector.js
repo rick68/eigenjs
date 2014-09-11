@@ -139,6 +139,10 @@ describe('Vector', function() {
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
     vec.setConstant(0.6).toString().should.equal("0.6\n0.6\n0.6\n0.6\n0.6\n0.6");
+
+    (function(){
+      vec.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of Vector', function() {

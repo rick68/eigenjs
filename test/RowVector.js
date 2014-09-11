@@ -116,6 +116,10 @@ describe('RowVector', function() {
 
     rvec.toString().should.equal("1 2 3 4 5 6");
     rvec.setConstant(0.6).toString().should.equal("0.6 0.6 0.6 0.6 0.6 0.6");
+
+    (function(){
+      rvec.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of RowVector', function() {

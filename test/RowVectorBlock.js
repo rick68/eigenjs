@@ -135,6 +135,10 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("1 2 3 4 5 6");
     rvblock.setConstant(0.6).toString().should.equal("0.6 0.6");
     rvec.toString().should.equal("  1   2 0.6 0.6   5   6");
+
+    (function(){
+      rvblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of RowVectorBlock', function() {

@@ -134,6 +134,10 @@ describe('MatrixBlock', function() {
     mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
     mblock.setConstant(0.6).toString().should.equal("0.6 0.6\n0.6 0.6");
     mat.toString().should.equal("  1   2   3   4\n  5 0.6 0.6   8\n  9 0.6 0.6  12\n 13  14  15  16");
+
+    (function(){
+      mblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of MatrixBlock', function() {
