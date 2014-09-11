@@ -22,9 +22,9 @@ install:
   - cmd: npm install -g node-gyp
   - npm install --msvs_version=2013
 
-build: off
-
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
+
+build: off
