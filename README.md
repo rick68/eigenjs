@@ -2174,7 +2174,7 @@ cmat =
 ```
 
 #### cmat.setConstant(scalar)
-#### cmat.setConstant(complex)
+#### cmat.setConstant(comp)
 
 ```js
 var Eigen = require('eigenjs')
