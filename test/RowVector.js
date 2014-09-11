@@ -106,6 +106,18 @@ describe('RowVector', function() {
     rvec.setOnes().toString().should.equal("1 1 1 1 1 1");
   });
 
+  it('#setRandom() should set all coefficients to random', function() {
+    rvec.setRandom.should.be.a.Function;
+    rvec.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    rvec.setConstant.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setConstant(0.6).toString().should.equal("0.6 0.6 0.6 0.6 0.6 0.6");
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 

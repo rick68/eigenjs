@@ -115,7 +115,6 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal("(1,0) (2,0) (0,0) (0,0) (5,0) (6,0)");
   });
 
-
   it('#setOnes() should set all coefficients to ones', function() {
     crvblock.setOnes.should.be.a.Function;
 
@@ -123,6 +122,22 @@ describe('CRowVectorBlock', function() {
     crvblock.setOnes().toString().should.equal("(1,0) (1,0)");
 
     crvec.toString().should.equal("(1,0) (2,0) (1,0) (1,0) (5,0) (6,0)");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    crvblock.setRandom.should.be.a.Function;
+    crvblock.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    crvblock.setConstant.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.setConstant(0.6).toString().should.equal("(0.6,0) (0.6,0)");
+    crvec.toString().should.equal("  (1,0)   (2,0) (0.6,0) (0.6,0)   (5,0)   (6,0)");
+
+    crvblock.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4)");
+    crvec.toString().should.equal(" (1,0)  (2,0) (3,-4) (3,-4)  (5,0)  (6,0)");
   });
 
   it('#toString() should return all element values of CRowVectorBlock', function() {

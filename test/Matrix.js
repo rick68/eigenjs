@@ -112,6 +112,18 @@ describe('Matrix', function() {
     mat.setOnes().toString().should.equal("1 1 1\n1 1 1\n1 1 1");
   });
 
+  it('#setRandom() should set all coefficients to random', function() {
+    mat.setRandom.should.be.a.Function;
+    mat.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    mat.setConstant.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setConstant(0.6).toString().should.equal("0.6 0.6 0.6\n0.6 0.6 0.6\n0.6 0.6 0.6");
+  });
+
   it('#toString() should return all element values of Matrix', function() {
     mat.toString.should.be.a.Function;
 

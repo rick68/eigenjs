@@ -126,6 +126,22 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (1,0)  (1,0)  (8,0)\n (9,0)  (1,0)  (1,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
+  it('#setRandom() should set all coefficients to random', function() {
+    cmblock.setRandom.should.be.a.Function;
+    cmblock.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    cmblock.setConstant.should.be.a.Function;
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+    cmblock.setConstant(0.6).toString().should.equal("(0.6,0) (0.6,0)\n(0.6,0) (0.6,0)");
+    cmat.toString().should.equal("  (1,0)   (2,0)   (3,0)   (4,0)\n  (5,0) (0.6,0) (0.6,0)   (8,0)\n  (9,0) (0.6,0) (0.6,0)  (12,0)\n (13,0)  (14,0)  (15,0)  (16,0)");
+
+    cmblock.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4)\n(3,-4) (3,-4)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0) (3,-4) (3,-4)  (8,0)\n (9,0) (3,-4) (3,-4) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+  });
+
   it('#toString() should return all element values of CMatrixBlock', function() {
     cmblock.toString.should.be.a.Function;
 
