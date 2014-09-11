@@ -27,6 +27,7 @@
 #include "instance_method_asDiagonal.hpp"
 
 #include "class_method_Constant.hpp"
+#include "class_method_LinSpaced.hpp"
 
 namespace EigenJS {
 
@@ -45,6 +46,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_asDiagonal)
 
   (class_method_Constant)
+  (class_method_LinSpaced)
 );
 
 }  // namespace EigenJS

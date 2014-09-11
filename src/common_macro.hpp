@@ -618,12 +618,54 @@
   }                                                                          \
   /**/
 
-#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ASDIAGONAL_CONTEXT()           \
+#define EIGENJS_COMMON_VECTOR_CLASS_METHOD_LINSPACED_CONTEXT()               \
   {                                                                          \
     NanScope();                                                              \
                                                                              \
+    if ( args.Length() == 3 &&                                               \
+         args[0]->IsNumber() &&      /* size */                              \
+         T::is_scalar( args[1] ) &&  /* low */                               \
+         T::is_scalar( args[2] )     /* high */                              \
+    ) {                                                                      \
+      const typename T::value_type::Index& size = args[0]->Int32Value();     \
+      const typename T::scalar_type& low = args[1]->NumberValue();           \
+      const typename T::scalar_type& high = args[2]->NumberValue();          \
+      v8::Local<v8::Value> argv[] = {                                        \
+        NanNew<v8::Integer>( 0 )  /* rows */                                 \
+      , NanNew<v8::Integer>( 0 )  /* cols */                                 \
+      };                                                                     \
+                                                                             \
+      if ( size <= 0 ) {                                                     \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      v8::Local< v8::Object > instance = U::new_instance(                    \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+      );                                                                     \
+                                                                             \
+      U* new_obj = node::ObjectWrap::Unwrap< U >( instance );                \
+      typename U::value_type& new_value = **new_obj;                         \
+                                                                             \
+      new_value = U::value_type::LinSpaced(                                  \
+                      Eigen::Sequential, size, low, high );                  \
+                                                                             \
+      NanReturnValue(instance);                                              \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_ASDIAGONAL_CONTEXT()           \
+  {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
                                                                              \
     if ( value.rows() && value.cols() ) {                                    \
       v8::Local<v8::Value> argv[] = {                                        \
