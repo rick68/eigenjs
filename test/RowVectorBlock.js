@@ -115,6 +115,32 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("1 2 0 0 5 6");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    rvblock.setOnes.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setOnes().toString().should.equal("1 1");
+
+    rvec.toString().should.equal("1 2 1 1 5 6");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    rvblock.setRandom.should.be.a.Function;
+    rvblock.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    rvblock.setConstant.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvblock.setConstant(0.6).toString().should.equal("0.6 0.6");
+    rvec.toString().should.equal("  1   2 0.6 0.6   5   6");
+
+    (function(){
+      rvblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 

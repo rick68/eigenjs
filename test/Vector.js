@@ -122,6 +122,29 @@ describe('Vector', function() {
     vec.setZero().toString().should.equal("0\n0\n0\n0\n0\n0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    vec.setOnes.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setOnes().toString().should.equal("1\n1\n1\n1\n1\n1");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    vec.setRandom.should.be.a.Function;
+    vec.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    vec.setConstant.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setConstant(0.6).toString().should.equal("0.6\n0.6\n0.6\n0.6\n0.6\n0.6");
+
+    (function(){
+      vec.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
+  });
+
   it('#toString() should return all element values of Vector', function() {
     vec.toString.should.be.a.Function;
 

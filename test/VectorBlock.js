@@ -118,7 +118,33 @@ describe('VectorBlock', function() {
     vblock.toString().should.equal("3\n4");
     vblock.setZero().toString().should.equal("0\n0");
 
-    vblock.toString().should.equal("0\n0");
+    vec.toString().should.equal("1\n2\n0\n0\n5\n6");
+  });
+
+  it('#setOnes() should set all coefficients to ones', function() {
+    vblock.setOnes.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setOnes().toString().should.equal("1\n1");
+
+    vec.toString().should.equal("1\n2\n1\n1\n5\n6");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    vblock.setRandom.should.be.a.Function;
+    vblock.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    vblock.setConstant.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vblock.setConstant(0.6).toString().should.equal("0.6\n0.6");
+    vec.toString().should.equal("  1\n  2\n0.6\n0.6\n  5\n  6");
+
+    (function(){
+      vblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
   });
 
   it('#toString() should return all element values of VectorBlock', function() {

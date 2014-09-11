@@ -116,6 +116,30 @@ describe('MatrixBlock', function() {
     mblock.setZero().toString().should.equal("0 0\n0 0");
   });
 
+  it('#setOnes() should set all coefficients to ones', function() {
+    mblock.setOnes.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.setOnes().toString().should.equal("1 1\n1 1");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    mblock.setRandom.should.be.a.Function;
+    mblock.setRandom();
+  });
+
+  it('#setConstant() should set all coefficients to constant', function() {
+    mblock.setConstant.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mblock.setConstant(0.6).toString().should.equal("0.6 0.6\n0.6 0.6");
+    mat.toString().should.equal("  1   2   3   4\n  5 0.6 0.6   8\n  9 0.6 0.6  12\n 13  14  15  16");
+
+    (function(){
+      mblock.setConstant(Complex(3, -4));
+    }).should.throw('Invalid argument');
+  });
+
   it('#toString() should return all element values of MatrixBlock', function() {
     mblock.toString.should.be.a.Function;
 
