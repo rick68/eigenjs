@@ -27,7 +27,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, setConstant,
 
       value.setConstant(scalar);
 
-      NanReturnValue(args.This());      
+      NanReturnValue(args.This());
     } else if (Complex::is_complex(args[0])) {
       const Complex* const& rhs_obj =
           node::ObjectWrap::Unwrap<Complex>(args[0]->ToObject());
@@ -35,7 +35,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, setConstant,
 
       value.setConstant(complex);
 
-      NanReturnValue(args.This());      
+      NanReturnValue(args.This());
     }
   }
 
