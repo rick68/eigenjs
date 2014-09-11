@@ -392,6 +392,7 @@ $ npm install eigenjs --msvs_version=2012
     * [Vector(scalar_array)](#vectorscalar_array)
     * [Vector.Constant(rows, scalar)](#vectorconstantrows-scalar)
     * [Vector.Constant(rows, comp)](#vectorconstantrows-comp)
+    * [Vector.LinSpaced(size, low, high)](#vectorlinspacedsizelowhigh)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
@@ -432,6 +433,7 @@ $ npm install eigenjs --msvs_version=2012
     * [RowVector(scalar_array)](#rowvectorscalar_array)
     * [RowVector.Constant(cols, scalar)](#rowvectorconstantcols-scalar)
     * [RowVector.Constant(cols, comp)](#rowvectorconstantcols-comp)
+    * [RowVector.LinSpaced(size, low, high)](#rowvectorlinspacedsizelowhigh)
   * [Row Vector Instance Methods](#row-vector-instance-methods)
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
@@ -2904,6 +2906,23 @@ vec =
 0.6
 ```
 
+#### Vector.LinSpaced(size, low, high)
+
+```js
+var V = require('eigenjs').Vector
+  , vec = V.LinSpaced(5, 0, 1);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+   0
+0.25
+ 0.5
+0.75
+   1
+```
+
 ### Vector Instance Methods
 
 #### vec.set(row, scalar)
@@ -3261,6 +3280,19 @@ console.log('rvec = \n%s', rvec);
 ```txt
 rvec =
 0.6 0.6 0.6 0.6
+```
+
+#### RowVector.LinSpaced(size, low, high)
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = RV.LinSpaced(5, 1, 0);
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+   1 0.75  0.5 0.25    0
 ```
 
 ### Row Vector Instance Methods
