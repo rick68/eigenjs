@@ -709,4 +709,76 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_SETLINSPACED_CONTEXT()         \
+  {                                                                          \
+    const int& args_length = args.Length();                                  \
+    T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
+    typename T::value_type& value = **obj;                                   \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    if ( args_length == 2 &&                                                 \
+         T::is_scalar( args[0] ) &&  /* low */                               \
+         T::is_scalar( args[1] )     /* high */                              \
+    ) {                                                                      \
+      const typename T::scalar_type& low = args[0]->NumberValue();           \
+      const typename T::scalar_type& high = args[1]->NumberValue();          \
+                                                                             \
+      if ( RowVectorBlock::is_rowvectorblock( args.This() ) ) {              \
+        /* workaround */                                                     \
+        value = RowVector::value_type::LinSpaced(                            \
+                    Eigen::Sequential                                        \
+                  , value.cols()                                             \
+                  , low                                                      \
+                  , high                                                     \
+                  );                                                         \
+      } else {                                                               \
+        value.setLinSpaced( low, high );                                     \
+      }                                                                      \
+                                                                             \
+      NanReturnValue( args.This() );                                         \
+    } else if ( args_length == 3 &&                                          \
+                args[0]->IsNumber() &&      /* size */                       \
+                T::is_scalar( args[1] ) &&  /* low */                        \
+                T::is_scalar( args[2] )     /* high */                       \
+    ) {                                                                      \
+      const typename T::value_type::Index& size = args[0]->Int32Value();     \
+      const typename T::scalar_type& low = args[1]->NumberValue();           \
+      const typename T::scalar_type& high = args[2]->NumberValue();          \
+                                                                             \
+      if ( size <= 0 ) {                                                     \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      if ( detail::is_eigen_block< typename T::value_type >::value &&        \
+           !( VectorBlock::is_vectorblock( args.This() ) &&                  \
+              size == value.rows() ) &&                                      \
+           !( RowVectorBlock::is_rowvectorblock( args.This() ) &&            \
+              size == value.cols() )                                         \
+      ) {                                                                    \
+        NanThrowError( "The size argument is not equal to the block size" ); \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      if ( RowVectorBlock::is_rowvectorblock( args.This() ) ) {              \
+        /* workaround */                                                     \
+        value = RowVector::value_type::LinSpaced(                            \
+                    Eigen::Sequential                                        \
+                  , size                                                     \
+                  , low                                                      \
+                  , high                                                     \
+                  );                                                         \
+      } else {                                                               \
+        value.setLinSpaced( size, low, high );                               \
+      }                                                                      \
+                                                                             \
+      NanReturnValue( args.This() );                                         \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
 #endif  // EIGENJS_COMMON_MACRO_HPP

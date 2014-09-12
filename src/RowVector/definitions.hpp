@@ -17,6 +17,8 @@
 #include "instance_method_set.hpp"
 #include "instance_method_get.hpp"
 
+#include "instance_method_setLinSpaced.hpp"
+
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
 #include "instance_method_col.hpp"
@@ -35,6 +37,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   RowVector
 , (instance_method_set)
   (instance_method_get)
+
+  (instance_method_setLinSpaced)
 
   (instance_method_block)
   (instance_method_row)
