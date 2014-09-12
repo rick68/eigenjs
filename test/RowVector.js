@@ -122,6 +122,22 @@ describe('RowVector', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a row-vector', function() {
+    rvec.setLinSpaced.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setLinSpaced(0.1, 0.2);
+    rvec.toString().should.equal(" 0.1 0.12 0.14 0.16 0.18  0.2");
+
+    rvec.setLinSpaced(2, 0, 1);
+    rvec.toString().should.equal("0 1");
+    rvec.cols().should.equal(2);
+
+    rvec.setLinSpaced(9, 0, 1);
+    rvec.toString().should.equal("    0 0.125  0.25 0.375   0.5 0.625  0.75 0.875     1");
+    rvec.cols().should.equal(9);
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 

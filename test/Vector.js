@@ -145,6 +145,22 @@ describe('Vector', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a vector', function() {
+    vec.setLinSpaced.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setLinSpaced(0.1, 0.2);
+    vec.toString().should.equal(" 0.1\n0.12\n0.14\n0.16\n0.18\n 0.2");
+
+    vec.setLinSpaced(2, 0, 1);
+    vec.toString().should.equal("0\n1");
+    vec.rows().should.equal(2);
+
+    vec.setLinSpaced(9, 0, 1);
+    vec.toString().should.equal("    0\n0.125\n 0.25\n0.375\n  0.5\n0.625\n 0.75\n0.875\n    1");
+    vec.rows().should.equal(9);
+  });
+
   it('#toString() should return all element values of Vector', function() {
     vec.toString.should.be.a.Function;
 

@@ -141,6 +141,21 @@ describe('RowVectorBlock', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a row-vector block', function() {
+    rvblock.setLinSpaced.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setLinSpaced(0.1, 0.2);
+    rvec.toString().should.equal("  1   2 0.1 0.2   5   6");
+
+    (function(){
+      rvblock.setLinSpaced(1, 0, 1);
+    }).should.throw('The size argument is not equal to the block size');
+
+    rvblock.setLinSpaced(2, 0, 1);
+    rvec.toString().should.equal("1 2 0 1 5 6");
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 

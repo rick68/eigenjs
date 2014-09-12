@@ -147,6 +147,21 @@ describe('VectorBlock', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a vector block', function() {
+    vblock.setLinSpaced.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setLinSpaced(0.1, 0.2);
+    vec.toString().should.equal("  1\n  2\n0.1\n0.2\n  5\n  6");
+
+    (function(){
+      vblock.setLinSpaced(1, 0, 1);
+    }).should.throw('The size argument is not equal to the block size');
+
+    vblock.setLinSpaced(2, 0, 1);
+    vec.toString().should.equal("1\n2\n0\n1\n5\n6");
+  });
+
   it('#toString() should return all element values of VectorBlock', function() {
     vblock.toString.should.be.a.Function;
 
