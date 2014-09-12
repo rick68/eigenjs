@@ -806,6 +806,22 @@ describe('RowVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a matrix which is replicated", function() {
+    rvec.replicate.should.be.a.Function;
+
+    rvec.replicate(0, 0).toString().should.equal("");
+    rvec.replicate(0, 1).toString().should.equal("");
+    rvec.replicate(1, 0).toString().should.equal("");
+    rvec.replicate(1, 1).toString().should.equal("1 2 3 4 5 6");
+    rvec.replicate(2, 1).toString().should.equal("1 2 3 4 5 6\n1 2 3 4 5 6");
+    rvec.replicate(1, 2).toString().should.equal("1 2 3 4 5 6 1 2 3 4 5 6");
+    rvec.replicate(2, 2).toString().should.equal("1 2 3 4 5 6 1 2 3 4 5 6\n1 2 3 4 5 6 1 2 3 4 5 6");
+
+    (function() {
+      rvec.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two row-vectors", function() {
     rvec.dot.should.be.a.Function;
 

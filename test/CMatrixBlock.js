@@ -1544,4 +1544,20 @@ describe('CMatrixBlock', function() {
       cmblock.col(3);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    cmblock.replicate.should.be.a.Function;
+
+    cmblock.replicate(0, 0).toString().should.equal("");
+    cmblock.replicate(0, 1).toString().should.equal("");
+    cmblock.replicate(1, 0).toString().should.equal("");
+    cmblock.replicate(1, 1).toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.replicate(2, 1).toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)\n (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.replicate(1, 2).toString().should.equal(" (6,0)  (7,0)  (6,0)  (7,0)\n(10,0) (11,0) (10,0) (11,0)");
+    cmblock.replicate(2, 2).toString().should.equal(" (6,0)  (7,0)  (6,0)  (7,0)\n(10,0) (11,0) (10,0) (11,0)\n (6,0)  (7,0)  (6,0)  (7,0)\n(10,0) (11,0) (10,0) (11,0)");
+
+    (function() {
+      cmblock.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
 });

@@ -1867,6 +1867,22 @@ describe('CRowVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    crvblock.replicate.should.be.a.Function;
+
+    crvblock.replicate(0, 0).toString().should.equal("");
+    crvblock.replicate(0, 1).toString().should.equal("");
+    crvblock.replicate(1, 0).toString().should.equal("");
+    crvblock.replicate(1, 1).toString().should.equal("(3,0) (4,0)");
+    crvblock.replicate(2, 1).toString().should.equal("(3,0) (4,0)\n(3,0) (4,0)");
+    crvblock.replicate(1, 2).toString().should.equal("(3,0) (4,0) (3,0) (4,0)");
+    crvblock.replicate(2, 2).toString().should.equal("(3,0) (4,0) (3,0) (4,0)\n(3,0) (4,0) (3,0) (4,0)");
+
+    (function() {
+      crvec.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#asDiagonal() should return a complex diagonal", function() {
     crvblock.asDiagonal.should.be.a.Function;
 

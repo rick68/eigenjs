@@ -915,6 +915,22 @@ describe('CVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    cvec.replicate.should.be.a.Function;
+
+    cvec.replicate(0, 0).toString().should.equal("");
+    cvec.replicate(0, 1).toString().should.equal("");
+    cvec.replicate(1, 0).toString().should.equal("");
+    cvec.replicate(1, 1).toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.replicate(2, 1).toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)\n(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.replicate(1, 2).toString().should.equal("(1,1) (1,1)\n(2,2) (2,2)\n(3,3) (3,3)\n(4,4) (4,4)\n(5,5) (5,5)\n(6,6) (6,6)");
+    cvec.replicate(2, 2).toString().should.equal("(1,1) (1,1)\n(2,2) (2,2)\n(3,3) (3,3)\n(4,4) (4,4)\n(5,5) (5,5)\n(6,6) (6,6)\n(1,1) (1,1)\n(2,2) (2,2)\n(3,3) (3,3)\n(4,4) (4,4)\n(5,5) (5,5)\n(6,6) (6,6)");
+
+    (function() {
+      cvec.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two complex vectors", function() {
     cvec.dot.should.be.a.Function;
 

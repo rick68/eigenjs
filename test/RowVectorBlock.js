@@ -1564,6 +1564,22 @@ describe('RowVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a matrix which is replicated", function() {
+    rvblock.replicate.should.be.a.Function;
+
+    rvblock.replicate(0, 0).toString().should.equal("");
+    rvblock.replicate(0, 1).toString().should.equal("");
+    rvblock.replicate(1, 0).toString().should.equal("");
+    rvblock.replicate(1, 1).toString().should.equal("3 4");
+    rvblock.replicate(2, 1).toString().should.equal("3 4\n3 4");
+    rvblock.replicate(1, 2).toString().should.equal("3 4 3 4");
+    rvblock.replicate(2, 2).toString().should.equal("3 4 3 4\n3 4 3 4");
+
+    (function() {
+      rvblock.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two row-vector blocks", function() {
     rvblock.dot.should.be.a.Function;
 

@@ -721,4 +721,20 @@ describe('Matrix', function() {
       mat.col(3);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#replicate() should return a matrix which is replicated", function() {
+    mat.replicate.should.be.a.Function;
+
+    mat.replicate(0, 0).toString().should.equal("");
+    mat.replicate(0, 1).toString().should.equal("");
+    mat.replicate(1, 0).toString().should.equal("");
+    mat.replicate(1, 1).toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.replicate(2, 1).toString().should.equal("1 2 3\n4 5 6\n7 8 9\n1 2 3\n4 5 6\n7 8 9");
+    mat.replicate(1, 2).toString().should.equal("1 2 3 1 2 3\n4 5 6 4 5 6\n7 8 9 7 8 9");
+    mat.replicate(2, 2).toString().should.equal("1 2 3 1 2 3\n4 5 6 4 5 6\n7 8 9 7 8 9\n1 2 3 1 2 3\n4 5 6 4 5 6\n7 8 9 7 8 9");
+
+    (function() {
+      mat.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
 });

@@ -845,6 +845,22 @@ describe('Vector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a matrix which is replicated", function() {
+    vec.replicate.should.be.a.Function;
+
+    vec.replicate(0, 0).toString().should.equal("");
+    vec.replicate(0, 1).toString().should.equal("");
+    vec.replicate(1, 0).toString().should.equal("");
+    vec.replicate(1, 1).toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.replicate(2, 1).toString().should.equal("1\n2\n3\n4\n5\n6\n1\n2\n3\n4\n5\n6");
+    vec.replicate(1, 2).toString().should.equal("1 1\n2 2\n3 3\n4 4\n5 5\n6 6");
+    vec.replicate(2, 2).toString().should.equal("1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6");
+
+    (function() {
+      vec.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#asDiagonal() should return a diagonal", function() {
     vec.asDiagonal.should.be.a.Function;
 

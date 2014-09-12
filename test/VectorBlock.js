@@ -1678,6 +1678,22 @@ describe('VectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a matrix which is replicated", function() {
+    vblock.replicate.should.be.a.Function;
+
+    vblock.replicate(0, 0).toString().should.equal("");
+    vblock.replicate(0, 1).toString().should.equal("");
+    vblock.replicate(1, 0).toString().should.equal("");
+    vblock.replicate(1, 1).toString().should.equal("3\n4");
+    vblock.replicate(2, 1).toString().should.equal("3\n4\n3\n4");
+    vblock.replicate(1, 2).toString().should.equal("3 3\n4 4");
+    vblock.replicate(2, 2).toString().should.equal("3 3\n4 4\n3 3\n4 4");
+
+    (function() {
+      vblock.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two vector blocks", function() {
     vblock.dot.should.be.a.Function;
 
