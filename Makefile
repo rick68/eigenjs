@@ -180,6 +180,7 @@ SOURCES = \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_row.hpp \
     src/RowVector/instance_method_set.hpp \
+    src/RowVector/instance_method_setLinSpaced.hpp \
     src/RowVector_fwd.hpp \
     src/RowVectorBlock.hpp \
     src/RowVectorBlock/definitions.hpp \
@@ -196,6 +197,7 @@ SOURCES = \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_row.hpp \
     src/Vector/instance_method_set.hpp \
+    src/Vector/instance_method_setLinSpaced.hpp \
     src/Vector_fwd.hpp \
     src/VectorBlock.hpp \
     src/VectorBlock/definitions.hpp \
