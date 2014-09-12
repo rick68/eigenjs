@@ -29,13 +29,14 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 ## Installation
 
-**OS X** (XCode & Command Line Tools) and **Linux** (GCC >= 4.8):
++ **OS X** (XCode & Command Line Tools)
++ **Linux** (GCC >= 4.8):
 
 ```bash
 $ npm install eigenjs
 ```
 
-**Windows7/8** (Visual Studio 2012):
++ **Windows7/8** (Visual Studio 2012):
 
 ```bash
 $ npm install eigenjs --msvs_version=2012
