@@ -1297,4 +1297,20 @@ describe('MatrixBlock', function() {
       mblock.col(2);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    mblock.replicate.should.be.a.Function;
+
+    mblock.replicate(0, 0).toString().should.equal("");
+    mblock.replicate(0, 1).toString().should.equal("");
+    mblock.replicate(1, 0).toString().should.equal("");
+    mblock.replicate(1, 1).toString().should.equal(" 6  7\n10 11");
+    mblock.replicate(2, 1).toString().should.equal(" 6  7\n10 11\n 6  7\n10 11");
+    mblock.replicate(1, 2).toString().should.equal(" 6  7  6  7\n10 11 10 11");
+    mblock.replicate(2, 2).toString().should.equal(" 6  7  6  7\n10 11 10 11\n 6  7  6  7\n10 11 10 11");
+
+    (function() {
+      mblock.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
 });

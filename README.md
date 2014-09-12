@@ -29,13 +29,14 @@ The goal of this project is to port Eigen library into JavaScript for linear alg
 
 ## Installation
 
-**OS X** (XCode & Command Line Tools) and **Linux** (GCC >= 4.8):
++ **OS X** (XCode & Command Line Tools)
++ **Linux** (GCC >= 4.8):
 
 ```bash
 $ npm install eigenjs
 ```
 
-**Windows7/8** (Visual Studio 2012):
++ **Windows7/8** (Visual Studio 2012):
 
 ```bash
 $ npm install eigenjs --msvs_version=2012
@@ -157,6 +158,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
+    * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
     * [mat.add(rvec)](#mataddrvec)
@@ -281,6 +283,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
+    * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
     * [cmat.add(rvec)](#cmataddrvec)
@@ -1361,6 +1364,27 @@ mat =
          0 -0.0302965          0
 ```
 
+#### mat.replicate(rowFactor, colFactor)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 1).set([
+             7,
+            -2,
+             6
+          ]);
+console.log('%s', mat.replicate(2, 5));
+```
+
+```txt
+ 7  7  7  7  7
+-2 -2 -2 -2 -2
+ 6  6  6  6  6
+ 7  7  7  7  7
+-2 -2 -2 -2 -2
+ 6  6  6  6  6
+```
+
 #### mat.add(mat)
 #### mat.add(vec)
 #### mat.add(rvec)
@@ -2256,6 +2280,27 @@ cmat =
                 (0,0)     (-0.97615,-0.147)                 (0,0)
                 (0,0) (-0.630134,-0.661642)                 (0,0)
                 (0,0)  (-0.211411,0.819724)                 (0,0)
+```
+
+#### cmat.replicate(rowFactor, colFactor)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 1).set([
+             7,
+            -2,
+             6
+          ]);
+console.log('%s', cmat.replicate(2, 5));
+```
+
+```txt
+ (7,0)  (7,0)  (7,0)  (7,0)  (7,0)
+(-2,0) (-2,0) (-2,0) (-2,0) (-2,0)
+ (6,0)  (6,0)  (6,0)  (6,0)  (6,0)
+ (7,0)  (7,0)  (7,0)  (7,0)  (7,0)
+(-2,0) (-2,0) (-2,0) (-2,0) (-2,0)
+ (6,0)  (6,0)  (6,0)  (6,0)  (6,0)
 ```
 
 #### cmat.add(mat)

@@ -1880,6 +1880,22 @@ describe('CVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    cvblock.replicate.should.be.a.Function;
+
+    cvblock.replicate(0, 0).toString().should.equal("");
+    cvblock.replicate(0, 1).toString().should.equal("");
+    cvblock.replicate(1, 0).toString().should.equal("");
+    cvblock.replicate(1, 1).toString().should.equal("(3,0)\n(4,0)");
+    cvblock.replicate(2, 1).toString().should.equal("(3,0)\n(4,0)\n(3,0)\n(4,0)");
+    cvblock.replicate(1, 2).toString().should.equal("(3,0) (3,0)\n(4,0) (4,0)");
+    cvblock.replicate(2, 2).toString().should.equal("(3,0) (3,0)\n(4,0) (4,0)\n(3,0) (3,0)\n(4,0) (4,0)");
+
+    (function() {
+      cvblock.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two complex vector blocks", function() {
     cvblock.dot.should.be.a.Function;
 

@@ -803,4 +803,20 @@ describe('CMatrix', function() {
       cmat.col(3);
     }).should.throw("The row or column number is out of range");
   });
+
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    cmat.replicate.should.be.a.Function;
+
+    cmat.replicate(0, 0).toString().should.equal("");
+    cmat.replicate(0, 1).toString().should.equal("");
+    cmat.replicate(1, 0).toString().should.equal("");
+    cmat.replicate(1, 1).toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.replicate(2, 1).toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)\n(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.replicate(1, 2).toString().should.equal("(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6) (4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9) (7,7) (8,8) (9,9)");
+    cmat.replicate(2, 2).toString().should.equal("(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6) (4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9) (7,7) (8,8) (9,9)\n(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6) (4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9) (7,7) (8,8) (9,9)");
+
+    (function() {
+      cmat.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
 });

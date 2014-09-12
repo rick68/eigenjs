@@ -845,6 +845,22 @@ describe('CRowVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#replicate() should return a complex matrix which is replicated", function() {
+    crvec.replicate.should.be.a.Function;
+
+    crvec.replicate(0, 0).toString().should.equal("");
+    crvec.replicate(0, 1).toString().should.equal("");
+    crvec.replicate(1, 0).toString().should.equal("");
+    crvec.replicate(1, 1).toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.replicate(2, 1).toString().should.equal("(1,1) (2,2) (3,3)\n(1,1) (2,2) (3,3)");
+    crvec.replicate(1, 2).toString().should.equal("(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)");
+    crvec.replicate(2, 2).toString().should.equal("(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)\n(1,1) (2,2) (3,3) (1,1) (2,2) (3,3)");
+
+    (function() {
+      crvec.replicate(-1, 0);
+    }).should.throw("Invalid argument");
+  });
+
   it("#dot() should return the dot product of two complex row-vectors", function() {
     crvec.dot.should.be.a.Function;
 

@@ -31,6 +31,7 @@
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
 #include "instance_method_col.hpp"
+#include "instance_method_replicate.hpp"
 
 #include "instance_method_add.hpp"
 #include "instance_method_adda.hpp"
@@ -86,6 +87,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_block)
   (instance_method_row)
   (instance_method_col)
+  (instance_method_replicate)
 
   (instance_method_add)
   (instance_method_adda)
