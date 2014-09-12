@@ -17,6 +17,8 @@
 #include "instance_method_set.hpp"
 #include "instance_method_get.hpp"
 
+#include "instance_method_setLinSpaced.hpp"
+
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
 #include "instance_method_col.hpp"
@@ -27,6 +29,7 @@
 #include "instance_method_asDiagonal.hpp"
 
 #include "class_method_Constant.hpp"
+#include "class_method_LinSpaced.hpp"
 
 namespace EigenJS {
 
@@ -34,6 +37,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   RowVector
 , (instance_method_set)
   (instance_method_get)
+
+  (instance_method_setLinSpaced)
 
   (instance_method_block)
   (instance_method_row)
@@ -45,6 +50,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_asDiagonal)
 
   (class_method_Constant)
+  (class_method_LinSpaced)
 );
 
 }  // namespace EigenJS

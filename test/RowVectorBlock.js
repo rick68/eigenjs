@@ -141,6 +141,21 @@ describe('RowVectorBlock', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a row-vector block', function() {
+    rvblock.setLinSpaced.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setLinSpaced(0.1, 0.2);
+    rvec.toString().should.equal("  1   2 0.1 0.2   5   6");
+
+    (function(){
+      rvblock.setLinSpaced(1, 0, 1);
+    }).should.throw('The size argument is not equal to the block size');
+
+    rvblock.setLinSpaced(2, 0, 1);
+    rvec.toString().should.equal("1 2 0 1 5 6");
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 
@@ -1489,6 +1504,26 @@ describe('RowVectorBlock', function() {
     rvec2.should.instanceOf(RowVector);
     rvec2.rows().should.equal(1);
     rvec2.cols().should.equal(3);
+  });
+
+  it('#LinSpaced() should return a linearly space row-vector', function() {
+    RowVectorBlock.LinSpaced.should.be.a.Function;
+
+    var rvec2 = RowVectorBlock.LinSpaced(5, 0, 1);
+    rvec2.should.instanceOf(RowVector);
+    rvec2.toString().should.equal("   0 0.25  0.5 0.75    1");
+ 
+    var rvec3 = RowVectorBlock.LinSpaced(5, 1, 0);
+    rvec3.should.instanceOf(RowVector);
+    rvec3.toString().should.equal("   1 0.75  0.5 0.25    0");
+
+    var rvec4 = RowVectorBlock.LinSpaced(5, 1, 1);
+    rvec4.should.instanceOf(RowVector);
+    rvec4.toString().should.equal("1 1 1 1 1");
+
+    (function() {
+      RowVectorBlock.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a row-vector block", function() {

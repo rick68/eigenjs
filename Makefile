@@ -170,6 +170,7 @@ SOURCES = \
     src/Matrix_fwd.hpp \
     src/RowVector.hpp \
     src/RowVector/class_method_Constant.hpp \
+    src/RowVector/class_method_LinSpaced.hpp \
     src/RowVector/definitions.hpp \
     src/RowVector/instance_method_asDiagonal.hpp \
     src/RowVector/instance_method_block.hpp \
@@ -179,12 +180,14 @@ SOURCES = \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_row.hpp \
     src/RowVector/instance_method_set.hpp \
+    src/RowVector/instance_method_setLinSpaced.hpp \
     src/RowVector_fwd.hpp \
     src/RowVectorBlock.hpp \
     src/RowVectorBlock/definitions.hpp \
     src/RowVectorBlock_fwd.hpp \
     src/Vector.hpp \
     src/Vector/class_method_Constant.hpp \
+    src/Vector/class_method_LinSpaced.hpp \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_asDiagonal.hpp \
     src/Vector/instance_method_block.hpp \
@@ -194,6 +197,7 @@ SOURCES = \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_row.hpp \
     src/Vector/instance_method_set.hpp \
+    src/Vector/instance_method_setLinSpaced.hpp \
     src/Vector_fwd.hpp \
     src/VectorBlock.hpp \
     src/VectorBlock/definitions.hpp \

@@ -392,10 +392,13 @@ $ npm install eigenjs --msvs_version=2012
     * [Vector(scalar_array)](#vectorscalar_array)
     * [Vector.Constant(rows, scalar)](#vectorconstantrows-scalar)
     * [Vector.Constant(rows, comp)](#vectorconstantrows-comp)
+    * [Vector.LinSpaced(size, low, high)](#vectorlinspacedsize-low-high)
   * [Vector Instance Methods](#vector-instance-methods)
     * [vec.set(row, scalar)](#vecsetrow-scalar)
     * [vec.set(scalar_array)](#vecsetscalar_array)
     * [vec.get(row)](#vecgetrow)
+    * [vec.setLinSpaced(low, high)](#vecsetlinspacedlow-high)
+    * [vec.setLinSpaced(size, low, high)](#vecsetlinspacedsize-low-high)
     * [vec.block(startRow, blockRows)](#vecblockstartrow-blockrows)
     * [vec.dot(vec)](#vecdotvec)
     * [vec.dot(rvec)](#vecdotrvec)
@@ -432,10 +435,13 @@ $ npm install eigenjs --msvs_version=2012
     * [RowVector(scalar_array)](#rowvectorscalar_array)
     * [RowVector.Constant(cols, scalar)](#rowvectorconstantcols-scalar)
     * [RowVector.Constant(cols, comp)](#rowvectorconstantcols-comp)
+    * [RowVector.LinSpaced(size, low, high)](#rowvectorlinspacedsize-low-high)
   * [Row Vector Instance Methods](#row-vector-instance-methods)
     * [rvec.set(col, scalar)](#rvecsetcol-scalar)
     * [rvec.set(scalar_array)](#rvecsetscalar_array)
     * [rvec.get(col)](#rvecgetcol)
+    * [rvec.setLinSpaced(low, high)](#rvecsetlinspacedlow-high)
+    * [rvec.setLinSpaced(size, low, high)](#rvecsetlinspacedsize-low-high)
     * [rvec.block(startCol, blockCols)](#rvecblockstartcol-blockcols)
     * [rvec.dot(vec)](#rvecdotvec)
     * [rvec.dot(rvec)](#rvecdotrvec)
@@ -2904,13 +2910,31 @@ vec =
 0.6
 ```
 
+#### Vector.LinSpaced(size, low, high)
+
+Sets a linearly space vector.
+
+```js
+var V = require('eigenjs').Vector
+  , vec = V.LinSpaced(5, 0, 1);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+   0
+0.25
+ 0.5
+0.75
+   1
+```
+
 ### Vector Instance Methods
 
 #### vec.set(row, scalar)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V(3);
 vec.set(0, 1);
 vec.set(1, 2);
@@ -2928,8 +2952,7 @@ vec =
 #### vec.set(scalar_array)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V(3);
 vec.set([1,
          2,
@@ -2947,8 +2970,7 @@ vec =
 #### vec.get(row)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V([1,
                  2,
                  3]);
@@ -2961,6 +2983,60 @@ console.log(vec.get(2).toString());
 1
 2
 3
+```
+
+#### vec.setLinSpaced(low, high)
+
+Sets a linearly space vector.
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Zero(5);
+console.log('vec = \n%s\n', vec);
+vec.setLinSpaced(0, 1);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+0
+0
+0
+0
+0
+
+vec =
+   0
+0.25
+ 0.5
+0.75
+   1
+```
+
+#### vec.setLinSpaced(size, low, high)
+
+Sets a linearly space vector.
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3);
+console.log('vec = \n%s\n', vec);
+vec.setLinSpaced(5, 0, 1);
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+-0.498866
+-0.440048
+ 0.118123
+
+vec =
+   0
+0.25
+ 0.5
+0.75
+   1
 ```
 
 #### vec.block(startRow, blockRows)
@@ -3197,8 +3273,7 @@ console.log(cvec1.dot(cvec2).toString());
 #### cvec.asDiagonal()
 
 ```js
-var Eigen = require('eigenjs')
-  , CV = Eigen.CVector
+var CV = require('eigenjs').CVecotr
   , cvec = new CV.Random(3)
   , dia = cvec.asDiagonal();
 console.log('cvec = \n%s\n', cvec);
@@ -3224,8 +3299,7 @@ dia =
 #### RowVector(cols)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV(3);
 console.log('rvec = \n%s', rvec);
 ```
@@ -3238,8 +3312,7 @@ rvec =
 #### RowVector(scalar_array)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV([1, 2, 3]);
 console.log('rvec = \n%s', rvec);
 ```
@@ -3263,13 +3336,27 @@ rvec =
 0.6 0.6 0.6 0.6
 ```
 
+#### RowVector.LinSpaced(size, low, high)
+
+Sets a linearly space vector.
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = RV.LinSpaced(5, 1, 0);
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+   1 0.75  0.5 0.25    0
+```
+
 ### Row Vector Instance Methods
 
 #### rvec.set(col, scalar)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV(3);
 rvec.set(0, 1);
 rvec.set(1, 2);
@@ -3285,8 +3372,7 @@ rvec =
 #### rvec.set(scalar_array)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV(3);
 rvec.set([1, 2, 3]);
 console.log('rvec = \n%s', rvec);
@@ -3300,8 +3386,7 @@ rvec =
 #### rvec.get(col)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV([1, 2, 3]);
 console.log(rvec.get(0).toString());
 console.log(rvec.get(1).toString());
@@ -3314,11 +3399,50 @@ console.log(rvec.get(2).toString());
 3
 ```
 
+#### rvec.setLinSpaced(low, high)
+
+Sets a linearly space vector.
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Zero(5);
+console.log('rvec = \n%s\n', rvec);
+rvec.setLinSpaced(1, 0);
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+0 0 0 0 0
+
+rvec =
+   1 0.75  0.5 0.25    0
+```
+
+#### rvec.setLinSpaced(size, low, high)
+
+Sets a linearly space vector.
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3);
+console.log('rvec = \n%s\n', rvec);
+rvec.setLinSpaced(5, 1, 0);
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+ 0.829713  0.985904 0.0914511
+
+rvec =
+   1 0.75  0.5 0.25    0
+```
+
 #### rvec.block(startCol, blockCols)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV([1, 2, 3, 4])
   , rvblock = rvec.block(1, 2);
 console.log('rvblock = \n%s', rvblock);
@@ -3339,8 +3463,7 @@ rvblock =
 #### rvec.dot(crvblock)
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec1 = new RV([1, 2, 3])
   , rvec2 = new RV([4, 5, 6]);
 console.log(rvec1.dot(rvec2).toString());
@@ -3353,8 +3476,7 @@ console.log(rvec1.dot(rvec2).toString());
 #### rvec.asDiagonal()
 
 ```js
-var Eigen = require('eigenjs')
-  , RV = Eigen.RowVector
+var RV = require('eigenjs').RowVector
   , rvec = new RV.Random(3)
   , dia = rvec.asDiagonal();
 console.log('rvec = \n%s\n', rvec);

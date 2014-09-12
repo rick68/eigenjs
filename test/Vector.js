@@ -145,6 +145,22 @@ describe('Vector', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a vector', function() {
+    vec.setLinSpaced.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setLinSpaced(0.1, 0.2);
+    vec.toString().should.equal(" 0.1\n0.12\n0.14\n0.16\n0.18\n 0.2");
+
+    vec.setLinSpaced(2, 0, 1);
+    vec.toString().should.equal("0\n1");
+    vec.rows().should.equal(2);
+
+    vec.setLinSpaced(9, 0, 1);
+    vec.toString().should.equal("    0\n0.125\n 0.25\n0.375\n  0.5\n0.625\n 0.75\n0.875\n    1");
+    vec.rows().should.equal(9);
+  });
+
   it('#toString() should return all element values of Vector', function() {
     vec.toString.should.be.a.Function;
 
@@ -771,7 +787,23 @@ describe('Vector', function() {
     var vec3 = Vector.Random(3, 999);
     vec3.rows().should.equal(3);
     vec3.cols().should.equal(1);
+  });
 
+  it('#LinSpaced() should return a linearly space vector', function() {
+    Vector.LinSpaced.should.be.a.Function;
+
+    var vec2 = Vector.LinSpaced(5, 0, 1);
+    vec2.toString().should.equal("   0\n0.25\n 0.5\n0.75\n   1");
+ 
+    var vec3 = Vector.LinSpaced(5, 1, 0);
+    vec3.toString().should.equal("   1\n0.75\n 0.5\n0.25\n   0");
+
+    var vec4 = Vector.LinSpaced(5, 1, 1);
+    vec4.toString().should.equal("1\n1\n1\n1\n1");
+
+    (function() {
+      Vector.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a vector block", function() {

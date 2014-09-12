@@ -2,29 +2,36 @@
 # http://www.appveyor.com/docs/appveyor-yml
 project_id: "jot11x58urjndseb"
 
-# build version format
+# Set build version format here instead of in the admin panel.
 version: "{build}"
 
 # fix lineendings in Windows
 init:
   - git config --global core.autocrlf input
 
-# what combinations to test
+# Test against these versions of Node.js.
 environment:
   matrix:
     - nodejs_version: 0.10
     - nodejs_version: 0.11
 
-# Get the latest stable version of Node 0.STABLE.latest
+# Install scripts. (runs after repo cloning)
 install:
+  # Get the latest stable version of Node 0.STABLE.latest
   - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
   - cmd: SET PATH=C:\Program Files (x86)\MSBuild\12.0\bin\;%PATH%
   - cmd: npm install -g node-gyp
   - npm install --msvs_version=2013
 
+# Post-install test scripts.
 test_script:
+  # Output useful info for debugging.
   - node --version
   - npm --version
+  # We test multiple Windows shells because of Node.js stdout buffering issues:
+  # https://github.com/joyent/node/issues/3584
   - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
+  - cmd: npm test
 
+# Don't actually build.
 build: off

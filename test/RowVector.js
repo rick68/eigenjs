@@ -122,6 +122,22 @@ describe('RowVector', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a row-vector', function() {
+    rvec.setLinSpaced.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setLinSpaced(0.1, 0.2);
+    rvec.toString().should.equal(" 0.1 0.12 0.14 0.16 0.18  0.2");
+
+    rvec.setLinSpaced(2, 0, 1);
+    rvec.toString().should.equal("0 1");
+    rvec.cols().should.equal(2);
+
+    rvec.setLinSpaced(9, 0, 1);
+    rvec.toString().should.equal("    0 0.125  0.25 0.375   0.5 0.625  0.75 0.875     1");
+    rvec.cols().should.equal(9);
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 
@@ -721,6 +737,23 @@ describe('RowVector', function() {
     rvec3.rows().should.equal(1);
     rvec3.cols().should.equal(3);
 
+  });
+
+  it('#LinSpaced() should return a linearly space row-vector', function() {
+    RowVector.LinSpaced.should.be.a.Function;
+
+    var rvec2 = RowVector.LinSpaced(5, 0, 1);
+    rvec2.toString().should.equal("   0 0.25  0.5 0.75    1");
+ 
+    var rvec3 = RowVector.LinSpaced(5, 1, 0);
+    rvec3.toString().should.equal("   1 0.75  0.5 0.25    0");
+
+    var rvec4 = RowVector.LinSpaced(5, 1, 1);
+    rvec4.toString().should.equal("1 1 1 1 1");
+
+    (function() {
+      RowVector.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a row-vector block", function() {

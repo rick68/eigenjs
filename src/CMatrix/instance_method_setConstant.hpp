@@ -16,12 +16,12 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, setConstant,
 {
-  T* obj = node::ObjectWrap::Unwrap<T>(args.This());
-  typename T::value_type& value = **obj;
-
   NanScope();
 
   if (args.Length() == 1) {
+    T* obj = node::ObjectWrap::Unwrap<T>(args.This());
+    typename T::value_type& value = **obj;
+
     if (T::is_scalar(args[0])) {
       const typename T::scalar_type& scalar = args[0]->NumberValue();
 

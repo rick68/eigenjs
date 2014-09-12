@@ -147,6 +147,21 @@ describe('VectorBlock', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setLinSpaced() should set a linearly space into a vector block', function() {
+    vblock.setLinSpaced.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setLinSpaced(0.1, 0.2);
+    vec.toString().should.equal("  1\n  2\n0.1\n0.2\n  5\n  6");
+
+    (function(){
+      vblock.setLinSpaced(1, 0, 1);
+    }).should.throw('The size argument is not equal to the block size');
+
+    vblock.setLinSpaced(2, 0, 1);
+    vec.toString().should.equal("1\n2\n0\n1\n5\n6");
+  });
+
   it('#toString() should return all element values of VectorBlock', function() {
     vblock.toString.should.be.a.Function;
 
@@ -1603,6 +1618,26 @@ describe('VectorBlock', function() {
     vec2.should.instanceOf(Vector);
     vec2.rows().should.equal(3);
     vec2.cols().should.equal(1);
+  });
+
+  it('#LinSpaced() should return a linearly space vector', function() {
+    VectorBlock.LinSpaced.should.be.a.Function;
+
+    var vec2 = VectorBlock.LinSpaced(5, 0, 1);
+    vec2.should.instanceOf(Vector);
+    vec2.toString().should.equal("   0\n0.25\n 0.5\n0.75\n   1");
+ 
+    var vec3 = VectorBlock.LinSpaced(5, 1, 0);
+    vec3.should.instanceOf(Vector);
+    vec3.toString().should.equal("   1\n0.75\n 0.5\n0.25\n   0");
+
+    var vec4 = VectorBlock.LinSpaced(5, 1, 1);
+    vec4.should.instanceOf(Vector);
+    vec4.toString().should.equal("1\n1\n1\n1\n1");
+
+    (function() {
+      VectorBlock.LinSpaced(-1, 0, 1);
+    }).should.throw("Invalid argument")
   });
 
   it("#block() should return a vector block", function() {
