@@ -2282,7 +2282,7 @@ cmat =
                 (0,0)  (-0.211411,0.819724)                 (0,0)
 ```
 
-#### mat.replicate(rowFactor, colFactor)
+#### cmat.replicate(rowFactor, colFactor)
 
 ```js
 var CM = require('eigenjs').CMatrix
