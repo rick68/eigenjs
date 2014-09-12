@@ -2912,6 +2912,8 @@ vec =
 
 #### Vector.LinSpaced(size, low, high)
 
+Sets a linearly space vector.
+
 ```js
 var V = require('eigenjs').Vector
   , vec = V.LinSpaced(5, 0, 1);
@@ -2985,6 +2987,8 @@ console.log(vec.get(2).toString());
 
 #### vec.setLinSpaced(low, high)
 
+Sets a linearly space vector.
+
 ```js
 var V = require('eigenjs').Vector
   , vec = new V.Zero(5);
@@ -3010,6 +3014,8 @@ vec =
 ```
 
 #### vec.setLinSpaced(size, low, high)
+
+Sets a linearly space vector.
 
 ```js
 var V = require('eigenjs').Vector
@@ -3332,6 +3338,8 @@ rvec =
 
 #### RowVector.LinSpaced(size, low, high)
 
+Sets a linearly space vector.
+
 ```js
 var RV = require('eigenjs').RowVector
   , rvec = RV.LinSpaced(5, 1, 0);
@@ -3393,6 +3401,8 @@ console.log(rvec.get(2).toString());
 
 #### rvec.setLinSpaced(low, high)
 
+Sets a linearly space vector.
+
 ```js
 var RV = require('eigenjs').RowVector
   , rvec = new RV.Zero(5);
@@ -3410,6 +3420,8 @@ rvec =
 ```
 
 #### rvec.setLinSpaced(size, low, high)
+
+Sets a linearly space vector.
 
 ```js
 var RV = require('eigenjs').RowVector
