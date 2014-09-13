@@ -43,6 +43,7 @@ SOURCES = \
     src/CMatrix/instance_method_setZero.hpp \
     src/CMatrix/instance_method_sub.hpp \
     src/CMatrix/instance_method_suba.hpp \
+    src/CMatrix/instance_method_sum.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/instance_method_trace.hpp \
     src/CMatrix/instance_method_transpose.hpp \
@@ -163,6 +164,7 @@ SOURCES = \
     src/Matrix/instance_method_setZero.hpp \
     src/Matrix/instance_method_sub.hpp \
     src/Matrix/instance_method_suba.hpp \
+    src/Matrix/instance_method_sum.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/instance_method_trace.hpp \
     src/Matrix/instance_method_transpose.hpp \
