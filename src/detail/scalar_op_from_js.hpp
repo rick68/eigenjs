@@ -27,8 +27,6 @@ namespace detail {
 
 template <typename ScalarType>
 struct scalar_op_from_js {
-  typedef Complex<ScalarType> Complex;
-
   scalar_op_from_js(
     _NAN_METHOD_ARGS_TYPE args
   , v8::Handle<v8::Function> func
@@ -66,14 +64,14 @@ struct scalar_op_from_js {
 
     v8::Local<v8::Value> argv[] = {
       NanNew(
-        Complex::new_instance(
+        Complex<ScalarType>::new_instance(
           args_
         , sizeof(a_argv) / sizeof(v8::Local<v8::Value>)
         , a_argv
         )
       )
     , NanNew(
-        Complex::new_instance(
+        Complex<ScalarType>::new_instance(
           args_
         , sizeof(b_argv) / sizeof(v8::Local<v8::Value>)
         , b_argv
@@ -88,10 +86,10 @@ struct scalar_op_from_js {
       , argv
       );
 
-    if (Complex::is_complex(result)) {
-      const Complex* const& obj =
-          node::ObjectWrap::Unwrap<Complex>(result->ToObject());
-      const typename Complex::value_type& value = **obj;
+    if (Complex<ScalarType>::is_complex(result)) {
+      const Complex<ScalarType>* const& obj =
+          node::ObjectWrap::Unwrap<Complex<ScalarType> >(result->ToObject());
+      const typename Complex<ScalarType>::value_type& value = **obj;
 
       return value;
     }
