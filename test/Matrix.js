@@ -737,4 +737,15 @@ describe('Matrix', function() {
       mat.replicate(-1, 0);
     }).should.throw("Invalid argument");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    mat.redux.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var result = mat.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(45);
+  });
 });

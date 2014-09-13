@@ -1701,4 +1701,15 @@ describe('RowVectorBlock', function() {
 
     dia.toString().should.equal("3 0\n0 4");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    rvblock.redux.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var result = rvblock.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(7);
+  });
 });

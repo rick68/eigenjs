@@ -1313,4 +1313,15 @@ describe('MatrixBlock', function() {
       mblock.replicate(-1, 0);
     }).should.throw("Invalid argument");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    mblock.redux.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var result = mblock.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(34);
+  });
 });

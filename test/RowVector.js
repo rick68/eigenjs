@@ -951,4 +951,15 @@ describe('RowVector', function() {
 
     dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    rvec.redux.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var result = rvec.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(21);
+  });
 });

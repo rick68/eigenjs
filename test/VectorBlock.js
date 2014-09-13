@@ -1811,4 +1811,15 @@ describe('VectorBlock', function() {
 
     dia.toString().should.equal("3 0\n0 4");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    vblock.redux.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var result = vblock.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(7);
+  });
 });

@@ -1999,4 +1999,15 @@ describe('CRowVectorBlock', function() {
 
     dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
   });
+
+  it("#redux() should return a full redux operation on the whole complex matrix", function() {
+    crvec.redux.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    var result = crvec.redux(function(a, b){
+      return a.add(b);
+    })
+    result.equals(21).should.be.true;
+  });
 });
