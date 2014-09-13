@@ -61,6 +61,7 @@
 #include "instance_method_isDiagonal.hpp"
 
 #include "instance_method_redux.hpp"
+#include "instance_method_sum.hpp"
 
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
@@ -119,6 +120,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_isDiagonal)
 
   (instance_method_redux)
+  (instance_method_sum)
 
   (class_method_Zero)
   (class_method_Ones)
