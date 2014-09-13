@@ -819,4 +819,15 @@ describe('CMatrix', function() {
       cmat.replicate(-1, 0);
     }).should.throw("Invalid argument");
   });
+
+  it("#redux() should return a full redux operation on the whole complex matrix", function() {
+    cmat.redux.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var result = cmat.redux(function(a, b){
+      return a.add(b);
+    })
+    result.equals(Complex(45, 45)).should.be.true;
+  });
 });

@@ -226,6 +226,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.inverse()](#matinverse)
     * [mat.trace()](#mattrace)
     * [mat.diagonal([index = 0])](#matdiagonalindex--0)
+    * [mat.redux(func)](#matreduxfunc)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -371,6 +372,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.inverse()](#cmatinverse)
     * [cmat.trace()](#cmattrace)
     * [cmat.diagonal([index = 0])](#cmatdiagonalindex--0)
+    * [cmat.redux(func)](#cmatreduxfunc)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -1754,6 +1756,25 @@ console.log('%s', mat.diagonal(-2).transpose());
 6 6
 ```
 
+#### mat.redux(func)
+
+* func `Function` The result of a full redux operation on the whoie matrix or vector using `func`.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+          ])
+  , func = function(a, b) { return a + b; };
+console.log('%d', mat.redux(func));
+```
+
+```txt
+45
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -2710,6 +2731,26 @@ cmat =
 
  (0.345978,0.85694)
 (-0.20903,0.834369)
+```
+
+#### cmat.redux(func)
+
+* func `Function` The result of a full redux operation on the whoie matrix or vector using `func`.
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 2).set([
+            C(1, 2), C(3, 4),
+            C(5, 6), C(7, 8)
+          ])
+  , func = function(a, b) { return a.add(b); };
+console.log('%s', cmat.redux(func));
+```
+
+```txt
+(16,20)
 ```
 
 #### cmat.equals(cmat)

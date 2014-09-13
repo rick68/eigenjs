@@ -2014,4 +2014,15 @@ describe('CVectorBlock', function() {
 
     dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
   });
+
+  it("#redux() should return a full redux operation on the whole complex matrix", function() {
+    cvblock.redux.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var result = cvblock.redux(function(a, b){
+      return a.add(b);
+    })
+    result.equals(7).should.be.true;
+  });
 });

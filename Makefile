@@ -32,6 +32,8 @@ SOURCES = \
     src/CMatrix/instance_method_isZero.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
+    src/CMatrix/instance_method_redux.hpp \
+    src/CMatrix/instance_method_replicate.hpp \
     src/CMatrix/instance_method_row.hpp \
     src/CMatrix/instance_method_rows.hpp \
     src/CMatrix/instance_method_set.hpp \
@@ -150,6 +152,8 @@ SOURCES = \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
+    src/Matrix/instance_method_redux.hpp \
+    src/Matrix/instance_method_replicate.hpp \
     src/Matrix/instance_method_row.hpp \
     src/Matrix/instance_method_rows.hpp \
     src/Matrix/instance_method_set.hpp \
@@ -214,6 +218,7 @@ SOURCES = \
     src/detail/is_rowvector_or_crowvector.hpp \
     src/detail/is_vector_or_cvector.hpp \
     src/detail/property_accessor_base.hpp \
+    src/detail/scalar_op_from_js.hpp \
     src/detail/unwrap_block.hpp \
     src/detail/unwrap_eigen_block.hpp \
     src/throw_error.hpp

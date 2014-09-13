@@ -996,4 +996,15 @@ describe('Vector', function() {
 
     dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
   });
+
+  it("#redux() should return a full redux operation on the whole matrix", function() {
+    vec.redux.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var result = vec.redux(function(a, b){
+      return a + b;
+    })
+    result.should.equal(21);
+  });
 });

@@ -1560,4 +1560,15 @@ describe('CMatrixBlock', function() {
       cmblock.replicate(-1, 0);
     }).should.throw("Invalid argument");
   });
+
+  it("#redux() should return a full redux operation on the whole complex matrix", function() {
+    cmblock.redux.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var result = cmblock.redux(function(a, b){
+      return a.add(b);
+    })
+    result.equals(34).should.be.true;
+  });
 });

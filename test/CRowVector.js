@@ -983,4 +983,15 @@ describe('CRowVector', function() {
 
     dia.toString().should.equal("(1,1) (0,0) (0,0)\n(0,0) (2,2) (0,0)\n(0,0) (0,0) (3,3)");
   });
+
+  it("#redux() should return a full redux operation on the whole complex matrix", function() {
+    crvec.redux.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var result = crvec.redux(function(a, b){
+      return a.add(b);
+    })
+    result.equals(Complex(6,6)).should.be.true;
+  });
 });

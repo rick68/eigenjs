@@ -20,7 +20,7 @@ namespace EigenJS {
 namespace detail {
 
 struct property_accessor_base {
-  property_accessor_base() : g_(0), s_(0) {}
+  property_accessor_base() : g_(nullptr), s_(nullptr) {}
 
  protected:
   NAN_GETTER((*g_));
