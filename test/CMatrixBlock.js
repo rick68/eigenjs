@@ -1571,4 +1571,13 @@ describe('CMatrixBlock', function() {
     })
     result.equals(34).should.be.true;
   });
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    cmblock.sum.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var result = cmblock.sum();
+    result.equals(Complex(34, 0)).should.be.true;
+  });
 });

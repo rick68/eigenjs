@@ -830,4 +830,14 @@ describe('CMatrix', function() {
     })
     result.equals(Complex(45, 45)).should.be.true;
   });
+
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    cmat.sum.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var result = cmat.sum();
+    result.equals(Complex(45, 45)).should.be.true;
+  });
 });

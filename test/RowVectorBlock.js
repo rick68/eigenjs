@@ -1712,4 +1712,13 @@ describe('RowVectorBlock', function() {
     })
     result.should.equal(7);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    rvblock.sum.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var result = rvblock.sum();
+    result.should.equal(7);
+  });
 });

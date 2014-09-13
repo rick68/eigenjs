@@ -1324,4 +1324,13 @@ describe('MatrixBlock', function() {
     })
     result.should.equal(34);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    mblock.sum.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var result = mblock.sum();
+    result.should.equal(34);
+  });
 });

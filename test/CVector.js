@@ -1049,4 +1049,13 @@ describe('CVector', function() {
     })
     result.equals(Complex(21, 21)).should.be.true;
   });
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    cvec.sum.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var result = cvec.sum();
+    result.equals(Complex(21, 21)).should.be.true;
+  });
 });

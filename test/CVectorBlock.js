@@ -2025,4 +2025,13 @@ describe('CVectorBlock', function() {
     })
     result.equals(7).should.be.true;
   });
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    cvblock.sum.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var result = cvblock.sum();
+    result.equals(Complex(7, 0)).should.be.true;
+  });
 });
