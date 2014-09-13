@@ -2010,4 +2010,13 @@ describe('CRowVectorBlock', function() {
     })
     result.equals(21).should.be.true;
   });
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    crvec.sum.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    var result = crvec.sum();
+    result.equals(Complex(21, 0)).should.be.true;
+  });
 });

@@ -1822,4 +1822,13 @@ describe('VectorBlock', function() {
     })
     result.should.equal(7);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    vblock.sum.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var result = vblock.sum();
+    result.should.equal(7);
+  });
 });

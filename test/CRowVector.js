@@ -994,4 +994,13 @@ describe('CRowVector', function() {
     })
     result.equals(Complex(6,6)).should.be.true;
   });
+
+  it("#sum() should return a full sum operation on the whole complex matrix", function() {
+    crvec.sum.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var result = crvec.sum();
+    result.equals(Complex(6, 6)).should.be.true;
+  });
 });

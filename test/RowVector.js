@@ -962,4 +962,13 @@ describe('RowVector', function() {
     })
     result.should.equal(21);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    rvec.sum.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var result = rvec.sum();
+    result.should.equal(21);
+  });
 });

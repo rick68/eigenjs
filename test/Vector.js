@@ -1007,4 +1007,13 @@ describe('Vector', function() {
     })
     result.should.equal(21);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    vec.sum.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var result = vec.sum();
+    result.should.equal(21);
+  });
 });

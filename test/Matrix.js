@@ -748,4 +748,13 @@ describe('Matrix', function() {
     })
     result.should.equal(45);
   });
+
+  it("#sum() should return a full sum operation on the whole matrix", function() {
+    mat.sum.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var result = mat.sum();
+    result.should.equal(45);
+  });
 });
