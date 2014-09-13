@@ -218,6 +218,7 @@ SOURCES = \
     src/detail/is_rowvector_or_crowvector.hpp \
     src/detail/is_vector_or_cvector.hpp \
     src/detail/property_accessor_base.hpp \
+    src/detail/scalar_op_from_js.hpp \
     src/detail/unwrap_block.hpp \
     src/detail/unwrap_eigen_block.hpp \
     src/throw_error.hpp
