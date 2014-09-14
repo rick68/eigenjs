@@ -32,6 +32,7 @@ SOURCES = \
     src/CMatrix/instance_method_isZero.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
+    src/CMatrix/instance_method_prod.hpp \
     src/CMatrix/instance_method_redux.hpp \
     src/CMatrix/instance_method_replicate.hpp \
     src/CMatrix/instance_method_row.hpp \
@@ -153,6 +154,7 @@ SOURCES = \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
+    src/Matrix/instance_method_prod.hpp \
     src/Matrix/instance_method_redux.hpp \
     src/Matrix/instance_method_replicate.hpp \
     src/Matrix/instance_method_row.hpp \
