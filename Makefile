@@ -30,6 +30,7 @@ SOURCES = \
     src/CMatrix/instance_method_isOnes.hpp \
     src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_isZero.hpp \
+    src/CMatrix/instance_method_mean.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
     src/CMatrix/instance_method_prod.hpp \
@@ -152,6 +153,7 @@ SOURCES = \
     src/Matrix/instance_method_isOnes.hpp \
     src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_isZero.hpp \
+    src/Matrix/instance_method_mean.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
     src/Matrix/instance_method_prod.hpp \
