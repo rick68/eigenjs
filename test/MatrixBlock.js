@@ -1342,4 +1342,13 @@ describe('MatrixBlock', function() {
     var result = mblock.prod();
     result.should.equal(4620);
   });
+
+  it("#mean() should return a full mean operation on the whole matrix", function() {
+    mblock.mean.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var result = mblock.mean();
+    result.should.equal(8.5);
+  });
 });

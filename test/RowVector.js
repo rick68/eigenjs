@@ -980,4 +980,13 @@ describe('RowVector', function() {
     var result = rvec.prod();
     result.should.equal(720);
   });
+
+  it("#mean() should return a full mean operation on the whole matrix", function() {
+    rvec.mean.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var result = rvec.mean();
+    result.should.equal(3.5);
+  });
 });

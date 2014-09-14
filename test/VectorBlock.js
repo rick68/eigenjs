@@ -1840,4 +1840,13 @@ describe('VectorBlock', function() {
     var result = vblock.prod();
     result.should.equal(12);
   });
+
+  it("#mean() should return a full mean operation on the whole matrix", function() {
+    vblock.mean.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var result = vblock.mean();
+    result.should.equal(3.5);
+  });
 });
