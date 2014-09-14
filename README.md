@@ -228,6 +228,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.diagonal([index = 0])](#matdiagonalindex--0)
     * [mat.redux(func)](#matreduxfunc)
     * [mat.sum()](#matsum)
+    * [mat.prod()](#matprod)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -375,6 +376,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.diagonal([index = 0])](#cmatdiagonalindex--0)
     * [cmat.redux(func)](#cmatreduxfunc)
     * [cmat.sum()](#cmatsum)
+    * [cmat.prod()](#cmatprod)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -1793,6 +1795,22 @@ console.log('%d', mat.sum());
 45
 ```
 
+#### mat.prod()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+          ]);
+console.log('%d', mat.prod());
+```
+
+```txt
+362880
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -2781,11 +2799,28 @@ var Eigen = require('eigenjs')
             C(1, 2), C(3, 4),
             C(5, 6), C(7, 8)
           ]);
-console.log('%s', mat.sum());
+console.log('%s', cmat.sum());
 ```
 
 ```txt
 (16,20)
+```
+
+#### cmat.prod()
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CM = Eigen.CMatrix
+  , cmat = new CM(2, 2).set([
+            C(1, 2), C(3, 4),
+            C(5, 6), C(7, 8)
+          ]);
+console.log('%s', cmat.prod());
+```
+
+```txt
+(-755,-540)
 ```
 
 #### cmat.equals(cmat)
