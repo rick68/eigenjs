@@ -422,4 +422,15 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_MATRIX_OPERATE_ALL_COEFFICIENTS_CONTEXT( OP )                \
+  {                                                                          \
+    NanScope();                                                              \
+                                                                             \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanReturnValue( NanNew< v8::Number >( value.OP() ) );                    \
+  }                                                                          \
+  /**/
+
 #endif  // EIGENJS_MATRIX_MACRO_HPP

@@ -16,25 +16,7 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(CMatrix, sum,
 {
-  NanScope();
-
-  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
-  const typename T::value_type& value = **obj;
-
-  const typename Complex::value_type& result = value.sum();
-
-  v8::Local<v8::Value> argv[] = {
-    NanNew<v8::Number>(result.real())
-  , NanNew<v8::Number>(result.imag())
-  };
-
-  NanReturnValue(
-    Complex::new_instance(
-      args
-    , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-    , argv
-    )
-  );
+  EIGENJS_CMATRIX_OPERATE_ALL_COEFFICIENTS_CONTEXT(sum)
 })
 
 }  // namespace EigenJS

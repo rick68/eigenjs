@@ -16,12 +16,7 @@ namespace EigenJS {
 
 EIGENJS_INSTANCE_METHOD(Matrix, sum,
 {
-  NanScope();
-
-  const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
-  const typename T::value_type& value = **obj;
-
-  NanReturnValue(NanNew<v8::Number>(value.sum()));
+  EIGENJS_MATRIX_OPERATE_ALL_COEFFICIENTS_CONTEXT(sum)
 })
 
 }  // namespace EigenJS
