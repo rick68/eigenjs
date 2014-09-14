@@ -1721,4 +1721,13 @@ describe('RowVectorBlock', function() {
     var result = rvblock.sum();
     result.should.equal(7);
   });
+
+  it("#prod() should return a full product operation on the whole matrix", function() {
+    rvblock.prod.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var result = rvblock.prod();
+    result.should.equal(12);
+  });
 });

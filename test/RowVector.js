@@ -971,4 +971,13 @@ describe('RowVector', function() {
     var result = rvec.sum();
     result.should.equal(21);
   });
+
+  it("#prod() should return a full product operation on the whole matrix", function() {
+    rvec.prod.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var result = rvec.prod();
+    result.should.equal(720);
+  });
 });

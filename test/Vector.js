@@ -1016,4 +1016,13 @@ describe('Vector', function() {
     var result = vec.sum();
     result.should.equal(21);
   });
+
+  it("#prod() should return a full prod operation on the whole matrix", function() {
+    vec.prod.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var result = vec.prod();
+    result.should.equal(720);
+  });
 });

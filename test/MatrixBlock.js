@@ -1333,4 +1333,13 @@ describe('MatrixBlock', function() {
     var result = mblock.sum();
     result.should.equal(34);
   });
+
+  it("#prod() should return a full product operation on the whole matrix", function() {
+    mblock.prod.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var result = mblock.prod();
+    result.should.equal(4620);
+  });
 });

@@ -2034,4 +2034,13 @@ describe('CVectorBlock', function() {
     var result = cvblock.sum();
     result.equals(Complex(7, 0)).should.be.true;
   });
+
+  it("#prod() should return a full product operation on the whole complex matrix", function() {
+    cvblock.prod.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var result = cvblock.prod();
+    result.equals(Complex(12, 0)).should.be.true;
+  });
 });

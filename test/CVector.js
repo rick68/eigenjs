@@ -1058,4 +1058,13 @@ describe('CVector', function() {
     var result = cvec.sum();
     result.equals(Complex(21, 21)).should.be.true;
   });
+
+  it("#prod() should return a full product operation on the whole complex matrix", function() {
+    cvec.prod.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var result = cvec.prod();
+    result.equals(Complex(0, -5760)).should.be.true;
+  });
 });
