@@ -840,4 +840,13 @@ describe('CMatrix', function() {
     var result = cmat.sum();
     result.equals(Complex(45, 45)).should.be.true;
   });
+
+  it("#prod() should return a full product operation on the whole complex matrix", function() {
+    cmat.prod.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var result = cmat.prod();
+    result.equals(Complex(5.80608e+06,5.80608e+06)).should.be.true;
+  });
 });

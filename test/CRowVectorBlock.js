@@ -2019,4 +2019,13 @@ describe('CRowVectorBlock', function() {
     var result = crvec.sum();
     result.equals(Complex(21, 0)).should.be.true;
   });
+
+  it("#prod() should return a full product operation on the whole complex matrix", function() {
+    crvec.prod.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    var result = crvec.prod();
+    result.equals(Complex(720, 0)).should.be.true;
+  });
 });

@@ -1,6 +1,6 @@
 //
-// Matrix/instance_method_sum.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CMatrix/instance_method_prod.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,16 +9,16 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_MATRIX_INSTANCE_METHOD_SUM_HPP
-#define EIGENJS_MATRIX_INSTANCE_METHOD_SUM_HPP
+#ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_PROD_HPP
+#define EIGENJS_CMATRIX_INSTANCE_METHOD_PROD_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(Matrix, sum,
+EIGENJS_INSTANCE_METHOD(CMatrix, prod,
 {
-  EIGENJS_MATRIX_OPERATE_ALL_COEFFICIENTS_CONTEXT(sum)
+  EIGENJS_CMATRIX_OPERATE_ALL_COEFFICIENTS_CONTEXT(prod)
 })
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_MATRIX_INSTANCE_METHOD_SUM_HPP
+#endif  // EIGENJS_CMATRIX_INSTANCE_METHOD_PROD_HPP

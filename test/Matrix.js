@@ -757,4 +757,13 @@ describe('Matrix', function() {
     var result = mat.sum();
     result.should.equal(45);
   });
+
+  it("#prod() should return a full product operation on the whole matrix", function() {
+    mat.prod.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var result = mat.prod();
+    result.should.equal(362880);
+  });
 });

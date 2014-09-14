@@ -1831,4 +1831,13 @@ describe('VectorBlock', function() {
     var result = vblock.sum();
     result.should.equal(7);
   });
+
+  it("#prod() should return a full product operation on the whole matrix", function() {
+    vblock.prod.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var result = vblock.prod();
+    result.should.equal(12);
+  });
 });
