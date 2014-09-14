@@ -2043,4 +2043,13 @@ describe('CVectorBlock', function() {
     var result = cvblock.prod();
     result.equals(Complex(12, 0)).should.be.true;
   });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    cvblock.mean.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var result = cvblock.mean();
+    result.equals(Complex(3.5, 0)).should.be.true;
+  });
 });

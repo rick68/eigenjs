@@ -1067,4 +1067,13 @@ describe('CVector', function() {
     var result = cvec.prod();
     result.equals(Complex(0, -5760)).should.be.true;
   });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    cvec.mean.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var result = cvec.mean();
+    result.equals(Complex(3.5, 3.5)).should.be.true;
+  });
 });

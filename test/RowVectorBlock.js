@@ -1730,4 +1730,13 @@ describe('RowVectorBlock', function() {
     var result = rvblock.prod();
     result.should.equal(12);
   });
+
+  it("#mean() should return a full mean operation on the whole matrix", function() {
+    rvblock.mean.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var result = rvblock.mean();
+    result.should.equal(3.5);
+  });
 });

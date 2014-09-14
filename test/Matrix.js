@@ -766,4 +766,13 @@ describe('Matrix', function() {
     var result = mat.prod();
     result.should.equal(362880);
   });
+
+  it("#mean() should return a full mean operation on the whole matrix", function() {
+    mat.mean.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var result = mat.mean();
+    result.should.equal(5);
+  });
 });

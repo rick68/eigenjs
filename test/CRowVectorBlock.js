@@ -2028,4 +2028,13 @@ describe('CRowVectorBlock', function() {
     var result = crvec.prod();
     result.equals(Complex(720, 0)).should.be.true;
   });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    crvec.mean.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    var result = crvec.mean();
+    result.equals(Complex(3.5, 0)).should.be.true;
+  });
 });

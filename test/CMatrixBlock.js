@@ -1589,4 +1589,13 @@ describe('CMatrixBlock', function() {
     var result = cmblock.prod();
     result.equals(Complex(4620, 0)).should.be.true;
   });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    cmblock.mean.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var result = cmblock.mean();
+    result.equals(Complex(8.5, 0)).should.be.true;
+  });
 });

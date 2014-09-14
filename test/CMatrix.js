@@ -849,4 +849,13 @@ describe('CMatrix', function() {
     var result = cmat.prod();
     result.equals(Complex(5.80608e+06,5.80608e+06)).should.be.true;
   });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    cmat.mean.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var result = cmat.mean();
+    result.equals(Complex(5, 5)).should.be.true;
+  });
 });

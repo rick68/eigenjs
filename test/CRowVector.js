@@ -1004,12 +1004,21 @@ describe('CRowVector', function() {
     result.equals(Complex(6, 6)).should.be.true;
   });
 
-  it("#prod) should return a full product operation on the whole complex matrix", function() {
+  it("#prod() should return a full product operation on the whole complex matrix", function() {
     crvec.prod.should.be.a.Function;
 
     crvec.toString().should.equal("(1,1) (2,2) (3,3)");
 
     var result = crvec.prod();
     result.equals(Complex(-12, 12)).should.be.true;
+  });
+
+  it("#mean() should return a full mean operation on the whole complex matrix", function() {
+    crvec.mean.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var result = crvec.mean();
+    result.equals(Complex(2, 2)).should.be.true;
   });
 });
