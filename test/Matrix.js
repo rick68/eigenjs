@@ -767,12 +767,38 @@ describe('Matrix', function() {
     result.should.equal(362880);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the mean of all coefficients", function() {
     mat.mean.should.be.a.Function;
 
     mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
 
     var result = mat.mean();
     result.should.equal(5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    mat.maxCoeff.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var max = mat.maxCoeff();
+    max.should.equal(9);
+
+    var result = {}, max = 0;
+    max = mat.maxCoeff(result);
+    max.should.equal(9);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":9,\"rowId\":2,\"colId\":2}");
+
+    var ok = false, max = 0;
+    max = mat.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    max.should.equal(9);
+    ok.should.be.true;
   });
 });

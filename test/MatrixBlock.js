@@ -1343,12 +1343,38 @@ describe('MatrixBlock', function() {
     result.should.equal(4620);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the mean of all coefficients", function() {
     mblock.mean.should.be.a.Function;
 
     mblock.toString().should.equal(" 6  7\n10 11");
 
     var result = mblock.mean();
     result.should.equal(8.5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    mblock.maxCoeff.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var max = mblock.maxCoeff();
+    max.should.equal(11);
+
+    var result = {}, max = 0;
+    max = mblock.maxCoeff(result);
+    max.should.equal(11);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":11,\"rowId\":1,\"colId\":1}");
+
+    var ok = false, max = 0;
+    max = mblock.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    max.should.equal(11);
+    ok.should.be.true;
   });
 });

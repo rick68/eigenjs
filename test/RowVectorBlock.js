@@ -1731,12 +1731,37 @@ describe('RowVectorBlock', function() {
     result.should.equal(12);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the mean of all coefficients", function() {
     rvblock.mean.should.be.a.Function;
 
     rvblock.toString().should.equal("3 4");
 
     var result = rvblock.mean();
     result.should.equal(3.5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    rvblock.maxCoeff.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var max = rvblock.maxCoeff();
+    max.should.equal(4);
+
+    var result = {}, max = 0;
+    max = rvblock.maxCoeff(result);
+    max.should.equal(4);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":4,\"rowId\":0,\"colId\":1}");
+
+    var ok = false, max = 0;
+    max = rvblock.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    ok.should.be.true;
   });
 });
