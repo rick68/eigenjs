@@ -1060,4 +1060,30 @@ describe('Vector', function() {
     max.should.equal(6);
     ok.should.be.true;
   });
+
+  it("#minCoeff() should return the minimum of all coefficients", function() {
+    vec.minCoeff.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var min = vec.minCoeff();
+    min.should.equal(1);
+
+    var result = {}, min = 0;
+    min = vec.minCoeff(result);
+    min.should.equal(1);
+    result.should.have.properties('minCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"minCoeff\":1,\"rowId\":0,\"colId\":0}");
+
+    var ok = false, min = 0;
+    min = vec.minCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    min.should.equal(1);
+    ok.should.be.true;
+  });
 });

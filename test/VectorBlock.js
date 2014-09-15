@@ -1875,4 +1875,30 @@ describe('VectorBlock', function() {
     max.should.equal(4);
     ok.should.be.true;
   });
+
+  it("#minCoeff() should return the minimum of all coefficients", function() {
+    vblock.minCoeff.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var min = vblock.minCoeff();
+    min.should.equal(3);
+
+    var result = {}, min = 0;
+    min = vblock.minCoeff(result);
+    min.should.equal(3);
+    result.should.have.properties('minCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"minCoeff\":3,\"rowId\":0,\"colId\":0}");
+
+    var ok = false, min = 0;
+    min = vblock.minCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    min.should.equal(3);
+    ok.should.be.true;
+  });
 });

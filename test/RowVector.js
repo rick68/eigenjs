@@ -1015,4 +1015,30 @@ describe('RowVector', function() {
     max.should.equal(6);
     ok.should.be.true;
   });
+
+  it("#minCoeff() should return the minimum of all coefficients", function() {
+    rvec.minCoeff.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var min = rvec.minCoeff();
+    min.should.equal(1);
+
+    var result = {}, min = 0;
+    min = rvec.minCoeff(result);
+    min.should.equal(1);
+    result.should.have.properties('minCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"minCoeff\":1,\"rowId\":0,\"colId\":0}");
+
+    var ok = false, min = 0;
+    min = rvec.minCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    min.should.equal(1);
+    ok.should.be.true;
+  });
 });
