@@ -230,6 +230,9 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.sum()](#matsum)
     * [mat.prod()](#matprod)
     * [mat.mean()](#matmean)
+    * [mat.maxCoeff()](#matmaxcoeff)
+    * [mat.maxCoeff(obj)](#matmaxcoeffobj)
+    * [mat.maxCoeff(func)](#matmaxcoefffunc)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -420,6 +423,9 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.dot(cvblock)](#vecdotcvblock)
     * [vec.dot(crvblock)](#vecdotcrvblock)
     * [vec.asDiagonal()](#vecasdiagonal)
+    * [vec.maxCoeff()](#vecmaxcoeff)
+    * [vec.maxCoeff(obj)](#vecmaxcoeffobj)
+    * [vec.maxCoeff(func)](#vecmaxcoefffunc)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
     * [CVector(rows)](#cvectorrows)
@@ -463,6 +469,9 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.dot(cvblock)](#rvecdotcvblock)
     * [rvec.dot(crvblock)](#rvecdotcrvblock)
     * [rvec.asDiagonal()](#rvecasdiagonal)
+    * [rvec.maxCoeff()](#rvecmaxcoeff)
+    * [rvec.maxCoeff(obj)](#rvecmaxcoeffobj)
+    * [rvec.maxCoeff(func)](#rvecmaxcoefffunc)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
@@ -1829,6 +1838,71 @@ console.log('%d', mat.mean());
 5
 ```
 
+#### mat.maxCoeff()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3);
+console.log('mat = \n%s\n', mat.maxCoeff());
+console.log('max = %d', mat.maxCoeff());
+```
+
+```txt
+mat =
+  0.175793  -0.547068  -0.959701
+  0.561311  -0.579446   0.297471
+-0.0382309  -0.743676  -0.411312
+
+max = 0.5613114636211243
+```
+
+#### mat.maxCoeff(obj)
+
++ obj `Object`
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , obj = {};
+console.log('mat = \n%s\n', mat);
+console.log('max = %s', mat.maxCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+mat =
+ -0.68294  0.690895 -0.698356
+-0.174138 -0.119934  0.733219
+-0.743578  0.262349 -0.795382
+
+max = 0.7332185766348702
+obj = {"maxCoeff":0.7332185766348702,"rowId":1,"colId":2}
+```
+
+#### mat.maxCoeff(func)
+
++ func `Function`
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , func = function(rowId, colId) {
+      console.log('rowId = %d, colId = %d', rowId, colId);
+    };
+console.log('mat = \n%s\n', mat);
+console.log('max = %s', mat.maxCoeff(func));
+```
+
+```txt
+mat =
+-0.552622 -0.355055  0.141004
+0.0814275   0.58272  -0.13819
+ 0.552011 -0.217758 -0.551142
+
+rowId = 1, colId = 1
+max = 0.5827204285109044
+```
+
 #### mat.equals(mat)
 #### mat.equals(vec)
 #### mat.equals(rvec)
@@ -2017,8 +2091,7 @@ mat =
 #### CMatrix(rows, cols)
 
 ```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
+var CM = require('eigenjs').CMatrix
   , cmat = new CM(2, 3);
 console.log('cmat =\n%s', cmat);
 ```
@@ -2116,8 +2189,7 @@ cmat =
 #### cmat.cols()
 
 ```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
+var CM = require('eigenjs').CMatrix
   , cmat = new CM(2, 3);
 console.log(cmat.rows());
 console.log(cmat.cols());
@@ -3053,8 +3125,7 @@ cmat =
 #### Vector(rows)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V(3);
 console.log('vec = \n%s', vec);
 ```
@@ -3069,8 +3140,7 @@ vec =
 #### Vector(scalar_array)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V([1,
                  2,
                  3]);
@@ -3233,8 +3303,7 @@ vec =
 #### vec.block(startRow, blockRows)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V([1,
                  2,
                  3,
@@ -3259,8 +3328,7 @@ vblock =
 #### vec.dot(crvblock)
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec1 = new V([1,
                   2,
                   3])
@@ -3277,8 +3345,7 @@ console.log(vec1.dot(vec2).toString());
 #### vec.asDiagonal()
 
 ```js
-var Eigen = require('eigenjs')
-  , V = Eigen.Vector
+var V = require('eigenjs').Vector
   , vec = new V.Random(3)
   , dia = vec.asDiagonal();
 console.log('vec = \n%s\n', vec);
@@ -3297,6 +3364,71 @@ dia =
         0         0 -0.718297
 ```
 
+#### vec.maxCoeff()
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3);
+console.log('vec = \n%s\n', vec);
+console.log('max = %d', vec.maxCoeff());
+```
+
+```txt
+vec =
+ 0.604974
+-0.210128
+  0.37608
+
+max = 0.6049735153117093
+```
+
+#### vec.maxCoeff(obj)
+
++ obj `Object`
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , obj = {};
+console.log('vec = \n%s\n', vec);
+console.log('max = %d', vec.maxCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+vec =
+-0.887644
+ -0.63168
+-0.644859
+
+max = -0.631679946385175
+obj = {"maxCoeff":-0.631679946385175,"rowId":1,"colId":0}
+```
+
+#### vec.maxCoeff(func)
+
++ func `Function`
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , func = function(rowId, colId) {
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
+console.log('vec = \n%s\n', vec);
+console.log('max = %d', vec.maxCoeff(func));
+```
+
+```txt
+vec =
+-0.006325
+-0.304345
+ 0.875084
+
+rowId = 2, colId = 0
+max = 0.8750841114088352
+```
+
 ## Complex Vector
 
 ### Complex Vector Class Methods
@@ -3304,8 +3436,7 @@ dia =
 #### CVector(rows)
 
 ```js
-var Eigen = require('eigenjs')
-  , CV = Eigen.CVector
+var CV = require('eigenjs').CVector
   , cvec = new CV(3);
 console.log('cvec = \n%s', cvec);
 ```
@@ -3684,6 +3815,65 @@ dia =
          0          0  -0.221164
 ```
 
+#### rvec.maxCoeff()
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3);
+console.log('rvec = \n%s\n', rvec);
+console.log('max = %d', rvec.maxCoeff());
+```
+
+```txt
+rvec =
+-0.487994  0.283088  -0.14679
+
+max = 0.28308759503210323
+```
+
+#### rvec.maxCoeff(obj)
+
++ obj `Object`
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , obj = {};
+console.log('rvec = \n%s\n', rvec);
+console.log('max = %d', rvec.maxCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+rvec =
+0.402709 0.332409 0.800923
+
+max = 0.8009226330560273
+obj = {"maxCoeff":0.8009226330560273,"rowId":0,"colId":2}
+```
+
+#### rvec.maxCoeff(func)
+
++ func `Function`
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , func = function(rowId, colId) {
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
+console.log('rvec = \n%s\n', rvec);
+console.log('max = %d', rvec.maxCoeff(func));
+```
+
+```txt
+rvec =
+ 0.713395 0.0274691 -0.326461
+
+rowId = 0, colId = 0
+max = 0.7133948633975324
+```
+
 ## Complex Row Vector
 
 ### Complex Row Vector Class Methods
@@ -3691,8 +3881,7 @@ dia =
 #### CRowVector(cols)
 
 ```js
-var Eigen = require('eigenjs')
-  , CRV = Eigen.CRowVector
+var CRV = require('eigenjs').CRowVector
   , crvec = new CRV(3);
 console.log('crvec = \n%s', crvec);
 ```
