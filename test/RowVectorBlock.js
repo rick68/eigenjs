@@ -1762,6 +1762,33 @@ describe('RowVectorBlock', function() {
 	colId.should.equal(result.colId);
 	ok = true;
     });
+    max.should.equal(4);
+    ok.should.be.true;
+  });
+
+  it("#minCoeff() should return the minimum of all coefficients", function() {
+    rvblock.minCoeff.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var min = rvblock.minCoeff();
+    min.should.equal(3);
+
+    var result = {}, min = 0;
+    min = rvblock.minCoeff(result);
+    min.should.equal(3);
+    result.should.have.properties('minCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"minCoeff\":3,\"rowId\":0,\"colId\":0}");
+
+    var ok = false, min = 0;
+    min = rvblock.minCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    min.should.equal(3);
     ok.should.be.true;
   });
 });

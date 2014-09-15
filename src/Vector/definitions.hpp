@@ -29,6 +29,7 @@
 #include "instance_method_asDiagonal.hpp"
 
 #include "instance_method_maxCoeff.hpp"
+#include "instance_method_minCoeff.hpp"
 
 #include "class_method_Constant.hpp"
 #include "class_method_LinSpaced.hpp"
@@ -52,6 +53,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_asDiagonal)
 
   (instance_method_maxCoeff)
+  (instance_method_minCoeff)
 
   (class_method_Constant)
   (class_method_LinSpaced)

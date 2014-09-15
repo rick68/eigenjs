@@ -154,6 +154,7 @@ SOURCES = \
     src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_maxCoeff.hpp \
+    src/Matrix/instance_method_minCoeff.hpp \
     src/Matrix/instance_method_mean.hpp \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
@@ -189,6 +190,7 @@ SOURCES = \
     src/RowVector/instance_method_dot.hpp \
     src/RowVector/instance_method_get.hpp \
     src/RowVector/instance_method_maxCoeff.hpp \
+    src/RowVector/instance_method_minCoeff.hpp \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_row.hpp \
     src/RowVector/instance_method_set.hpp \
@@ -207,6 +209,7 @@ SOURCES = \
     src/Vector/instance_method_dot.hpp \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_maxCoeff.hpp \
+    src/Vector/instance_method_minCoeff.hpp \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_row.hpp \
     src/Vector/instance_method_set.hpp \

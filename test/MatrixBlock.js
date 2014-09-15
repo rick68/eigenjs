@@ -1377,4 +1377,30 @@ describe('MatrixBlock', function() {
     max.should.equal(11);
     ok.should.be.true;
   });
+
+  it("#minCoeff() should return the minimum of all coefficients", function() {
+    mblock.minCoeff.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var min = mblock.minCoeff();
+    min.should.equal(6);
+
+    var result = {}, min = 0;
+    min = mblock.minCoeff(result);
+    min.should.equal(6);
+    result.should.have.properties('minCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"minCoeff\":6,\"rowId\":0,\"colId\":0}");
+
+    var ok = false, min = 0;
+    min = mblock.minCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    min.should.equal(6);
+    ok.should.be.true;
+  });
 });
