@@ -233,6 +233,9 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.maxCoeff()](#matmaxcoeff)
     * [mat.maxCoeff(obj)](#matmaxcoeffobj)
     * [mat.maxCoeff(func)](#matmaxcoefffunc)
+    * [mat.minCoeff()](#matmincoeff)
+    * [mat.minCoeff(obj)](#matmincoeffobj)
+    * [mat.minCoeff(func)](#matmincoefffunc)
     * [mat.equals(mat)](#matequalsmat)
     * [mat.equals(vec)](#matequalsvec)
     * [mat.equals(rvec)](#matequalsrvec)
@@ -426,6 +429,9 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.maxCoeff()](#vecmaxcoeff)
     * [vec.maxCoeff(obj)](#vecmaxcoeffobj)
     * [vec.maxCoeff(func)](#vecmaxcoefffunc)
+    * [vec.minCoeff()](#vecmincoeff)
+    * [vec.minCoeff(obj)](#vecmincoeffobj)
+    * [vec.minCoeff(func)](#vecmincoefffunc)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
     * [CVector(rows)](#cvectorrows)
@@ -472,6 +478,9 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.maxCoeff()](#rvecmaxcoeff)
     * [rvec.maxCoeff(obj)](#rvecmaxcoeffobj)
     * [rvec.maxCoeff(func)](#rvecmaxcoefffunc)
+    * [rvec.minCoeff()](#rvecmincoeff)
+    * [rvec.minCoeff(obj)](#rvecmincoeffobj)
+    * [rvec.minCoeff(func)](#rvecmincoefffunc)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
     * [CRowVector(cols)](#crowvectorcols)
@@ -1843,7 +1852,7 @@ console.log('%d', mat.mean());
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3);
-console.log('mat = \n%s\n', mat.maxCoeff());
+console.log('mat = \n%s\n', mat);
 console.log('max = %d', mat.maxCoeff());
 ```
 
@@ -1887,8 +1896,8 @@ obj = {"maxCoeff":0.7332185766348702,"rowId":1,"colId":2}
 var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3)
   , func = function(rowId, colId) {
-      console.log('rowId = %d, colId = %d', rowId, colId);
-    };
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
 console.log('mat = \n%s\n', mat);
 console.log('max = %s', mat.maxCoeff(func));
 ```
@@ -1901,6 +1910,70 @@ mat =
 
 rowId = 1, colId = 1
 max = 0.5827204285109044
+```
+
+#### mat.minCoeff()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3);
+console.log('mat = \n%s\n', mat);
+console.log('min = %d', mat.minCoeff());
+```
+
+```txt
+mat =
+-0.725041  0.511321   0.29833
+ 0.233345  -0.22101 0.0355704
+-0.167162 -0.514649 -0.168438
+
+min = -0.7250411527813604
+```
+
+#### mat.minCoeff(obj)
+
++ obj `Object`
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , obj = {};
+console.log('mat = \n%s\n', mat);
+console.log('min = %s', mat.minCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+mat =
+  0.74568  0.870563  -0.82341
+ 0.636928 -0.455949  0.944912
+ 0.855648  0.872564  -0.87055
+
+min = -0.8705498761825962
+obj = {"minCoeff":-0.8705498761825962,"rowId":2,"colId":2}
+```
+
+#### mat.minCoeff(func)
+
++ func `Function`
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(3, 3)
+  , func = function(rowId, colId) {
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
+console.log('mat = \n%s\n', mat);
+console.log('min = %s', mat.minCoeff(func));
+```
+
+```txt
+ 0.371743  0.261372  0.144462
+-0.111958  0.884582  -0.02937
+ 0.314765 -0.823458  0.378298
+
+rowId = 2, colId = 1
+min = -0.8234578174648144
 ```
 
 #### mat.equals(mat)
@@ -3429,6 +3502,71 @@ rowId = 2, colId = 0
 max = 0.8750841114088352
 ```
 
+#### vec.minCoeff()
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3);
+console.log('vec = \n%s\n', vec);
+console.log('min = %d', vec.minCoeff());
+```
+
+```txt
+vec =
+ 0.311621
+ -0.59179
+-0.210911
+
+min = -0.5917897846511517
+```
+
+#### vec.minCoeff(obj)
+
++ obj `Object`
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , obj = {};
+console.log('vec = \n%s\n', vec);
+console.log('min = %d', vec.minCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+vec =
+  0.413097
+    0.9239
+-0.0150985
+
+min = -0.015098494950262165
+obj = {"minCoeff":-0.015098494950262165,"rowId":2,"colId":0}
+```
+
+#### vec.minCoeff(func)
+
++ func `Function`
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , func = function(rowId, colId) {
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
+console.log('vec = \n%s\n', vec);
+console.log('min = %d', vec.minCoeff(func));
+```
+
+```txt
+vec =
+-0.277781
+-0.668038
+ 0.286223
+
+rowId = 1, colId = 0
+min = -0.668037947112712
+```
+
 ## Complex Vector
 
 ### Complex Vector Class Methods
@@ -3872,6 +4010,65 @@ rvec =
 
 rowId = 0, colId = 0
 max = 0.7133948633975324
+```
+
+#### rvec.minCoeff()
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3);
+console.log('rvec = \n%s\n', rvec);
+console.log('min = %d', rvec.minCoeff());
+```
+
+```txt
+rvec =
+ 0.349846 -0.129927  0.316636
+
+min = -0.1299270163895222
+```
+
+#### rvec.minCoeff(obj)
+
++ obj `Object`
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , obj = {};
+console.log('rvec = \n%s\n', rvec);
+console.log('min = %d', rvec.minCoeff(obj));
+console.log('obj = %s', JSON.stringify(obj));
+```
+
+```txt
+rvec =
+ 0.451323 -0.614237  0.512448
+
+min = -0.6142373744464653
+obj = {"minCoeff":-0.6142373744464653,"rowId":0,"colId":1}
+```
+
+#### rvec.minCoeff(func)
+
++ func `Function`
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , func = function(rowId, colId) {
+             console.log('rowId = %d, colId = %d', rowId, colId);
+           };
+console.log('rvec = \n%s\n', rvec);
+console.log('min = %d', rvec.minCoeff(func));
+```
+
+```txt
+rvec =
+-0.816445 0.0135587 -0.118738
+
+rowId = 0, colId = 0
+min = -0.8164447219187602
 ```
 
 ## Complex Row Vector
