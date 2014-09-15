@@ -1319,8 +1319,8 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
-console.log('mat =\n%s', mat.setConstant());
+console.log('mat =\n%s\n', mat);
+console.log('mat =\n%s', mat.setConstant(0.6));
 ```
 
 ```txt
@@ -1328,10 +1328,11 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+
 mat =
- -0.292434 -0.0673437   0.283946
- -0.938224   0.154289   0.283845
- -0.725773  -0.862362   0.583097
+0.6 0.6 0.6
+0.6 0.6 0.6
+0.6 0.6 0.6
 ```
 
 #### mat.block(startRow, startCol, blockRows, blockCols)
@@ -2431,7 +2432,7 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CM = Eigen.CMatrix
   , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setConstant(C(6, 8)));
 ```
 
@@ -2440,6 +2441,7 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+
 cmat =
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
