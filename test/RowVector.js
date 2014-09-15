@@ -981,12 +981,38 @@ describe('RowVector', function() {
     result.should.equal(720);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the mean of all coefficients", function() {
     rvec.mean.should.be.a.Function;
 
     rvec.toString().should.equal("1 2 3 4 5 6");
 
     var result = rvec.mean();
     result.should.equal(3.5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    rvec.maxCoeff.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var max = rvec.maxCoeff();
+    max.should.equal(6);
+
+    var result = {}, max = 0;
+    max = rvec.maxCoeff(result);
+    max.should.equal(6);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":6,\"rowId\":0,\"colId\":5}");
+
+    var ok = false, max = 0;
+    max = rvec.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    max.should.equal(6);
+    ok.should.be.true;
   });
 });

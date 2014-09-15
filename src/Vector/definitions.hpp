@@ -28,6 +28,8 @@
 #include "instance_method_dot.hpp"
 #include "instance_method_asDiagonal.hpp"
 
+#include "instance_method_maxCoeff.hpp"
+
 #include "class_method_Constant.hpp"
 #include "class_method_LinSpaced.hpp"
 
@@ -48,6 +50,8 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_dot)
   (instance_method_asDiagonal)
+
+  (instance_method_maxCoeff)
 
   (class_method_Constant)
   (class_method_LinSpaced)

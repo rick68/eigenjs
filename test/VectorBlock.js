@@ -1841,12 +1841,38 @@ describe('VectorBlock', function() {
     result.should.equal(12);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the maximum of all coefficients", function() {
     vblock.mean.should.be.a.Function;
 
     vblock.toString().should.equal("3\n4");
 
     var result = vblock.mean();
     result.should.equal(3.5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    vblock.maxCoeff.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var max = vblock.maxCoeff();
+    max.should.equal(4);
+
+    var result = {}, max = 0;
+    max = vblock.maxCoeff(result);
+    max.should.equal(4);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":4,\"rowId\":1,\"colId\":0}");
+
+    var ok = false, max = 0;
+    max = vblock.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    max.should.equal(4);
+    ok.should.be.true;
   });
 });

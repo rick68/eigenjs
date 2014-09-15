@@ -1026,12 +1026,38 @@ describe('Vector', function() {
     result.should.equal(720);
   });
 
-  it("#mean() should return a full mean operation on the whole matrix", function() {
+  it("#mean() should return the mean of all coefficinents", function() {
     vec.mean.should.be.a.Function;
 
     vec.toString().should.equal("1\n2\n3\n4\n5\n6");
 
     var result = vec.mean();
     result.should.equal(3.5);
+  });
+
+  it("#maxCoeff() should return the maximum of all coefficients", function() {
+    vec.maxCoeff.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var max = vec.maxCoeff();
+    max.should.equal(6);
+
+    var result = {}, max = 0;
+    max = vec.maxCoeff(result);
+    max.should.equal(6);
+    result.should.have.properties('maxCoeff', 'rowId', 'colId');
+    JSON.stringify(result).should.equal("{\"maxCoeff\":6,\"rowId\":5,\"colId\":0}");
+
+    var ok = false, max = 0;
+    max = vec.maxCoeff(function(rowId, colId) {
+	rowId.should.be.a.Number;
+	colId.should.be.a.Number;
+	rowId.should.equal(result.rowId);
+	colId.should.equal(result.colId);
+	ok = true;
+    });
+    max.should.equal(6);
+    ok.should.be.true;
   });
 });
