@@ -487,7 +487,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.dot(cvblock)](#rvecdotcvblock)
     * [rvec.dot(crvblock)](#rvecdotcrvblock)
     * [rvec.asDiagonal()](#rvecasdiagonal)
-    * [rvec.normalize()](#vecrnormalize)
+    * [rvec.normalize()](#rvecnormalize)
     * [rvec.maxCoeff()](#rvecmaxcoeff)
     * [rvec.maxCoeff(obj)](#rvecmaxcoeffobj)
     * [rvec.maxCoeff(func)](#rvecmaxcoefffunc)
