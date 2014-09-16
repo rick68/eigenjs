@@ -132,11 +132,6 @@ describe('CVectorBlock', function() {
     cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(1,0)\n(5,0)\n(6,0)");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    cvblock.setRandom.should.be.a.Function;
-    cvblock.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     cvblock.setConstant.should.be.a.Function;
 
@@ -146,6 +141,11 @@ describe('CVectorBlock', function() {
 
     cvblock.setConstant(Complex(3, -4)).toString().should.equal("(3,-4)\n(3,-4)");
     cvec.toString().should.equal(" (1,0)\n (2,0)\n(3,-4)\n(3,-4)\n (5,0)\n (6,0)");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    cvblock.setRandom.should.be.a.Function;
+    cvblock.setRandom();
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

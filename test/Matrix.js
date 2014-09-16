@@ -113,11 +113,6 @@ describe('Matrix', function() {
     mat.setOnes().toString().should.equal("1 1 1\n1 1 1\n1 1 1");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    mat.setRandom.should.be.a.Function;
-    mat.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     mat.setConstant.should.be.a.Function;
 
@@ -127,6 +122,11 @@ describe('Matrix', function() {
     (function(){
       mat.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    mat.setRandom.should.be.a.Function;
+    mat.setRandom();
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {
