@@ -1900,7 +1900,7 @@ var M = require('eigenjs').Matrix
              console.log('rowId = %d, colId = %d', rowId, colId);
            };
 console.log('mat = \n%s\n', mat);
-console.log('max = %s', mat.maxCoeff(func));
+console.log('max = %d', mat.maxCoeff(func));
 ```
 
 ```txt
@@ -1940,7 +1940,7 @@ var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3)
   , obj = {};
 console.log('mat = \n%s\n', mat);
-console.log('min = %s', mat.minCoeff(obj));
+console.log('min = %d', mat.minCoeff(obj));
 console.log('obj = %s', JSON.stringify(obj));
 ```
 
@@ -1965,7 +1965,7 @@ var M = require('eigenjs').Matrix
              console.log('rowId = %d, colId = %d', rowId, colId);
            };
 console.log('mat = \n%s\n', mat);
-console.log('min = %s', mat.minCoeff(func));
+console.log('min = %d', mat.minCoeff(func));
 ```
 
 ```txt
