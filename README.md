@@ -135,10 +135,10 @@ $ npm install eigenjs --msvs_version=2012
     * [Matrix.Ones(rows, cols)](#matrixonesrows-cols)
     * [Matrix.Constant(rows, cols, scalar)](#matrixconstantrows-cols-scalar)
     * [Matrix.Constant(rows, cols, comp)](#matrixconstantrows-cols-comp)
-    * [Matrix.Identity(n)](#matrixidentityn)
-    * [Matrix.Identity(rows, cols)](#matrixidentityrows-cols)
     * [Matrix.Random(n)](#matrixrandomn)
     * [Matrix.Random(rows, cols)](#matrixrandomrows-cols)
+    * [Matrix.Identity(n)](#matrixidentityn)
+    * [Matrix.Identity(rows, cols)](#matrixidentityrows-cols)
   * [Matrix Instance Methods](#matrix-instance-methods)
     * [mat.rows()](#matrows)
     * [mat.cols()](#matcols)
@@ -153,8 +153,8 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(rvblock)](#matassignrvblock)
     * [mat.setZero()](#matsetzero)
     * [mat.setOnes()](#matsetones)
-    * [mat.setRandom()](#matsetrandom)
     * [mat.setConstant(scalar)](#matsetconstantscalar)
+    * [mat.setRandom()](#matsetrandom)
     * [mat.setDiagonal(index, vec)](#matsetdiagonalindex-vec)
     * [mat.setDiagonal(index, rvec)](#matsetdiagonalindex-rvec)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
@@ -265,10 +265,10 @@ $ npm install eigenjs --msvs_version=2012
     * [CMatrix.Ones(rows, cols)](#cmatrixonesrows-cols)
     * [CMatrix.Constant(rows, cols, scalar)](#cmatrixconstantrows-cols-scalar)
     * [CMatrix.Constant(rows, cols, comp)](#cmatrixconstantrows-cols-comp)
-    * [CMatrix.Identity(n)](#cmatrixidentityn)
-    * [CMatrix.Identity(rows, cols)](#cmatrixidentityrows-cols)
     * [CMatrix.Random(n)](#cmatrixrandomn)
     * [CMatrix.Random(rows, cols)](#cmatrixrandomrows-cols)
+    * [CMatrix.Identity(n)](#cmatrixidentityn)
+    * [CMatrix.Identity(rows, cols)](#cmatrixidentityrows-cols)
   * [Complex Matrix Instance Methods](#complex-matrix-instance-methods)
     * [cmat.rows()](#cmatrows)
     * [cmat.cols()](#cmatcols)
@@ -289,9 +289,9 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
     * [cmat.setZero()](#cmatsetzero)
     * [cmat.setOnes()](#cmatsetones)
-    * [cmat.setRandom()](#cmatsetrandom)
     * [cmat.setConstant(scalar)](#cmatsetconstantscalar)
     * [cmat.setConstant(comp)](#cmatsetconstantcomp)
+    * [cmat.setRandom()](#cmatsetrandom)
     * [cmat.setDiagonal(index, vec)](#cmatsetdiagonalindex-vec)
     * [cmat.setDiagonal(index, rvec)](#cmatsetdiagonalindex-rvec)
     * [cmat.setDiagonal(index, cvec)](#cmatsetdiagonalindex-cvec)
@@ -1129,6 +1129,21 @@ mat =
 0.6 0.6 0.6 0.6
 ```
 
+#### Matrix.Random(n)
+#### Matrix.Random(rows, cols)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Random(2, 3);
+console.log('mat = \n%s', mat);
+```
+
+```txt
+mat =
+-0.421952 -0.671276  0.547419
+ 0.260209  -0.13622  0.464891
+```
+
 #### Matrix.Identity(n)
 #### Matrix.Identity(rows, cols)
 
@@ -1147,21 +1162,6 @@ mat1 =
 mat2 =
 1 0 0
 0 1 0
-```
-
-#### Matrix.Random(n)
-#### Matrix.Random(rows, cols)
-
-```js
-var M = require('eigenjs').Matrix
-  , mat = M.Random(2, 3);
-console.log('mat = \n%s', mat);
-```
-
-```txt
-mat =
--0.421952 -0.671276  0.547419
- 0.260209  -0.13622  0.464891
 ```
 
 ### Matrix Instance Methods
@@ -1299,26 +1299,6 @@ mat =
 1 1 1
 ```
 
-#### mat.setRandom()
-
-```js
-var M = require('eigenjs').Matrix
-  , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
-console.log('mat =\n%s', mat.setRandom());
-```
-
-```txt
-mat =
-0 0 0
-0 0 0
-0 0 0
-mat =
- -0.292434 -0.0673437   0.283946
- -0.938224   0.154289   0.283845
- -0.725773  -0.862362   0.583097
-```
-
 #### mat.setConstant(scalar)
 
 
@@ -1339,6 +1319,26 @@ mat =
 0.6 0.6 0.6
 0.6 0.6 0.6
 0.6 0.6 0.6
+```
+
+#### mat.setRandom()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+console.log('mat =\n%s', mat);
+console.log('mat =\n%s', mat.setRandom());
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+mat =
+ -0.292434 -0.0673437   0.283946
+ -0.938224   0.154289   0.283845
+ -0.725773  -0.862362   0.583097
 ```
 
 #### mat.setDiagonal(index, vec)
@@ -2247,6 +2247,21 @@ cmat =
 (0.6,0) (0.6,0) (0.6,0) (0.6,0)
 ```
 
+#### CMatrix.Random(n)
+#### CMatrix.Random(rows, cols)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Random(2, 3);
+console.log('cmat = \n%s', cmat);
+```
+
+```txt
+cmat =
+   (0.827048,0.18844)  (-0.130621,0.648239)  (-0.946608,0.364096)
+(-0.895631,-0.864291)  (0.952898,-0.648834)  (-0.646252,0.440248)
+```
+
 #### CMatrix.Identity(n)
 #### CMatrix.Identity(rows, cols)
 ```js
@@ -2264,21 +2279,6 @@ cmat1 =
 cmat2 =
 (1,0) (0,0) (0,0)
 (0,0) (1,0) (0,0)
-```
-
-#### CMatrix.Random(n)
-#### CMatrix.Random(rows, cols)
-
-```js
-var CM = require('eigenjs').CMatrix
-  , cmat = CM.Random(2, 3);
-console.log('cmat = \n%s', cmat);
-```
-
-```txt
-cmat =
-   (0.827048,0.18844)  (-0.130621,0.648239)  (-0.946608,0.364096)
-(-0.895631,-0.864291)  (0.952898,-0.648834)  (-0.646252,0.440248)
 ```
 
 ### Complex Matrix Instance Methods
@@ -2428,26 +2428,6 @@ cmat =
 (1,0) (1,0) (1,0)
 ```
 
-#### cmat.setRandom()
-
-```js
-var CM = require('eigenjs').CMatrix
-  , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
-console.log('cmat =\n%s', cmat.setRandom());
-```
-
-```txt
-cmat =
-(0,0) (0,0) (0,0)
-(0,0) (0,0) (0,0)
-(0,0) (0,0) (0,0)
-cmat =
-   (0.298345,0.285858)   (-0.693147,0.286686)  (-0.91605,-0.0576106)
-  (0.410026,-0.685715)     (0.33597,0.656071)   (-0.261633,0.736407)
-(-0.808358,-0.0710831)    (0.588954,0.544957)   (0.800236,-0.434336)
-```
-
 #### cmat.setConstant(scalar)
 #### cmat.setConstant(comp)
 
@@ -2470,6 +2450,26 @@ cmat =
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
+```
+
+#### cmat.setRandom()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Zero(3, 3);
+console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s', cmat.setRandom());
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+cmat =
+   (0.298345,0.285858)   (-0.693147,0.286686)  (-0.91605,-0.0576106)
+  (0.410026,-0.685715)     (0.33597,0.656071)   (-0.261633,0.736407)
+(-0.808358,-0.0710831)    (0.588954,0.544957)   (0.800236,-0.434336)
 ```
 
 #### mat.setDiagonal(index, vec)
