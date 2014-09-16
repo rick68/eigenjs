@@ -67,6 +67,7 @@ SOURCES = \
     src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_mula.hpp \
+    src/CRowVector/instance_method_normalize.hpp \
     src/CRowVector/instance_method_row.hpp \
     src/CRowVector/instance_method_set.hpp \
     src/CRowVector_fwd.hpp \
@@ -82,6 +83,7 @@ SOURCES = \
     src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_mula.hpp \
+    src/CVector/instance_method_normalize.hpp \
     src/CVector/instance_method_row.hpp \
     src/CVector/instance_method_set.hpp \
     src/CVector_fwd.hpp \
@@ -198,6 +200,7 @@ SOURCES = \
     src/RowVector/instance_method_maxCoeff.hpp \
     src/RowVector/instance_method_minCoeff.hpp \
     src/RowVector/instance_method_mula.hpp \
+    src/RowVector/instance_method_normalize.hpp \
     src/RowVector/instance_method_row.hpp \
     src/RowVector/instance_method_set.hpp \
     src/RowVector/instance_method_setLinSpaced.hpp \
@@ -217,6 +220,7 @@ SOURCES = \
     src/Vector/instance_method_maxCoeff.hpp \
     src/Vector/instance_method_minCoeff.hpp \
     src/Vector/instance_method_mula.hpp \
+    src/Vector/instance_method_normalize.hpp \
     src/Vector/instance_method_row.hpp \
     src/Vector/instance_method_set.hpp \
     src/Vector/instance_method_setLinSpaced.hpp \
