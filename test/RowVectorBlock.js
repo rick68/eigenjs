@@ -1745,6 +1745,18 @@ describe('RowVectorBlock', function() {
     dia.toString().should.equal("3 0\n0 4");
   });
 
+  it("#normalize() should normalizes the row-vector block", function() {
+    rvblock.normalize.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.normalize();
+    rvblock.toString().should.equal("0.6 0.8");
+
+    rvec.toString().should.equal("  1   2 0.6 0.8   5   6");
+  });
+
   it("#redux() should return a full redux operation on the whole matrix", function() {
     rvblock.redux.should.be.a.Function;
 

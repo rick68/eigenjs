@@ -1855,6 +1855,18 @@ describe('VectorBlock', function() {
     dia.toString().should.equal("3 0\n0 4");
   });
 
+  it("#normalize() should normalizes the vector block", function() {
+    vblock.normalize.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vblock.toString().should.equal("3\n4");
+    vblock.normalize();
+    vblock.toString().should.equal("0.6\n0.8");
+
+    vec.toString().should.equal("  1\n  2\n0.6\n0.8\n  5\n  6");
+  });
+
   it("#redux() should return a full redux operation on the whole matrix", function() {
     vblock.redux.should.be.a.Function;
 

@@ -1941,17 +1941,6 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#asDiagonal() should return a complex diagonal", function() {
-    crvblock.asDiagonal.should.be.a.Function;
-
-    crvblock.toString().should.equal("(3,0) (4,0)");
-
-    var dia = crvblock.asDiagonal();
-    dia.should.instanceOf(CMatrix);
-
-    dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
-  });
-
   it("#dot() should return the dot product of two complex row-vector blocks", function() {
     crvblock.dot.should.be.a.Function;
 
@@ -2056,6 +2045,18 @@ describe('CRowVectorBlock', function() {
     dia.should.instanceOf(CMatrix);
 
     dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
+  });
+
+  it("#normalize() should normalizes the complex row-vector block", function() {
+    crvblock.normalize.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.normalize();
+    crvblock.toString().should.equal("(0.6,0) (0.8,0)");
+
+    crvec.toString().should.equal("  (1,0)   (2,0) (0.6,0) (0.8,0)   (5,0)   (6,0)");
   });
 
   it("#redux() should return a full redux operation on the whole complex matrix", function() {
