@@ -123,11 +123,6 @@ describe('MatrixBlock', function() {
     mblock.setOnes().toString().should.equal("1 1\n1 1");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    mblock.setRandom.should.be.a.Function;
-    mblock.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     mblock.setConstant.should.be.a.Function;
 
@@ -138,6 +133,19 @@ describe('MatrixBlock', function() {
     (function(){
       mblock.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    mblock.setRandom.should.be.a.Function;
+    mblock.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    mblock.setIdentity.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mblock.setIdentity().toString().should.equal("1 0\n0 1");
+    mat.toString().should.equal(" 1  2  3  4\n 5  1  0  8\n 9  0  1 12\n13 14 15 16");
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

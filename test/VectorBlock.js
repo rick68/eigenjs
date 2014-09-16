@@ -130,11 +130,6 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n1\n1\n5\n6");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    vblock.setRandom.should.be.a.Function;
-    vblock.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     vblock.setConstant.should.be.a.Function;
 
@@ -145,6 +140,19 @@ describe('VectorBlock', function() {
     (function(){
       vblock.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    vblock.setRandom.should.be.a.Function;
+    vblock.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    vblock.setIdentity.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vblock.setIdentity().toString().should.equal("1\n0");
+    vec.toString().should.equal("1\n2\n1\n0\n5\n6");
   });
 
   it('#setLinSpaced() should set a linearly space into a vector block', function() {

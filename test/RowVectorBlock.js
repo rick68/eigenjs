@@ -124,11 +124,6 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("1 2 1 1 5 6");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    rvblock.setRandom.should.be.a.Function;
-    rvblock.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     rvblock.setConstant.should.be.a.Function;
 
@@ -139,6 +134,19 @@ describe('RowVectorBlock', function() {
     (function(){
       rvblock.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    rvblock.setRandom.should.be.a.Function;
+    rvblock.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    rvblock.setIdentity.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvblock.setIdentity().toString().should.equal("1 0");
+    rvec.toString().should.equal("1 2 1 0 5 6");
   });
 
   it('#setLinSpaced() should set a linearly space into a row-vector block', function() {

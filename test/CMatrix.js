@@ -149,17 +149,24 @@ describe('CMatrix', function() {
     cmat.setOnes().toString().should.equal("(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)\n(1,0) (1,0) (1,0)");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    cmat.setRandom.should.be.a.Function;
-    cmat.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     cmat.setConstant.should.be.a.Function;
 
     cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
     cmat.setConstant(0.6).toString().should.equal("(0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0)");
     cmat.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4) (3,-4)\n(3,-4) (3,-4) (3,-4)\n(3,-4) (3,-4) (3,-4)");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    cmat.setRandom.should.be.a.Function;
+    cmat.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    cmat.setIdentity.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.setIdentity().toString().should.equal("(1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0)\n(0,0) (0,0) (1,0)");
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

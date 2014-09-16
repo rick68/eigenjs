@@ -103,17 +103,24 @@ describe('CRowVector', function() {
     crvec.setOnes().toString().should.equal("(1,0) (1,0) (1,0)");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    crvec.setRandom.should.be.a.Function;
-    crvec.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     crvec.setConstant.should.be.a.Function;
 
     crvec.toString().should.equal("(1,1) (2,2) (3,3)");
     crvec.setConstant(0.6).toString().should.equal("(0.6,0) (0.6,0) (0.6,0)");
     crvec.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4) (3,-4)");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    crvec.setRandom.should.be.a.Function;
+    crvec.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    crvec.setIdentity.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.setIdentity().toString().should.equal("(1,0) (0,0) (0,0)");
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

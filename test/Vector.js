@@ -129,11 +129,6 @@ describe('Vector', function() {
     vec.setOnes().toString().should.equal("1\n1\n1\n1\n1\n1");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    vec.setRandom.should.be.a.Function;
-    vec.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     vec.setConstant.should.be.a.Function;
 
@@ -143,6 +138,18 @@ describe('Vector', function() {
     (function(){
       vec.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    vec.setRandom.should.be.a.Function;
+    vec.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    vec.setIdentity.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setIdentity().toString().should.equal("1\n0\n0\n0\n0\n0");
   });
 
   it('#setLinSpaced() should set a linearly space into a vector', function() {

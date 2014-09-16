@@ -113,11 +113,6 @@ describe('Matrix', function() {
     mat.setOnes().toString().should.equal("1 1 1\n1 1 1\n1 1 1");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    mat.setRandom.should.be.a.Function;
-    mat.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     mat.setConstant.should.be.a.Function;
 
@@ -127,6 +122,18 @@ describe('Matrix', function() {
     (function(){
       mat.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    mat.setRandom.should.be.a.Function;
+    mat.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    mat.setIdentity.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setIdentity().toString().should.equal("1 0 0\n0 1 0\n0 0 1");
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

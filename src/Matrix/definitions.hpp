@@ -25,8 +25,9 @@
 
 #include "instance_method_setZero.hpp"
 #include "instance_method_setOnes.hpp"
-#include "instance_method_setRandom.hpp"
 #include "instance_method_setConstant.hpp"
+#include "instance_method_setRandom.hpp"
+#include "instance_method_setIdentity.hpp"
 #include "instance_method_setDiagonal.hpp"
 
 #include "instance_method_block.hpp"
@@ -71,8 +72,8 @@
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
 #include "class_method_Constant.hpp"
-#include "class_method_Identity.hpp"
 #include "class_method_Random.hpp"
+#include "class_method_Identity.hpp"
 
 namespace EigenJS {
 
@@ -89,8 +90,9 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_setZero)
   (instance_method_setOnes)
-  (instance_method_setRandom)
   (instance_method_setConstant)
+  (instance_method_setRandom)
+  (instance_method_setIdentity)
   (instance_method_setDiagonal)
 
   (instance_method_block)
@@ -135,8 +137,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (class_method_Zero)
   (class_method_Ones)
   (class_method_Constant)
-  (class_method_Identity)
   (class_method_Random)
+  (class_method_Identity)
 );
 
 }  // namespace EigenJS

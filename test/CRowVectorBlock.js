@@ -124,11 +124,6 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal("(1,0) (2,0) (1,0) (1,0) (5,0) (6,0)");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    crvblock.setRandom.should.be.a.Function;
-    crvblock.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     crvblock.setConstant.should.be.a.Function;
 
@@ -138,6 +133,20 @@ describe('CRowVectorBlock', function() {
 
     crvblock.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4)");
     crvec.toString().should.equal(" (1,0)  (2,0) (3,-4) (3,-4)  (5,0)  (6,0)");
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    crvblock.setRandom.should.be.a.Function;
+    crvblock.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    crvblock.setIdentity.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.setIdentity().toString().should.equal("(1,0) (0,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (1,0) (0,0) (5,0) (6,0)");
   });
 
   it('#setDiagonal() should set the diagonal to other values', function() {

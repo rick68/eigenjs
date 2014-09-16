@@ -106,11 +106,6 @@ describe('RowVector', function() {
     rvec.setOnes().toString().should.equal("1 1 1 1 1 1");
   });
 
-  it('#setRandom() should set all coefficients to random', function() {
-    rvec.setRandom.should.be.a.Function;
-    rvec.setRandom();
-  });
-
   it('#setConstant() should set all coefficients to constant', function() {
     rvec.setConstant.should.be.a.Function;
 
@@ -120,6 +115,18 @@ describe('RowVector', function() {
     (function(){
       rvec.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setRandom() should set all coefficients to random', function() {
+    rvec.setRandom.should.be.a.Function;
+    rvec.setRandom();
+  });
+
+  it('#setIdentity() should write the identity expression into itself', function() {
+    rvec.setIdentity.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setIdentity().toString().should.equal("1 0 0 0 0 0");
   });
 
   it('#setLinSpaced() should set a linearly space into a row-vector', function() {
