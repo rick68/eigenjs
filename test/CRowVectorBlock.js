@@ -1640,6 +1640,21 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    crvblock.norm.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var sum = Complex(0);
+
+    for (var i = 0; i < crvblock.cols(); ++i) {
+      var c = crvblock.get(i);
+      sum.adda(c.norm())
+    }
+
+    crvblock.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+  });
+
   it('#equals() should return true if two complex row-vector blocks are equal', function() {
     crvblock.equals.should.be.a.Function;
 

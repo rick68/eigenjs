@@ -657,6 +657,21 @@ describe('CRowVector', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    crvec.norm.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var sum = Complex(0);
+
+    for (var i = 0; i < crvec.cols(); ++i) {
+      var c = crvec.get(i);
+      sum.adda(c.norm())
+    }
+
+    crvec.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+  });
+
   it('#equals() should return true if two complex row-vectors are equal', function() {
     crvec.equals.should.be.a.Function;
 

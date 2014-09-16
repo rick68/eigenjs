@@ -1283,6 +1283,23 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the Frobenius norm', function() {
+    cmblock.norm.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var sum = Complex(0);
+
+    for (var i = 0; i < cmblock.cols(); ++i) {
+      for (var j = 0; j < cmblock.rows(); ++j) {
+        var c = cmblock.get(j, i);
+        sum.adda(c.norm());
+      }
+    }
+
+    cmblock.norm().equals(Complex.pow(sum, 0.5)).should.be.true;
+  });
+
   it('#equals() should return true if two complex matrix block are equal', function() {
     cmblock.equals.should.be.a.Function;
 

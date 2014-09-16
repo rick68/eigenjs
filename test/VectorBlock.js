@@ -1396,6 +1396,20 @@ describe('VectorBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    vblock.norm.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var sum = 0;
+
+    for (var i = 0; i < vblock.rows(); ++i) {
+      sum += Math.pow(vblock.get(i), 2);
+    }
+
+    vblock.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two vector block are equal', function() {
     vblock.equals.should.be.a.Function;
 

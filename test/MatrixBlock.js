@@ -1038,6 +1038,22 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the Frobenius norm', function() {
+    mat.norm.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+
+    var sum = 0;
+
+    for (var i = 0; i < mat.cols(); ++i) {
+      for (var j = 0; j < mat.rows(); ++j) {
+        sum += Math.pow(mat.get(j, i), 2);
+      }
+    }
+
+    mat.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if a matrix block and a matrix are equal', function() {
     mblock.equals.should.be.a.Function;
 

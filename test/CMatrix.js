@@ -617,6 +617,23 @@ describe('CMatrix', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the Frobenius norm', function() {
+    cmat.norm.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var sum = Complex(0);
+
+    for (var i = 0; i < cmat.cols(); ++i) {
+      for (var j = 0; j < cmat.rows(); ++j) {
+        var c = cmat.get(j, i);
+        sum.adda(c.norm());
+      }
+    }
+
+    cmat.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+  });
+
   it('#isApprox() should return true if this is approximately equal to other', function() {
     cmat.isApprox.should.be.a.Function;
 

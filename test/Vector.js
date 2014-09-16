@@ -609,6 +609,20 @@ describe('Vector', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    vec.norm.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var sum = 0;
+
+    for (var i = 0; i < vec.rows(); ++i) {
+      sum += Math.pow(vec.get(i), 2);
+    }
+
+    vec.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two vectors are equal', function() {
     vec.equals.should.be.a.Function;
 
