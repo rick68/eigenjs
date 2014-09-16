@@ -1348,17 +1348,11 @@ mat =
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3)
   , dia = mat.diagonal(1);
-console.log('mat =\n%s\n', mat);
 dia.setRandom();
 console.log('mat =\n%s', mat.setDiagonal(1, dia));
 ```
 
 ```txt
-mat =
-0 0 0
-0 0 0
-0 0 0
-
 mat =
         0 -0.294006         0
         0         0  0.634569
@@ -2487,17 +2481,11 @@ cmat =
 var CM = require('eigenjs').CMatrix
   , cmat = new M.Random(3, 3)
   , dia = cmat.diagonal(1);
-console.log('cmat =\n%s\n', cmat);
 dia.setZero();
 console.log('cmat =\n%s', cmat.setDiagonal(1, dia));
 ```
 
 ```txt
-cmat =
- -0.357257 -0.0375886   0.574079
- -0.419258   0.249095   0.551282
- -0.464809   0.537786  -0.609209
-
 cmat =
 -0.357257         0  0.574079
 -0.419258  0.249095         0
