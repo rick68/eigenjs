@@ -1266,7 +1266,7 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3);
-console.log('mat =\n%s', mat);
+console.log('mat =\n%s\n', mat);
 console.log('mat =\n%s', mat.setZero());
 ```
 
@@ -1275,6 +1275,7 @@ mat =
  0.244911 -0.752925 -0.562905
  0.215088 -0.406688 -0.750836
  0.983236  0.800109  0.695126
+
 mat =
 0 0 0
 0 0 0
@@ -1286,7 +1287,7 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
+console.log('mat =\n%s\n', mat);
 console.log('mat =\n%s', mat.setOnes());
 ```
 
@@ -1295,6 +1296,7 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+
 mat =
 1 1 1
 1 1 1
@@ -1328,7 +1330,7 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
+console.log('mat =\n%s\n', mat);
 console.log('mat =\n%s', mat.setRandom());
 ```
 
@@ -1337,6 +1339,7 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+
 mat =
  -0.292434 -0.0673437   0.283946
  -0.938224   0.154289   0.283845
@@ -1348,7 +1351,7 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
+console.log('mat =\n%s\n', mat);
 console.log('mat =\n%s', mat.setIdentity());
 ```
 
@@ -1357,6 +1360,7 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+
 mat =
 1 0 0
 0 1 0
@@ -1370,11 +1374,17 @@ mat =
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3)
   , dia = mat.diagonal(1);
+console.log('mat =\n%s\n', mat);
 dia.setRandom();
 console.log('mat =\n%s', mat.setDiagonal(1, dia));
 ```
 
 ```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+
 mat =
         0 -0.294006         0
         0         0  0.634569
@@ -2415,7 +2425,7 @@ cmat =
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Random(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setZero());
 ```
 
@@ -2424,6 +2434,7 @@ cmat =
   (0.828056,-0.856655)  (0.192893,-0.0390696)   (-0.477729,0.812314)
    (0.200923,0.904817)  (-0.643549,-0.129635)    (0.566937,0.514797)
 (-0.740525,0.00155845)   (-0.780958,0.437884)    (0.194337,0.223802)
+
 cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
@@ -2435,7 +2446,7 @@ cmat =
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setOnes());
 ```
 
@@ -2444,6 +2455,7 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+
 cmat =
 (1,0) (1,0) (1,0)
 (1,0) (1,0) (1,0)
@@ -2479,7 +2491,7 @@ cmat =
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setRandom());
 ```
 
@@ -2488,6 +2500,7 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+
 cmat =
    (0.298345,0.285858)   (-0.693147,0.286686)  (-0.91605,-0.0576106)
   (0.410026,-0.685715)     (0.33597,0.656071)   (-0.261633,0.736407)
@@ -2499,7 +2512,7 @@ cmat =
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setIdentity());
 ```
 
@@ -2508,6 +2521,7 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+
 cmat =
 (1,0) (0,0) (0,0)
 (0,0) (1,0) (0,0)
@@ -2523,15 +2537,21 @@ cmat =
 var CM = require('eigenjs').CMatrix
   , cmat = new M.Random(3, 3)
   , dia = cmat.diagonal(1);
+console.log('cmat = \n%s\n', cmat);
 dia.setZero();
 console.log('cmat =\n%s', cmat.setDiagonal(1, dia));
 ```
 
 ```txt
 cmat =
--0.357257         0  0.574079
--0.419258  0.249095         0
--0.464809  0.537786 -0.609209
+ 0.103146  0.540894  0.490517
+-0.433484  0.804028  0.127162
+ 0.438421 -0.707295 -0.785343
+
+cmat =
+ 0.103146         0  0.490517
+-0.433484  0.804028         0
+ 0.438421 -0.707295 -0.785343
 ```
 
 #### cmat.block(startRow, startCol, blockRows, blockCols)
