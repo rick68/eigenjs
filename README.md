@@ -155,6 +155,8 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.setOnes()](#matsetones)
     * [mat.setRandom()](#matsetrandom)
     * [mat.setConstant(scalar)](#matsetconstantscalar)
+    * [mat.setDiagonal(index, vec)](#matsetdiagonalindex-vec)
+    * [mat.setDiagonal(index, rvec)](#matsetdiagonalindex-rvec)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -290,6 +292,10 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.setRandom()](#cmatsetrandom)
     * [cmat.setConstant(scalar)](#cmatsetconstantscalar)
     * [cmat.setConstant(comp)](#cmatsetconstantcomp)
+    * [cmat.setDiagonal(index, vec)](#cmatsetdiagonalindex-vec)
+    * [cmat.setDiagonal(index, rvec)](#cmatsetdiagonalindex-rvec)
+    * [cmat.setDiagonal(index, cvec)](#cmatsetdiagonalindex-cvec)
+    * [cmat.setDiagonal(index, crvec)](#cmatsetdiagonalindex-crvec)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -1333,6 +1339,30 @@ mat =
 0.6 0.6 0.6
 0.6 0.6 0.6
 0.6 0.6 0.6
+```
+
+#### mat.setDiagonal(index, vec)
+#### mat.setDiagonal(index, rvec)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3)
+  , dia = mat.diagonal(1);
+console.log('mat =\n%s\n', mat);
+dia.setRandom();
+console.log('mat =\n%s', mat.setDiagonal(1, dia));
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+
+mat =
+        0 -0.294006         0
+        0         0  0.634569
+        0         0         0
 ```
 
 #### mat.block(startRow, startCol, blockRows, blockCols)
@@ -2446,6 +2476,32 @@ cmat =
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
+```
+
+#### mat.setDiagonal(index, vec)
+#### mat.setDiagonal(index, rvec)
+#### mat.setDiagonal(index, cvec)
+#### mat.setDiagonal(index, crvec)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new M.Random(3, 3)
+  , dia = cmat.diagonal(1);
+console.log('cmat =\n%s\n', cmat);
+dia.setZero();
+console.log('cmat =\n%s', cmat.setDiagonal(1, dia));
+```
+
+```txt
+cmat =
+ -0.357257 -0.0375886   0.574079
+ -0.419258   0.249095   0.551282
+ -0.464809   0.537786  -0.609209
+
+cmat =
+-0.357257         0  0.574079
+-0.419258  0.249095         0
+-0.464809  0.537786 -0.609209
 ```
 
 #### cmat.block(startRow, startCol, blockRows, blockCols)
