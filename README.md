@@ -3072,11 +3072,11 @@ var Eigen = require('eigenjs')
              C(1, 2), C(3, 4),
              C(5, 6), C(7, 9)
            ]);
-console.log('%s', cmat.norm());
+console.log('%d', cmat.norm());
 ```
 
 ```txt
-(14.8661,0)
+14.866068747318506
 ```
 
 #### cmat.redux(func)

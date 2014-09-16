@@ -711,14 +711,13 @@ describe('CVector', function() {
 
     cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
 
-    var sum = Complex(0);
+    var sum = 0;
 
     for (var i = 0; i < cvec.rows(); ++i) {
-      var c = cvec.get(i);
-      sum.adda(c.norm())
+      sum += cvec.get(i).norm();
     }
 
-    cvec.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+    cvec.norm().should.equal(Math.pow(sum, 0.5));
   });
 
   it('#equals() should return true if two complex vectors are equal', function() {

@@ -1645,14 +1645,13 @@ describe('CRowVectorBlock', function() {
 
     crvblock.toString().should.equal("(3,0) (4,0)");
 
-    var sum = Complex(0);
+    var sum = 0;
 
     for (var i = 0; i < crvblock.cols(); ++i) {
-      var c = crvblock.get(i);
-      sum.adda(c.norm())
+      sum += crvblock.get(i).norm();
     }
 
-    crvblock.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+    crvblock.norm().should.equal(Math.pow(sum, 0.5));
   });
 
   it('#equals() should return true if two complex row-vector blocks are equal', function() {
