@@ -162,6 +162,13 @@ describe('CMatrix', function() {
     cmat.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    cmat.setIdentity.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.setIdentity().toString().should.equal("(1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0)\n(0,0) (0,0) (1,0)");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     cmat.setDiagonal.should.be.a.Function;
 

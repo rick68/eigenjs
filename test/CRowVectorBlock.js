@@ -140,6 +140,15 @@ describe('CRowVectorBlock', function() {
     crvblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    crvblock.setIdentity.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.setIdentity().toString().should.equal("(1,0) (0,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (1,0) (0,0) (5,0) (6,0)");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     crvblock.setDiagonal.should.be.a.Function;
 

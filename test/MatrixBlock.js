@@ -140,6 +140,14 @@ describe('MatrixBlock', function() {
     mblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    mblock.setIdentity.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mblock.setIdentity().toString().should.equal("1 0\n0 1");
+    mat.toString().should.equal(" 1  2  3  4\n 5  1  0  8\n 9  0  1 12\n13 14 15 16");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     mblock.setDiagonal.should.be.a.Function;
 

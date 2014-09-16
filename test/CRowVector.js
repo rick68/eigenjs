@@ -116,6 +116,13 @@ describe('CRowVector', function() {
     crvec.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    crvec.setIdentity.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.setIdentity().toString().should.equal("(1,0) (0,0) (0,0)");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     crvec.setDiagonal.should.be.a.Function;
 

@@ -141,6 +141,14 @@ describe('RowVectorBlock', function() {
     rvblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    rvblock.setIdentity.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvblock.setIdentity().toString().should.equal("1 0");
+    rvec.toString().should.equal("1 2 1 0 5 6");
+  });
+
   it('#setLinSpaced() should set a linearly space into a row-vector block', function() {
     rvblock.setLinSpaced.should.be.a.Function;
 

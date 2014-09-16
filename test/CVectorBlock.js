@@ -148,6 +148,16 @@ describe('CVectorBlock', function() {
     cvblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    cvblock.setIdentity.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.setIdentity().toString().should.equal("(1,0)\n(0,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(0,0)\n(5,0)\n(6,0)");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     cvblock.setDiagonal.should.be.a.Function;
 

@@ -145,6 +145,13 @@ describe('Vector', function() {
     vec.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    vec.setIdentity.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setIdentity().toString().should.equal("1\n0\n0\n0\n0\n0");
+  });
+
   it('#setLinSpaced() should set a linearly space into a vector', function() {
     vec.setLinSpaced.should.be.a.Function;
 

@@ -147,6 +147,14 @@ describe('VectorBlock', function() {
     vblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    vblock.setIdentity.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vblock.setIdentity().toString().should.equal("1\n0");
+    vec.toString().should.equal("1\n2\n1\n0\n5\n6");
+  });
+
   it('#setLinSpaced() should set a linearly space into a vector block', function() {
     vblock.setLinSpaced.should.be.a.Function;
 

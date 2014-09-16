@@ -122,6 +122,13 @@ describe('RowVector', function() {
     rvec.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    rvec.setIdentity.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setIdentity().toString().should.equal("1 0 0 0 0 0");
+  });
+
   it('#setLinSpaced() should set a linearly space into a row-vector', function() {
     rvec.setLinSpaced.should.be.a.Function;
 

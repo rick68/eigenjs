@@ -142,6 +142,16 @@ describe('CMatrixBlock', function() {
     cmblock.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    cmblock.setIdentity.should.be.a.Function;
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.setIdentity().toString().should.equal("(1,0) (0,0)\n(0,0) (1,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (1,0)  (0,0)  (8,0)\n (9,0)  (0,0)  (1,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     cmblock.setDiagonal.should.be.a.Function;
 

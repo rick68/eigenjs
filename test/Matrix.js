@@ -129,6 +129,13 @@ describe('Matrix', function() {
     mat.setRandom();
   });
 
+  it('#setIdentity() should write the identity expression into itself', function() {
+    mat.setIdentity.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setIdentity().toString().should.equal("1 0 0\n0 1 0\n0 0 1");
+  });
+
   it('#setDiagonal() should set the diagonal to other values', function() {
     mat.setDiagonal.should.be.a.Function;
 
