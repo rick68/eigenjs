@@ -989,6 +989,14 @@ describe('RowVector', function() {
     dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
   });
 
+  it("#normalize() should normalizes the row-vector", function() {
+    rvec.normalize.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.normalize();
+    rvec.toString().should.equal("0.104828 0.209657 0.314485 0.419314 0.524142 0.628971");
+  });
+
   it("#redux() should return a full redux operation on the whole matrix", function() {
     rvec.redux.should.be.a.Function;
 

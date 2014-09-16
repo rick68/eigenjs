@@ -854,4 +854,17 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_VECTOR_INSTANCE_METHOD_NORMALIZE_CONTEXT()            \
+  {                                                                          \
+    T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
+    typename T::value_type& value = **obj;                                   \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    value.normalize();                                                       \
+                                                                             \
+    NanReturnValue( args.This() );                                           \
+  }                                                                          \
+  /**/
+
 #endif  // EIGENJS_COMMON_MACRO_HPP

@@ -1031,6 +1031,14 @@ describe('CRowVector', function() {
     dia.toString().should.equal("(1,1) (0,0) (0,0)\n(0,0) (2,2) (0,0)\n(0,0) (0,0) (3,3)");
   });
 
+  it("#normalize() should normalizes the complex row-vector", function() {
+    crvec.normalize.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.normalize();
+    crvec.toString().should.equal("(0.188982,0.188982) (0.377964,0.377964) (0.566947,0.566947)");
+  });
+
   it("#redux() should return a full redux operation on the whole complex matrix", function() {
     crvec.redux.should.be.a.Function;
 

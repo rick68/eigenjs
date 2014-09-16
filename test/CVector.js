@@ -1086,6 +1086,14 @@ describe('CVector', function() {
     dia.toString().should.equal("(1,1) (0,0) (0,0) (0,0) (0,0) (0,0)\n(0,0) (2,2) (0,0) (0,0) (0,0) (0,0)\n(0,0) (0,0) (3,3) (0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0) (4,4) (0,0) (0,0)\n(0,0) (0,0) (0,0) (0,0) (5,5) (0,0)\n(0,0) (0,0) (0,0) (0,0) (0,0) (6,6)");
   });
 
+  it("#normalize() should normalizes the complex vector", function() {
+    cvec.normalize.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.normalize();
+    cvec.toString().should.equal("(0.0741249,0.0741249)\n    (0.14825,0.14825)\n  (0.222375,0.222375)\n      (0.2965,0.2965)\n  (0.370625,0.370625)\n    (0.44475,0.44475)");
+  });
+
   it("#redux() should return a full redux operation on the whole complex matrix", function() {
     cvec.redux.should.be.a.Function;
 

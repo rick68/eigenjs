@@ -436,6 +436,7 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.dot(cvblock)](#vecdotcvblock)
     * [vec.dot(crvblock)](#vecdotcrvblock)
     * [vec.asDiagonal()](#vecasdiagonal)
+    * [vec.normalize()](#vecnormalize)
     * [vec.maxCoeff()](#vecmaxcoeff)
     * [vec.maxCoeff(obj)](#vecmaxcoeffobj)
     * [vec.maxCoeff(func)](#vecmaxcoefffunc)
@@ -462,6 +463,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.dot(cvblock)](#cvecdotcvblock)
     * [cvec.dot(crvblock)](#cvecdotcrvblock)
     * [cvec.asDiagonal()](#cvecasdiagonal)
+    * [cvec.normalize()](#cvecnormalize)
 * [Row Vector](#row-vector) **inherits from Matrix**
   * [Row Vector Class Methods](#row-vector-class-methods)
     * [RowVector(cols)](#rowvectorcols)
@@ -485,6 +487,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.dot(cvblock)](#rvecdotcvblock)
     * [rvec.dot(crvblock)](#rvecdotcrvblock)
     * [rvec.asDiagonal()](#rvecasdiagonal)
+    * [rvec.normalize()](#rvecnormalize)
     * [rvec.maxCoeff()](#rvecmaxcoeff)
     * [rvec.maxCoeff(obj)](#rvecmaxcoeffobj)
     * [rvec.maxCoeff(func)](#rvecmaxcoefffunc)
@@ -511,6 +514,7 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.dot(cvblock)](#crvecdotcvblock)
     * [crvec.dot(crvblock)](#crvecdotcrvblock)
     * [crvec.asDiagonal()](#crvecasdiagonal)
+    * [crvec.normalize()](#crvecnormalize)
 * [Matrix Block](#matrix-block) **inherits from Matrix**
   * [Matrix Block Class Methods](#matrix-block-class-methods)
     * [MatrixBlock(mat, startRow, startCol, blockRows, blockCols)](#matrixblockmat-startrow-startcol-blockrows-blockcols)
@@ -3584,6 +3588,26 @@ dia =
         0         0 -0.718297
 ```
 
+#### vec.normalize()
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V([
+            1,
+            2,
+            3
+          ]);
+vec.normalize();
+console.log('vec = \n%s', vec);
+```
+
+```txt
+vec =
+0.267261
+0.534522
+0.801784
+```
+
 #### vec.maxCoeff()
 
 ```js
@@ -3899,6 +3923,28 @@ dia =
                 (0,0)                 (0,0) (-0.725789,-0.339967)
 ```
 
+#### cvec.normalize()
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CV = Eigen.CVector
+  , cvec = new CV([
+               1    ,
+             C(2, 3),
+               4
+           ]);
+cvec.normalize();
+console.log('cvec = \n%s', cvec);
+```
+
+```txt
+cvec =
+       (0.182574,0)
+(0.365148,0.547723)
+       (0.730297,0)
+```
+
 ## Row Vector
 
 ### Row Vector Class Methods
@@ -4098,6 +4144,20 @@ dia =
 0.00429723          0          0
          0   0.223465          0
          0          0  -0.221164
+```
+
+#### rvec.normalize()
+
+```js
+var RV = require('eigenjs').RVector
+  , rvec = new RV([1, 2, 3]);
+rvec.normalize();
+console.log('rvec = \n%s', rvec);
+```
+
+```txt
+rvec =
+0.267261 0.534522 0.801784
 ```
 
 #### rvec.maxCoeff()
@@ -4375,6 +4435,22 @@ dia =
  (-0.52811,0.0530528)                 (0,0)                 (0,0)
                 (0,0) (-0.340944,-0.248457)                 (0,0)
                 (0,0)                 (0,0)  (0.185028,-0.228998)
+```
+
+#### crvec.normalize()
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CRV = Eigen.CRowVector
+  , crvec = new CRV([1, C(2, 3), 4]);
+crvec.normalize();
+console.log('crvec = \n%s', crvec);
+```
+
+```txt
+crvec =
+       (0.182574,0) (0.365148,0.547723)        (0.730297,0)
 ```
 
 ## Matrix Block

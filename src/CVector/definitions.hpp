@@ -26,6 +26,8 @@
 #include "instance_method_dot.hpp"
 #include "instance_method_asDiagonal.hpp"
 
+#include "instance_method_normalize.hpp"
+
 #include "class_method_Constant.hpp"
 
 namespace EigenJS {
@@ -43,6 +45,8 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_dot)
   (instance_method_asDiagonal)
+
+  (instance_method_normalize)
 
   (class_method_Constant)
 );

@@ -28,6 +28,8 @@
 #include "instance_method_dot.hpp"
 #include "instance_method_asDiagonal.hpp"
 
+#include "instance_method_normalize.hpp"
+
 #include "instance_method_maxCoeff.hpp"
 #include "instance_method_minCoeff.hpp"
 
@@ -51,6 +53,8 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_dot)
   (instance_method_asDiagonal)
+
+  (instance_method_normalize)
 
   (instance_method_maxCoeff)
   (instance_method_minCoeff)

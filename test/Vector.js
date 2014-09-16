@@ -909,6 +909,14 @@ describe('Vector', function() {
     dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
   });
 
+  it("#normalize() should normalizes the vector", function() {
+    vec.normalize.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.normalize();
+    vec.toString().should.equal("0.104828\n0.209657\n0.314485\n0.419314\n0.524142\n0.628971");
+  });
+
   it("#dot() should return the dot product of two vectors", function() {
     vec.dot.should.be.a.Function;
 

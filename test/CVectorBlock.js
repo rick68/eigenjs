@@ -2074,6 +2074,18 @@ describe('CVectorBlock', function() {
     dia.toString().should.equal("(3,0) (0,0)\n(0,0) (4,0)");
   });
 
+  it("#normalize() should normalizes the complex vector block", function() {
+    cvblock.normalize.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.normalize();
+    cvblock.toString().should.equal("(0.6,0)\n(0.8,0)");
+
+    cvec.toString().should.equal("  (1,0)\n  (2,0)\n(0.6,0)\n(0.8,0)\n  (5,0)\n  (6,0)");
+  });
+
   it("#redux() should return a full redux operation on the whole complex matrix", function() {
     cvblock.redux.should.be.a.Function;
 
