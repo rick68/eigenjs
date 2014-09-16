@@ -40,6 +40,7 @@ SOURCES = \
     src/CMatrix/instance_method_rows.hpp \
     src/CMatrix/instance_method_set.hpp \
     src/CMatrix/instance_method_setConstant.hpp \
+    src/CMatrix/instance_method_setDiagonal.hpp \
     src/CMatrix/instance_method_setOnes.hpp \
     src/CMatrix/instance_method_setRandom.hpp \
     src/CMatrix/instance_method_setZero.hpp \
@@ -165,6 +166,7 @@ SOURCES = \
     src/Matrix/instance_method_rows.hpp \
     src/Matrix/instance_method_set.hpp \
     src/Matrix/instance_method_setConstant.hpp \
+    src/Matrix/instance_method_setDiagonal.hpp \
     src/Matrix/instance_method_setOnes.hpp \
     src/Matrix/instance_method_setRandom.hpp \
     src/Matrix/instance_method_setZero.hpp \

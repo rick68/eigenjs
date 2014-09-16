@@ -162,6 +162,27 @@ describe('VectorBlock', function() {
     vec.toString().should.equal("1\n2\n0\n1\n5\n6");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    vblock.setDiagonal.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vblock.toString().should.equal("3\n4");
+    vblock.setDiagonal(0, Vector.Zero(1)).toString().should.equal("0\n4");
+    vec.toString().should.equal("1\n2\n0\n4\n5\n6");
+
+    vblock.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("1\n4");
+    vec.toString().should.equal("1\n2\n1\n4\n5\n6");
+
+    (function(){
+      vblock.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      vblock.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of VectorBlock', function() {
     vblock.toString.should.be.a.Function;
 

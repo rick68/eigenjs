@@ -142,6 +142,41 @@ describe('CMatrixBlock', function() {
     cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0) (3,-4) (3,-4)  (8,0)\n (9,0) (3,-4) (3,-4) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    cmblock.setDiagonal.should.be.a.Function;
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+    cmblock.setDiagonal(0, Vector.Zero(2)).toString().should.equal(" (0,0)  (7,0)\n(10,0)  (0,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (7,0)  (8,0)\n (9,0) (10,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    cmblock.setDiagonal(0, RowVector.Ones(2)).toString().should.equal(" (1,0)  (7,0)\n(10,0)  (1,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (1,0)  (7,0)  (8,0)\n (9,0) (10,0)  (1,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    cmblock.setDiagonal(0, CVector.Zero(2)).toString().should.equal(" (0,0)  (7,0)\n(10,0)  (0,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (0,0)  (7,0)  (8,0)\n (9,0) (10,0)  (0,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    cmblock.setDiagonal(0, CRowVector.Ones(2)).toString().should.equal(" (1,0)  (7,0)\n(10,0)  (1,0)");
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (1,0)  (7,0)  (8,0)\n (9,0) (10,0)  (1,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+
+    (function(){
+      cmblock.setDiagonal(68, Vector.Random(2));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmblock.setDiagonal(-500, RowVector.Random(2));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmblock.setDiagonal(68, CVector.Random(2));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmblock.setDiagonal(-500, CRowVector.Random(2));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of CMatrixBlock', function() {
     cmblock.toString.should.be.a.Function;
 

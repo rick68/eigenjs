@@ -140,6 +140,41 @@ describe('CRowVectorBlock', function() {
     crvec.toString().should.equal(" (1,0)  (2,0) (3,-4) (3,-4)  (5,0)  (6,0)");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    crvblock.setDiagonal.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+    crvblock.setDiagonal(0, Vector.Zero(1)).toString().should.equal("(0,0) (4,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (0,0) (4,0) (5,0) (6,0)");
+
+    crvblock.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("(1,0) (4,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (1,0) (4,0) (5,0) (6,0)");
+
+    crvblock.setDiagonal(0, CVector.Zero(1)).toString().should.equal("(0,0) (4,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (0,0) (4,0) (5,0) (6,0)");
+
+    crvblock.setDiagonal(0, CRowVector.Ones(1)).toString().should.equal("(1,0) (4,0)");
+    crvec.toString().should.equal("(1,0) (2,0) (1,0) (4,0) (5,0) (6,0)");
+
+    (function(){
+      crvblock.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvblock.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvblock.setDiagonal(68, CVector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvblock.setDiagonal(-500, CRowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of CRowVectorBlock', function() {
     crvblock.toString.should.be.a.Function;
 

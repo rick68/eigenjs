@@ -148,6 +148,41 @@ describe('CVectorBlock', function() {
     cvec.toString().should.equal(" (1,0)\n (2,0)\n(3,-4)\n(3,-4)\n (5,0)\n (6,0)");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    cvblock.setDiagonal.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+    cvblock.setDiagonal(0, Vector.Zero(1)).toString().should.equal("(0,0)\n(4,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("(1,0)\n(4,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.setDiagonal(0, CVector.Zero(1)).toString().should.equal("(0,0)\n(4,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(0,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    cvblock.setDiagonal(0, CRowVector.Ones(1)).toString().should.equal("(1,0)\n(4,0)");
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(1,0)\n(4,0)\n(5,0)\n(6,0)");
+
+    (function(){
+      cvblock.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvblock.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvblock.setDiagonal(68, CVector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvblock.setDiagonal(-500, CRowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of CVectorBlock', function() {
     cvblock.toString.should.be.a.Function;
 

@@ -140,6 +140,27 @@ describe('MatrixBlock', function() {
     }).should.throw('Invalid argument');
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    mblock.setDiagonal.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.setDiagonal(0, Vector.Zero(2)).toString().should.equal(" 0  7\n10  0");
+    mat.toString().should.equal(" 1  2  3  4\n 5  0  7  8\n 9 10  0 12\n13 14 15 16");
+
+    mblock.setDiagonal(0, RowVector.Ones(2)).toString().should.equal(" 1  7\n10  1");
+    mat.toString().should.equal(" 1  2  3  4\n 5  1  7  8\n 9 10  1 12\n13 14 15 16");
+
+    (function(){
+      mblock.setDiagonal(68, Vector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      mblock.setDiagonal(-500, RowVector.Random(3));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of MatrixBlock', function() {
     mblock.toString.should.be.a.Function;
 

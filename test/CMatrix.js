@@ -6,6 +6,8 @@ const
     CMatrix = Eigen.CMatrix,
     CVector = Eigen.CVector,
     CMatrixBlock = Eigen.CMatrixBlock,
+    RowVector = Eigen.RowVector,
+    CRowVector = Eigen.CRowVector,
     should = require('should');
 
 describe('CMatrix', function() {
@@ -158,6 +160,32 @@ describe('CMatrix', function() {
     cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
     cmat.setConstant(0.6).toString().should.equal("(0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0)\n(0.6,0) (0.6,0) (0.6,0)");
     cmat.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4) (3,-4)\n(3,-4) (3,-4) (3,-4)\n(3,-4) (3,-4) (3,-4)");
+  });
+
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    cmat.setDiagonal.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.setDiagonal(0, Vector.Zero(3)).toString().should.equal("(0,0) (2,2) (3,3)\n(4,4) (0,0) (6,6)\n(7,7) (8,8) (0,0)");
+    cmat.setDiagonal(0, RowVector.Ones(3)).toString().should.equal("(1,0) (2,2) (3,3)\n(4,4) (1,0) (6,6)\n(7,7) (8,8) (1,0)");
+    cmat.setDiagonal(0, CVector.Zero(3)).toString().should.equal("(0,0) (2,2) (3,3)\n(4,4) (0,0) (6,6)\n(7,7) (8,8) (0,0)");
+    cmat.setDiagonal(0, CRowVector.Ones(3)).toString().should.equal("(1,0) (2,2) (3,3)\n(4,4) (1,0) (6,6)\n(7,7) (8,8) (1,0)");
+
+    (function(){
+      cmat.setDiagonal(68, Vector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmat.setDiagonal(-500, RowVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmat.setDiagonal(68, CVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cmat.setDiagonal(-500, CRowVector.Random(3));
+    }).should.throw('Invalid index argument');
   });
 
   it('#toString() should return all element values of CMatrix', function() {

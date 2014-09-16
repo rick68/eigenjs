@@ -138,6 +138,22 @@ describe('RowVector', function() {
     rvec.cols().should.equal(9);
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    rvec.setDiagonal.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.setDiagonal(0, Vector.Zero(1)).toString().should.equal("0 2 3 4 5 6");
+    rvec.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("1 2 3 4 5 6");
+
+    (function(){
+      rvec.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      rvec.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of RowVector', function() {
     rvec.toString.should.be.a.Function;
 

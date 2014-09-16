@@ -27,6 +27,7 @@
 #include "instance_method_setOnes.hpp"
 #include "instance_method_setRandom.hpp"
 #include "instance_method_setConstant.hpp"
+#include "instance_method_setDiagonal.hpp"
 
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
@@ -88,6 +89,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_setOnes)
   (instance_method_setRandom)
   (instance_method_setConstant)
+  (instance_method_setDiagonal)
 
   (instance_method_block)
   (instance_method_row)

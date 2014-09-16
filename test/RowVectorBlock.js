@@ -156,6 +156,27 @@ describe('RowVectorBlock', function() {
     rvec.toString().should.equal("1 2 0 1 5 6");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    rvblock.setDiagonal.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvblock.toString().should.equal("3 4");
+    rvblock.setDiagonal(0, Vector.Zero(1)).toString().should.equal("0 4");
+    rvec.toString().should.equal("1 2 0 4 5 6");
+
+    rvblock.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("1 4");
+    rvec.toString().should.equal("1 2 1 4 5 6");
+
+    (function(){
+      rvblock.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      rvblock.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of RowVectorBlock', function() {
     rvblock.toString.should.be.a.Function;
 

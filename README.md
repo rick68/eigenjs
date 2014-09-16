@@ -155,6 +155,8 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.setOnes()](#matsetones)
     * [mat.setRandom()](#matsetrandom)
     * [mat.setConstant(scalar)](#matsetconstantscalar)
+    * [mat.setDiagonal(index, vec)](#matsetdiagonalindex-vec)
+    * [mat.setDiagonal(index, rvec)](#matsetdiagonalindex-rvec)
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
@@ -290,6 +292,10 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.setRandom()](#cmatsetrandom)
     * [cmat.setConstant(scalar)](#cmatsetconstantscalar)
     * [cmat.setConstant(comp)](#cmatsetconstantcomp)
+    * [cmat.setDiagonal(index, vec)](#cmatsetdiagonalindex-vec)
+    * [cmat.setDiagonal(index, rvec)](#cmatsetdiagonalindex-rvec)
+    * [cmat.setDiagonal(index, cvec)](#cmatsetdiagonalindex-cvec)
+    * [cmat.setDiagonal(index, crvec)](#cmatsetdiagonalindex-crvec)
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
@@ -1319,8 +1325,8 @@ mat =
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Zero(3, 3);
-console.log('mat =\n%s', mat);
-console.log('mat =\n%s', mat.setConstant());
+console.log('mat =\n%s\n', mat);
+console.log('mat =\n%s', mat.setConstant(0.6));
 ```
 
 ```txt
@@ -1328,10 +1334,29 @@ mat =
 0 0 0
 0 0 0
 0 0 0
+
 mat =
- -0.292434 -0.0673437   0.283946
- -0.938224   0.154289   0.283845
- -0.725773  -0.862362   0.583097
+0.6 0.6 0.6
+0.6 0.6 0.6
+0.6 0.6 0.6
+```
+
+#### mat.setDiagonal(index, vec)
+#### mat.setDiagonal(index, rvec)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3)
+  , dia = mat.diagonal(1);
+dia.setRandom();
+console.log('mat =\n%s', mat.setDiagonal(1, dia));
+```
+
+```txt
+mat =
+        0 -0.294006         0
+        0         0  0.634569
+        0         0         0
 ```
 
 #### mat.block(startRow, startCol, blockRows, blockCols)
@@ -1899,7 +1924,7 @@ var M = require('eigenjs').Matrix
              console.log('rowId = %d, colId = %d', rowId, colId);
            };
 console.log('mat = \n%s\n', mat);
-console.log('max = %s', mat.maxCoeff(func));
+console.log('max = %d', mat.maxCoeff(func));
 ```
 
 ```txt
@@ -1939,7 +1964,7 @@ var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3)
   , obj = {};
 console.log('mat = \n%s\n', mat);
-console.log('min = %s', mat.minCoeff(obj));
+console.log('min = %d', mat.minCoeff(obj));
 console.log('obj = %s', JSON.stringify(obj));
 ```
 
@@ -1964,7 +1989,7 @@ var M = require('eigenjs').Matrix
              console.log('rowId = %d, colId = %d', rowId, colId);
            };
 console.log('mat = \n%s\n', mat);
-console.log('min = %s', mat.minCoeff(func));
+console.log('min = %d', mat.minCoeff(func));
 ```
 
 ```txt
@@ -2431,7 +2456,7 @@ var Eigen = require('eigenjs')
   , C = Eigen.Complex
   , CM = Eigen.CMatrix
   , cmat = new CM.Zero(3, 3);
-console.log('cmat =\n%s', cmat);
+console.log('cmat =\n%s\n', cmat);
 console.log('cmat =\n%s', cmat.setConstant(C(6, 8)));
 ```
 
@@ -2440,10 +2465,31 @@ cmat =
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0)
+
 cmat =
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
 (6,8) (6,8) (6,8)
+```
+
+#### mat.setDiagonal(index, vec)
+#### mat.setDiagonal(index, rvec)
+#### mat.setDiagonal(index, cvec)
+#### mat.setDiagonal(index, crvec)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new M.Random(3, 3)
+  , dia = cmat.diagonal(1);
+dia.setZero();
+console.log('cmat =\n%s', cmat.setDiagonal(1, dia));
+```
+
+```txt
+cmat =
+-0.357257         0  0.574079
+-0.419258  0.249095         0
+-0.464809  0.537786 -0.609209
 ```
 
 #### cmat.block(startRow, startCol, blockRows, blockCols)

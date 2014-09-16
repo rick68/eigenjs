@@ -116,6 +116,32 @@ describe('CRowVector', function() {
     crvec.setConstant(Complex(3, -4)).toString().should.equal("(3,-4) (3,-4) (3,-4)");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    crvec.setDiagonal.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.setDiagonal(0, Vector.Zero(1)).toString().should.equal("(0,0) (2,2) (3,3)");
+    crvec.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("(1,0) (2,2) (3,3)");
+    crvec.setDiagonal(0, CVector.Zero(1)).toString().should.equal("(0,0) (2,2) (3,3)");
+    crvec.setDiagonal(0, CRowVector.Ones(1)).toString().should.equal("(1,0) (2,2) (3,3)");
+
+    (function(){
+      crvec.setDiagonal(68, Vector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvec.setDiagonal(-500, RowVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvec.setDiagonal(68, CVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      crvec.setDiagonal(-500, CRowVector.Random(3));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of CRowVector', function() {
     crvec.toString.should.be.a.Function;
 

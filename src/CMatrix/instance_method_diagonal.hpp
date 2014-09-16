@@ -30,7 +30,7 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diagonal,
   }
 
   if (index <= -value.rows() || index >= value.cols()) {
-    EIGENJS_THROW_ERROR_INVALID_INDEX_ARGUMENTS()
+    EIGENJS_THROW_ERROR_INVALID_INDEX_ARGUMENT()
     NanReturnUndefined();
   }
 
@@ -44,7 +44,6 @@ EIGENJS_INSTANCE_METHOD(CMatrix, diagonal,
   typename CVector::value_type& new_value = **new_obj;
 
   new_value = value.diagonal(index);
-
 
   NanReturnValue(instance);
 })
