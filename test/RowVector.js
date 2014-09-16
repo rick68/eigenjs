@@ -591,6 +591,20 @@ describe('RowVector', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    rvec.norm.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var sum = 0;
+
+    for (var i = 0; i < rvec.cols(); ++i) {
+      sum += Math.pow(rvec.get(i), 2);
+    }
+
+    rvec.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two row-vectors are equal', function() {
     rvec.equals.should.be.a.Function;
 

@@ -1628,6 +1628,20 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    cvblock.norm.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var sum = 0;
+
+    for (var i = 0; i < cvblock.rows(); ++i) {
+      sum += cvblock.get(i).norm();
+    }
+
+    cvblock.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two complex vector block are equal', function() {
     cvblock.equals.should.be.a.Function;
 

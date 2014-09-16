@@ -54,6 +54,8 @@
 #include "instance_method_trace.hpp"
 #include "instance_method_diagonal.hpp"
 
+#include "instance_method_norm.hpp"
+
 #include "instance_method_equals.hpp"
 #include "instance_method_isApprox.hpp"
 #include "instance_method_isSquare.hpp"
@@ -116,6 +118,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_inverse)
   (instance_method_trace)
   (instance_method_diagonal)
+
+  (instance_method_norm)
 
   (instance_method_equals)
   (instance_method_isApprox)

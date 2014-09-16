@@ -490,6 +490,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the Frobenius norm', function() {
+    mat.norm.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var sum = 0;
+
+    for (var i = 0; i < mat.cols(); ++i) {
+      for (var j = 0; j < mat.rows(); ++j) {
+        sum += Math.pow(mat.get(j, i), 2);
+      }
+    }
+
+    mat.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two matrices are equal', function() {
     mat.equals.should.be.a.Function;
 

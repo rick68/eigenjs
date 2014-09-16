@@ -1299,6 +1299,20 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    rvblock.norm.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var sum = 0;
+
+    for (var i = 0; i < rvblock.cols(); ++i) {
+      sum += Math.pow(rvblock.get(i), 2);
+    }
+
+    rvblock.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two row-vector blocks are equal', function() {
     rvblock.equals.should.be.a.Function;
 

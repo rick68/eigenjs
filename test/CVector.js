@@ -706,6 +706,20 @@ describe('CVector', function() {
     }).should.throw("Invalid index argument");
   });
 
+  it('#norm() should return the l2 norm', function() {
+    cvec.norm.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var sum = 0;
+
+    for (var i = 0; i < cvec.rows(); ++i) {
+      sum += cvec.get(i).norm();
+    }
+
+    cvec.norm().should.equal(Math.pow(sum, 0.5));
+  });
+
   it('#equals() should return true if two complex vectors are equal', function() {
     cvec.equals.should.be.a.Function;
 
