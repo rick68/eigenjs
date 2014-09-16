@@ -131,6 +131,32 @@ describe('CVector', function() {
     cvec.setConstant(Complex(3, -4)).toString().should.equal("(3,-4)\n(3,-4)\n(3,-4)\n(3,-4)\n(3,-4)\n(3,-4)");
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    cvec.setDiagonal.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setDiagonal(0, Vector.Zero(1)).toString().should.equal("(0,0)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("(1,0)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setDiagonal(0, CVector.Zero(1)).toString().should.equal("(0,0)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.setDiagonal(0, CRowVector.Ones(1)).toString().should.equal("(1,0)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    (function(){
+      cvec.setDiagonal(68, Vector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvec.setDiagonal(-500, RowVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvec.setDiagonal(68, CVector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      cvec.setDiagonal(-500, CRowVector.Random(3));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of CVector', function() {
     cvec.toString.should.be.a.Function;
 

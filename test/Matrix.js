@@ -5,6 +5,7 @@ const
     Vector = Eigen.Vector,
     CMatrix = Eigen.CMatrix,
     MatrixBlock = Eigen.MatrixBlock,
+    RowVector = Eigen.RowVector,
     should = require('should');
 
 describe('Matrix', function() {
@@ -126,6 +127,22 @@ describe('Matrix', function() {
     (function(){
       mat.setConstant(Complex(3, -4));
     }).should.throw('Invalid argument');
+  });
+
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    mat.setDiagonal.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.setDiagonal(0, Vector.Zero(3)).toString().should.equal("0 2 3\n4 0 6\n7 8 0");
+    mat.setDiagonal(0, RowVector.Ones(3)).toString().should.equal("1 2 3\n4 1 6\n7 8 1");
+
+    (function(){
+      mat.setDiagonal(68, Vector.Random(3));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      mat.setDiagonal(-500, RowVector.Random(3));
+    }).should.throw('Invalid index argument');
   });
 
   it('#toString() should return all element values of Matrix', function() {

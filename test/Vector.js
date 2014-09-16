@@ -161,6 +161,22 @@ describe('Vector', function() {
     vec.rows().should.equal(9);
   });
 
+  it('#setDiagonal() should set the diagonal to other values', function() {
+    vec.setDiagonal.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.setDiagonal(0, Vector.Zero(1)).toString().should.equal("0\n2\n3\n4\n5\n6");
+    vec.setDiagonal(0, RowVector.Ones(1)).toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    (function(){
+      vec.setDiagonal(68, Vector.Random(1));
+    }).should.throw('Invalid index argument');
+
+    (function(){
+      vec.setDiagonal(-500, RowVector.Random(1));
+    }).should.throw('Invalid index argument');
+  });
+
   it('#toString() should return all element values of Vector', function() {
     vec.toString.should.be.a.Function;
 
