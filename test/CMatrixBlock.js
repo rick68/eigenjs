@@ -1288,16 +1288,15 @@ describe('CMatrixBlock', function() {
 
     cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
 
-    var sum = Complex(0);
+    var sum = 0;
 
     for (var i = 0; i < cmblock.cols(); ++i) {
       for (var j = 0; j < cmblock.rows(); ++j) {
-        var c = cmblock.get(j, i);
-        sum.adda(c.norm());
+        sum += cmblock.get(j, i).norm();
       }
     }
 
-    cmblock.norm().equals(Complex.pow(sum, 0.5)).should.be.true;
+    cmblock.norm().should.equal(Math.pow(sum, 0.5));
   });
 
   it('#equals() should return true if two complex matrix block are equal', function() {

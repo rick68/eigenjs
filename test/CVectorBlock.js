@@ -1633,14 +1633,13 @@ describe('CVectorBlock', function() {
 
     cvblock.toString().should.equal("(3,0)\n(4,0)");
 
-    var sum = Complex(0);
+    var sum = 0;
 
     for (var i = 0; i < cvblock.rows(); ++i) {
-      var c = cvblock.get(i);
-      sum.adda(c.norm())
+      sum += cvblock.get(i).norm();
     }
 
-    cvblock.norm().isApprox(Complex.pow(sum, 0.5)).should.be.true;
+    cvblock.norm().should.equal(Math.pow(sum, 0.5));
   });
 
   it('#equals() should return true if two complex vector block are equal', function() {
