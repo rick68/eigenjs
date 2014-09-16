@@ -30,7 +30,7 @@ EIGENJS_INSTANCE_METHOD(Matrix, diagonal,
   }
 
   if (index <= -value.rows() || index >= value.cols()) {
-    EIGENJS_THROW_ERROR_INVALID_INDEX_ARGUMENTS()
+    EIGENJS_THROW_ERROR_INVALID_INDEX_ARGUMENT()
     NanReturnUndefined();
   }
 
