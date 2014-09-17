@@ -419,6 +419,56 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_REPLICATE_CONTEXT()            \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+    v8::Local< v8::Value > argv[] = {                                        \
+        NanNew<v8::Integer>( 0 )  /* rows */                                 \
+      , NanNew<v8::Integer>( 0 )  /* cols */                                 \
+      };                                                                     \
+                                                                             \
+    NanScope();                                                              \
+                                                                             \
+    if ( args.Length() == 2 &&                                               \
+         args[0]->IsNumber() &&  /* rowFactor */                             \
+         args[1]->IsNumber()     /* colFactor */                             \
+    ) {                                                                      \
+      const typename T::value_type::Index& rowFactor =                       \
+          args[0]->Int32Value();                                             \
+      const typename T::value_type::Index& colFactor =                       \
+          args[1]->Int32Value();                                             \
+                                                                             \
+      if ( rowFactor < 0 || colFactor < 0 ) {                                \
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
+        NanReturnUndefined();                                                \
+      }                                                                      \
+                                                                             \
+      typedef typename std::conditional<                                     \
+          detail::is_complex< T >::value                                     \
+        , CMatrix                                                            \
+        , Matrix                                                             \
+        >::type MT;                                                          \
+                                                                             \
+      v8::Local< v8::Object > instance = MT::new_instance(                   \
+          args                                                               \
+        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
+        , argv                                                               \
+        );                                                                   \
+                                                                             \
+      MT* new_obj = node::ObjectWrap::Unwrap< MT >( instance );              \
+      typename MT::value_type& new_matrix_or_cmatirx = **new_obj;            \
+                                                                             \
+      new_matrix_or_cmatirx = value.replicate( rowFactor, colFactor );       \
+                                                                             \
+      NanReturnValue( instance );                                            \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_SETZERO_CONTEXT()              \
   {                                                                          \
     T* obj = node::ObjectWrap::Unwrap< T >( args.This() );                   \
@@ -638,56 +688,6 @@
     NanScope();                                                              \
                                                                              \
     NanReturnValue( NanNew< v8::Boolean >( value.isDiagonal( prec ) ) );     \
-  }                                                                          \
-  /**/
-
-#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_REPLICATE_CONTEXT()            \
-  {                                                                          \
-    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
-    const typename T::value_type& value = **obj;                             \
-    v8::Local< v8::Value > argv[] = {                                        \
-        NanNew<v8::Integer>( 0 )  /* rows */                                 \
-      , NanNew<v8::Integer>( 0 )  /* cols */                                 \
-      };                                                                     \
-                                                                             \
-    NanScope();                                                              \
-                                                                             \
-    if ( args.Length() == 2 &&                                               \
-         args[0]->IsNumber() &&  /* rowFactor */                             \
-         args[1]->IsNumber()     /* colFactor */                             \
-    ) {                                                                      \
-      const typename T::value_type::Index& rowFactor =                       \
-          args[0]->Int32Value();                                             \
-      const typename T::value_type::Index& colFactor =                       \
-          args[1]->Int32Value();                                             \
-                                                                             \
-      if ( rowFactor < 0 || colFactor < 0 ) {                                \
-        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                               \
-        NanReturnUndefined();                                                \
-      }                                                                      \
-                                                                             \
-      typedef typename std::conditional<                                     \
-          detail::is_complex< T >::value                                     \
-        , CMatrix                                                            \
-        , Matrix                                                             \
-        >::type MT;                                                          \
-                                                                             \
-      v8::Local< v8::Object > instance = MT::new_instance(                   \
-          args                                                               \
-        , sizeof( argv ) / sizeof( v8::Local< v8::Value > )                  \
-        , argv                                                               \
-        );                                                                   \
-                                                                             \
-      MT* new_obj = node::ObjectWrap::Unwrap< MT >( instance );              \
-      typename MT::value_type& new_matrix_or_cmatirx = **new_obj;            \
-                                                                             \
-      new_matrix_or_cmatirx = value.replicate( rowFactor, colFactor );       \
-                                                                             \
-      NanReturnValue( instance );                                            \
-    }                                                                        \
-                                                                             \
-    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
-    NanReturnUndefined();                                                    \
   }                                                                          \
   /**/
 
