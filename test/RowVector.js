@@ -708,6 +708,16 @@ describe('RowVector', function() {
     rvec2.isDiagonal().should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    rvec.all.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.all().should.be.true;
+    rvec.set(0, 0);
+    rvec.toString().should.equal("0 2 3 4 5 6");
+    rvec.all().should.be.false;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 

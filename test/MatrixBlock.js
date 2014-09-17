@@ -1224,6 +1224,19 @@ describe('MatrixBlock', function() {
     mblock2.isDiagonal().should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    mblock.all.should.be.a.Function;
+
+    mat.all().should.be.true;
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.all().should.be.true;
+    mblock.set(0, 0, 0);
+    mblock.toString().should.equal(" 0  7\n10 11");
+    mblock.all().should.be.false;
+    mat.toString().should.equal(" 1  2  3  4\n 5  0  7  8\n 9 10 11 12\n13 14 15 16");
+    mat.all().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 

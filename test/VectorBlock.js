@@ -1599,6 +1599,19 @@ describe('VectorBlock', function() {
     vblock2.isDiagonal().should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    vblock.all.should.be.a.Function;
+
+    vec.all().should.be.true;
+    vblock.toString().should.equal("3\n4");
+    vblock.all().should.be.true;
+    vblock.set(0, 0);
+    vblock.toString().should.equal("0\n4");
+    vblock.all().should.be.false;
+    vec.toString().should.equal("1\n2\n0\n4\n5\n6");
+    vec.all().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     VectorBlock.Zero.should.be.a.Function;
 
