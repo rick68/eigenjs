@@ -1491,6 +1491,19 @@ describe('RowVectorBlock', function() {
     rvblock2.isDiagonal().should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    rvblock.all.should.be.a.Function;
+
+    rvec.all().should.be.true;
+    rvblock.toString().should.equal("3 4");
+    rvblock.all().should.be.true;
+    rvblock.set(0, 0);
+    rvblock.toString().should.equal("0 4");
+    rvblock.all().should.be.false;
+    rvec.toString().should.equal("1 2 0 4 5 6");
+    rvec.all().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     RowVectorBlock.Zero.should.be.a.Function;
 

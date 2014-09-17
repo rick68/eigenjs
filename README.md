@@ -257,6 +257,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isOnes([prec = 1e-12])](#matisonesprec--1e-12)
     * [mat.isIdentity([prec = 1e-12])](#matisidentityprec--1e-12)
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
+    * [mat.all()](#matall)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -2197,6 +2198,32 @@ console.log(mat.isDiagonal(1e-3));
 ```txt
 false
 true
+```
+
+#### mat.all()
+
+Returns true if all coefficients are true.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Constant(3, 3, 1);
+console.log('mat = \n%s\n%s\n', mat, mat.all());
+mat.set(0, 0, 0);
+console.log('mat = \n%s\n%s', mat, mat.all());
+```
+
+```txt
+mat =
+1 1 1
+1 1 1
+1 1 1
+true
+
+mat =
+0 1 1
+1 1 1
+1 1 1
+false
 ```
 
 #### mat.toString([options])

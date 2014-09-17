@@ -750,6 +750,16 @@ describe('Vector', function() {
     vec2.isDiagonal().should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    vec.all.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.all().should.be.true;
+    vec.set(0, 0);
+    vec.toString().should.equal("0\n2\n3\n4\n5\n6");
+    vec.all().should.be.false;
+  });
+
   it('#Zero() should return a zero vector', function() {
     Vector.Zero.should.be.a.Function;
 

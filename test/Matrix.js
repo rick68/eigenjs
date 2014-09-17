@@ -643,6 +643,16 @@ describe('Matrix', function() {
     mat2.isDiagonal(1e-4).should.be.true;
   });
 
+  it('#all() should return true if all coefficients are true', function() {
+    mat.all.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.all().should.be.true;
+    mat.set(0, 0, 0);
+    mat.toString().should.equal("0 2 3\n4 5 6\n7 8 9");
+    mat.all().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 
