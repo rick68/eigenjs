@@ -81,7 +81,7 @@ struct visitor_from_js {
     , NanNew<v8::Integer>(i)
     , NanNew<v8::Integer>(j)
     };
-  
+
     NanMakeCallback(
         args_.This()
       , func_
