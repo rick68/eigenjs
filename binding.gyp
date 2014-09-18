@@ -15,7 +15,7 @@
             'VCCLCompilerTool': {
               'ExceptionHandling': 1,
               'AdditionalOptions': [
-                '/GR', '/EHsc', '/wd4003', '/wd4018', '/wd4506'
+                '/GR', '/EHsc', '/wd4003', '/wd4018', '/wd4506', '/wd4800'
               ]
             }
           }
