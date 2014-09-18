@@ -1237,6 +1237,19 @@ describe('MatrixBlock', function() {
     mat.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    mblock.any.should.be.a.Function;
+
+    mat.any().should.be.true;
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.any().should.be.true;
+    mblock.setZero();
+    mblock.toString().should.equal("0 0\n0 0");
+    mblock.any().should.be.false;
+    mat.toString().should.equal(" 1  2  3  4\n 5  0  0  8\n 9  0  0 12\n13 14 15 16");
+    mat.any().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 

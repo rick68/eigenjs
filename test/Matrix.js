@@ -653,6 +653,16 @@ describe('Matrix', function() {
     mat.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    mat.any.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.any().should.be.true;
+    mat.setZero();
+    mat.toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+    mat.any().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 

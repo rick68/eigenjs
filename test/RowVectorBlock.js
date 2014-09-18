@@ -1504,6 +1504,19 @@ describe('RowVectorBlock', function() {
     rvec.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    rvblock.any.should.be.a.Function;
+
+    rvec.any().should.be.true;
+    rvblock.toString().should.equal("3 4");
+    rvblock.any().should.be.true;
+    rvblock.setZero();
+    rvblock.toString().should.equal("0 0");
+    rvblock.any().should.be.false;
+    rvec.toString().should.equal("1 2 0 0 5 6");
+    rvec.any().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     RowVectorBlock.Zero.should.be.a.Function;
 

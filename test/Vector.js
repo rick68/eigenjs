@@ -760,6 +760,16 @@ describe('Vector', function() {
     vec.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    vec.any.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.any().should.be.true;
+    vec.setZero();
+    vec.toString().should.equal("0\n0\n0\n0\n0\n0");
+    vec.any().should.be.false;
+  });
+
   it('#Zero() should return a zero vector', function() {
     Vector.Zero.should.be.a.Function;
 
