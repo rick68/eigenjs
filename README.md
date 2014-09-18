@@ -234,6 +234,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.sum()](#matsum)
     * [mat.prod()](#matprod)
     * [mat.mean()](#matmean)
+    * [mat.visit(func)](#matvisitfunc)
     * [mat.maxCoeff()](#matmaxcoeff)
     * [mat.maxCoeff(obj)](#matmaxcoeffobj)
     * [mat.maxCoeff(func)](#matmaxcoefffunc)
@@ -398,6 +399,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.sum()](#cmatsum)
     * [cmat.prod()](#cmatprod)
     * [cmat.mean()](#cmatmean)
+    * [cmat.visit(func)](#cmatvisitfunc)
     * [cmat.equals(cmat)](#cmatequalscmat)
     * [cmat.equals(cvec)](#cmatequalscvec)
     * [cmat.equals(crvec)](#cmatequalscrvec)
@@ -1932,6 +1934,34 @@ console.log('%d', mat.mean());
 5
 ```
 
+#### mat.visit(func)
+
+* func `Function` Applies the `func` to the whole coefficients of the matrix or vector.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+          ]);
+mat.visit(function(value, row, col) {
+  console.log('mat(%d, %d) = %d', row, col, value);
+});
+```
+
+```txt
+mat(0, 0) = 1
+mat(1, 0) = 4
+mat(2, 0) = 7
+mat(0, 1) = 2
+mat(1, 1) = 5
+mat(2, 1) = 8
+mat(0, 2) = 3
+mat(1, 2) = 6
+mat(2, 2) = 9
+```
+
 #### mat.maxCoeff()
 
 ```js
@@ -3176,7 +3206,7 @@ var Eigen = require('eigenjs')
   , cmat = new CM(2, 2).set([
             C(1, 2), C(3, 4),
             C(5, 6), C(7, 8)
-          ])
+           ])
   , func = function(a, b) { return a.add(b); };
 console.log('%s', cmat.redux(func));
 ```
@@ -3194,7 +3224,7 @@ var Eigen = require('eigenjs')
   , cmat = new CM(2, 2).set([
             C(1, 2), C(3, 4),
             C(5, 6), C(7, 8)
-          ]);
+           ]);
 console.log('%s', cmat.sum());
 ```
 
@@ -3211,7 +3241,7 @@ var Eigen = require('eigenjs')
   , cmat = new CM(2, 2).set([
             C(1, 2), C(3, 4),
             C(5, 6), C(7, 8)
-          ]);
+           ]);
 console.log('%s', cmat.prod());
 ```
 
@@ -3228,12 +3258,40 @@ var Eigen = require('eigenjs')
   , cmat = new CM(2, 2).set([
             C(1, 2), C(3, 4),
             C(5, 6), C(7, 8)
-          ]);
+           ]);
 console.log('%s', cmat.mean());
 ```
 
 ```txt
 (4,5)
+```
+
+#### cmat.visit(func)
+
+* func `Function` Applies the `func` to the whole coefficients of the matrix or vector.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+           ]);
+cmat.visit(function(value, row, col) {
+  console.log('cmat(%d, %d) = %s', row, col, value);
+});
+```
+
+```txt
+cmat(0, 0) = (1,0)
+cmat(1, 0) = (4,0)
+cmat(2, 0) = (7,0)
+cmat(0, 1) = (2,0)
+cmat(1, 1) = (5,0)
+cmat(2, 1) = (8,0)
+cmat(0, 2) = (3,0)
+cmat(1, 2) = (6,0)
+cmat(2, 2) = (9,0)
 ```
 
 #### cmat.equals(cmat)
