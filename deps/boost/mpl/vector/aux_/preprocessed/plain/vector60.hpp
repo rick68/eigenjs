@@ -690,7 +690,7 @@ struct pop_back_impl< aux::vector_tag<53> >
             , typename Vector::item46, typename Vector::item47
             , typename Vector::item48, typename Vector::item49
             , typename Vector::item50, typename Vector::item51
-            > type
+            > type;
     };
 };
 
@@ -709,8 +709,8 @@ template<
     , typename T25, typename T26, typename T27, typename T28, typename T29
     , typename T30, typename T31, typename T32, typename T33, typename T34
     , typename T35, typename T36, typename T37, typename T38, typename T39
-    , typename T40, typename T41, typename T42, typename T43, typename T34
-    , typename T45, typename T46, typename T47, typename T48, typename T39
+    , typename T40, typename T41, typename T42, typename T43, typename T44
+    , typename T45, typename T46, typename T47, typename T48, typename T49
     , typename T50, typename T51, typename T52, typename T53
     >
 struct vector54
