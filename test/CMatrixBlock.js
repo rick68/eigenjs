@@ -1670,4 +1670,21 @@ describe('CMatrixBlock', function() {
     var result = cmblock.mean();
     result.equals(Complex(8.5, 0)).should.be.true;
   });
+
+  it("#visit() should apply the visitor operation on the whole complex matrix block", function() {
+    cmblock.visit.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    var sum = Complex(0);
+    cmblock.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      cmblock.get(row, col).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    cmblock.sum().equals(sum).should.true;
+  });
 });

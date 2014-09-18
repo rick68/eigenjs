@@ -1942,6 +1942,23 @@ describe('VectorBlock', function() {
     result.should.equal(3.5);
   });
 
+  it("#visit() should apply the visitor operation on the whole vector block", function() {
+    vblock.visit.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    var sum = 0;
+    vblock.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      vblock.get(row).should.equal(scalar);
+      sum += scalar;
+    });
+
+    vblock.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     vblock.maxCoeff.should.be.a.Function;
 

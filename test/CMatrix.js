@@ -918,4 +918,21 @@ describe('CMatrix', function() {
     var result = cmat.mean();
     result.equals(Complex(5, 5)).should.be.true;
   });
+
+  it("#visit() should apply the visitor operation on the whole complex matrix", function() {
+    cmat.visit.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    var sum = Complex(0);
+    cmat.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      cmat.get(row, col).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    cmat.sum().equals(sum).should.true;
+  });
 });

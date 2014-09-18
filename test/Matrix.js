@@ -845,6 +845,23 @@ describe('Matrix', function() {
     result.should.equal(5);
   });
 
+  it("#visit() should apply the visitor operation on the whole matrix", function() {
+    mat.visit.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+
+    var sum = 0;
+    mat.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      mat.get(row, col).should.equal(scalar);
+      sum += scalar;
+    });
+
+    mat.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     mat.maxCoeff.should.be.a.Function;
 

@@ -1109,6 +1109,23 @@ describe('Vector', function() {
     result.should.equal(3.5);
   });
 
+  it("#visit() should apply the visitor operation on the whole vector", function() {
+    vec.visit.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    var sum = 0;
+    vec.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      vec.get(row).should.equal(scalar);
+      sum += scalar;
+    });
+
+    vec.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     vec.maxCoeff.should.be.a.Function;
 

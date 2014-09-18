@@ -1832,6 +1832,23 @@ describe('RowVectorBlock', function() {
     result.should.equal(3.5);
   });
 
+  it("#visit() should apply the visitor operation on the whole row-vector block", function() {
+    rvblock.visit.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    var sum = 0;
+    rvblock.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      rvblock.get(col).should.equal(scalar);
+      sum += scalar;
+    });
+
+    rvblock.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     rvblock.maxCoeff.should.be.a.Function;
 

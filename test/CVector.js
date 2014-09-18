@@ -1140,4 +1140,21 @@ describe('CVector', function() {
     var result = cvec.mean();
     result.equals(Complex(3.5, 3.5)).should.be.true;
   });
+
+  it("#visit() should apply the visitor operation on the whole complex vector", function() {
+    cvec.visit.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    var sum = Complex(0);
+    cvec.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      cvec.get(row).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    cvec.sum().equals(sum).should.true;
+  });
 });

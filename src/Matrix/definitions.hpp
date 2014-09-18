@@ -72,8 +72,10 @@
 #include "instance_method_sum.hpp"
 #include "instance_method_prod.hpp"
 #include "instance_method_mean.hpp"
+#include "instance_method_visit.hpp"
 #include "instance_method_maxCoeff.hpp"
 #include "instance_method_minCoeff.hpp"
+
 
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
@@ -143,6 +145,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_sum)
   (instance_method_prod)
   (instance_method_mean)
+  (instance_method_visit)
   (instance_method_maxCoeff)
   (instance_method_minCoeff)
 

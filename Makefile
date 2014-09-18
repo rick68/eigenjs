@@ -53,6 +53,7 @@ SOURCES = \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/instance_method_trace.hpp \
     src/CMatrix/instance_method_transpose.hpp \
+    src/CMatrix/instance_method_visit.hpp \
     src/CMatrix/macro.hpp \
     src/CMatrixBlock.hpp \
     src/CMatrixBlock/instance_method_mula.hpp \
@@ -186,6 +187,7 @@ SOURCES = \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/instance_method_trace.hpp \
     src/Matrix/instance_method_transpose.hpp \
+    src/Matrix/instance_method_visit.hpp \
     src/Matrix/macro.hpp \
     src/MatrixBlock.hpp \
     src/MatrixBlock/instance_method_mula.hpp \
@@ -247,6 +249,7 @@ SOURCES = \
     src/detail/scalar_op_from_js.hpp \
     src/detail/unwrap_block.hpp \
     src/detail/unwrap_eigen_block.hpp \
+    src/detail/visitor_from_js.hpp \
     src/throw_error.hpp
 
 FILTER = -build/c++11,-build/include_what_you_use,-whitespace/braces,-whitespace/parens,-whitespace/operators
