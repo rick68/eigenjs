@@ -65,6 +65,7 @@
 #include "instance_method_isDiagonal.hpp"
 
 #include "instance_method_allFinite.hpp"
+#include "instance_method_hasNaN.hpp"
 
 #include "instance_method_redux.hpp"
 #include "instance_method_sum.hpp"
@@ -133,6 +134,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_isDiagonal)
 
   (instance_method_allFinite)
+  (instance_method_hasNaN)
 
   (instance_method_redux)
   (instance_method_sum)
