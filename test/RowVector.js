@@ -718,6 +718,16 @@ describe('RowVector', function() {
     rvec.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    rvec.any.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.any().should.be.true;
+    rvec.setZero();
+    rvec.toString().should.equal("0 0 0 0 0 0");
+    rvec.any().should.be.false;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 

@@ -1612,6 +1612,19 @@ describe('VectorBlock', function() {
     vec.all().should.be.false;
   });
 
+  it('#any() should return true if at least one coefficient is true', function() {
+    vblock.any.should.be.a.Function;
+
+    vec.any().should.be.true;
+    vblock.toString().should.equal("3\n4");
+    vblock.any().should.be.true;
+    vblock.setZero();
+    vblock.toString().should.equal("0\n0");
+    vblock.any().should.be.false;
+    vec.toString().should.equal("1\n2\n0\n0\n5\n6");
+    vec.any().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     VectorBlock.Zero.should.be.a.Function;
 
