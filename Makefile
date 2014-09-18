@@ -13,6 +13,7 @@ SOURCES = \
     src/CMatrix/instance_method_add.hpp \
     src/CMatrix/instance_method_adda.hpp \
     src/CMatrix/instance_method_adjoint.hpp \
+    src/CMatrix/instance_method_allFinite.hpp \
     src/CMatrix/instance_method_block.hpp \
     src/CMatrix/instance_method_col.hpp \
     src/CMatrix/instance_method_cols.hpp \
@@ -142,6 +143,7 @@ SOURCES = \
     src/Matrix/instance_method_adda.hpp \
     src/Matrix/instance_method_adjoint.hpp \
     src/Matrix/instance_method_all.hpp \
+    src/Matrix/instance_method_allFinite.hpp \
     src/Matrix/instance_method_any.hpp \
     src/Matrix/instance_method_block.hpp \
     src/Matrix/instance_method_col.hpp \
