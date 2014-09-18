@@ -718,6 +718,16 @@ describe('RowVector', function() {
     rvec.all().should.be.false;
   });
 
+  it('#count() should return the number of coefficients which evaluate to true', function() {
+    rvec.count.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.count().should.equal(6);
+    rvec.set(0, 0);
+    rvec.toString().should.equal("0 2 3 4 5 6");
+    rvec.count().should.equal(5);
+  });
+
   it('#any() should return true if at least one coefficient is true', function() {
     rvec.any.should.be.a.Function;
 

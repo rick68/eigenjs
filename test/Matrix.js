@@ -663,6 +663,16 @@ describe('Matrix', function() {
     mat.any().should.be.false;
   });
 
+  it('#count() should return the number of coefficients which evaluate to true', function() {
+    mat.count.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.count().should.equal(9);
+    mat.setZero();
+    mat.toString().should.equal("0 0 0\n0 0 0\n0 0 0");
+    mat.count().should.equal(0);
+  });
+
   it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
     mat.allFinite.should.be.a.Function;
 

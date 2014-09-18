@@ -150,6 +150,7 @@ SOURCES = \
     src/Matrix/instance_method_col.hpp \
     src/Matrix/instance_method_cols.hpp \
     src/Matrix/instance_method_conjugate.hpp \
+    src/Matrix/instance_method_count.hpp \
     src/Matrix/instance_method_determinant.hpp \
     src/Matrix/instance_method_diagonal.hpp \
     src/Matrix/instance_method_div.hpp \

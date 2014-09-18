@@ -260,6 +260,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.isDiagonal([prec = 1e-12])](#matisdiagonalprec--1e-12)
     * [mat.all()](#matall)
     * [mat.any()](#matany)
+    * [mat.count()](#matcount)
     * [mat.allFinite()](#matallfinite)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
@@ -2283,6 +2284,27 @@ mat =
 0 0 0
 0 0 0
 true
+```
+
+#### mat.count()
+
+Returns the number of coefficients which evaluate to true.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+mat.block(0, 1, 3, 2).setOnes();
+console.log('mat = \n%s\n', mat);
+console.log('%d', mat.count());
+```
+
+```txt
+mat =
+0 1 1
+0 1 1
+0 1 1
+
+6
 ```
 
 #### mat.allFinite()
