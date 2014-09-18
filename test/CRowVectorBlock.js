@@ -2071,40 +2071,57 @@ describe('CRowVectorBlock', function() {
   });
 
   it("#redux() should return a full redux operation on the whole complex matrix", function() {
-    crvec.redux.should.be.a.Function;
+    crvblock.redux.should.be.a.Function;
 
-    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
 
-    var result = crvec.redux(function(a, b){
+    var result = crvblock.redux(function(a, b){
       return a.add(b);
     })
-    result.equals(21).should.be.true;
+    result.equals(7).should.be.true;
   });
 
   it("#sum() should return a full sum operation on the whole complex matrix", function() {
-    crvec.sum.should.be.a.Function;
+    crvblock.sum.should.be.a.Function;
 
-    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
 
-    var result = crvec.sum();
-    result.equals(Complex(21, 0)).should.be.true;
+    var result = crvblock.sum();
+    result.equals(Complex(7, 0)).should.be.true;
   });
 
   it("#prod() should return a full product operation on the whole complex matrix", function() {
-    crvec.prod.should.be.a.Function;
+    crvblock.prod.should.be.a.Function;
 
-    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
 
-    var result = crvec.prod();
-    result.equals(Complex(720, 0)).should.be.true;
+    var result = crvblock.prod();
+    result.equals(Complex(12, 0)).should.be.true;
   });
 
   it("#mean() should return a full mean operation on the whole complex matrix", function() {
-    crvec.mean.should.be.a.Function;
+    crvblock.mean.should.be.a.Function;
 
-    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvblock.toString().should.equal("(3,0) (4,0)");
 
-    var result = crvec.mean();
+    var result = crvblock.mean();
     result.equals(Complex(3.5, 0)).should.be.true;
+  });
+
+  it("#visit() should apply the visitor operation on the whole complex row-vector block", function() {
+    crvblock.visit.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    var sum = Complex(0);
+    crvblock.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      crvblock.get(col).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    crvblock.sum().equals(sum).should.true;
   });
 });

@@ -1064,6 +1064,23 @@ describe('RowVector', function() {
     result.should.equal(3.5);
   });
 
+  it("#visit() should apply the visitor operation on the whole row-vector", function() {
+    rvec.visit.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    var sum = 0;
+    rvec.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      rvec.get(col).should.equal(scalar);
+      sum += scalar;
+    });
+
+    rvec.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     rvec.maxCoeff.should.be.a.Function;
 

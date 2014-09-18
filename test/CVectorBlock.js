@@ -2134,4 +2134,21 @@ describe('CVectorBlock', function() {
     var result = cvblock.mean();
     result.equals(Complex(3.5, 0)).should.be.true;
   });
+
+  it("#visit() should apply the visitor operation on the whole complex vector block", function() {
+    cvblock.visit.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    var sum = Complex(0);
+    cvblock.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      cvblock.get(row).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    cvblock.sum().equals(sum).should.true;
+  });
 });

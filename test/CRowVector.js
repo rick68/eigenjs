@@ -1085,4 +1085,21 @@ describe('CRowVector', function() {
     var result = crvec.mean();
     result.equals(Complex(2, 2)).should.be.true;
   });
+
+  it("#visit() should apply the visitor operation on the whole complex row-vector", function() {
+    crvec.visit.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    var sum = Complex(0);
+    crvec.visit(function(scalar, row, col) {
+      scalar.should.instanceOf(Complex);
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      crvec.get(col).equals(scalar).should.true;
+      sum.adda(scalar);
+    });
+
+    crvec.sum().equals(sum).should.true;
+  });
 });

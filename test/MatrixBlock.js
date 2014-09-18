@@ -1434,6 +1434,23 @@ describe('MatrixBlock', function() {
     result.should.equal(8.5);
   });
 
+  it("#visit() should apply the visitor operation on the whole matrix block", function() {
+    mblock.visit.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    var sum = 0;
+    mblock.visit(function(scalar, row, col) {
+      scalar.should.be.a.Number;
+      row.should.be.a.Number;
+      col.should.be.a.Number;
+      mblock.get(row, col).should.equal(scalar);
+      sum += scalar;
+    });
+
+    mblock.sum().should.equal(sum);
+  });
+
   it("#maxCoeff() should return the maximum of all coefficients", function() {
     mblock.maxCoeff.should.be.a.Function;
 
