@@ -742,6 +742,16 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_NONZEROS_CONTEXT()             \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Integer >( value.nonZeros() ) );             \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ALLFINITE_CONTEXT()            \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
