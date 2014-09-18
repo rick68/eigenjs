@@ -308,10 +308,10 @@ struct vector52
     typedef T51 item51;
     
 
-    typedef void_ item42;
-    typedef T41 back;
+    typedef void_ item52;
+    typedef T51 back;
     typedef v_iter< type,0 > begin;
-    typedef v_iter< type,42 > end;
+    typedef v_iter< type,52 > end;
 };
 
 template<>
