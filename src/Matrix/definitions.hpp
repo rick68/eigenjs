@@ -66,6 +66,7 @@
 
 #include "instance_method_all.hpp"
 #include "instance_method_any.hpp"
+#include "instance_method_allFinite.hpp"
 
 #include "instance_method_redux.hpp"
 #include "instance_method_sum.hpp"
@@ -136,6 +137,7 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_all)
   (instance_method_any)
+  (instance_method_allFinite)
 
   (instance_method_redux)
   (instance_method_sum)
