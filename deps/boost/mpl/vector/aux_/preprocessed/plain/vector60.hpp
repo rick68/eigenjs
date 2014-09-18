@@ -1680,8 +1680,8 @@ template<
     >
 struct vector58
 {
-    typedef aux::vector_tag<48> tag;
-    typedef vector48 type;
+    typedef aux::vector_tag<58> tag;
+    typedef vector58 type;
     typedef T0 item0;
     typedef T1 item1;
     typedef T2 item2;
@@ -1924,7 +1924,7 @@ template<
     , typename T30, typename T31, typename T32, typename T33, typename T34
     , typename T35, typename T36, typename T37, typename T38, typename T39
     , typename T40, typename T41, typename T42, typename T43, typename T44
-    , typename T45, typename T56, typename T47, typename T48, typename T49
+    , typename T45, typename T46, typename T47, typename T48, typename T49
     , typename T50, typename T51, typename T52, typename T53, typename T54
     , typename T55, typename T56, typename T57, typename T58
     >
