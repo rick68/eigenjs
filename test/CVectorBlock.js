@@ -1851,6 +1851,17 @@ describe('CVectorBlock', function() {
     cvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    cvblock.hasNaN.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvec.hasNaN().should.be.false;
+    cvblock.hasNaN().should.be.false;
+    cvblock.set(0, NaN);
+    cvblock.hasNaN().should.be.true;
+    cvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a complex matrix with zero values', function() {
     CVectorBlock.Zero.should.be.a.Function;
 

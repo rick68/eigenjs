@@ -859,6 +859,15 @@ describe('CVector', function() {
     cvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    cvec.hasNaN.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.hasNaN().should.be.false;
+    cvec.set(0, NaN);
+    cvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero complex vector', function() {
     CVector.Zero.should.be.a.Function;
 

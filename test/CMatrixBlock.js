@@ -1502,6 +1502,17 @@ describe('CMatrixBlock', function() {
     cmat.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true is it contains at least one Not A Number (NaN)', function() {
+    cmblock.hasNaN.should.be.a.Function;
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+    cmat.hasNaN().should.be.false;
+    cmblock.hasNaN().should.be.false;
+    cmblock.set(0, 0, NaN);
+    cmblock.hasNaN().should.be.true;
+    cmat.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CMatrixBlock.Zero.should.be.a.Function;
 

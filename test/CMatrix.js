@@ -757,6 +757,15 @@ describe('CMatrix', function() {
     cmat.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true is it contains at leas one Not A Number (NaN)', function() {
+    cmat.hasNaN.should.be.a.Function;
+
+    cmat.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+    cmat.hasNaN().should.be,false;
+    cmat.set(0, 0, NaN);
+    cmat.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero complex matrix', function() {
     CMatrix.Zero.should.be.a.Function;
 

@@ -1649,6 +1649,17 @@ describe('VectorBlock', function() {
     vec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    vblock.hasNaN.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.hasNaN().should.be.false;
+    vblock.hasNaN().should.be.false;
+    vblock.set(0, NaN);
+    vblock.hasNaN().should.be.true;
+    vec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     VectorBlock.Zero.should.be.a.Function;
 
