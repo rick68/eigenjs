@@ -110,6 +110,19 @@ describe('CMatrixBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    cmblock.value.should.be.a.Function;
+
+    cmblock.toString().should.equal(" (6,0)  (7,0)\n(10,0) (11,0)");
+
+    (function(){
+      cmblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var cmblock2 = cmblock.block(0, 0, 1, 1);
+    cmblock2.value().equals(6).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     cmblock.setZero.should.be.a.Function;
 

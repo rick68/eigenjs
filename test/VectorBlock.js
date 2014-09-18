@@ -112,6 +112,19 @@ describe('VectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    vblock.value.should.be.a.Function;
+
+    vblock.toString().should.equal("3\n4");
+
+    (function(){
+      vblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var vblock2 = vblock.block(0, 1);
+    vblock2.value().should.equal(3);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     vblock.setZero.should.be.a.Function;
 

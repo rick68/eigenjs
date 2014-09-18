@@ -106,6 +106,32 @@ describe('RowVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    rvblock.value.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    (function(){
+      rvblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var rvblock2 = rvblock.block(0, 1);
+    rvblock2.value().should.equal(3);
+  });
+
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    rvblock.value.should.be.a.Function;
+
+    rvblock.toString().should.equal("3 4");
+
+    (function(){
+      rvblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var rvblock2 = rvblock.block(0, 1);
+    rvblock2.value().should.equal(3);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     rvblock.setZero.should.be.a.Function;
 

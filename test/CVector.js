@@ -104,6 +104,17 @@ describe('CVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    cvec.value.should.be.a.Function;
+
+    (function(){
+      cvec.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var cvec2 = new CVector(1);
+    cvec2.value().equals(0).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     cvec.setZero.should.be.a.Function;
 

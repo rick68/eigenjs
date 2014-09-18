@@ -99,6 +99,17 @@ describe('Matrix', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    mat.value.should.be.a.Function;
+
+    (function(){
+      mat.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var mat2 = new Matrix(1, 1);
+    mat2.value().should.equal(0);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     mat.setZero.should.be.a.Function;
 
