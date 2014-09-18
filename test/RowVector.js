@@ -1093,6 +1093,7 @@ describe('RowVector', function() {
       scalar.should.be.a.Number;
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       rvec.get(col).should.equal(scalar);
       sum += scalar;
     });

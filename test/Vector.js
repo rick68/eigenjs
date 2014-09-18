@@ -1139,6 +1139,7 @@ describe('Vector', function() {
       row.should.be.a.Number;
       col.should.be.a.Number;
       vec.get(row).should.equal(scalar);
+      col.should.equal(0);
       sum += scalar;
     });
 

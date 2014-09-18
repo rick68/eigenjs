@@ -1866,6 +1866,7 @@ describe('RowVectorBlock', function() {
       scalar.should.be.a.Number;
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       rvblock.get(col).should.equal(scalar);
       sum += scalar;
     });

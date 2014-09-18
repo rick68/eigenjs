@@ -2157,6 +2157,7 @@ describe('CVectorBlock', function() {
       row.should.be.a.Number;
       col.should.be.a.Number;
       cvblock.get(row).equals(scalar).should.true;
+      col.should.equal(0);
       sum.adda(scalar);
     });
 

@@ -1161,6 +1161,7 @@ describe('CVector', function() {
       row.should.be.a.Number;
       col.should.be.a.Number;
       cvec.get(row).equals(scalar).should.true;
+      col.should.equal(0);
       sum.adda(scalar);
     });
 

@@ -2129,6 +2129,7 @@ describe('CRowVectorBlock', function() {
       scalar.should.instanceOf(Complex);
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       crvblock.get(col).equals(scalar).should.true;
       sum.adda(scalar);
     });
