@@ -1237,6 +1237,19 @@ describe('MatrixBlock', function() {
     mat.all().should.be.false;
   });
 
+  it('#count() should the number of coefficients which evaluate to true', function() {
+    mblock.count.should.be.a.Function;
+
+    mat.count().should.equal(16);
+    mblock.toString().should.equal(" 6  7\n10 11");
+    mblock.count().should.equal(4);
+    mblock.set(0, 0, 0);
+    mblock.toString().should.equal(" 0  7\n10 11");
+    mblock.count().should.equal(3);
+    mat.toString().should.equal(" 1  2  3  4\n 5  0  7  8\n 9 10 11 12\n13 14 15 16");
+    mat.count().should.equal(15);
+  });
+
   it('#any() should return true if at least one coefficient is true', function() {
     mblock.any.should.be.a.Function;
 

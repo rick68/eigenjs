@@ -1504,6 +1504,19 @@ describe('RowVectorBlock', function() {
     rvec.all().should.be.false;
   });
 
+  it('#count() should return the number of coefficients which evaluate to true', function() {
+    rvblock.count.should.be.a.Function;
+
+    rvec.count().should.equal(6);
+    rvblock.toString().should.equal("3 4");
+    rvblock.count().should.equal(2);
+    rvblock.set(0, 0);
+    rvblock.toString().should.equal("0 4");
+    rvblock.count().should.equal(1);
+    rvec.toString().should.equal("1 2 0 4 5 6");
+    rvec.count().should.equal(5);
+  });
+
   it('#any() should return true if at least one coefficient is true', function() {
     rvblock.any.should.be.a.Function;
 

@@ -760,6 +760,16 @@ describe('Vector', function() {
     vec.all().should.be.false;
   });
 
+  it('#count() should return the number of coefficients which evaluate to true', function() {
+    vec.count.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.count().should.equal(6);
+    vec.set(0, 0);
+    vec.toString().should.equal("0\n2\n3\n4\n5\n6");
+    vec.count().should.equal(5);
+  });
+
   it('#any() should return true if at least one coefficient is true', function() {
     vec.any.should.be.a.Function;
 

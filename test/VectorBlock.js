@@ -1612,6 +1612,19 @@ describe('VectorBlock', function() {
     vec.all().should.be.false;
   });
 
+  it('#count() should return the number of coefficients which evaluate to true', function() {
+    vblock.count.should.be.a.Function;
+
+    vec.count().should.equal(6);
+    vblock.toString().should.equal("3\n4");
+    vblock.count().should.equal(2);
+    vblock.set(0, 0);
+    vblock.toString().should.equal("0\n4");
+    vblock.count().should.equal(1);
+    vec.toString().should.equal("1\n2\n0\n4\n5\n6");
+    vec.count().should.equal(5);
+  });
+
   it('#any() should return true if at least one coefficient is true', function() {
     vblock.any.should.be.a.Function;
 
