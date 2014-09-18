@@ -663,6 +663,15 @@ describe('Matrix', function() {
     mat.any().should.be.false;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    mat.allFinite.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.allFinite().should.be.true;
+    mat.set(0, 0, NaN);
+    mat.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 

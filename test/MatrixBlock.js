@@ -1250,6 +1250,17 @@ describe('MatrixBlock', function() {
     mat.any().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    mblock.allFinite.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mat.allFinite().should.be.true;
+    mblock.allFinite().should.be.true;
+    mblock.set(0, 0, NaN);
+    mblock.allFinite().should.be.false;
+    mat.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 

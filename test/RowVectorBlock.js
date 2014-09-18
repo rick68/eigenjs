@@ -1517,6 +1517,17 @@ describe('RowVectorBlock', function() {
     rvec.any().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    rvblock.allFinite.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.allFinite().should.be.true;
+    rvblock.allFinite().should.be.true;
+    rvblock.set(0, NaN);
+    rvblock.allFinite().should.be.false;
+    rvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     RowVectorBlock.Zero.should.be.a.Function;
 

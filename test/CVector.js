@@ -850,6 +850,15 @@ describe('CVector', function() {
     cvec2.isDiagonal().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    cvec.allFinite.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+    cvec.allFinite().should.be.true;
+    cvec.set(0, Infinity);
+    cvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero complex vector', function() {
     CVector.Zero.should.be.a.Function;
 

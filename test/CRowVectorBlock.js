@@ -1832,6 +1832,17 @@ describe('CRowVectorBlock', function() {
     crvblock2.isDiagonal().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    crvblock.allFinite.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvec.allFinite().should.be.true;
+    crvblock.allFinite().should.be.true;
+    crvblock.set(0, Infinity);
+    crvblock.allFinite().should.be.false;
+    crvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CRowVectorBlock.Zero.should.be.a.Function;
 
