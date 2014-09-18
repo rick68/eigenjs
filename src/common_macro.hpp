@@ -613,6 +613,25 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_VISIT_CONTEXT()                \
+  {                                                                          \
+    if ( args.Length() == 1 && args[0]->IsFunction() ) {                     \
+      const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
+      const typename T::value_type& value = **obj;                           \
+                                                                             \
+      detail::visitor_from_js< T >                                           \
+          visitor( args, args[0].As< v8::Function >() );                     \
+                                                                             \
+      value.visit( visitor );                                                \
+                                                                             \
+      NanReturnValue( args.This() );                                         \
+    }                                                                        \
+                                                                             \
+    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()                                   \
+    NanReturnUndefined();                                                    \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ISSQUARE_CONTEXT()             \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
