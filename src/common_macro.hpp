@@ -615,6 +615,8 @@
 
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_VISIT_CONTEXT()                \
   {                                                                          \
+    NanScope();                                                              \
+                                                                             \
     if ( args.Length() == 1 && args[0]->IsFunction() ) {                     \
       const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );    \
       const typename T::value_type& value = **obj;                           \
