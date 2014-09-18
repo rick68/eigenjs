@@ -1274,6 +1274,17 @@ describe('MatrixBlock', function() {
     mat.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true is it contains at least one Not A Number (NaN)', function() {
+    mblock.hasNaN.should.be.a.Function;
+
+    mat.toString().should.equal(" 1  2  3  4\n 5  6  7  8\n 9 10 11 12\n13 14 15 16");
+    mat.hasNaN().should.be.false;
+    mblock.hasNaN().should.be.false;
+    mblock.set(0, 0, NaN);
+    mblock.hasNaN().should.be.true;
+    mat.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     MatrixBlock.Zero.should.be.a.Function;
 

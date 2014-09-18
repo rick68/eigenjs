@@ -732,6 +732,16 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_COUNT_CONTEXT()                \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Integer >( value.count() ) );                \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ALLFINITE_CONTEXT()            \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
@@ -742,13 +752,13 @@
   }                                                                          \
   /**/
 
-#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_COUNT_CONTEXT()                \
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_HASNAN_CONTEXT()               \
   {                                                                          \
     const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
     const typename T::value_type& value = **obj;                             \
                                                                              \
     NanScope();                                                              \
-    NanReturnValue( NanNew< v8::Integer >( value.count() ) );                \
+    NanReturnValue( NanNew< v8::Boolean >( value.hasNaN() ) );               \
   }                                                                          \
   /**/
 

@@ -1843,6 +1843,17 @@ describe('CRowVectorBlock', function() {
     crvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    crvblock.hasNaN.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,0) (2,0) (3,0) (4,0) (5,0) (6,0)");
+    crvec.hasNaN().should.be.false;
+    crvblock.hasNaN().should.be.false;
+    crvblock.set(0, NaN);
+    crvblock.hasNaN().should.be.true;
+    crvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CRowVectorBlock.Zero.should.be.a.Function;
 

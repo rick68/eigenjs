@@ -262,6 +262,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.any()](#matany)
     * [mat.count()](#matcount)
     * [mat.allFinite()](#matallfinite)
+    * [mat.hasNaN()](#mathasnan)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -419,6 +420,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isIdentity([prec = 1e-12])](#cmatisidentityprec--1e-12)
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.allFinite()](#cmatallfinite)
+    * [cmat.hasNaN()](#cmathasnan)
     * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
@@ -2315,7 +2317,7 @@ Returns true if it contains only finite numbers, i.e., no NaN and no +/-INF valu
 var M = require('eigenjs').Matrix
   , mat = new M.Random(3, 3);
 console.log('mat = \n%s\n%s\n', mat, mat.allFinite());
-mat.set(0, 0, NaN);
+mat.set(0, 0, Infinity);
 console.log('mat = \n%s\n%s', mat, mat.allFinite());
 ```
 
@@ -2327,10 +2329,36 @@ mat =
 true
 
 mat =
-      nan  0.271506 -0.887678
+      inf  0.271506 -0.887678
  0.592388 -0.806422  0.799406
   0.26443  0.461303 -0.389755
 false
+```
+
+#### mat.hasNaN()
+
+Returns true if it contains at least one Not A Number (NaN).
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Zero(3, 3);
+console.log('mat = \n%s\n%s\n', mat, mat.hasNaN());
+mat.set(1, 1, NaN);
+console.log('mat = \n%s\n%s', mat, mat.hasNaN());
+```
+
+```txt
+mat =
+0 0 0
+0 0 0
+0 0 0
+false
+
+mat =
+  0   0   0
+  0 nan   0
+  0   0   0
+true
 ```
 
 #### mat.toString([options])
@@ -3490,6 +3518,32 @@ cmat =
  (-0.982734,-0.815806)  (-0.153287,-0.292975)  (-0.532892,-0.314321)
   (0.750476,-0.742562) (-0.0286768,0.0286941)   (-0.790602,0.352619)
 false
+```
+
+#### cmat.hasNaN()
+
+Returns true if it contains at least one Not A Number (NaN).
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Zero(3, 3);
+console.log('cmat = \n%s\n%s\n', cmat, cmat.hasNaN());
+cmat.set(1, 1, NaN);
+console.log('cmat = \n%s\n%s', cmat, cmat.hasNaN());
+```
+
+```txt
+cmat =
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0)
+false
+
+cmat =
+  (0,0)   (0,0)   (0,0)
+  (0,0) (nan,0)   (0,0)
+  (0,0)   (0,0)   (0,0)
+true
 ```
 
 #### cmat.toString([options])

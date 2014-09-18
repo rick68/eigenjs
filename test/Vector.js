@@ -789,6 +789,15 @@ describe('Vector', function() {
     vec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    vec.hasNaN.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.hasNaN().should.be.false;
+    vec.set(0, NaN);
+    vec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero vector', function() {
     Vector.Zero.should.be.a.Function;
 

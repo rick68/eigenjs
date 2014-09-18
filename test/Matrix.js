@@ -682,6 +682,15 @@ describe('Matrix', function() {
     mat.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true is it contains at leas one Not A Number (NaN)', function() {
+    mat.hasNaN.should.be.a.Function;
+
+    mat.toString().should.equal("1 2 3\n4 5 6\n7 8 9");
+    mat.hasNaN().should.be,false;
+    mat.set(0, 0, NaN);
+    mat.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     Matrix.Zero.should.be.a.Function;
 

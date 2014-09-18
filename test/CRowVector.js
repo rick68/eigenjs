@@ -799,6 +799,15 @@ describe('CRowVector', function() {
     crvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    crvec.hasNaN.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.hasNaN().should.be.false;
+    crvec.set(0, NaN);
+    crvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero complex row-vector', function() {
     CRowVector.Zero.should.be.a.Function;
 

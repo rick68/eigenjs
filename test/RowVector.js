@@ -747,6 +747,15 @@ describe('RowVector', function() {
     rvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    rvec.hasNaN.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.hasNaN().should.be.false;
+    rvec.set(0, NaN);
+    rvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 

@@ -1541,6 +1541,17 @@ describe('RowVectorBlock', function() {
     rvec.allFinite().should.be.false;
   });
 
+  it('#hasNaN() should return true if it contains at least one Not A Number (NaN)', function() {
+    rvblock.hasNaN.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.hasNaN().should.be.false;
+    rvblock.hasNaN().should.be.false;
+    rvblock.set(0, NaN);
+    rvblock.hasNaN().should.be.true;
+    rvec.hasNaN().should.be.true;
+  });
+
   it('#Zero() should return a zero matrix', function() {
     RowVectorBlock.Zero.should.be.a.Function;
 
