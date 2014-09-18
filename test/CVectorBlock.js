@@ -1840,6 +1840,17 @@ describe('CVectorBlock', function() {
     cvblock2.isDiagonal().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    cvblock.allFinite.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,0)\n(2,0)\n(3,0)\n(4,0)\n(5,0)\n(6,0)");
+    cvec.allFinite().should.be.true;
+    cvblock.allFinite().should.be.true;
+    cvblock.set(0, Infinity);
+    cvblock.allFinite().should.be.false;
+    cvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a complex matrix with zero values', function() {
     CVectorBlock.Zero.should.be.a.Function;
 

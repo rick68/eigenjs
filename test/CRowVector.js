@@ -790,6 +790,15 @@ describe('CRowVector', function() {
     crvec2.isDiagonal().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    crvec.allFinite.should.be.a.Function;
+
+    crvec.toString().should.equal("(1,1) (2,2) (3,3)");
+    crvec.allFinite().should.be.true;
+    crvec.set(0, Infinity);
+    crvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero complex row-vector', function() {
     CRowVector.Zero.should.be.a.Function;
 

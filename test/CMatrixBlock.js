@@ -1491,6 +1491,17 @@ describe('CMatrixBlock', function() {
     cmblock2.isDiagonal().should.be.true;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    cmblock.allFinite.should.be.a.Function;
+
+    cmat.toString().should.equal(" (1,0)  (2,0)  (3,0)  (4,0)\n (5,0)  (6,0)  (7,0)  (8,0)\n (9,0) (10,0) (11,0) (12,0)\n(13,0) (14,0) (15,0) (16,0)");
+    cmat.allFinite().should.be.true;
+    cmblock.allFinite().should.be.true;
+    cmblock.set(0, 0, Infinity);
+    cmblock.allFinite().should.be.false;
+    cmat.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a complex zero matrix', function() {
     CMatrixBlock.Zero.should.be.a.Function;
 

@@ -770,6 +770,15 @@ describe('Vector', function() {
     vec.any().should.be.false;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    vec.allFinite.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+    vec.allFinite().should.be.true;
+    vec.set(0, NaN);
+    vec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero vector', function() {
     Vector.Zero.should.be.a.Function;
 

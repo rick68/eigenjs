@@ -64,6 +64,8 @@
 #include "instance_method_isIdentity.hpp"
 #include "instance_method_isDiagonal.hpp"
 
+#include "instance_method_allFinite.hpp"
+
 #include "instance_method_redux.hpp"
 #include "instance_method_sum.hpp"
 #include "instance_method_prod.hpp"
@@ -128,6 +130,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_isOnes)
   (instance_method_isIdentity)
   (instance_method_isDiagonal)
+
+  (instance_method_allFinite)
 
   (instance_method_redux)
   (instance_method_sum)

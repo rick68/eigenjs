@@ -728,6 +728,15 @@ describe('RowVector', function() {
     rvec.any().should.be.false;
   });
 
+  it('#allFinite() should return true if it contains only finite numbers, i.e., no NaN and no +/-INF values', function() {
+    rvec.allFinite.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+    rvec.allFinite().should.be.true;
+    rvec.set(0, NaN);
+    rvec.allFinite().should.be.false;
+  });
+
   it('#Zero() should return a zero row-vector', function() {
     RowVector.Zero.should.be.a.Function;
 

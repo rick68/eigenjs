@@ -711,6 +711,16 @@
   }                                                                          \
   /**/
 
+#define EIGENJS_COMMON_MATRIX_INSTANCE_METHOD_ALLFINITE_CONTEXT()            \
+  {                                                                          \
+    const T* const& obj = node::ObjectWrap::Unwrap< T >( args.This() );      \
+    const typename T::value_type& value = **obj;                             \
+                                                                             \
+    NanScope();                                                              \
+    NanReturnValue( NanNew< v8::Boolean >( value.allFinite() ) );            \
+  }                                                                          \
+  /**/
+
 #define EIGENJS_COMMON_VECTOR_CLASS_METHOD_LINSPACED_CONTEXT()               \
   {                                                                          \
     NanScope();                                                              \
