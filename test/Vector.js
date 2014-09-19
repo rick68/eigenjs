@@ -115,6 +115,17 @@ describe('Vector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    vec.value.should.be.a.Function;
+
+    (function(){
+      vec.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var vec2 = new Vector(1);
+    vec2.value().should.equal(0);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     vec.setZero.should.be.a.Function;
 
@@ -1139,6 +1150,7 @@ describe('Vector', function() {
       row.should.be.a.Number;
       col.should.be.a.Number;
       vec.get(row).should.equal(scalar);
+      col.should.equal(0);
       sum += scalar;
     });
 

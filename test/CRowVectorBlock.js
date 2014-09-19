@@ -106,6 +106,19 @@ describe('CRowVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    crvblock.value.should.be.a.Function;
+
+    crvblock.toString().should.equal("(3,0) (4,0)");
+
+    (function(){
+      crvblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var crvblock2 = crvblock.block(0, 1);
+    crvblock2.value().equals(3).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     crvblock.setZero.should.be.a.Function;
 
@@ -2129,6 +2142,7 @@ describe('CRowVectorBlock', function() {
       scalar.should.instanceOf(Complex);
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       crvblock.get(col).equals(scalar).should.true;
       sum.adda(scalar);
     });

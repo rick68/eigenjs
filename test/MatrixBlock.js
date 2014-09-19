@@ -109,6 +109,19 @@ describe('MatrixBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    mblock.value.should.be.a.Function;
+
+    mblock.toString().should.equal(" 6  7\n10 11");
+
+    (function(){
+      mblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var mblock2 = mblock.block(0, 0, 1, 1);
+    mblock2.value().should.equal(6);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     mblock.setZero.should.be.a.Function;
 

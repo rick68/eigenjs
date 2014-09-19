@@ -135,6 +135,17 @@ describe('CMatrix', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    cmat.value.should.be.a.Function;
+
+    (function(){
+      cmat.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var cmat2 = new CMatrix(1, 1);
+    cmat2.value().equals(0).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     cmat.setZero.should.be.a.Function;
 

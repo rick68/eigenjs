@@ -54,6 +54,7 @@ SOURCES = \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/instance_method_trace.hpp \
     src/CMatrix/instance_method_transpose.hpp \
+    src/CMatrix/instance_method_value.hpp \
     src/CMatrix/instance_method_visit.hpp \
     src/CMatrix/macro.hpp \
     src/CMatrixBlock.hpp \
@@ -190,6 +191,7 @@ SOURCES = \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/instance_method_trace.hpp \
     src/Matrix/instance_method_transpose.hpp \
+    src/Matrix/instance_method_value.hpp \
     src/Matrix/instance_method_visit.hpp \
     src/Matrix/macro.hpp \
     src/MatrixBlock.hpp \

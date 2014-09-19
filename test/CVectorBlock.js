@@ -114,6 +114,19 @@ describe('CVectorBlock', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    cvblock.value.should.be.a.Function;
+
+    cvblock.toString().should.equal("(3,0)\n(4,0)");
+
+    (function(){
+      cvblock.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var cvblock2 = cvblock.block(0, 1);
+    cvblock2.value().equals(3).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     cvblock.setZero.should.be.a.Function;
 
@@ -2157,6 +2170,7 @@ describe('CVectorBlock', function() {
       row.should.be.a.Number;
       col.should.be.a.Number;
       cvblock.get(row).equals(scalar).should.true;
+      col.should.equal(0);
       sum.adda(scalar);
     });
 

@@ -151,6 +151,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.assign(mblock)](#matassignmblock)
     * [mat.assign(vblock)](#matassignvblock)
     * [mat.assign(rvblock)](#matassignrvblock)
+    * [mat.value()](#matvalue)
     * [mat.setZero()](#matsetzero)
     * [mat.setOnes()](#matsetones)
     * [mat.setConstant(scalar)](#matsetconstantscalar)
@@ -295,6 +296,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.assign(cmblock)](#cmatassigncmblock)
     * [cmat.assign(cvblock)](#cmatassigncvblock)
     * [cmat.assign(crvblock)](#cmatassigncrvblock)
+    * [cmat.value()](#cmatvalue)
     * [cmat.setZero()](#cmatsetzero)
     * [cmat.setOnes()](#cmatsetones)
     * [cmat.setConstant(scalar)](#cmatsetconstantscalar)
@@ -1274,6 +1276,20 @@ mat =
 0 0 0 0
 0 0 0 0
 0 0 0 0
+```
+
+#### mat.value()
+
+Returns the unique coefficient of a 1x1 expression
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = M.Random(1, 1);
+console.log('%d', mat.value());
+```
+
+```txt
+-0.7131525574778916
 ```
 
 #### mat.setZero()
@@ -2604,6 +2620,20 @@ cmat =
 (0,0) (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0) (0,0)
+```
+
+#### cmat.value()
+
+Returns the unique coefficient of a 1x1 expression
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = CM.Random(1, 1);
+console.log('%s', cmat.value());
+```
+
+```txt
+(-0.402467,-0.259974)
 ```
 
 #### cmat.setZero()

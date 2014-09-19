@@ -92,6 +92,17 @@ describe('RowVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    rvec.value.should.be.a.Function;
+
+    (function(){
+      rvec.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var rvec2 = new RowVector(1);
+    rvec2.value().should.equal(0);
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     rvec.setZero.should.be.a.Function;
 
@@ -1093,6 +1104,7 @@ describe('RowVector', function() {
       scalar.should.be.a.Number;
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       rvec.get(col).should.equal(scalar);
       sum += scalar;
     });

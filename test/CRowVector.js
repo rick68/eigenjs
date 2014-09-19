@@ -89,6 +89,17 @@ describe('CRowVector', function() {
     }).should.throw('The row or column number is out of range');
   });
 
+  it('#value() should return the unique coefficient of a 1x1 expression', function() {
+    crvec.value.should.be.a.Function;
+
+    (function(){
+      crvec.value();
+    }).should.throw('The size of row and column values must equal 1');
+
+    var crvec2 = new CRowVector(1);
+    crvec2.value().equals(0).should.be.true;
+  });
+
   it('#setZero() should set all coefficients to zero', function() {
     crvec.setZero.should.be.a.Function;
 
@@ -1105,6 +1116,7 @@ describe('CRowVector', function() {
       scalar.should.instanceOf(Complex);
       row.should.be.a.Number;
       col.should.be.a.Number;
+      row.should.equal(0);
       crvec.get(col).equals(scalar).should.true;
       sum.adda(scalar);
     });
