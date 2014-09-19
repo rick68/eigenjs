@@ -941,6 +941,22 @@ describe('Vector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    vec.topRows.should.be.a.Function;
+
+    var vblock = vec.topRows(3);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("1\n2\n3");
+
+    (function() {
+      vec.topRows(7);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      vec.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vec.replicate.should.be.a.Function;
 

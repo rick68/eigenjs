@@ -1960,6 +1960,22 @@ describe('CRowVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    crvblock.topRows.should.be.a.Function;
+
+    var crvblock2 = crvblock.topRows(1);
+    crvblock2.should.instanceOf(CRowVectorBlock);
+    crvblock2.toString().should.equal("(3,0) (4,0)");
+
+    (function() {
+      crvblock.topRows(2);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      crvblock.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvblock.replicate.should.be.a.Function;
 

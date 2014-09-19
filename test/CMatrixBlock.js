@@ -1641,6 +1641,22 @@ describe('CMatrixBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    cmblock.topRows.should.be.a.Function;
+
+    var cmblock2 = cmblock.topRows(1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal("(6,0) (7,0)");
+
+    (function() {
+      cmblock.topRows(3);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      cmblock.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmblock.replicate.should.be.a.Function;
 

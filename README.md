@@ -162,6 +162,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.block(startRow, startCol, blockRows, blockCols)](#matblockstartrow-startcol-blockrows-blockcols)
     * [mat.row(n)](#matrown)
     * [mat.col(n)](#matcoln)
+    * [mat.topRows(n)](#mattoprowsn)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -310,6 +311,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.block(startRow, startCol, blockRows, blockCols)](#cmatblockstartrow-startcol-blockrows-blockcols)
     * [cmat.row(n)](#cmatrown)
     * [cmat.col(n)](#cmatcoln)
+    * [cmat.topRows(n)](#cmattoprowsn)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1476,6 +1478,26 @@ mat =
          0   0.674939          0
          0  -0.303923          0
          0 -0.0302965          0
+```
+
+#### mat.topRows(n)
+
+Returns a block consisting of the top rows of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.topRows(2));
+```
+
+```txt
+ 7  9 -5  3
+-2 -6  1  0
 ```
 
 #### mat.replicate(rowFactor, colFactor)
@@ -2824,6 +2846,26 @@ cmat =
                 (0,0)     (-0.97615,-0.147)                 (0,0)
                 (0,0) (-0.630134,-0.661642)                 (0,0)
                 (0,0)  (-0.211411,0.819724)                 (0,0)
+```
+
+#### cmat.topRows(n)
+
+Returns a block consisting of the top rows of it.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(4, 2).set([
+             C( 1,  2), C( 3,  4),
+             C( 5,  6), C( 7,  8),
+             C( 9, 10), C(11, 12),
+             C(13, 14), C(15, 16)
+           ]);
+console.log('%s', cmat.topRows(2));
+```
+
+```txt
+(1,2) (3,4)
+(5,6) (7,8)
 ```
 
 #### cmat.replicate(rowFactor, colFactor)

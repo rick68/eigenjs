@@ -884,6 +884,22 @@ describe('CMatrix', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    cmat.topRows.should.be.a.Function;
+
+    var cmblock = cmat.topRows(2);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(1,1) (2,2) (3,3)\n(4,4) (5,5) (6,6)");
+
+    (function() {
+      cmat.topRows(4);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      cmat.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmat.replicate.should.be.a.Function;
 

@@ -921,6 +921,22 @@ describe('CRowVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    crvec.topRows.should.be.a.Function;
+
+    var crvblock = crvec.topRows(1);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    (function() {
+      crvec.topRows(2);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      crvec.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvec.replicate.should.be.a.Function;
 
