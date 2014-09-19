@@ -1,7 +1,7 @@
 {
   "name": "eigenjs",
   "description": "The goal of this project is to port Eigen library into JavaScript for linear algebra.",
-  "version": "0.0.63",
+  "version": "0.0.64",
   "homepage": "https://github.com/rick68/eigenjs",
   "main": "index.js",
   "scripts": {
