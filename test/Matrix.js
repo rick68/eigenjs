@@ -821,6 +821,22 @@ describe('Matrix', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    mat.topRows.should.be.a.Function;
+
+    var mblock = mat.topRows(2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("1 2 3\n4 5 6");
+
+    (function() {
+      mat.topRows(4);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      mat.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 

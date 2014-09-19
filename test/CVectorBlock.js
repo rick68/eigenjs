@@ -1974,6 +1974,22 @@ describe('CVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    cvblock.topRows.should.be.a.Function;
+
+    var cvblock2 = cvblock.topRows(1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(3,0)");
+
+    (function() {
+      cvblock.topRows(3);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      cvblock.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvblock.replicate.should.be.a.Function;
 

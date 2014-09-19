@@ -1417,6 +1417,22 @@ describe('MatrixBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    mblock.topRows.should.be.a.Function;
+
+    var mblock2 = mblock.topRows(1);
+    mblock2.should.instanceOf(MatrixBlock);
+    mblock2.toString().should.equal("6 7");
+
+    (function() {
+      mblock.topRows(3);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      mblock.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     mblock.replicate.should.be.a.Function;
 

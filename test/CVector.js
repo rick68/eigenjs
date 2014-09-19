@@ -991,6 +991,22 @@ describe('CVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    cvec.topRows.should.be.a.Function;
+
+    var cvblock = cvec.topRows(3);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(1,1)\n(2,2)\n(3,3)");
+
+    (function() {
+      cvec.topRows(7);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      cvec.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvec.replicate.should.be.a.Function;
 

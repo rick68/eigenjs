@@ -1795,6 +1795,21 @@ describe('VectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#topRows() should return a block consisting of the top rows of it", function() {
+    vblock.topRows.should.be.a.Function;
+
+    var vblock2 = vblock.topRows(1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("3");
+
+    (function() {
+      vblock.topRows(4);
+    }).should.throw("The row or column number is out of range");
+
+    (function() {
+      vblock.topRows(-1);
+    }).should.throw("The row or column number is out of range");
+  });
   it("#replicate() should return a matrix which is replicated", function() {
     vblock.replicate.should.be.a.Function;
 
