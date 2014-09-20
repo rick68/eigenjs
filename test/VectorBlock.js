@@ -1804,11 +1804,11 @@ describe('VectorBlock', function() {
 
     (function() {
       vblock.topRows(4);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       vblock.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
   });
   it("#replicate() should return a matrix which is replicated", function() {
     vblock.replicate.should.be.a.Function;

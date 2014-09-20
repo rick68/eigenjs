@@ -1969,11 +1969,11 @@ describe('CRowVectorBlock', function() {
 
     (function() {
       crvblock.topRows(2);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       crvblock.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {

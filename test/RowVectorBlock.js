@@ -1690,11 +1690,11 @@ describe('RowVectorBlock', function() {
 
     (function() {
       rvblock.topRows(2);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       rvblock.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a matrix which is replicated", function() {
