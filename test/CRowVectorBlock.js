@@ -1992,6 +1992,22 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    crvblock.middleRows.should.be.a.Function;
+
+    var crvblock2 = crvblock.middleRows(0, 1);
+    crvblock2.should.instanceOf(CRowVectorBlock);
+    crvblock2.toString().should.equal("(3,0) (4,0)");
+
+    (function() {
+      crvblock.middleRows(2, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvblock.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvblock.replicate.should.be.a.Function;
 

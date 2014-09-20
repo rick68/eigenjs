@@ -853,6 +853,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    mat.middleRows.should.be.a.Function;
+
+    var mblock = mat.middleRows(1, 1);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("4 5 6");
+
+    (function() {
+      mat.middleRows(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 

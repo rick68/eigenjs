@@ -1713,6 +1713,22 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    rvblock.middleRows.should.be.a.Function;
+
+    var rvblock2 = rvblock.middleRows(0, 1);
+    rvblock2.should.instanceOf(RowVectorBlock);
+    rvblock2.toString().should.equal("3 4");
+
+    (function() {
+      rvblock.middleRows(1, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvblock.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvblock.replicate.should.be.a.Function;
 

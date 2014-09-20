@@ -6,7 +6,7 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 //
 
-// Preprocessed version of "boost/mpl/vector/vector60_c.hpp" header
+// Preprocessed version of "boost/mpl/vector/vector70_c.hpp" header
 // -- DO NOT modify by hand!
 
 namespace boost { namespace mpl {
@@ -18,14 +18,15 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
+    , T C51, T C52, T C53, T C54, T C55, T C56, T T57, T C58, T C59, T C60
     >
-struct vector51_c
+struct vector61_c
     : v_item<
-          integral_c< T,C50 >
-        , vector50_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49 >
+          integral_c< T,C60 >
+        , vector60_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59 >
         >
 {
-    typedef vector51_c type;
+    typedef vector61_c type;
     typedef T value_type;
 };
 
@@ -36,15 +37,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61
     >
-struct vector52_c
+struct vector62_c
     : v_item<
-          integral_c< T,C51 >
-        , vector51_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50 >
+          integral_c< T,C61 >
+        , vector61_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60 >
         >
 {
-    typedef vector52_c type;
+    typedef vector62_c type;
     typedef T value_type;
 };
 
@@ -55,15 +57,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62
     >
-struct vector53_c
+struct vector63_c
     : v_item<
-          integral_c< T,C52 >
-        , vector52_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51 >
+          integral_c< T,C62 >
+        , vector62_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61 >
         >
 {
-    typedef vector53_c type;
+    typedef vector63_c type;
     typedef T value_type;
 };
 
@@ -74,15 +77,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63
     >
-struct vector54_c
+struct vector64_c
     : v_item<
-          integral_c< T,C53 >
-        , vector53_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52 >
+          integral_c< T,C63 >
+        , vector63_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62 >
         >
 {
-    typedef vector54_c type;
+    typedef vector64_c type;
     typedef T value_type;
 };
 
@@ -93,15 +97,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64
     >
-struct vector55_c
+struct vector65_c
     : v_item<
-          integral_c< T,C54 >
-        , vector54_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53 >
+          integral_c< T,C64 >
+        , vector64_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63 >
         >
 {
-    typedef vector55_c type;
+    typedef vector65_c type;
     typedef T value_type;
 };
 
@@ -112,15 +117,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54, T C55
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64, T C65
     >
-struct vector56_c
+struct vector66_c
     : v_item<
-          integral_c< T,C55 >
-        , vector55_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54 >
+          integral_c< T,C65 >
+        , vector65_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63,C64 >
         >
 {
-    typedef vector56_c type;
+    typedef vector66_c type;
     typedef T value_type;
 };
 
@@ -131,15 +137,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54, T C55, T C56
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64, T C65, T C66
     >
-struct vector57_c
+struct vector67_c
     : v_item<
-          integral_c< T,C56 >
-        , vector56_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55 >
+          integral_c< T,C66 >
+        , vector66_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63,C64,C65 >
         >
 {
-    typedef vector57_c type;
+    typedef vector67_c type;
     typedef T value_type;
 };
 
@@ -150,15 +157,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54, T C55, T C56, T C57
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64, T C65, T C66, T C67
     >
-struct vector58_c
+struct vector68_c
     : v_item<
-          integral_c< T,C57 >
-        , vector57_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56 >
+          integral_c< T,C67 >
+        , vector67_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63,C64,C65,C66 >
         >
 {
-    typedef vector58_c type;
+    typedef vector68_c type;
     typedef T value_type;
 };
 
@@ -169,15 +177,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64, T C65, T C66, T C67, T C68
     >
-struct vector59_c
+struct vector69_c
     : v_item<
-          integral_c< T,C58 >
-        , vector58_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57 >
+          integral_c< T,C68 >
+        , vector68_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63,C64,C65,C66,C67 >
         >
 {
-    typedef vector59_c type;
+    typedef vector69_c type;
     typedef T value_type;
 };
 
@@ -188,15 +197,16 @@ template<
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
     , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
-    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59
+    , T C51, T C52, T C53, T C54, T C55, T C56, T C57, T C58, T C59, T C60
+    , T C61, T C62, T C63, T C64, T C65, T C66, T C67, T C68, T C69
     >
-struct vector60_c
+struct vector70_c
     : v_item<
-          integral_c< T,C59 >
-        , vector59_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58 >
+          integral_c< T,C69 >
+        , vector69_c< T,C0,C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38,C39,C40,C41,C42,C43,C44,C45,C46,C47,C48,C49,C50,C51,C52,C53,C54,C55,C56,C57,C58,C59,C60,C61,C62,C63,C64,C65,C66,C67,C68 >
         >
 {
-    typedef vector60_c type;
+    typedef vector70_c type;
     typedef T value_type;
 };
 

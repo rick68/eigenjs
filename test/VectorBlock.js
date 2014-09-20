@@ -1827,6 +1827,22 @@ describe('VectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    vblock.middleRows.should.be.a.Function;
+
+    var vblock2 = vblock.middleRows(1, 1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("4");
+
+    (function() {
+      vblock.middleRows(4, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vblock.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vblock.replicate.should.be.a.Function;
 

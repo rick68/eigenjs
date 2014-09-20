@@ -1023,6 +1023,22 @@ describe('CVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    cvec.middleRows.should.be.a.Function;
+
+    var cvblock = cvec.middleRows(3, 3);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.middleRows(7, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvec.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvec.replicate.should.be.a.Function;
 

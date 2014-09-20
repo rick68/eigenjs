@@ -24,7 +24,7 @@
 #include <boost/preprocessor/seq/size.hpp>
 #include <boost/preprocessor/seq/for_each_i.hpp>
 
-#define BOOST_MPL_LIMIT_VECTOR_SIZE 60
+#define BOOST_MPL_LIMIT_VECTOR_SIZE 70
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/for_each.hpp>
 

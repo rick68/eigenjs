@@ -1673,6 +1673,22 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    cmblock.middleRows.should.be.a.Function;
+
+    var cmblock2 = cmblock.middleRows(1, 1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal("(10,0) (11,0)");
+
+    (function() {
+      cmblock.middleRows(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmblock.replicate.should.be.a.Function;
 
