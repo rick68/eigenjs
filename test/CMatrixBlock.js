@@ -1650,11 +1650,27 @@ describe('CMatrixBlock', function() {
 
     (function() {
       cmblock.topRows(3);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       cmblock.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    cmblock.bottomRows.should.be.a.Function;
+
+    var cmblock2 = cmblock.bottomRows(1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal("(10,0) (11,0)");
+
+    (function() {
+      cmblock.bottomRows(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.bottomRows(-1);
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {

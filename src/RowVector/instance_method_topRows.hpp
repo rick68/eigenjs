@@ -24,7 +24,8 @@ EIGENJS_INSTANCE_METHOD(RowVector, topRows,
       const typename T::value_type& value = **obj;
       const typename T::value_type::Index& n = args[0]->Int32Value();
 
-      if (T::is_out_of_range(value, n - 1, 0)) {
+      if (n <= 0 || n > value.rows()) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
 

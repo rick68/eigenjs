@@ -1000,11 +1000,27 @@ describe('CVector', function() {
 
     (function() {
       cvec.topRows(7);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       cvec.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    cvec.bottomRows.should.be.a.Function;
+
+    var cvblock = cvec.bottomRows(3);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.bottomRows(7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvec.bottomRows(-1);
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {

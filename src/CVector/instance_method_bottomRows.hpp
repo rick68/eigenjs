@@ -1,6 +1,6 @@
 //
-// CMatrix/instance_method_topRows.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CVector/instance_method_bottomRows.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,12 +9,12 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_TOPROWS_HPP
-#define EIGENJS_CMATRIX_INSTANCE_METHOD_TOPROWS_HPP
+#ifndef EIGENJS_CVECTOR_INSTANCE_METHOD_BOTTOMROWS_HPP
+#define EIGENJS_CVECTOR_INSTANCE_METHOD_BOTTOMROWS_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CMatrix, topRows,
+EIGENJS_INSTANCE_METHOD(CVector, bottomRows,
 {
   NanScope();
 
@@ -31,14 +31,12 @@ EIGENJS_INSTANCE_METHOD(CMatrix, topRows,
 
       v8::Local<v8::Value> argv[] = {
           args.This()
-        , NanNew<v8::Integer>(0)             /* startRow */
-        , NanNew<v8::Integer>(0)             /* startCol */
-        , NanNew<v8::Integer>(n)             /* blockRows */
-        , NanNew<v8::Integer>(value.cols())  /* blockCols */
+        , NanNew<v8::Integer>(value.rows() - n)  /* startRow */
+        , NanNew<v8::Integer>(n)                 /* blockRows */
       };
 
       NanReturnValue(
-        CMatrixBlock::new_instance(
+        CVectorBlock::new_instance(
           args
         , sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
@@ -53,4 +51,4 @@ EIGENJS_INSTANCE_METHOD(CMatrix, topRows,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CMATRIX_INSTANCE_METHOD_TOPROWS_HPP
+#endif  // EIGENJS_CVECTOR_INSTANCE_METHOD_BOTTOMROWS_HPP

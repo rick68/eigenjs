@@ -893,11 +893,27 @@ describe('CMatrix', function() {
 
     (function() {
       cmat.topRows(4);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       cmat.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    cmat.bottomRows.should.be.a.Function;
+
+    var cmblock = cmat.bottomRows(2);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(4,4) (5,5) (6,6)\n(7,7) (8,8) (9,9)");
+
+    (function() {
+      cmat.bottomRows(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmat.bottomRows(-1);
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {

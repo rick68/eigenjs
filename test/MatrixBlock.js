@@ -1426,11 +1426,27 @@ describe('MatrixBlock', function() {
 
     (function() {
       mblock.topRows(3);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       mblock.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    mblock.bottomRows.should.be.a.Function;
+
+    var mblock2 = mblock.bottomRows(1);
+    mblock2.should.instanceOf(MatrixBlock);
+    mblock2.toString().should.equal("10 11");
+
+    (function() {
+      mblock.bottomRows(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mblock.bottomRows(-1);
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {

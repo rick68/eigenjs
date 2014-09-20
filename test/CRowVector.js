@@ -930,11 +930,27 @@ describe('CRowVector', function() {
 
     (function() {
       crvec.topRows(2);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
 
     (function() {
       crvec.topRows(-1);
-    }).should.throw("The row or column number is out of range");
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    crvec.bottomRows.should.be.a.Function;
+
+    var crvblock = crvec.bottomRows(1);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    (function() {
+      crvec.bottomRows(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvec.bottomRows(-1);
+    }).should.throw("Invalid argument");
   });
 
   it("#replicate() should return a complex matrix which is replicated", function() {
