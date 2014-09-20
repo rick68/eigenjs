@@ -164,7 +164,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.col(n)](#matcoln)
     * [mat.topRows(n)](#mattoprowsn)
     * [mat.bottomRows(n)](#matbottomrowsn)
-    * [mat.middleRows(startRow, n)](#matmiddlerowsstartrown)
+    * [mat.middleRows(startRow, n)](#matmiddlerowsstartrow-n)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
