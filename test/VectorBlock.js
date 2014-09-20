@@ -1810,6 +1810,23 @@ describe('VectorBlock', function() {
       vblock.topRows(-1);
     }).should.throw("Invalid argument");
   });
+
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    vblock.bottomRows.should.be.a.Function;
+
+    var vblock2 = vblock.bottomRows(1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("4");
+
+    (function() {
+      vblock.bottomRows(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vblock.bottomRows(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vblock.replicate.should.be.a.Function;
 

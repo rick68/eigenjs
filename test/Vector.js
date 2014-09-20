@@ -957,6 +957,22 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    vec.bottomRows.should.be.a.Function;
+
+    var vblock = vec.bottomRows(3);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("4\n5\n6");
+
+    (function() {
+      vec.bottomRows(7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vec.bottomRows(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vec.replicate.should.be.a.Function;
 

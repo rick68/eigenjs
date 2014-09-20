@@ -918,6 +918,22 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    rvec.bottomRows.should.be.a.Function;
+
+    var rvblock = rvec.bottomRows(1);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("1 2 3 4 5 6");
+
+    (function() {
+      rvec.bottomRows(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvec.bottomRows(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvec.replicate.should.be.a.Function;
 

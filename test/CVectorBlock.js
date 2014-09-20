@@ -1990,6 +1990,22 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    cvblock.bottomRows.should.be.a.Function;
+
+    var cvblock2 = cvblock.bottomRows(1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(4,0)");
+
+    (function() {
+      cvblock.bottomRows(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvblock.bottomRows(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvblock.replicate.should.be.a.Function;
 

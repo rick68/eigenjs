@@ -837,6 +837,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRows() should return a block consisting of the bottom rows of it", function() {
+    mat.bottomRows.should.be.a.Function;
+
+    var mblock = mat.bottomRows(2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("4 5 6\n7 8 9");
+
+    (function() {
+      mat.bottomRows(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.bottomRows(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 
