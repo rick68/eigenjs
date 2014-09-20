@@ -2064,6 +2064,7 @@ struct pop_front_impl< aux::vector_tag<68> >
             , typename Vector::item51, typename Vector::item52
             , typename Vector::item53, typename Vector::item54
             , typename Vector::item55, typename Vector::item56
+            , typename Vector::item57, typename Vector::item58
             , typename Vector::item59, typename Vector::item60
             , typename Vector::item61, typename Vector::item62
             , typename Vector::item63, typename Vector::item64
