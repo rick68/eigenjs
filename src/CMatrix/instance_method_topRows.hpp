@@ -23,6 +23,12 @@ EIGENJS_INSTANCE_METHOD(CMatrix, topRows,
       const T* obj = node::ObjectWrap::Unwrap<T>(args.This());
       const typename T::value_type& value = **obj;
       const typename T::value_type::Index& n = args[0]->Int32Value();
+
+      if (n <= 0 || n > value.rows()) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+        NanReturnUndefined();
+      }
+
       v8::Local<v8::Value> argv[] = {
           args.This()
         , NanNew<v8::Integer>(0)             /* startRow */
