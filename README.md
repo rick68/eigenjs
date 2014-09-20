@@ -164,6 +164,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.col(n)](#matcoln)
     * [mat.topRows(n)](#mattoprowsn)
     * [mat.bottomRows(n)](#matbottomrowsn)
+    * [mat.middleRows(startRow, n)](#matmiddlerowsstartrown)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -314,6 +315,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.col(n)](#cmatcoln)
     * [cmat.topRows(n)](#cmattoprowsn)
     * [cmat.bottomRows(n)](#cmatbottomrowsn)
+    * [cmat.middleRows(startRow, n)](#cmatmiddlerowsstartrow-n)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1520,6 +1522,26 @@ console.log('%s', mat.bottomRows(2));
 ```txt
  6 -3  0  9
  6  6  3  9
+```
+
+#### mat.middleRows(startRow, n)
+
+Returns a block consisting of a range of rows of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.middleRows(1, 2));
+```
+
+```txt
+-2 -6  1  0
+ 6 -3  0  9
 ```
 
 #### mat.replicate(rowFactor, colFactor)
@@ -2908,6 +2930,26 @@ console.log('%s', cmat.bottomRows(2));
 ```txt
  (9,10) (11,12)
 (13,14) (15,16)
+```
+
+#### cmat.middleRows(startRow, n)
+
+Returns a block consisting of a range of rows of it.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(4, 2).set([
+             C( 1,  2), C( 3,  4),
+             C( 5,  6), C( 7,  8),
+             C( 9, 10), C(11, 12),
+             C(13, 14), C(15, 16)
+           ]);
+console.log('%s', cmat.middleRows(1, 2));
+```
+
+```txt
+  (5,6)   (7,8)
+ (9,10) (11,12)
 ```
 
 #### cmat.replicate(rowFactor, colFactor)
