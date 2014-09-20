@@ -15,7 +15,7 @@ SOURCES = \
     src/CMatrix/instance_method_adjoint.hpp \
     src/CMatrix/instance_method_allFinite.hpp \
     src/CMatrix/instance_method_block.hpp \
-    src/CMatrix/instance_method_buttomRows.hpp \
+    src/CMatrix/instance_method_bottomRows.hpp \
     src/CMatrix/instance_method_col.hpp \
     src/CMatrix/instance_method_cols.hpp \
     src/CMatrix/instance_method_conjugate.hpp \
@@ -69,7 +69,7 @@ SOURCES = \
     src/CRowVector/definitions.hpp \
     src/CRowVector/instance_method_asDiagonal.hpp \
     src/CRowVector/instance_method_block.hpp \
-    src/CRowVector/instance_method_buttomRows.hpp \
+    src/CRowVector/instance_method_bottomRows.hpp \
     src/CRowVector/instance_method_col.hpp \
     src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
@@ -87,7 +87,7 @@ SOURCES = \
     src/CVector/definitions.hpp \
     src/CVector/instance_method_asDiagonal.hpp \
     src/CVector/instance_method_block.hpp \
-    src/CVector/instance_method_buttomRows.hpp \
+    src/CVector/instance_method_bottomRows.hpp \
     src/CVector/instance_method_col.hpp \
     src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
@@ -155,7 +155,7 @@ SOURCES = \
     src/Matrix/instance_method_allFinite.hpp \
     src/Matrix/instance_method_any.hpp \
     src/Matrix/instance_method_block.hpp \
-    src/Matrix/instance_method_buttomRows.hpp \
+    src/Matrix/instance_method_bottomRows.hpp \
     src/Matrix/instance_method_col.hpp \
     src/Matrix/instance_method_cols.hpp \
     src/Matrix/instance_method_conjugate.hpp \
@@ -213,7 +213,7 @@ SOURCES = \
     src/RowVector/definitions.hpp \
     src/RowVector/instance_method_asDiagonal.hpp \
     src/RowVector/instance_method_block.hpp \
-    src/RowVector/instance_method_buttomRows.hpp \
+    src/RowVector/instance_method_bottomRows.hpp \
     src/RowVector/instance_method_col.hpp \
     src/RowVector/instance_method_dot.hpp \
     src/RowVector/instance_method_get.hpp \
@@ -235,7 +235,7 @@ SOURCES = \
     src/Vector/definitions.hpp \
     src/Vector/instance_method_asDiagonal.hpp \
     src/Vector/instance_method_block.hpp \
-    src/Vector/instance_method_buttomRows.hpp \
+    src/Vector/instance_method_bottomRows.hpp \
     src/Vector/instance_method_col.hpp \
     src/Vector/instance_method_dot.hpp \
     src/Vector/instance_method_get.hpp \
