@@ -189,7 +189,7 @@ template<
     , T C11, T C12, T C13, T C14, T C15, T C16, T C17, T C18, T C19, T C20
     , T C21, T C22, T C23, T C24, T C25, T C26, T C27, T C28, T C29, T C30
     , T C31, T C32, T C33, T C34, T C35, T C36, T C37, T C38, T C39, T C40
-    , T C41, T C42, T C43, T C44, T C45, T C36, T C37, T C38, T C39, T C40
+    , T C41, T C42, T C43, T C44, T C45, T C46, T C47, T C48, T C49, T C50
     , T C51, T C52, T C53, T C54, T C55
     >
 struct vector56_c

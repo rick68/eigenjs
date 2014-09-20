@@ -1903,7 +1903,7 @@ struct pop_back_impl< aux::vector_tag<58> >
             , typename Vector::item50, typename Vector::item51
             , typename Vector::item52, typename Vector::item53
             , typename Vector::item54, typename Vector::item55
-            , typename Vector::item46
+            , typename Vector::item56
             > type;
     };
 };
