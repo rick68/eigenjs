@@ -953,6 +953,22 @@ describe('CRowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    crvec.middleRows.should.be.a.Function;
+
+    var crvblock = crvec.middleRows(0, 1);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(1,1) (2,2) (3,3)");
+
+    (function() {
+      crvec.middleRows(2, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvec.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvec.replicate.should.be.a.Function;
 

@@ -973,6 +973,22 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleRows() should return a block consisting of a range of rows of it", function() {
+    vec.middleRows.should.be.a.Function;
+
+    var vblock = vec.middleRows(3, 3);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("4\n5\n6");
+
+    (function() {
+      vec.middleRows(7, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vec.middleRows(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vec.replicate.should.be.a.Function;
 
