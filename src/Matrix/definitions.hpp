@@ -36,6 +36,7 @@
 #include "instance_method_col.hpp"
 #include "instance_method_topRows.hpp"
 #include "instance_method_bottomRows.hpp"
+#include "instance_method_middleRows.hpp"
 
 #include "instance_method_replicate.hpp"
 
@@ -115,6 +116,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_col)
   (instance_method_topRows)
   (instance_method_bottomRows)
+  (instance_method_middleRows)
 
   (instance_method_replicate)
 
