@@ -34,6 +34,7 @@ SOURCES = \
     src/CMatrix/instance_method_isSquare.hpp \
     src/CMatrix/instance_method_isZero.hpp \
     src/CMatrix/instance_method_mean.hpp \
+    src/CMatrix/instance_method_middleRows.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
     src/CMatrix/instance_method_norm.hpp \
@@ -73,6 +74,7 @@ SOURCES = \
     src/CRowVector/instance_method_col.hpp \
     src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
+    src/CRowVector/instance_method_middleRows.hpp \
     src/CRowVector/instance_method_mula.hpp \
     src/CRowVector/instance_method_normalize.hpp \
     src/CRowVector/instance_method_row.hpp \
@@ -91,6 +93,7 @@ SOURCES = \
     src/CVector/instance_method_col.hpp \
     src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
+    src/CVector/instance_method_middleRows.hpp \
     src/CVector/instance_method_mula.hpp \
     src/CVector/instance_method_normalize.hpp \
     src/CVector/instance_method_row.hpp \
@@ -175,6 +178,7 @@ SOURCES = \
     src/Matrix/instance_method_isSquare.hpp \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_maxCoeff.hpp \
+    src/Matrix/instance_method_middleRows.hpp \
     src/Matrix/instance_method_minCoeff.hpp \
     src/Matrix/instance_method_mean.hpp \
     src/Matrix/instance_method_mul.hpp \
@@ -218,6 +222,7 @@ SOURCES = \
     src/RowVector/instance_method_dot.hpp \
     src/RowVector/instance_method_get.hpp \
     src/RowVector/instance_method_maxCoeff.hpp \
+    src/RowVector/instance_method_middleRows.hpp \
     src/RowVector/instance_method_minCoeff.hpp \
     src/RowVector/instance_method_mula.hpp \
     src/RowVector/instance_method_normalize.hpp \
@@ -240,6 +245,7 @@ SOURCES = \
     src/Vector/instance_method_dot.hpp \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_maxCoeff.hpp \
+    src/Vector/instance_method_middleRows.hpp \
     src/Vector/instance_method_minCoeff.hpp \
     src/Vector/instance_method_mula.hpp \
     src/Vector/instance_method_normalize.hpp \
