@@ -168,6 +168,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.leftCols(n)](#matleftcolsn)
     * [mat.rightCols(n)](#matrightcolsn)
     * [mat.middleCols(startCol, n)](#matmiddlecolsstartcol-n)
+    * [mat.topLeftCorner(cRows, cCols)](#mattopleftcornercrows-ccols)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -322,6 +323,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.leftCols(n)](#cmatleftcolsn)
     * [cmat.rightCols(n)](#cmatrightcolsn)
     * [cmat.middleCols(startCol, n)](#cmatmiddlecolsstartcol-n)
+    * [cmat.topLeftCorner(cRows, cCols)](#cmattopleftcornercrows-ccols)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1562,7 +1564,7 @@ var M = require('eigenjs').Matrix
              6, -3,  0,  9,
              6,  6,  3,  9
           ]);
-console.log('%s', mat.middleCols(2));
+console.log('%s', mat.leftCols(2));
 ```
 
 ```txt
@@ -1614,6 +1616,26 @@ console.log('%s', mat.middleCols(1, 2));
 -6  1
 -3  0
  6  3
+```
+
+#### mat.topLeftCorner(cRows, cCols)
+
+Returns a block consisting of a top-left corner of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.topLeftCorner(2, 2));
+```
+
+```txt
+ 7  9
+-2 -6
 ```
 
 #### mat.replicate(rowFactor, colFactor)
@@ -3088,6 +3110,26 @@ console.log('%s', cmat.middleCols(1, 1));
   (7,8)
 (11,12)
 (15,16)
+```
+
+#### cmat.topLeftCorner(cRows, cCols)
+
+Returns a block consisting of a top-left corner of it.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(4, 2).set([
+             C( 1,  2), C( 3,  4),
+             C( 5,  6), C( 7,  8),
+             C( 9, 10), C(11, 12),
+             C(13, 14), C(15, 16)
+           ]);
+console.log('%s', cmat.topLeftCorner(2, 1));
+```
+
+```txt
+(1,2)
+(5,6)
 ```
 
 #### cmat.replicate(rowFactor, colFactor)
