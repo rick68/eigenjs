@@ -989,6 +989,22 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#leftCols() should return a block consisting of the columns of it", function() {
+    vec.leftCols.should.be.a.Function;
+
+    var vblock = vec.leftCols(1);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    (function() {
+      vec.leftCols(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vec.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vec.replicate.should.be.a.Function;
 

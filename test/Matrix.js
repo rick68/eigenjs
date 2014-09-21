@@ -869,6 +869,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
+    mat.leftCols.should.be.a.Function;
+
+    var mblock = mat.leftCols(2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("1 2\n4 5\n7 8");
+
+    (function() {
+      mat.leftCols(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 

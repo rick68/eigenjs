@@ -1689,6 +1689,22 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#leftCols() should return a block consisting of the columns of it", function() {
+    cmblock.leftCols.should.be.a.Function;
+
+    var cmblock2 = cmblock.leftCols(1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal(" (6,0)\n(10,0)");
+
+    (function() {
+      cmblock.leftCols(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmblock.replicate.should.be.a.Function;
 
