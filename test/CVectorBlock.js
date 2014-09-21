@@ -2070,6 +2070,22 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topLeftCorner() should return a block consisting of a top-left corner of it", function() {
+    cvblock.topLeftCorner.should.be.a.Function;
+
+    var cvblock2 = cvblock.topLeftCorner(1, 1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(3,0)");
+
+    (function() {
+      cvblock.topLeftCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvblock.topLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvblock.replicate.should.be.a.Function;
 

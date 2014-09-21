@@ -980,6 +980,22 @@ describe('CMatrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topLeftCorner() should return a block consisting of a top-left corner of it", function() {
+    cmat.topLeftCorner.should.be.a.Function;
+
+    var cmblock = cmat.topLeftCorner(2, 1);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(1,1)\n(4,4)");
+
+    (function() {
+      cmat.topLeftCorner(4, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmat.topLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmat.replicate.should.be.a.Function;
 
