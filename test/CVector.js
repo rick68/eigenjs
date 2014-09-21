@@ -1071,6 +1071,22 @@ describe('CVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    cvec.middleCols.should.be.a.Function;
+
+    var cvblock = cvec.middleCols(0, 1);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.middleCols(1, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvec.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvec.replicate.should.be.a.Function;
 

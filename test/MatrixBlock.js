@@ -1497,6 +1497,22 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    mblock.middleCols.should.be.a.Function;
+
+    var mblock2 = mblock.middleCols(0, 1);
+    mblock2.should.instanceOf(MatrixBlock);
+    mblock2.toString().should.equal(" 6\n10");
+
+    (function() {
+      mblock.middleCols(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mblock.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     mblock.replicate.should.be.a.Function;
 
