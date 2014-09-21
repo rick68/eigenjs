@@ -3022,7 +3022,7 @@ console.log('%s', cmat.leftCols(1));
 (13,14)
 ```
 
-#### cmat.leftCols(n)
+#### cmat.rightCols(n)
 
 Returns a block consisting of the right columns of it.
 
