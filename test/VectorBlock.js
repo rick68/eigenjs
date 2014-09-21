@@ -1907,6 +1907,22 @@ describe('VectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topRightCorner() should return a block consisting of a top-right corner of it", function() {
+    vblock.topRightCorner.should.be.a.Function;
+
+    var vblock2 = vblock.topRightCorner(1, 1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("3");
+
+    (function() {
+      vblock.topRightCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vblock.topRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vblock.replicate.should.be.a.Function;
 

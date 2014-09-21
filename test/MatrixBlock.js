@@ -1529,6 +1529,22 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topRightCorner() should return a block consisting of a top-right corner of it", function() {
+    mblock.topRightCorner.should.be.a.Function;
+
+    var mblock2 = mblock.topRightCorner(1, 1);
+    mblock2.should.instanceOf(MatrixBlock);
+    mblock2.toString().should.equal("7");
+
+    (function() {
+      mblock.topRightCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mblock.topRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     mblock.replicate.should.be.a.Function;
 

@@ -2072,6 +2072,22 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topRightCorner() should return a block consisting of a top-right corner of it", function() {
+    crvblock.topRightCorner.should.be.a.Function;
+
+    var crvblock2 = crvblock.topRightCorner(1, 1);
+    crvblock2.should.instanceOf(CRowVectorBlock);
+    crvblock2.toString().should.equal("(4,0)");
+
+    (function() {
+      crvblock.topRightCorner(1, 4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvblock.topRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvblock.replicate.should.be.a.Function;
 
