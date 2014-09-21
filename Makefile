@@ -35,6 +35,7 @@ SOURCES = \
     src/CMatrix/instance_method_isZero.hpp \
     src/CMatrix/instance_method_leftCols.hpp \
     src/CMatrix/instance_method_mean.hpp \
+    src/CMatrix/instance_method_middleCols.hpp \
     src/CMatrix/instance_method_middleRows.hpp \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
@@ -77,6 +78,7 @@ SOURCES = \
     src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
     src/CRowVector/instance_method_leftCols.hpp \
+    src/CRowVector/instance_method_middleCols.hpp \
     src/CRowVector/instance_method_middleRows.hpp \
     src/CRowVector/instance_method_mula.hpp \
     src/CRowVector/instance_method_normalize.hpp \
@@ -97,6 +99,7 @@ SOURCES = \
     src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
     src/CVector/instance_method_leftCols.hpp \
+    src/CVector/instance_method_middleCols.hpp \
     src/CVector/instance_method_middleRows.hpp \
     src/CVector/instance_method_mula.hpp \
     src/CVector/instance_method_normalize.hpp \
@@ -183,6 +186,7 @@ SOURCES = \
     src/Matrix/instance_method_isZero.hpp \
     src/Matrix/instance_method_leftCols.hpp \
     src/Matrix/instance_method_maxCoeff.hpp \
+    src/Matrix/instance_method_middleCols.hpp \
     src/Matrix/instance_method_middleRows.hpp \
     src/Matrix/instance_method_minCoeff.hpp \
     src/Matrix/instance_method_mean.hpp \
@@ -229,6 +233,7 @@ SOURCES = \
     src/RowVector/instance_method_get.hpp \
     src/RowVector/instance_method_leftCols.hpp \
     src/RowVector/instance_method_maxCoeff.hpp \
+    src/RowVector/instance_method_middleCols.hpp \
     src/RowVector/instance_method_middleRows.hpp \
     src/RowVector/instance_method_minCoeff.hpp \
     src/RowVector/instance_method_mula.hpp \
@@ -253,6 +258,7 @@ SOURCES = \
     src/Vector/instance_method_get.hpp \
     src/Vector/instance_method_leftCols.hpp \
     src/Vector/instance_method_maxCoeff.hpp \
+    src/Vector/instance_method_middleCols.hpp \
     src/Vector/instance_method_middleRows.hpp \
     src/Vector/instance_method_minCoeff.hpp \
     src/Vector/instance_method_mula.hpp \

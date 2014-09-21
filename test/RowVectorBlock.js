@@ -1761,6 +1761,22 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    rvblock.middleCols.should.be.a.Function;
+
+    var rvblock2 = rvblock.middleCols(1, 1);
+    rvblock2.should.instanceOf(RowVectorBlock);
+    rvblock2.toString().should.equal("4");
+
+    (function() {
+      rvblock.middleCols(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvblock.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvblock.replicate.should.be.a.Function;
 

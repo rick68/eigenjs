@@ -964,6 +964,22 @@ describe('CMatrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    cmat.middleCols.should.be.a.Function;
+
+    var cmblock = cmat.middleCols(1, 1);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(2,2)\n(5,5)\n(8,8)");
+
+    (function() {
+      cmat.middleCols(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmat.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmat.replicate.should.be.a.Function;
 

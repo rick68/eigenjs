@@ -1843,7 +1843,7 @@ describe('VectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     vblock.leftCols.should.be.a.Function;
 
     var vblock2 = vblock.leftCols(1);
@@ -1856,6 +1856,38 @@ describe('VectorBlock', function() {
 
     (function() {
       vblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    vblock.rightCols.should.be.a.Function;
+
+    var vblock2 = vblock.rightCols(1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("3\n4");
+
+    (function() {
+      vblock.rightCols(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vblock.rightCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#middleCols() should return a block consisting of a range columns of it", function() {
+    vblock.middleCols.should.be.a.Function;
+
+    var vblock2 = vblock.middleCols(0, 1);
+    vblock2.should.instanceOf(VectorBlock);
+    vblock2.toString().should.equal("3\n4");
+
+    (function() {
+      vblock.middleCols(1, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vblock.middleCols(-1, 1);
     }).should.throw("Invalid argument");
   });
 

@@ -2054,6 +2054,22 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    cvblock.middleCols.should.be.a.Function;
+
+    var cvblock2 = cvblock.middleCols(0, 1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)");
+
+    (function() {
+      cvblock.middleCols(1, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvblock.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvblock.replicate.should.be.a.Function;
 

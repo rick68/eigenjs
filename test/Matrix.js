@@ -901,6 +901,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#middleCols() should return a block consisting of a range of columns of it", function() {
+    mat.middleCols.should.be.a.Function;
+
+    var mblock = mat.middleCols(1, 1);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("2\n5\n8");
+
+    (function() {
+      mat.middleCols(4, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.middleCols(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 
