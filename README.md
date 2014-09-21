@@ -3098,7 +3098,7 @@ var CM = require('eigenjs').CMatrix
              7,
             -2,
              6
-          ]);
+           ]);
 console.log('%s', cmat.replicate(2, 5));
 ```
 
