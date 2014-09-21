@@ -58,6 +58,7 @@ SOURCES = \
     src/CMatrix/instance_method_sum.hpp \
     src/CMatrix/instance_method_toString.hpp \
     src/CMatrix/instance_method_topLeftCorner.hpp \
+    src/CMatrix/instance_method_topRightCorner.hpp \
     src/CMatrix/instance_method_topRows.hpp \
     src/CMatrix/instance_method_trace.hpp \
     src/CMatrix/instance_method_transpose.hpp \
@@ -86,6 +87,7 @@ SOURCES = \
     src/CRowVector/instance_method_row.hpp \
     src/CRowVector/instance_method_set.hpp \
     src/CRowVector/instance_method_topLeftCorner.hpp \
+    src/CRowVector/instance_method_topRightCorner.hpp \
     src/CRowVector/instance_method_topRows.hpp \
     src/CRowVector_fwd.hpp \
     src/CRowVectorBlock.hpp \
@@ -108,6 +110,7 @@ SOURCES = \
     src/CVector/instance_method_row.hpp \
     src/CVector/instance_method_set.hpp \
     src/CVector/instance_method_topLeftCorner.hpp \
+    src/CVector/instance_method_topRightCorner.hpp \
     src/CVector/instance_method_topRows.hpp \
     src/CVector_fwd.hpp \
     src/CVectorBlock.hpp \
@@ -214,6 +217,7 @@ SOURCES = \
     src/Matrix/instance_method_sum.hpp \
     src/Matrix/instance_method_toString.hpp \
     src/Matrix/instance_method_topLeftCorner.hpp \
+    src/Matrix/instance_method_topRightCorner.hpp \
     src/Matrix/instance_method_topRows.hpp \
     src/Matrix/instance_method_trace.hpp \
     src/Matrix/instance_method_transpose.hpp \
@@ -246,6 +250,7 @@ SOURCES = \
     src/RowVector/instance_method_set.hpp \
     src/RowVector/instance_method_setLinSpaced.hpp \
     src/RowVector/instance_method_topLeftCorner.hpp \
+    src/RowVector/instance_method_topRightCorner.hpp \
     src/RowVector/instance_method_topRows.hpp \
     src/RowVector_fwd.hpp \
     src/RowVectorBlock.hpp \
@@ -272,6 +277,7 @@ SOURCES = \
     src/Vector/instance_method_set.hpp \
     src/Vector/instance_method_setLinSpaced.hpp \
     src/Vector/instance_method_topLeftCorner.hpp \
+    src/Vector/instance_method_topRightCorner.hpp \
     src/Vector/instance_method_topRows.hpp \
     src/Vector_fwd.hpp \
     src/VectorBlock.hpp \
