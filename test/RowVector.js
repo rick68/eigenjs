@@ -950,7 +950,7 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     rvec.leftCols.should.be.a.Function;
 
     var rvblock = rvec.leftCols(3);
@@ -963,6 +963,22 @@ describe('RowVector', function() {
 
     (function() {
       rvec.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    rvec.rightCols.should.be.a.Function;
+
+    var rvblock = rvec.rightCols(3);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("4 5 6");
+
+    (function() {
+      rvec.rightCols(7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvec.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

@@ -969,7 +969,7 @@ describe('CRowVector', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     crvec.leftCols.should.be.a.Function;
 
     var crvblock = crvec.leftCols(2);
@@ -982,6 +982,22 @@ describe('CRowVector', function() {
 
     (function() {
       crvec.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    crvec.rightCols.should.be.a.Function;
+
+    var crvblock = crvec.rightCols(2);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(2,2) (3,3)");
+
+    (function() {
+      crvec.rightCols(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvec.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

@@ -1689,7 +1689,7 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     cmblock.leftCols.should.be.a.Function;
 
     var cmblock2 = cmblock.leftCols(1);
@@ -1702,6 +1702,22 @@ describe('CMatrixBlock', function() {
 
     (function() {
       cmblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    cmblock.rightCols.should.be.a.Function;
+
+    var cmblock2 = cmblock.rightCols(1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal(" (7,0)\n(11,0)");
+
+    (function() {
+      cmblock.rightCols(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

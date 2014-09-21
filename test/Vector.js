@@ -989,7 +989,7 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     vec.leftCols.should.be.a.Function;
 
     var vblock = vec.leftCols(1);
@@ -1002,6 +1002,22 @@ describe('Vector', function() {
 
     (function() {
       vec.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    vec.rightCols.should.be.a.Function;
+
+    var vblock = vec.rightCols(1);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    (function() {
+      vec.rightCols(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vec.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

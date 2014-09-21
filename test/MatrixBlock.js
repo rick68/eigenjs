@@ -1465,7 +1465,7 @@ describe('MatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of a range of rows of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     mblock.leftCols.should.be.a.Function;
 
     var mblock2 = mblock.leftCols(1);
@@ -1478,6 +1478,22 @@ describe('MatrixBlock', function() {
 
     (function() {
       mblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    mblock.rightCols.should.be.a.Function;
+
+    var mblock2 = mblock.rightCols(1);
+    mblock2.should.instanceOf(MatrixBlock);
+    mblock2.toString().should.equal(" 7\n11");
+
+    (function() {
+      mblock.rightCols(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mblock.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

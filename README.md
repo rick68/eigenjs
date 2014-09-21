@@ -166,6 +166,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.bottomRows(n)](#matbottomrowsn)
     * [mat.middleRows(startRow, n)](#matmiddlerowsstartrow-n)
     * [mat.leftCols(n)](#matleftcolsn)
+    * [mat.rightCols(n)](#matrightcolsn)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -318,6 +319,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.bottomRows(n)](#cmatbottomrowsn)
     * [cmat.middleRows(startRow, n)](#cmatmiddlerowsstartrow-n)
     * [cmat.leftCols(n)](#cmatleftcolsn)
+    * [cmat.rightCols(n)](#cmatrightcolsn)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1548,7 +1550,7 @@ console.log('%s', mat.middleRows(1, 2));
 
 #### mat.leftCols(n)
 
-Returns a block consisting of the columns of it.
+Returns a block consisting of the left columns of it.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1566,6 +1568,28 @@ console.log('%s', mat.middleCols(2));
 -2 -6
  6 -3
  6  6
+```
+
+#### mat.rightCols(n)
+
+Returns a block consisting of the right columns of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.rightCols(2));
+```
+
+```txt
+-5  3
+ 1  0
+ 0  9
+ 3  9
 ```
 
 #### mat.replicate(rowFactor, colFactor)
@@ -2978,7 +3002,7 @@ console.log('%s', cmat.middleRows(1, 2));
 
 #### cmat.leftCols(n)
 
-Returns a block consisting of the columns of it.
+Returns a block consisting of the left columns of it.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -2996,6 +3020,28 @@ console.log('%s', cmat.leftCols(1));
   (5,6)
  (9,10)
 (13,14)
+```
+
+#### cmat.rightCols(n)
+
+Returns a block consisting of the right columns of it.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(4, 2).set([
+             C( 1,  2), C( 3,  4),
+             C( 5,  6), C( 7,  8),
+             C( 9, 10), C(11, 12),
+             C(13, 14), C(15, 16)
+           ]);
+console.log('%s', cmat.rightCols(1));
+```
+
+```txt
+  (3,4)
+  (7,8)
+(11,12)
+(15,16)
 ```
 
 #### cmat.replicate(rowFactor, colFactor)
