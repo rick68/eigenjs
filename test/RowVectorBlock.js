@@ -1729,7 +1729,7 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     rvblock.leftCols.should.be.a.Function;
 
     var rvblock2 = rvblock.leftCols(1);
@@ -1742,6 +1742,22 @@ describe('RowVectorBlock', function() {
 
     (function() {
       rvblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    rvblock.rightCols.should.be.a.Function;
+
+    var rvblock2 = rvblock.rightCols(1);
+    rvblock2.should.instanceOf(RowVectorBlock);
+    rvblock2.toString().should.equal("4");
+
+    (function() {
+      rvblock.rightCols(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvblock.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

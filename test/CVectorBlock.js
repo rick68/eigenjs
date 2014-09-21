@@ -2022,7 +2022,7 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     cvblock.leftCols.should.be.a.Function;
 
     var cvblock2 = cvblock.leftCols(1);
@@ -2035,6 +2035,22 @@ describe('CVectorBlock', function() {
 
     (function() {
       cvblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    cvblock.rightCols.should.be.a.Function;
+
+    var cvblock2 = cvblock.rightCols(1);
+    cvblock2.should.instanceOf(CVectorBlock);
+    cvblock2.toString().should.equal("(3,0)\n(4,0)");
+
+    (function() {
+      cvblock.rightCols(2);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvblock.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 

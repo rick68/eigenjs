@@ -885,6 +885,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    mat.rightCols.should.be.a.Function;
+
+    var mblock = mat.rightCols(2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("2 3\n5 6\n8 9");
+
+    (function() {
+      mat.rightCols(4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.rightCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 

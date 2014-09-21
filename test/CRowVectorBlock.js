@@ -2008,7 +2008,7 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
-  it("#leftCols() should return a block consisting of the columns of it", function() {
+  it("#leftCols() should return a block consisting of the left columns of it", function() {
     crvblock.leftCols.should.be.a.Function;
 
     var crvblock2 = crvblock.leftCols(1);
@@ -2021,6 +2021,22 @@ describe('CRowVectorBlock', function() {
 
     (function() {
       crvblock.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#rightCols() should return a block consisting of the right columns of it", function() {
+    crvblock.rightCols.should.be.a.Function;
+
+    var crvblock2 = crvblock.rightCols(1);
+    crvblock2.should.instanceOf(CRowVectorBlock);
+    crvblock2.toString().should.equal("(4,0)");
+
+    (function() {
+      crvblock.rightCols(3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvblock.rightCols(-1);
     }).should.throw("Invalid argument");
   });
 
