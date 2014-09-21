@@ -998,6 +998,22 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topLeftCorner() should return a block consisting of a top-left corner of it", function() {
+    rvec.topLeftCorner.should.be.a.Function;
+
+    var rvblock = rvec.topLeftCorner(1, 2);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("1 2");
+
+    (function() {
+      rvec.topLeftCorner(1, 7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvec.topLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvec.replicate.should.be.a.Function;
 
