@@ -950,6 +950,22 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#leftCols() should return a block consisting of the columns of it", function() {
+    rvec.leftCols.should.be.a.Function;
+
+    var rvblock = rvec.leftCols(3);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("1 2 3");
+
+    (function() {
+      rvec.leftCols(7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvec.leftCols(-1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvec.replicate.should.be.a.Function;
 
