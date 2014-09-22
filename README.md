@@ -459,6 +459,7 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.setLinSpaced(size, low, high)](#vecsetlinspacedsize-low-high)
     * [vec.block(startRow, blockRows)](#vecblockstartrow-blockrows)
     * [vec.head(n)](#vecheadn)
+    * [vec.tail(n)](#vectailn)
     * [vec.dot(vec)](#vecdotvec)
     * [vec.dot(rvec)](#vecdotrvec)
     * [vec.dot(vblock)](#vecdotvblock)
@@ -487,6 +488,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.get(row)](#cvecgetrow)
     * [cvec.block(startRow, blockRows)](#cvecblockstartrow-blockrows)
     * [cvec.head(n)](#cvecheadn)
+    * [cvec.htail(n)](#cvectailn)
     * [cvec.dot(vec)](#cvecdotvec)
     * [cvec.dot(rvec)](#cvecdotrvec)
     * [cvec.dot(vblock)](#cvecdotvblock)
@@ -512,6 +514,7 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.setLinSpaced(size, low, high)](#rvecsetlinspacedsize-low-high)
     * [rvec.block(startCol, blockCols)](#rvecblockstartcol-blockcols)
     * [rvec.head(n)](#rvecheadn)
+    * [rvec.tail(n)](#rvectailn)
     * [rvec.dot(vec)](#rvecdotvec)
     * [rvec.dot(rvec)](#rvecdotrvec)
     * [rvec.dot(vblock)](#rvecdotvblock)
@@ -540,6 +543,7 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.get(col)](#crvecgetcol)
     * [crvec.block(startCol, blockCols)](#crvecblockstartcol-blockcols)
     * [crvec.head(n)](#crvecheadn)
+    * [crvec.tail(n)](#crvectailn)
     * [crvec.dot(vec)](#crvecdotvec)
     * [crvec.dot(rvec)](#crvecdotrvec)
     * [crvec.dot(vblock)](#crvecdotvblock)
@@ -4268,6 +4272,24 @@ vblock =
 2
 ```
 
+#### vec.tail(n)
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V([1,
+                 2,
+                 3,
+                 4])
+  , vblock = vec.tail(2);
+console.log('vblock = \n%s', vblock);
+```
+
+```txt
+vblock =
+3
+4
+```
+
 #### vec.dot(vec)
 #### vec.dot(rvec)
 #### vec.dot(vblock)
@@ -4619,6 +4641,24 @@ cvblock =
 (2,0)
 ```
 
+#### cvec.tail(n)
+
+```js
+var CV = require('eigenjs').CVector
+  , cvec = new CV([  1    ,
+                     2    ,
+                   C(3   ),
+                   C(4, 0)])
+  , cvblock = cvec.tail(2);
+console.log('cvblock = \n%s', cvblock);
+```
+
+```txt
+cvblock =
+(3,0)
+(4,0)
+```
+
 #### cvec.dot(vec)
 #### cvec.dot(rvec)
 #### cvec.dot(vblock)
@@ -4862,6 +4902,20 @@ console.log('rvblock = \n%s', rvblock);
 ```txt
 rvblock =
 1 2
+```
+
+#### rvec.tail(n)
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV([1, 2, 3, 4])
+  , rvblock = rvec.tail(2);
+console.log('rvblock = \n%s', rvblock);
+```
+
+```txt
+rvblock =
+3 4
 ```
 
 #### rvec.dot(vec)
@@ -5166,6 +5220,22 @@ console.log('crvblock = \n%s', crvblock);
 ```txt
 crvblock =
 (1,0) (2,0)
+```
+
+#### crvec.tail(n)
+
+```js
+var Eigen = require('eigenjs')
+  , C = Eigen.Complex
+  , CRV = Eigen.CRowVector
+  , crvec = new CRV([1, 2, C(3), C(4, 0)])
+  , crvblock = crvec.tail(2);
+console.log('crvblock = \n%s', crvblock);
+```
+
+```txt
+crvblock =
+(3,0) (4,0)
 ```
 
 #### crvec.dot(vec)
