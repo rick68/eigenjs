@@ -1046,6 +1046,22 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRightCorner() should return a block consisting of a bottom-right corner of it", function() {
+    rvec.bottomRightCorner.should.be.a.Function;
+
+    var rvblock = rvec.bottomRightCorner(1, 3);
+    rvblock.should.instanceOf(RowVectorBlock);
+    rvblock.toString().should.equal("4 5 6");
+
+    (function() {
+      rvec.bottomRightCorner(1, 7);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvec.bottomRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvec.replicate.should.be.a.Function;
 
