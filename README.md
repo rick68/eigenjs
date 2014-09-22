@@ -488,7 +488,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.get(row)](#cvecgetrow)
     * [cvec.block(startRow, blockRows)](#cvecblockstartrow-blockrows)
     * [cvec.head(n)](#cvecheadn)
-    * [cvec.htail(n)](#cvectailn)
+    * [cvec.tail(n)](#cvectailn)
     * [cvec.dot(vec)](#cvecdotvec)
     * [cvec.dot(rvec)](#cvecdotrvec)
     * [cvec.dot(vblock)](#cvecdotvblock)
