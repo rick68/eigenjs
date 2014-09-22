@@ -1960,6 +1960,18 @@ describe('CRowVectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#head() should return a dynamic-size expression of the first coefficients of it", function() {
+    crvblock.head.should.be.a.Function;
+
+    var head = crvblock.head(1);
+    head.should.instanceOf(CRowVectorBlock);
+    head.toString().should.equal("(3,0)");
+
+    (function() {
+      crvblock.head(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     crvblock.topRows.should.be.a.Function;
 

@@ -902,6 +902,18 @@ describe('RowVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#head() should return a dynamic-size expression of the first coefficients of it", function() {
+    rvec.head.should.be.a.Function;
+
+    var head = rvec.head(3);
+    head.should.instanceOf(RowVectorBlock);
+    head.toString().should.equal("1 2 3");
+
+    (function() {
+      rvec.head(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     rvec.topRows.should.be.a.Function;
 

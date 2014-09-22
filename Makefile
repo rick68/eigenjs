@@ -83,6 +83,7 @@ SOURCES = \
     src/CRowVector/instance_method_col.hpp \
     src/CRowVector/instance_method_dot.hpp \
     src/CRowVector/instance_method_get.hpp \
+    src/CRowVector/instance_method_head.hpp \
     src/CRowVector/instance_method_leftCols.hpp \
     src/CRowVector/instance_method_middleCols.hpp \
     src/CRowVector/instance_method_middleRows.hpp \
@@ -108,6 +109,7 @@ SOURCES = \
     src/CVector/instance_method_col.hpp \
     src/CVector/instance_method_dot.hpp \
     src/CVector/instance_method_get.hpp \
+    src/CVector/instance_method_head.hpp \
     src/CVector/instance_method_leftCols.hpp \
     src/CVector/instance_method_middleCols.hpp \
     src/CVector/instance_method_middleRows.hpp \
@@ -249,6 +251,7 @@ SOURCES = \
     src/RowVector/instance_method_col.hpp \
     src/RowVector/instance_method_dot.hpp \
     src/RowVector/instance_method_get.hpp \
+    src/RowVector/instance_method_head.hpp \
     src/RowVector/instance_method_leftCols.hpp \
     src/RowVector/instance_method_maxCoeff.hpp \
     src/RowVector/instance_method_middleCols.hpp \
@@ -278,6 +281,7 @@ SOURCES = \
     src/Vector/instance_method_col.hpp \
     src/Vector/instance_method_dot.hpp \
     src/Vector/instance_method_get.hpp \
+    src/Vector/instance_method_head.hpp \
     src/Vector/instance_method_leftCols.hpp \
     src/Vector/instance_method_maxCoeff.hpp \
     src/Vector/instance_method_middleCols.hpp \

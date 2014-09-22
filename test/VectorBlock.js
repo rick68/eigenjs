@@ -1795,6 +1795,18 @@ describe('VectorBlock', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#head() should return a dynamic-size expression of the first coefficients of it", function() {
+    vblock.head.should.be.a.Function;
+
+    var head = vblock.head(1);
+    head.should.instanceOf(VectorBlock);
+    head.toString().should.equal("3");
+
+    (function() {
+      vblock.head(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     vblock.topRows.should.be.a.Function;
 

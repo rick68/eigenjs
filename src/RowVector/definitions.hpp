@@ -22,6 +22,7 @@
 #include "instance_method_block.hpp"
 #include "instance_method_row.hpp"
 #include "instance_method_col.hpp"
+#include "instance_method_head.hpp"
 #include "instance_method_topRows.hpp"
 #include "instance_method_bottomRows.hpp"
 #include "instance_method_middleRows.hpp"
@@ -58,6 +59,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_block)
   (instance_method_row)
   (instance_method_col)
+  (instance_method_head)
   (instance_method_topRows)
   (instance_method_bottomRows)
   (instance_method_middleRows)
