@@ -933,6 +933,18 @@ describe('CRowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the last coefficients of it", function() {
+    crvec.tail.should.be.a.Function;
+
+    var tail = crvec.tail(2);
+    tail.should.instanceOf(CRowVectorBlock);
+    tail.toString().should.equal("(2,2) (3,3)");
+
+    (function() {
+      crvec.tail(4);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     crvec.topRows.should.be.a.Function;
 

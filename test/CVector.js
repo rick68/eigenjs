@@ -1003,6 +1003,18 @@ describe('CVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the last coefficients of it", function() {
+    cvec.tail.should.be.a.Function;
+
+    var tail = cvec.tail(3);
+    tail.should.instanceOf(CVectorBlock);
+    tail.toString().should.equal("(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.tail(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     cvec.topRows.should.be.a.Function;
 

@@ -914,6 +914,18 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the last coefficients of it", function() {
+    rvec.tail.should.be.a.Function;
+
+    var tail = rvec.tail(3);
+    tail.should.instanceOf(RowVectorBlock);
+    tail.toString().should.equal("4 5 6");
+
+    (function() {
+      rvec.tail(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     rvec.topRows.should.be.a.Function;
 

@@ -1972,6 +1972,18 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the tail coefficients of it", function() {
+    crvblock.tail.should.be.a.Function;
+
+    var tail = crvblock.tail(1);
+    tail.should.instanceOf(CRowVectorBlock);
+    tail.toString().should.equal("(4,0)");
+
+    (function() {
+      crvblock.tail(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     crvblock.topRows.should.be.a.Function;
 

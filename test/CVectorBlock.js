@@ -1986,6 +1986,18 @@ describe('CVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the last coefficients of it", function() {
+    cvblock.tail.should.be.a.Function;
+
+    var tail = cvblock.tail(1);
+    tail.should.instanceOf(CVectorBlock);
+    tail.toString().should.equal("(4,0)");
+
+    (function() {
+      cvblock.tail(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     cvblock.topRows.should.be.a.Function;
 
