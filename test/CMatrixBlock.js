@@ -1753,6 +1753,22 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#topRightCorner() should return a block consisting of a top-right corner of it", function() {
+    cmblock.topRightCorner.should.be.a.Function;
+
+    var cmblock2 = cmblock.topRightCorner(1, 1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal("(7,0)");
+
+    (function() {
+      cmblock.topRightCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.topRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmblock.replicate.should.be.a.Function;
 

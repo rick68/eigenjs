@@ -29,6 +29,7 @@
 #include "instance_method_rightCols.hpp"
 #include "instance_method_middleCols.hpp"
 #include "instance_method_topLeftCorner.hpp"
+#include "instance_method_topRightCorner.hpp"
 
 #include "instance_method_mula.hpp"
 
@@ -62,6 +63,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_rightCols)
   (instance_method_middleCols)
   (instance_method_topLeftCorner)
+  (instance_method_topRightCorner)
 
   (instance_method_mula)
 
