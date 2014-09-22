@@ -2104,6 +2104,22 @@ describe('CRowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRightCorner() should return a block consisting of a bottom-right corner of it", function() {
+    crvblock.bottomRightCorner.should.be.a.Function;
+
+    var crvblock2 = crvblock.bottomRightCorner(1, 1);
+    crvblock2.should.instanceOf(CRowVectorBlock);
+    crvblock2.toString().should.equal("(4,0)");
+
+    (function() {
+      crvblock.bottomRightCorner(1, 3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvblock.bottomRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     crvblock.replicate.should.be.a.Function;
 

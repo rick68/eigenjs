@@ -1785,6 +1785,22 @@ describe('CMatrixBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRightCorner() should return a block consisting of a bottom-right corner of it", function() {
+    cmblock.bottomRightCorner.should.be.a.Function;
+
+    var cmblock2 = cmblock.bottomRightCorner(1, 1);
+    cmblock2.should.instanceOf(CMatrixBlock);
+    cmblock2.toString().should.equal("(11,0)");
+
+    (function() {
+      cmblock.bottomRightCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmblock.bottomRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmblock.replicate.should.be.a.Function;
 

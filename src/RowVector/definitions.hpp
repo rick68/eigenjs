@@ -31,6 +31,7 @@
 #include "instance_method_topLeftCorner.hpp"
 #include "instance_method_topRightCorner.hpp"
 #include "instance_method_bottomLeftCorner.hpp"
+#include "instance_method_bottomRightCorner.hpp"
 
 #include "instance_method_mula.hpp"
 
@@ -66,6 +67,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_topLeftCorner)
   (instance_method_topRightCorner)
   (instance_method_bottomLeftCorner)
+  (instance_method_bottomRightCorner)
 
   (instance_method_mula)
 

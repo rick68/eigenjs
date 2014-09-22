@@ -1,6 +1,6 @@
 //
-// CMatrix/instance_method_bottomLeftCorner.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// RowVector/instance_method_bottomRightCorner.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,12 +9,12 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CMATRIX_INSTANCE_METHOD_BOTTOMLEFTCORNER_HPP
-#define EIGENJS_CMATRIX_INSTANCE_METHOD_BOTTOMLEFTCORNER_HPP
+#ifndef EIGENJS_ROWVECTOR_INSTANCE_METHOD_BOTTOMRIGHTCORNER_HPP
+#define EIGENJS_ROWVECTOR_INSTANCE_METHOD_BOTTOMRIGHTCORNER_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CMatrix, bottomLeftCorner,
+EIGENJS_INSTANCE_METHOD(RowVector, bottomRightCorner,
 {
   NanScope();
 
@@ -34,14 +34,12 @@ EIGENJS_INSTANCE_METHOD(CMatrix, bottomLeftCorner,
 
       v8::Local<v8::Value> argv[] = {
           args.This()
-        , NanNew<v8::Integer>(value.rows() - cRows)  /* startRow */
-        , NanNew<v8::Integer>(0)                     /* startCol */
-        , NanNew<v8::Integer>(cRows)                 /* blockRows */
+        , NanNew<v8::Integer>(value.cols() - cCols)  /* startCol */
         , NanNew<v8::Integer>(cCols)                 /* blockCols */
       };
 
       NanReturnValue(
-        CMatrixBlock::new_instance(
+        RowVectorBlock::new_instance(
           args
         , sizeof(argv) / sizeof(v8::Local<v8::Value>)
         , argv
@@ -56,4 +54,4 @@ EIGENJS_INSTANCE_METHOD(CMatrix, bottomLeftCorner,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CMATRIX_INSTANCE_METHOD_BOTTOMLEFTCORNER_HPP
+#endif  // EIGENJS_ROWVECTOR_INSTANCE_METHOD_BOTTOMRIGHTCORNER_HPP

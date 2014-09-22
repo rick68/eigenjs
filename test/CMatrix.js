@@ -1028,6 +1028,22 @@ describe('CMatrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomRightCorner() should return a block consisting of a bottom-right corner of it", function() {
+    cmat.bottomRightCorner.should.be.a.Function;
+
+    var cmblock = cmat.bottomRightCorner(2, 2);
+    cmblock.should.instanceOf(CMatrixBlock);
+    cmblock.toString().should.equal("(5,5) (6,6)\n(8,8) (9,9)");
+
+    (function() {
+      cmat.bottomRightCorner(4, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cmat.bottomRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cmat.replicate.should.be.a.Function;
 
