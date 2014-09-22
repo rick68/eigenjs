@@ -171,6 +171,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.topLeftCorner(cRows, cCols)](#mattopleftcornercrows-ccols)
     * [mat.topRightCorner(cRows, cCols)](#mattoprightcornercrows-ccols)
     * [mat.bottomLeftCorner(cRows, cCols)](#matbottomleftcornercrows-ccols)
+    * [mat.bottomRightCorner(cRows, cCols)](#matbottomrightcornercrows-ccols)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -328,6 +329,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.topLeftCorner(cRows, cCols)](#cmattopleftcornercrows-ccols)
     * [cmat.topRightCorner(cRows, cCols)](#cmattoprightcornercrows-ccols)
     * [cmat.bottomLeftCorner(cRows, cCols)](#cmatbottomleftcornercrows-ccols)
+    * [cmat.bottomRightCorner(cRows, cCols)](#cmatbottomrightcornercrows-ccols)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1675,6 +1677,26 @@ var M = require('eigenjs').Matrix
              6,  6,  3,  9
           ]);
 console.log('%s', mat.bottomLeftCorner(2, 2));
+```
+
+```txt
+ 6 -3
+ 6  6
+```
+
+#### mat.bottomRightCorner(cRows, cCols)
+
+Returns a block consisting of a bottom-right corner of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.bottomRightCorner(2, 2));
 ```
 
 ```txt
