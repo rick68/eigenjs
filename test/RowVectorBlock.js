@@ -1809,6 +1809,22 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomLeftCorner() should return a block consisting of a bottom-left corner of it", function() {
+    rvblock.bottomLeftCorner.should.be.a.Function;
+
+    var rvblock2 = rvblock.bottomLeftCorner(1, 1);
+    rvblock2.should.instanceOf(RowVectorBlock);
+    rvblock2.toString().should.equal("3");
+
+    (function() {
+      rvblock.bottomLeftCorner(1, 3);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      rvblock.bottomLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     rvblock.replicate.should.be.a.Function;
 

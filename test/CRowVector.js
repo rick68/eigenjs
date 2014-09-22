@@ -1041,11 +1041,27 @@ describe('CRowVector', function() {
     crvblock.toString().should.equal("(2,2) (3,3)");
 
     (function() {
-      crvec.topRightCorner(3, 1);
+      crvec.topRightCorner(1, 4);
     }).should.throw("Invalid argument");
 
     (function() {
       crvec.topRightCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
+  it("#bottomLeftCorner() should return a block consisting of a bottom-left corner of it", function() {
+    crvec.bottomLeftCorner.should.be.a.Function;
+
+    var crvblock = crvec.bottomLeftCorner(1, 2);
+    crvblock.should.instanceOf(CRowVectorBlock);
+    crvblock.toString().should.equal("(1,1) (2,2)");
+
+    (function() {
+      crvec.bottomLeftCorner(3, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      crvec.bottomLeftCorner(-1, 1);
     }).should.throw("Invalid argument");
   });
 

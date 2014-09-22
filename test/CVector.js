@@ -1119,6 +1119,22 @@ describe('CVector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomLeftCorner() should return a block consisting of a bottom-left corner of it", function() {
+    cvec.bottomLeftCorner.should.be.a.Function;
+
+    var cvblock = cvec.bottomLeftCorner(3, 1);
+    cvblock.should.instanceOf(CVectorBlock);
+    cvblock.toString().should.equal("(4,4)\n(5,5)\n(6,6)");
+
+    (function() {
+      cvec.bottomLeftCorner(7, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      cvec.bottomLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a complex matrix which is replicated", function() {
     cvec.replicate.should.be.a.Function;
 
