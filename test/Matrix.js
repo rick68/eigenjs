@@ -949,6 +949,22 @@ describe('Matrix', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomLeftCorner() should return a block consisting of a bottom-left corner of it", function() {
+    mat.bottomLeftCorner.should.be.a.Function;
+
+    var mblock = mat.bottomLeftCorner(2, 2);
+    mblock.should.instanceOf(MatrixBlock);
+    mblock.toString().should.equal("4 5\n7 8");
+
+    (function() {
+      mat.bottomLeftCorner(4, 4);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      mat.bottomLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     mat.replicate.should.be.a.Function;
 

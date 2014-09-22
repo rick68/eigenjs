@@ -170,6 +170,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.middleCols(startCol, n)](#matmiddlecolsstartcol-n)
     * [mat.topLeftCorner(cRows, cCols)](#mattopleftcornercrows-ccols)
     * [mat.topRightCorner(cRows, cCols)](#mattoprightcornercrows-ccols)
+    * [mat.bottomLeftCorner(cRows, cCols)](#matbottomleftcornercrows-ccols)
     * [mat.replicate(rowFactor, colFactor)](#matreplicaterowfactor-colfactor)
     * [mat.add(mat)](#mataddmat)
     * [mat.add(vec)](#mataddvec)
@@ -326,6 +327,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.middleCols(startCol, n)](#cmatmiddlecolsstartcol-n)
     * [cmat.topLeftCorner(cRows, cCols)](#cmattopleftcornercrows-ccols)
     * [cmat.topRightCorner(cRows, cCols)](#cmattoprightcornercrows-ccols)
+    * [cmat.bottomLeftCorner(cRows, cCols)](#cmatbottomleftcornercrows-ccols)
     * [cmat.replicate(rowFactor, colFactor)](#cmatreplicaterowfactor-colfactor)
     * [cmat.add(mat)](#cmataddmat)
     * [cmat.add(vec)](#cmataddvec)
@@ -1658,6 +1660,26 @@ console.log('%s', mat.topRightCorner(2, 2));
 ```txt
 -5  3
  1  0
+```
+
+#### mat.bottomLeftCorner(cRows, cCols)
+
+Returns a block consisting of a bottom-left corner of it.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(4, 4).set([
+             7,  9, -5,  3,
+            -2, -6,  1,  0,
+             6, -3,  0,  9,
+             6,  6,  3,  9
+          ]);
+console.log('%s', mat.bottomLeftCorner(2, 2));
+```
+
+```txt
+ 6 -3
+ 6  6
 ```
 
 #### mat.replicate(rowFactor, colFactor)
@@ -3172,6 +3194,26 @@ console.log('%s', cmat.topRightCorner(2, 1));
 ```txt
 (3,4)
 (7,8)
+```
+
+#### cmat.bottomLeftCorner(cRows, cCols)
+
+Returns a block consisting of a bottom-left corner of it.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(4, 2).set([
+             C( 1,  2), C( 3,  4),
+             C( 5,  6), C( 7,  8),
+             C( 9, 10), C(11, 12),
+             C(13, 14), C(15, 16)
+           ]);
+console.log('%s', cmat.bottomLeftCorner(2, 1));
+```
+
+```txt
+ (9,10)
+(13,14)
 ```
 
 #### cmat.replicate(rowFactor, colFactor)

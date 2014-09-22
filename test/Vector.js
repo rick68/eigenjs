@@ -1069,6 +1069,22 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#bottomLeftCorner() should return a block consisting of a bottom-left corner of it", function() {
+    vec.bottomLeftCorner.should.be.a.Function;
+
+    var vblock = vec.bottomLeftCorner(2, 1);
+    vblock.should.instanceOf(VectorBlock);
+    vblock.toString().should.equal("5\n6");
+
+    (function() {
+      vec.bottomLeftCorner(7, 1);
+    }).should.throw("Invalid argument");
+
+    (function() {
+      vec.bottomLeftCorner(-1, 1);
+    }).should.throw("Invalid argument");
+  });
+
   it("#replicate() should return a matrix which is replicated", function() {
     vec.replicate.should.be.a.Function;
 
