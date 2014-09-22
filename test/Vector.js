@@ -941,6 +941,18 @@ describe('Vector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#head() should return a dynamic-size expression of the first coefficients of it", function() {
+    vec.head.should.be.a.Function;
+
+    var head = vec.head(3);
+    head.should.instanceOf(VectorBlock);
+    head.toString().should.equal("1\n2\n3");
+
+    (function() {
+      vec.head(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     vec.topRows.should.be.a.Function;
 

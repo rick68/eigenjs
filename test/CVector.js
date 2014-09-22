@@ -991,6 +991,18 @@ describe('CVector', function() {
     }).should.throw("The row or column number is out of range");
   });
 
+  it("#head() should return a dynamic-size expression of the first coefficients of it", function() {
+    cvec.head.should.be.a.Function;
+
+    var head = cvec.head(3);
+    head.should.instanceOf(CVectorBlock);
+    head.toString().should.equal("(1,1)\n(2,2)\n(3,3)");
+
+    (function() {
+      cvec.head(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     cvec.topRows.should.be.a.Function;
 
