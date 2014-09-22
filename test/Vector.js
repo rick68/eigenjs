@@ -953,6 +953,18 @@ describe('Vector', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the tail coefficients of it", function() {
+    vec.tail.should.be.a.Function;
+
+    var tail = vec.tail(3);
+    tail.should.instanceOf(VectorBlock);
+    tail.toString().should.equal("4\n5\n6");
+
+    (function() {
+      vec.tail(7);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     vec.topRows.should.be.a.Function;
 

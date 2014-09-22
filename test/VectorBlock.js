@@ -1807,6 +1807,18 @@ describe('VectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the tail coefficients of it", function() {
+    vblock.tail.should.be.a.Function;
+
+    var tail = vblock.tail(1);
+    tail.should.instanceOf(VectorBlock);
+    tail.toString().should.equal("4");
+
+    (function() {
+      vblock.tail(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     vblock.topRows.should.be.a.Function;
 

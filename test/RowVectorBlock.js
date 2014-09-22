@@ -1693,6 +1693,18 @@ describe('RowVectorBlock', function() {
     }).should.throw("Invalid argument");
   });
 
+  it("#tail() should return a dynamic-size expression of the last coefficients of it", function() {
+    rvblock.tail.should.be.a.Function;
+
+    var tail = rvblock.tail(1);
+    tail.should.instanceOf(RowVectorBlock);
+    tail.toString().should.equal("4");
+
+    (function() {
+      rvblock.tail(3);
+    }).should.throw("Invalid argument");
+  });
+
   it("#topRows() should return a block consisting of the top rows of it", function() {
     rvblock.topRows.should.be.a.Function;
 
