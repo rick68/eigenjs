@@ -584,6 +584,11 @@ $ npm install eigenjs --msvs_version=2012
     * [CRowVectorBlock(crvec, startCol, blockCols)](#crowvectorblockcrvec-startcol-blockcols)
     * [CRowVectorBlock(crvblock, startCol, blockCols)](#crowvectorblockcrvblock-startcol-blockcols)
   * [Complex Row Vector Block Instance Methods](#complex-row-vector-block-instance-methods)
+* [Partial Pivoting LU](#partial-pivoting-lu)
+  * [Partial Pivoting LU Class Methods](#partial-pivoting-lu-class-methods)
+    * [PartialPivLU(mat)](#partialpivlumat)
+    * [PartialPivLU(mblock)](#partialpivlumblock)
+  * [Partial Pivoting LU Instance Methods](#partial-pivoting-lu-instance-methods)
 
 ## Complex
 
@@ -5468,3 +5473,32 @@ crvblock =
 ```
 
 ### Complex Row Vector Block Instance Methods
+
+## Partial Pivoting LU
+
+### Partial Pivoting LU Class Methods
+
+#### PartialPivLU(mat)
+#### PartialPivLU(mblock)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('P = \n%s', pplu.permutationP());
+```
+
+```txt
+P =
+0 0 1
+0 1 0
+1 0 0
+```
+
+### Partial Pivoting LU Instance Methods
