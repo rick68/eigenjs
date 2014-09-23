@@ -589,6 +589,7 @@ $ npm install eigenjs --msvs_version=2012
     * [PartialPivLU(mat)](#partialpivlumat)
     * [PartialPivLU(mblock)](#partialpivlumblock)
   * [Partial Pivoting LU Instance Methods](#partial-pivoting-lu-instance-methods)
+    * [permutationP()](#permutationp)
 
 ## Complex
 
@@ -5478,6 +5479,8 @@ crvblock =
 
 ### Partial Pivoting LU Class Methods
 
+This class represents a LU decomposition of a square invertible matrix, with partial pivoting: the matrix A is decomposed as PA = LU where L is unit-lower-triangular, U is upper-triangular, and P is a permutation matrix.
+
 #### PartialPivLU(mat)
 #### PartialPivLU(mblock)
 
@@ -5502,3 +5505,27 @@ P =
 ```
 
 ### Partial Pivoting LU Instance Methods
+
+#### permutationP()
+
+Returns the permutation matrix P.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('P = \n%s', pplu.permutationP());
+```
+
+```txt
+P =
+0 0 1
+0 1 0
+1 0 0
+```
