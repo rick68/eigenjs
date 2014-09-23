@@ -87,7 +87,7 @@ class CVectorBlock
     if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
-          "CVector, startRow and blockRows arguments");
+          "CVector, startRow, and blockRows arguments");
       NanReturnUndefined();
     }
 

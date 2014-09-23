@@ -87,7 +87,7 @@ class CRowVectorBlock
     if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
-          "CRowVector, startCol and blockCols arguments");
+          "CRowVector, startCol, and blockCols arguments");
       NanReturnUndefined();
     }
 

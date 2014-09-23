@@ -87,7 +87,7 @@ class VectorBlock
     if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
-          "Vector, startRow and blockRows arguments");
+          "Vector, startRow, and blockRows arguments");
       NanReturnUndefined();
     }
 
