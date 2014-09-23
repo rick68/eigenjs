@@ -40,4 +40,14 @@ describe('PartialPivLU', function() {
       PartialPivLU(mat.block(0, 0, 2, 3));
     }).should.throw("The matrix must be square");
   });
+
+  it('#permutationP() should return the permutation matrix P', function() {
+    PartialPivLU.should.be.a.Function;
+
+    var p = lu.permutationP();
+    p.toString().should.equal("0 0 1\n0 1 0\n1 0 0");
+
+    p = blocklu.permutationP();
+    p.toString().should.equal("0 1\n1 0");
+  });
 });
