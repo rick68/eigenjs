@@ -62,4 +62,15 @@ describe('PartialPivLU', function() {
     l = blocklu.matrixL();
     l.toString().should.equal("   1    0\n0.25    1");
   });
+
+  it('#matrixU() should return the upper-triangular matrix U', function() {
+    lu.matrixU.should.be.a.Function;
+    blocklu.matrixU.should.be.a.Function;
+
+    var u = lu.matrixU();
+    u.toString().should.equal("   5    6    3\n   0 -2.8  3.6\n   0    0    8");
+
+    u = blocklu.matrixU();
+    u.toString().should.equal("  4   2\n  0 3.5");
+  });
 });
