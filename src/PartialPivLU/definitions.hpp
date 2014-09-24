@@ -17,6 +17,7 @@
 #include "instance_method_permutationP.hpp"
 #include "instance_method_matrixL.hpp"
 #include "instance_method_matrixU.hpp"
+#include "instance_method_solve.hpp"
 
 namespace EigenJS {
 
@@ -25,6 +26,7 @@ EIGENJS_OBJECT_DEFINITIONS(
 , (instance_method_permutationP)
   (instance_method_matrixL)
   (instance_method_matrixU)
+  (instance_method_solve)
 );
 
 }  // namespace EigenJS
