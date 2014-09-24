@@ -5495,15 +5495,17 @@ var Eigen = require('eigenjs')
             4, 2, 6,
             5, 6, 3
           ])
-  , pplu = new PPLU(mat);
-console.log('P = \n%s', pplu.permutationP());
+  , pplu = new PPLU(mat)
+  , P = pplu.permutationP()
+  , L = pplu.matrixL()
+  , U = pplu.matrixU();
+console.log('%s', P.inverse().mula(L).mula(U));
 ```
 
 ```txt
-P =
-0 0 1
-0 1 0
-1 0 0
+1 4 5
+4 2 6
+5 6 3
 ```
 
 ### Partial Pivoting LU Instance Methods
