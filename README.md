@@ -590,6 +590,7 @@ $ npm install eigenjs --msvs_version=2012
     * [PartialPivLU(mblock)](#partialpivlumblock)
   * [Partial Pivoting LU Instance Methods](#partial-pivoting-lu-instance-methods)
     * [permutationP()](#permutationp)
+    * [martixL()](#matrixL)
 
 ## Complex
 
@@ -5528,4 +5529,28 @@ P =
 0 0 1
 0 1 0
 1 0 0
+```
+
+#### matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('L = \n%s', pplu.matrixL());
+```
+
+```txt
+L =
+  1   0   0
+0.8   1   0
+0.2  -1   1
 ```
