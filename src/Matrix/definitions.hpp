@@ -90,6 +90,7 @@
 #include "instance_method_maxCoeff.hpp"
 #include "instance_method_minCoeff.hpp"
 
+#include "instance_method_partialPivLu.hpp"
 
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
@@ -176,6 +177,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_visit)
   (instance_method_maxCoeff)
   (instance_method_minCoeff)
+
+  (instance_method_partialPivLu)
 
   (class_method_Zero)
   (class_method_Ones)

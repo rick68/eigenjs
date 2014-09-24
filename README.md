@@ -274,6 +274,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.count()](#matcount)
     * [mat.allFinite()](#matallfinite)
     * [mat.hasNaN()](#mathasnan)
+    * [mat.partialPivLu()](#matpartialpivlu)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -584,6 +585,16 @@ $ npm install eigenjs --msvs_version=2012
     * [CRowVectorBlock(crvec, startCol, blockCols)](#crowvectorblockcrvec-startcol-blockcols)
     * [CRowVectorBlock(crvblock, startCol, blockCols)](#crowvectorblockcrvblock-startcol-blockcols)
   * [Complex Row Vector Block Instance Methods](#complex-row-vector-block-instance-methods)
+* [Partial Pivoting LU](#partial-pivoting-lu)
+  * [Partial Pivoting LU Class Methods](#partial-pivoting-lu-class-methods)
+    * [PartialPivLU(mat)](#partialpivlumat)
+    * [PartialPivLU(mblock)](#partialpivlumblock)
+  * [Partial Pivoting LU Instance Methods](#partial-pivoting-lu-instance-methods)
+    * [pplu.permutationP()](#pplupermutationp)
+    * [pplu.martixL()](#pplumatrixl)
+    * [pplu.martixU()](#pplumatrixu)
+    * [pplu.solve(mat)](#pplusolvemat)
+    * [pplu.solve(vec)](#pplusolvevec)
 
 ## Complex
 
@@ -2609,6 +2620,38 @@ mat =
   0 nan   0
   0   0   0
 true
+```
+
+#### mat.partialPivLu()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = mat.partialPivLu();
+console.log('P = \n%s\n', pplu.permutationP());
+console.log('L = \n%s\n', pplu.matrixL());
+console.log('U = \n%s', pplu.matrixU());
+```
+
+```txt
+P =
+0 0 1
+0 1 0
+1 0 0
+
+L =
+  1   0   0
+0.8   1   0
+0.2  -1   1
+
+U =
+   5    6    3
+   0 -2.8  3.6
+   0    0    8
 ```
 
 #### mat.toString([options])
@@ -5468,3 +5511,139 @@ crvblock =
 ```
 
 ### Complex Row Vector Block Instance Methods
+
+## Partial Pivoting LU
+
+### Partial Pivoting LU Class Methods
+
+This class represents a LU decomposition of a square invertible matrix, with partial pivoting: the matrix A is decomposed as PA = LU where L is unit-lower-triangular, U is upper-triangular, and P is a permutation matrix.
+
+#### PartialPivLU(mat)
+#### PartialPivLU(mblock)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat)
+  , P = pplu.permutationP()
+  , L = pplu.matrixL()
+  , U = pplu.matrixU();
+console.log('%s', P.inverse().mula(L).mula(U));
+```
+
+```txt
+1 4 5
+4 2 6
+5 6 3
+```
+
+### Partial Pivoting LU Instance Methods
+
+#### pplu.permutationP()
+
+Returns the permutation matrix P.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('P = \n%s', pplu.permutationP());
+```
+
+```txt
+P =
+0 0 1
+0 1 0
+1 0 0
+```
+
+#### pplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('L = \n%s', pplu.matrixL());
+```
+
+```txt
+L =
+  1   0   0
+0.8   1   0
+0.2  -1   1
+```
+
+#### pplu.matrixU()
+
+Returns the upper-triangular matrix U.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('U = \n%s', pplu.matrixU());
+```
+
+```txt
+U =
+   5    6    3
+   0 -2.8  3.6
+   0    0    8
+```
+
+#### pplu.solve(mat)
+#### pplu.solve(vec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which it is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , b = new V([
+              24,
+              26,
+              26
+            ])
+  , pplu = new PPLU(mat);
+console.log('x = \n%s', pplu.solve(b));
+```
+
+```txt
+x =
+1
+2
+3
+```

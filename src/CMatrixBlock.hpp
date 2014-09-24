@@ -87,7 +87,7 @@ class CMatrixBlock
     if (args.Length() != 5) {
       NanThrowError(
           "Tried creating a complex block without "
-          "Matrix, startRow, startCol, blockRows and blockCols arguments");
+          "Matrix, startRow, startCol, blockRows, and blockCols arguments");
       NanReturnUndefined();
     }
 

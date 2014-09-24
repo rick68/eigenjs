@@ -31,6 +31,8 @@
 #include "RowVectorBlock.hpp"
 #include "CRowVectorBlock.hpp"
 
+#include "PartialPivLU.hpp"
+
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
@@ -56,6 +58,8 @@ void Init(v8::Handle<v8::Object> exports) {
 
   RowVectorBlock<>::Init(exports);
   CRowVectorBlock<>::Init(exports);
+
+  PartialPivLU<>::Init(exports);
 }
 
 }  // namespace EigenJS

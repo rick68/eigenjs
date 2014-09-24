@@ -6,6 +6,7 @@ const
     CMatrix = Eigen.CMatrix,
     MatrixBlock = Eigen.MatrixBlock,
     RowVector = Eigen.RowVector,
+    PartialPivLU = Eigen.PartialPivLU,
     should = require('should');
 
 describe('Matrix', function() {
@@ -1102,5 +1103,16 @@ describe('Matrix', function() {
     });
     min.should.equal(1);
     ok.should.be.true;
+  });
+
+  it("#partialPivLu() should return a PartialPivLU object", function() {
+    mat.partialPivLu.should.be.a.Function;
+
+    var pplu = mat.partialPivLu();
+    pplu.should.instanceOf(PartialPivLU);
+
+    (function() {
+      Matrix.Random(1, 2).partialPivLu();
+    }).should.throw("The matrix must be square");
   });
 });

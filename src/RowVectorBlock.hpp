@@ -87,7 +87,7 @@ class RowVectorBlock
     if (args.Length() != 3) {
       NanThrowError(
           "Tried creating a block without "
-          "RowVector, startCol and blockCols arguments");
+          "RowVector, startCol, and blockCols arguments");
       NanReturnUndefined();
     }
 
