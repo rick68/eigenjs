@@ -274,6 +274,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.count()](#matcount)
     * [mat.allFinite()](#matallfinite)
     * [mat.hasNaN()](#mathasnan)
+    * [mat.partialPivLu()](#matpartialpivlu)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -2619,6 +2620,38 @@ mat =
   0 nan   0
   0   0   0
 true
+```
+
+#### mat.partialPivLu()
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = mat.partialPivLu();
+console.log('P = \n%s\n', pplu.permutationP());
+console.log('L = \n%s\n', pplu.matrixL());
+console.log('U = \n%s', pplu.matrixU());
+```
+
+```txt
+P =
+0 0 1
+0 1 0
+1 0 0
+
+L =
+  1   0   0
+0.8   1   0
+0.2  -1   1
+
+U =
+   5    6    3
+   0 -2.8  3.6
+   0    0    8
 ```
 
 #### mat.toString([options])
