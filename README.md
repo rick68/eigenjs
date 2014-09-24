@@ -444,6 +444,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.isDiagonal([prec = 1e-12])](#cmatisdiagonalprec--1e-12)
     * [cmat.allFinite()](#cmatallfinite)
     * [cmat.hasNaN()](#cmathasnan)
+    * [cmat.partialPivLu()](#cmatpartialpivlu)
     * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
@@ -4067,6 +4068,38 @@ cmat =
   (0,0) (nan,0)   (0,0)
   (0,0)   (0,0)   (0,0)
 true
+```
+
+#### cmat.partialPivLu()
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cpplu = cmat.partialPivLu();
+console.log('P = \n%s\n', cpplu.permutationP());
+console.log('L = \n%s\n', cpplu.matrixL());
+console.log('U = \n%s', cpplu.matrixU());
+```
+
+```txt
+P =
+(0,0) (0,0) (1,0)
+(0,0) (1,0) (0,0)
+(1,0) (0,0) (0,0)
+
+L =
+  (1,0)   (0,0)   (0,0)
+(0.8,0)   (1,0)   (0,0)
+(0.2,0) (-1,-0)   (1,0)
+
+U =
+   (5,0)    (6,0)    (3,0)
+   (0,0) (-2.8,0)  (3.6,0)
+   (0,0)    (0,0)    (8,0)
 ```
 
 #### cmat.toString([options])
