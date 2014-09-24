@@ -42,7 +42,8 @@ describe('PartialPivLU', function() {
   });
 
   it('#permutationP() should return the permutation matrix P', function() {
-    PartialPivLU.should.be.a.Function;
+    lu.permutationP.should.be.a.Function;
+    blocklu.permutationP.should.be.a.Function;
 
     var p = lu.permutationP();
     p.toString().should.equal("0 0 1\n0 1 0\n1 0 0");
