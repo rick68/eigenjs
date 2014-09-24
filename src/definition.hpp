@@ -42,6 +42,7 @@
 #include "RowVectorBlock_fwd.hpp"
 #include "CRowVectorBlock_fwd.hpp"
 #include "PartialPivLU_fwd.hpp"
+#include "CPartialPivLU_fwd.hpp"
 
 #include "detail/initializer.hpp"
 #include "detail/unwrap_block.hpp"
@@ -65,6 +66,7 @@
   typedef ::EigenJS::CRowVectorBlock< scalar_type > CRowVectorBlock;         \
                                                                              \
   typedef ::EigenJS::PartialPivLU< scalar_type > PartialPivLU;               \
+  typedef ::EigenJS::CPartialPivLU< scalar_type > CPartialPivLU;             \
   /**/
 
 #define EIGENJS_CLASS_METHOD( CLASS, NAME, ... /* CODE */ )                  \
