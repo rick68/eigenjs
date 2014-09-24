@@ -211,6 +211,7 @@ SOURCES = \
     src/Matrix/instance_method_mul.hpp \
     src/Matrix/instance_method_mula.hpp \
     src/Matrix/instance_method_norm.hpp \
+    src/Matrix/instance_method_partialPivLu.hpp \
     src/Matrix/instance_method_prod.hpp \
     src/Matrix/instance_method_redux.hpp \
     src/Matrix/instance_method_replicate.hpp \
@@ -241,6 +242,13 @@ SOURCES = \
     src/MatrixBlock/definitions.hpp \
     src/MatrixBlock_fwd.hpp \
     src/Matrix_fwd.hpp \
+    src/PartialPivLU.hpp \
+    src/PartialPivLU/definitions.hpp \
+    src/PartialPivLU/instance_method_matrixL.hpp \
+    src/PartialPivLU/instance_method_matrixU.hpp \
+    src/PartialPivLU/instance_method_permutationP.hpp \
+    src/PartialPivLU/instance_method_solve.hpp \
+    src/PartialPivLU_fwd.hpp \
     src/RowVector.hpp \
     src/RowVector/class_method_Constant.hpp \
     src/RowVector/class_method_LinSpaced.hpp \
