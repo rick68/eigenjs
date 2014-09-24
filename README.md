@@ -589,9 +589,9 @@ $ npm install eigenjs --msvs_version=2012
     * [PartialPivLU(mat)](#partialpivlumat)
     * [PartialPivLU(mblock)](#partialpivlumblock)
   * [Partial Pivoting LU Instance Methods](#partial-pivoting-lu-instance-methods)
-    * [permutationP()](#permutationp)
-    * [martixL()](#matrixL)
-    * [martixU()](#matrixU)
+    * [pplu.permutationP()](#pplupermutationp)
+    * [pplu.martixL()](#pplumatrixl)
+    * [pplu.martixU()](#pplumatrixu)
 
 ## Complex
 
@@ -5510,7 +5510,7 @@ console.log('%s', P.inverse().mula(L).mula(U));
 
 ### Partial Pivoting LU Instance Methods
 
-#### permutationP()
+#### pplu.permutationP()
 
 Returns the permutation matrix P.
 
@@ -5534,7 +5534,7 @@ P =
 1 0 0
 ```
 
-#### matrixL()
+#### pplu.matrixL()
 
 Returns the unit-lower-triangular matrix L.
 
@@ -5558,7 +5558,7 @@ L =
 0.2  -1   1
 ```
 
-#### matrixU()
+#### pplu.matrixU()
 
 Returns the upper-triangular matrix U.
 
