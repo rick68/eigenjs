@@ -35,8 +35,8 @@ EIGENJS_INSTANCE_METHOD(PartialPivLU, matrixL,
   Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
   typename Matrix::value_type& new_matrix = **new_obj;
 
-  new_matrix =
-      value.matrixLU().template triangularView<Eigen::UnitLower>().toDenseMatrix();
+  new_matrix = value.matrixLU().template
+      triangularView<Eigen::UnitLower>().toDenseMatrix();
 
   NanReturnValue(instance);
 })
