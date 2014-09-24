@@ -110,7 +110,11 @@ describe('CPartialPivLU', function() {
       26
     ]));
     x.should.instanceOf(CVector);
-    x.toString().should.equal("(1,0)\n(2,0)\n(3,0)");
+    x.isApprox(CVector([
+      1,
+      2,
+      3
+    ])).should.be.true;
 
     (function() {
       lu.solve(CVector.Random(1));
