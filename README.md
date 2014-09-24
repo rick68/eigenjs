@@ -595,6 +595,16 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.martixU()](#pplumatrixu)
     * [pplu.solve(mat)](#pplusolvemat)
     * [pplu.solve(vec)](#pplusolvevec)
+* [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
+  * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
+    * [CPartialPivLU(cmat)](#cpartialpivlucmat)
+    * [CPartialPivLU(cmblock)](#cpartialpivlucmblock)
+  * [Complex Partial Pivoting LU Instance Methods](#complex-partial-pivoting-lu-instance-methods)
+    * [cpplu.permutationP()](#cpplupermutationp)
+    * [cpplu.martixL()](#cpplumatrixl)
+    * [cpplu.martixU()](#cpplumatrixu)
+    * [cpplu.solve(cmat)](#cpplusolvecmat)
+    * [cpplu.solve(cvec)](#cpplusolvecvec)
 
 ## Complex
 
@@ -5646,4 +5656,140 @@ x =
 1
 2
 3
+```
+
+## Complex Partial Pivoting LU
+
+### Complex Partial Pivoting LU Class Methods
+
+This class represents a LU decomposition of a square invertible matrix, with partial pivoting: the matrix A is decomposed as PA = LU where L is unit-lower-triangular, U is upper-triangular, and P is a permutation matrix.
+
+#### CPartialPivLU(cmat)
+#### CPartialPivLU(cmblock)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cpplu = new CPPLU(cmat)
+  , P = cpplu.permutationP()
+  , L = cpplu.matrixL()
+  , U = cpplu.matrixU();
+console.log('%s', P.inverse().mula(L).mula(U));
+```
+
+```txt
+(1,0) (4,0) (5,0)
+(4,0) (2,0) (6,0)
+(5,0) (6,0) (3,0)
+```
+
+### Complex Partial Pivoting LU Instance Methods
+
+#### cpplu.permutationP()
+
+Returns the permutation matrix P.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cpplu = new CPPLU(cmat);
+console.log('P = \n%s', cpplu.permutationP());
+```
+
+```txt
+P =
+(0,0) (0,0) (1,0)
+(0,0) (1,0) (0,0)
+(1,0) (0,0) (0,0)
+```
+
+#### cpplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cpplu = new CPPLU(cmat);
+console.log('L = \n%s', cpplu.matrixL());
+```
+
+```txt
+L =
+  (1,0)   (0,0)   (0,0)
+(0.8,0)   (1,0)   (0,0)
+(0.2,0) (-1,-0)   (1,0)
+```
+
+#### cpplu.matrixU()
+
+Returns the upper-triangular matrix U.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cpplu = new CPPLU(cmat);
+console.log('U = \n%s', cpplu.matrixU());
+```
+
+```txt
+U =
+   (5,0)    (6,0)    (3,0)
+   (0,0) (-2.8,0)  (3.6,0)
+   (0,0)    (0,0)    (8,0)
+```
+
+#### cpplu.solve(cmat)
+#### cpplu.solve(cvec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which it is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CV = Eigen.CVector
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , b = new CV([
+               24,
+               26,
+               26
+             ])
+  , cpplu = new CPPLU(cmat);
+console.log('x = \n%s', cpplu.solve(b));
+```
+
+```txt
+x =
+(1,0)
+(2,0)
+(3,0)
 ```
