@@ -42,6 +42,7 @@ SOURCES = \
     src/CMatrix/instance_method_mul.hpp \
     src/CMatrix/instance_method_mula.hpp \
     src/CMatrix/instance_method_norm.hpp \
+    src/CMatrix/instance_method_partialPivLU.hpp \
     src/CMatrix/instance_method_prod.hpp \
     src/CMatrix/instance_method_redux.hpp \
     src/CMatrix/instance_method_replicate.hpp \
@@ -72,6 +73,13 @@ SOURCES = \
     src/CMatrixBlock/definitions.hpp \
     src/CMatrixBlock_fwd.hpp \
     src/CMatrix_fwd.hpp \
+    src/CPartialPivLU.hpp \
+    src/CPartialPivLU/definitions.hpp \
+    src/CPartialPivLU/instance_method_matrixL.hpp \
+    src/CPartialPivLU/instance_method_matrixU.hpp \
+    src/CPartialPivLU/instance_method_permutationP.hpp \
+    src/CPartialPivLU/instance_method_solve.hpp \
+    src/CPartialPivLU_fwd.hpp \
     src/CRowVector.hpp \
     src/CRowVector/class_method_Constant.hpp \
     src/CRowVector/definitions.hpp \

@@ -85,6 +85,8 @@
 #include "instance_method_mean.hpp"
 #include "instance_method_visit.hpp"
 
+#include "instance_method_partialPivLu.hpp"
+
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
 #include "class_method_Constant.hpp"
@@ -165,6 +167,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_prod)
   (instance_method_mean)
   (instance_method_visit)
+
+  (instance_method_partialPivLu)
 
   (class_method_Zero)
   (class_method_Ones)

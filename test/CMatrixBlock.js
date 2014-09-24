@@ -9,6 +9,7 @@ const
     CRowVector = Eigen.CRowVector,
     MatrixBlock = Eigen.MatrixBlock,
     CMatrixBlock = Eigen.CMatrixBlock,
+    CPartialPivLU = Eigen.CPartialPivLU,
     should = require('should');
 
 describe('CMatrixBlock', function() {
@@ -1870,5 +1871,16 @@ describe('CMatrixBlock', function() {
     });
 
     cmblock.sum().equals(sum).should.true;
+  });
+
+  it("#partialPivLu() should return a PartialPivLU object", function() {
+    cmblock.partialPivLu.should.be.a.Function;
+
+    var cpplu = cmblock.partialPivLu();
+    cpplu.should.instanceOf(CPartialPivLU);
+
+    (function() {
+      CMatrix.Random(1, 2).partialPivLu();
+    }).should.throw("The matrix must be square");
   });
 });
