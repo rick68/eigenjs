@@ -51,4 +51,15 @@ describe('PartialPivLU', function() {
     p = blocklu.permutationP();
     p.toString().should.equal("0 1\n1 0");
   });
+
+  it('#matrixL() should return the unit-lower-triangular matrix L', function() {
+    lu.matrixL.should.be.a.Function;
+    blocklu.matrixL.should.be.a.Function;
+
+    var l = lu.matrixL();
+    l.toString().should.equal("  1   0   0\n0.8   1   0\n0.2  -1   1");
+
+    l = blocklu.matrixL();
+    l.toString().should.equal("   1    0\n0.25    1");
+  });
 });
