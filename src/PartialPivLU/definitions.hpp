@@ -15,12 +15,14 @@
 #include "../PartialPivLU_fwd.hpp"
 
 #include "instance_method_permutationP.hpp"
+#include "instance_method_matrixL.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
   PartialPivLU
 , (instance_method_permutationP)
+  (instance_method_matrixL)
 );
 
 }  // namespace EigenJS
