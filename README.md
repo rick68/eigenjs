@@ -592,6 +592,8 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.permutationP()](#pplupermutationp)
     * [pplu.martixL()](#pplumatrixl)
     * [pplu.martixU()](#pplumatrixu)
+    * [pplu.solve(mat)](#pplusolvemat)
+    * [pplu.solve(vec)](#pplusolvevec)
 
 ## Complex
 
@@ -5580,4 +5582,35 @@ U =
    5    6    3
    0 -2.8  3.6
    0    0    8
+```
+
+#### pplu.solve(mat)
+#### pplu.solve(vec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which it is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , b = new V([
+              24,
+              26,
+              26
+            ])
+  , pplu = new PPLU(mat);
+console.log('x = \n%s', pplu.solve(b));
+```
+
+```txt
+x =
+1
+2
+3
 ```
