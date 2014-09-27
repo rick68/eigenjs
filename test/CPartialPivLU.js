@@ -128,4 +128,11 @@ describe('CPartialPivLU', function() {
     result.equals(112).should.be.true;
     result.equals(cmat.determinant()).should.be.true;
   });
+
+  it('#inverse() should return the inverse of the matrix of which it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    var inv = lu.inverse();
+    inv.equals(cmat.inverse());
+  });
 });

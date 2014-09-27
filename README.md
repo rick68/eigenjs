@@ -597,6 +597,7 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.solve(mat)](#pplusolvemat)
     * [pplu.solve(vec)](#pplusolvevec)
     * [pplu.determinant()](#ppludeterminant)
+    * [pplu.inverse()](#ppluinverse)
 * [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
   * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
     * [CPartialPivLU(cmat)](#cpartialpivlucmat)
@@ -608,6 +609,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.solve(cmat)](#cpplusolvecmat)
     * [cpplu.solve(cvec)](#cpplusolvecvec)
     * [cpplu.determinant()](#cppludeterminant)
+    * [cpplu.inverse()](#cppluinverse)
 
 ## Complex
 
@@ -2051,6 +2053,8 @@ mat2 =
 
 #### mat.determinant()
 
+Returns the determinant of this matrix. This method uses class [PartialPivLU](#partial-pivoting-lu).
+
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Random(2, 2);
@@ -2067,6 +2071,8 @@ det = 0.540171350604003
 ```
 
 #### mat.inverse()
+
+Returns the matrix inverse of this matrix. This method uses class [PartialPivLU](#partial-pivoting-lu).
 
 ```js
 var M = require('eigenjs').Matrix
@@ -3676,6 +3682,8 @@ cmat2 =
 
 #### cmat.determinant()
 
+Returns the determinant of this matrix. This method uses class [CPartialPivLU](#cpartial-pivoting-lu).
+
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Random(2, 2);
@@ -3692,6 +3700,8 @@ det = (-0.120764,0.968768)
 ```
 
 #### cmat.inverse()
+
+Returns the matrix inverse of this matrix. This method uses class [CPartialPivLU](#cpartial-pivoting-lu).
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -5716,7 +5726,29 @@ console.log('%d', pplu.determinant());
 112
 ```
 
-## Complex Partial Pivoting LU
+#### pplu.inverse()
+
+Returns the inverse of the matrix of which *this is the LU decomposition.
+The matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class FullPivLU instead.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('%s', pplu.inverse().equals(mat.inverse()));
+```
+
+```txt
+true
+```
+
+ã## Complex Partial Pivoting LU
 
 ### Complex Partial Pivoting LU Class Methods
 
@@ -5873,4 +5905,26 @@ console.log('%s', cpplu.determinant());
 ```txt
 (112,-0)
 (112,-0)
+```
+
+#### cpplu.inverse()
+
+Returns the inverse of the complex matrix of which *this is the LU decomposition.
+The complex matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class CFullPivLU instead.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , cpplu = new CPPLU(cmat);
+console.log('%s', cpplu.inverse().equals(cmat.inverse()));
+```
+
+```txt
+true
 ```
