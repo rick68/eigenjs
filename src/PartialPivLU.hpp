@@ -95,7 +95,9 @@ class PartialPivLU
           node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
       const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (!PartialPivLU::is_square_matrix(rhs_obj)) {
+      if (rhs_matrix.rows() != rhs_matrix.cols()) {
+        NanThrowError("PartialPivLU is only for square "
+                      "(and moreover invertible) matrices");
         NanReturnUndefined();
       }
 
@@ -107,7 +109,9 @@ class PartialPivLU
           node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
       const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
 
-      if (!PartialPivLU::is_square_matrix(rhs_obj)) {
+      if (rhs_matrixblock.rows() != rhs_matrixblock.cols()) {
+        NanThrowError("PartialPivLU is only for square "
+                      "(and moreover invertible) matrices");
         NanReturnUndefined();
       }
 

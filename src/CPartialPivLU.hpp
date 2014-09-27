@@ -95,7 +95,9 @@ class CPartialPivLU
           node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
       const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
 
-      if (!CPartialPivLU::is_square_matrix(rhs_obj)) {
+      if (rhs_cmatrix.rows() != rhs_cmatrix.cols()) {
+        NanThrowError("CPartialPivLU is only for square "
+                      "(and moreover invertible) complex matrices");
         NanReturnUndefined();
       }
 
@@ -107,7 +109,9 @@ class CPartialPivLU
           node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
       const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
 
-      if (!CPartialPivLU::is_square_matrix(rhs_obj)) {
+      if (rhs_cmatrixblock.rows() != rhs_cmatrixblock.cols()) {
+        NanThrowError("CPartialPivLU is only for square "
+                      "(and moreover invertible) complex matrices");
         NanReturnUndefined();
       }
 
