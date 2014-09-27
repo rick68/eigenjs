@@ -124,4 +124,11 @@ describe('PartialPivLU', function() {
     result.should.approximately(112, 1e-3);
     result.should.equal(mat.determinant());
   });
+
+  it('#inverse() should return the inverse of the matrix of which it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    var inv = lu.inverse();
+    inv.equals(mat.inverse());
+  });
 });
