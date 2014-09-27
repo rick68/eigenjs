@@ -596,6 +596,7 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.martixU()](#pplumatrixu)
     * [pplu.solve(mat)](#pplusolvemat)
     * [pplu.solve(vec)](#pplusolvevec)
+    * [pplu.determinant()](#ppludeterminant)
 * [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
   * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
     * [CPartialPivLU(cmat)](#cpartialpivlucmat)
@@ -606,6 +607,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.martixU()](#cpplumatrixu)
     * [cpplu.solve(cmat)](#cpplusolvecmat)
     * [cpplu.solve(cvec)](#cpplusolvecvec)
+    * [cpplu.determinant()](#cppludeterminant)
 
 ## Complex
 
@@ -5691,6 +5693,29 @@ x =
 3
 ```
 
+#### pplu.determinant()
+
+Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('%d', mat.determinant());
+console.log('%d', pplu.determinant());
+```
+
+```txt
+112
+112
+```
+
 ## Complex Partial Pivoting LU
 
 ### Complex Partial Pivoting LU Class Methods
@@ -5825,4 +5850,27 @@ x =
 (1,0)
 (2,0)
 (3,0)
+```
+
+#### cpplu.determinant()
+
+Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , cpplu = new CPPLU(cmat);
+console.log('%s', cmat.determinant());
+console.log('%s', cpplu.determinant());
+```
+
+```txt
+(112,-0)
+(112,-0)
 ```
