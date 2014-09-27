@@ -19,6 +19,8 @@
 #include "instance_method_matrixU.hpp"
 #include "instance_method_solve.hpp"
 
+#include "instance_method_determinant.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
@@ -27,6 +29,8 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_matrixL)
   (instance_method_matrixU)
   (instance_method_solve)
+
+  (instance_method_determinant)
 );
 
 }  // namespace EigenJS
