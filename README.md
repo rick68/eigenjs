@@ -2053,7 +2053,7 @@ mat2 =
 
 #### mat.determinant()
 
-Returns the determinant of this matrix. This method uses class CPartialPivLU.
+Returns the determinant of this matrix. This method uses class [PartialPivLU](#partial-pivoting-lu).
 
 ```js
 var M = require('eigenjs').Matrix
@@ -2072,7 +2072,7 @@ det = 0.540171350604003
 
 #### mat.inverse()
 
-Returns the matrix inverse of this matrix. This method uses class PartialPivLU.
+Returns the matrix inverse of this matrix. This method uses class [PartialPivLU](#partial-pivoting-lu).
 
 ```js
 var M = require('eigenjs').Matrix
@@ -3682,7 +3682,7 @@ cmat2 =
 
 #### cmat.determinant()
 
-Returns the determinant of this matrix. This method uses class CPartialPivLU.
+Returns the determinant of this matrix. This method uses class [CPartialPivLU](#cpartial-pivoting-lu).
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3701,7 +3701,7 @@ det = (-0.120764,0.968768)
 
 #### cmat.inverse()
 
-Returns the matrix inverse of this matrix. This method uses class CPartialPivLU.
+Returns the matrix inverse of this matrix. This method uses class [CPartialPivLU](#cpartial-pivoting-lu).
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -5907,7 +5907,7 @@ console.log('%s', cpplu.determinant());
 (112,-0)
 ```
 
-#### pplu.inverse()
+#### cpplu.inverse()
 
 Returns the inverse of the complex matrix of which *this is the LU decomposition.
 The complex matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class CFullPivLU instead.
