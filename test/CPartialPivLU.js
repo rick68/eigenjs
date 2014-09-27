@@ -35,11 +35,11 @@ describe('CPartialPivLU', function() {
   it('#CPartialPivLU() should be invoked with a sequare', function() {
     (function() {
       CPartialPivLU(CMatrix.Random(2,3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
 
     (function() {
       CPartialPivLU(cmat.block(0, 0, 2, 3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
   });
 
   it('#permutationP() should return the permutation matrix P', function() {
@@ -119,5 +119,13 @@ describe('CPartialPivLU', function() {
     (function() {
       lu.solve(CVector.Random(1));
     }).should.throw("Invalid argument");
+  });
+
+  it('#determinant() should return the determinant of the matrix of it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    var result = lu.determinant();
+    result.equals(112).should.be.true;
+    result.equals(cmat.determinant()).should.be.true;
   });
 });

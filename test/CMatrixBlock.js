@@ -1881,6 +1881,6 @@ describe('CMatrixBlock', function() {
 
     (function() {
       CMatrix.Random(1, 2).partialPivLu();
-    }).should.throw("The matrix must be square");
+    }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
   });
 });

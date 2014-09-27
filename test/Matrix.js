@@ -1113,6 +1113,6 @@ describe('Matrix', function() {
 
     (function() {
       Matrix.Random(1, 2).partialPivLu();
-    }).should.throw("The matrix must be square");
+    }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
   });
 });

@@ -35,11 +35,11 @@ describe('PartialPivLU', function() {
   it('#PartialPivLU() should be invoked with a sequare', function() {
     (function() {
       PartialPivLU(Matrix.Random(2,3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
 
     (function() {
       PartialPivLU(mat.block(0, 0, 2, 3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
   });
 
   it('#permutationP() should return the permutation matrix P', function() {
@@ -115,5 +115,13 @@ describe('PartialPivLU', function() {
     (function() {
       lu.solve(Vector.Random(1));
     }).should.throw("Invalid argument");
+  });
+
+  it('#determinant() should return the determinant of the matrix of it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    var result = lu.determinant();
+    result.should.approximately(112, 1e-3);
+    result.should.equal(mat.determinant());
   });
 });
