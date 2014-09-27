@@ -35,11 +35,11 @@ describe('PartialPivLU', function() {
   it('#PartialPivLU() should be invoked with a sequare', function() {
     (function() {
       PartialPivLU(Matrix.Random(2,3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
 
     (function() {
       PartialPivLU(mat.block(0, 0, 2, 3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
   });
 
   it('#permutationP() should return the permutation matrix P', function() {

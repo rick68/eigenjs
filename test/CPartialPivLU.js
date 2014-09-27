@@ -35,11 +35,11 @@ describe('CPartialPivLU', function() {
   it('#CPartialPivLU() should be invoked with a sequare', function() {
     (function() {
       CPartialPivLU(CMatrix.Random(2,3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
 
     (function() {
       CPartialPivLU(cmat.block(0, 0, 2, 3));
-    }).should.throw("The matrix must be square");
+    }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
   });
 
   it('#permutationP() should return the permutation matrix P', function() {
