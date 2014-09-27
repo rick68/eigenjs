@@ -1532,7 +1532,7 @@ mat =
 
 #### mat.topRows(n)
 
-Returns a block consisting of the top rows of it.
+Returns a block consisting of the top rows of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1552,7 +1552,7 @@ console.log('%s', mat.topRows(2));
 
 #### mat.bottomRows(n)
 
-Returns a block consisting of the bottom rows of it.
+Returns a block consisting of the bottom rows of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1572,7 +1572,7 @@ console.log('%s', mat.bottomRows(2));
 
 #### mat.middleRows(startRow, n)
 
-Returns a block consisting of a range of rows of it.
+Returns a block consisting of a range of rows of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1592,7 +1592,7 @@ console.log('%s', mat.middleRows(1, 2));
 
 #### mat.leftCols(n)
 
-Returns a block consisting of the left columns of it.
+Returns a block consisting of the left columns of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1614,7 +1614,7 @@ console.log('%s', mat.leftCols(2));
 
 #### mat.rightCols(n)
 
-Returns a block consisting of the right columns of it.
+Returns a block consisting of the right columns of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1636,7 +1636,7 @@ console.log('%s', mat.rightCols(2));
 
 #### mat.middleCols(startCol, n)
 
-Returns a block consisting of a range of columns of it.
+Returns a block consisting of a range of columns of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1658,7 +1658,7 @@ console.log('%s', mat.middleCols(1, 2));
 
 #### mat.topLeftCorner(cRows, cCols)
 
-Returns a block consisting of a top-left corner of it.
+Returns a block consisting of a top-left corner of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1678,7 +1678,7 @@ console.log('%s', mat.topLeftCorner(2, 2));
 
 #### mat.topRightCorner(cRows, cCols)
 
-Returns a block consisting of a top-right corner of it.
+Returns a block consisting of a top-right corner of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1698,7 +1698,7 @@ console.log('%s', mat.topRightCorner(2, 2));
 
 #### mat.bottomLeftCorner(cRows, cCols)
 
-Returns a block consisting of a bottom-left corner of it.
+Returns a block consisting of a bottom-left corner of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -1718,7 +1718,7 @@ console.log('%s', mat.bottomLeftCorner(2, 2));
 
 #### mat.bottomRightCorner(cRows, cCols)
 
-Returns a block consisting of a bottom-right corner of it.
+Returns a block consisting of a bottom-right corner of *this.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -2585,7 +2585,7 @@ mat =
 
 #### mat.allFinite()
 
-Returns true if it contains only finite numbers, i.e., no NaN and no +/-INF values.
+Returns true if *this contains only finite numbers, i.e., no NaN and no +/-INF values.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -2611,7 +2611,7 @@ false
 
 #### mat.hasNaN()
 
-Returns true if it contains at least one Not A Number (NaN).
+Returns true if *this contains at least one Not A Number (NaN).
 
 ```js
 var M = require('eigenjs').Matrix
@@ -3118,7 +3118,7 @@ cmat =
 
 #### cmat.topRows(n)
 
-Returns a block consisting of the top rows of it.
+Returns a block consisting of the top rows of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3138,7 +3138,7 @@ console.log('%s', cmat.topRows(2));
 
 #### cmat.bottomRows(n)
 
-Returns a block consisting of the bottom rows of it.
+Returns a block consisting of the bottom rows of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3158,7 +3158,7 @@ console.log('%s', cmat.bottomRows(2));
 
 #### cmat.middleRows(startRow, n)
 
-Returns a block consisting of a range of rows of it.
+Returns a block consisting of a range of rows of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3178,7 +3178,7 @@ console.log('%s', cmat.middleRows(1, 2));
 
 #### cmat.leftCols(n)
 
-Returns a block consisting of the left columns of it.
+Returns a block consisting of the left columns of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3200,7 +3200,7 @@ console.log('%s', cmat.leftCols(1));
 
 #### cmat.rightCols(n)
 
-Returns a block consisting of the right columns of it.
+Returns a block consisting of the right columns of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3222,7 +3222,7 @@ console.log('%s', cmat.rightCols(1));
 
 #### cmat.middleCols(startCol, n)
 
-Returns a block consisting of a range of columns of it.
+Returns a block consisting of a range of columns of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3244,7 +3244,7 @@ console.log('%s', cmat.middleCols(1, 1));
 
 #### cmat.topLeftCorner(cRows, cCols)
 
-Returns a block consisting of a top-left corner of it.
+Returns a block consisting of a top-left corner of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3264,7 +3264,7 @@ console.log('%s', cmat.topLeftCorner(2, 1));
 
 #### cmat.topRightCorner(cRows, cCols)
 
-Returns a block consisting of a top-right corner of it.
+Returns a block consisting of a top-right corner of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3284,7 +3284,7 @@ console.log('%s', cmat.topRightCorner(2, 1));
 
 #### cmat.bottomLeftCorner(cRows, cCols)
 
-Returns a block consisting of a bottom-left corner of it.
+Returns a block consisting of a bottom-left corner of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -3304,7 +3304,7 @@ console.log('%s', cmat.bottomLeftCorner(2, 1));
 
 #### cmat.bottomRightCorner(cRows, cCols)
 
-Returns a block consisting of a bottom-right corner of it.
+Returns a block consisting of a bottom-right corner of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -4022,7 +4022,7 @@ true
 
 #### cmat.allFinite()
 
-Returns true if it contains only finite numbers, i.e., no NaN and no +/-INF values.
+Returns true if *this contains only finite numbers, i.e., no NaN and no +/-INF values.
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -4048,7 +4048,7 @@ false
 
 #### cmat.hasNaN()
 
-Returns true if it contains at least one Not A Number (NaN).
+Returns true if *this contains at least one Not A Number (NaN).
 
 ```js
 var CM = require('eigenjs').CMatrix
@@ -5665,7 +5665,7 @@ U =
 #### pplu.solve(mat)
 #### pplu.solve(vec)
 
-This method returns the solution x to the equation Ax=b, where A is the matrix of which it is the LU decomposition.
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
 
 ```js
 var Eigen = require('eigenjs')
@@ -5824,7 +5824,7 @@ U =
 #### cpplu.solve(cmat)
 #### cpplu.solve(cvec)
 
-This method returns the solution x to the equation Ax=b, where A is the matrix of which it is the LU decomposition.
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
 
 ```js
 var Eigen = require('eigenjs')
@@ -5854,7 +5854,7 @@ x =
 
 #### cpplu.determinant()
 
-Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
+Returns the determinant of the complex matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square complex matrix) as the LU decomposition has already been computed.
 
 ```js
 var Eigen = require('eigenjs')
