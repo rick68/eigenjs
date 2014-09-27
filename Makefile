@@ -75,6 +75,7 @@ SOURCES = \
     src/CMatrix_fwd.hpp \
     src/CPartialPivLU.hpp \
     src/CPartialPivLU/definitions.hpp \
+    src/CPartialPivLU/instance_method_determinant.hpp \
     src/CPartialPivLU/instance_method_matrixL.hpp \
     src/CPartialPivLU/instance_method_matrixU.hpp \
     src/CPartialPivLU/instance_method_permutationP.hpp \
@@ -252,6 +253,7 @@ SOURCES = \
     src/Matrix_fwd.hpp \
     src/PartialPivLU.hpp \
     src/PartialPivLU/definitions.hpp \
+    src/PartialPivLU/instance_method_determinant.hpp \
     src/PartialPivLU/instance_method_matrixL.hpp \
     src/PartialPivLU/instance_method_matrixU.hpp \
     src/PartialPivLU/instance_method_permutationP.hpp \
