@@ -597,6 +597,7 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.solve(mat)](#pplusolvemat)
     * [pplu.solve(vec)](#pplusolvevec)
     * [pplu.determinant()](#ppludeterminant)
+    * [pplu.inverse()](#ppluinverse)
 * [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
   * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
     * [CPartialPivLU(cmat)](#cpartialpivlucmat)
@@ -608,6 +609,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.solve(cmat)](#cpplusolvecmat)
     * [cpplu.solve(cvec)](#cpplusolvecvec)
     * [cpplu.determinant()](#cppludeterminant)
+    * [cpplu.inverse()](#cppluinverse)
 
 ## Complex
 
@@ -5716,7 +5718,29 @@ console.log('%d', pplu.determinant());
 112
 ```
 
-## Complex Partial Pivoting LU
+#### pplu.inverse()
+
+Returns the inverse of the matrix of which *this is the LU decomposition.
+The matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class FullPivLU instead.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , pplu = new PPLU(mat);
+console.log('%s', pplu.inverse().equals(mat.inverse()));
+```
+
+```txt
+true
+```
+
+ã## Complex Partial Pivoting LU
 
 ### Complex Partial Pivoting LU Class Methods
 
@@ -5873,4 +5897,26 @@ console.log('%s', cpplu.determinant());
 ```txt
 (112,-0)
 (112,-0)
+```
+
+#### pplu.inverse()
+
+Returns the inverse of the complex matrix of which *this is the LU decomposition.
+The complex matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class CFullPivLU instead.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , cpplu = new CPPLU(cmat);
+console.log('%s', cpplu.inverse().equals(cmat.inverse()));
+```
+
+```txt
+true
 ```
