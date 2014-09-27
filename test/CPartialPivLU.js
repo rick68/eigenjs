@@ -120,4 +120,12 @@ describe('CPartialPivLU', function() {
       lu.solve(CVector.Random(1));
     }).should.throw("Invalid argument");
   });
+
+  it('#determinant() should return the determinant of the matrix of it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    var result = lu.determinant();
+    result.equals(112).should.be.true;
+    result.equals(cmat.determinant()).should.be.true;
+  });
 });
