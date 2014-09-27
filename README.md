@@ -2053,6 +2053,8 @@ mat2 =
 
 #### mat.determinant()
 
+Returns the determinant of this matrix. This method uses class CPartialPivLU.
+
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M.Random(2, 2);
@@ -2069,6 +2071,8 @@ det = 0.540171350604003
 ```
 
 #### mat.inverse()
+
+Returns the matrix inverse of this matrix. This method uses class PartialPivLU.
 
 ```js
 var M = require('eigenjs').Matrix
@@ -3678,6 +3682,8 @@ cmat2 =
 
 #### cmat.determinant()
 
+Returns the determinant of this matrix. This method uses class CPartialPivLU.
+
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM.Random(2, 2);
@@ -3694,6 +3700,8 @@ det = (-0.120764,0.968768)
 ```
 
 #### cmat.inverse()
+
+Returns the matrix inverse of this matrix. This method uses class CPartialPivLU.
 
 ```js
 var CM = require('eigenjs').CMatrix
