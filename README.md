@@ -6031,7 +6031,7 @@ P =
 0 1 0
 ```
 
-### Complex Full Pivoting LU Instance Methods
+### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
 
@@ -6092,4 +6092,3 @@ P =
 1 0 0
 0 1 0
 ```
-
