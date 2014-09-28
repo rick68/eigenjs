@@ -31,4 +31,15 @@ describe('CFullPivLU', function() {
   it('#CFullPivLU() should be invoked with a CMatrixBlock argument', function() {
     cblocklu.should.instanceOf(CFullPivLU);
   });
+
+  it('#permutationP() should return the permutation matrix P', function() {
+    lu.permutationP.should.be.a.Function;
+    cblocklu.permutationP.should.be.a.Function;
+
+    var p = lu.permutationP();
+    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+
+    p = cblocklu.permutationP();
+    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+  });
 });

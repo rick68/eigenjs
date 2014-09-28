@@ -31,4 +31,15 @@ describe('FullPivLU', function() {
   it('#FullPivLU() should be invoked with a MatrixBlock argument', function() {
     blocklu.should.instanceOf(FullPivLU);
   });
+
+  it('#permutationP() should return the permutation matrix P', function() {
+    lu.permutationP.should.be.a.Function;
+    blocklu.permutationP.should.be.a.Function;
+
+    var p = lu.permutationP();
+    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+
+    p = blocklu.permutationP();
+    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+  });
 });
