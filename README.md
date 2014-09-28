@@ -5969,7 +5969,7 @@ console.log('%s', cpplu.inverse().equals(cmat.inverse()));
 true
 ```
 
-### Full Pivoting LU Instance Methods
+### Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
 
@@ -6041,8 +6041,8 @@ This LU decomposition is very stable and well tested with large matrices. Howeve
 
 #### Complex Full Pivoting LU Class Methods
 
-#### CFullPivLU(mat)
-#### CFullPivLU(mblock)
+#### CFullPivLU(cmat)
+#### CFullPivLU(cmblock)
 
 ```js
 var Eigen = require('eigenjs')
