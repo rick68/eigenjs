@@ -4397,6 +4397,8 @@ vblock =
 #### vec.dot(cvblock)
 #### vec.dot(crvblock)
 
+Returns the dot product of *this with other.
+
 ```js
 var V = require('eigenjs').Vector
   , vec1 = new V([1,
@@ -4766,6 +4768,9 @@ cvblock =
 #### cvec.dot(cvblock)
 #### cvec.dot(crvblock)
 
+Returns the dot product of *this with other.
+This function returns the hermitian (sesquilinear) dot product, conjugate-linear in the first variable and linear in the second variable.
+
 ```js
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
@@ -5024,6 +5029,8 @@ rvblock =
 #### rvec.dot(crvec)
 #### rvec.dot(cvblock)
 #### rvec.dot(crvblock)
+
+Returns the dot product of *this with other.
 
 ```js
 var RV = require('eigenjs').RowVector
@@ -5344,6 +5351,9 @@ crvblock =
 #### crvec.dot(crvec)
 #### crvec.dot(cvblock)
 #### crvec.dot(crvblock)
+
+Returns the dot product of *this with other.
+This function returns the hermitian (sesquilinear) dot product, conjugate-linear in the first variable and linear in the second variable.
 
 ```js
 var Eigen = require('eigenjs')
