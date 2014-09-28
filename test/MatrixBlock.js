@@ -9,6 +9,7 @@ const
     CRowVector = Eigen.CRowVector,
     MatrixBlock = Eigen.MatrixBlock,
     PartialPivLU = Eigen.PartialPivLU
+    FullPivLU = Eigen.FullPivLU
     should = require('should');
 
 describe('MatrixBlock', function() {
@@ -1710,5 +1711,12 @@ describe('MatrixBlock', function() {
     (function() {
       Matrix.Random(1, 2).partialPivLu();
     }).should.throw("PartialPivLU is only for square (and moreover invertible) matrices");
+  });
+
+  it("#FullPivLu() should return a FullPivLU object", function() {
+    mblock.partialPivLu.should.be.a.Function;
+
+    var fplu = mblock.fullPivLu();
+    fplu.should.instanceOf(FullPivLU);
   });
 });

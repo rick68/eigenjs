@@ -9,6 +9,7 @@ const
     RowVector = Eigen.RowVector,
     CRowVector = Eigen.CRowVector,
     CPartialPivLU = Eigen.CPartialPivLU,
+    CFullPivLU = Eigen.CFullPivLU,
     should = require('should');
 
 describe('CMatrix', function() {
@@ -1126,5 +1127,12 @@ describe('CMatrix', function() {
     (function() {
       CMatrix.Random(1, 2).partialPivLu();
     }).should.throw("CPartialPivLU is only for square (and moreover invertible) complex matrices");
+  });
+
+  it("#fullPivLu() should return a CFullPivLU object", function() {
+    cmat.partialPivLu.should.be.a.Function;
+
+    var fplu = cmat.fullPivLu();
+    fplu.should.instanceOf(CFullPivLU);
   });
 });
