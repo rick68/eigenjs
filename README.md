@@ -2643,6 +2643,8 @@ true
 
 #### mat.partialPivLu()
 
+Returns the partial-pivoting LU decomposition of *this.
+
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M(3, 3).set([
@@ -4083,6 +4085,8 @@ true
 ```
 
 #### cmat.partialPivLu()
+
+Returns the partial-pivoting LU decomposition of *this.
 
 ```js
 var CM = require('eigenjs').CMatrix
