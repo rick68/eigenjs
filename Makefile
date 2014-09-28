@@ -3,6 +3,10 @@ CPPLINT ?= $(TOPLEVEL)/cpplint.py
 PYTHON ?= python
 
 SOURCES = \
+    src/CFullPivLU.hpp \
+    src/CFullPivLU/definitions.hpp \
+    src/CFullPivLU/instance_method_permutationP.hpp \
+    src/CFullPivLU_fwd.hpp \
     src/CMatrix.hpp \
     src/CMatrix/class_method_Constant.hpp \
     src/CMatrix/class_method_Identity.hpp \
@@ -177,6 +181,10 @@ SOURCES = \
     src/Complex/property_accessor_real.hpp \
     src/Complex_fwd.hpp \
     src/EigenJS.cpp \
+    src/FullPivLU.hpp \
+    src/FullPivLU/definitions.hpp \
+    src/FullPivLU/instance_method_permutationP.hpp \
+    src/FullPivLU_fwd.hpp \
     src/Matrix.hpp \
     src/Matrix/class_method_Constant.hpp \
     src/Matrix/class_method_Identity.hpp \
