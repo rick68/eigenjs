@@ -42,4 +42,15 @@ describe('FullPivLU', function() {
     p = blocklu.permutationP();
     p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
   });
+
+  it('#permutationQ() should return the permutation matrix Q', function() {
+    lu.permutationQ.should.be.a.Function;
+    blocklu.permutationP.should.be.a.Function;
+
+    var q = lu.permutationQ();
+    q.toString().should.equal("0 0 1 0 0\n0 1 0 0 0\n0 0 0 1 0\n1 0 0 0 0\n0 0 0 0 1");
+
+    q = blocklu.permutationQ();
+    q.toString().should.equal("0 1 0\n0 0 1\n1 0 0");
+  });
 });
