@@ -18,6 +18,8 @@ EIGENJS_INSTANCE_METHOD(FullPivLU, matrixL,
 {
   const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
   const typename T::value_type& value = **obj;
+  const typename T::value_type::Index& rows = value.rows();
+  const typename T::value_type::Index& cols = value.cols();
 
   NanScope();
 
@@ -35,8 +37,17 @@ EIGENJS_INSTANCE_METHOD(FullPivLU, matrixL,
   Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
   typename Matrix::value_type& new_matrix = **new_obj;
 
-  new_matrix = value.matrixLU().template
-      triangularView<Eigen::UnitLower>().toDenseMatrix();
+  new_matrix = Matrix::value_type::Identity(rows, rows);
+
+  if (rows == cols) {
+    new_matrix.template triangularView<Eigen::StrictlyLower>() = value.matrixLU();
+  } else if (rows > cols) {
+    new_matrix.block(0, 0, rows, cols).template
+        triangularView<Eigen::StrictlyLower>() = value.matrixLU();
+  } else {
+    new_matrix.template triangularView<Eigen::StrictlyLower>() =
+        value.matrixLU().block(0, 0, rows, rows);
+  }
 
   NanReturnValue(instance);
 })
