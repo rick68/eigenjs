@@ -59,7 +59,7 @@ describe('CFullPivLU', function() {
     cblocklu.matrixL.should.be.a.Function;
 
     var l = lu.matrixL();
-    l.toString().should.equal("        (1,0)         (0,0)         (0,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)         (0,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)         (0,0)         (0,0)");
+    l.toString().should.equal("        (1,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)");
 
     l = cblocklu.matrixL();
     l.toString().should.equal("        (1,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)");
@@ -70,7 +70,7 @@ describe('CFullPivLU', function() {
     cblocklu.matrixU.should.be.a.Function;
 
     var u = lu.matrixL();
-    u.toString().should.equal("        (1,0)         (0,0)         (0,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)         (0,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)         (0,0)         (0,0)");
+    u.toString().should.equal("        (1,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)");
 
     u = cblocklu.matrixU();
     u.toString().should.equal("        (6,0)         (2,0)         (1,0)\n        (0,0)   (2.33333,0) (-0.333333,0)\n        (0,0)         (0,0)  (0.142857,0)");

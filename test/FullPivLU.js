@@ -59,18 +59,21 @@ describe('FullPivLU', function() {
     blocklu.matrixL.should.be.a.Function;
 
     var l = lu.matrixL();
-    l.toString().should.equal("        1         0         0         0         0\n 0.333333         1         0         0         0\n 0.666667 -0.571429         1         0         0");
+    l.toString().should.equal("        1         0         0\n 0.333333         1         0\n 0.666667 -0.571429         1");
 
     l = blocklu.matrixL();
     l.toString().should.equal("        1         0         0\n 0.333333         1         0\n 0.666667 -0.571429         1");
+
+    l = mat.transpose().fullPivLu().matrixL();
+    l.toString().should.equal("        1         0         0         0         0\n 0.333333         1         0         0         0\n 0.166667  0.285714         1         0         0\n 0.166667 -0.142857      -0.5         1         0\n-0.666667  0.142857       0.5         0         1");
   });
 
   it('#matrixU() should return the upperer-triangular matrix U', function() {
     lu.matrixL.should.be.a.Function;
     blocklu.matrixU.should.be.a.Function;
 
-    var u = lu.matrixL();
-    u.toString().should.equal("        1         0         0         0         0\n 0.333333         1         0         0         0\n 0.666667 -0.571429         1         0         0");
+    var u = lu.matrixU();
+    u.toString().should.equal("        6         2         1         1        -4\n        0   2.33333  0.666667 -0.333333  0.333333\n        0         0 -0.285714  0.142857 -0.142857");
 
     u = blocklu.matrixU();
     u.toString().should.equal("        6         2         1\n        0   2.33333 -0.333333\n        0         0  0.142857");
