@@ -53,4 +53,15 @@ describe('CFullPivLU', function() {
     q = cblocklu.permutationQ();
     q.toString().should.equal("(0,0) (1,0) (0,0)\n(0,0) (0,0) (1,0)\n(1,0) (0,0) (0,0)");
   });
+
+  it('#matrixL() should return the unit-lower-triangular matrix L', function() {
+    lu.matrixL.should.be.a.Function;
+    cblocklu.matrixL.should.be.a.Function;
+
+    var l = lu.matrixL();
+    l.toString().should.equal("        (1,0)         (0,0)         (0,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)         (0,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)         (0,0)         (0,0)");
+
+    l = cblocklu.matrixL();
+    l.toString().should.equal("        (1,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)");
+  });
 });
