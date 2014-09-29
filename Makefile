@@ -5,7 +5,10 @@ PYTHON ?= python
 SOURCES = \
     src/CFullPivLU.hpp \
     src/CFullPivLU/definitions.hpp \
+    src/CFullPivLU/instance_method_matrixL.hpp \
+    src/CFullPivLU/instance_method_matrixU.hpp \
     src/CFullPivLU/instance_method_permutationP.hpp \
+    src/CFullPivLU/instance_method_permutationQ.hpp \
     src/CFullPivLU_fwd.hpp \
     src/CMatrix.hpp \
     src/CMatrix/class_method_Constant.hpp \
@@ -183,7 +186,10 @@ SOURCES = \
     src/EigenJS.cpp \
     src/FullPivLU.hpp \
     src/FullPivLU/definitions.hpp \
+    src/FullPivLU/instance_method_matrixL.hpp \
+    src/FullPivLU/instance_method_matrixU.hpp \
     src/FullPivLU/instance_method_permutationP.hpp \
+    src/FullPivLU/instance_method_permutationQ.hpp \
     src/FullPivLU_fwd.hpp \
     src/Matrix.hpp \
     src/Matrix/class_method_Constant.hpp \
