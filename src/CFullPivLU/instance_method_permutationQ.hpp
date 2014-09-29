@@ -1,6 +1,6 @@
 //
-// CPartialPivLU/instance_method_permutationP.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// CFullPivLU/instance_method_permutationQ.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,12 +9,12 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
-#define EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
+#ifndef EIGENJS_CFULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP
+#define EIGENJS_CFULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
+EIGENJS_INSTANCE_METHOD(CFullPivLU, permutationQ,
 {
   const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
   const typename T::value_type& value = **obj;
@@ -35,7 +35,7 @@ EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
   CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
   typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-  new_cmatrix = value.permutationP().toDenseMatrix().template
+  new_cmatrix = value.permutationQ().toDenseMatrix().template
       cast<typename Complex::value_type>();
 
   NanReturnValue(instance);
@@ -43,4 +43,4 @@ EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
+#endif  // EIGENJS_CFULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP

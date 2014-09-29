@@ -1,6 +1,6 @@
 //
-// CPartialPivLU/instance_method_permutationP.hpp
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// FullPivLU/instance_method_permutationQ.hpp
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
 //
@@ -9,12 +9,12 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
-#define EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
+#ifndef EIGENJS_FULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP
+#define EIGENJS_FULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP
 
 namespace EigenJS {
 
-EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
+EIGENJS_INSTANCE_METHOD(FullPivLU, permutationQ,
 {
   const T* const& obj = node::ObjectWrap::Unwrap<T>(args.This());
   const typename T::value_type& value = **obj;
@@ -26,21 +26,21 @@ EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
   , NanNew<v8::Integer>(0)  /* cols */
   };
 
-  v8::Local<v8::Object> instance = CMatrix::new_instance(
+  v8::Local<v8::Object> instance = Matrix::new_instance(
     args
   , sizeof(argv) / sizeof(v8::Local<v8::Value>)
   , argv
   );
 
-  CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
-  typename CMatrix::value_type& new_cmatrix = **new_obj;
+  Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
+  typename Matrix::value_type& new_matrix = **new_obj;
 
-  new_cmatrix = value.permutationP().toDenseMatrix().template
-      cast<typename Complex::value_type>();
+  new_matrix =value.permutationQ().toDenseMatrix().template
+      cast<typename T::scalar_type>();
 
   NanReturnValue(instance);
 })
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_CPARTIALPIVLU_INSTANCE_METHOD_PERMUTATIONP_HPP
+#endif  // EIGENJS_FULLPIVLU_INSTANCE_METHOD_PERMUTATIONQ_HPP

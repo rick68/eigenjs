@@ -86,6 +86,7 @@
 #include "instance_method_visit.hpp"
 
 #include "instance_method_partialPivLu.hpp"
+#include "instance_method_fullPivLu.hpp"
 
 #include "class_method_Zero.hpp"
 #include "class_method_Ones.hpp"
@@ -169,6 +170,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_visit)
 
   (instance_method_partialPivLu)
+  (instance_method_fullPivLu)
 
   (class_method_Zero)
   (class_method_Ones)

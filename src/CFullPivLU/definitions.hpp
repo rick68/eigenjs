@@ -1,5 +1,5 @@
 //
-// PartialPivLU/definitions.hpp
+// CFullPivLU/definitions.hpp
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Copyright (c) 2014 Rick Yang (rick68 at gmail dot com)
@@ -9,32 +9,26 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-#ifndef EIGENJS_PARTIALPIVLU_DEFINITIONS_HPP
-#define EIGENJS_PARTIALPIVLU_DEFINITIONS_HPP
+#ifndef EIGENJS_CFULLPIVLU_DEFINITIONS_HPP
+#define EIGENJS_CFULLPIVLU_DEFINITIONS_HPP
 
-#include "../PartialPivLU_fwd.hpp"
+#include "../CFullPivLU_fwd.hpp"
 
 #include "instance_method_permutationP.hpp"
+#include "instance_method_permutationQ.hpp"
 #include "instance_method_matrixL.hpp"
 #include "instance_method_matrixU.hpp"
-
-#include "instance_method_determinant.hpp"
-#include "instance_method_inverse.hpp"
-#include "instance_method_solve.hpp"
 
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
-  PartialPivLU
+  CFullPivLU
 , (instance_method_permutationP)
+  (instance_method_permutationQ)
   (instance_method_matrixL)
   (instance_method_matrixU)
-
-  (instance_method_determinant)
-  (instance_method_inverse)
-  (instance_method_solve)
 );
 
 }  // namespace EigenJS
 
-#endif  // EIGENJS_PARTIALPIVLU_DEFINITIONS_HPP
+#endif  // EIGENJS_CFULLPIVLU_DEFINITIONS_HPP

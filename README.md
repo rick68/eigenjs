@@ -275,6 +275,7 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.allFinite()](#matallfinite)
     * [mat.hasNaN()](#mathasnan)
     * [mat.partialPivLu()](#matpartialpivlu)
+    * [mat.fullPivLu()](#matfullpivlu)
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
@@ -445,6 +446,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.allFinite()](#cmatallfinite)
     * [cmat.hasNaN()](#cmathasnan)
     * [cmat.partialPivLu()](#cmatpartialpivlu)
+    * [cmat.fullPivLu()](#cmatfullpivlu)
     * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
@@ -610,6 +612,24 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.solve(cvec)](#cpplusolvecvec)
     * [cpplu.determinant()](#cppludeterminant)
     * [cpplu.inverse()](#cppluinverse)
+* [Full Pivoting LU](#full-pivoting-lu)
+  * [Full Pivoting LU Class Methods](#full-pivoting-lu-class-methods)
+    * [FullPivLU(mat)](#fullpivlumat)
+    * [FullPivLU(mblock)](#fullpivlumblock)
+  * [Full Pivoting LU Instance Methods](#full-pivoting-lu-instance-methods)
+    * [fplu.permutationP()](#fplupermutationp)
+    * [fplu.permutationQ()](#fplupermutationq)
+    * [fplu.martixL()](#fplumatrixl)
+    * [fplu.martixU()](#fplumatrixu)
+* [Complex Full Pivoting LU](#complex-full-pivoting-lu)
+  * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
+    * [CFullPivLU(cmat)](#cfullpivlucmat)
+    * [CFullPivLU(cmblock)](#cfullpivlucmblock)
+  * [Complex Full Pivoting LU Instance Methods](#complex-full-pivoting-lu-instance-methods)
+    * [cfplu.permutationP()](#cfplupermutationp)
+    * [cfplu.permutationQ()](#cfplupermutationq)
+    * [cfplu.martixL()](#cfplumatrixl)
+    * [cfplu.martixU()](#cfplumatrixu)
 
 ## Complex
 
@@ -2643,6 +2663,8 @@ true
 
 #### mat.partialPivLu()
 
+Returns the partial-pivoting LU decomposition of *this.
+
 ```js
 var M = require('eigenjs').Matrix
   , mat = new M(3, 3).set([
@@ -2671,6 +2693,43 @@ U =
    5    6    3
    0 -2.8  3.6
    0    0    8
+```
+
+#### mat.fullPivLu()
+
+Returns the full-pivoting LU decomposition of *this.
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 4).set([
+             1,  1,  1,  3,
+             1,  2, -1,  4
+          ])
+  , fplu = mat.fullPivLu();
+console.log('P = \n%s\n', fplu.permutationP());
+console.log('L = \n%s\n', fplu.matrixL());
+console.log('U = \n%s\n', fplu.matrixU());
+console.log('Q = \n%s', fplu.permutationQ());
+```
+
+```txt
+P =
+0 1
+1 0
+
+L =
+   1    0
+0.75    1
+
+U =
+   4   -1    2    1
+   0 1.75 -0.5 0.25
+
+Q =
+0 0 0 1
+0 0 1 0
+0 1 0 0
+1 0 0 0
 ```
 
 #### mat.toString([options])
@@ -4084,6 +4143,8 @@ true
 
 #### cmat.partialPivLu()
 
+Returns the partial-pivoting LU decomposition of *this.
+
 ```js
 var CM = require('eigenjs').CMatrix
   , cmat = new CM(3, 3).set([
@@ -4112,6 +4173,43 @@ U =
    (5,0)    (6,0)    (3,0)
    (0,0) (-2.8,0)  (3.6,0)
    (0,0)    (0,0)    (8,0)
+```
+
+#### cmat.fullPivLu()
+
+Returns the full-pivoting LU decomposition of *this.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(2, 4).set([
+              1,  1,  1,  3,
+              1,  2, -1,  4
+           ])
+  , cfplu = cmat.fullPivLu();
+console.log('P = \n%s\n', cfplu.permutationP());
+console.log('L = \n%s\n', cfplu.matrixL());
+console.log('U = \n%s\n', cfplu.matrixU());
+console.log('Q = \n%s', cfplu.permutationQ());
+```
+
+```txt
+P =
+(0,0) (1,0)
+(1,0) (0,0)
+
+L =
+   (1,0)    (0,0)
+(0.75,0)    (1,0)
+
+U =
+   (4,0)   (-1,0)    (2,0)    (1,0)
+   (0,0) (1.75,0) (-0.5,0) (0.25,0)
+
+Q =
+(0,0) (0,0) (0,0) (1,0)
+(0,0) (0,0) (1,0) (0,0)
+(0,0) (1,0) (0,0) (0,0)
+(1,0) (0,0) (0,0) (0,0)
 ```
 
 #### cmat.toString([options])
@@ -4396,6 +4494,8 @@ vblock =
 #### vec.dot(crvec)
 #### vec.dot(cvblock)
 #### vec.dot(crvblock)
+
+Returns the dot product of *this with other.
 
 ```js
 var V = require('eigenjs').Vector
@@ -4766,6 +4866,10 @@ cvblock =
 #### cvec.dot(cvblock)
 #### cvec.dot(crvblock)
 
+Returns the dot product of *this with other.
+
+This function returns the hermitian (sesquilinear) dot product, conjugate-linear in the first variable and linear in the second variable.
+
 ```js
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
@@ -5024,6 +5128,8 @@ rvblock =
 #### rvec.dot(crvec)
 #### rvec.dot(cvblock)
 #### rvec.dot(crvblock)
+
+Returns the dot product of *this with other.
 
 ```js
 var RV = require('eigenjs').RowVector
@@ -5345,6 +5451,10 @@ crvblock =
 #### crvec.dot(cvblock)
 #### crvec.dot(crvblock)
 
+Returns the dot product of *this with other.
+
+This function returns the hermitian (sesquilinear) dot product, conjugate-linear in the first variable and linear in the second variable.
+
 ```js
 var Eigen = require('eigenjs')
   , C = Eigen.Complex
@@ -5569,9 +5679,9 @@ crvblock =
 
 ## Partial Pivoting LU
 
-### Partial Pivoting LU Class Methods
-
 This class represents a LU decomposition of a square invertible matrix, with partial pivoting: the matrix A is decomposed as PA = LU where L is unit-lower-triangular, U is upper-triangular, and P is a permutation matrix.
+
+### Partial Pivoting LU Class Methods
 
 #### PartialPivLU(mat)
 #### PartialPivLU(mblock)
@@ -5729,6 +5839,7 @@ console.log('%d', pplu.determinant());
 #### pplu.inverse()
 
 Returns the inverse of the matrix of which *this is the LU decomposition.
+
 The matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class FullPivLU instead.
 
 ```js
@@ -5748,11 +5859,11 @@ console.log('%s', pplu.inverse().equals(mat.inverse()));
 true
 ```
 
-ã## Complex Partial Pivoting LU
-
-### Complex Partial Pivoting LU Class Methods
+### Complex Partial Pivoting LU
 
 This class represents a LU decomposition of a square invertible matrix, with partial pivoting: the matrix A is decomposed as PA = LU where L is unit-lower-triangular, U is upper-triangular, and P is a permutation matrix.
+
+### Complex Partial Pivoting LU Class Methods
 
 #### CPartialPivLU(cmat)
 #### CPartialPivLU(cmblock)
@@ -5910,6 +6021,7 @@ console.log('%s', cpplu.determinant());
 #### cpplu.inverse()
 
 Returns the inverse of the complex matrix of which *this is the LU decomposition.
+
 The complex matrix being decomposed here is assumed to be invertible. If you need to check for invertibility, use class CFullPivLU instead.
 
 ```js
@@ -5927,4 +6039,276 @@ console.log('%s', cpplu.inverse().equals(cmat.inverse()));
 
 ```txt
 true
+```
+
+### Full Pivoting LU
+
+This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
+
+This decomposition provides the generic approach to solving systems of linear equations, computing the rank, invertibility, inverse, kernel, and determinant.
+
+This LU decomposition is very stable and well tested with large matrices. However there are use cases where the SVD decomposition is inherently more stable and/or flexible. For example, when computing the kernel of a matrix, working with the SVD allows to select the smallest singular values of the matrix, something that the LU decomposition doesn't see.
+
+#### Full Pivoting LU Class Methods
+
+#### FullPivLU(mat)
+#### FullPivLU(mblock)
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat)
+  , P = fplu.permutationP()
+  , L = fplu.matrixL()
+  , U = fplu.matrixU()
+  , Q = fplu.permutationQ();
+console.log('%s', P.inverse().mula(L).mula(U).mula(Q.inverse()));
+```
+
+```txt
+ 1  3  0  2 -1
+ 0  0  1  4 -3
+ 1  2  1  6 -4
+```
+
+#### Full Pivoting LU Instance Methods
+
+#### fplu.permutationP()
+
+Returns the permutation matrix P.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('P = \n%s', fplu.permutationP());
+```
+
+```txt
+P =
+0 0 1
+1 0 0
+0 1 0
+```
+
+#### fplu.permutationQ()
+
+Returns the permutation matrix Q.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('Q = \n%s', fplu.permutationQ());
+```
+
+```txt
+Q =
+0 0 1 0 0
+0 1 0 0 0
+0 0 0 1 0
+1 0 0 0 0
+0 0 0 0 1
+```
+
+#### fplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('L = \n%s', fplu.matrixL());
+```
+
+```txt
+L =
+        1         0         0
+ 0.333333         1         0
+ 0.666667 -0.571429         1
+```
+
+#### fplu.matrixU()
+
+Returns the upper-triangular matrix U.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('U = \n%s', fplu.matrixU());
+```
+
+```txt
+U =
+        6         2         1         1        -4
+        0   2.33333  0.666667 -0.333333  0.333333
+        0         0 -0.285714  0.142857 -0.142857
+```
+
+### Complex Full Pivoting LU
+
+This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
+
+This decomposition provides the generic approach to solving systems of linear equations, computing the rank, invertibility, inverse, kernel, and determinant.
+
+This LU decomposition is very stable and well tested with large matrices. However there are use cases where the SVD decomposition is inherently more stable and/or flexible. For example, when computing the kernel of a matrix, working with the SVD allows to select the smallest singular values of the matrix, something that the LU decomposition doesn't see.
+
+#### Complex Full Pivoting LU Class Methods
+
+#### CFullPivLU(cmat)
+#### CFullPivLU(cmblock)
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat)
+  , P = cfplu.permutationP()
+  , L = cfplu.matrixL()
+  , U = cfplu.matrixU()
+  , Q = cfplu.permutationQ();
+console.log('%s', P.inverse().mula(L).mula(U).mula(Q.inverse()));
+```
+
+```txt
+          (1,0)           (3,0)           (0,0)           (2,0)          (-1,0)
+          (0,0) (2.22045e-16,0)           (1,0)           (4,0)          (-3,0)
+          (1,0)           (2,0)           (1,0)           (6,0)          (-4,0)
+```
+
+#### Complex Full Pivoting LU Instance Methods
+
+#### cfplu.permutationP()
+
+Returns the permutation matrix P.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('P = \n%s', cfplu.permutationP());
+```
+
+```txt
+P =
+(0,0) (0,0) (1,0)
+(1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0)
+```
+
+#### cfplu.permutationQ()
+
+Returns the permutation matrix Q.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('Q = \n%s', cfplu.permutationQ());
+```
+
+```txt
+Q =
+(0,0) (0,0) (1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0) (1,0) (0,0)
+(1,0) (0,0) (0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0) (0,0) (1,0)
+```
+
+#### cfplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('L = \n%s', cfplu.matrixL());
+```
+
+```txt
+L =
+        (1,0)         (0,0)         (0,0)
+ (0.333333,0)         (1,0)         (0,0)
+ (0.666667,0) (-0.571429,0)         (1,0)
+```
+
+#### cfplu.matrixU()
+
+Returns the upper-triangular matrix U.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('U = \n%s', cfplu.matrixU());
+```
+
+```txt
+U =
+        (6,0)         (2,0)         (1,0)         (1,0)        (-4,0)
+        (0,0)   (2.33333,0)  (0.666667,0) (-0.333333,0)  (0.333333,0)
+        (0,0)         (0,0) (-0.285714,0)  (0.142857,0) (-0.142857,0)
 ```

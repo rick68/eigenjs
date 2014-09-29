@@ -34,6 +34,9 @@
 #include "PartialPivLU.hpp"
 #include "CPartialPivLU.hpp"
 
+#include "FullPivLU.hpp"
+#include "CFullPivLU.hpp"
+
 namespace EigenJS {
 
 void Init(v8::Handle<v8::Object> exports) {
@@ -62,6 +65,9 @@ void Init(v8::Handle<v8::Object> exports) {
 
   PartialPivLU<>::Init(exports);
   CPartialPivLU<>::Init(exports);
+
+  FullPivLU<>::Init(exports);
+  CFullPivLU<>::Init(exports);
 }
 
 }  // namespace EigenJS
