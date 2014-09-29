@@ -16,6 +16,7 @@
 
 #include "instance_method_permutationP.hpp"
 #include "instance_method_permutationQ.hpp"
+#include "instance_method_matrixL.hpp"
 
 namespace EigenJS {
 
@@ -23,6 +24,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   CFullPivLU
 , (instance_method_permutationP)
   (instance_method_permutationQ)
+  (instance_method_matrixL)
 );
 
 }  // namespace EigenJS
