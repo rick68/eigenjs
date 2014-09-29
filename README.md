@@ -618,12 +618,14 @@ $ npm install eigenjs --msvs_version=2012
     * [FullPivLU(mblock)](#fullpivlumblock)
   * [Full Pivoting LU Instance Methods](#full-pivoting-lu-instance-methods)
     * [fplu.permutationP()](#fplupermutationp)
+    * [fplu.permutationQ()](#fplupermutationq)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
     * [CFullPivLU(cmblock)](#cfullpivlucmblock)
   * [Complex Full Pivoting LU Instance Methods](#complex-full-pivoting-lu-instance-methods)
     * [cfplu.permutationP()](#cfplupermutationp)
+    * [cfplu.permutationQ()](#cfplupermutationq)
 
 ## Complex
 
@@ -6031,6 +6033,32 @@ P =
 0 1 0
 ```
 
+#### fplu.permutationQ()
+
+Returns the permutation matrix Q.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('Q = \n%s', fplu.permutationQ());
+```
+
+```txt
+Q =
+0 0 1 0 0
+0 1 0 0 0
+0 0 0 1 0
+1 0 0 0 0
+0 0 0 0 1
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6088,7 +6116,33 @@ console.log('P = \n%s', cfplu.permutationP());
 
 ```txt
 P =
-0 0 1
-1 0 0
-0 1 0
+(0,0) (0,0) (1,0)
+(1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0)
+```
+
+#### cfplu.permutationQ()
+
+Returns the permutation matrix Q.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('Q = \n%s', cfplu.permutationQ());
+```
+
+```txt
+Q =
+(0,0) (0,0) (1,0) (0,0) (0,0)
+(0,0) (1,0) (0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0) (1,0) (0,0)
+(1,0) (0,0) (0,0) (0,0) (0,0)
+(0,0) (0,0) (0,0) (0,0) (1,0)
 ```
