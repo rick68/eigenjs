@@ -26,17 +26,17 @@ EIGENJS_INSTANCE_METHOD(CFullPivLU, permutationQ,
   , NanNew<v8::Integer>(0)  /* cols */
   };
 
-  v8::Local<v8::Object> instance = Matrix::new_instance(
+  v8::Local<v8::Object> instance = CMatrix::new_instance(
     args
   , sizeof(argv) / sizeof(v8::Local<v8::Value>)
   , argv
   );
 
-  Matrix* new_obj = node::ObjectWrap::Unwrap<Matrix>(instance);
-  typename Matrix::value_type& new_matrix = **new_obj;
+  CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
+  typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-  new_matrix =value.permutationQ().toDenseMatrix().template
-      cast<typename T::scalar_type>();
+  new_cmatrix = value.permutationQ().toDenseMatrix().template
+      cast<typename Complex::value_type>();
 
   NanReturnValue(instance);
 })

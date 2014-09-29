@@ -35,7 +35,7 @@ EIGENJS_INSTANCE_METHOD(CPartialPivLU, permutationP,
   CMatrix* new_obj = node::ObjectWrap::Unwrap<CMatrix>(instance);
   typename CMatrix::value_type& new_cmatrix = **new_obj;
 
-  new_cmatrix =value.permutationP().toDenseMatrix().template
+  new_cmatrix = value.permutationP().toDenseMatrix().template
       cast<typename Complex::value_type>();
 
   NanReturnValue(instance);
