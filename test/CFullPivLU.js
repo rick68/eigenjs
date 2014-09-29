@@ -37,10 +37,10 @@ describe('CFullPivLU', function() {
     cblocklu.permutationP.should.be.a.Function;
 
     var p = lu.permutationP();
-    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+    p.toString().should.equal("(0,0) (0,0) (1,0)\n(1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0)");
 
     p = cblocklu.permutationP();
-    p.toString().should.equal("0 0 1\n1 0 0\n0 1 0");
+    p.toString().should.equal("(0,0) (0,0) (1,0)\n(1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0)");
   });
 
   it('#permutationQ() should return the permutation matrix Q', function() {
@@ -48,9 +48,9 @@ describe('CFullPivLU', function() {
     cblocklu.permutationP.should.be.a.Function;
 
     var q = lu.permutationQ();
-    q.toString().should.equal("0 0 1 0 0\n0 1 0 0 0\n0 0 0 1 0\n1 0 0 0 0\n0 0 0 0 1");
+    q.toString().should.equal("(0,0) (0,0) (1,0) (0,0) (0,0)\n(0,0) (1,0) (0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0) (1,0) (0,0)\n(1,0) (0,0) (0,0) (0,0) (0,0)\n(0,0) (0,0) (0,0) (0,0) (1,0)");
 
     q = cblocklu.permutationQ();
-    q.toString().should.equal("0 1 0\n0 0 1\n1 0 0");
+    q.toString().should.equal("(0,0) (1,0) (0,0)\n(0,0) (0,0) (1,0)\n(1,0) (0,0) (0,0)");
   });
 });
