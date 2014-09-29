@@ -1123,11 +1123,4 @@ describe('Matrix', function() {
     var fplu = mat.fullPivLu();
     fplu.should.instanceOf(FullPivLU);
   });
-
-  it("#fullPivLu() should return a FullPivLU object", function() {
-    mat.partialPivLu.should.be.a.Function;
-
-    var fplu = mat.fullPivLu();
-    fplu.should.instanceOf(FullPivLU);
-  });
 });
