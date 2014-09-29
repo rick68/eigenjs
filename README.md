@@ -619,6 +619,7 @@ $ npm install eigenjs --msvs_version=2012
   * [Full Pivoting LU Instance Methods](#full-pivoting-lu-instance-methods)
     * [fplu.permutationP()](#fplupermutationp)
     * [fplu.permutationQ()](#fplupermutationq)
+    * [fplu.martixL()](#fplumatrixl)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
@@ -626,6 +627,7 @@ $ npm install eigenjs --msvs_version=2012
   * [Complex Full Pivoting LU Instance Methods](#complex-full-pivoting-lu-instance-methods)
     * [cfplu.permutationP()](#cfplupermutationp)
     * [cfplu.permutationQ()](#cfplupermutationq)
+    * [cfplu.martixL()](#cfplumatrixl)
 
 ## Complex
 
@@ -6059,6 +6061,30 @@ Q =
 0 0 0 0 1
 ```
 
+#### fplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 5).set([
+             1,  3,  0,  2, -1,
+             0,  0,  1,  4, -3,
+             1,  2,  1,  6, -4
+          ])
+  , fplu = new FPLU(mat);
+console.log('L = \n%s', fplu.matrixL());
+```
+
+```txt
+L =
+        1         0         0         0         0
+ 0.333333         1         0         0         0
+ 0.666667 -0.571429         1         0         0
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6145,4 +6171,28 @@ Q =
 (0,0) (0,0) (0,0) (1,0) (0,0)
 (1,0) (0,0) (0,0) (0,0) (0,0)
 (0,0) (0,0) (0,0) (0,0) (1,0)
+```
+
+#### cfplu.matrixL()
+
+Returns the unit-lower-triangular matrix L.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('L = \n%s', cfplu.matrixL());
+```
+
+```txt
+L =
+        (1,0)         (0,0)         (0,0)         (0,0)         (0,0)
+ (0.333333,0)         (1,0)         (0,0)         (0,0)         (0,0)
+ (0.666667,0) (-0.571429,0)         (1,0)         (0,0)         (0,0)
 ```
