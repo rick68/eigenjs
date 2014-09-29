@@ -64,4 +64,15 @@ describe('CFullPivLU', function() {
     l = cblocklu.matrixL();
     l.toString().should.equal("        (1,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)");
   });
+
+  it('#matrixU() should return the upperer-triangular matrix U', function() {
+    lu.matrixL.should.be.a.Function;
+    cblocklu.matrixU.should.be.a.Function;
+
+    var u = lu.matrixL();
+    u.toString().should.equal("        (1,0)         (0,0)         (0,0)         (0,0)         (0,0)\n (0.333333,0)         (1,0)         (0,0)         (0,0)         (0,0)\n (0.666667,0) (-0.571429,0)         (1,0)         (0,0)         (0,0)");
+
+    u = cblocklu.matrixU();
+    u.toString().should.equal("        (6,0)         (2,0)         (1,0)\n        (0,0)   (2.33333,0) (-0.333333,0)\n        (0,0)         (0,0)  (0.142857,0)");
+  });
 });
