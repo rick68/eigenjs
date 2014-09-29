@@ -2699,6 +2699,39 @@ U =
 
 Returns the full-pivoting LU decomposition of *this.
 
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M(2, 4).set([
+             1,  1,  1,  3,
+             1,  2, -1,  4
+          ])
+  , fplu = mat.fullPivLu();
+console.log('P = \n%s\n', fplu.permutationP());
+console.log('L = \n%s\n', fplu.matrixL());
+console.log('U = \n%s\n', fplu.matrixU());
+console.log('Q = \n%s', fplu.permutationQ());
+```
+
+```txt
+P =
+0 1
+1 0
+
+L =
+   1    0
+0.75    1
+
+U =
+   4   -1    2    1
+   0 1.75 -0.5 0.25
+
+Q =
+0 0 0 1
+0 0 1 0
+0 1 0 0
+1 0 0 0
+```
+
 #### mat.toString([options])
 
 + options `Object`
@@ -4145,6 +4178,39 @@ U =
 #### cmat.fullPivLu()
 
 Returns the full-pivoting LU decomposition of *this.
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM(2, 4).set([
+              1,  1,  1,  3,
+              1,  2, -1,  4
+           ])
+  , cfplu = cmat.fullPivLu();
+console.log('P = \n%s\n', cfplu.permutationP());
+console.log('L = \n%s\n', cfplu.matrixL());
+console.log('U = \n%s\n', cfplu.matrixU());
+console.log('Q = \n%s', cfplu.permutationQ());
+```
+
+```txt
+P =
+(0,0) (1,0)
+(1,0) (0,0)
+
+L =
+   (1,0)    (0,0)
+(0.75,0)    (1,0)
+
+U =
+   (4,0)   (-1,0)    (2,0)    (1,0)
+   (0,0) (1.75,0) (-0.5,0) (0.25,0)
+
+Q =
+(0,0) (0,0) (0,0) (1,0)
+(0,0) (0,0) (1,0) (0,0)
+(0,0) (1,0) (0,0) (0,0)
+(1,0) (0,0) (0,0) (0,0)
+```
 
 #### cmat.toString([options])
 
@@ -5998,10 +6064,10 @@ var Eigen = require('eigenjs')
              1,  2,  1,  6, -4
           ])
   , fplu = new FPLU(mat)
-  , P = pplu.permutationP()
-  , Q = pplu.permutationQ()
-  , L = pplu.matrixL()
-  , U = pplu.matrixU();
+  , P = fplu.permutationP()
+  , L = fplu.matrixL()
+  , U = fplu.matrixU()
+  , Q = fplu.permutationQ();
 console.log('%s', P.inverse().mula(L).mula(U).mula(Q.inverse()));
 ```
 
@@ -6126,25 +6192,25 @@ This LU decomposition is very stable and well tested with large matrices. Howeve
 
 ```js
 var Eigen = require('eigenjs')
-  , M = Eigen.Matrix
-  , FPLU = Eigen.FullPivLU
-  , mat = new M(3, 5).set([
-             1,  3,  0,  2, -1,
-             0,  0,  1,  4, -3,
-             1,  2,  1,  6, -4
-          ])
-  , fplu = new FPLU(mat)
-  , P = pplu.permutationP()
-  , Q = pplu.permutationQ()
-  , L = pplu.matrixL()
-  , U = pplu.matrixU();
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 5).set([
+              1,  3,  0,  2, -1,
+              0,  0,  1,  4, -3,
+              1,  2,  1,  6, -4
+           ])
+  , cfplu = new CFPLU(cmat)
+  , P = cfplu.permutationP()
+  , L = cfplu.matrixL()
+  , U = cfplu.matrixU()
+  , Q = cfplu.permutationQ();
 console.log('%s', P.inverse().mula(L).mula(U).mula(Q.inverse()));
 ```
 
 ```txt
-(1,0)  (3,0)  (0,0)  (2,0) (-1,0)
-(0,0)  (0,0)  (1,0)  (4,0) (-3,0)
-(1,0)  (2,0)  (1,0)  (6,0) (-4,0)
+          (1,0)           (3,0)           (0,0)           (2,0)          (-1,0)
+          (0,0) (2.22045e-16,0)           (1,0)           (4,0)          (-3,0)
+          (1,0)           (2,0)           (1,0)           (6,0)          (-4,0)
 ```
 
 #### Complex Full Pivoting LU Instance Methods
