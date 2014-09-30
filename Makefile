@@ -6,6 +6,7 @@ SOURCES = \
     src/CFullPivLU.hpp \
     src/CFullPivLU/definitions.hpp \
     src/CFullPivLU/instance_method_determinant.hpp \
+    src/CFullPivLU/instance_method_inverse.hpp \
     src/CFullPivLU/instance_method_matrixL.hpp \
     src/CFullPivLU/instance_method_matrixU.hpp \
     src/CFullPivLU/instance_method_permutationP.hpp \
@@ -188,6 +189,7 @@ SOURCES = \
     src/FullPivLU.hpp \
     src/FullPivLU/definitions.hpp \
     src/FullPivLU/instance_method_determinant.hpp \
+    src/FullPivLU/instance_method_inverse.hpp \
     src/FullPivLU/instance_method_matrixL.hpp \
     src/FullPivLU/instance_method_matrixU.hpp \
     src/FullPivLU/instance_method_permutationP.hpp \
