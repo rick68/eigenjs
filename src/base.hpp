@@ -42,6 +42,7 @@
 #include "detail/unwrap_eigen_block.hpp"
 #include "detail/is_eigen_block.hpp"
 #include "detail/is_eigen_matrix.hpp"
+#include "detail/is_eigen_fullpivlu.hpp"
 
 namespace EigenJS {
 
@@ -245,6 +246,7 @@ struct base : node::ObjectWrap {
     boost::mpl::or_<
       detail::is_eigen_block<typename T::value_type>
     , detail::is_eigen_matrix<typename T::value_type>
+    , detail::is_eigen_fullpivlu<typename T::value_type>
     >::value
   , bool
   >::type
