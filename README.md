@@ -596,10 +596,10 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.permutationP()](#pplupermutationp)
     * [pplu.martixL()](#pplumatrixl)
     * [pplu.martixU()](#pplumatrixu)
-    * [pplu.solve(mat)](#pplusolvemat)
-    * [pplu.solve(vec)](#pplusolvevec)
     * [pplu.determinant()](#ppludeterminant)
     * [pplu.inverse()](#ppluinverse)
+    * [pplu.solve(mat)](#pplusolvemat)
+    * [pplu.solve(vec)](#pplusolvevec)
 * [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
   * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
     * [CPartialPivLU(cmat)](#cpartialpivlucmat)
@@ -608,10 +608,10 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.permutationP()](#cpplupermutationp)
     * [cpplu.martixL()](#cpplumatrixl)
     * [cpplu.martixU()](#cpplumatrixu)
-    * [cpplu.solve(cmat)](#cpplusolvecmat)
-    * [cpplu.solve(cvec)](#cpplusolvecvec)
     * [cpplu.determinant()](#cppludeterminant)
     * [cpplu.inverse()](#cppluinverse)
+    * [cpplu.solve(cmat)](#cpplusolvecmat)
+    * [cpplu.solve(cvec)](#cpplusolvecvec)
 * [Full Pivoting LU](#full-pivoting-lu)
   * [Full Pivoting LU Class Methods](#full-pivoting-lu-class-methods)
     * [FullPivLU(mat)](#fullpivlumat)
@@ -5784,37 +5784,6 @@ U =
    0    0    8
 ```
 
-#### pplu.solve(mat)
-#### pplu.solve(vec)
-
-This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
-
-```js
-var Eigen = require('eigenjs')
-  , M = Eigen.Matrix
-  , V = Eigen.Vector
-  , PPLU = Eigen.PartialPivLU
-  , mat = new M(3, 3).set([
-            1, 4, 5,
-            4, 2, 6,
-            5, 6, 3
-          ])
-  , b = new V([
-              24,
-              26,
-              26
-            ])
-  , pplu = new PPLU(mat);
-console.log('x = \n%s', pplu.solve(b));
-```
-
-```txt
-x =
-1
-2
-3
-```
-
 #### pplu.determinant()
 
 Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
@@ -5859,6 +5828,37 @@ console.log('%s', pplu.inverse().equals(mat.inverse()));
 
 ```txt
 true
+```
+
+#### pplu.solve(mat)
+#### pplu.solve(vec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , b = new V([
+              24,
+              26,
+              26
+            ])
+  , pplu = new PPLU(mat);
+console.log('x = \n%s', pplu.solve(b));
+```
+
+```txt
+x =
+1
+2
+3
 ```
 
 ### Complex Partial Pivoting LU
@@ -5966,37 +5966,6 @@ U =
    (0,0)    (0,0)    (8,0)
 ```
 
-#### cpplu.solve(cmat)
-#### cpplu.solve(cvec)
-
-This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
-
-```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
-  , CV = Eigen.CVector
-  , CPPLU = Eigen.CPartialPivLU
-  , cmat = new CM(3, 3).set([
-             1, 4, 5,
-             4, 2, 6,
-             5, 6, 3
-           ])
-  , b = new CV([
-               24,
-               26,
-               26
-             ])
-  , cpplu = new CPPLU(cmat);
-console.log('x = \n%s', cpplu.solve(b));
-```
-
-```txt
-x =
-(1,0)
-(2,0)
-(3,0)
-```
-
 #### cpplu.determinant()
 
 Returns the determinant of the complex matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the complex square matrix) as the LU decomposition has already been computed.
@@ -6041,6 +6010,37 @@ console.log('%s', cpplu.inverse().equals(cmat.inverse()));
 
 ```txt
 true
+```
+
+#### cpplu.solve(cmat)
+#### cpplu.solve(cvec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CV = Eigen.CVector
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , b = new CV([
+               24,
+               26,
+               26
+             ])
+  , cpplu = new CPPLU(cmat);
+console.log('x = \n%s', cpplu.solve(b));
+```
+
+```txt
+x =
+(1,0)
+(2,0)
+(3,0)
 ```
 
 ### Full Pivoting LU
