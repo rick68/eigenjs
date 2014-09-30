@@ -5,6 +5,7 @@ PYTHON ?= python
 SOURCES = \
     src/CFullPivLU.hpp \
     src/CFullPivLU/definitions.hpp \
+    src/CFullPivLU/instance_method_determinant.hpp \
     src/CFullPivLU/instance_method_matrixL.hpp \
     src/CFullPivLU/instance_method_matrixU.hpp \
     src/CFullPivLU/instance_method_permutationP.hpp \
@@ -186,6 +187,7 @@ SOURCES = \
     src/EigenJS.cpp \
     src/FullPivLU.hpp \
     src/FullPivLU/definitions.hpp \
+    src/FullPivLU/instance_method_determinant.hpp \
     src/FullPivLU/instance_method_matrixL.hpp \
     src/FullPivLU/instance_method_matrixU.hpp \
     src/FullPivLU/instance_method_permutationP.hpp \
@@ -344,6 +346,7 @@ SOURCES = \
     src/detail/initializer.hpp \
     src/detail/is_complex.hpp \
     src/detail/is_eigen_block.hpp \
+    src/detail/is_eigen_fullpivlu.hpp \
     src/detail/is_eigen_matrix.hpp \
     src/detail/is_matrix_or_cmatrix.hpp \
     src/detail/is_rowvector_or_crowvector.hpp \
