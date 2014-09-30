@@ -86,4 +86,15 @@ describe('CFullPivLU', function() {
     lu = CMatrix.Random(3, 3);
     lu.determinant();
   });
+
+  it('#inverse() should return the inverse of the matrix of which it is the LU decomposition', function() {
+    lu.inverse.should.be.a.Function;
+
+    (function() {
+      lu.inverse();
+    }).should.throw("The matrix must be square");
+
+    lu = Matrix.Random(3, 3);
+    lu.inverse();
+  });
 });
