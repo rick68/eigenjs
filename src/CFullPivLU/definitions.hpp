@@ -20,6 +20,7 @@
 #include "instance_method_matrixU.hpp"
 
 #include "instance_method_determinant.hpp"
+#include "instance_method_inverse.hpp"
 
 namespace EigenJS {
 
@@ -31,6 +32,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_matrixU)
 
   (instance_method_determinant)
+  (instance_method_inverse)
 );
 
 }  // namespace EigenJS

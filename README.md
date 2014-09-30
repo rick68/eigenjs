@@ -622,6 +622,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.martixL()](#fplumatrixl)
     * [fplu.martixU()](#fplumatrixu)
     * [fplu.determinant()](#fpludeterminant)
+    * [fplu.inverse()](#fpluinverse)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
@@ -632,6 +633,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.martixL()](#cfplumatrixl)
     * [cfplu.martixU()](#cfplumatrixu)
     * [cfplu.determinant()](#cfpludeterminant)
+    * [cfplu.inverse()](#cfpluinverse)
 
 ## Complex
 
@@ -6203,6 +6205,24 @@ mat =
 det = 0.27353337419849527
 ```
 
+#### fplu.inverse()
+
+Returns the inverse of the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = M.Random(3, 3)
+  , fplu = new FPLU(mat)
+  , inv = fplu.inverse();
+console.log('%s', inv.isApprox(mat.inverse()));
+```
+
+```txt
+true
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6361,4 +6381,22 @@ cmat =
  (0.306307,0.100039) (-0.741677,0.642565)  (0.534108,0.757001)
 
 det = (0.871298,0.0216014)
+```
+
+#### cfplu.inverse()
+
+Returns the inverse of complex matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = CM.Random(3, 3)
+  , cfplu = new CFPLU(cmat)
+  , inv = cfplu.inverse();
+console.log('%s', inv.isApprox(cmat.inverse()));
+```
+
+```txt
+true
 ```
