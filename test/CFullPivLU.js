@@ -75,4 +75,15 @@ describe('CFullPivLU', function() {
     u = cblocklu.matrixU();
     u.toString().should.equal("        (6,0)         (2,0)         (1,0)\n        (0,0)   (2.33333,0) (-0.333333,0)\n        (0,0)         (0,0)  (0.142857,0)");
   });
+
+  it('#determinant() should return the determinant of the matrix of it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    (function() {
+      lu.determinant();
+    }).should.throw("The matrix must be square");
+
+    lu = CMatrix.Random(3, 3);
+    lu.determinant();
+  });
 });

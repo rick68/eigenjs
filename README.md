@@ -596,10 +596,10 @@ $ npm install eigenjs --msvs_version=2012
     * [pplu.permutationP()](#pplupermutationp)
     * [pplu.martixL()](#pplumatrixl)
     * [pplu.martixU()](#pplumatrixu)
-    * [pplu.solve(mat)](#pplusolvemat)
-    * [pplu.solve(vec)](#pplusolvevec)
     * [pplu.determinant()](#ppludeterminant)
     * [pplu.inverse()](#ppluinverse)
+    * [pplu.solve(mat)](#pplusolvemat)
+    * [pplu.solve(vec)](#pplusolvevec)
 * [Complex Partial Pivoting LU](#complex-partial-pivoting-lu)
   * [Complex Partial Pivoting LU Class Methods](#complex-partial-pivoting-lu-class-methods)
     * [CPartialPivLU(cmat)](#cpartialpivlucmat)
@@ -608,10 +608,10 @@ $ npm install eigenjs --msvs_version=2012
     * [cpplu.permutationP()](#cpplupermutationp)
     * [cpplu.martixL()](#cpplumatrixl)
     * [cpplu.martixU()](#cpplumatrixu)
-    * [cpplu.solve(cmat)](#cpplusolvecmat)
-    * [cpplu.solve(cvec)](#cpplusolvecvec)
     * [cpplu.determinant()](#cppludeterminant)
     * [cpplu.inverse()](#cppluinverse)
+    * [cpplu.solve(cmat)](#cpplusolvecmat)
+    * [cpplu.solve(cvec)](#cpplusolvecvec)
 * [Full Pivoting LU](#full-pivoting-lu)
   * [Full Pivoting LU Class Methods](#full-pivoting-lu-class-methods)
     * [FullPivLU(mat)](#fullpivlumat)
@@ -621,6 +621,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.permutationQ()](#fplupermutationq)
     * [fplu.martixL()](#fplumatrixl)
     * [fplu.martixU()](#fplumatrixu)
+    * [fplu.determinant()](#fpludeterminant)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
@@ -630,6 +631,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.permutationQ()](#cfplupermutationq)
     * [cfplu.martixL()](#cfplumatrixl)
     * [cfplu.martixU()](#cfplumatrixu)
+    * [cfplu.determinant()](#cfpludeterminant)
 
 ## Complex
 
@@ -5782,37 +5784,6 @@ U =
    0    0    8
 ```
 
-#### pplu.solve(mat)
-#### pplu.solve(vec)
-
-This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
-
-```js
-var Eigen = require('eigenjs')
-  , M = Eigen.Matrix
-  , V = Eigen.Vector
-  , PPLU = Eigen.PartialPivLU
-  , mat = new M(3, 3).set([
-            1, 4, 5,
-            4, 2, 6,
-            5, 6, 3
-          ])
-  , b = new V([
-              24,
-              26,
-              26
-            ])
-  , pplu = new PPLU(mat);
-console.log('x = \n%s', pplu.solve(b));
-```
-
-```txt
-x =
-1
-2
-3
-```
-
 #### pplu.determinant()
 
 Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
@@ -5857,6 +5828,37 @@ console.log('%s', pplu.inverse().equals(mat.inverse()));
 
 ```txt
 true
+```
+
+#### pplu.solve(mat)
+#### pplu.solve(vec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , PPLU = Eigen.PartialPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , b = new V([
+              24,
+              26,
+              26
+            ])
+  , pplu = new PPLU(mat);
+console.log('x = \n%s', pplu.solve(b));
+```
+
+```txt
+x =
+1
+2
+3
 ```
 
 ### Complex Partial Pivoting LU
@@ -5964,40 +5966,9 @@ U =
    (0,0)    (0,0)    (8,0)
 ```
 
-#### cpplu.solve(cmat)
-#### cpplu.solve(cvec)
-
-This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
-
-```js
-var Eigen = require('eigenjs')
-  , CM = Eigen.CMatrix
-  , CV = Eigen.CVector
-  , CPPLU = Eigen.CPartialPivLU
-  , cmat = new CM(3, 3).set([
-             1, 4, 5,
-             4, 2, 6,
-             5, 6, 3
-           ])
-  , b = new CV([
-               24,
-               26,
-               26
-             ])
-  , cpplu = new CPPLU(cmat);
-console.log('x = \n%s', cpplu.solve(b));
-```
-
-```txt
-x =
-(1,0)
-(2,0)
-(3,0)
-```
-
 #### cpplu.determinant()
 
-Returns the determinant of the complex matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square complex matrix) as the LU decomposition has already been computed.
+Returns the determinant of the complex matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the complex square matrix) as the LU decomposition has already been computed.
 
 ```js
 var Eigen = require('eigenjs')
@@ -6039,6 +6010,37 @@ console.log('%s', cpplu.inverse().equals(cmat.inverse()));
 
 ```txt
 true
+```
+
+#### cpplu.solve(cmat)
+#### cpplu.solve(cvec)
+
+This method returns the solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CV = Eigen.CVector
+  , CPPLU = Eigen.CPartialPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , b = new CV([
+               24,
+               26,
+               26
+             ])
+  , cpplu = new CPPLU(cmat);
+console.log('x = \n%s', cpplu.solve(b));
+```
+
+```txt
+x =
+(1,0)
+(2,0)
+(3,0)
 ```
 
 ### Full Pivoting LU
@@ -6177,6 +6179,30 @@ U =
         0         0 -0.285714  0.142857 -0.142857
 ```
 
+#### fplu.determinant()
+
+Returns the determinant of the matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the square matrix) as the LU decomposition has already been computed.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = M.Random(3, 3)
+  , fplu = new FPLU(mat)
+  , det = fplu.determinant();
+console.log('mat = \n%s\n', mat);
+console.log('det = %d', det);
+```
+
+```txt
+mat =
+   0.460707   -0.430882   -0.561277
+  -0.902957     0.15904    0.614972
+-0.00347658    0.980629   -0.170248
+
+det = 0.27353337419849527
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6311,4 +6337,28 @@ U =
         (6,0)         (2,0)         (1,0)         (1,0)        (-4,0)
         (0,0)   (2.33333,0)  (0.666667,0) (-0.333333,0)  (0.333333,0)
         (0,0)         (0,0) (-0.285714,0)  (0.142857,0) (-0.142857,0)
+```
+
+#### cfplu.determinant()
+
+Returns the determinant of the complex matrix of which *this is the LU decomposition. It has only linear complexity (that is, O(n) where n is the dimension of the complex square matrix) as the LU decomposition has already been computed.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = CM.Random(3, 3)
+  , cfplu = new CFPLU(cmat)
+  , det = cfplu.determinant();
+console.log('cmat = \n%s\n', cmat);
+console.log('det = %s', det);
+```
+
+```txt
+cmat =
+ (-0.93669,-0.95681) (-0.640516,0.839641) (-0.418346,0.860162)
+ (0.886216,0.637253) (-0.146449,0.632311)   (0.73613,0.142591)
+ (0.306307,0.100039) (-0.741677,0.642565)  (0.534108,0.757001)
+
+det = (0.871298,0.0216014)
 ```
