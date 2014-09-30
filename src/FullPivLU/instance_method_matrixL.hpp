@@ -40,7 +40,8 @@ EIGENJS_INSTANCE_METHOD(FullPivLU, matrixL,
   new_matrix = Matrix::value_type::Identity(rows, rows);
 
   if (rows == cols) {
-    new_matrix.template triangularView<Eigen::StrictlyLower>() = value.matrixLU();
+    new_matrix.template triangularView<Eigen::StrictlyLower>() =
+        value.matrixLU();
   } else if (rows > cols) {
     new_matrix.block(0, 0, rows, cols).template
         triangularView<Eigen::StrictlyLower>() = value.matrixLU();
