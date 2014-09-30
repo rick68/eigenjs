@@ -78,4 +78,15 @@ describe('FullPivLU', function() {
     u = blocklu.matrixU();
     u.toString().should.equal("        6         2         1\n        0   2.33333 -0.333333\n        0         0  0.142857");
   });
+
+  it('#determinant() should return the determinant of the matrix of it is the LU decomposition', function() {
+    lu.determinant.should.be.a.Function;
+
+    (function() {
+      lu.determinant();
+    }).should.throw("The matrix must be square");
+
+    lu = Matrix.Random(3, 3);
+    lu.determinant();
+  });
 });
