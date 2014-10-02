@@ -83,7 +83,7 @@ describe('CFullPivLU', function() {
       lu.determinant();
     }).should.throw("The matrix must be square");
 
-    lu = CMatrix.Random(3, 3);
+    lu = CMatrix.Random(3, 3).fullPivLu();
     lu.determinant();
   });
 
@@ -94,8 +94,72 @@ describe('CFullPivLU', function() {
       lu.inverse();
     }).should.throw("The matrix must be square");
 
-    lu = Matrix.Random(3, 3);
+    lu = CMatrix.Random(3, 3).fullPivLu();
     lu.inverse();
+  });
+
+  it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
+    lu.solve.should.be.a.Function;
+
+    (function() {
+      lu.solve(new CMatrix(5, 2).set([
+        1, 2,
+        1, 2,
+        1, 2,
+        1, 2,
+        1, 2
+      ]));
+    }).should.throw("The matrix must be square");
+
+    lu = CMatrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu();
+
+    var x = lu.solve(new CMatrix(3, 2).set([
+      1, 4,
+      2, 5,
+      3, 6
+    ]));
+    x.should.instanceOf(CMatrix);
+    x.toString().should.equal("(-1,-0) (-7,-0)\n  (2,0)   (8,0)\n (-1,0)  (-4,0)");
+
+    (function() {
+      lu.solve(CMatrix.Random(1, 1));
+    }).should.throw("Invalid argument");
+  });
+
+  it('#solve() should return solution x to the equation Ax=b, where A is the complex matrx and b is the complex vector', function() {
+    lu.solve.should.be.a.Function;
+
+    (function() {
+      lu.solve(new CVector([
+        1,
+        1,
+        1,
+        1,
+        1
+      ]));
+    }).should.throw("The matrix must be square");
+
+    lu = CMatrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu();
+
+    var x = lu.solve(new CVector([
+      1,
+      2,
+      3
+    ]));
+    x.should.instanceOf(CVector);
+    x.toString().should.equal("(-1,-0)\n  (2,0)\n (-1,0)");
+
+    (function() {
+      lu.solve(CVector.Random(1));
+    }).should.throw("Invalid argument");
   });
 
   it('#dimensionOfKernel() should return the dimension of the kernel of the matrix of which *this is the LU decomposition.', function() {

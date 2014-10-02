@@ -12,6 +12,7 @@ SOURCES = \
     src/CFullPivLU/instance_method_matrixU.hpp \
     src/CFullPivLU/instance_method_permutationP.hpp \
     src/CFullPivLU/instance_method_permutationQ.hpp \
+    src/CFullPivLU/instance_method_solve.hpp \
     src/CFullPivLU_fwd.hpp \
     src/CMatrix.hpp \
     src/CMatrix/class_method_Constant.hpp \
@@ -196,6 +197,7 @@ SOURCES = \
     src/FullPivLU/instance_method_matrixU.hpp \
     src/FullPivLU/instance_method_permutationP.hpp \
     src/FullPivLU/instance_method_permutationQ.hpp \
+    src/FullPivLU/instance_method_solve.hpp \
     src/FullPivLU_fwd.hpp \
     src/Matrix.hpp \
     src/Matrix/class_method_Constant.hpp \

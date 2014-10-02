@@ -21,6 +21,7 @@
 
 #include "instance_method_determinant.hpp"
 #include "instance_method_inverse.hpp"
+#include "instance_method_solve.hpp"
 
 #include "instance_method_dimensionOfKernel.hpp"
 
@@ -35,6 +36,7 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_determinant)
   (instance_method_inverse)
+  (instance_method_solve)
 
   (instance_method_dimensionOfKernel)
 );
