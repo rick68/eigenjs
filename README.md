@@ -623,6 +623,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.martixU()](#fplumatrixu)
     * [fplu.determinant()](#fpludeterminant)
     * [fplu.inverse()](#fpluinverse)
+    * [fplu.dimensionOfKernel()](#fpludimensionofkernel)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
@@ -634,6 +635,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.martixU()](#cfplumatrixu)
     * [cfplu.determinant()](#cfpludeterminant)
     * [cfplu.inverse()](#cfpluinverse)
+    * [cfplu.dimensionOfKernel()](#cfpludimensionofkernel)
 
 ## Complex
 
@@ -6223,6 +6225,28 @@ console.log('%s', inv.isApprox(mat.inverse()));
 true
 ```
 
+#### fplu.dimensionOfKernel()
+
+Returns the dimension of the kernel of the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = M(3, 4).set([
+            1, 1, 0, 2,
+            1, 2, 0, 3,
+            2, 3, 0, 5
+          ])
+  , fplu = new FPLU(mat)
+  , dim = fplu.dimensionOfKernel();
+console.log('dim = %d', dim);
+```
+
+```txt
+dim = 2
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6399,4 +6423,26 @@ console.log('%s', inv.isApprox(cmat.inverse()));
 
 ```txt
 true
+```
+
+#### cfplu.dimensionOfKernel()
+
+Returns the dimension of the kernel of the complex matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = CM(3, 4).set([
+             1, 1, 0, 2,
+             1, 2, 0, 3,
+             2, 3, 0, 5
+           ])
+  , cfplu = new CFPLU(cmat)
+  , dim = cfplu.dimensionOfKernel();
+console.log('dim = %d', dim);
+```
+
+```txt
+dim = 2
 ```

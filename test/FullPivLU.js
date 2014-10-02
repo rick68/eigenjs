@@ -100,4 +100,14 @@ describe('FullPivLU', function() {
     lu = Matrix.Random(3, 3);
     lu.inverse();
   });
+
+  it('#dimensionOfKernel() should return the dimension of the kernel of the matrix of which *this is the LU decomposition.', function() {
+    lu.dimensionOfKernel.should.be.a.Function;
+
+    lu.dimensionOfKernel().should.equal(2);
+
+    Matrix.Random(2, 2).fullPivLu().dimensionOfKernel().should.equal(0);
+    Matrix.Random(2, 3).fullPivLu().dimensionOfKernel().should.equal(1);
+    Matrix.Random(2, 4).fullPivLu().dimensionOfKernel().should.equal(2);
+  });
 });

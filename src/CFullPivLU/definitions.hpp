@@ -22,6 +22,8 @@
 #include "instance_method_determinant.hpp"
 #include "instance_method_inverse.hpp"
 
+#include "instance_method_dimensionOfKernel.hpp"
+
 namespace EigenJS {
 
 EIGENJS_OBJECT_DEFINITIONS(
@@ -33,6 +35,8 @@ EIGENJS_OBJECT_DEFINITIONS(
 
   (instance_method_determinant)
   (instance_method_inverse)
+
+  (instance_method_dimensionOfKernel)
 );
 
 }  // namespace EigenJS
