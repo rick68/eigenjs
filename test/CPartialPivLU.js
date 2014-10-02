@@ -77,7 +77,6 @@ describe('CPartialPivLU', function() {
 
   it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
     lu.solve.should.be.a.Function;
-    cblocklu.solve.should.be.a.Function;
 
     var x = lu.solve(new CMatrix(3, 1).set([
       24,
@@ -102,7 +101,6 @@ describe('CPartialPivLU', function() {
 
   it('#solve() should return solution x to the equation Ax=b, where A is the matrx and b is the vector', function() {
     lu.solve.should.be.a.Function;
-    cblocklu.solve.should.be.a.Function;
 
     var x = lu.solve(new CVector([
       24,
