@@ -101,6 +101,70 @@ describe('FullPivLU', function() {
     lu.inverse();
   });
 
+  it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
+    lu.solve.should.be.a.Function;
+
+    (function() {
+      lu.solve(new Matrix(5, 2).set([
+        1, 2,
+        1, 2,
+        1, 2,
+        1, 2,
+        1, 2
+      ]));
+    }).should.throw("The matrix must be square");
+
+    lu = Matrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu();
+
+    var x = lu.solve(new Matrix(3, 2).set([
+      1, 4,
+      2, 5,
+      3, 6
+    ]));
+    x.should.instanceOf(Matrix);
+    x.toString().should.equal("-1 -7\n 2  8\n-1 -4");
+
+    (function() {
+      lu.solve(Matrix.Random(1, 1));
+    }).should.throw("Invalid argument");
+  });
+
+  it('#solve() should return solution x to the equation Ax=b, where A is the matrx and b is the vector', function() {
+    lu.solve.should.be.a.Function;
+
+    (function() {
+      lu.solve(new Vector([
+        1,
+        1,
+        1,
+        1,
+        1
+      ]));
+    }).should.throw("The matrix must be square");
+
+    lu = Matrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu();
+
+    var x = lu.solve(new Vector([
+      1,
+      2,
+      3
+    ]));
+    x.should.instanceOf(Vector);
+    x.toString().should.equal("-1\n 2\n-1");
+
+    (function() {
+      lu.solve(Vector.Random(1));
+    }).should.throw("Invalid argument");
+  });
+
   it('#dimensionOfKernel() should return the dimension of the kernel of the matrix of which *this is the LU decomposition.', function() {
     lu.dimensionOfKernel.should.be.a.Function;
 
