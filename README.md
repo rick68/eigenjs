@@ -4377,9 +4377,9 @@ var V = require('eigenjs').Vector
   , vec = new V([1,
                  2,
                  3]);
-console.log(vec.get(0).toString());
-console.log(vec.get(1).toString());
-console.log(vec.get(2).toString());
+console.log(vec.get(0));
+console.log(vec.get(1));
+console.log(vec.get(2));
 ```
 
 ```txt
@@ -5037,9 +5037,9 @@ rvec =
 ```js
 var RV = require('eigenjs').RowVector
   , rvec = new RV([1, 2, 3]);
-console.log(rvec.get(0).toString());
-console.log(rvec.get(1).toString());
-console.log(rvec.get(2).toString());
+console.log(rvec.get(0));
+console.log(rvec.get(1));
+console.log(rvec.get(2));
 ```
 
 ```txt
