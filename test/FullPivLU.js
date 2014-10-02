@@ -86,7 +86,7 @@ describe('FullPivLU', function() {
       lu.determinant();
     }).should.throw("The matrix must be square");
 
-    lu = Matrix.Random(3, 3);
+    lu = Matrix.Random(3, 3).fullPivLu();
     lu.determinant();
   });
 
@@ -97,7 +97,7 @@ describe('FullPivLU', function() {
       lu.inverse();
     }).should.throw("The matrix must be square");
 
-    lu = Matrix.Random(3, 3);
+    lu = Matrix.Random(3, 3).fullPivLu()
     lu.inverse();
   });
 
