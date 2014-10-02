@@ -623,6 +623,8 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.martixU()](#fplumatrixu)
     * [fplu.determinant()](#fpludeterminant)
     * [fplu.inverse()](#fpluinverse)
+    * [fplu.solve(mat)](#fplusolvemat)
+    * [fplu.solve(vec)](#fplusolvevec)
     * [fplu.dimensionOfKernel()](#fpludimensionofkernel)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
@@ -635,6 +637,8 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.martixU()](#cfplumatrixu)
     * [cfplu.determinant()](#cfpludeterminant)
     * [cfplu.inverse()](#cfpluinverse)
+    * [cfplu.solve(cmat)](#cfplusolvecmat)
+    * [cfplu.solve(cvec)](#cfplusolvecvec)
     * [cfplu.dimensionOfKernel()](#cfpludimensionofkernel)
 
 ## Complex
@@ -6225,6 +6229,37 @@ console.log('%s', inv.isApprox(mat.inverse()));
 true
 ```
 
+#### fplu.solve(mat)
+#### fplu.solve(vec)
+
+Returns a solution x to the equation Ax=b, where A is the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , V = Eigen.Vector
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 3).set([
+            0, 1, 1,
+            1, 2, 1,
+            2, 7, 9
+          ])
+  , b = new V([
+              1,
+              2,
+              3
+            ])
+  , fplu = new FPLU(mat);
+console.log('x = \n%s', fplu.solve(b));
+```
+
+```txt
+x =
+-1
+ 2
+-1
+```
+
 #### fplu.dimensionOfKernel()
 
 Returns the dimension of the kernel of the matrix of which *this is the LU decomposition.
@@ -6423,6 +6458,37 @@ console.log('%s', inv.isApprox(cmat.inverse()));
 
 ```txt
 true
+```
+
+#### cfplu.solve(cmat)
+#### cfplu.solve(cvec)
+
+Returns a solution x to the equation Ax=b, where A is the complex matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CV = Eigen.CVector
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 3).set([
+              0, 1, 1,
+              1, 2, 1,
+              2, 7, 9
+            ])
+  , b = new CV([
+               4,
+               5,
+               6
+             ])
+  , cfplu = new CFPLU(cmat);
+console.log('x = \n%s', cfplu.solve(b));
+```
+
+```txt
+x =
+(-7,-0)
+  (8,0)
+ (-4,0)
 ```
 
 #### cfplu.dimensionOfKernel()
