@@ -1221,6 +1221,146 @@ describe('RowVector', function() {
     }).should.throw("Invalid argument")
   });
 
+  it("#dot() should return the dot product of a row-vector and a matrix (1xm)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Matrix(1, rvec.cols())).should.equal(0);
+    rvec.dot(new Matrix(1, rvec.cols()).set([
+      7, 8, 9, 10, 11, 12
+    ])).should.equal(217);
+
+    (function() {
+      rvec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a matrix block (1xm)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Matrix(1, rvec.cols()).row(0)).should.equal(0);
+    rvec.dot(new Matrix(1, rvec.cols()).set([
+      7, 8, 9, 10, 11, 12
+    ]).row(0)).should.equal(217);
+
+    (function() {
+      rvec.dot(new Matrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a matrix (mx1)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Matrix(rvec.cols(), 1)).should.equal(0);
+    rvec.dot(new Matrix(rvec.cols(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12
+    ])).should.equal(217);
+
+    (function() {
+      rvec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a matrix block (mx1)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new Matrix(rvec.cols(), 1).col(0)).should.equal(0);
+    rvec.dot(new Matrix(rvec.cols(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12
+    ]).col(0)).should.equal(217);
+
+    (function() {
+      rvec.dot(new Matrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex matrix (1xm)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CMatrix(1, rvec.cols())).equals(Complex(0)).should.be.true;
+    rvec.dot(new CMatrix(1, rvec.cols()).set([
+      7, 8, 9, 10, 11, 12
+    ])).equals(Complex(217)).should.be.true;
+
+    (function() {
+      rvec.dot(new CMatrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex matrix block (1xm)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CMatrix(1, rvec.cols()).row(0)).equals(Complex(0)).should.be.true;
+    rvec.dot(new CMatrix(1, rvec.cols()).set([
+      7, 8, 9, 10, 11, 12
+    ]).row(0)).equals(Complex(217)).should.be.true;
+
+    (function() {
+      rvec.dot(new CMatrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex matrix (mx1)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CMatrix(rvec.cols(), 1)).equals(Complex(0)).should.be.true;
+    rvec.dot(new CMatrix(rvec.cols(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12
+    ])).equals(Complex(217)).should.be.true;
+
+    (function() {
+      rvec.dot(new CMatrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a row-vector and a complex matrix block (mx1)", function() {
+    rvec.dot.should.be.a.Function;
+
+    rvec.toString().should.equal("1 2 3 4 5 6");
+
+    rvec.dot(new CMatrix(rvec.cols(), 1).col(0)).equals(0).should.be.true;
+    rvec.dot(new CMatrix(rvec.cols(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12
+    ]).col(0)).equals(217).should.be.true;
+
+    (function() {
+      rvec.dot(new CMatrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
   it("#asDiagonal() should return a diagonal", function() {
     rvec.asDiagonal.should.be.a.Function;
 
