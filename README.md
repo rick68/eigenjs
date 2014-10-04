@@ -464,12 +464,16 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.block(startRow, blockRows)](#vecblockstartrow-blockrows)
     * [vec.head(n)](#vecheadn)
     * [vec.tail(n)](#vectailn)
+    * [vec.dot(mat)](#vecdotmat)
     * [vec.dot(vec)](#vecdotvec)
     * [vec.dot(rvec)](#vecdotrvec)
+    * [vec.dot(mblock)](#vecdotmblock)
     * [vec.dot(vblock)](#vecdotvblock)
     * [vec.dot(rvblock)](#vecdotrvblock)
+    * [vec.dot(cmat)](#vecdotcmat)
     * [vec.dot(cvec)](#vecdotcvec)
     * [vec.dot(crvec)](#vecdotcrvec)
+    * [vec.dot(cmblock)](#vecdotcmblock)
     * [vec.dot(cvblock)](#vecdotcvblock)
     * [vec.dot(crvblock)](#vecdotcrvblock)
     * [vec.asDiagonal()](#vecasdiagonal)
@@ -493,12 +497,16 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.block(startRow, blockRows)](#cvecblockstartrow-blockrows)
     * [cvec.head(n)](#cvecheadn)
     * [cvec.tail(n)](#cvectailn)
+    * [cvec.dot(mat)](#cvecdotmat)
     * [cvec.dot(vec)](#cvecdotvec)
     * [cvec.dot(rvec)](#cvecdotrvec)
+    * [cvec.dot(mblock)](#cvecdotmblock)
     * [cvec.dot(vblock)](#cvecdotvblock)
     * [cvec.dot(rvblock)](#cvecdotrvblock)
+    * [cvec.dot(cmat)](#cvecdotcmat)
     * [cvec.dot(cvec)](#cvecdotcvec)
     * [cvec.dot(crvec)](#cvecdotcrvec)
+    * [cvec.dot(cmblock)](#cvecdotcmblock)
     * [cvec.dot(cvblock)](#cvecdotcvblock)
     * [cvec.dot(crvblock)](#cvecdotcrvblock)
     * [cvec.asDiagonal()](#cvecasdiagonal)
@@ -519,12 +527,16 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.block(startCol, blockCols)](#rvecblockstartcol-blockcols)
     * [rvec.head(n)](#rvecheadn)
     * [rvec.tail(n)](#rvectailn)
+    * [rvec.dot(mat)](#rvecdotmat)
     * [rvec.dot(vec)](#rvecdotvec)
     * [rvec.dot(rvec)](#rvecdotrvec)
+    * [rvec.dot(mblock)](#rvecdotmblock)
     * [rvec.dot(vblock)](#rvecdotvblock)
     * [rvec.dot(rvblock)](#rvecdotrvblock)
+    * [rvec.dot(cmat)](#rvecdotcmat)
     * [rvec.dot(cvec)](#rvecdotcvec)
     * [rvec.dot(crvec)](#rvecdotcrvec)
+    * [rvec.dot(cmblock)](#rvecdotcmblock)
     * [rvec.dot(cvblock)](#rvecdotcvblock)
     * [rvec.dot(crvblock)](#rvecdotcrvblock)
     * [rvec.asDiagonal()](#rvecasdiagonal)
@@ -548,12 +560,16 @@ $ npm install eigenjs --msvs_version=2012
     * [crvec.block(startCol, blockCols)](#crvecblockstartcol-blockcols)
     * [crvec.head(n)](#crvecheadn)
     * [crvec.tail(n)](#crvectailn)
+    * [crvec.dot(mat)](#crvecdotmat)
     * [crvec.dot(vec)](#crvecdotvec)
     * [crvec.dot(rvec)](#crvecdotrvec)
+    * [crvec.dot(mblock)](#crvecdotmblock)
     * [crvec.dot(vblock)](#crvecdotvblock)
     * [crvec.dot(rvblock)](#crvecdotrvblock)
+    * [crvec.dot(cmat)](#crvecdotcmat)
     * [crvec.dot(cvec)](#crvecdotcvec)
     * [crvec.dot(crvec)](#crvecdotcrvec)
+    * [crvec.dot(cmblock)](#crvecdotcmblock)
     * [crvec.dot(cvblock)](#crvecdotcvblock)
     * [crvec.dot(crvblock)](#crvecdotcrvblock)
     * [crvec.asDiagonal()](#crvecasdiagonal)
@@ -4377,9 +4393,9 @@ var V = require('eigenjs').Vector
   , vec = new V([1,
                  2,
                  3]);
-console.log(vec.get(0).toString());
-console.log(vec.get(1).toString());
-console.log(vec.get(2).toString());
+console.log(vec.get(0));
+console.log(vec.get(1));
+console.log(vec.get(2));
 ```
 
 ```txt
@@ -4496,12 +4512,16 @@ vblock =
 4
 ```
 
+#### vec.dot(mat)
 #### vec.dot(vec)
 #### vec.dot(rvec)
+#### vec.dot(mblock)
 #### vec.dot(vblock)
 #### vec.dot(rvblock)
+#### vec.dot(cmat)
 #### vec.dot(cvec)
 #### vec.dot(crvec)
+#### vec.dot(cmblock)
 #### vec.dot(cvblock)
 #### vec.dot(crvblock)
 
@@ -4867,12 +4887,16 @@ cvblock =
 (4,0)
 ```
 
+#### cvec.dot(mat)
 #### cvec.dot(vec)
 #### cvec.dot(rvec)
+#### cvec.dot(mblock)
 #### cvec.dot(vblock)
 #### cvec.dot(rvblock)
+#### cvec.dot(cmat)
 #### cvec.dot(cvec)
 #### cvec.dot(crvec)
+#### cvec.dot(cmblock)
 #### cvec.dot(cvblock)
 #### cvec.dot(crvblock)
 
@@ -5037,9 +5061,9 @@ rvec =
 ```js
 var RV = require('eigenjs').RowVector
   , rvec = new RV([1, 2, 3]);
-console.log(rvec.get(0).toString());
-console.log(rvec.get(1).toString());
-console.log(rvec.get(2).toString());
+console.log(rvec.get(0));
+console.log(rvec.get(1));
+console.log(rvec.get(2));
 ```
 
 ```txt
@@ -5130,12 +5154,16 @@ rvblock =
 3 4
 ```
 
+#### rvec.dot(mat)
 #### rvec.dot(vec)
 #### rvec.dot(rvec)
+#### rvec.dot(mblock)
 #### rvec.dot(vblock)
 #### rvec.dot(rvblock)
+#### rvec.dot(cmat)
 #### rvec.dot(cvec)
 #### rvec.dot(crvec)
+#### rvec.dot(cmblock)
 #### rvec.dot(cvblock)
 #### rvec.dot(crvblock)
 
@@ -5452,12 +5480,16 @@ crvblock =
 (3,0) (4,0)
 ```
 
+#### crvec.dot(mat)
 #### crvec.dot(vec)
 #### crvec.dot(rvec)
+#### crvec.dot(mblock)
 #### crvec.dot(vblock)
 #### crvec.dot(rvblock)
+#### crvec.dot(cmat)
 #### crvec.dot(cvec)
 #### crvec.dot(crvec)
+#### crvec.dot(cmblock)
 #### crvec.dot(cvblock)
 #### crvec.dot(crvblock)
 

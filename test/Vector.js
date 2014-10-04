@@ -1285,6 +1285,126 @@ describe('Vector', function() {
     dia.toString().should.equal("1 0 0 0 0 0\n0 2 0 0 0 0\n0 0 3 0 0 0\n0 0 0 4 0 0\n0 0 0 0 5 0\n0 0 0 0 0 6");
   });
 
+  it("#dot() should return the dot product of a vector and a matrix (mx1)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new Matrix(vec.rows(), 1)).should.equal(0);
+    vec.dot(new Matrix(vec.rows(), 1).set([
+      -1,
+      -2,
+      -3,
+      -4,
+      -5,
+      -6
+    ])).should.equal(-91);
+
+    (function() {
+      vec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a matrix block (mx1)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new Matrix(vec.rows(), 1).col(0)).should.equal(0);
+    vec.dot(new Matrix(vec.rows(), 1).set([
+      -1,
+      -2,
+      -3,
+      -4,
+      -5,
+      -6
+    ]).col(0)).should.equal(-91);
+
+    (function() {
+      vec.dot(new Matrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a matrix (1xm)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new Matrix(1, vec.rows())).should.equal(0);
+    vec.dot(new Matrix(1, vec.rows()).set([
+      -1, -2, -3, -4, -5, -6
+    ])).should.equal(-91);
+
+    (function() {
+      vec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a matrix block (1xm)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new Matrix(1, vec.rows()).row(0)).should.equal(0);
+    vec.dot(new Matrix(1, vec.rows()).set([
+      -1, -2, -3, -4, -5, -6
+    ]).row(0)).should.equal(-91);
+
+    (function() {
+      vec.dot(new Matrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a complex matrix block (mx1)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new CMatrix(vec.rows(), 1).col(0)).equals(Complex(0)).should.be.true;
+    vec.dot(new CMatrix(vec.rows(), 1).set([
+      -1,
+      -2,
+      -3,
+      -4,
+      -5,
+      -6
+    ]).col(0)).equals(Complex(-91)).should.be.true;
+
+    (function() {
+      vec.dot(new CMatrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a complex matrix (1xm)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new CMatrix(1, vec.rows())).equals(Complex(0)).should.be.true;
+    vec.dot(new CMatrix(1, vec.rows()).set([
+      -1, -2, -3, -4, -5, -6
+    ])).equals(Complex(-91)).should.be.true;
+
+    (function() {
+      vec.dot(new CMatrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a vector and a complex matrix block (1xm)", function() {
+    vec.dot.should.be.a.Function;
+
+    vec.toString().should.equal("1\n2\n3\n4\n5\n6");
+
+    vec.dot(new CMatrix(1, vec.rows()).row(0)).equals(Complex(0)).should.be.true;
+    vec.dot(new CMatrix(1, vec.rows()).set([
+      -1, -2, -3, -4, -5, -6
+    ]).row(0)).equals(Complex(-91)).should.be.true;
+
+    (function() {
+      vec.dot(new Matrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
   it("#redux() should return a full redux operation on the whole matrix", function() {
     vec.redux.should.be.a.Function;
 

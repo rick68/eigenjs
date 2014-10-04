@@ -1288,6 +1288,142 @@ describe('CVector', function() {
     }).should.throw("Invalid argument")
   });
 
+  it("#dot() should return the dot product of a complex vector and a matrix (mx1)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Matrix(cvec.rows(), 1)).equals(0).should.be.true;
+    cvec.dot(new Matrix(cvec.rows(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a matrix block (mx1)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Matrix(cvec.rows(), 1).col(0)).equals(0).should.be.true;
+    cvec.dot(new Matrix(cvec.rows(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12]).col(0)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new Matrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a complex matrix (mx1)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CMatrix(cvec.rows(), 1)).equals(0).should.be.true;
+    cvec.dot(new CMatrix(cvec.rows(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new CMatrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a complex matrix block (mx1)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CMatrix(cvec.rows(), 1).col(0)).equals(0).should.be.true;
+    cvec.dot(new CMatrix(cvec.rows(), 1).set([
+       7,
+       8,
+       9,
+      10,
+      11,
+      12]).col(0)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new CMatrix(1, 1).col(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a matrix (1xm)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Matrix(1, cvec.rows())).equals(0).should.be.true;
+    cvec.dot(new Matrix(1, cvec.rows()).set([
+      7, 8, 9, 10, 11, 12
+    ])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new Matrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a matrix block (1xm)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new Matrix(1, cvec.rows()).row(0)).equals(0).should.be.true;
+    cvec.dot(new Matrix(1, cvec.rows()).set([
+      7, 8, 9, 10, 11, 12
+    ]).row(0)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new Matrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a complec matrix (1xm)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CMatrix(1, cvec.rows())).equals(0).should.be.true;
+    cvec.dot(new CMatrix(1, cvec.rows()).set([
+      7, 8, 9, 10, 11, 12
+    ])).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new CMatrix(1, 1));
+    }).should.throw("Invalid argument")
+  });
+
+  it("#dot() should return the dot product of a complex vector and a complec matrix block (1xm)", function() {
+    cvec.dot.should.be.a.Function;
+
+    cvec.toString().should.equal("(1,1)\n(2,2)\n(3,3)\n(4,4)\n(5,5)\n(6,6)");
+
+    cvec.dot(new CMatrix(1, cvec.rows()).row(0)).equals(0).should.be.true;
+    cvec.dot(new CMatrix(1, cvec.rows()).set([
+      7, 8, 9, 10, 11, 12
+    ]).row(0)).equals(Complex(217, -217)).should.be.true;
+
+    (function() {
+      cvec.dot(new CMatrix(1, 1).row(0));
+    }).should.throw("Invalid argument")
+  });
+
   it("#asDiagonal() should return a complex diagonal", function() {
     cvec.asDiagonal.should.be.a.Function;
 
