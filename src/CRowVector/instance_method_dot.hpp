@@ -24,7 +24,43 @@ EIGENJS_INSTANCE_METHOD(CRowVector, dot,
     const typename T::value_type::Index& n = value.cols();
     typename Complex::value_type result;
 
-    if (CVector::is_cvector(args[0])) {
+    if (CMatrix::is_cmatrix(args[0])) {
+      const CMatrix* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
+      const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+      const typename CMatrix::value_type::Index& rows = rhs_cmatrix.rows();
+      const typename CMatrix::value_type::Index& cols = rhs_cmatrix.cols();
+
+      if (rows != 1 && cols != 1 || n != rows * cols) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+        NanReturnUndefined();
+      }
+
+      typename Complex::value_type result;
+
+      if (cols > rows) {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(rhs_cmatrix)));
+      } else {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_cmatrix.transpose()
+            )));
+      }
+
+      v8::Local<v8::Value> argv[] = {
+        NanNew<v8::Number>(result.real())
+      , NanNew<v8::Number>(result.imag())
+      };
+
+      NanReturnValue(
+        Complex::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
+    } else if (CVector::is_cvector(args[0])) {
       const CVector* const& rhs_obj =
           node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
       const typename CVector::value_type& rhs_cvector = **rhs_obj;
@@ -48,6 +84,44 @@ EIGENJS_INSTANCE_METHOD(CRowVector, dot,
       }
 
       result = value.dot(rhs_crowvector);
+    } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+      const CMatrixBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+      const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
+      const typename CMatrixBlock::value_type::Index& rows =
+          rhs_cmatrixblock.rows();
+      const typename CMatrixBlock::value_type::Index& cols =
+          rhs_cmatrixblock.cols();
+
+      if (rows != 1 && cols != 1 || n != rows * cols) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+        NanReturnUndefined();
+      }
+
+      typename Complex::value_type result;
+
+      if (cols > rows) {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(rhs_cmatrixblock)));
+      } else {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_cmatrixblock.transpose()
+            )));
+      }
+
+      v8::Local<v8::Value> argv[] = {
+        NanNew<v8::Number>(result.real())
+      , NanNew<v8::Number>(result.imag())
+      };
+
+      NanReturnValue(
+        Complex::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
     } else if (CVectorBlock::is_cvectorblock(args[0])) {
       const CVectorBlock* const& rhs_obj =
           node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
@@ -75,6 +149,45 @@ EIGENJS_INSTANCE_METHOD(CRowVector, dot,
       }
 
       result = value.dot(rhs_crowvectorblock);
+    } else if (Matrix::is_matrix(args[0])) {
+      const Matrix* const& rhs_obj =
+          node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+      const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+      const typename Matrix::value_type::Index& rows = rhs_matrix.rows();
+      const typename Matrix::value_type::Index& cols = rhs_matrix.cols();
+
+      if (rows != 1 && cols != 1 || n != rows * cols) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+        NanReturnUndefined();
+      }
+
+      typename Complex::value_type result;
+
+      if (cols > rows) {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_matrix.template cast<typename Complex::value_type>()
+            )));
+      } else {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_matrix.transpose()
+                    .template cast<typename Complex::value_type>()
+            )));
+      }
+
+      v8::Local<v8::Value> argv[] = {
+        NanNew<v8::Number>(result.real())
+      , NanNew<v8::Number>(result.imag())
+      };
+
+      NanReturnValue(
+        Complex::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
     } else if (Vector::is_vector(args[0])) {
       const Vector* const& rhs_obj =
           node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
@@ -99,6 +212,47 @@ EIGENJS_INSTANCE_METHOD(CRowVector, dot,
       }
 
       result = value.dot(rhs_rowvector);
+    } else if (MatrixBlock::is_matrixblock(args[0])) {
+      const MatrixBlock* const& rhs_obj =
+          node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+      const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+      const typename MatrixBlock::value_type::Index& rows =
+          rhs_matrixblock.rows();
+      const typename MatrixBlock::value_type::Index& cols =
+          rhs_matrixblock.cols();
+
+      if (rows != 1 && cols != 1 || n != rows * cols) {
+        EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+        NanReturnUndefined();
+      }
+
+      typename Complex::value_type result;
+
+      if (cols > rows) {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_matrixblock.template cast<typename Complex::value_type>()
+            )));
+      } else {
+        new (&result) typename Complex::value_type
+            (value.dot(typename CRowVector::value_type(
+                rhs_matrixblock.transpose()
+                    .template cast<typename Complex::value_type>()
+            )));
+      }
+
+      v8::Local<v8::Value> argv[] = {
+        NanNew<v8::Number>(result.real())
+      , NanNew<v8::Number>(result.imag())
+      };
+
+      NanReturnValue(
+        Complex::new_instance(
+          args
+        , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+        , argv
+        )
+      );
     } else if (VectorBlock::is_vectorblock(args[0])) {
       const VectorBlock* const& rhs_obj =
           node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
