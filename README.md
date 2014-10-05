@@ -128,6 +128,12 @@ $ npm install eigenjs --msvs_version=2012
     * [comp.imag](#compimag)
 * [Matrix](#matrix)
   * [Matrix Class Methods](#matrix-class-methods)
+    * [Matrix(mat)](#matrixmat)
+    * [Matrix(vec)](#matrixvec)
+    * [Matrix(rvec)](#matrixrvec)
+    * [Matrix(mblock)](#matrixmblock)
+    * [Matrix(vblock)](#matrixvblock)
+    * [Matrix(rvblock)](#matrixrvblock)
     * [Matrix(rows, cols)](#matrixrows-cols)
     * [Matrix.Zero(n)](#matrixzeron)
     * [Matrix.Zero(rows, cols)](#matrixzerorows-cols)
@@ -1186,6 +1192,31 @@ console.log('(%d,%d)', c.real, c.imag);
 ## Matrix
 
 ### Matrix Class Methods
+
+#### Matrix(mat)
+#### Matrix(vec)
+#### Matrix(rvec)
+#### Matrix(mblock)
+#### Matrix(vblock)
+#### Matrix(rvblock)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(2, 3)
+  , mat2 = new M(mat);
+console.log('mat =\n%s\n', mat);
+console.log('mat2 =\n%s', mat2);
+```
+
+```txt
+mat =
+  0.381981  -0.373117  -0.866239
+-0.0467884  -0.981309  -0.885573
+
+mat2 =
+  0.381981  -0.373117  -0.866239
+-0.0467884  -0.981309  -0.885573
+```
 
 #### Matrix(rows, cols)
 
