@@ -41,6 +41,12 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
+  typedef ::EigenJS::MatrixBlock<scalar_type> MatrixBlock;
+  typedef ::EigenJS::VectorBlock<scalar_type> VectorBlock;
+  typedef ::EigenJS::RowVector<scalar_type> RowVector;
+  typedef ::EigenJS::RowVectorBlock<scalar_type> RowVectorBlock;
+
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
@@ -99,6 +105,89 @@ class Vector : public base<Vector, ScalarType, ValueType, ClassName> {
           vector(i, 0) = elem->NumberValue();
         }
 
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (Matrix::is_matrix(args[0])) {
+        const Matrix* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+        const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+        const typename Matrix::value_type::Index& rows = rhs_matrix.rows();
+        const typename Matrix::value_type::Index& cols = rhs_matrix.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        Vector* obj = new Vector(0);
+
+        if (rows > cols) {
+          **obj = rhs_matrix;
+        } else {
+          **obj = rhs_matrix.transpose();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (Vector::is_vector(args[0])) {
+        const Vector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+        const typename Vector::value_type& rhs_vector = **rhs_obj;
+
+        Vector* obj = new Vector(0);
+        **obj = rhs_vector;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVector::is_rowvector(args[0])) {
+        const RowVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+        Vector* obj = new Vector(0);
+        **obj = rhs_rowvector.transpose();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (MatrixBlock::is_matrixblock(args[0])) {
+        const MatrixBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+        const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+        const typename MatrixBlock::value_type::Index& rows =
+            rhs_matrixblock.rows();
+        const typename MatrixBlock::value_type::Index& cols =
+            rhs_matrixblock.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        Vector* obj = new Vector(0);
+
+        if (rows > cols) {
+          **obj = rhs_matrixblock;
+        } else {
+          **obj = rhs_matrixblock.transpose();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (VectorBlock::is_vectorblock(args[0])) {
+        const VectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+        const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+        Vector* obj = new Vector(0);
+        **obj = rhs_vectorblock;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+        const RowVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+        const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+            **rhs_obj;
+
+        Vector* obj = new Vector(0);
+        **obj = rhs_rowvectorblock.transpose();
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       }

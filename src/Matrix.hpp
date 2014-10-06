@@ -39,6 +39,12 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   typedef ScalarType scalar_type;
   typedef ValueType value_type;
 
+  typedef ::EigenJS::MatrixBlock<scalar_type> MatrixBlock;
+  typedef ::EigenJS::Vector<scalar_type> Vector;
+  typedef ::EigenJS::VectorBlock<scalar_type> VectorBlock;
+  typedef ::EigenJS::RowVector<scalar_type> RowVector;
+  typedef ::EigenJS::RowVectorBlock<scalar_type> RowVectorBlock;
+
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
@@ -64,37 +70,104 @@ class Matrix : public base<Matrix, ScalarType, ValueType, ClassName> {
   ~Matrix() {}
 
   static NAN_METHOD(New) {
+    const int& args_length = args.Length();
+
     NanScope();
 
-    if (args.Length() < 2) {
-      NanThrowError
-          ("Tried creating a matrix without rows and columns arguments");
-      NanReturnUndefined();
-    }
+    if (args_length == 1) {
+      if (!args.IsConstructCall()) {
+        v8::Local<v8::Value> argv[] = { args[0] };
+        NanReturnValue(
+          base_type::new_instance(
+            args
+          , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+          , argv
+          )
+        );
+      }
 
-    if (args[0]->IsNumber() && args[1]->IsNumber()) {
-      typename value_type::Index rows = args[0]->Int32Value();
-      typename value_type::Index cols = args[1]->Int32Value();
+      if (Matrix::is_matrix(args[0])) {
+        const Matrix* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+        const typename Matrix::value_type& rhs_matrix = **rhs_obj;
 
-      if (rows >= 0 && cols >= 0) {
-        if (args.IsConstructCall()) {
-          Matrix* obj = new Matrix(rows, cols);
-          obj->Wrap(args.This());
-          NanReturnValue(args.This());
-        } else {
-          v8::Local<v8::Value> argv[] = { args[0], args[1] };
-          NanReturnValue(
-            base_type::new_instance(
-              args
-            , sizeof(argv) / sizeof(v8::Local<v8::Value>)
-            , argv
-            )
-          );
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_matrix;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (Vector::is_vector(args[0])) {
+        const Vector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+        const typename Vector::value_type& rhs_vector = **rhs_obj;
+
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_vector;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVector::is_rowvector(args[0])) {
+        const RowVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_rowvector;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (MatrixBlock::is_matrixblock(args[0])) {
+        const MatrixBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+        const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_matrixblock;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (VectorBlock::is_vectorblock(args[0])) {
+        const VectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+        const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_vectorblock;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+        const RowVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+        const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+            **rhs_obj;
+
+        Matrix* obj = new Matrix(0, 0);
+        **obj = rhs_rowvectorblock;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      }
+    } else if (args_length == 2) {
+      if (args[0]->IsNumber() && args[1]->IsNumber()) {
+        typename value_type::Index rows = args[0]->Int32Value();
+        typename value_type::Index cols = args[1]->Int32Value();
+
+        if (rows >= 0 && cols >= 0) {
+          if (args.IsConstructCall()) {
+            Matrix* obj = new Matrix(rows, cols);
+            obj->Wrap(args.This());
+            NanReturnValue(args.This());
+          } else {
+            v8::Local<v8::Value> argv[] = { args[0], args[1] };
+            NanReturnValue(
+              base_type::new_instance(
+                args
+              , sizeof(argv) / sizeof(v8::Local<v8::Value>)
+              , argv
+              )
+            );
+          }
         }
       }
     }
 
-    EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
+    NanThrowError
+        ("Tried creating a matrix without rows and columns arguments");
     NanReturnUndefined();
   }
 };

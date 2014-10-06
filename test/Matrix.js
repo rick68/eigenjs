@@ -47,6 +47,50 @@ describe('Matrix', function() {
       .set(2, 2, 9);
   });
 
+  it('#Matrix() should created by Matrix', function() {
+    var mat2 = new Matrix(mat);
+    mat2.equals(mat).should.be.true;
+  });
+
+  it('#Matrix() should created by MatrixBlock', function() {
+    var mblock = mat.block(0, 0, 2, 2);
+    var mat2 = new Matrix(mblock);
+    mat2.equals(mblock).should.be.true;
+  });
+
+  it('#Matrix() should created by Vector', function() {
+    var vec = new Vector([
+      1,
+      2,
+      3]);
+    var mat2 = new Matrix(vec);
+    mat2.toString().should.equal(vec.toString());
+  });
+
+
+  it('#Matrix() should created by VectorBlock', function() {
+    var vec = new Vector([
+      1,
+      2,
+      3]);
+    var vblock = vec.block(0, 3);
+    var mat2 = new Matrix(vblock);
+    mat2.toString().should.equal(vblock.toString());
+  });
+
+  it('#Matrix() should created by RowVector', function() {
+    var rvec = new RowVector([1, 2, 3]);
+    var mat2 = new Matrix(rvec);
+    mat2.toString().should.equal(rvec.toString());
+  });
+
+  it('#Matrix() should created by RowVectorBlock', function() {
+    var rvec = new Vector([1, 2, 3]);
+    var rvblock = rvec.block(0, 3);
+    var mat2 = new Matrix(rvblock);
+    mat2.toString().should.equal(rvblock.toString());
+  });
+
   it('#set() should throw message when row or column numbers are out of range', function() {
     mat.set.should.be.a.Function;
 

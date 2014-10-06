@@ -128,6 +128,12 @@ $ npm install eigenjs --msvs_version=2012
     * [comp.imag](#compimag)
 * [Matrix](#matrix)
   * [Matrix Class Methods](#matrix-class-methods)
+    * [Matrix(mat)](#matrixmat)
+    * [Matrix(vec)](#matrixvec)
+    * [Matrix(rvec)](#matrixrvec)
+    * [Matrix(mblock)](#matrixmblock)
+    * [Matrix(vblock)](#matrixvblock)
+    * [Matrix(rvblock)](#matrixrvblock)
     * [Matrix(rows, cols)](#matrixrows-cols)
     * [Matrix.Zero(n)](#matrixzeron)
     * [Matrix.Zero(rows, cols)](#matrixzerorows-cols)
@@ -279,6 +285,18 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
+    * [CMatrix(mat)](#cmatrixmat)
+    * [CMatrix(vec)](#cmatrixvec)
+    * [CMatrix(rvec)](#cmatrixrvec)
+    * [CMatrix(mblock)](#cmatrixmblock)
+    * [CMatrix(vblock)](#cmatrixvblock)
+    * [CMatrix(rvblock)](#cmatrixrvblock)
+    * [CMatrix(cmat)](#cmatrixcmat)
+    * [CMatrix(cvec)](#cmatrixcvec)
+    * [CMatrix(crvec)](#cmatrixcrvec)
+    * [CMatrix(cmblock)](#cmatrixcmblock)
+    * [CMatrix(cvblock)](#cmatrixcvblock)
+    * [CMatrix(crvblock)](#cmatrixcrvblock)
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
     * [CMatrix.Zero(n)](#cmatrixzeron)
     * [CMatrix.Zero(rows, cols)](#cmatrixzerorows-cols)
@@ -450,6 +468,12 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
+    * [Vector(mat)](#vectormat)
+    * [Vector(vec)](#vectorvec)
+    * [Vector(rvec)](#vectorrvec)
+    * [Vector(mblock)](#vectormblock)
+    * [Vector(vblock)](#vectorvblock)
+    * [Vector(rvblock)](#vectorrvblock)
     * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalar_array)
     * [Vector.Constant(rows, scalar)](#vectorconstantrows-scalar)
@@ -486,6 +510,18 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.minCoeff(func)](#vecmincoefffunc)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
+    * [CVector(mat)](#cvectormat)
+    * [CVector(vec)](#cvectorvec)
+    * [CVector(rvec)](#cvectorrvec)
+    * [CVector(mblock)](#cvectormblock)
+    * [CVector(vblock)](#cvectorvblock)
+    * [CVector(rvblock)](#cvectorrvblock)
+    * [CVector(cmat)](#cvectorcmat)
+    * [CVector(cvec)](#cvectorcvec)
+    * [CVector(crvec)](#cvectorcrvec)
+    * [CVector(cmblock)](#cvectorcmblock)
+    * [CVector(cvblock)](#cvectorcvblock)
+    * [CVector(crvblock)](#cvectorcrvblock)
     * [CVector(rows)](#cvectorrows)
     * [CVector(comp_array)](#cvectorcomp_array)
     * [CVector.Constant(rows, scalar)](#cvectorconstantrows-scalar)
@@ -513,6 +549,12 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.normalize()](#cvecnormalize)
 * [Row Vector](#row-vector) **inherits from Matrix**
   * [Row Vector Class Methods](#row-vector-class-methods)
+    * [RowVector(mat)](#rowvectormat)
+    * [RowVector(vec)](#rowvectorvec)
+    * [RowVector(rvec)](#rowvectorrvec)
+    * [RowVector(mblock)](#rowvectormblock)
+    * [RowVector(vblock)](#rowvectorvblock)
+    * [RowVector(rvblock)](#rowvectorrvblock)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
     * [RowVector.Constant(cols, scalar)](#rowvectorconstantcols-scalar)
@@ -549,6 +591,18 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.minCoeff(func)](#rvecmincoefffunc)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
+    * [CRowVector(mat)](#crowvectormat)
+    * [CRowVector(vec)](#crowvectorvec)
+    * [CRowVector(rvec)](#crowvectorrvec)
+    * [CRowVector(mblock)](#crowvectormblock)
+    * [CRowVector(vblock)](#crowvectorvblock)
+    * [CRowVector(rvblock)](#crowvectorrvblock)
+    * [CRowVector(cmat)](#crowvectorcmat)
+    * [CRowVector(cvec)](#crowvectorcvec)
+    * [CRowVector(crvec)](#crowvectorcrvec)
+    * [CRowVector(cmblock)](#crowvectorcmblock)
+    * [CRowVector(cvblock)](#crowvectorcvblock)
+    * [CRowVector(crvblock)](#crowvectorcrvblock)
     * [CRowVector(cols)](#crowvectorcols)
     * [CRowVector(comp_array)](#crowvectorcomp_array)
     * [CRowVector.Constant(cols, scalar)](#crowvectorconstantcols-scalar)
@@ -1186,6 +1240,31 @@ console.log('(%d,%d)', c.real, c.imag);
 ## Matrix
 
 ### Matrix Class Methods
+
+#### Matrix(mat)
+#### Matrix(vec)
+#### Matrix(rvec)
+#### Matrix(mblock)
+#### Matrix(vblock)
+#### Matrix(rvblock)
+
+```js
+var M = require('eigenjs').Matrix
+  , mat = new M.Random(2, 3)
+  , mat2 = new M(mat);
+console.log('mat =\n%s\n', mat);
+console.log('mat2 =\n%s', mat2);
+```
+
+```txt
+mat =
+  0.381981  -0.373117  -0.866239
+-0.0467884  -0.981309  -0.885573
+
+mat2 =
+  0.381981  -0.373117  -0.866239
+-0.0467884  -0.981309  -0.885573
+```
 
 #### Matrix(rows, cols)
 
@@ -2801,6 +2880,37 @@ mat =
 
 ### Complex Matrix Class Methods
 
+#### CMatrix(mat)
+#### CMatrix(vec)
+#### CMatrix(rvec)
+#### CMatrix(mblock)
+#### CMatrix(vblock)
+#### CMatrix(rvblock)
+#### CMatrix(cmat)
+#### CMatrix(cvec)
+#### CMatrix(crvec)
+#### CMatrix(cmblock)
+#### CMatrix(cvblock)
+#### CMatrix(crvblock)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(2, 3)
+  , cmat2 = new CM(cmat);
+console.log('cmat =\n%s\n', cmat);
+console.log('cmat2 =\n%s', cmat2);
+```
+
+```txt
+cmat =
+ (-0.947988,-0.839555) (-0.502409,0.00732418)   (0.402069,-0.422384)
+   (-0.40669,0.758583)   (-0.902474,0.124615)  (0.992439,-0.0813283)
+
+cmat2 =
+ (-0.947988,-0.839555) (-0.502409,0.00732418)   (0.402069,-0.422384)
+   (-0.40669,0.758583)   (-0.902474,0.124615)  (0.992439,-0.0813283)
+```
+
 #### CMatrix(rows, cols)
 
 ```js
@@ -4280,6 +4390,33 @@ cmat =
 
 ### Vector Class Methods
 
+#### Vector(mat)
+#### Vector(vec)
+#### Vector(rvec)
+#### Vector(mblock)
+#### Vector(vblock)
+#### Vector(rvblock)
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , vec2 = new V(vec);
+console.log('vec = \n%s\n', vec);
+console.log('vec2 = \n%s', vec2);
+```
+
+```txt
+vec =
+-0.777518
+  0.25226
+-0.262954
+
+vec2 =
+-0.777518
+  0.25226
+-0.262954
+```
+
 #### Vector(rows)
 
 ```js
@@ -4718,6 +4855,39 @@ min = -0.668037947112712
 
 ### Complex Vector Class Methods
 
+#### CVector(mat)
+#### CVector(vec)
+#### CVector(rvec)
+#### CVector(mblock)
+#### CVector(vblock)
+#### CVector(rvblock)
+#### CVector(cmat)
+#### CVector(cvec)
+#### CVector(crvec)
+#### CVector(cmblock)
+#### CVector(cvblock)
+#### CVector(crvblock)
+
+```js
+var CV = require('eigenjs').CVector
+  , cvec = new CV.Random(3)
+  , cvec2 = new CV(cvec);
+console.log('cvec = \n%s\n', cvec);
+console.log('cvec2 = \n%s', cvec2);
+```
+
+```txt
+cvec =
+ (0.97863,-0.172027)
+(0.743826,-0.517891)
+(-0.194503,0.984235)
+
+cvec2 =
+ (0.97863,-0.172027)
+(0.743826,-0.517891)
+(-0.194503,0.984235)
+```
+
 #### CVector(rows)
 
 ```js
@@ -4968,6 +5138,29 @@ cvec =
 ## Row Vector
 
 ### Row Vector Class Methods
+
+#### RowVector(mat)
+#### RowVector(vec)
+#### RowVector(rvec)
+#### RowVector(mblock)
+#### RowVector(vblock)
+#### RowVector(rvblock)
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , rvec2 = new RV(rvec);
+console.log('rvec = \n%s\n', rvec);
+console.log('rvec2 = \n%s', rvec2);
+```
+
+```txt
+rvec =
+-0.0369638   0.749797   -0.15956
+
+rvec2 =
+-0.0369638   0.749797   -0.15956
+```
 
 #### RowVector(cols)
 
@@ -5335,6 +5528,35 @@ min = -0.8164447219187602
 ## Complex Row Vector
 
 ### Complex Row Vector Class Methods
+
+#### CRowVector(mat)
+#### CRowVector(vec)
+#### CRowVector(rvec)
+#### CRowVector(mblock)
+#### CRowVector(vblock)
+#### CRowVector(rvblock)
+#### CRowVector(cmat)
+#### CRowVector(cvec)
+#### CRowVector(crvec)
+#### CRowVector(cmblock)
+#### CRowVector(cvblock)
+#### CRowVector(crvblock)
+
+```js
+var CRV = require('eigenjs').CRowVector
+  , crvec = new CRV.Random(3)
+  , crvec2 = new CRV(crvec);
+console.log('crvec = \n%s\n', crvec);
+console.log('crvec2 = \n%s', crvec2);
+```
+
+```txt
+crvec =
+(-0.456363,-0.0965678)    (0.985458,0.584867)   (-0.136223,0.491867)
+
+crvec2 =
+(-0.456363,-0.0965678)    (0.985458,0.584867)   (-0.136223,0.491867)
+```
 
 #### CRowVector(cols)
 

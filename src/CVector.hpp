@@ -43,6 +43,19 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
 
   typedef ::EigenJS::Complex<scalar_type> Complex;
 
+  typedef ::EigenJS::CMatrix<scalar_type> CMatrix;
+  typedef ::EigenJS::CMatrixBlock<scalar_type> CMatrixBlock;
+  typedef ::EigenJS::CVectorBlock<scalar_type> CVectorBlock;
+  typedef ::EigenJS::CRowVector<scalar_type> CRowVector;
+  typedef ::EigenJS::CRowVectorBlock<scalar_type> CRowVectorBlock;
+
+  typedef ::EigenJS::Matrix<scalar_type> Matrix;
+  typedef ::EigenJS::MatrixBlock<scalar_type> MatrixBlock;
+  typedef ::EigenJS::Vector<scalar_type> Vector;
+  typedef ::EigenJS::VectorBlock<scalar_type> VectorBlock;
+  typedef ::EigenJS::RowVector<scalar_type> RowVector;
+  typedef ::EigenJS::RowVectorBlock<scalar_type> RowVectorBlock;
+
  public:
   static void Init(v8::Handle<v8::Object> exports) {
     NanScope();
@@ -109,6 +122,177 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
           }
         }
 
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CMatrix::is_cmatrix(args[0])) {
+        const CMatrix* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CMatrix>(args[0]->ToObject());
+        const typename CMatrix::value_type& rhs_cmatrix = **rhs_obj;
+        const typename CMatrix::value_type::Index& rows = rhs_cmatrix.rows();
+        const typename CMatrix::value_type::Index& cols = rhs_cmatrix.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        CVector* obj = new CVector(0);
+
+        if (rows > cols) {
+          **obj = rhs_cmatrix;
+        } else {
+          **obj = rhs_cmatrix.transpose();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CVector::is_cvector(args[0])) {
+        const CVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CVector>(args[0]->ToObject());
+        const typename CVector::value_type& rhs_cvector = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_cvector;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CRowVector::is_crowvector(args[0])) {
+        const CRowVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CRowVector>(args[0]->ToObject());
+        const typename CRowVector::value_type& rhs_crowvector = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_crowvector.transpose();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CMatrixBlock::is_cmatrixblock(args[0])) {
+        const CMatrixBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CMatrixBlock>(args[0]->ToObject());
+        const typename CMatrixBlock::value_type& rhs_cmatrixblock = **rhs_obj;
+        const typename CMatrix::value_type::Index& rows =
+            rhs_cmatrixblock.rows();
+        const typename CMatrix::value_type::Index& cols =
+            rhs_cmatrixblock.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        CVector* obj = new CVector(0);
+
+        if (rows > cols) {
+          **obj = rhs_cmatrixblock;
+        } else {
+          **obj = rhs_cmatrixblock.transpose();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CVectorBlock::is_cvectorblock(args[0])) {
+        const CVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CVectorBlock>(args[0]->ToObject());
+        const typename CVectorBlock::value_type& rhs_cvectorblock = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_cvectorblock;
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (CRowVectorBlock::is_crowvectorblock(args[0])) {
+        const CRowVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<CRowVectorBlock>(args[0]->ToObject());
+        const typename CRowVectorBlock::value_type& rhs_crowvectorblock =
+            **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_crowvectorblock.transpose();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (Matrix::is_matrix(args[0])) {
+        const Matrix* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Matrix>(args[0]->ToObject());
+        const typename Matrix::value_type& rhs_matrix = **rhs_obj;
+        const typename Matrix::value_type::Index& rows = rhs_matrix.rows();
+        const typename Matrix::value_type::Index& cols = rhs_matrix.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        CVector* obj = new CVector(0);
+
+        if (rows > cols) {
+          **obj = rhs_matrix.template cast<typename Complex::value_type>();
+        } else {
+          **obj = rhs_matrix.transpose()
+              .template cast<typename Complex::value_type>();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (Vector::is_vector(args[0])) {
+        const Vector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<Vector>(args[0]->ToObject());
+        const typename Vector::value_type& rhs_vector = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_vector.template cast<typename Complex::value_type>();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVector::is_rowvector(args[0])) {
+        const RowVector* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVector>(args[0]->ToObject());
+        const typename RowVector::value_type& rhs_rowvector = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_rowvector.transpose()
+            .template cast<typename Complex::value_type>();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (MatrixBlock::is_matrixblock(args[0])) {
+        const MatrixBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
+        const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
+        const typename MatrixBlock::value_type::Index& rows =
+            rhs_matrixblock.rows();
+        const typename MatrixBlock::value_type::Index& cols =
+            rhs_matrixblock.cols();
+
+        if (rows != 1 && cols != 1) {
+          EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
+          NanReturnUndefined();
+        }
+
+        CVector* obj = new CVector(0);
+
+        if (rows > cols) {
+          **obj = rhs_matrixblock
+              .template cast<typename Complex::value_type>();
+        } else {
+          **obj = rhs_matrixblock.transpose()
+              .template cast<typename Complex::value_type>();
+        }
+
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (VectorBlock::is_vectorblock(args[0])) {
+        const VectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<VectorBlock>(args[0]->ToObject());
+        const typename VectorBlock::value_type& rhs_vectorblock = **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_vectorblock.template cast<typename Complex::value_type>();
+        obj->Wrap(args.This());
+        NanReturnValue(args.This());
+      } else if (RowVectorBlock::is_rowvectorblock(args[0])) {
+        const RowVectorBlock* const& rhs_obj =
+            node::ObjectWrap::Unwrap<RowVectorBlock>(args[0]->ToObject());
+        const typename RowVectorBlock::value_type& rhs_rowvectorblock =
+            **rhs_obj;
+
+        CVector* obj = new CVector(0);
+        **obj = rhs_rowvectorblock.transpose()
+            .template cast<typename Complex::value_type>();
         obj->Wrap(args.This());
         NanReturnValue(args.This());
       }
