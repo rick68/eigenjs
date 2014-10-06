@@ -94,7 +94,6 @@ describe('Matrix', function() {
     mat2.toString().should.equal(vblock.toString());
   });
 
-
   it('#set() should throw message when row or column numbers are out of range', function() {
     mat.set.should.be.a.Function;
 
