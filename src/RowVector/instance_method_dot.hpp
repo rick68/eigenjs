@@ -30,7 +30,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, dot,
       const typename Matrix::value_type::Index& rows = rhs_matrix.rows();
       const typename Matrix::value_type::Index& cols = rhs_matrix.cols();
 
-      if (rows != 1 && cols != 1 || n != rows * cols) {
+      if ((rows != 1 && cols != 1) || (n != rows * cols)) {
         EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
@@ -77,7 +77,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, dot,
       const typename MatrixBlock::value_type::Index& cols =
           rhs_matrixblock.cols();
 
-      if (rows != 1 && cols != 1 || n != rows * cols) {
+      if ((rows != 1 && cols != 1) || (n != rows * cols)) {
         EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
@@ -127,7 +127,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, dot,
       const typename CMatrix::value_type::Index& rows = rhs_cmatrix.rows();
       const typename CMatrix::value_type::Index& cols = rhs_cmatrix.cols();
 
-      if (rows != 1 && cols != 1 || n != rows * cols) {
+      if ((rows != 1 && cols != 1) || (n != rows * cols)) {
         EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
@@ -217,7 +217,7 @@ EIGENJS_INSTANCE_METHOD(RowVector, dot,
       const typename CMatrixBlock::value_type::Index& cols =
           rhs_cmatrixblock.cols();
 
-      if (rows != 1 && cols != 1 || n != rows * cols) {
+      if ((rows != 1 && cols != 1) || (n != rows * cols)) {
         EIGENJS_THROW_ERROR_INVALID_ARGUMENT()
         NanReturnUndefined();
       }
