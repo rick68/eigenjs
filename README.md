@@ -510,6 +510,18 @@ $ npm install eigenjs --msvs_version=2012
     * [vec.minCoeff(func)](#vecmincoefffunc)
 * [Complex Vector](#complex-vector) **inherits from CMatrix**
   * [Complex Vector Class Methods](#complex-vector-class-methods)
+    * [CVector(mat)](#cvectormat)
+    * [CVector(vec)](#cvectorvec)
+    * [CVector(rvec)](#cvectorrvec)
+    * [CVector(mblock)](#cvectormblock)
+    * [CVector(vblock)](#cvectorvblock)
+    * [CVector(rvblock)](#cvectorrvblock)
+    * [CVector(cmat)](#cvectorcmat)
+    * [CVector(cvec)](#cvectorcvec)
+    * [CVector(crvec)](#cvectorcrvec)
+    * [CVector(cmblock)](#cvectorcmblock)
+    * [CVector(cvblock)](#cvectorcvblock)
+    * [CVector(crvblock)](#cvectorcrvblock)
     * [CVector(rows)](#cvectorrows)
     * [CVector(comp_array)](#cvectorcomp_array)
     * [CVector.Constant(rows, scalar)](#cvectorconstantrows-scalar)
@@ -4830,6 +4842,39 @@ min = -0.668037947112712
 ## Complex Vector
 
 ### Complex Vector Class Methods
+
+#### CVector(mat)
+#### CVector(vec)
+#### CVector(rvec)
+#### CVector(mblock)
+#### CVector(vblock)
+#### CVector(rvblock)
+#### CVector(cmat)
+#### CVector(cvec)
+#### CVector(crvec)
+#### CVector(cmblock)
+#### CVector(cvblock)
+#### CVector(crvblock)
+
+```js
+var CV = require('eigenjs').CVector
+  , cvec = new CV.Random(3)
+  , cvec2 = new CV(cvec);
+console.log('cvec = \n%s\n', cvec);
+console.log('cvec2 = \n%s', cvec2);
+```
+
+```txt
+cvec =
+ (0.97863,-0.172027)
+(0.743826,-0.517891)
+(-0.194503,0.984235)
+
+cvec2 =
+ (0.97863,-0.172027)
+(0.743826,-0.517891)
+(-0.194503,0.984235)
+```
 
 #### CVector(rows)
 
