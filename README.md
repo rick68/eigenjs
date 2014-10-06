@@ -456,6 +456,12 @@ $ npm install eigenjs --msvs_version=2012
     * [cmat.toString([options])](#cmattostringoptions)
 * [Vector](#vector) **inherits from Matrix**
   * [Vector Class Methods](#vector-class-methods)
+    * [Vector(mat)](#vectormat)
+    * [Vector(vec)](#vectorvec)
+    * [Vector(rvec)](#vectorrvec)
+    * [Vector(mblock)](#vectormblock)
+    * [Vector(vblock)](#vectorvblock)
+    * [Vector(rvblock)](#vectorrvblock)
     * [Vector(rows)](#vectorrows)
     * [Vector(scalar_array)](#vectorscalar_array)
     * [Vector.Constant(rows, scalar)](#vectorconstantrows-scalar)
@@ -4310,6 +4316,33 @@ cmat =
 ## Vector
 
 ### Vector Class Methods
+
+#### Vector(mat)
+#### Vector(vec)
+#### Vector(rvec)
+#### Vector(mblock)
+#### Vector(vblock)
+#### Vector(rvblock)
+
+```js
+var V = require('eigenjs').Vector
+  , vec = new V.Random(3)
+  , vec2 = new V(vec);
+console.log('vec = \n%s\n', vec);
+console.log('vec2 = \n%s', vec2);
+```
+
+```txt
+vec =
+-0.777518
+  0.25226
+-0.262954
+
+vec2 =
+-0.777518
+  0.25226
+-0.262954
+```
 
 #### Vector(rows)
 
