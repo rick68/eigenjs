@@ -93,7 +93,7 @@ describe('CVector', function() {
     });
   });
 
-  it('#CVector() should created by CRowVector', function() {
+  it('#CVector() should created by CRowVectorBlock', function() {
     var crvec = new CRowVector([1, 2, 3]);
     var crblock = crvec.row(0);
     var cvec2 = new CVector(crblock);
