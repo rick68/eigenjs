@@ -591,6 +591,18 @@ $ npm install eigenjs --msvs_version=2012
     * [rvec.minCoeff(func)](#rvecmincoefffunc)
 * [Complex Row Vector](#complex-row-vector) **inherits from CMatrix**
   * [Complex Row Vector Class Methods](#complex-row-vector-class-methods)
+    * [CRowVector(mat)](#crowvectormat)
+    * [CRowVector(vec)](#crowvectorvec)
+    * [CRowVector(rvec)](#crowvectorrvec)
+    * [CRowVector(mblock)](#crowvectormblock)
+    * [CRowVector(vblock)](#crowvectorvblock)
+    * [CRowVector(rvblock)](#crowvectorrvblock)
+    * [CRowVector(cmat)](#crowvectorcmat)
+    * [CRowVector(cvec)](#crowvectorcvec)
+    * [CRowVector(crvec)](#crowvectorcrvec)
+    * [CRowVector(cmblock)](#crowvectorcmblock)
+    * [CRowVector(cvblock)](#crowvectorcvblock)
+    * [CRowVector(crvblock)](#crowvectorcrvblock)
     * [CRowVector(cols)](#crowvectorcols)
     * [CRowVector(comp_array)](#crowvectorcomp_array)
     * [CRowVector.Constant(cols, scalar)](#crowvectorconstantcols-scalar)
@@ -5516,6 +5528,35 @@ min = -0.8164447219187602
 ## Complex Row Vector
 
 ### Complex Row Vector Class Methods
+
+#### CRowVector(mat)
+#### CRowVector(vec)
+#### CRowVector(rvec)
+#### CRowVector(mblock)
+#### CRowVector(vblock)
+#### CRowVector(rvblock)
+#### CRowVector(cmat)
+#### CRowVector(cvec)
+#### CRowVector(crvec)
+#### CRowVector(cmblock)
+#### CRowVector(cvblock)
+#### CRowVector(crvblock)
+
+```js
+var CRV = require('eigenjs').CRowVector
+  , crvec = new CRV.Random(3)
+  , crvec2 = new CRV(crvec);
+console.log('crvec = \n%s\n', crvec);
+console.log('crvec2 = \n%s', crvec2);
+```
+
+```txt
+crvec =
+(-0.456363,-0.0965678)    (0.985458,0.584867)   (-0.136223,0.491867)
+
+crvec2 =
+(-0.456363,-0.0965678)    (0.985458,0.584867)   (-0.136223,0.491867)
+```
 
 #### CRowVector(cols)
 
