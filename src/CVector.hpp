@@ -253,8 +253,10 @@ class CVector : public base<CVector, ScalarType, ValueType, ClassName> {
         const MatrixBlock* const& rhs_obj =
             node::ObjectWrap::Unwrap<MatrixBlock>(args[0]->ToObject());
         const typename MatrixBlock::value_type& rhs_matrixblock = **rhs_obj;
-        const typename MatrixBlock::value_type::Index& rows = rhs_matrixblock.rows();
-        const typename MatrixBlock::value_type::Index& cols = rhs_matrixblock.cols();
+        const typename MatrixBlock::value_type::Index& rows =
+            rhs_matrixblock.rows();
+        const typename MatrixBlock::value_type::Index& cols =
+            rhs_matrixblock.cols();
 
         if (rows != 1 && cols != 1) {
           EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()
