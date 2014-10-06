@@ -49,6 +49,114 @@ describe('CMatrix', function() {
       .set(2, 2, Complex(9, 9));
   });
 
+  it('#CMatrix() should created by Matrix', function() {
+    var mat = new Matrix.Random(3, 3);
+    var cmat2 = new CMatrix(mat);
+    cmat2.visit(function(value, row, col) {
+      value.equals(mat.get(row, col)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by MatrixBlock', function() {
+    var mat = new Matrix.Random(3, 3);
+    var mblock = mat.block(0, 0, 3, 3);
+    var cmat2 = new CMatrix(mblock);
+    cmat2.visit(function(value, row, col) {
+      value.equals(mblock.get(row, col)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by Vector', function() {
+    var vec = new Vector([
+      1,
+      2,
+      3]);
+    var cmat2 = new CMatrix(vec);
+    cmat2.visit(function(value, row, col) {
+      value.equals(vec.get(row)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by VectorBlock', function() {
+    var vec = new Vector([
+      1,
+      2,
+      3]);
+    var vblock = vec.col(0);
+    var cmat2 = new CMatrix(vblock);
+    cmat2.visit(function(value, row, col) {
+      value.equals(vblock.get(row)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by RowVector', function() {
+    var rvec = new RowVector([1, 2, 3]);
+    var cmat2 = new CMatrix(rvec);
+    cmat2.visit(function(value, row, col) {
+      value.equals(rvec.get(col)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by RowVectorBlock', function() {
+    var rvec = new RowVector([1, 2, 3]);
+    var rvblock = rvec.row(0);
+    var cmat2 = new CMatrix(rvblock);
+    cmat2.visit(function(value, row, col) {
+      value.equals(rvec.get(col)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by CMatrix', function() {
+    var cmat2 = new CMatrix(cmat);
+    cmat2.equals(cmat).should.be.true;
+  });
+
+  it('#CMatrix() should created by CMatrixBlock', function() {
+    var cmblock = cmat.block(0, 0, 3, 3);
+    var cmat2 = new CMatrix(cmblock);
+    cmat2.equals(cmblock).should.be.true;
+  });
+
+  it('#CMatrix() should created by CVector', function() {
+    var cvec = new CVector([
+      1,
+      2,
+      3]);
+    var cmat2 = new CMatrix(cvec);
+    cmat2.visit(function(value, row, col) {
+      value.equals(cvec.get(row)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by CVectorBlock', function() {
+    var cvec = new CVector([
+      1,
+      2,
+      3]);
+    var cvblock = cvec.col(0);
+    var cmat2 = new CMatrix(cvblock);
+    cmat2.visit(function(value, row, col) {
+      value.equals(cvblock.get(row)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by RowVector', function() {
+    var crvec = new CRowVector([1, 2, 3]);
+    var cmat2 = new CMatrix(crvec);
+    cmat2.visit(function(value, row, col) {
+      value.equals(crvec.get(col)).should.be.true;
+    });
+  });
+
+  it('#CMatrix() should created by RowVectorBlock', function() {
+    var crvec = new CRowVector([1, 2, 3]);
+    var crvblock = crvec.row(0);
+    var cmat2 = new CMatrix(crvblock);
+    cmat2.visit(function(value, row, col) {
+      value.equals(crvec.get(col)).should.be.true;
+    });
+  });
+
   it('#set() should throw message when row or column numbers are out of range', function() {
     cmat.set.should.be.a.Function;
 
