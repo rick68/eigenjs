@@ -57,6 +57,52 @@ describe('Vector', function() {
     );
   });
 
+  it('#Vector() should created by Matrix', function() {
+    var mat = new Matrix.Random(3, 1);
+    var vec2 = new Vector(mat);
+    vec2.toString().should.equal(mat.toString());
+
+    mat2 = new Matrix.Random(1, 3);
+    vec3 = new Vector(mat2);
+    vec3.toString({ rowSeparator: ' ' }).should.equal(mat2.toString());
+  });
+
+  it('#Vector() should created by MatrixBlock', function() {
+    var mat = new Matrix.Random(3, 3);
+    var mblock = mat.col(0);
+    var mblock2 = mat.row(0);
+
+    var vec2 = new Vector(mblock);
+    vec2.toString().should.equal(mblock.toString());
+
+    var vec3 = new Vector(mblock2);
+    vec3.toString({ rowSeparator: ' ' }).should.equal(mblock2.toString());
+  });
+
+  it('#Vector() should created by Vector', function() {
+    var vec2 = new Vector(vec);
+    vec2.equals(vec).should.be.true;
+  });
+
+  it('#Vector() should created by VectorBlock', function() {
+    var vblock = vec.col(0);
+    var vec2 = new Vector(vblock);
+    vec2.equals(vblock).should.be.true;
+  });
+
+  it('#Vector() should created by RowVector', function() {
+    var rvec = new RowVector.Random(3);
+    var vec2 = new Vector(rvec);
+    vec2.toString({ rowSeparator: ' ' }).should.equal(rvec.toString());
+  });
+
+  it('#Vector() should created by RowVectorBlock', function() {
+    var rvec = new RowVector.Random(3);
+    var rblock = rvec.row(0);
+    var vec2 = new Vector(rblock);
+    vec2.toString({ rowSeparator: ' ' }).should.equal(rvec.toString());
+  });
+
   it('#set() should throw message when the row is out of range', function() {
     vec.set.should.be.a.Function;
 
