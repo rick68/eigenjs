@@ -52,6 +52,108 @@ describe('CVector', function() {
     ]);
   });
 
+  it('#CVector() should created by CMatrix', function() {
+    var cmat = new CMatrix.Random(3, 1);
+    var cvec2 = new CVector(cmat);
+    cvec2.toString().should.equal(cmat.toString());
+
+    cmat2 = new CMatrix.Random(1, 3);
+    var cvec3 = new CVector(cmat2);
+    cvec3.toString({ rowSeparator: ' ' }).should.equal(cmat2.toString());
+  });
+
+  it('#CVector() should created by CMatrixBlock', function() {
+    var cmat = new CMatrix.Random(3, 3);
+    var cmblock = cmat.col(0);
+    var cmblock2 = cmat.row(0);
+
+    var cvec2 = new CVector(cmblock);
+    cvec2.toString().should.equal(cmblock.toString());
+
+    var cvec3 = new CVector(cmblock2);
+    cvec3.toString({ rowSeparator: ' ' }).should.equal(cmblock2.toString());
+  });
+
+  it('#CVector() should created by CVector', function() {
+    var cvec2 = new CVector(cvec);
+    cvec2.equals(cvec).should.be.true;
+  });
+
+  it('#CVector() should created by CVectorBlock', function() {
+    var cvblock = cvec.col(0);
+    var cvec2 = new CVector(cvblock);
+    cvec2.equals(cvec).should.be.true;
+  });
+
+  it('#CVector() should created by CRowVector', function() {
+    var crvec = new CRowVector([1, 2, 3]);
+    var cvec2 = new CVector(crvec);
+    cvec2.visit(function(value, row, col) {
+      value.equals(crvec.get(row)).should.be.true;
+    });
+  });
+
+  it('#CVector() should created by CRowVector', function() {
+    var crvec = new CRowVector([1, 2, 3]);
+    var crblock = crvec.row(0);
+    var cvec2 = new CVector(crblock);
+    cvec2.visit(function(value, row, col) {
+      value.equals(crvec.get(row)).should.be.true;
+    });
+  });
+
+  it('#CVector() should created by Matrix', function() {
+    var mat = new Matrix.Random(3, 1);
+    var cvec2 = new CVector(mat);
+    cvec2.visit(function(value, row, col) {
+      value.equals(mat.get(row, col)).should.be.true;
+    });
+
+    var mat2 = new Matrix.Random(1, 3);
+    var cvec3 = new CVector(mat2);
+    cvec3.visit(function(value, row, col) {
+      value.equals(mat2.get(0, row)).should.be.true;
+    });
+  });
+
+  it('#CVector() should created by MatrixBlock', function() {
+    var cmat = new CMatrix.Random(3, 3);
+    var cmblock = cmat.col(0);
+    var cmblock2 = cmat.row(0);
+
+    var cvec2 = new CVector(cmblock);
+    cvec2.toString().should.equal(cmblock.toString());
+
+    var cvec3 = new CVector(cmblock2);
+    cvec3.toString({ rowSeparator: ' ' }).should.equal(cmblock2.toString());
+  });
+
+  it('#CVector() should created by Vector', function() {
+    var cvec2 = new CVector(cvec);
+    cvec2.equals(cvec).should.be.true;
+  });
+
+  it('#CVector() should created by VectorBlock', function() {
+    var cvblock = cvec.col(0);
+    var cvec2 = new CVector(cvblock);
+    cvec2.visit(function(value, row, col) {
+      value.equals(cvblock.get(row)).should.be.true;
+    });
+  });
+
+  it('#CVector() should created by RowVector', function() {
+    var crvec = new CRowVector.Random(3);
+    var cvec2 = new CVector(crvec);
+    cvec2.toString({ rowSeparator: ' ' }).should.equal(crvec.toString());
+  });
+
+  it('#CVector() should created by RowVectorBlock', function() {
+    var crvec = new CRowVector.Random(3);
+    var crblock = crvec.row(0);
+    var cvec2 = new CVector(crblock);
+    cvec2.toString({ rowSeparator: ' ' }).should.equal(crvec.toString());
+  });
+
   it('#set() should throw message when the row is out of range', function() {
     cvec.set.should.be.a.Function;
 
