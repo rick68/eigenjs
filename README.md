@@ -525,6 +525,12 @@ $ npm install eigenjs --msvs_version=2012
     * [cvec.normalize()](#cvecnormalize)
 * [Row Vector](#row-vector) **inherits from Matrix**
   * [Row Vector Class Methods](#row-vector-class-methods)
+    * [RowVector(mat)](#rowvectormat)
+    * [RowVector(vec)](#rowvectorvec)
+    * [RowVector(rvec)](#rowvectorrvec)
+    * [RowVector(mblock)](#rowvectormblock)
+    * [RowVector(vblock)](#rowvectorvblock)
+    * [RowVector(rvblock)](#rowvectorrvblock)
     * [RowVector(cols)](#rowvectorcols)
     * [RowVector(scalar_array)](#rowvectorscalar_array)
     * [RowVector.Constant(cols, scalar)](#rowvectorconstantcols-scalar)
@@ -5032,6 +5038,29 @@ cvec =
 ## Row Vector
 
 ### Row Vector Class Methods
+
+#### RowVector(mat)
+#### RowVector(vec)
+#### RowVector(rvec)
+#### RowVector(mblock)
+#### RowVector(vblock)
+#### RowVector(rvblock)
+
+```js
+var RV = require('eigenjs').RowVector
+  , rvec = new RV.Random(3)
+  , rvec2 = new RV(rvec);
+console.log('rvec = \n%s\n', rvec);
+console.log('rvec2 = \n%s', rvec2);
+```
+
+```txt
+rvec =
+-0.0369638   0.749797   -0.15956
+
+rvec2 =
+-0.0369638   0.749797   -0.15956
+```
 
 #### RowVector(cols)
 
