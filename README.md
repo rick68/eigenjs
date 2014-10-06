@@ -285,6 +285,18 @@ $ npm install eigenjs --msvs_version=2012
     * [mat.toString([options])](#mattostringoptions)
 * [Complex Matrix](#complex-matrix)
   * [Complex Matrix Class Methods](#complex-matrix-class-methods)
+    * [CMatrix(mat)](#cmatrixmat)
+    * [CMatrix(vec)](#cmatrixvec)
+    * [CMatrix(rvec)](#cmatrixrvec)
+    * [CMatrix(mblock)](#cmatrixmblock)
+    * [CMatrix(vblock)](#cmatrixvblock)
+    * [CMatrix(rvblock)](#cmatrixrvblock)
+    * [CMatrix(cmat)](#cmatrixcmat)
+    * [CMatrix(cvec)](#cmatrixcvec)
+    * [CMatrix(crvec)](#cmatrixcrvec)
+    * [CMatrix(cmblock)](#cmatrixcmblock)
+    * [CMatrix(cvblock)](#cmatrixcvblock)
+    * [CMatrix(crvblock)](#cmatrixcrvblock)
     * [CMatrix(rows, cols)](#cmatrixrows-cols)
     * [CMatrix.Zero(n)](#cmatrixzeron)
     * [CMatrix.Zero(rows, cols)](#cmatrixzerorows-cols)
@@ -2843,6 +2855,37 @@ mat =
 ## Complex Matrix
 
 ### Complex Matrix Class Methods
+
+#### CMatrix(mat)
+#### CMatrix(vec)
+#### CMatrix(rvec)
+#### CMatrix(mblock)
+#### CMatrix(vblock)
+#### CMatrix(rvblock)
+#### CMatrix(cmat)
+#### CMatrix(cvec)
+#### CMatrix(crvec)
+#### CMatrix(cmblock)
+#### CMatrix(cvblock)
+#### CMatrix(crvblock)
+
+```js
+var CM = require('eigenjs').CMatrix
+  , cmat = new CM.Random(2, 3)
+  , cmat2 = new CM(cmat);
+console.log('cmat =\n%s\n', cmat);
+console.log('cmat2 =\n%s', cmat2);
+```
+
+```txt
+cmat =
+ (-0.947988,-0.839555) (-0.502409,0.00732418)   (0.402069,-0.422384)
+   (-0.40669,0.758583)   (-0.902474,0.124615)  (0.992439,-0.0813283)
+
+cmat2 =
+ (-0.947988,-0.839555) (-0.502409,0.00732418)   (0.402069,-0.422384)
+   (-0.40669,0.758583)   (-0.902474,0.124615)  (0.992439,-0.0813283)
+```
 
 #### CMatrix(rows, cols)
 
