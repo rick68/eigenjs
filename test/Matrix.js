@@ -84,14 +84,11 @@ describe('Matrix', function() {
     mat2.toString().should.equal(rvec.toString());
   });
 
-  it('#Matrix() should created by VectorBlock', function() {
-    var vec = new Vector([
-      1,
-      2,
-      3]);
-    var vblock = vec.block(0, 3);
-    var mat2 = new Matrix(vblock);
-    mat2.toString().should.equal(vblock.toString());
+  it('#Matrix() should created by RowVectorBlock', function() {
+    var rvec = new Vector([1, 2, 3]);
+    var rvblock = rvec.block(0, 3);
+    var mat2 = new Matrix(rvblock);
+    mat2.toString().should.equal(rvblock.toString());
   });
 
   it('#set() should throw message when row or column numbers are out of range', function() {
