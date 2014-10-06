@@ -53,7 +53,7 @@ describe('RowVector', function() {
     rvec2.toString().should.equal(mat.toString());
 
     mat2 = new Matrix.Random(3, 1);
-    rvec3 = new RowVector(mat2);
+    var rvec3 = new RowVector(mat2);
     rvec3.toString().should.equal(mat2.toString({ rowSeparator: ' ' }));
   });
 

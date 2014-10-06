@@ -63,7 +63,7 @@ describe('Vector', function() {
     vec2.toString().should.equal(mat.toString());
 
     mat2 = new Matrix.Random(1, 3);
-    vec3 = new Vector(mat2);
+    var vec3 = new Vector(mat2);
     vec3.toString({ rowSeparator: ' ' }).should.equal(mat2.toString());
   });
 
