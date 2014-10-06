@@ -26,4 +26,8 @@
   NanThrowError("Invalid index argument");                                   \
   /**/
 
+#define EIGENJS_THROW_ERROR_THE_MATRIX_SIZE_MUST_BE_1XN_OR_MX1()             \
+  NanThrowError("The matrix size must be 1xN or Mx1");                       \
+  /**/
+
 #endif  // EIGENJS_THROW_ERROR_HPP
