@@ -696,6 +696,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.solve(mat)](#fplusolvemat)
     * [fplu.solve(vec)](#fplusolvevec)
     * [fplu.dimensionOfKernel()](#fpludimensionofkernel)
+    * [fplu.kernel()](#fplukernel)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
   * [Complex Full Pivoting LU Class Methods](#complex-full-pivoting-lu-class-methods)
     * [CFullPivLU(cmat)](#cfullpivlucmat)
@@ -710,6 +711,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.solve(cmat)](#cfplusolvecmat)
     * [cfplu.solve(cvec)](#cfplusolvecvec)
     * [cfplu.dimensionOfKernel()](#cfpludimensionofkernel)
+    * [cfplu.kernel()](#cfplukernel)
 
 ## Complex
 
@@ -6536,6 +6538,32 @@ console.log('dim = %d', dim);
 dim = 2
 ```
 
+#### fplu.kernel()
+
+Returns the kernel of the matrix, also called its null-space. The columns of the returned matrix will form a basis of the kernel.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = M(3, 4).set([
+            1, 1, 0, 2,
+            1, 2, 0, 3,
+            2, 3, 0, 5
+          ])
+  , fplu = new FPLU(mat)
+  , ker = fplu.kernel();
+console.log('ker = \n%s', ker);
+```
+
+```txt
+ker =
+ 1  0
+ 1  0
+ 0  1
+-1 -0
+```
+
 ### Complex Full Pivoting LU
 
 This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is decomposed as PAQ = LU where L is unit-lower-triangular, U is upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any zeros are at the end.
@@ -6765,4 +6793,30 @@ console.log('dim = %d', dim);
 
 ```txt
 dim = 2
+```
+
+#### cfplu.kernel()
+
+Returns the kernel of the complex matrix, also called its null-space. The columns of the returned matrix will form a basis of the kernel.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = CM(3, 4).set([
+             1, 1, 0, 2,
+             1, 2, 0, 3,
+             2, 3, 0, 5
+           ])
+  , cfplu = new CFPLU(cmat)
+  , ker = cfplu.kernel();
+console.log('ker = \n%s', ker);
+```
+
+```txt
+ker =
+  (1,0)   (0,0)
+  (1,0)  (-0,0)
+  (0,0)   (1,0)
+(-1,-0) (-0,-0)
 ```
