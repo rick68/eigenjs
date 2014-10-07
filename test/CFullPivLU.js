@@ -175,6 +175,14 @@ describe('CFullPivLU', function() {
   it('#kernel() should return the kernel of the matrix' , function() {
     lu.kernel.should.be.a.Function;
 
-    lu.kernel().toString().should.equal("          (0.5,0)         (-0.5,-0)\n(-1.18952e-16,-0)  (2.61695e-16,-0)\n            (1,0)             (0,0)\n       (-0.25,-0)         (0.75,-0)\n            (0,0)             (1,0)");
+    var kernel = lu.kernel();
+    kernel.should.instanceOf(CMatrix);
+    kernel.visit(function(value, row, col) {
+      if (Math.abs(value.real) < 1e-12) value.real = 0;
+      if (Math.abs(value.imag) < 1e-12) value.imag = 0
+
+      kernel.set(row, col, value);
+    });
+    kernel.toString().should.equal("  (0.5,0)  (-0.5,0)\n    (0,0)     (0,0)\n    (1,0)     (0,0)\n(-0.25,0)  (0.75,0)\n    (0,0)     (1,0)");
   });
 });
