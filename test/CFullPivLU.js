@@ -171,4 +171,10 @@ describe('CFullPivLU', function() {
     CMatrix.Random(2, 3).fullPivLu().dimensionOfKernel().should.equal(1);
     CMatrix.Random(2, 4).fullPivLu().dimensionOfKernel().should.equal(2);
   });
+
+  it('#kernel() should return the kernel of the matrix' , function() {
+    lu.kernel.should.be.a.Function;
+
+    lu.kernel().toString().should.equal("          (0.5,0)         (-0.5,-0)\n(-1.18952e-16,-0)  (2.61695e-16,-0)\n            (1,0)             (0,0)\n       (-0.25,-0)         (0.75,-0)\n            (0,0)             (1,0)");
+  });
 });

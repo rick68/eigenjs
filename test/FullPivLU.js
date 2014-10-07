@@ -174,4 +174,20 @@ describe('FullPivLU', function() {
     Matrix.Random(2, 3).fullPivLu().dimensionOfKernel().should.equal(1);
     Matrix.Random(2, 4).fullPivLu().dimensionOfKernel().should.equal(2);
   });
+
+  it('#dimensionOfKernel() should return the dimension of the kernel of the matrix of which *this is the LU decomposition.', function() {
+    lu.dimensionOfKernel.should.be.a.Function;
+
+    lu.dimensionOfKernel().should.equal(2);
+
+    Matrix.Random(2, 2).fullPivLu().dimensionOfKernel().should.equal(0);
+    Matrix.Random(2, 3).fullPivLu().dimensionOfKernel().should.equal(1);
+    Matrix.Random(2, 4).fullPivLu().dimensionOfKernel().should.equal(2);
+  });
+
+  it('#kernel() should return the kernel of the matrix' , function() {
+    lu.kernel.should.be.a.Function;
+
+    lu.kernel().toString().should.equal("         0.5         -0.5\n-1.18952e-16  3.09276e-16\n           1            0\n       -0.25         0.75\n           0            1");
+  });
 });
