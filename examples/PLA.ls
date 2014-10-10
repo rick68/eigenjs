@@ -7,7 +7,7 @@ dataset_dimension = 2
 dataset_maxvalue = 1
 threshold = 0
 
-require! Eigen: eigenjs
+require! eigenjs: Eigen
 
 const Matrix = Eigen.Matrix
 const Vector = Eigen.Vector
