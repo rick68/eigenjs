@@ -23,6 +23,7 @@
 #include "instance_method_inverse.hpp"
 #include "instance_method_solve.hpp"
 
+#include "instance_method_rank.hpp"
 #include "instance_method_dimensionOfKernel.hpp"
 #include "instance_method_kernel.hpp"
 
@@ -39,6 +40,7 @@ EIGENJS_OBJECT_DEFINITIONS(
   (instance_method_inverse)
   (instance_method_solve)
 
+  (instance_method_rank)
   (instance_method_dimensionOfKernel)
   (instance_method_kernel)
 );
