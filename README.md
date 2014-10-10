@@ -695,6 +695,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.inverse()](#fpluinverse)
     * [fplu.solve(mat)](#fplusolvemat)
     * [fplu.solve(vec)](#fplusolvevec)
+    * [fplu.rank()](#fplurank)
     * [fplu.dimensionOfKernel()](#fpludimensionofkernel)
     * [fplu.kernel()](#fplukernel)
 * [Complex Full Pivoting LU](#complex-full-pivoting-lu)
@@ -710,6 +711,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.inverse()](#cfpluinverse)
     * [cfplu.solve(cmat)](#cfplusolvecmat)
     * [cfplu.solve(cvec)](#cfplusolvecvec)
+    * [cfplu.rank()](#cfplurank)
     * [cfplu.dimensionOfKernel()](#cfpludimensionofkernel)
     * [cfplu.kernel()](#cfplukernel)
 
@@ -6516,6 +6518,27 @@ x =
 -1
 ```
 
+#### fplu.rank()
+
+Returns the rank of the matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 4).set([
+            2, 1, 0, 1,
+            0, 2, 1, 0,
+            2, 3, 1, 1
+          ])
+  , fplu = new FPLU(mat);
+console.log('%d', fplu.rank());
+```
+
+```txt
+2
+```
+
 #### fplu.dimensionOfKernel()
 
 Returns the dimension of the kernel of the matrix of which *this is the LU decomposition.
@@ -6771,6 +6794,27 @@ x =
 (-7,-0)
   (8,0)
  (-4,0)
+```
+
+#### cfplu.rank()
+
+Returns the rank of the complex matrix of which *this is the LU decomposition.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.CMatrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 4).set([
+             2, 1, 0, 1,
+             0, 2, 1, 0,
+             2, 3, 1, 1
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('%d', cfplu.rank());
+```
+
+```txt
+2
 ```
 
 #### cfplu.dimensionOfKernel()
