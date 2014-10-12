@@ -8,6 +8,7 @@ SOURCES = \
     src/CFullPivLU/instance_method_determinant.hpp \
     src/CFullPivLU/instance_method_dimensionOfKernel.hpp \
     src/CFullPivLU/instance_method_inverse.hpp \
+    src/CFullPivLU/instance_method_isInvertible.hpp \
     src/CFullPivLU/instance_method_kernel.hpp \
     src/CFullPivLU/instance_method_matrixL.hpp \
     src/CFullPivLU/instance_method_matrixU.hpp \
@@ -195,6 +196,7 @@ SOURCES = \
     src/FullPivLU/instance_method_determinant.hpp \
     src/FullPivLU/instance_method_dimensionOfKernel.hpp \
     src/FullPivLU/instance_method_inverse.hpp \
+    src/FullPivLU/instance_method_isInvertible.hpp \
     src/FullPivLU/instance_method_kernel.hpp \
     src/FullPivLU/instance_method_matrixL.hpp \
     src/FullPivLU/instance_method_matrixU.hpp \
