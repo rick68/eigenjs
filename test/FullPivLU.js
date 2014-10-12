@@ -101,6 +101,20 @@ describe('FullPivLU', function() {
     lu.inverse();
   });
 
+  it('#isInvertible() should return true if the matrix of which *this is the LU decomposition is invertible.', function() {
+    lu.solve.should.be.a.Function;
+
+    lu.isInvertible().should.be.false;
+
+    Matrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu().isInvertible().should.be.true;
+
+    Matrix.Random(3, 3).fullPivLu().isInvertible().should.be.true;
+  });
+
   it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
     lu.solve.should.be.a.Function;
 
@@ -185,13 +199,13 @@ describe('FullPivLU', function() {
     Matrix.Random(2, 4).fullPivLu().dimensionOfKernel().should.equal(2);
   });
 
-  it('#kernel() should return the kernel of the matrix' , function() {
+  it('#kernel() should return the kernel of the matrix.' , function() {
     lu.kernel.should.be.a.Function;
 
     lu.kernel().toString().should.equal("         0.5         -0.5\n-1.18952e-16  3.09276e-16\n           1            0\n       -0.25         0.75\n           0            1");
   });
 
-  it('#rank() should return the rank of the matrix of which *this is the LU decomposition' , function() {
+  it('#rank() should return the rank of the matrix of which *this is the LU decomposition.', function() {
     lu.rank.should.be.a.Function;
 
     lu.rank().should.equal(3);

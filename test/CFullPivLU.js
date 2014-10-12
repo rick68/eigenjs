@@ -98,36 +98,29 @@ describe('CFullPivLU', function() {
     lu.inverse();
   });
 
-  it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
-    lu.solve.should.be.a.Function;
+  it('#inverse() should return the inverse of the matrix of which it is the LU decomposition', function() {
+    lu.inverse.should.be.a.Function;
 
     (function() {
-      lu.solve(new CMatrix(5, 2).set([
-        1, 2,
-        1, 2,
-        1, 2,
-        1, 2,
-        1, 2
-      ]));
+      lu.inverse();
     }).should.throw("The matrix must be square");
 
-    lu = CMatrix(3, 3).set([
+    lu = CMatrix.Random(3, 3).fullPivLu();
+    lu.inverse();
+  });
+
+  it('#isInvertible() should return true if the matrix of which *this is the LU decomposition is invertible.', function() {
+    lu.solve.should.be.a.Function;
+
+    lu.isInvertible().should.be.false;
+
+    CMatrix(3, 3).set([
       0, 1, 1,
       1, 2, 1,
       2, 7, 9
-    ]).fullPivLu();
+    ]).fullPivLu().isInvertible().should.be.true;
 
-    var x = lu.solve(new CMatrix(3, 2).set([
-      1, 4,
-      2, 5,
-      3, 6
-    ]));
-    x.should.instanceOf(CMatrix);
-    x.toString().should.equal("(-1,-0) (-7,-0)\n  (2,0)   (8,0)\n (-1,0)  (-4,0)");
-
-    (function() {
-      lu.solve(CMatrix.Random(1, 1));
-    }).should.throw("Invalid argument");
+    CMatrix.Random(3, 3).fullPivLu().isInvertible().should.be.true;
   });
 
   it('#solve() should return solution x to the equation Ax=b, where A is the complex matrx and b is the complex vector', function() {
@@ -186,7 +179,7 @@ describe('CFullPivLU', function() {
     kernel.toString().should.equal("  (0.5,0)  (-0.5,0)\n    (0,0)     (0,0)\n    (1,0)     (0,0)\n(-0.25,0)  (0.75,0)\n    (0,0)     (1,0)");
   });
 
-  it('#rank() should return the rank of the complex matrix of which *this is the LU decomposition' , function() {
+  it('#rank() should return the rank of the complex matrix of which *this is the LU decomposition.' , function() {
     lu.rank.should.be.a.Function;
 
     lu.rank().should.equal(3);
