@@ -693,6 +693,7 @@ $ npm install eigenjs --msvs_version=2012
     * [fplu.martixU()](#fplumatrixu)
     * [fplu.determinant()](#fpludeterminant)
     * [fplu.inverse()](#fpluinverse)
+    * [fplu.isInvertible()](#fpluisinvertible)
     * [fplu.solve(mat)](#fplusolvemat)
     * [fplu.solve(vec)](#fplusolvevec)
     * [fplu.rank()](#fplurank)
@@ -709,6 +710,7 @@ $ npm install eigenjs --msvs_version=2012
     * [cfplu.martixU()](#cfplumatrixu)
     * [cfplu.determinant()](#cfpludeterminant)
     * [cfplu.inverse()](#cfpluinverse)
+    * [cfplu.isInvertible()](#cfpluisinvertible)
     * [cfplu.solve(cmat)](#cfplusolvecmat)
     * [cfplu.solve(cvec)](#cfplusolvecvec)
     * [cfplu.rank()](#cfplurank)
@@ -6487,6 +6489,27 @@ console.log('%s', inv.isApprox(mat.inverse()));
 true
 ```
 
+#### fplu.isInvertible()
+
+Returns true if the matrix of which *this is the LU decomposition is invertible.
+
+```js
+var Eigen = require('eigenjs')
+  , M = Eigen.Matrix
+  , FPLU = Eigen.FullPivLU
+  , mat = new M(3, 3).set([
+            1, 4, 5,
+            4, 2, 6,
+            5, 6, 3
+          ])
+  , fplu = new FPLU(mat);
+console.log('%s', fplu.isInvertible());
+```
+
+```txt
+true
+```
+
 #### fplu.solve(mat)
 #### fplu.solve(vec)
 
@@ -6759,6 +6782,27 @@ var Eigen = require('eigenjs')
   , cfplu = new CFPLU(cmat)
   , inv = cfplu.inverse();
 console.log('%s', inv.isApprox(cmat.inverse()));
+```
+
+```txt
+true
+```
+
+#### cfplu.isInvertible()
+
+Returns true if the complex matrix of which *this is the LU decomposition is invertible.
+
+```js
+var Eigen = require('eigenjs')
+  , CM = Eigen.Matrix
+  , CFPLU = Eigen.CFullPivLU
+  , cmat = new CM(3, 3).set([
+             1, 4, 5,
+             4, 2, 6,
+             5, 6, 3
+           ])
+  , cfplu = new CFPLU(cmat);
+console.log('%s', cfplu.isInvertible());
 ```
 
 ```txt
