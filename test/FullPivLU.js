@@ -101,6 +101,20 @@ describe('FullPivLU', function() {
     lu.inverse();
   });
 
+  it('#isInvertible() should return true if the matrix of which *this is the LU decomposition is invertible.', function() {
+    lu.solve.should.be.a.Function;
+
+    lu.isInvertible().should.be.false;
+
+    Matrix(3, 3).set([
+      0, 1, 1,
+      1, 2, 1,
+      2, 7, 9
+    ]).fullPivLu().isInvertible().should.be.true;
+
+    Matrix.Random(3, 3).fullPivLu().isInvertible().should.be.true;
+  });
+
   it('#solve() should return solution x to the equation Ax=b, where A and b are the matrices', function() {
     lu.solve.should.be.a.Function;
 
