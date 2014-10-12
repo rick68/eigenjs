@@ -186,7 +186,7 @@ describe('CFullPivLU', function() {
     kernel.toString().should.equal("  (0.5,0)  (-0.5,0)\n    (0,0)     (0,0)\n    (1,0)     (0,0)\n(-0.25,0)  (0.75,0)\n    (0,0)     (1,0)");
   });
 
-  it('#rank() should return the rank of the complex matrix of which *this is the LU decomposition' , function() {
+  it('#rank() should return the rank of the complex matrix of which *this is the LU decomposition.' , function() {
     lu.rank.should.be.a.Function;
 
     lu.rank().should.equal(3);
